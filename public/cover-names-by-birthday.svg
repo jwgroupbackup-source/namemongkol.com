@@ -1,0 +1,87 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1200" height="630" fill="url(#bgGradient6)"/>
+  
+  <!-- 7 Days grid -->
+  <!-- Day 1: Monday -->
+  <rect x="80" y="100" width="130" height="100" rx="10" fill="#fbbf24" opacity="0.1" stroke="#fbbf24" stroke-width="2"/>
+  <text x="145" y="135" font-size="32" text-anchor="middle" fill="#fbbf24" font-weight="bold">จ</text>
+  <text x="145" y="165" font-size="14" text-anchor="middle" fill="#e0e7ff">จันทร์</text>
+  
+  <!-- Day 2: Tuesday -->
+  <rect x="250" y="100" width="130" height="100" rx="10" fill="#34d399" opacity="0.1" stroke="#34d399" stroke-width="2"/>
+  <text x="315" y="135" font-size="32" text-anchor="middle" fill="#34d399" font-weight="bold">อ</text>
+  <text x="315" y="165" font-size="14" text-anchor="middle" fill="#e0e7ff">อังคาร</text>
+  
+  <!-- Day 3: Wednesday -->
+  <rect x="420" y="100" width="130" height="100" rx="10" fill="#a78bfa" opacity="0.1" stroke="#a78bfa" stroke-width="2"/>
+  <text x="485" y="135" font-size="32" text-anchor="middle" fill="#a78bfa" font-weight="bold">พ</text>
+  <text x="485" y="165" font-size="14" text-anchor="middle" fill="#e0e7ff">พุธ</text>
+  
+  <!-- Day 4: Thursday -->
+  <rect x="590" y="100" width="130" height="100" rx="10" fill="#f87171" opacity="0.1" stroke="#f87171" stroke-width="2"/>
+  <text x="655" y="135" font-size="32" text-anchor="middle" fill="#f87171" font-weight="bold">พ</text>
+  <text x="655" y="165" font-size="14" text-anchor="middle" fill="#e0e7ff">พฤหัส</text>
+  
+  <!-- Day 5: Friday -->
+  <rect x="760" y="100" width="130" height="100" rx="10" fill="#06b6d4" opacity="0.1" stroke="#06b6d4" stroke-width="2"/>
+  <text x="825" y="135" font-size="32" text-anchor="middle" fill="#06b6d4" font-weight="bold">ศ</text>
+  <text x="825" y="165" font-size="14" text-anchor="middle" fill="#e0e7ff">ศุกร์</text>
+  
+  <!-- Day 6: Saturday -->
+  <rect x="930" y="100" width="130" height="100" rx="10" fill="#ec4899" opacity="0.1" stroke="#ec4899" stroke-width="2"/>
+  <text x="995" y="135" font-size="32" text-anchor="middle" fill="#ec4899" font-weight="bold">ส</text>
+  <text x="995" y="165" font-size="14" text-anchor="middle" fill="#e0e7ff">เสาร์</text>
+  
+  <!-- Main title -->
+  <text x="600" y="280" font-size="52" font-weight="bold" text-anchor="middle" fill="#fbbf24">
+    ชื่อมงคล ตามวันเกิด
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="335" font-size="26" text-anchor="middle" fill="#e0e7ff">
+    50+ ชื่อชาย-หญิง สำหรับทั้ง 7 วัน
+  </text>
+  
+  <!-- Feature boxes -->
+  <g opacity="0.6">
+    <rect x="150" y="400" width="280" height="80" rx="10" fill="#3b82f6" opacity="0.1" stroke="#3b82f6" stroke-width="1"/>
+    <text x="290" y="430" font-size="16" text-anchor="middle" fill="#60a5fa" font-weight="bold">
+      ✓ 50+ ชื่อ
+    </text>
+    <text x="290" y="460" font-size="14" text-anchor="middle" fill="#cbd5e1">
+      ชาย • หญิง
+    </text>
+  </g>
+  
+  <g opacity="0.6">
+    <rect x="460" y="400" width="280" height="80" rx="10" fill="#8b5cf6" opacity="0.1" stroke="#8b5cf6" stroke-width="1"/>
+    <text x="600" y="430" font-size="16" text-anchor="middle" fill="#a78bfa" font-weight="bold">
+      ✓ 7 วัน
+    </text>
+    <text x="600" y="460" font-size="14" text-anchor="middle" fill="#cbd5e1">
+      จ-ท อ พ ศ ส อ
+    </text>
+  </g>
+  
+  <g opacity="0.6">
+    <rect x="770" y="400" width="280" height="80" rx="10" fill="#ec4899" opacity="0.1" stroke="#ec4899" stroke-width="1"/>
+    <text x="910" y="430" font-size="16" text-anchor="middle" fill="#f472b6" font-weight="bold">
+      ✓ เกรด A+
+    </text>
+    <text x="910" y="460" font-size="14" text-anchor="middle" fill="#cbd5e1">
+      ทั้งหมด
+    </text>
+  </g>
+  
+  <!-- Footer -->
+  <text x="600" y="570" font-size="16" text-anchor="middle" fill="#94a3b8">
+    วันเกิดใดก็ได้ • เลือกชื่อให้เหมาะสม • เสริมดวงชะตา
+  </text>
+</svg>

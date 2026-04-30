@@ -66,12 +66,23 @@ const getCachedDbArticles = unstable_cache(
     { revalidate: 3600, tags: ['articles'] }
 );
 
+// Old Thai slug → New English slug redirect map
+const SLUG_REDIRECTS: Record<string, string> = {
+    'ตั้งชื่อลูก-2569-คู่มือสมบูรณ์': 'baby-naming-guide-2569',
+    'ทักษา-ปกรณ์-ตั้งชื่อลูกให้ตรงจุด': 'thaksa-pakorn-naming-guide',
+    'เบอร์มงคล-วิธีเลือก-คู่เลขเสริมดวง': 'lucky-phone-numbers-guide-2569',
+    'ชื่อลูกสาว-2569-50-ชื่อมงคล': 'girl-names-2569-50-auspicious',
+    'ชื่อลูกชาย-2569-50-ชื่อมงคล': 'boy-names-2569-50-auspicious',
+};
+
 async function getArticles() {
     const dbArticles = await getCachedDbArticles();
 
-    // Enhance DB articles with local data (fallback for images)
+    // Enhance DB articles with local data (fallback for images + slug migration)
     const enrichedDbArticles = dbArticles.map(dbArticle => {
-        const localMatch = localArticles.find(a => a.slug === dbArticle.slug);
+        // Try to find local match by slug first, then by title (for migrated slugs)
+        const localMatch = localArticles.find(a => a.slug === dbArticle.slug)
+            || localArticles.find(a => a.title === dbArticle.title);
         const dbImage = dbArticle.cover_image || dbArticle.coverImage;
         const localImage = localMatch?.coverImage;
 
@@ -79,8 +90,12 @@ async function getArticles() {
         // fallback to local static image only if DB image is empty.
         const finalImage = dbImage || localImage || '';
 
+        // If the DB slug is old (Thai) and we have a redirect, use the new English slug
+        const migratedSlug = SLUG_REDIRECTS[dbArticle.slug as string] || (localMatch ? localMatch.slug : dbArticle.slug);
+
         return {
             ...dbArticle,
+            slug: migratedSlug,
             coverImage: finalImage,
             coverImageAlt: dbArticle.cover_image_alt || localMatch?.coverImageAlt || '',
             // Keep cover_image for backward compatibility if needed, but we'll use coverImage primarily
@@ -88,9 +103,11 @@ async function getArticles() {
         };
     });
 
-    // Filter out local articles that are already present in DB (by slug)
+    // Filter out local articles that are already present in DB (by slug OR title)
+    // This prevents duplicates when slugs differ (e.g. old Thai slug in DB vs new English slug in local)
     const existingSlugs = new Set(enrichedDbArticles.map(a => a.slug));
-    const uniqueLocalArticles = localArticles.filter(a => !existingSlugs.has(a.slug));
+    const existingTitles = new Set(enrichedDbArticles.map(a => a.title));
+    const uniqueLocalArticles = localArticles.filter(a => !existingSlugs.has(a.slug) && !existingTitles.has(a.title));
 
     // Combine
     const allArticles = [...enrichedDbArticles, ...uniqueLocalArticles];

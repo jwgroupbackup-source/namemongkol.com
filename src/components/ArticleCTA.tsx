@@ -95,6 +95,22 @@ export const ArticleCTA = () => {
                 </div>
             </Link>
 
+            {/* Search Auspicious Names Card */}
+            <Link href="/search" className="group relative overflow-hidden rounded-xl bg-slate-800/40 border border-slate-700/50 hover:border-amber-500/40 transition-all p-5 hover:bg-slate-800/60">
+                <div className="flex items-start justify-between">
+                    <div>
+                        <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center mb-3 text-amber-400">
+                            <Sparkles className="w-4 h-4" />
+                        </div>
+                        <h3 className="text-lg font-bold text-white mb-1 group-hover:text-amber-300 transition-colors">ตั้งชื่อมงคล ตั้งชื่อลูก</h3>
+                        <p className="text-slate-400 text-xs mb-0 line-clamp-2">
+                            ค้นหาชื่อมงคลจาก 5,000+ รายชื่อ คัดเกรด A+ ฟรี
+                        </p>
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-slate-600 group-hover:text-amber-400 group-hover:translate-x-1 transition-all" />
+                </div>
+            </Link>
+
             {/* Bulk Analysis Card */}
             <Link href="/name-analysis" className="group relative overflow-hidden rounded-xl bg-slate-800/40 border border-slate-700/50 hover:border-blue-500/40 transition-all p-5 hover:bg-slate-800/60">
                 <div className="flex items-start justify-between">

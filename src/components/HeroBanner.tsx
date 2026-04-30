@@ -17,7 +17,7 @@ export const HeroBanner = () => {
 
                 <div className="text-center z-10 relative">
                     <div className="mb-2 sm:mb-3 inline-flex items-center rounded-full border border-amber-200/20 bg-black/25 px-3 py-1 sm:px-4 sm:py-1.5 text-[10px] sm:text-[11px] uppercase tracking-[0.35em] text-amber-50/88 backdrop-blur-md shadow-[0_0_18px_rgba(245,158,11,0.08)]">
-                        ✦ วิเคราะห์ชื่อมงคล
+                        ✦ วิเคราะห์ชื่อ ✦ ตั้งชื่อมงคล
                     </div>
 
                     <h1 className="cosmic-text-crisp text-[1.2rem] sm:text-[2rem] font-bold leading-tight mb-2 sm:mb-3 tracking-tight">

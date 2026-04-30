@@ -37,11 +37,11 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE
 
 export const metadata: Metadata = {
   title: {
-    default: "NameMongkol | วิเคราะห์ชื่อมงคล ทำนายชื่อ-นามสกุล แม่นยำที่สุด",
+    default: "NameMongkol | วิเคราะห์ชื่อ ตั้งชื่อมงคล ทำนายชื่อ-นามสกุล แม่นยำที่สุด",
     template: "%s | NameMongkol"
   },
-  description: "NameMongkol (เนมมงคล) บริการวิเคราะห์ชื่อมงคล ดูผลรวมชื่อ-นามสกุล พลังเงา และความหมายตามหลักเลขศาสตร์และทักษาปกรณ์ ฟรี! เช็คชื่อของคุณวันนี้เพื่อความเป็นสิริมงคล",
-  keywords: ["NameMongkol", "ชื่อมงคล", "วิเคราะห์ชื่อ", "ตั้งชื่อมงคล", "ดูดวงชื่อ", "เลขศาสตร์", "ตั้งชื่อลูก", "เปลี่ยนชื่อ", "ความหมายเลขศาสตร์", "ทักษาปกรณ์", "ตั้งชื่อมงคลวันเกิด"],
+  description: "NameMongkol (เนมมงคล) บริการวิเคราะห์ชื่อ ตั้งชื่อมงคล ตั้งชื่อลูก ดูผลรวมชื่อ-นามสกุล พลังเงา และความหมายตามหลักเลขศาสตร์และทักษาปกรณ์ ฟรี! เช็คชื่อของคุณวันนี้เพื่อความเป็นสิริมงคล",
+  keywords: ["NameMongkol", "วิเคราะห์ชื่อ", "ชื่อมงคล", "ตั้งชื่อมงคล", "ตั้งชื่อลูก", "เบอร์มงคล", "ดูดวงชื่อ", "เลขศาสตร์", "เปลี่ยนชื่อ", "ความหมายเลขศาสตร์", "ทักษาปกรณ์", "ตั้งชื่อมงคลวันเกิด"],
   metadataBase: new URL(siteUrl),
   icons: {
     icon: [
@@ -61,22 +61,22 @@ export const metadata: Metadata = {
     locale: 'th_TH',
     url: siteUrl,
     siteName: 'NameMongkol',
-    title: 'NameMongkol - วิเคราะห์ชื่อมงคล อันดับ 1',
-    description: 'เช็คชื่อมงคล วิเคราะห์ชื่อ-นามสกุล ฟรี! ด้วยศาสตร์คำนวณที่แม่นยำที่สุด',
+    title: 'NameMongkol - วิเคราะห์ชื่อ ตั้งชื่อมงคล อันดับ 1',
+    description: 'วิเคราะห์ชื่อ นามสกุล ตั้งชื่อมงคล ตั้งชื่อลูก ฟรี! ด้วยศาสตร์คำนวณที่แม่นยำที่สุด',
     images: [
       {
         url: `${siteUrl}/api/og?variant=default`,
         width: 1200,
         height: 630,
-        alt: 'NameMongkol - วิเคราะห์ชื่อมงคล',
+        alt: 'NameMongkol - วิเคราะห์ชื่อ ตั้งชื่อมงคล',
         type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NameMongkol - วิเคราะห์ชื่อมงคล',
-    description: 'วิเคราะห์ชื่อ-นามสกุล ดูผลรวม พลังเงา และความหมายมงคล ฟรี',
+    title: 'NameMongkol - วิเคราะห์ชื่อ ตั้งชื่อมงคล',
+    description: 'วิเคราะห์ชื่อ นามสกุล ดูผลรวม พลังเงา และความหมายมงคล ฟรี',
     images: [`${siteUrl}/api/og?variant=default`],
     creator: '@namemongkol',
   },
