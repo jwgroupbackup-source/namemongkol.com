@@ -3,11 +3,8 @@ import { Metadata } from 'next';
 import ClientPage from './ClientPage';
 import { PhoneSeoContent } from '@/components/PhoneSeoContent';
 import { PhoneFAQSection } from '@/components/PhoneFAQSection';
+import { siteUrl } from '@/lib/seo';
 
-const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'https://www.namemongkol.com';
-const siteUrl = rawSiteUrl.includes('namemongkol.com') && !rawSiteUrl.includes('www.')
-    ? rawSiteUrl.replace('://namemongkol.com', '://www.namemongkol.com')
-    : rawSiteUrl;
 
 export const metadata: Metadata = {
     title: 'เบอร์มงคล ฟรี! เช็คเบอร์โทรศัพท์ กราฟพลังงาน 6 ด้าน เกรด A-F | NameMongkol',

@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import Script from 'next/script';
 import ClientPage from './ClientPage';
+import { siteUrl } from '@/lib/seo';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
 
 export const metadata: Metadata = {
     title: 'เช็คชื่อมงคลหลายชื่อพร้อมกัน 2569 | Bulk Name Analysis | NameMongkol',

@@ -382,7 +382,7 @@ export const articles: Article[] = [
             <p class="text-xl text-white font-bold mb-4">พร้อมปลดล็อกศักยภาพชีวิตแล้วหรือยัง?</p>
             <p class="text-slate-300 mb-6">เริ่มต้นค้นหาชื่อมงคลและฤกษ์ที่ใช่เฉพาะตัวคุณได้เลยที่</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="/" class="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold px-6 py-3 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all">🔮 วิเคราะห์ชื่อมงคลฟรี</a>
+                <a href="/" class="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold px-6 py-3 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all">🔮 เช็คชื่อของคุณฟรี</a>
                 <a href="/premium-analysis" class="inline-block bg-gradient-to-r from-purple-500 to-purple-600 text-white font-bold px-6 py-3 rounded-xl hover:from-purple-400 hover:to-purple-500 transition-all">👑 ค้นหาชื่อ Premium</a>
             </div>
         </div>
@@ -1839,7 +1839,7 @@ export const articles: Article[] = [
         "เหมาะกับดวงชะตาหรือไม่"</p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/name-analysis"
-            class="px-8 py-3 bg-white text-orange-600 font-bold rounded-xl hover:bg-slate-100 transition-colors shadow-md">เช็คชื่อมงคลหลายชื่อพร้อมกัน</a>
+            class="px-8 py-3 bg-white text-orange-600 font-bold rounded-xl hover:bg-slate-100 transition-colors shadow-md">วิเคราะห์ชื่อหลายชื่อ Bulk Analysis</a>
         <a href="/premium-search"
             class="px-8 py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-colors shadow-md border border-white/20">ค้นหาชื่อมงคล
             Premium</a>
@@ -2395,7 +2395,7 @@ export const articles: Article[] = [
                     <p class="text-white/90 mb-6">ตรวจสอบผลรวมชื่อ-นามสกุลของคุณด้วยระบบ AI ที่แม่นยำที่สุด</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <a href="/name-analysis" class="px-8 py-3 bg-white text-orange-600 font-bold rounded-xl hover:bg-slate-100 transition-colors shadow-md">
-                            เช็คชื่อมงคลหลายชื่อพร้อมกัน
+                            เปรียบเทียบชื่อมงคลพร้อมกัน
                         </a>
                         <a href="/premium-search" class="px-8 py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-colors shadow-md border border-white/20">
                             ค้นหาชื่อมงคล Premium
@@ -2417,7 +2417,7 @@ export const articles: Article[] = [
                             🔢 คู่มือพลังเลข 0-9
                         </a>
                         <a href="/name-analysis" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-sm transition-colors font-bold">
-                            🏠 เช็คชื่อมงคลหลายชื่อพร้อมกัน
+                            🏠 ตรวจสอบชื่อครบ 4 ศาสตร์
                         </a>
                     </div>
                 </div>
@@ -2442,6 +2442,7 @@ export const articles: Article[] = [
             { title: 'ความลับของคู่เลขมงคล', id: 'pairing-secret', level: 2 },
             { title: 'สรุปแนวทางการเลือกทีม', id: 'conclusion', level: 2 },
         ],
+        relatedSlugs: ['auspicious-names-by-birthday-2026', 'micro-analysis-lucky-number-pairs', '100-auspicious-boy-names-2569'],
         content: `
             <div class="space-y-8">
                 <div id="intro">
@@ -3461,7 +3462,7 @@ export const articles: Article[] = [
                 <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
                     <a href="/" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold rounded-xl shadow-lg shadow-amber-500/30 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/40 transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
-                        วิเคราะห์ชื่อมงคลฟรี
+                        วิเคราะห์ชื่อ-นามสกุลทันที
                     </a>
                     <a href="/premium-search" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl border border-slate-600 hover:-translate-y-1 transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
@@ -3524,6 +3525,7 @@ export const articles: Article[] = [
         keywords: ['เขมนิจ จามิกรณ์', 'วิเคราะห์ชื่อดารา', 'ชื่อมงคลเกรด A', 'คู่เลขมงคล 24', 'พลังเงา'],
         metaTitle: 'วิเคราะห์ชื่อ "เขมนิจ จามิกรณ์" ทำไมถึงรวยและดัง? | NameMongkol',
         metaDescription: 'เปิดผังวิเคราะห์ชื่อ "เขมนิจ จามิกรณ์" ด้วย 3 ศาสตร์: เลขศาสตร์, ทักษา และพลังเงา พบคำตอบว่าทำไมชื่อนี้ถึงส่งเสริมให้ชีวิตรุ่งโรจน์แบบก้าวกระโดด',
+        relatedSlugs: ['lucky-names-for-2026-grade-a-plus', 'top-20-popular-thai-names-numerology-analysis'],
         content: `
             <p class="lead text-xl text-slate-300 mb-6">
                 เคยสงสัยไหมว่าทำไมดาราหรือคนดังหลายคนถึงมีชีวิตที่ประสบความสำเร็จอย่างงดงาม? นอกจากการวางตัวและความสามารถแล้ว <strong class="text-amber-400">"ชื่อ"</strong> ของพวกเขาก็เป็นอีกหนึ่งปัจจัยที่ส่งเสริมดวงชะตา วันนี้ NameMongkol จะพามาเจาะลึกชื่อของคุณ <strong>"แพนเค้ก เขมนิจ จามิกรณ์"</strong> ผ่านระบบวิเคราะห์ AI ของเรา ที่ให้ผลลัพธ์ระดับ <span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded font-bold">A+</span>
@@ -3561,7 +3563,7 @@ export const articles: Article[] = [
                 <h3 class="text-2xl font-bold text-white mb-4">อยากมีชื่อเกรด A+ แบบนี้ไหม?</h3>
                 <p class="text-slate-300 mb-6">เช็คชื่อของคุณฟรีๆ ได้ทันที ด้วยระบบเดียวกับที่เราใช้วิเคราะห์ดารา</p>
                 <a href="/" class="inline-block px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold rounded-full hover:scale-105 transition-transform shadow-lg shadow-orange-500/30">
-                    วิเคราะห์ชื่อมงคลฟรี
+                    ทดสอบชื่อมงคลที่นี่
                 </a>
             </div>
         `
@@ -3579,6 +3581,7 @@ export const articles: Article[] = [
         keywords: ['พลังเงาคืออะไร', 'อายตนะ 6', 'เปลี่ยนชื่อ', 'ศาสตร์ตั้งชื่อลับ', 'วิเคราะห์ชื่อลึกซึ้ง'],
         metaTitle: 'พลังเงาและอายตนะ 6 คืออะไร? ศาสตร์ลับเปลี่ยนชื่อ | NameMongkol',
         metaDescription: 'เจาะลึก "พลังเงา" และ "อายตนะ 6" ศาสตร์ชั้นสูงในการตั้งชื่อที่เว็บทั่วไปไม่บอกคุณ รู้ทันแรงสั่นสะเทือนของชื่อเพื่อชีวิตที่สมบูรณ์แบบ',
+        relatedSlugs: ['what-is-shadow-power', 'what-is-ayatana-6', '4-pillars-of-naming'],
         content: `
             <p class="lead text-xl text-slate-300 mb-6">
                 คุณเคยเจอคนชื่อผลรวมดี (เช่น 36, 45, 59) ทักษาดี แต่ทำไมชีวิตยังลุ่มๆ ดอนๆ บ้างไหมครับ? คำตอบอาจซ่อนอยู่ในสิ่งที่เรียกว่า <strong>"พลังเงา"</strong> และ <strong>"อายตนะ 6"</strong> ซึ่งเป็นศาสตร์ชั้นสูงที่หมอดูชื่อทั่วไปมักมองข้าม
@@ -3627,6 +3630,10 @@ export const articles: Article[] = [
             <p class="text-slate-300 mb-6">
                 ที่ <strong>NameMongkol</strong> เราเป็นเว็บไซต์เดียวที่กล้านำค่าพลังเหล่านี้มาแสดงให้คุณเห็นแบบชัดเจน เพื่อให้คุณมั่นใจได้ว่าชื่อใหม่นั้น "ดีจริง" ในทุกมิติ
             </p>
+
+            <div class="mt-8 p-6 bg-slate-800/80 rounded-xl border border-indigo-500/30">
+                <p class="text-slate-300">🔮 อย่าลืม <a href="/aura-analysis" class="text-indigo-400 font-bold hover:underline">เช็คออร่าชื่อของคุณ</a> ด้วยระบบ AI ของเรา ว่าชื่อของคุณสื่อถึงพลังงานเชิงบวกที่ดึงดูดความสำเร็จหรือไม่</p>
+            </div>
         `
     },
     {
@@ -3642,6 +3649,7 @@ export const articles: Article[] = [
         keywords: ['คู่เลขมงคล', 'วิเคราะห์เบอร์โทร', 'เลขศาสตร์ 00-99', 'คู่เลขเสีย', 'Micro-Analysis'],
         metaTitle: 'คู่เลขมงคลคืออะไร? สำคัญกว่าผลรวมเลขศาสตร์อย่างไร | NameMongkol',
         metaDescription: 'คู่เลขมงคลสำคัญไฉน? NameMongkol พาเจาะลึก Micro-Analysis ถอดรหัสคู่เลข 00-99 ในชื่อ เพื่อปิดจุดตาย เสริมจุดเด่น ให้ชีวิตปังกว่าเดิม',
+        relatedSlugs: ['numerology-0-9-power-guide', 'lucky-numbers-2569-guide', 'unfavorable-love-numbers-guide'],
         content: `
             <p class="lead text-xl text-slate-300 mb-6">
                 หลายคนเข้าใจผิดว่า ขอแค่ผลรวมชื่อออกมาดี (เช่น 45, 59) ก็จบแล้ว... แต่ความจริงนั้น <strong>"รายละเอียดซ่อนอยู่ในปีศาจ"</strong> (The Devil is in the details) ครับ
@@ -3691,6 +3699,7 @@ export const articles: Article[] = [
         keywords: ['สไตล์การตั้งชื่อ', 'ชื่อมงคล 5 Gen', 'ตั้งชื่อลูก Gen Alpha', 'ชื่อมงคล Gen Z', 'เทรนด์ตั้งชื่อ'],
         metaTitle: 'วิวัฒนาการตั้งชื่อ 5 Generation ของคนไทย | NameMongkol',
         metaDescription: 'ดูวิวัฒนาการตั้งชื่อมงคล 5 ยุค จาก Baby Boomers ถึง Gen Alpha พร้อมไอเดียชื่อมงคลที่สะท้อนตัวตนแต่ละเจนเนอเรชัน',
+        relatedSlugs: ['thai-naming-stats-2025-popular-initials', 'history-of-thai-naming-tradition', 'top-20-popular-thai-names-numerology-analysis'],
         content: `
             <p class="lead text-xl text-slate-300 mb-6">
                 การตั้งชื่อเปรียบเสมือน <strong>"ของขวัญชิ้นแรก"</strong> ที่จะติดตัวเราไปตลอดชีวิต แต่ละยุคสมัยมีค่านิยมและมุมมองต่อความหมายของชื่อที่แตกต่างกัน วันนี้ NameMongkol จะพาไปดูว่าคนแต่ละ Gen เขามีสไตล์การตั้งชื่ออย่างไร และศาสตร์มงคลแบบไหนที่ตอบโจทย์พวกเขามากที่สุด
@@ -4062,6 +4071,7 @@ export const articles: Article[] = [
         keywords: ['ตั้งชื่อจีน', 'ปาจื้อ Bazi', 'ธาตุทั้ง 5', 'คนไทยเชื้อสายจีน', 'ปีมะเมีย', 'ตั้งชื่อตามนักษัตร', 'ฮวงจุ้ยชื่อ', 'แซ่จีน'],
         metaTitle: 'ตั้งชื่อมงคลจีน 2569 หลักปาจื้อ ธาตุทั้ง 5 | NameMongkol',
         metaDescription: 'เจาะลึกศาสตร์การตั้งชื่อแบบจีน หลักปาจื้อ (Bazi) สมดุลธาตุทั้ง 5 การนับขีดอักษรมงคล เคล็ดลับตั้งชื่อตามปีนักษัตรปีม้า 2569 สำหรับคนไทยเชื้อสายจีน',
+        relatedSlugs: ['naming-baby-year-of-horse-2569', '4-pillars-of-naming', 'auspicious-names-by-birthday-2026'],
         content: `
             <p class="lead text-xl text-slate-300 mb-6">สำหรับ <strong>คนไทยเชื้อสายจีน</strong> การตั้งชื่อไม่ใช่แค่เรื่องความไพเราะหรือความหมายสวยงาม แต่เป็น <em>"พิธีกรรมศักดิ์สิทธิ์"</em> ที่สืบทอดกันมาหลายพันปี ในขณะที่คนไทยนิยมใช้หลัก <strong>ทักษา</strong> (บริวาร, อายุ, เดช, ศรี) หรือ <strong>เลขศาสตร์</strong> (ผลรวมตัวเลข) ศาสตร์การตั้งชื่อแบบจีนจะเน้นเรื่อง <strong class="text-amber-400">สมดุลธาตุ (五行 - Wǔ Xíng)</strong> เป็นหลักครับ</p>
 
@@ -5012,6 +5022,7 @@ export const articles: Article[] = [
         keywords: ['วิเคราะห์ชื่อจริง', 'เลขศาสตร์ชื่อ', 'ชื่อมงคลตัวอย่าง', 'ความหมายชื่อสมชาย', 'ชื่อยอดนิยมไทย', '20 ชื่อฮิต', 'ตั้งชื่อมงคล', 'ชื่อซ้ำ'],
         metaTitle: 'ผ่าดวง 20 ชื่อยอดฮิต สมชาย สมจิต ดีหรือโหล? | NameMongkol',
         metaDescription: 'วิเคราะห์ 20 ชื่อจริงคนไทยที่ใช้มากที่สุด ด้วยหลักเลขศาสตร์และอายตนะ 6 สมชาย สมจิต ประเสริฐ ชื่อดีจริงไหม? พร้อมแนะนำชื่อทางเลือกที่ทันสมัยและเลขดีกว่า',
+        relatedSlugs: ['lucky-names-for-2026-grade-a-plus', 'case-study-khemanit-name-analysis', 'auspicious-names-by-birthday-2026'],
         content: `
             <p class="lead text-xl text-slate-300 mb-6">เคยสงสัยไหมว่าทำไมชื่อ <strong>"สมชาย"</strong> ถึงมีคนใช้เกือบ 5 แสนคนทั่วประเทศ? หรือชื่อ <strong>"สมจิต"</strong> ที่ครองอันดับสองก็มีคนใช้กว่า 2.8 แสนคน? วันนี้ <strong>NameMongkol</strong> จะพาคุณไปไขปริศนาว่า... ชื่อเหล่านี้ถูกเลือกเพราะ "ความหมายดี" หรือ "เลขศาสตร์ดี" กันแน่? แล้วถ้าคนใช้เยอะขนาดนี้ มันยังจะ "เป็นมงคล" อยู่ไหม?</p>
 
@@ -5506,6 +5517,7 @@ export const articles: Article[] = [
         keywords: ['ชื่อมงคลฟรี', 'ตั้งชื่อลูก 2568', 'แจกชื่อมงคล', 'ชื่อมงคลความหมายดี', 'เปลี่ยนชื่อฟรี'],
         metaTitle: 'แจกฟรี 999 ชื่อมงคลปี 2568 ความหมายดี พลิกชีวิต | NameMongkol',
         metaDescription: 'แจกชื่อมงคลฟรี 999 ชื่อ ประจำปี 2568 คัดพิเศษความหมายดี ผลรวมเยี่ยม ช่วยพลิกชีวิต เสริมดวงเศรษฐี ห้ามพลาด! คลิกดูเลย',
+        relatedSlugs: ['auspicious-names-by-birthday-2026', 'lucky-names-for-2026-grade-a-plus', '100-auspicious-women-names-2026'],
         content: `
             <p class="lead text-xl text-slate-300 mb-6">กำลังมองหาชื่อมงคลอยู่ใช่ไหม? <strong>NameMongkol</strong> จัดให้! กับการรวบรวมสุดยอดรายชื่อมงคลกว่า 999 ชื่อ ที่คัดสรรมาแล้วว่า "ความหมายดี" และ "ผลรวมเลขศาสตร์เยี่ยม" เพื่อเป็นของขวัญต้อนรับปีใหม่ให้ทุกคนได้นำไปใช้ <strong>ฟรี!</strong></p>
             
@@ -5595,6 +5607,7 @@ export const articles: Article[] = [
         keywords: ['วิเคราะห์เบอร์มงคล', 'เลือกเบอร์มงคลปี 2569', 'เลขศาสตร์', 'เบอร์มงคลปีมะเมีย', 'NameMongkol', 'คู่เลขมงคล', 'กาลกิณีวันเกิด'],
         metaTitle: 'วิธีเลือกเบอร์มงคล 2569 ด้วยตัวเอง คู่มือสมบูรณ์ | NameMongkol',
         metaDescription: 'สอนวิธีเลือกและวิเคราะห์เบอร์มงคลปี 2569 ด้วยตัวเอง เช็คคู่ลำดับ ผลรวม และกาลกิณีตามวันเกิด เปลี่ยนเบอร์รับปีมะเมียธาตุไฟให้รวยและรุ่ง',
+        relatedSlugs: ['most-accurate-phone-number-analysis-2026', 'lucky-numbers-2569-guide', 'unfavorable-love-numbers-guide'],
         content: `
             <p class="lead text-xl text-slate-300 mb-6">ในปี 2569 หรือปีมะเมีย (ธาตุไฟ) พลังงานแห่งความรวดเร็ว การเปลี่ยนแปลง และนวัตกรรมจะพุ่งสูงขึ้นเป็นพิเศษ "เบอร์โทรศัพท์" ซึ่งเปรียบเสมือนรหัสดิจิทัลประจำตัวจึงไม่ได้เป็นเพียงเครื่องมือติดต่อสื่อสาร แต่คือ "คลื่นพลังงาน" ที่ดึงดูดโอกาสและผู้คนเข้ามาในชีวิต การเลือกเบอร์มงคลในปีนี้จึงต้องมีความละเอียดและเจาะลึกมากกว่าที่เคย</p>
             <p class="mb-6">นี่คือ <strong>4 ขั้นตอนการวิเคราะห์เบอร์มงคลด้วยตนเองอย่างมืออาชีพ</strong> ที่ทีมงาน NameMongkol สรุปมาให้แบบเข้าใจง่ายและนำไปใช้ได้จริงครับ</p>
@@ -5693,6 +5706,7 @@ export const articles: Article[] = [
         keywords: ['สถิติชื่อไทย 2568', 'ตัวอักษรตั้งชื่อมงคล', 'เทรนด์ตั้งชื่อ', 'NameMongkol', 'ชื่อมงคลปีมะเส็ง', 'ชื่อมงคลปีมะเมีย', 'ความหมายชื่อ'],
         metaTitle: 'สถิติชื่อไทย 2568 และเทรนด์ 2569 อักษรไหนปัง? | NameMongkol',
         metaDescription: 'เจาะลึกสถิติชื่อไทยปี 2568 และเทรนด์ปี 2569 ตัวอักษรไหนปังสุด? ทำไมคนไทยเน้นความหมายมากกว่าความคล้องจอง? อ่านวิเคราะห์เจาะลึกจาก NameMongkol ได้ที่นี่',
+        relatedSlugs: ['naming-style-evolution-5-generations', 'history-of-thai-naming-tradition', 'top-20-popular-thai-names-numerology-analysis'],
         content: `
             <p class="lead text-xl text-slate-300 mb-6">ในโลกของศาสตร์แห่งนาม (Onomastics) ตัวอักษรตัวแรกของชื่อเปรียบเสมือน "ประตูดวง" ที่กำหนดทิศทางของพลังงานและภาพลักษณ์ของผู้เป็นเจ้าของชื่อ เมื่อก้าวเข้าสู่ปี 2569 ทางทีมวิเคราะห์ข้อมูลจาก <strong>NameMongkol</strong> ได้รวบรวมและวิเคราะห์พฤติกรรมการตั้งชื่อของคนไทยในปี 2568 (ปีมะเส็ง) ที่ผ่านมา เพื่อค้นหาว่าตัวอักษรใดคือ "แชมป์" ที่ถูกนำมาใช้ตั้งชื่อมากที่สุด และเทรนด์เหล่านี้สะท้อนอะไรถึงความต้องการของคนไทยในยุคปัจจุบัน</p>
 
@@ -5798,6 +5812,7 @@ export const articles: Article[] = [
         slug: 'unfavorable-love-numbers-guide',
         title: 'เช็กด่วน! คู่เลข "อุปสรรค" ด้านความรักและเสน่ห์ รู้ก่อนแก้...เปลี่ยนดวงรักให้พุ่ง',
         excerpt: 'เผยคู่เลขต้องห้ามที่เป็นอุปสรรคต่อความรัก ทำให้รักร้าวราน เป็นโสดนาน หรือดึงดูดคนไม่ดีเข้ามา พร้อมวิธีแก้เคล็ดเปลี่ยนดวงรักให้ราบรื่น',
+        relatedSlugs: ['lucky-numbers-2569-guide', 'auspicious-phone-number-guide-2026', 'micro-analysis-lucky-number-pairs'],
         content: `
             <p>เคยสงสัยไหมว่า... ทำไมบางคนหน้าตาก็ดี หน้าที่การงานก็เด่น แต่เรื่องความรักกลับ "อาภัพ" หรือมักจะเจอกับอุปสรรคซ้ำๆ? ในทางศาสตร์ตัวเลข (Numerology) พลังของตัวเลขที่อยู่รอบตัวเรา โดยเฉพาะในเบอร์โทรศัพท์ อาจเป็น "ตัวสกัดดาวรุ่ง" ที่คอยขัดขวางเสน่ห์และทำลายความสัมพันธ์ของคุณอยู่ก็เป็นได้</p>
             <p>วันนี้ NameMongkol จะพาคุณไปเจาะลึก <strong>คู่เลขที่เป็นอุปสรรคด้านเสน่ห์และความรัก</strong> ที่ควรหลีกเลี่ยง หากคุณต้องการให้เส้นทางความรักราบรื่นและเป็นที่รักของผู้คนครับ</p>
@@ -5938,6 +5953,7 @@ export const articles: Article[] = [
         slug: 'power-of-naming-analysis',
         title: 'พลังแห่งการตั้งชื่อ: ชื่อมงคลเปลี่ยนชีวิตได้จริงหรือ?',
         excerpt: 'เจาะลึกศาสตร์แห่งการตั้งชื่อและหลักเลขศาสตร์ ว่าชื่อส่งผลต่อชะตาชีวิต การงาน และความรักของคุณได้อย่างไรตามหลักโหราศาสตร์ไทย',
+        relatedSlugs: ['4-pillars-of-naming', 'history-of-thai-naming-tradition', 'naming-style-evolution-5-generations'],
         content: `
             <p><strong>"ชื่อดีเป็นศรีแก่ตัว"</strong> คำกล่าวนี้ไม่ได้เป็นเพียงความเชื่อโบราณ แต่เป็นสิ่งที่อยู่คู่กับสังคมไทยมายาวนาน การตั้งชื่อมงคลไม่ใช่เพียงแค่การนำตัวอักษรมาเรียงร้อยกันให้มีความหมายดี แต่เป็นการผสานศาสตร์แห่งดวงดาว เลขศาสตร์ และพลังของอักขระเข้าด้วยกัน</p>
             
@@ -5981,6 +5997,7 @@ export const articles: Article[] = [
         slug: 'naming-tips-2026-year-of-horse',
         title: 'รวม 100 ชื่อมงคลลูกชายปีมะเมีย 2569 ตั้งแล้วรวย เสริมบารมี พร้อมความหมาย (อัปเดตล่าสุด)',
         excerpt: 'คู่มือตั้งชื่อลูกชายปีมะเมีย 2569 แบบครบจบในหน้าเดียว รวมแนวชื่อมงคลตามวันเกิดทั้ง 7 วัน ตารางอักษรกาลกิณีต้องห้าม ชื่อยอดนิยมความหมายดี และทางลัดเช็กชื่อเฉพาะตัวให้เหมาะกับดวงจริง',
+        relatedSlugs: ['naming-baby-year-of-horse-2569', 'auspicious-names-by-birthday-2026', '4-pillars-of-naming', 'thai-chinese-naming-bazi-five-elements'],
         content: `
             <p class="lead text-lg text-slate-300 mb-6">ปี 2569 (2026) ที่จะถึงนี้ ตรงกับ <strong>"ปีมะเมีย" (ปีม้า)</strong> ซึ่งถือเป็นปีแห่งพลังอำนาจ ความว่องไว และความเป็นผู้นำ โดยเฉพาะลูกชายที่เกิดในปีนี้ มักจะมีบุคลิกโดดเด่น กระตือรือร้น และมีความคิดสร้างสรรค์</p>
             
@@ -6268,6 +6285,7 @@ export const articles: Article[] = [
         slug: 'forbidden-letters-kalakini',
         title: 'อักษรกาลกิณี: สิ่งต้องห้ามที่ควรรู้ก่อนตั้งชื่อ',
         excerpt: 'เจาะลึกเรื่องอักษรต้องห้ามตามวันเกิด (กาลกิณี) หากมีในชื่อจะส่งผลเสียอย่างไร และวิธีแก้เคล็ดสำหรับคนที่ไม่ต้องการเปลี่ยนชื่อ',
+        relatedSlugs: ['check-kalakini-letters-7-days', '4-pillars-of-naming', 'auspicious-names-by-birthday-2026', 'naming-baby-year-of-horse-2569'],
         content: `
             <p>ในหลักทักษาปกรณ์ <strong>"กาลกิณี"</strong> คือกลุ่มอักษรที่ให้โทษแก่เจ้าชะตา ถือเป็นอุปสรรค ขวากหนาม และความยุ่งยากในชีวิต การมีอักษรกาลกิณีในชื่อมักถูกเชื่อว่าจะทำให้ชีวิตเหนื่อยยาก มีปัญหาสุขภาพเรื้อรัง หรือเก็บเงินไม่อยู่ แม้หามาได้มากก็มีเหตุให้ต้องจ่ายออกไป</p>
             
@@ -6343,6 +6361,7 @@ export const articles: Article[] = [
         slug: 'what-is-ayatana-6',
         title: 'อายตนะ 6 คืออะไร? ทำไมสายมูต้องรู้ก่อนตั้งชื่อ',
         excerpt: 'ทำความรู้จักกับศาสตร์ "อายตนะ 6" อีกหนึ่งหลักการสำคัญที่บ่งบอกถึงจิตใจ สัมผัส และการยอมรับจากคนรอบข้าง',
+        relatedSlugs: ['shadow-power-ayatana-6-meaning', 'what-is-shadow-power', '4-pillars-of-naming'],
         content: `
             <p>นอกจากเลขศาสตร์และทักษาปกรณ์แล้ว <strong>"อายตนะ 6"</strong> เป็นอีกหนึ่งศาสตร์ที่ใช้ในการตั้งชื่อมงคล โดยเน้นเรื่องของความรู้สึก การรับรู้ และปฏิกิริยาของคนรอบข้างที่มีต่อเจ้าของชื่อ เปรียบเสมือน "รัศมี" หรือ "ออร่า" ที่แผ่ออกมาจากชื่อเมื่อมีการเรียกขาน</p>
 
@@ -6406,6 +6425,7 @@ export const articles: Article[] = [
         slug: 'lucky-numbers-2569-guide',
         title: 'คู่มือเลือก "เลขมงคลตามวันเกิด" ปี 2569 เสริมดวงชะตา พลิกชีวิตให้ปัง!',
         excerpt: 'เจาะลึกคู่เลขมงคลสำหรับคนเกิดทั้ง 7 วัน เสริมการงาน การเงิน ความรัก และเลขกาลกิณีที่ควรเลี่ยงปี 2569 พลิกชีวิตให้เฮงด้วยพลังตัวเลข',
+        relatedSlugs: ['auspicious-phone-number-guide-2026', 'most-accurate-phone-number-analysis-2026', 'micro-analysis-lucky-number-pairs', 'auspicious-colors-2569-guide'],
         content: `
             <p>เชื่อหรือไม่ว่า <strong>"ตัวเลข"</strong> ที่อยู่รอบตัวเรามีพลังงานซ่อนอยู่? ไม่ว่าจะเป็นเบอร์โทรศัพท์ ทะเบียนรถ หรือแม้แต่เลขต่อท้ายชื่อ หากเลือกใช้คู่เลขที่ถูกโฉลกกับวันเกิด ก็จะช่วยเสริมพลังด้านบวก ทั้งการเงิน การงาน และความรัก</p>
             <p>วันนี้ NameMongkol จะพาไปเจาะลึกคู่เลขมงคลสำหรับคนเกิดทั้ง 7 วัน ใครควรใช้เลขไหน และเลขไหนคือ <strong>"กาลกิณี"</strong> ที่ต้องเลี่ยง มาเช็กกันเลย!</p>
@@ -6624,6 +6644,7 @@ export const articles: Article[] = [
         slug: 'auspicious-colors-2569-guide',
         title: 'ตารางสีมงคลตามวันเกิดปี 2569 เสริมดวงเฮง การเงินพุ่ง รักรุ่งตลอดปี!',
         excerpt: 'เช็กตารางสีมงคลประจำวันเกิดปี 2569 เสริมอำนาจ โชคลาภ และเมตตา พร้อมสีที่ควรเลี่ยง เพื่อความเฮงตลอดปี',
+        relatedSlugs: ['lucky-numbers-2569-guide', 'caishen-wallpaper-free-download', '4-pillars-of-naming'],
         content: `
             <p>นอกจากเรื่องของ <strong>"ตัวเลขมงคล"</strong> แล้ว อีกหนึ่งศาสตร์ที่ส่งผลต่อพลังงานรอบตัวเราอย่างมากคือ <strong>"สีมงคลประจำวันเกิด"</strong> ไม่ว่าจะเป็นสีกระเป๋าสตางค์ สีเสื้อผ้า หรือแม้แต่สีพื้นหลังหน้าจอมือถือ</p>
             <p>การเลือกใช้สีที่ถูกโฉลกจะช่วยปรับสมดุลธาตุ เสริมเสน่ห์ และดึงดูดโชคลาภเข้ามาในชีวิต วันนี้ NameMongkol สรุปตารางสีมงคลแบบเน้นๆ มาให้ครบทั้ง 7 วันเกิดครับ</p>
@@ -6823,6 +6844,11 @@ export const articles: Article[] = [
                 </a>
                 <p class="text-xs text-slate-400 mt-4 relative z-10">ราคาพิเศษเพียงรูปละไม่กี่เครดิต! รองรับทุกหน้าจอ</p>
             </div>
+
+            <div class="mt-8 p-6 bg-slate-800/80 rounded-xl border border-slate-600/50">
+                <p class="text-slate-300">💡 <strong>เคล็ดลับเสริมดวง:</strong> คุณสามารถใช้สีมงคลร่วมกับการ <a href="/palm-analysis" class="text-amber-400 font-bold hover:underline">ดูลายมือเสริมดวงด้วย AI</a> เพื่อเลือกเส้นทางและสิ่งที่เหมาะสมกับดวงชะตาของคุณมากที่สุด</p>
+            </div>
+
         `,
         coverImage: '/images/articles/auspicious-colors-2569.webp',
         coverImageAlt: 'สีมงคลตามวันเกิดปี 2569 ตารางสีเสริมดวง',
@@ -6838,6 +6864,7 @@ export const articles: Article[] = [
         slug: '4-pillars-of-naming',
         title: '4 ศาสตร์การตั้งชื่อมงคลที่คุณต้องรู้: เปลี่ยนชื่อทั้งที ต้องดีให้ครบทุกมิติ!',
         excerpt: 'เจาะลึก 4 ศาสตร์หลักในการตั้งชื่อมงคล: ทักษาปกรณ์, เลขศาสตร์, อายตนะ 6 และศาสตร์นิรันดร์ เพื่อชื่อที่ดีรอบด้านและเสริมดวงอย่างแท้จริง',
+        relatedSlugs: ['forbidden-letters-kalakini', 'numerology-0-9-power-guide', 'what-is-shadow-power', 'what-is-ayatana-6', 'check-kalakini-letters-7-days'],
         content: `
             <p>การตั้งชื่อไม่ใช่แค่การเลือกคำที่ไพเราะหรือมีความหมายดีเท่านั้น แต่ในทางโหราศาสตร์ไทย <strong>"ชื่อ"</strong> คือรหัสลับที่ส่งผลต่อดวงชะตาและพลังงานรอบตัว การจะตั้งชื่อให้เป็น <strong>"มงคลสูงสุด"</strong> จึงต้องอาศัยการผสมผสานหลายศาสตร์เข้าด้วยกัน</p>
             <p>วันนี้ NameMongkol จะพาทุกท่านไปทำความรู้จักกับ 4 ศาสตร์หลักที่นิยมใช้ในการตั้งชื่อ เพื่อให้คุณได้ชื่อที่เสริมดวงและเป็นสิริมงคลอย่างแท้จริงครับ</p>
@@ -6946,6 +6973,11 @@ export const articles: Article[] = [
                    </a>
                 </div>
             </div>
+
+            <div class="mt-8 p-6 bg-slate-800/80 rounded-xl border border-slate-600/50">
+                <p class="text-slate-300">💡 <strong>รู้หรือไม่?</strong> นอกจากศาสตร์เรื่องชื่อแล้ว NameMongkol ยังมีเครื่องมือ <a href="/palm-analysis" class="text-amber-400 font-bold hover:underline">วิเคราะห์ลายมือด้วย AI ฟรี</a> เพื่อดูแนวโน้มชะตาชีวิตที่ติดตัวมาตั้งแต่เกิดอีกด้วย ลองใช้คู่กันเพื่อผลลัพธ์ที่แม่นยำที่สุดครับ</p>
+            </div>
+
         `,
         coverImage: '/images/articles/4-pillars-naming.webp',
         coverImageAlt: '4 ศาสตร์การตั้งชื่อมงคล เลขศาสตร์ ทักษา อายตนะ พลังเงา',
@@ -6961,6 +6993,7 @@ export const articles: Article[] = [
         slug: 'numerology-0-9-power-guide',
         title: 'ทำไม "เลขศาสตร์" ถึงมีผลกับชีวิต? เจาะลึกพลังตัวเลข 0-9 และความลับที่ซ่อนอยู่',
         excerpt: 'เจาะลึกพลังตัวเลข 0-9 ตามหลักเลขศาสตร์ ตัวเลขแต่ละตัวส่งผลต่อชีวิต ความคิด และโชคชะตาอย่างไร พร้อมวิธีเลือกเลขมงคลเสริมดวง',
+        relatedSlugs: ['micro-analysis-lucky-number-pairs', '4-pillars-of-naming', 'lucky-numbers-2569-guide', 'lucky-names-for-2026-grade-a-plus'],
         content: `
             <p class="lead text-xl text-slate-200 font-light border-l-4 border-amber-500 pl-4 italic mb-8">
                 เคยสงสัยไหมว่า... ทำไมบางคนถึงยอมจ่ายเงินหลักแสนเพื่อเบอร์โทรศัพท์สวยๆ? ในศาสตร์แห่งพยากรณ์ "ตัวเลข" ไม่ได้มีหน้าที่เพียงแค่การนับคำนวณ แต่ละตัวเลขคือสัญลักษณ์ของพลังงานดวงดาวที่มีคลื่นความถี่ส่งผลต่อความคิด อารมณ์ และจังหวะชีวิตของเรา
@@ -7154,6 +7187,7 @@ export const articles: Article[] = [
         slug: 'check-kalakini-letters-7-days',
         title: 'เช็คด่วน! อักษรกาลกิณีตามวันเกิดของคุณคืออะไร? (ครบทั้ง 7 วัน)',
         excerpt: 'รู้ทัน "อักษรกาลกิณี" ตามวันเกิด ตัวอักษรต้องห้ามที่อาจขัดขวางความเจริญ พร้อมตารางเช็คลิสต์ครบทั้ง 7 วัน และวิธีแก้เคล็ดตั้งชื่อมงคล',
+        relatedSlugs: ['forbidden-letters-kalakini', '4-pillars-of-naming', 'auspicious-names-by-birthday-2026'],
         content: `
             <p>เคยสงสัยไหมว่า... ทำไมบางช่วงชีวิตถึงทำอะไรก็ติดขัด? นอกจากการวางแผนชีวิตที่ดีแล้ว ในทางทักษาปกรณ์ของไทย <strong>"ชื่อ"</strong> เปรียบเสมือนรหัสผ่านของชีวิต และหนึ่งในรหัสที่สำคัญที่สุดคือการหลีกเลี่ยง <strong>"อักษรกาลกิณี"</strong></p>
             <p>วันนี้ NameMongkol จะพาทุกคนไปเช็คลิสต์อักษรต้องห้ามตามวันเกิด เพื่อเป็นแนวทางในการตั้งชื่อ หรือตรวจสอบชื่อปัจจุบันของคุณกันครับ</p>
@@ -7262,6 +7296,7 @@ export const articles: Article[] = [
         slug: 'most-accurate-phone-number-analysis-2026',
         title: 'วิเคราะห์เบอร์มงคล แม่นยำที่สุด 2026: เจาะลึกอัลกอริทึมเลขศาสตร์ดิจิทัล เปลี่ยนดวงชะตาผ่านพลังงานคู่ลำดับ',
         excerpt: 'ทำไมเบอร์มงคลถึงเปลี่ยนชีวิตได้จริง? เจาะลึกศาสตร์การวิเคราะห์เบอร์โทรศัพท์ 4 มิติ และคู่เลขมงคลตามอาชีพที่แม่นยำที่สุด ด้วยระบบ AI และสถิติเลขศาสตร์ชั้นสูง',
+        relatedSlugs: ['auspicious-phone-number-guide-2026', 'lucky-numbers-2569-guide', 'micro-analysis-lucky-number-pairs'],
         content: `
             <p class="lead text-lg text-slate-300 mb-6 font-light">คุณเคยสงสัยไหมว่า... ทำไมเปลี่ยนเบอร์มงคลแล้วชีวิตยังเหมือนเดิม? หรือทำไมคนอื่นใช้เลขนี้แล้วรวย แต่เราใช้แล้วเฉยๆ? คำตอบไม่ได้อยู่ที่ "ผลรวม" แต่อยู่ที่ <strong>"ความลึก"</strong> ของการวิเคราะห์</p>
             
@@ -7413,6 +7448,7 @@ export const articles: Article[] = [
         slug: 'what-is-shadow-power',
         title: 'พลังเงา (Shadow Power) คืออะไร? ศาสตร์ลับที่หลายคนมองข้าม วิเคราะห์ชื่อชั้นสูงที่แม่นยำกว่าเดิม',
         excerpt: 'เผยความลับ "พลังเงา" ที่ซ่อนอยู่ในชื่อของคุณ ส่งผลต่อจิตใต้สำนึกและชะตาชีวิตถึง 90% รู้จักศาสตร์ชั้นสูงที่จะพลิกชีวิตคุณให้เหนือกว่า',
+        relatedSlugs: ['shadow-power-ayatana-6-meaning', 'what-is-ayatana-6', '4-pillars-of-naming'],
         content: `
             <p class="lead text-lg text-slate-300 mb-6 font-light">คุณเคยสงสัยไหม? ทำไมชื่อที่ผลรวมดี อักษรดี แต่ชีวิตกลับยังมีอุปสรรคที่ไม่คาดคิด? คำตอบอาจซ่อนอยู่ในสิ่งที่คุณมองไม่เห็น นั่นคือ <strong>"พลังเงา" (Shadow Power)</strong></p>
 
@@ -7559,6 +7595,13 @@ export const articles: Article[] = [
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                 </a>
             </div>
+
+            <div class="mt-8 p-6 bg-slate-800/80 rounded-xl border border-indigo-500/30">
+                <h3 class="text-xl font-bold text-amber-400 mb-3">🛠️ เครื่องมือวิเคราะห์เพิ่มเติม</h3>
+                <p class="text-slate-300 mb-2">นอกจากวิเคราะห์ชื่อแล้ว คุณยังสามารถ <a href="/aura-analysis" class="text-indigo-400 font-bold hover:underline">วิเคราะห์ออร่าชื่อ</a> เพื่อดูพลังงานแฝงเบื้องลึกที่ส่งผลต่อตัวคุณ</p>
+                <p class="text-slate-300">และหากต้องการเจาะลึกชะตาชีวิตที่ติดตัวมาแต่เกิด ลองใช้ระบบ <a href="/palm-analysis" class="text-amber-400 font-bold hover:underline">วิเคราะห์ลายมือด้วย AI ฟรี</a> ของเราได้เลยครับ</p>
+            </div>
+
         `,
         coverImage: '/images/articles/what-is-shadow-power.webp',
         coverImageAlt: 'พลังเงา Shadow Power คืออะไร ศาสตร์การตั้งชื่อ',

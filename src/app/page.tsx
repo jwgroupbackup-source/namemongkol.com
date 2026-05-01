@@ -120,14 +120,33 @@ export default function Page() {
           '@type': 'Offer',
           'price': '0',
           'priceCurrency': 'THB'
-        },
-        'aggregateRating': {
-          '@type': 'AggregateRating',
-          'ratingValue': '4.9',
-          'ratingCount': '150000',
-          'bestRating': '5',
-          'worstRating': '1'
         }
+      },
+      {
+        '@type': 'HowTo',
+        'name': 'วิธีวิเคราะห์ชื่อมงคลออนไลน์ ฟรี',
+        'description': 'ขั้นตอนการวิเคราะห์ชื่อมงคลที่ NameMongkol — ง่ายเพียง 3 ขั้นตอน',
+        'totalTime': 'PT1M',
+        'step': [
+          {
+            '@type': 'HowToStep',
+            'position': 1,
+            'name': 'กรอกชื่อ-นามสกุล',
+            'text': 'พิมพ์ชื่อและนามสกุลของคุณในช่องด้านบน ระบบรองรับทั้งชื่อภาษาไทยและภาษาอังกฤษ'
+          },
+          {
+            '@type': 'HowToStep',
+            'position': 2,
+            'name': 'เลือกวันเกิด',
+            'text': 'เลือกวันเกิดเพื่อตรวจสอบอักษรทักษาปกรณ์ กาลกิณี และอายตนะ 6 ที่ตรงกับดวงชะตาของคุณ'
+          },
+          {
+            '@type': 'HowToStep',
+            'position': 3,
+            'name': 'กดวิเคราะห์ รอผลทันที',
+            'text': 'กดปุ่มวิเคราะห์ ระบบ AI จะคำนวณผลรวมเลขศาสตร์ ตรวจสอบทักษาปกรณ์ อายตนะ 6 และนิรันดร์ศาสตร์ พร้อมแสดงผลครบ 4 ศาสตร์ทันที'
+          }
+        ]
       },
       {
         '@type': 'FAQPage',

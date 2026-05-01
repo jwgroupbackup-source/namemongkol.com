@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Script from 'next/script';
 import { notFound, redirect } from 'next/navigation';
-import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
+import { ArrowLeft, Calendar, User, Tag, RefreshCw, BookOpen, Award, ExternalLink, Star } from 'lucide-react';
 import { Metadata } from 'next';
 import { ArticleImage } from '@/components/ArticleImage';
 import dynamic from 'next/dynamic';
@@ -247,6 +247,15 @@ export default async function ArticlePage({ params }: Props) {
     // ── Canonical base URL (consistent across metadata & JSON-LD) ──
     const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com').replace(/\/$/, '');
     const canonicalUrl = `${baseUrl}/articles/${slug}`;
+
+    // ── Date formatting helpers ──
+    const formatThaiDate = (dateStr: string) => {
+        try {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
+        } catch { return dateStr; }
+    };
+    const hasBeenModified = article.dateModified && article.dateModified !== article.date;
     const isPalmistryArticle = slug === PALMISTRY_SLUG;
 
     // ── Reading time estimate ──
@@ -336,7 +345,13 @@ export default async function ArticlePage({ params }: Props) {
                         "author": [{
                             "@type": "Person",
                             "name": article.author,
-                            "url": baseUrl
+                            "url": `${baseUrl}/about`,
+                            "jobTitle": "นักวิเคราะห์ชื่อมงคลและเลขศาสตร์",
+                            "affiliation": {
+                                "@type": "Organization",
+                                "name": "NameMongkol",
+                                "url": baseUrl
+                            }
                         }],
                         "publisher": {
                             "@type": "Organization",
@@ -406,8 +421,14 @@ export default async function ArticlePage({ params }: Props) {
                         </span>
                         <div className="flex items-center gap-2">
                             <Calendar size={14} />
-                            <span>{article.date}</span>
+                            <span>เผยแพร่: {formatThaiDate(article.date)}</span>
                         </div>
+                        {hasBeenModified && (
+                            <div className="flex items-center gap-2 text-emerald-400/80">
+                                <RefreshCw size={12} />
+                                <span>อัปเดต: {formatThaiDate(article.dateModified!)}</span>
+                            </div>
+                        )}
                         <div className="flex items-center gap-2">
                             <User size={14} />
                             <span>{article.author}</span>
@@ -533,6 +554,51 @@ export default async function ArticlePage({ params }: Props) {
 
                     {/* Aura Vibe Widget — End-of-Article (ก่อน CTA section) */}
                     <AuraVibeWidget />
+
+                    {/* Author Bio Card — EEAT signal */}
+                    <section className="mt-10 bg-gradient-to-r from-slate-800/60 to-slate-800/30 border border-slate-700/50 rounded-2xl p-6 flex flex-col md:flex-row items-start gap-5">
+                        <div className="w-16 h-16 bg-gradient-to-br from-amber-500/20 to-purple-500/20 border border-amber-500/30 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">
+                            👨‍🏫
+                        </div>
+                        <div className="flex-1">
+                            <h3 className="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                                {article.author}
+                                <Award size={16} className="text-amber-400" />
+                            </h3>
+                            <p className="text-slate-400 text-sm leading-relaxed mb-3">
+                                นักวิเคราะห์ชื่อมงคลและเลขศาสตร์ ผู้เชี่ยวชาญด้านทักษาปกรณ์ เลขศาสตร์ไทย และโหราศาสตร์
+                                ประสบการณ์วิเคราะห์ชื่อมากกว่า 150,000 ชื่อผ่านระบบ NameMongkol
+                                อ้างอิงตำราทักษาปกรณ์ฉบับราชบัณฑิต และหลักเลขศาสตร์สากล
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                                <Link href="/about" className="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-full transition-colors">
+                                    <BookOpen size={12} /> เกี่ยวกับผู้เขียน
+                                </Link>
+                                <Link href="/" className="inline-flex items-center gap-1.5 text-xs text-purple-400 hover:text-purple-300 bg-purple-500/10 border border-purple-500/20 px-3 py-1.5 rounded-full transition-colors">
+                                    <ExternalLink size={12} /> วิเคราะห์ชื่อฟรี
+                                </Link>
+                                <Link href="/reviews" className="inline-flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 bg-blue-500/10 border border-blue-500/20 px-3 py-1.5 rounded-full transition-colors">
+                                    <Star size={12} /> ดูรีวิวผู้ใช้งาน
+                                </Link>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Mandatory CTA — ตาม Checklist */}
+                    <div className="mt-8 bg-gradient-to-r from-amber-500/10 via-yellow-500/5 to-purple-500/10 border border-amber-500/20 rounded-2xl p-6 md:p-8 text-center">
+                        <p className="text-xl md:text-2xl font-bold text-white mb-3">
+                            อยากรู้ว่าชื่อของคุณดีแค่ไหน?
+                        </p>
+                        <p className="text-slate-300 mb-5">
+                            วิเคราะห์ครบ 4 ศาสตร์: เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และกาลกิณี ฟรี 100%
+                        </p>
+                        <Link
+                            href="/"
+                            className="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold px-8 py-3.5 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all shadow-lg shadow-amber-500/30 text-lg"
+                        >
+                            🔮 คลิกวิเคราะห์ฟรีที่นี่
+                        </Link>
+                    </div>
 
                     {/* CTA Section */}
                     <div className="mt-8 pt-8 border-t border-white/10">

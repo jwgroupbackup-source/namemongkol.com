@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import ClientPage from './ClientPage';
 import { Sparkles, Sun, Moon, Flame, MessageCircle, BookOpen, Heart, Shield, Crown, Star, Zap, Download, ChevronRight, HelpCircle } from 'lucide-react';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
     title: 'วอลเปเปอร์มงคล 2569 เสริมดวง งาน เงิน รัก บารมี | NameMongkol',
+    alternates: { canonical: `${siteUrl}/wallpapers` },
     description: 'ดาวน์โหลดวอลเปเปอร์มงคลเสริมดวงชะตา 2569 ฟรี! ออกแบบตามหลักฮวงจุ้ย โหราศาสตร์ไทย สีมงคลตามวันเกิด พร้อมสัญลักษณ์ศักดิ์สิทธิ์ ท้าวเวสสุวรรณ เลขมงคล 4289 เสริมการเงิน การงาน ความรัก สุขภาพ และบารมี',
     keywords: [
         'วอลเปเปอร์มงคล', 'วอลเปเปอร์เสริมดวง', 'วอลเปเปอร์สายมู',
