@@ -165,7 +165,8 @@ const getArticle = async (slug: string): Promise<Article | null> => {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug } = await params;
+    const { slug: rawSlug } = await params;
+    const slug = decodeURIComponent(rawSlug);
 
     // Redirect old Thai slugs to new English slugs
     if (SLUG_REDIRECTS[slug]) {
@@ -237,7 +238,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ArticlePage({ params }: Props) {
-    const { slug } = await params;
+    const { slug: rawSlug } = await params;
+    const slug = decodeURIComponent(rawSlug);
+    
+    // Check redirect again here just in case generateMetadata isn't invoked (e.g. client navigation)
+    if (SLUG_REDIRECTS[slug]) {
+        redirect(`/articles/${SLUG_REDIRECTS[slug]}`);
+    }
+
     const article = await getArticle(slug);
 
     if (!article) {

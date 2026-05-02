@@ -412,7 +412,11 @@ export default function ClientPage() {
                                 exit={{ opacity: 0, scale: 0.95 }}
                                 transition={{ duration: 0.3 }}
                                 className="break-inside-avoid glass-card ancient-frame rounded-2xl sm:rounded-3xl p-4 sm:p-7 group relative overflow-hidden mb-4 sm:mb-6"
+                                itemScope
+                                itemType="https://schema.org/Review"
                             >
+                                {/* Hidden Microdata for SEO Item Reviewed */}
+                                <meta itemProp="itemReviewed" content={review.service_type && SERVICE_INFO[review.service_type] ? SERVICE_INFO[review.service_type].name : SERVICE_INFO['general'].name} />
                                 {/* Owner Actions - Adjusted z-index and position */}
                                 {currentUser && (currentUser.id === review.user_id || isAdmin) && (
                                     <div className="absolute top-4 right-4 z-30 flex gap-2">
@@ -455,12 +459,17 @@ export default function ClientPage() {
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center gap-1.5 sm:gap-2">
-                                            <span className="text-white font-bold text-sm sm:text-base">{review.nickname}</span>
+                                            <span className="text-white font-bold text-sm sm:text-base" itemProp="author" itemScope itemType="https://schema.org/Person">
+                                                <span itemProp="name">{review.nickname}</span>
+                                            </span>
                                             {/* Verified Badge - E-E-A-T Signal */}
                                             {review.is_verified && (
-                                                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold border border-emerald-500/20">
+                                                <span 
+                                                    className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold border border-emerald-500/20 cursor-default"
+                                                    title="ยืนยันแล้วว่าเป็นผู้ใช้บริการจริงผ่านระบบสมาชิก"
+                                                >
                                                     <BadgeCheck size={12} className="fill-emerald-400 text-emerald-900" />
-                                                    Verified
+                                                    ผู้ใช้บริการจริง
                                                 </span>
                                             )}
                                         </div>
@@ -473,6 +482,7 @@ export default function ClientPage() {
                                                     <Link
                                                         href={SERVICE_INFO[review.service_type].url}
                                                         className="text-cyan-400 hover:text-cyan-300 hover:underline transition-colors normal-case"
+                                                        title={`ดูรายละเอียดบริการ ${SERVICE_INFO[review.service_type].name}`}
                                                     >
                                                         ใช้บริการ: {SERVICE_INFO[review.service_type].shortName}
                                                     </Link>
@@ -485,6 +495,7 @@ export default function ClientPage() {
                                                     <time
                                                         dateTime={formatDateForSEO(review.date).isoDate}
                                                         className="text-slate-500"
+                                                        itemProp="datePublished"
                                                     >
                                                         {formatDateForSEO(review.date).thaiDate}
                                                     </time>
@@ -494,7 +505,10 @@ export default function ClientPage() {
                                     </div>
                                 </div>
 
-                                <div className="flex gap-1.5 mb-4">
+                                <div className="flex gap-1.5 mb-4" itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                                    <meta itemProp="ratingValue" content={review.rating.toString()} />
+                                    <meta itemProp="bestRating" content="5" />
+                                    <meta itemProp="worstRating" content="1" />
                                     {[...Array(5)].map((_, i) => (
                                         <Star
                                             key={i}
@@ -504,7 +518,7 @@ export default function ClientPage() {
                                     ))}
                                 </div>
 
-                                <p className="cosmic-text-soft leading-relaxed mb-6 relative z-10 italic">
+                                <p className="cosmic-text-soft leading-relaxed mb-6 relative z-10 italic" itemProp="reviewBody">
                                     &quot;{review.content}&quot;
                                 </p>
 
@@ -519,7 +533,7 @@ export default function ClientPage() {
                                                 <div className="absolute inset-0 bg-slate-800/50" />
                                                 <Image
                                                     src={img}
-                                                    alt={`รีวิวจาก ${review.nickname} - ${idx + 1}`}
+                                                    alt={`ภาพรีวิวผลลัพธ์หลังใช้บริการ${review.service_type && SERVICE_INFO[review.service_type] ? SERVICE_INFO[review.service_type].name : 'ของ NameMongkol'} จากคุณ ${review.nickname} - ภาพที่ ${idx + 1}`}
                                                     fill
                                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                     className="object-cover transition-transform duration-500 group-hover:scale-105"
