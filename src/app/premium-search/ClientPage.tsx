@@ -811,7 +811,7 @@ export default function PremiumSearchPage() {
                                     💡 <strong className="text-emerald-400">คำแนะนำสำคัญ:</strong> หลังได้ชื่อที่ต้องการแล้ว อย่าลืมนำไป
                                 </p>
                                 <Link
-                                    href="/name-analysis"
+                                    href="/"
                                     className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-colors"
                                 >
                                     <Sparkles size={18} />

@@ -460,44 +460,44 @@ export default function PremiumAnalysisPage() {
     );
 
     const formContent = (
-        <div className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-6 md:p-12 shadow-2xl animate-fade-in-up max-w-7xl mx-auto relative overflow-hidden">
+        <div className="bg-gradient-to-b from-[#1e293b] to-[#0f172a] backdrop-blur-2xl border border-amber-500/20 rounded-3xl md:rounded-[2.5rem] p-5 md:p-12 shadow-[0_0_40px_rgba(245,158,11,0.1)] animate-fade-in-up max-w-7xl mx-auto relative overflow-hidden">
 
             {/* Background Texture inside form */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 blur-[100px] rounded-full pointer-events-none -mr-32 -mt-32"></div>
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/10 blur-[120px] rounded-full pointer-events-none -mr-32 -mt-32"></div>
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 blur-[100px] rounded-full pointer-events-none -ml-32 -mb-32"></div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-16 relative z-10">
 
                 {/* Left Column: Personal Inputs (User Data) */}
-                <div className="lg:col-span-5 space-y-8">
+                <div className="lg:col-span-5 space-y-6 md:space-y-8">
 
-                    <div className="flex items-center gap-3 text-amber-200/80 mb-2">
-                        <div className="w-1 h-6 bg-amber-500 rounded-full"></div>
-                        <h3 className="text-lg font-bold uppercase tracking-wider">ข้อมูลส่วนตัว</h3>
+                    <div className="flex items-center gap-3 text-amber-400 mb-2">
+                        <div className="w-1.5 h-6 md:h-7 bg-gradient-to-b from-amber-400 to-amber-600 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
+                        <h3 className="text-lg md:text-xl font-extrabold uppercase tracking-widest drop-shadow-md">ข้อมูลส่วนตัว</h3>
                     </div>
 
                     {/* Surname */}
-                    <div className="space-y-3">
-                        <label className="text-sm font-medium text-slate-300 ml-1">นามสกุล <span className="text-red-400">*</span></label>
+                    <div className="space-y-2 md:space-y-3">
+                        <label className="text-sm font-bold text-slate-200 ml-1">นามสกุล <span className="text-red-400">*</span></label>
                         <div className="relative group">
-                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-amber-400 transition-colors">
-                                <User size={20} />
+                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-amber-400 transition-colors">
+                                <User size={20} className="w-5 h-5 md:w-5 md:h-5" />
                             </div>
                             <input
                                 type="text"
                                 value={surname}
                                 onChange={(e) => setSurname(e.target.value)}
                                 placeholder="กรอกนามสกุลของท่าน"
-                                className="w-full bg-slate-900/50 border border-white/10 rounded-2xl pl-12 pr-5 py-4 text-lg focus:outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/10 transition-all placeholder:text-slate-600 text-white"
+                                className="w-full bg-[#0b1120]/80 border border-slate-600 rounded-xl md:rounded-2xl pl-11 md:pl-12 pr-4 md:pr-5 py-3 md:py-4 text-base md:text-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-all placeholder:text-slate-500 text-white shadow-inner"
                             />
                         </div>
                     </div>
 
                     {/* Birth Date & Time */}
-                    <div className="grid grid-cols-1 gap-6">
-                        {/* Birth Date */}
+                    <div className="grid grid-cols-1 gap-5 md:gap-6">
                         {/* Birth Date (Dropdowns) */}
-                        <div className="space-y-3">
-                            <label className="text-sm font-medium text-slate-300 ml-1">วันเกิด</label>
+                        <div className="space-y-2 md:space-y-3">
+                            <label className="text-sm font-bold text-slate-200 ml-1">วันเกิด</label>
                             <div className="grid grid-cols-12 gap-2 sm:gap-4">
                                 {/* Day */}
                                 <div className="col-span-4 sm:col-span-3 relative">
@@ -535,13 +535,13 @@ export default function PremiumAnalysisPage() {
                         </div>
 
                         {/* Birth Time */}
-                        <div className="space-y-3">
-                            <label className="text-sm font-medium text-slate-300 ml-1 flex justify-between items-center">
+                        <div className="space-y-2 md:space-y-3">
+                            <label className="text-sm font-bold text-slate-200 ml-1 flex justify-between items-center">
                                 <span className="flex items-center gap-2">
                                     เวลาเกิด
                                     {/* Tooltip for birth time */}
                                     <div className="relative group/tooltip">
-                                        <Info size={14} className="text-slate-500 hover:text-amber-400 cursor-help transition-colors" />
+                                        <Info size={14} className="text-slate-400 hover:text-amber-400 cursor-help transition-colors" />
                                         <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-64 p-3 bg-slate-800 border border-amber-500/20 rounded-xl text-xs text-slate-300 opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all z-50 shadow-xl">
                                             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-slate-800 border-r border-b border-amber-500/20 rotate-45"></div>
                                             <p className="leading-relaxed">
@@ -559,12 +559,12 @@ export default function PremiumAnalysisPage() {
                                             setIsUnknownTime(e.target.checked);
                                             if (e.target.checked) setBirthTime('');
                                         }}
-                                        className="rounded border-white/20 bg-white/5 text-amber-500 focus:ring-amber-500/50"
+                                        className="rounded border-slate-500 bg-[#0b1120] text-amber-500 focus:ring-amber-500/50"
                                     />
-                                    <label htmlFor="unknownTime" className="text-xs text-slate-400 cursor-pointer hover:text-white transition-colors">ไม่ทราบเวลา</label>
+                                    <label htmlFor="unknownTime" className="text-xs text-slate-300 cursor-pointer hover:text-amber-400 transition-colors">ไม่ทราบเวลา</label>
                                 </div>
                             </label>
-                            <div className={`grid grid-cols-2 gap-4 ${isUnknownTime ? 'opacity-50 pointer-events-none' : ''}`}>
+                            <div className={`grid grid-cols-2 gap-3 md:gap-4 ${isUnknownTime ? 'opacity-50 pointer-events-none' : ''}`}>
                                 {/* Hour */}
                                 <div className="relative">
                                     <SearchableSelect
@@ -593,23 +593,23 @@ export default function PremiumAnalysisPage() {
                     </div>
 
                     {/* Gender */}
-                    <div className="space-y-3">
-                        <label className="text-sm font-medium text-slate-300 ml-1">เพศ</label>
-                        <div className="grid grid-cols-2 gap-2 bg-slate-900/50 p-1.5 rounded-2xl border border-white/10">
+                    <div className="space-y-2 md:space-y-3">
+                        <label className="text-sm font-bold text-slate-200 ml-1">เพศ</label>
+                        <div className="grid grid-cols-2 gap-3 p-1">
                             <button
                                 onClick={() => setGender('male')}
-                                className={`py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 ${gender === 'male'
-                                    ? 'bg-gradient-to-br from-slate-700 to-slate-800 text-white shadow-lg'
-                                    : 'text-slate-500 hover:text-slate-300 hover:bg-white/5'
+                                className={`py-3 md:py-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border ${gender === 'male'
+                                    ? 'bg-gradient-to-br from-blue-600 to-blue-800 text-white border-blue-400 shadow-[0_0_15px_rgba(37,99,235,0.4)]'
+                                    : 'bg-[#0b1120]/80 border-slate-600 text-slate-400 hover:border-slate-400'
                                     }`}
                             >
                                 <span>ชาย</span>
                             </button>
                             <button
                                 onClick={() => setGender('female')}
-                                className={`py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 ${gender === 'female'
-                                    ? 'bg-gradient-to-br from-pink-900/80 to-pink-800/80 text-pink-100 shadow-lg'
-                                    : 'text-slate-500 hover:text-slate-300 hover:bg-white/5'
+                                className={`py-3 md:py-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border ${gender === 'female'
+                                    ? 'bg-gradient-to-br from-pink-600 to-pink-800 text-white border-pink-400 shadow-[0_0_15px_rgba(219,39,119,0.4)]'
+                                    : 'bg-[#0b1120]/80 border-slate-600 text-slate-400 hover:border-slate-400'
                                     }`}
                             >
                                 <span>หญิง</span>
@@ -619,56 +619,56 @@ export default function PremiumAnalysisPage() {
                 </div>
 
                 {/* Right Column: Focus Selection (Grid Cards) */}
-                <div className="lg:col-span-7 flex flex-col h-full">
-                    <div className="flex items-center gap-3 text-amber-200/80 mb-6 lg:mb-10">
-                        <div className="w-1 h-6 bg-amber-500 rounded-full"></div>
-                        <h3 className="text-lg font-bold uppercase tracking-wider">เลือกสิ่งที่คุณต้องการเน้น (Focus)</h3>
+                <div className="lg:col-span-7 flex flex-col h-full mt-2 md:mt-0">
+                    <div className="flex items-center gap-3 text-amber-400 mb-4 md:mb-8">
+                        <div className="w-1.5 h-6 md:h-7 bg-gradient-to-b from-amber-400 to-amber-600 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
+                        <h3 className="text-lg md:text-xl font-extrabold uppercase tracking-widest drop-shadow-md">เลือกสิ่งที่คุณต้องการเน้น (FOCUS)</h3>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 flex-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 flex-1">
                         {focusOptions.map((option) => {
                             const isActive = focus === option.key;
                             return (
                                 <button
                                     key={option.key}
                                     onClick={() => setFocus(option.key)}
-                                    className={`group relative px-4 py-3 rounded-xl border transition-all duration-300 flex items-center gap-4 overflow-hidden
+                                    className={`group relative p-3 md:p-4 rounded-xl md:rounded-2xl border-2 transition-all duration-300 flex items-center gap-3 md:gap-4 overflow-hidden
                                         ${isActive
-                                            ? 'border-amber-500 bg-gradient-to-br from-amber-500/20 via-amber-900/40 to-black shadow-[0_0_20px_rgba(245,158,11,0.2)]'
-                                            : 'border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/10'
+                                            ? 'border-amber-400 bg-gradient-to-br from-[#2a1f14] to-[#140f0a] shadow-[0_0_25px_rgba(245,158,11,0.25)] scale-[1.02] md:scale-[1.02]'
+                                            : 'border-slate-700 bg-[#0b1120]/60 hover:bg-[#151f32] hover:border-amber-500/50'
                                         }`}
                                 >
                                     {/* Active border glow */}
-                                    {isActive && <div className="absolute inset-0 border border-amber-400/50 rounded-xl pointer-events-none animate-pulse"></div>}
+                                    {isActive && <div className="absolute inset-0 border-2 border-amber-400/30 rounded-xl md:rounded-2xl pointer-events-none animate-pulse"></div>}
 
                                     {/* Icon Box */}
-                                    <div className={`p-2 rounded-lg transition-all duration-300 shrink-0 ${isActive
-                                        ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-black shadow-lg shadow-amber-500/30'
-                                        : 'bg-slate-800 text-slate-400 group-hover:text-amber-200 group-hover:bg-slate-700'
+                                    <div className={`p-2.5 md:p-3 rounded-lg md:rounded-xl transition-all duration-300 shrink-0 ${isActive
+                                        ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-[#140f0a] shadow-[0_0_15px_rgba(245,158,11,0.4)]'
+                                        : 'bg-slate-800 text-slate-400 group-hover:text-amber-300 group-hover:bg-slate-700'
                                         }`}>
-                                        {React.cloneElement(option.icon as React.ReactElement<{ size: number }>, { size: 20 })}
+                                        {React.cloneElement(option.icon as React.ReactElement<{ size: number }>, { size: 24 })}
                                     </div>
 
                                     {/* Text Content */}
                                     <div className="flex-1 text-left z-10">
                                         <div className="flex items-center gap-2">
-                                            <h4 className={`text-sm font-bold transition-colors ${isActive ? 'text-white' : 'text-slate-300 group-hover:text-white'}`}>
+                                            <h4 className={`text-sm md:text-base font-bold transition-colors ${isActive ? 'text-amber-300' : 'text-slate-200 group-hover:text-white'}`}>
                                                 {option.title}
                                             </h4>
                                             {isActive && (
-                                                <div className="w-4 h-4 rounded-full bg-amber-500 flex items-center justify-center shadow-lg transform scale-100 transition-transform">
-                                                    <Check size={10} className="text-black stroke-[3px]" />
+                                                <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-amber-500 flex items-center justify-center shadow-lg transform scale-100 transition-transform">
+                                                    <Check size={12} className="text-[#140f0a] stroke-[3px] w-2.5 h-2.5 md:w-3 md:h-3" />
                                                 </div>
                                             )}
                                         </div>
-                                        <p className={`text-[11px] leading-tight mt-0.5 ${isActive ? 'text-amber-100/80' : 'text-slate-500 group-hover:text-slate-400'}`}>
+                                        <p className={`text-xs mt-0.5 md:mt-1 ${isActive ? 'text-amber-100/90' : 'text-slate-400 group-hover:text-slate-300'}`}>
                                             {option.subtitle}
                                         </p>
                                     </div>
 
                                     {/* Lustrous effect for active state */}
                                     {isActive && (
-                                        <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-full blur-xl -mr-6 -mt-6 pointer-events-none"></div>
+                                        <div className="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-amber-500/10 rounded-full blur-2xl -mr-6 -mt-6 md:-mr-8 md:-mt-8 pointer-events-none"></div>
                                     )}
                                 </button>
                             );
@@ -678,35 +678,35 @@ export default function PremiumAnalysisPage() {
             </div>
 
             {/* Bottom Action Area */}
-            <div className="mt-12 pt-8 border-t border-white/5">
+            <div className="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-slate-700 relative z-10">
                 <div className="flex flex-col items-center justify-center space-y-4">
                     <button
                         onClick={() => handleAnalyze(false)}
                         disabled={isLoading}
                         data-track="premiumAnalysis.form.analyze"
-                        className="group relative w-full md:max-w-2xl mx-auto overflow-hidden rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600 p-[1px] shadow-2xl transition-all hover:scale-[1.02] hover:shadow-amber-500/40 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 disabled:grayscale"
+                        className="group relative w-full md:max-w-2xl mx-auto overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600 p-[2px] shadow-[0_0_30px_rgba(245,158,11,0.3)] transition-all hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(245,158,11,0.5)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 disabled:grayscale"
                     >
-                        <div className="relative flex items-center justify-between rounded-2xl bg-[#0f172a] px-10 py-6 transition-all group-hover:bg-[#0f172a]/90">
-                            <div className="flex items-center gap-4">
-                                <div className="bg-amber-500/20 p-2.5 rounded-xl text-amber-500 group-hover:text-amber-300 transition-colors">
-                                    {isLoading ? <span className="animate-spin block"><RefreshCw size={24} /></span> : <Sparkles className="animate-pulse w-6 h-6" />}
+                        <div className="relative flex items-center justify-between rounded-xl md:rounded-2xl bg-[#0f172a] px-5 py-4 md:px-10 md:py-6 transition-all group-hover:bg-[#162238]">
+                            <div className="flex items-center gap-3 md:gap-5">
+                                <div className="bg-gradient-to-br from-amber-400 to-orange-500 p-2.5 md:p-3 rounded-lg md:rounded-xl text-[#0f172a] shadow-lg shrink-0">
+                                    {isLoading ? <span className="animate-spin block"><RefreshCw className="w-5 h-5 md:w-7 md:h-7" /></span> : <Sparkles className="animate-pulse w-5 h-5 md:w-7 md:h-7" />}
                                 </div>
                                 <div className="text-left">
-                                    <h3 className="text-lg font-bold text-white leading-tight">วิเคราะห์ชื่อมงคล</h3>
-                                    <p className="text-xs text-slate-400 group-hover:text-amber-200/80 transition-colors">ใช้ศาสตร์ชั้นสูง + พลังตัวเลข</p>
+                                    <h3 className="text-lg md:text-xl font-black text-white tracking-wide">วิเคราะห์ชื่อมงคล</h3>
+                                    <p className="text-[11px] md:text-sm text-amber-200/80 font-medium mt-0.5 md:mt-1">ใช้ศาสตร์ชั้นสูง + พลังตัวเลข</p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl border border-white/5">
-                                <span className="text-sm font-bold text-amber-500">ใช้ 30 เครดิต</span>
-                                <Coins size={16} className="text-amber-500" />
+                            <div className="flex items-center gap-1.5 md:gap-2 bg-gradient-to-r from-amber-500/10 to-orange-500/10 px-3 py-2 md:px-5 md:py-3 rounded-lg md:rounded-xl border border-amber-500/30 shadow-inner shrink-0">
+                                <span className="text-sm md:text-base font-bold text-amber-400">ใช้ 30 เครดิต</span>
+                                <Coins className="w-4 h-4 md:w-5 md:h-5 text-amber-400" />
                             </div>
                         </div>
                         {/* Shimmer Effect */}
                         {!isLoading && <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-20 pointer-events-none"></div>}
                     </button>
 
-                    <p className="text-slate-500 text-xs flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
-                        <Lock size={12} />
+                    <p className="text-slate-400 text-xs md:text-sm flex items-center gap-1.5 md:gap-2 opacity-80 hover:opacity-100 transition-opacity font-medium">
+                        <Lock size={14} className="text-amber-500 w-3.5 h-3.5 md:w-4 md:h-4" />
                         ปลอดภัยสูงสุด • ข้อมูลของท่านจะถูกเก็บเป็นความลับ
                     </p>
                 </div>
