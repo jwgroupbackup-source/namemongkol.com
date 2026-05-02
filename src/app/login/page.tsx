@@ -8,7 +8,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com
 export const metadata: Metadata = {
     title: 'เข้าสู่ระบบ | NameMongkol - วิเคราะห์ชื่อมงคล',
     description: 'เข้าสู่ระบบ NameMongkol เพื่อใช้งานบริการวิเคราะห์ชื่อมงคล ดูประวัติการวิเคราะห์ และเข้าถึงฟีเจอร์พิเศษสำหรับสมาชิก',
-    keywords: ['เข้าสู่ระบบ', 'ล็อกอิน', 'สมาชิก', 'NameMongkol', 'วิเคราะห์ชื่อมงคล'],
+    keywords: ['เข้าสู่ระบบ', 'ล็อกอิน', 'สมาชิก', 'NameMongkol', 'บัญชีผู้ใช้'],
 
     openGraph: {
         title: 'เข้าสู่ระบบ | NameMongkol',

@@ -445,7 +445,7 @@ export default async function ArticlePage({ params }: Props) {
                     </h1>
 
                     {/* Cover Image */}
-                    <div className="w-full aspect-video bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl mb-10 overflow-hidden relative border border-white/5 shadow-2xl shadow-purple-900/10">
+                    <div className="w-full aspect-video bg-slate-900 rounded-2xl mb-10 overflow-hidden relative border border-white/5 shadow-2xl shadow-purple-900/10 flex items-center justify-center">
                         {/* 
                            Note: Since we might not have real images yet, 
                            we'll use a placeholder logic if exact file doesn't exist, 
@@ -456,6 +456,7 @@ export default async function ArticlePage({ params }: Props) {
                             src={article.coverImage}
                             alt={article.coverImageAlt || `ภาพหน้าปกบทความ ${article.title}`}
                             priority
+                            objectFit="contain"
                             className="group-hover:scale-100" // Disable zoom effect if not needed, or keep standard
                         />
                     </div>

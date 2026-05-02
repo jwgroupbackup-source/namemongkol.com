@@ -9,13 +9,17 @@ interface ArticleImageProps {
     alt: string;
     priority?: boolean;
     className?: string;
+    objectFit?: 'cover' | 'contain';
+    objectPosition?: string;
 }
 
 export const ArticleImage: React.FC<ArticleImageProps> = ({ 
     src, 
     alt, 
     priority = false, 
-    className
+    className,
+    objectFit = 'cover',
+    objectPosition = 'center',
 }) => {
     const [error, setError] = useState(false);
 
@@ -35,6 +39,8 @@ export const ArticleImage: React.FC<ArticleImageProps> = ({
     // Determine if external URL
     const isExternal = src.startsWith('http');
 
+    const objectFitClass = objectFit === 'contain' ? 'object-contain' : 'object-cover';
+
     return (
         <Image
             src={src}
@@ -42,7 +48,8 @@ export const ArticleImage: React.FC<ArticleImageProps> = ({
             fill
             priority={priority}
             loading={priority ? 'eager' : 'lazy'}
-            className={`object-cover transition-transform duration-500 ${className || 'group-hover:scale-105'}`}
+            className={`${objectFitClass} transition-transform duration-500 ${className || 'group-hover:scale-105'}`}
+            style={{ objectPosition }}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             onError={() => setError(true)}
             unoptimized={isExternal}
@@ -50,3 +57,4 @@ export const ArticleImage: React.FC<ArticleImageProps> = ({
         />
     );
 };
+

@@ -69,7 +69,9 @@ export interface AnalysisResult {
     prediction: PredictionResult;
     thaksa: ThaksaAnalysisResult | null;
     ayatana: AyatanaResult;
-    grade: 'A+' | 'A' | 'B' | 'C'; // Added grade
+    nameGrade: 'A+' | 'A' | 'B' | 'C';
+    surnameGrade: 'A+' | 'A' | 'B' | 'C';
+    grade: 'A+' | 'A' | 'B' | 'C'; // Combined grade
     isNirun: boolean;
 }
 

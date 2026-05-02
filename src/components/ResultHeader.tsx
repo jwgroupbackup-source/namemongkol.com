@@ -6,6 +6,18 @@ interface ResultHeaderProps {
     result: AnalysisResult;
 }
 
+const GradeBadge = ({ grade }: { grade: 'A+' | 'A' | 'B' | 'C' }) => (
+    <div className={`
+        w-9 h-9 rounded-lg flex items-center justify-center font-bold text-sm border shadow-lg backdrop-blur-md
+        ${grade === 'A+' ? 'bg-emerald-500 text-white border-emerald-400 shadow-emerald-500/30' :
+            grade === 'A' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
+                grade === 'B' ? 'bg-blue-500/20 text-blue-400 border-blue-500/30' :
+                    'bg-rose-500/20 text-rose-400 border-rose-500/30'}
+    `}>
+        {grade}
+    </div>
+);
+
 export const ResultHeader: React.FC<ResultHeaderProps> = ({ result }) => {
     return (
         <>
@@ -23,6 +35,10 @@ export const ResultHeader: React.FC<ResultHeaderProps> = ({ result }) => {
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
                 <div className="glass-card p-4 rounded-2xl text-center relative overflow-hidden group hover:scale-[1.02] transition-transform">
                     <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${result.namePrediction.bgGradient}`}></div>
+                    {/* Grade Badge */}
+                    <div className="flex justify-end mb-1">
+                        <GradeBadge grade={result.nameGrade} />
+                    </div>
                     <span className="text-slate-400 text-sm font-medium">ผลรวมชื่อ</span>
                     <div className={`text-4xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${result.namePrediction.bgGradient} mt-2 mb-1`}>
                         {result.nameScore}
@@ -56,6 +72,10 @@ export const ResultHeader: React.FC<ResultHeaderProps> = ({ result }) => {
                 </div>
                 <div className="glass-card p-4 rounded-2xl text-center relative overflow-hidden group hover:scale-[1.02] transition-transform">
                     <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${result.surnamePrediction.bgGradient}`}></div>
+                    {/* Grade Badge */}
+                    <div className="flex justify-end mb-1">
+                        <GradeBadge grade={result.surnameGrade} />
+                    </div>
                     <span className="text-slate-400 text-sm font-medium">ผลรวมนามสกุล</span>
                     <div className={`text-4xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${result.surnamePrediction.bgGradient} mt-2 mb-1`}>
                         {result.surnameScore}
@@ -76,4 +96,3 @@ export const ResultHeader: React.FC<ResultHeaderProps> = ({ result }) => {
         </>
     );
 };
-

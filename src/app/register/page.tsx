@@ -7,7 +7,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com
 export const metadata: Metadata = {
     title: 'สมัครสมาชิก | NameMongkol - วิเคราะห์ชื่อมงคลฟรี',
     description: 'สมัครสมาชิก NameMongkol ฟรี! เพื่อรับเครดิตต้อนรับและใช้งานบริการวิเคราะห์ชื่อมงคล เบอร์มงคล พร้อมฟีเจอร์พิเศษมากมาย',
-    keywords: ['สมัครสมาชิก', 'ลงทะเบียน', 'Register', 'NameMongkol', 'วิเคราะห์ชื่อมงคล', 'สมัครฟรี'],
+    keywords: ['สมัครสมาชิก', 'ลงทะเบียน', 'Register', 'NameMongkol', 'สมัครฟรี', 'เครดิตฟรี'],
 
     openGraph: {
         title: 'สมัครสมาชิก | NameMongkol',

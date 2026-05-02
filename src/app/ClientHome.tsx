@@ -46,6 +46,8 @@ const PrivacyStrip = dynamic(() => import('@/components/PrivacyStrip').then(mod 
 const HowItWorksSection = dynamic(() => import('@/components/HowItWorksSection').then(mod => mod.HowItWorksSection));
 const InlineSignupCTA = dynamic(() => import('@/components/InlineSignupCTA').then(mod => mod.InlineSignupCTA), { ssr: false });
 const SaveResultCTA = dynamic(() => import('@/components/SaveResultCTA').then(mod => mod.SaveResultCTA), { ssr: false });
+const BulkAnalysisUpsell = dynamic(() => import('@/components/BulkAnalysisUpsell').then(mod => mod.BulkAnalysisUpsell));
+const BulkAnalysisBanner = dynamic(() => import('@/components/BulkAnalysisBanner').then(mod => mod.BulkAnalysisBanner));
 
 function HomeContent() {
     const searchParams = useSearchParams();
@@ -100,6 +102,8 @@ function HomeContent() {
             prediction: totalPrediction,
             thaksa: analyzeThaksa(cleanName, inputDay, cleanSurname),
             ayatana: calculateAyatana(totalScore),
+            nameGrade: calculateGrade(nameScore, namePairs),
+            surnameGrade: calculateGrade(surnameScore, surnamePairs),
             grade: calculateGrade(totalScore, [...namePairs, ...surnamePairs]),
             isNirun: isNirun
         };
@@ -192,6 +196,9 @@ function HomeContent() {
                             <PairAnalysisCard namePairs={result.namePairs} surnamePairs={result.surnamePairs} />
                         </div>
 
+                        {/* Upsell: วิเคราะห์หลายชื่อ */}
+                        <BulkAnalysisUpsell currentName={result.name} />
+
                         {/* Premium Section */}
                         <PremiumBlurOverlay
                             isLocked={!isPremiumUnlocked}
@@ -231,6 +238,7 @@ function HomeContent() {
             {!result && (
                 <>
                     <WallpaperShowcase />
+                    <BulkAnalysisBanner />
                     <UspSection />
                     <HowItWorksSection />
                     <ComparisonSection />

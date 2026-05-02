@@ -176,11 +176,13 @@ export default function ArticleLuckyNamesByBirthday2569() {
                     </h1>
 
                     {/* Cover Image */}
-                    <div className="w-full aspect-video bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl mb-10 overflow-hidden relative border border-white/5 shadow-2xl shadow-purple-900/10">
+                    <div className="w-full aspect-video bg-slate-900 rounded-2xl mb-10 overflow-hidden relative border border-white/5 shadow-2xl shadow-purple-900/10 flex items-center justify-center">
                         <ArticleImage
                             src={article.coverImage}
                             alt={article.coverImageAlt || `ภาพหน้าปกบทความ ${article.title}`}
                             priority
+                            objectFit="contain"
+                            className="group-hover:scale-100"
                         />
                     </div>
 
