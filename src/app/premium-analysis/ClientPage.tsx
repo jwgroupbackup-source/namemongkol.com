@@ -361,18 +361,16 @@ export default function PremiumAnalysisPage() {
                             key={idx}
                             className={`relative group p-6 rounded-3xl border backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl flex flex-col justify-between overflow-hidden
                                 ${isPremium
-                                    ? 'bg-gradient-to-br from-slate-900/90 to-slate-900/50 border-amber-500/40 shadow-lg shadow-amber-900/20'
-                                    : 'bg-slate-900/60 border-white/5 hover:border-white/20'
+                                    ? 'bg-indigo-950/40 border-amber-500/40 shadow-[0_0_20px_rgba(245,158,11,0.1)]'
+                                    : 'bg-white/5 border-white/5 hover:bg-white/10'
                                 }`}
                         >
                             {/* Decorative Elements for Premium Cards */}
                             {isPremium && (
                                 <>
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none"></div>
-                                    <div className="absolute top-4 right-4 text-amber-300 animate-pulse drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">
+                                    <div className="absolute top-4 right-4 text-amber-400">
                                         <Crown size={24} />
                                     </div>
-                                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500/0 via-amber-500/50 to-amber-500/0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 </>
                             )}
 
@@ -460,11 +458,7 @@ export default function PremiumAnalysisPage() {
     );
 
     const formContent = (
-        <div className="bg-gradient-to-b from-[#1e293b] to-[#0f172a] backdrop-blur-2xl border border-amber-500/20 rounded-3xl md:rounded-[2.5rem] p-5 md:p-12 shadow-[0_0_40px_rgba(245,158,11,0.1)] animate-fade-in-up max-w-7xl mx-auto relative overflow-hidden">
-
-            {/* Background Texture inside form */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/10 blur-[120px] rounded-full pointer-events-none -mr-32 -mt-32"></div>
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 blur-[100px] rounded-full pointer-events-none -ml-32 -mb-32"></div>
+        <div className="animate-fade-in-up max-w-6xl mx-auto relative overflow-visible px-4 md:px-8">
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-16 relative z-10">
 
@@ -488,7 +482,7 @@ export default function PremiumAnalysisPage() {
                                 value={surname}
                                 onChange={(e) => setSurname(e.target.value)}
                                 placeholder="กรอกนามสกุลของท่าน"
-                                className="w-full bg-[#0b1120]/80 border border-slate-600 rounded-xl md:rounded-2xl pl-11 md:pl-12 pr-4 md:pr-5 py-3 md:py-4 text-base md:text-lg focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-all placeholder:text-slate-500 text-white shadow-inner"
+                                className="w-full bg-white/5 border border-white/5 rounded-xl md:rounded-2xl pl-11 md:pl-12 pr-4 md:pr-5 py-3 md:py-4 text-base md:text-lg focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all placeholder:text-slate-500 text-white shadow-inner"
                             />
                         </div>
                     </div>
@@ -559,7 +553,7 @@ export default function PremiumAnalysisPage() {
                                             setIsUnknownTime(e.target.checked);
                                             if (e.target.checked) setBirthTime('');
                                         }}
-                                        className="rounded border-slate-500 bg-[#0b1120] text-amber-500 focus:ring-amber-500/50"
+                                        className="rounded border-white/20 bg-white/5 text-amber-500 focus:ring-amber-500/50"
                                     />
                                     <label htmlFor="unknownTime" className="text-xs text-slate-300 cursor-pointer hover:text-amber-400 transition-colors">ไม่ทราบเวลา</label>
                                 </div>
@@ -599,8 +593,8 @@ export default function PremiumAnalysisPage() {
                             <button
                                 onClick={() => setGender('male')}
                                 className={`py-3 md:py-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border ${gender === 'male'
-                                    ? 'bg-gradient-to-br from-blue-600 to-blue-800 text-white border-blue-400 shadow-[0_0_15px_rgba(37,99,235,0.4)]'
-                                    : 'bg-[#0b1120]/80 border-slate-600 text-slate-400 hover:border-slate-400'
+                                    ? 'bg-blue-500/10 text-blue-300 border-blue-500/30 ring-1 ring-blue-500/30'
+                                    : 'bg-white/5 border-transparent text-slate-400 hover:bg-white/10'
                                     }`}
                             >
                                 <span>ชาย</span>
@@ -608,8 +602,8 @@ export default function PremiumAnalysisPage() {
                             <button
                                 onClick={() => setGender('female')}
                                 className={`py-3 md:py-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border ${gender === 'female'
-                                    ? 'bg-gradient-to-br from-pink-600 to-pink-800 text-white border-pink-400 shadow-[0_0_15px_rgba(219,39,119,0.4)]'
-                                    : 'bg-[#0b1120]/80 border-slate-600 text-slate-400 hover:border-slate-400'
+                                    ? 'bg-pink-500/10 text-pink-300 border-pink-500/30 ring-1 ring-pink-500/30'
+                                    : 'bg-white/5 border-transparent text-slate-400 hover:bg-white/10'
                                     }`}
                             >
                                 <span>หญิง</span>
@@ -632,14 +626,12 @@ export default function PremiumAnalysisPage() {
                                 <button
                                     key={option.key}
                                     onClick={() => setFocus(option.key)}
-                                    className={`group relative p-3 md:p-4 rounded-xl md:rounded-2xl border-2 transition-all duration-300 flex items-center gap-3 md:gap-4 overflow-hidden
+                                    className={`group relative p-4 rounded-2xl border-0 transition-all duration-300 flex items-center gap-4 overflow-hidden
                                         ${isActive
-                                            ? 'border-amber-400 bg-gradient-to-br from-[#2a1f14] to-[#140f0a] shadow-[0_0_25px_rgba(245,158,11,0.25)] scale-[1.02] md:scale-[1.02]'
-                                            : 'border-slate-700 bg-[#0b1120]/60 hover:bg-[#151f32] hover:border-amber-500/50'
+                                            ? 'bg-amber-500/10 shadow-inner ring-1 ring-amber-500/50'
+                                            : 'bg-white/5 hover:bg-white/10'
                                         }`}
                                 >
-                                    {/* Active border glow */}
-                                    {isActive && <div className="absolute inset-0 border-2 border-amber-400/30 rounded-xl md:rounded-2xl pointer-events-none animate-pulse"></div>}
 
                                     {/* Icon Box */}
                                     <div className={`p-2.5 md:p-3 rounded-lg md:rounded-xl transition-all duration-300 shrink-0 ${isActive
@@ -678,27 +670,27 @@ export default function PremiumAnalysisPage() {
             </div>
 
             {/* Bottom Action Area */}
-            <div className="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-slate-700 relative z-10">
+            <div className="mt-12 pt-8 border-t border-white/5 relative z-10">
                 <div className="flex flex-col items-center justify-center space-y-4">
                     <button
                         onClick={() => handleAnalyze(false)}
                         disabled={isLoading}
                         data-track="premiumAnalysis.form.analyze"
-                        className="group relative w-full md:max-w-2xl mx-auto overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600 p-[2px] shadow-[0_0_30px_rgba(245,158,11,0.3)] transition-all hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(245,158,11,0.5)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 disabled:grayscale"
+                        className="group relative w-full md:max-w-xl mx-auto overflow-hidden rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 shadow-[0_0_30px_rgba(245,158,11,0.2)] transition-all hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(245,158,11,0.4)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 disabled:grayscale"
                     >
-                        <div className="relative flex items-center justify-between rounded-xl md:rounded-2xl bg-[#0f172a] px-5 py-4 md:px-10 md:py-6 transition-all group-hover:bg-[#162238]">
+                        <div className="relative flex items-center justify-between px-6 py-5 md:px-8 md:py-6">
                             <div className="flex items-center gap-3 md:gap-5">
                                 <div className="bg-gradient-to-br from-amber-400 to-orange-500 p-2.5 md:p-3 rounded-lg md:rounded-xl text-[#0f172a] shadow-lg shrink-0">
                                     {isLoading ? <span className="animate-spin block"><RefreshCw className="w-5 h-5 md:w-7 md:h-7" /></span> : <Sparkles className="animate-pulse w-5 h-5 md:w-7 md:h-7" />}
                                 </div>
                                 <div className="text-left">
-                                    <h3 className="text-lg md:text-xl font-black text-white tracking-wide">วิเคราะห์ชื่อมงคล</h3>
-                                    <p className="text-[11px] md:text-sm text-amber-200/80 font-medium mt-0.5 md:mt-1">ใช้ศาสตร์ชั้นสูง + พลังตัวเลข</p>
+                                    <h3 className="text-lg md:text-xl font-black text-[#140f0a] tracking-wide">วิเคราะห์ชื่อมงคล</h3>
+                                    <p className="text-[11px] md:text-sm text-[#2a1f14] font-medium mt-0.5 md:mt-1">ใช้ศาสตร์ชั้นสูง + พลังตัวเลข</p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-1.5 md:gap-2 bg-gradient-to-r from-amber-500/10 to-orange-500/10 px-3 py-2 md:px-5 md:py-3 rounded-lg md:rounded-xl border border-amber-500/30 shadow-inner shrink-0">
-                                <span className="text-sm md:text-base font-bold text-amber-400">ใช้ 30 เครดิต</span>
-                                <Coins className="w-4 h-4 md:w-5 md:h-5 text-amber-400" />
+                            <div className="flex items-center gap-1.5 md:gap-2 bg-black/10 px-3 py-2 md:px-5 md:py-3 rounded-lg md:rounded-xl shadow-inner shrink-0">
+                                <span className="text-sm md:text-base font-bold text-[#140f0a]">ใช้ 30 เครดิต</span>
+                                <Coins className="w-4 h-4 md:w-5 md:h-5 text-[#140f0a]" />
                             </div>
                         </div>
                         {/* Shimmer Effect */}
@@ -741,8 +733,8 @@ export default function PremiumAnalysisPage() {
                             <div className="h-1 w-24 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto rounded-full opacity-50"></div>
                         </div>
 
-                        <p className="text-slate-400 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed">
-                            เจาะลึกชะตาชีวิตด้วย <span className="text-amber-200 font-medium">ทักษาปกรณ์</span> และ <span className="text-amber-200 font-medium">เลขศาสตร์ชั้นสูง</span>
+                        <p className="text-slate-300 text-lg md:text-2xl max-w-3xl mx-auto font-light leading-loose">
+                            เจาะลึกชะตาชีวิตด้วย <strong className="text-amber-200 font-bold">ทักษาปกรณ์</strong> และ <strong className="text-amber-200 font-bold">เลขศาสตร์ชั้นสูง</strong>
                             <br className="hidden md:block" />
                             เพื่อค้นหาชื่อที่ส่งเสริมดวงชะตาของท่านอย่างแท้จริง
                         </p>
@@ -758,15 +750,17 @@ export default function PremiumAnalysisPage() {
                         <section className="mt-8 pt-16 border-t border-white/10 space-y-16 pb-20">
 
                             {/* Section A: ความแตกต่างของการ "วิเคราะห์ขั้นสูง" */}
-                            <div className="max-w-4xl mx-auto">
-                                <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-8">
+                            <div className="max-w-3xl mx-auto">
+                                <h2 className="text-3xl md:text-5xl font-black text-center text-white mb-10 tracking-tight leading-tight">
                                     ความแตกต่างของ <span className="text-amber-400">&quot;วิเคราะห์ชื่อมงคลขั้นสูง&quot;</span>
                                 </h2>
-                                <div className="bg-gradient-to-br from-amber-500/5 to-orange-500/5 border border-amber-500/20 rounded-3xl p-8 md:p-10">
-                                    <p className="text-lg text-slate-300 leading-relaxed mb-6">
-                                        การวิเคราะห์ชื่อทั่วไปดูเพียงแค่ <span className="text-slate-200">ผลรวมเลขศาสตร์</span> แต่ <strong className="text-amber-400">การวิเคราะห์ชื่อมงคลขั้นสูง</strong> ของเรานำ <strong className="text-white">&quot;เวลาตกฟาก&quot;</strong> มาคำนวณหาลัคนาราศีที่แท้จริง เพื่อดูว่าชื่อส่งผลต่อดวงกำเนิดของคุณในมุมลึกอย่างไร
+                                <div className="bg-amber-500/5 rounded-3xl p-8 md:p-12 mb-16 text-center">
+                                    <p className="text-xl md:text-2xl text-slate-300 leading-relaxed max-w-2xl mx-auto">
+                                        การวิเคราะห์ชื่อทั่วไปดูเพียงแค่ <span className="text-slate-200">ผลรวมเลขศาสตร์</span> แต่ <strong className="text-amber-400 font-extrabold">การวิเคราะห์ชื่อมงคลขั้นสูง</strong> ของเรานำ <strong className="text-white font-extrabold">&quot;เวลาตกฟาก&quot;</strong> มาคำนวณหาลัคนาราศีที่แท้จริง เพื่อดูว่าชื่อส่งผลต่อดวงกำเนิดของคุณในมุมลึกอย่างไร
                                     </p>
-                                    <div className="grid md:grid-cols-3 gap-6">
+                                </div>
+                                
+                                <div className="grid md:grid-cols-3 gap-8 md:gap-12 max-w-4xl mx-auto">
                                         <div className="bg-white/5 rounded-2xl p-5 border border-white/5">
                                             <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center mb-3">
                                                 <Clock className="w-5 h-5 text-amber-400" />
@@ -790,14 +784,13 @@ export default function PremiumAnalysisPage() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
                             {/* Section B: เจาะลึก 5 ด้านที่เลือกเน้นได้ */}
-                            <div className="max-w-4xl mx-auto">
-                                <h2 className="text-3xl font-bold text-center text-white mb-4">
+                            <div className="max-w-5xl mx-auto pt-16">
+                                <h2 className="text-3xl md:text-4xl font-black text-center text-white mb-6 tracking-tight">
                                     เจาะลึก <span className="text-amber-400">5 ด้าน</span> ที่คุณเลือกเน้นได้
                                 </h2>
-                                <p className="text-center text-slate-400 mb-8">
+                                <p className="text-center text-lg text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
                                     เลือก Focus ที่ต้องการ ระบบจะคำนวณหาชื่อที่เสริมดวงด้านนั้นโดยเฉพาะ
                                 </p>
 

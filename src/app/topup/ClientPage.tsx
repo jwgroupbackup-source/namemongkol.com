@@ -166,10 +166,10 @@ export default function TopUpPage({ gateway, promptpayNumber }: TopUpPageProps) 
                             <Zap size={14} className="md:w-4 md:h-4" />
                             <span>Top Up Credits</span>
                         </div>
-                        <h1 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white via-slate-200 to-slate-400">
+                        <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-tight text-white drop-shadow-sm">
                             เติมเครดิตเพื่อใช้งาน
                         </h1>
-                        <p className="text-slate-400 text-sm md:text-lg max-w-2xl mx-auto px-4">
+                        <p className="text-slate-300 text-sm md:text-lg max-w-2xl mx-auto px-4 leading-relaxed">
                             เลือกแพ็กเกจเครดิตที่คุ้มค่าสำหรับคุณ เพื่อใช้งานบริการวิเคราะห์ชื่อมงคลขั้นสูงและบริการอื่นๆ
                         </p>
                     </div>
@@ -181,13 +181,13 @@ export default function TopUpPage({ gateway, promptpayNumber }: TopUpPageProps) 
                         ) : tiers.map((tier) => (
                             <div
                                 key={tier.id}
-                                className={`relative group p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex flex-col ${tier.popular
-                                    ? 'bg-gradient-to-b from-slate-800/80 to-slate-900/90 border-amber-500/30 shadow-amber-500/10 scale-100 md:scale-105 z-10'
-                                    : 'bg-slate-900/50 border-white/10 hover:border-white/20'
+                                className={`relative group p-6 md:p-10 rounded-[2rem] border transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl flex flex-col ${tier.popular
+                                    ? 'bg-amber-500/5 border-amber-500/30 shadow-[0_0_40px_rgba(245,158,11,0.1)] scale-100 md:scale-105 z-10'
+                                    : 'bg-white/[0.02] border-white/5 hover:bg-white/[0.04]'
                                     }`}
                             >
                                 {tier.popular && (
-                                    <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 px-3 py-0.5 md:px-4 md:py-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full text-white text-[10px] md:text-xs font-bold shadow-lg shadow-amber-500/30 flex items-center gap-1">
+                                    <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-amber-500 rounded-full text-[#140f0a] text-[10px] md:text-xs font-black tracking-wider uppercase shadow-lg shadow-amber-500/20 flex items-center gap-1.5">
                                         <Package size={10} className="md:w-3 md:h-3" /> BEST SELLER
                                     </div>
                                 )}
@@ -201,14 +201,14 @@ export default function TopUpPage({ gateway, promptpayNumber }: TopUpPageProps) 
                                     <p className="text-slate-400 text-xs md:text-sm">{tier.description}</p>
                                 </div>
 
-                                <div className="mt-1 md:mt-4 mb-2 md:mb-8">
-                                    <span className="text-3xl md:text-4xl font-black text-white">{tier.price}</span>
+                                <div className="mt-2 md:mt-4 mb-4 md:mb-8">
+                                    <span className="text-4xl md:text-5xl font-black text-white tracking-tighter">{tier.price}</span>
                                     <span className="text-slate-500 ml-2 text-sm md:text-lg">baht</span>
                                 </div>
 
-                                <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-8 text-emerald-400 font-medium bg-emerald-500/10 px-3 py-2 md:px-4 md:py-3 rounded-lg md:rounded-xl border border-emerald-500/20">
-                                    <Zap size={16} className="md:w-5 md:h-5" />
-                                    <span className="text-lg md:text-xl font-bold">{tier.credits}</span> Credits
+                                <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-8 text-slate-300 font-medium bg-white/5 px-4 py-3 rounded-xl border border-white/5">
+                                    <Zap size={16} className="md:w-5 md:h-5 text-amber-400" />
+                                    <span className="text-lg md:text-xl font-bold text-white">{tier.credits}</span> Credits
                                 </div>
 
                                 <div className="mt-auto">
@@ -217,11 +217,11 @@ export default function TopUpPage({ gateway, promptpayNumber }: TopUpPageProps) 
                                             type="button"
                                             onClick={() => handleSelectTier(tier)}
                                             disabled={isLoading}
-                                            className={`w-full py-3 md:py-4 rounded-xl font-bold transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 text-sm md:text-base ${isLoading
-                                                ? 'bg-slate-700 text-slate-400 cursor-not-allowed'
+                                            className={`w-full py-3 md:py-4 rounded-xl font-bold transition-all active:scale-95 flex items-center justify-center gap-2 text-sm md:text-base ${isLoading
+                                                ? 'bg-white/5 text-slate-500 cursor-not-allowed border border-white/5'
                                                 : tier.popular
-                                                    ? 'bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white shadow-amber-500/25'
-                                                    : 'bg-white text-slate-900 hover:bg-slate-200'
+                                                    ? 'bg-amber-500 hover:bg-amber-400 text-[#140f0a] shadow-[0_0_20px_rgba(245,158,11,0.2)]'
+                                                    : 'bg-white/10 text-white hover:bg-white/20'
                                                 }`}
                                         >
                                             {isLoading ? 'กำลังดำเนินการ...' : 'ซื้อแพ็กเกจ (PromptPay)'}
@@ -229,9 +229,9 @@ export default function TopUpPage({ gateway, promptpayNumber }: TopUpPageProps) 
                                     ) : (
                                         <button
                                             onClick={() => handleSelectTier(tier)}
-                                            className={`w-full py-3 md:py-4 rounded-xl font-bold transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 text-sm md:text-base ${tier.popular
-                                                ? 'bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white shadow-amber-500/25'
-                                                : 'bg-white text-slate-900 hover:bg-slate-200'
+                                            className={`w-full py-3 md:py-4 rounded-xl font-bold transition-all active:scale-95 flex items-center justify-center gap-2 text-sm md:text-base ${tier.popular
+                                                ? 'bg-amber-500 hover:bg-amber-400 text-[#140f0a] shadow-[0_0_20px_rgba(245,158,11,0.2)]'
+                                                : 'bg-white/10 text-white hover:bg-white/20'
                                                 }`}
                                         >
                                             <Upload size={18} /> แจ้งสลิปโอนเงิน

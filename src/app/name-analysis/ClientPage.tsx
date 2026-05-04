@@ -378,9 +378,9 @@ export default function NameAnalysisPage() {
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                         {/* Input Panel */}
-                        <div className="lg:col-span-4 space-y-4 sticky top-8">
-                            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
-                                <div className="p-6 border-b border-white/5 bg-white/[0.02] flex justify-between items-center">
+                        <div className="lg:col-span-4 space-y-6 sticky top-8">
+                            <div className="flex flex-col gap-4">
+                                <div className="flex justify-between items-center px-1">
                                     <h3 className="font-bold text-slate-300 uppercase tracking-wider text-xs flex items-center gap-2">
                                         <Hash className="w-4 h-4 text-indigo-400" />
                                         รายชื่อที่ต้องการวิเคราะห์
@@ -392,9 +392,9 @@ export default function NameAnalysisPage() {
                                         {currentCount.toLocaleString()} / 1,000
                                     </span>
                                 </div>
-                                <div className="p-4">
+                                <div>
                                     <textarea
-                                        className="w-full h-[400px] p-6 text-lg border border-white/10 rounded-2xl focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 outline-none transition-all resize-none bg-black/20 text-slate-200 placeholder:text-slate-600 font-medium custom-scrollbar leading-loose"
+                                        className="w-full h-[280px] p-6 text-lg border border-white/5 rounded-2xl focus:ring-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 outline-none transition-all resize-none bg-indigo-950/20 text-slate-200 placeholder:text-slate-600 font-medium custom-scrollbar leading-loose shadow-inner"
                                         placeholder="วางรายชื่อที่นี่...&#10;เช่น:&#10;ณวิธ&#10;กลิ่นหอม"
                                         value={inputText}
                                         onChange={(e) => setInputText(e.target.value)}
@@ -402,8 +402,8 @@ export default function NameAnalysisPage() {
                                 </div>
 
                                 {/* Analysis Action */}
-                                <div className="px-6 pb-6 pt-2">
-                                    <div className="flex flex-col gap-3">
+                                <div>
+                                    <div className="flex flex-col gap-4">
                                         <div className="flex justify-between items-center text-sm px-1">
                                             <span className="text-slate-400">รายการวิเคราะห์:</span>
                                             <span className="font-bold text-white">{currentCount} รายชื่อ</span>
@@ -419,7 +419,7 @@ export default function NameAnalysisPage() {
                                             onClick={handleAnalyzeClick}
                                             disabled={isAnalyzing || currentCount === 0 || currentCount > 1000}
                                             data-track="nameAnalysis.form.analyze"
-                                            className="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white rounded-xl shadow-lg shadow-indigo-500/25 transition-all font-bold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden"
+                                            className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl shadow-[0_0_20px_rgba(79,70,229,0.15)] transition-all font-bold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden text-lg"
                                         >
                                             {isAnalyzing ? (
                                                 <>
@@ -437,12 +437,12 @@ export default function NameAnalysisPage() {
                                 </div>
 
                                 {/* Pricing Info */}
-                                <div className="px-6 pb-6 pt-0">
-                                    <div className="bg-indigo-500/5 p-4 rounded-2xl border border-indigo-500/10 space-y-2">
-                                        <p className="text-xs font-bold text-indigo-300 uppercase flex items-center gap-2">
+                                <div>
+                                    <div className="bg-white/5 p-5 rounded-2xl border border-white/5 space-y-3">
+                                        <p className="text-xs font-bold text-slate-300 uppercase flex items-center gap-2">
                                             <Info className="w-4 h-4" /> อัตราค่าบริการ (Credit)
                                         </p>
-                                        <ul className="text-xs text-slate-400 space-y-1 ml-1">
+                                        <ul className="text-xs text-slate-400 space-y-2 ml-1">
                                             <li className="flex justify-between">
                                                 <span>1 - 10 ชื่อ</span>
                                                 <span className="text-amber-400 font-bold">5 Credit</span>
@@ -466,7 +466,7 @@ export default function NameAnalysisPage() {
                             <div ref={printRef} className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl min-h-[720px] flex flex-col pt-0">
                                 {/* Actions Toolbar */}
                                 {(results.length > 0) && (
-                                    <div className="p-4 border-b border-white/5 flex gap-3 justify-end bg-white/[0.02]">
+                                    <div className="p-4 border-b border-white/[0.02] flex gap-3 justify-end bg-white/[0.01]">
                                         <button
                                             onClick={() => setIsSorted(!isSorted)}
                                             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-xs font-bold border ${isSorted
@@ -480,10 +480,10 @@ export default function NameAnalysisPage() {
                                         <button onClick={handleSaveHistory} className="flex items-center gap-2 px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 rounded-lg transition-all text-xs font-bold border border-emerald-500/20">
                                             <Save className="w-3 h-3" /> บันทึก
                                         </button>
-                                        <button onClick={exportCSV} className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition-all text-xs font-bold shadow-lg shadow-indigo-600/20">
+                                        <button onClick={exportCSV} className="flex items-center gap-2 px-4 py-2 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 rounded-lg transition-all text-xs font-bold border border-indigo-500/20">
                                             <Download className="w-3 h-3" /> CSV
                                         </button>
-                                        <button onClick={handleExportPDF} className="flex items-center gap-2 px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-lg transition-all text-xs font-bold shadow-lg shadow-rose-600/20">
+                                        <button onClick={handleExportPDF} className="flex items-center gap-2 px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 rounded-lg transition-all text-xs font-bold border border-rose-500/20">
                                             <Printer className="w-3 h-3" /> PDF
                                         </button>
                                         <button onClick={handleClear} className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 text-slate-400 hover:text-rose-400 rounded-lg transition-all text-xs font-bold border border-white/10">
@@ -512,7 +512,7 @@ export default function NameAnalysisPage() {
                                 <div className="flex-1 overflow-auto custom-scrollbar">
                                     {sortedResults.length > 0 ? (
                                         <table className="w-full text-left border-collapse min-w-[700px]">
-                                            <thead className="bg-black/20 sticky top-0 z-10 backdrop-blur-md">
+                                            <thead className="bg-indigo-950/40 sticky top-0 z-10 backdrop-blur-md">
                                                 <tr className="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-white/5">
                                                     <th className="px-6 py-4 w-16 text-center">#</th>
                                                     <th className="px-6 py-4 w-20 text-center">เกรด</th>
@@ -647,11 +647,11 @@ export default function NameAnalysisPage() {
                     {/* ==================== SEO Content Sections ==================== */}
 
                     {/* Why Bulk Analysis */}
-                    <section className="mt-20 mb-12 max-w-5xl mx-auto">
-                        <h2 className="text-2xl md:text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-purple-300 mb-4">
+                    <section className="mt-24 mb-16 max-w-4xl mx-auto">
+                        <h2 className="text-3xl md:text-5xl font-black text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-purple-300 mb-6 tracking-tight leading-tight">
                             ทำไมต้องใช้ Bulk Analysis วิเคราะห์ชื่อแบบกลุ่ม?
                         </h2>
-                        <p className="text-center text-slate-400 mb-10 max-w-2xl mx-auto">
+                        <p className="text-center text-lg md:text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
                             เครื่องมือที่ช่วยให้คุณตรวจสอบและเปรียบเทียบชื่อหลายชื่อได้ในคลิกเดียว ประหยัดเวลา และตัดสินใจได้แม่นยำขึ้น
                         </p>
                         <div className="grid md:grid-cols-4 gap-6">
@@ -659,8 +659,8 @@ export default function NameAnalysisPage() {
                                 <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                                     <Zap className="w-7 h-7 text-indigo-400" />
                                 </div>
-                                <h3 className="font-semibold text-slate-200 mb-2">รวดเร็วทันใจ</h3>
-                                <p className="text-slate-400 text-sm">
+                                <h3 className="font-bold text-lg text-slate-200 mb-3">รวดเร็วทันใจ</h3>
+                                <p className="text-slate-400 text-sm leading-relaxed">
                                     วิเคราะห์ได้สูงสุด 1,000 ชื่อพร้อมกันในไม่กี่วินาที ไม่ต้องพิมพ์ทีละชื่อ
                                 </p>
                             </article>
@@ -668,8 +668,8 @@ export default function NameAnalysisPage() {
                                 <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                                     <ArrowDownWideNarrow className="w-7 h-7 text-emerald-400" />
                                 </div>
-                                <h3 className="font-semibold text-slate-200 mb-2">จัดเกรดอัตโนมัติ</h3>
-                                <p className="text-slate-400 text-sm">
+                                <h3 className="font-bold text-lg text-slate-200 mb-3">จัดเกรดอัตโนมัติ</h3>
+                                <p className="text-slate-400 text-sm leading-relaxed">
                                     ระบบจัดเกรด A+, A, B, C อัตโนมัติ พร้อมเรียงลำดับจากดีที่สุด
                                 </p>
                             </article>

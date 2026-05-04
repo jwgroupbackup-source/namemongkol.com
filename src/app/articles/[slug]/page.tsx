@@ -504,7 +504,14 @@ export default async function ArticlePage({ params }: Props) {
                         <p className="lead text-xl text-slate-200 font-light border-l-4 border-amber-500 pl-4 italic">
                             {article.excerpt}
                         </p>
-                        <div dangerouslySetInnerHTML={{ __html: article.content }} />
+                        <div dangerouslySetInnerHTML={{
+                            __html: article.coverImage
+                                ? article.content.replace(
+                                    /<img\b[^>]*?>/gi,
+                                    `<div class="w-full aspect-video bg-slate-900 rounded-2xl my-8 overflow-hidden relative border border-white/5 shadow-2xl shadow-purple-900/10 not-prose flex items-center justify-center"><img src="${article.coverImage}" alt="${(article.coverImageAlt ?? `ภาพหน้าปกบทความ ${article.title}`).replace(/"/g, '&quot;')}" class="object-contain w-full h-full" /></div>`
+                                )
+                                : article.content
+                        }} />
                     </article>
 
                     {/* Aura Vibe Widget — Mid-Article (คั่นระหว่างเนื้อหากับ FAQ) */}
