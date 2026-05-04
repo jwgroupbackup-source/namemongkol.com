@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-04T09:18:23Z",
+  "title": "Design System: NameMongkol",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Mystic Amber", "canonical": "#c9933a", "tonalRamp": ["#fdf8ee", "#faeccc", "#f6dca3", "#f1c874", "#edb144", "#c9933a", "#a27129", "#7c521a"] },
+      "neutral-bg": { "role": "neutral", "displayName": "Obsidian Space", "canonical": "#050711", "tonalRamp": ["#e7e8eb", "#c1c3cc", "#9a9ead", "#767a8f", "#525770", "#33374d", "#1a1c29", "#050711"] }
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Tactile & Magical primary action button.",
+      "html": "<button class=\"ds-btn-primary\">วิเคราะห์ชื่อ</button>",
+      "css": ".ds-btn-primary { background: linear-gradient(135deg, #e67e22 0%, #f59e0b 50%, #e67e22 100%); color: #ffffff; padding: 12px 24px; border-radius: 12px; font-weight: 700; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 18px 36px rgba(180, 83, 9, 0.32), 0 0 24px rgba(245, 158, 11, 0.22); } .ds-btn-primary:hover { background: linear-gradient(135deg, #d97706 0%, #fbbf24 50%, #d97706 100%); box-shadow: 0 22px 42px rgba(180, 83, 9, 0.38), 0 0 32px rgba(245, 158, 11, 0.30); transform: translateY(-2px); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Sacred Terminal",
+    "overview": "The Sacred Terminal blends the profound mysticism of numerology with the precision of modern technology. The aesthetic is heavily anchored in deep space minimalism, where interfaces recede and sacred information glows. We explicitly reject the chaotic, banner-heavy designs of old-school horoscope websites and the overly dry, sterile feel of generic SaaS tools.",
+    "keyCharacteristics": [
+      "Dark, immersive Obsidian Space background.",
+      "Mystical, glowing accents that guide the eye naturally.",
+      "Tactile, magical components that respond to user interaction.",
+      "Typographic clarity to build trust and authority."
+    ],
+    "rules": [
+      { "name": "The Focused Aura Rule", "body": "Glows and ambient light are reserved for state changes (hover/focus) or highly specific mystical elements (like the aura analysis). They should never overwhelm the foundational darkness.", "section": "colors" },
+      { "name": "The Legibility Rule", "body": "Never sacrifice readability for aesthetics. Ensure text contrasts highly against the dark background, keeping accessibility in mind.", "section": "typography" },
+      { "name": "The Ethereal Layer Rule", "body": "Structural elements float. Use border opacity (e.g., border-white/10) and background tints (bg-white/5) instead of solid fills to maintain the airy, magical feel.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use bg-white/5 or bg-white/10 for subtle structural containers to maintain the Obsidian Space theme.",
+      "Do ensure high contrast for all reading text.",
+      "Do use the Mystic Amber color strategically for conversion-focused actions."
+    ],
+    "donts": [
+      "Don't use chaotic, highly saturated colors beyond the Mystic Amber accent.",
+      "Don't build interfaces that look like dry, clinical SaaS tools.",
+      "Don't clutter the screen with heavy, opaque structural borders."
+    ]
+  }
+}

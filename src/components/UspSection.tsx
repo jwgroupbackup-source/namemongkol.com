@@ -4,51 +4,51 @@ import { Search, Layers, Activity } from 'lucide-react';
 export const UspSection = () => {
     return (
         <section className="w-full max-w-6xl mx-auto px-4 py-8 sm:py-16 relative z-10">
-            <div className="text-center mb-6 sm:mb-12">
-                <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-yellow-500 mb-4 sm:mb-6">
+            <div className="text-center mb-10 sm:mb-16">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-500 mb-6 tracking-tight">
                     ทำไมต้องวิเคราะห์ชื่อกับ NameMongkol?
                 </h2>
-                <p className="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg">
+                <p className="text-slate-400 max-w-[65ch] mx-auto text-base sm:text-lg leading-relaxed">
                     เพราะเราให้ผลลัพธ์ที่ "ลึกซึ้ง" และ "แม่นยำ" กว่า ด้วยการผสาน 3 ศาสตร์แห่งการตั้งชื่อไว้ในที่เดียว
                 </p>
             </div>
 
             <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar px-1 pb-2 sm:gap-6 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:px-0 md:pb-0 md:snap-none">
                 {/* USP 1 */}
-                <div className="w-[86%] shrink-0 snap-start bg-slate-900/50 border border-slate-700 p-5 sm:w-[72%] sm:p-8 rounded-2xl hover:border-amber-500/50 transition-all hover:-translate-y-2 group md:w-auto md:shrink md:snap-none">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-amber-500/20 rounded-xl flex items-center justify-center text-amber-400 mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
-                        <Search size={28} className="sm:w-8 sm:h-8" />
+                <div className="w-[86%] shrink-0 snap-start bg-white/5 border border-white/5 p-6 sm:p-8 rounded-2xl hover:border-white/10 hover:bg-white/10 transition-all hover:-translate-y-1 group md:w-auto md:shrink md:snap-none backdrop-blur-sm">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-center justify-center text-amber-500 mb-6 group-hover:scale-110 transition-transform">
+                        <Search size={24} className="sm:w-7 sm:h-7" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 group-hover:text-amber-300 transition-colors">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-4 tracking-tight group-hover:text-amber-400 transition-colors">
                         Micro-Analysis (คู่เลขมงคล)
                     </h3>
-                    <p className="text-slate-400 leading-relaxed">
+                    <p className="text-slate-400 leading-relaxed text-sm sm:text-base">
                         ไม่ใช่แค่ดูผลรวม แต่เราถอดรหัส <strong>"ทุกคู่ตัวเลข"</strong> ในชื่อ (เช่น 22, 24, 65) เพื่อค้นหาจุดดีและจุดเสียที่ซ่อนอยู่อย่างละเอียด
                     </p>
                 </div>
 
                 {/* USP 2 */}
-                <div className="w-[86%] shrink-0 snap-start bg-slate-900/50 border border-slate-700 p-5 sm:w-[72%] sm:p-8 rounded-2xl hover:border-emerald-500/50 transition-all hover:-translate-y-2 group md:w-auto md:shrink md:snap-none">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-emerald-500/20 rounded-xl flex items-center justify-center text-emerald-400 mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
-                        <Layers size={28} className="sm:w-8 sm:h-8" />
+                <div className="w-[86%] shrink-0 snap-start bg-white/5 border border-white/5 p-6 sm:p-8 rounded-2xl hover:border-white/10 hover:bg-white/10 transition-all hover:-translate-y-1 group md:w-auto md:shrink md:snap-none backdrop-blur-sm">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-center justify-center text-amber-500 mb-6 group-hover:scale-110 transition-transform">
+                        <Layers size={24} className="sm:w-7 sm:h-7" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 group-hover:text-emerald-300 transition-colors">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-4 tracking-tight group-hover:text-amber-400 transition-colors">
                         Multi-Dimensional Logic
                     </h3>
-                    <p className="text-slate-400 leading-relaxed">
+                    <p className="text-slate-400 leading-relaxed text-sm sm:text-base">
                         รวม 3 ศาสตร์ใหญ่ไว้ในหน้าเดียว: <strong>เลขศาสตร์ + ทักษาปกรณ์ + อายตนะ 6</strong> เพื่อความแม่นยำสูงสุดและครบทุกมิติ
                     </p>
                 </div>
 
                 {/* USP 3 */}
-                <div className="w-[86%] shrink-0 snap-start bg-slate-900/50 border border-slate-700 p-5 sm:w-[72%] sm:p-8 rounded-2xl hover:border-purple-500/50 transition-all hover:-translate-y-2 group md:w-auto md:shrink md:snap-none">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
-                        <Activity size={28} className="sm:w-8 sm:h-8" />
+                <div className="w-[86%] shrink-0 snap-start bg-white/5 border border-white/5 p-6 sm:p-8 rounded-2xl hover:border-white/10 hover:bg-white/10 transition-all hover:-translate-y-1 group md:w-auto md:shrink md:snap-none backdrop-blur-sm">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-center justify-center text-amber-500 mb-6 group-hover:scale-110 transition-transform">
+                        <Activity size={24} className="sm:w-7 sm:h-7" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 group-hover:text-purple-300 transition-colors">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-4 tracking-tight group-hover:text-amber-400 transition-colors">
                         Visual Data & Shadow Power
                     </h3>
-                    <p className="text-slate-400 leading-relaxed">
+                    <p className="text-slate-400 leading-relaxed text-sm sm:text-base">
                         เจาะลึก <strong>"พลังเงา"</strong> และแสดงผลด้วยกราฟิกที่เข้าใจง่าย เปลี่ยนเรื่องมูเตลูให้เป็นวิทยาศาสตร์ที่พิสูจน์ได้จริง
                     </p>
                 </div>

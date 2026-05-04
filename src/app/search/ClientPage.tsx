@@ -476,10 +476,10 @@ export default function SearchPage() {
                                         <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4" />
                                         <span>{t('pages.search.badge')}</span>
                                     </div>
-                                    <h1 className="text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 mb-3 md:mb-4 leading-tight pb-1">
+                                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl">
                                         {t('pages.search.title')}
                                     </h1>
-                                    <p className="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mb-5 md:mb-6 px-2">
+                                    <p className="text-sm sm:text-base text-slate-300 max-w-[65ch] mx-auto mb-5 md:mb-6 px-2 leading-relaxed">
                                         {t('pages.search.description')}
                                     </p>
                                     {/* Pro Tip / Guidance Block */}
@@ -511,11 +511,11 @@ export default function SearchPage() {
                             <select
                                 value={selectedDay}
                                 onChange={handleDayChange}
-                                className="block w-full pl-11 pr-4 py-2.5 md:py-3 text-sm md:text-base bg-[#1e293b]/80 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent backdrop-blur-xl transition-all appearance-none cursor-pointer"
+                                className="block w-full pl-11 pr-4 py-2.5 md:py-3 text-sm md:text-base bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent backdrop-blur-xl transition-all appearance-none cursor-pointer"
                             >
-                                <option value="all">{t('pages.search.filters.dayAny')}</option>
+                                <option value="all" className="bg-slate-900 text-slate-200">{t('pages.search.filters.dayAny')}</option>
                                 {Object.keys(thaksaConfig).map((key) => (
-                                    <option key={key} value={key} className="bg-[#1e293b]">
+                                    <option key={key} value={key} className="bg-slate-900 text-slate-200">
                                         {thaksaConfig[key as DayKey].name}
                                     </option>
                                 ))}
@@ -536,12 +536,12 @@ export default function SearchPage() {
                                     setSelectedGender(e.target.value as any);
                                     setVisibleCount(10);
                                 }}
-                                className="block w-full pl-12 pr-4 py-2.5 md:py-3 text-sm md:text-base bg-[#1e293b]/80 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent backdrop-blur-xl transition-all appearance-none cursor-pointer"
+                                className="block w-full pl-12 pr-4 py-2.5 md:py-3 text-sm md:text-base bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent backdrop-blur-xl transition-all appearance-none cursor-pointer"
                             >
-                                <option value="all" className="bg-[#1e293b]">{t('pages.search.filters.genderAll')}</option>
-                                <option value="male" className="bg-[#1e293b]">{t('pages.search.filters.genderMale')}</option>
-                                <option value="female" className="bg-[#1e293b]">{t('pages.search.filters.genderFemale')}</option>
-                                <option value="neutral" className="bg-[#1e293b]">{t('pages.search.filters.genderNeutral')}</option>
+                                <option value="all" className="bg-slate-900 text-slate-200">{t('pages.search.filters.genderAll')}</option>
+                                <option value="male" className="bg-slate-900 text-slate-200">{t('pages.search.filters.genderMale')}</option>
+                                <option value="female" className="bg-slate-900 text-slate-200">{t('pages.search.filters.genderFemale')}</option>
+                                <option value="neutral" className="bg-slate-900 text-slate-200">{t('pages.search.filters.genderNeutral')}</option>
                             </select>
                             <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
                                 <ChevronDown className="h-4 w-4 text-slate-400" />
@@ -560,11 +560,11 @@ export default function SearchPage() {
                                     e.target.select();
                                 }}
                                 onBlur={() => setTimeout(() => setIsSumFocused(false), 200)} // Delay to allow click
-                                className="block w-full px-4 py-2.5 md:py-3 text-sm md:text-base bg-[#1e293b]/80 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent backdrop-blur-xl transition-all appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                className="block w-full px-4 py-2.5 md:py-3 text-sm md:text-base bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent backdrop-blur-xl transition-all appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 placeholder={t('pages.search.filters.sumPlaceholder')}
                             />
 
-                            <div className={`absolute top-full left-0 w-full mt-2 max-h-80 overflow-y-auto bg-[#1e293b] border border-white/10 rounded-xl shadow-xl z-50 transition-all duration-200 custom-scrollbar ${isSumFocused ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-2 invisible'}`}>
+                            <div className={`absolute top-full left-0 w-full mt-2 max-h-80 overflow-y-auto bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl z-50 transition-all duration-200 custom-scrollbar ${isSumFocused ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-2 invisible'}`}>
                                 {uniqueScores
                                     .filter(score => (isSumFocused && !hasTyped) || !targetSum || score.toString().includes(targetSum))
                                     .map(score => {
@@ -639,7 +639,7 @@ export default function SearchPage() {
                                 className={`px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all ${
                                     selectedLetter === 'all'
                                         ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-lg shadow-amber-500/20'
-                                        : 'bg-slate-800/60 text-slate-400 border border-white/10 hover:text-white hover:border-white/20'
+                                        : 'bg-white/5 text-slate-400 border border-white/10 hover:text-white hover:border-white/20'
                                 }`}
                             >
                                 ทั้งหมด
@@ -651,7 +651,7 @@ export default function SearchPage() {
                                     className={`w-7 h-7 md:w-9 md:h-9 rounded-lg text-xs md:text-sm font-medium transition-all flex items-center justify-center ${
                                         selectedLetter === letter
                                             ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-lg shadow-amber-500/20 scale-110'
-                                            : 'bg-slate-800/60 text-slate-400 border border-white/10 hover:text-white hover:border-white/20 hover:bg-white/5'
+                                            : 'bg-white/5 text-slate-400 border border-white/10 hover:text-white hover:border-white/20 hover:bg-white/10'
                                     }`}
                                 >
                                     {letter}
@@ -672,10 +672,10 @@ export default function SearchPage() {
                 <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl mb-8 shadow-2xl shadow-black/20">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="bg-gradient-to-r from-amber-500/10 via-purple-500/10 to-amber-500/10 border-b border-white/10 text-amber-200">
-                                <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-lg tracking-wide">{t('pages.search.table.name')}</th>
-                                <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-lg tracking-wide">{t('pages.search.table.day')}</th>
-                                <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-lg tracking-wide text-center">{t('pages.search.table.score')}</th>
+                            <tr className="bg-white/5 border-b border-white/10 text-amber-300 backdrop-blur-md">
+                                <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase">{t('pages.search.table.name')}</th>
+                                <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase">{t('pages.search.table.day')}</th>
+                                <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase text-center">{t('pages.search.table.score')}</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5">

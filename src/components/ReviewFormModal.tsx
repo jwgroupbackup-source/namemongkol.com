@@ -365,7 +365,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({ isOpen, onClos
             />
 
             {/* Modal Card */}
-            <div className="relative bg-[#1e293b] border border-amber-500/20 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl shadow-amber-500/10 transform animate-scale-in overflow-hidden max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div className="relative bg-slate-900/90 backdrop-blur-xl border border-amber-500/20 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl shadow-amber-500/10 transform animate-scale-in overflow-hidden max-h-[90vh] overflow-y-auto custom-scrollbar">
                 {/* Background Decor */}
                 <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-amber-500/5 to-transparent pointer-events-none" />
                 <button
@@ -396,7 +396,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({ isOpen, onClos
                                         type="text"
                                         value={formData.nickname}
                                         onChange={e => setFormData({ ...formData, nickname: e.target.value })}
-                                        className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 outline-none transition-all placeholder:text-slate-600 text-sm"
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-slate-200 focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 outline-none transition-all placeholder:text-slate-500 text-sm"
                                         placeholder="เช่น คุณส้ม"
                                     />
                                 </div>
@@ -406,7 +406,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({ isOpen, onClos
                                         type="text"
                                         value={formData.role}
                                         onChange={e => setFormData({ ...formData, role: e.target.value })}
-                                        className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 outline-none transition-all placeholder:text-slate-600 text-sm"
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-slate-200 focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 outline-none transition-all placeholder:text-slate-500 text-sm"
                                         placeholder="เช่น ธุรกิจส่วนตัว"
                                     />
                                 </div>
@@ -433,7 +433,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({ isOpen, onClos
                                                 }}
                                                 className={`px-2 py-2 rounded-lg text-[10px] sm:text-xs font-medium border transition-all ${isSelected
                                                     ? 'bg-amber-500 text-slate-900 border-amber-500 shadow-lg shadow-amber-500/20'
-                                                    : 'bg-slate-900/50 text-slate-400 border-slate-700 hover:border-slate-500'
+                                                    : 'bg-white/5 text-slate-400 border-white/10 hover:border-white/30'
                                                     }`}
                                             >
                                                 {cat.label}
@@ -459,7 +459,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({ isOpen, onClos
                                                 onClick={() => setServiceType(service.id)}
                                                 className={`px-2 py-2 rounded-lg text-[10px] sm:text-xs font-medium border transition-all text-left ${isSelected
                                                     ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/50 shadow-lg shadow-cyan-500/10'
-                                                    : 'bg-slate-900/50 text-slate-400 border-slate-700 hover:border-slate-500'
+                                                    : 'bg-white/5 text-slate-400 border-white/10 hover:border-white/30'
                                                     }`}
                                             >
                                                 {service.label}
@@ -506,7 +506,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({ isOpen, onClos
                                 <div
                                     className={`border-2 border-dashed rounded-xl p-4 transition-all ${isDragging
                                         ? 'border-amber-500 bg-amber-500/10'
-                                        : 'border-slate-700 bg-slate-900/30 hover:border-slate-600'
+                                        : 'border-white/20 bg-white/5 hover:border-white/40'
                                         }`}
                                     onDragOver={onDragOver}
                                     onDragLeave={onDragLeave}
@@ -561,7 +561,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({ isOpen, onClos
                                             <button
                                                 type="button"
                                                 onClick={() => fileInputRef.current?.click()}
-                                                className="mt-3 px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-medium transition-colors border border-slate-700"
+                                                className="mt-3 px-4 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs text-slate-300 font-medium transition-colors border border-white/10"
                                             >
                                                 เลือกรูปภาพ
                                             </button>
@@ -627,7 +627,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({ isOpen, onClos
                             ทีมงานจะตรวจสอบและอนุมัติภายใน 24 ชม.
                         </p>
 
-                        <div className="bg-slate-900/50 border border-emerald-500/30 rounded-xl p-4 mb-6 flex items-center gap-3">
+                        <div className="bg-white/5 border border-emerald-500/30 rounded-xl p-4 mb-6 flex items-center gap-3">
                             <Sparkles className="text-emerald-400" size={20} />
                             <div className="text-left">
                                 <p className="text-xs text-slate-400">เมื่อได้รับการอนุมัติ</p>

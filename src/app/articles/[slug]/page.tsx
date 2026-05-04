@@ -330,11 +330,11 @@ export default async function ArticlePage({ params }: Props) {
     } : null;
 
     return (
-        <div className="min-h-screen bg-[#0f172a] text-slate-100 font-sans selection:bg-purple-500 selection:text-white relative overflow-hidden pb-28">
+        <div className="min-h-screen bg-[#050711] text-slate-100 font-sans selection:bg-amber-500 selection:text-[#050711] relative overflow-hidden pb-28">
             {/* Background Decor */}
             <div className="absolute top-0 left-0 w-full h-[600px] overflow-hidden pointer-events-none">
-                <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px]"></div>
-                <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
+                <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#c9933a]/5 rounded-full blur-[120px]"></div>
+                <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-amber-600/5 rounded-full blur-[120px]"></div>
             </div>
 
             {/* Article Schema — consistent baseUrl */}
@@ -416,14 +416,14 @@ export default async function ArticlePage({ params }: Props) {
                     </nav>
 
                     {/* Back Link */}
-                    <Link href="/articles" className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white mb-6 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all group backdrop-blur-sm w-fit">
-                        <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
+                    <Link href="/articles" className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white mb-8 px-4 py-2 rounded-full bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group backdrop-blur-sm w-fit">
+                        <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform text-amber-500/70" />
                         <span>บทความทั้งหมด</span>
                     </Link>
 
                     {/* Meta */}
                     <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400 mb-6 font-medium">
-                        <span className="px-3 py-1 bg-purple-500/10 text-purple-400 rounded-full border border-purple-500/20 inline-flex items-center gap-1.5">
+                        <span className="px-3 py-1 bg-white/5 text-amber-400 rounded-full border border-white/5 inline-flex items-center gap-1.5 shadow-[0_0_15px_rgba(201,147,58,0.1)]">
                             <Tag size={12} />
                             {article.category}
                         </span>
@@ -448,7 +448,7 @@ export default async function ArticlePage({ params }: Props) {
                     </div>
 
                     {/* Title */}
-                    <h1 className="text-3xl md:text-5xl font-bold mb-8 leading-tight text-white">
+                    <h1 className="text-3xl md:text-5xl font-bold mb-8 leading-tight text-white tracking-tight">
                         {article.title}
                     </h1>
 
@@ -471,21 +471,21 @@ export default async function ArticlePage({ params }: Props) {
 
                     {/* Table of Contents — enhanced with numbered sections for long articles */}
                     {article.toc && article.toc.length > 0 && (
-                        <nav className="bg-slate-800/50 rounded-xl p-6 mb-8 border border-slate-700/50" aria-label="สารบัญบทความ">
-                            <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                <span className="text-xl">📚</span> สารบัญ
+                        <nav className="bg-white/5 backdrop-blur-md rounded-2xl p-6 mb-10 border border-white/5" aria-label="สารบัญบทความ">
+                            <h2 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
+                                <span className="text-xl opacity-80">📖</span> สารบัญ
                                 <span className="text-xs font-normal text-slate-500 ml-auto">{article.toc.filter(t => t.level === 2).length} หัวข้อหลัก</span>
                             </h2>
-                            <ul className="space-y-1.5">
+                            <ul className="space-y-2">
                                 {(() => {
                                     let h2Counter = 0;
                                     return article.toc.map((item) => {
                                         if (item.level === 2) h2Counter++;
                                         return (
                                             <li key={item.id} style={{ paddingLeft: (item.level - 2) * 16 }}>
-                                                <a href={`#${item.id}`} className="text-slate-400 hover:text-purple-400 transition-colors text-sm flex items-center gap-2 py-0.5">
+                                                <a href={`#${item.id}`} className="text-slate-300 hover:text-amber-400 transition-colors text-sm flex items-center gap-3 py-1">
                                                     {item.level === 2 ? (
-                                                        <span className="w-5 h-5 bg-purple-500/20 text-purple-400 rounded text-xs flex items-center justify-center flex-shrink-0 font-bold">{h2Counter}</span>
+                                                        <span className="w-5 h-5 text-amber-500 rounded text-xs flex items-center justify-center flex-shrink-0 font-bold border border-amber-500/20">{h2Counter}</span>
                                                     ) : (
                                                         <span className="w-1.5 h-1.5 bg-slate-600 rounded-full flex-shrink-0 ml-1.5" />
                                                     )}
@@ -519,25 +519,25 @@ export default async function ArticlePage({ params }: Props) {
 
                     {/* FAQ Section — renders when article has faqItems */}
                     {article.faqItems && article.faqItems.length > 0 && (
-                        <section id="faq-section" className="mt-12 scroll-mt-24">
-                            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                                <span className="text-3xl">❓</span> คำถามที่พบบ่อย (FAQ)
+                        <section id="faq-section" className="mt-14 scroll-mt-24">
+                            <h2 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                                <span className="text-3xl opacity-80">❓</span> คำถามที่พบบ่อย (FAQ)
                             </h2>
                             <div className="space-y-4">
                                 {article.faqItems.map((item, index) => (
                                     <details
                                         key={index}
-                                        className="group bg-slate-800/40 border border-slate-700/50 rounded-xl overflow-hidden hover:border-purple-500/30 transition-all"
+                                        className="group bg-white/5 border border-white/5 rounded-2xl overflow-hidden hover:border-white/10 transition-all"
                                         {...(index < 3 ? { open: true } : {})}
                                     >
-                                        <summary className="flex items-start gap-3 p-5 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden">
-                                            <span className="w-6 h-6 bg-purple-500/20 text-purple-400 rounded-lg text-xs flex items-center justify-center flex-shrink-0 font-bold mt-0.5">{index + 1}</span>
+                                        <summary className="flex items-start gap-3 p-6 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden">
+                                            <span className="w-6 h-6 text-amber-500 rounded text-xs flex items-center justify-center flex-shrink-0 font-bold mt-0.5 border border-amber-500/20">{index + 1}</span>
                                             <span className="text-white font-medium leading-snug flex-1">{item.question}</span>
                                             <span className="text-slate-500 group-open:rotate-180 transition-transform duration-200 flex-shrink-0 mt-0.5">
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                                             </span>
                                         </summary>
-                                        <div className="px-5 pb-5 pt-0 text-slate-300 text-sm leading-relaxed border-t border-slate-700/50 mt-0 pt-4">
+                                        <div className="px-6 pb-6 pt-0 text-slate-300 text-sm leading-relaxed border-t border-white/5 mt-0 pt-4">
                                             {item.answer}
                                         </div>
                                     </details>
@@ -561,10 +561,11 @@ export default async function ArticlePage({ params }: Props) {
 
                     {/* Palm Analysis CTA — palmistry article specific */}
                     {isPalmistryArticle && (
-                        <div className="mt-8 p-6 bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border border-purple-500/30 rounded-2xl text-center">
-                            <h3 className="text-xl font-bold text-white mb-2">อยากลองวิเคราะห์ลายมือของคุณด้วย AI?</h3>
-                            <p className="text-slate-300 text-sm mb-4">ระบบ AI ของ NameMongkol อ่านเส้นชีวิต เส้นสมอง เส้นหัวใจ และเส้นวาสนา ให้คำแนะนำเชิงสร้างสรรค์ ฟรี 100%</p>
-                            <Link href="/palm-analysis" className="inline-block px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-purple-600/30">➡ วิเคราะห์ลายมือฟรีที่นี่</Link>
+                        <div className="mt-10 p-8 bg-white/5 border border-[#c9933a]/20 rounded-2xl text-center backdrop-blur-md relative overflow-hidden">
+                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#c9933a]/10 via-transparent to-transparent pointer-events-none"></div>
+                            <h3 className="text-xl font-bold text-white mb-3 relative z-10">อยากลองวิเคราะห์ลายมือของคุณด้วย AI?</h3>
+                            <p className="text-slate-300 text-sm mb-6 max-w-lg mx-auto relative z-10">ระบบ AI ของ NameMongkol อ่านเส้นชีวิต เส้นสมอง เส้นหัวใจ และเส้นวาสนา ให้คำแนะนำเชิงสร้างสรรค์ ฟรี 100%</p>
+                            <Link href="/palm-analysis" className="inline-block px-8 py-3.5 bg-[#c9933a] hover:bg-[#d4a54e] text-white font-bold rounded-xl transition-all shadow-[0_0_24px_rgba(245,158,11,0.22)] hover:shadow-[0_0_32px_rgba(245,158,11,0.30)] hover:-translate-y-0.5 relative z-10">วิเคราะห์ลายมือฟรีที่นี่</Link>
                         </div>
                     )}
 
@@ -572,47 +573,48 @@ export default async function ArticlePage({ params }: Props) {
                     <AuraVibeWidget />
 
                     {/* Author Bio Card — EEAT signal */}
-                    <section className="mt-10 bg-gradient-to-r from-slate-800/60 to-slate-800/30 border border-slate-700/50 rounded-2xl p-6 flex flex-col md:flex-row items-start gap-5">
-                        <div className="w-16 h-16 bg-gradient-to-br from-amber-500/20 to-purple-500/20 border border-amber-500/30 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">
+                    <section className="mt-12 bg-white/5 backdrop-blur-md border border-white/5 rounded-2xl p-8 flex flex-col md:flex-row items-start gap-6">
+                        <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">
                             👨‍🏫
                         </div>
                         <div className="flex-1">
-                            <h3 className="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                            <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
                                 {article.author}
-                                <Award size={16} className="text-amber-400" />
+                                <Award size={16} className="text-[#c9933a]" />
                             </h3>
-                            <p className="text-slate-400 text-sm leading-relaxed mb-3">
+                            <p className="text-slate-400 text-sm leading-relaxed mb-5 max-w-2xl">
                                 นักวิเคราะห์ชื่อมงคลและเลขศาสตร์ ผู้เชี่ยวชาญด้านทักษาปกรณ์ เลขศาสตร์ไทย และโหราศาสตร์
                                 ประสบการณ์วิเคราะห์ชื่อมากกว่า 150,000 ชื่อผ่านระบบ NameMongkol
                                 อ้างอิงตำราทักษาปกรณ์ฉบับราชบัณฑิต และหลักเลขศาสตร์สากล
                             </p>
-                            <div className="flex flex-wrap gap-2">
-                                <Link href="/about" className="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-full transition-colors">
-                                    <BookOpen size={12} /> เกี่ยวกับผู้เขียน
+                            <div className="flex flex-wrap gap-3">
+                                <Link href="/about" className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
+                                    <BookOpen size={12} className="text-[#c9933a]" /> เกี่ยวกับผู้เขียน
                                 </Link>
-                                <Link href="/" className="inline-flex items-center gap-1.5 text-xs text-purple-400 hover:text-purple-300 bg-purple-500/10 border border-purple-500/20 px-3 py-1.5 rounded-full transition-colors">
-                                    <ExternalLink size={12} /> วิเคราะห์ชื่อฟรี
+                                <Link href="/" className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
+                                    <ExternalLink size={12} className="text-[#c9933a]" /> วิเคราะห์ชื่อฟรี
                                 </Link>
-                                <Link href="/reviews" className="inline-flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 bg-blue-500/10 border border-blue-500/20 px-3 py-1.5 rounded-full transition-colors">
-                                    <Star size={12} /> ดูรีวิวผู้ใช้งาน
+                                <Link href="/reviews" className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
+                                    <Star size={12} className="text-[#c9933a]" /> ดูรีวิวผู้ใช้งาน
                                 </Link>
                             </div>
                         </div>
                     </section>
 
                     {/* Mandatory CTA — ตาม Checklist */}
-                    <div className="mt-8 bg-gradient-to-r from-amber-500/10 via-yellow-500/5 to-purple-500/10 border border-amber-500/20 rounded-2xl p-6 md:p-8 text-center">
-                        <p className="text-xl md:text-2xl font-bold text-white mb-3">
+                    <div className="mt-12 bg-white/5 backdrop-blur-md border border-[#c9933a]/20 rounded-2xl p-8 md:p-10 text-center relative overflow-hidden">
+                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#c9933a]/10 via-transparent to-transparent pointer-events-none"></div>
+                        <p className="text-2xl md:text-3xl font-bold text-white mb-4 relative z-10 tracking-tight">
                             อยากรู้ว่าชื่อของคุณดีแค่ไหน?
                         </p>
-                        <p className="text-slate-300 mb-5">
+                        <p className="text-slate-300 mb-8 max-w-lg mx-auto relative z-10">
                             วิเคราะห์ครบ 4 ศาสตร์: เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และกาลกิณี ฟรี 100%
                         </p>
                         <Link
                             href="/"
-                            className="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold px-8 py-3.5 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all shadow-lg shadow-amber-500/30 text-lg"
+                            className="inline-block bg-[#c9933a] text-white font-bold px-8 py-4 rounded-xl hover:bg-[#d4a54e] transition-all shadow-[0_0_24px_rgba(245,158,11,0.22)] hover:shadow-[0_0_32px_rgba(245,158,11,0.30)] hover:-translate-y-0.5 text-lg relative z-10"
                         >
-                            🔮 คลิกวิเคราะห์ฟรีที่นี่
+                            วิเคราะห์ชื่อฟรีที่นี่
                         </Link>
                     </div>
 
@@ -630,30 +632,30 @@ export default async function ArticlePage({ params }: Props) {
 
                     {/* Related Articles Section */}
                     {relatedArticles.length > 0 && (
-                        <section className="mt-12 pt-8 border-t border-white/10">
-                            <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                                <span className="text-2xl">📚</span>
+                        <section className="mt-14 pt-10 border-t border-white/5">
+                            <h3 className="text-xl font-bold text-white mb-8 flex items-center gap-3">
+                                <span className="text-2xl opacity-80">📚</span>
                                 บทความที่เกี่ยวข้อง
                             </h3>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {relatedArticles.map((related) => (
                                     <Link
                                         key={related.slug}
                                         href={`/articles/${related.slug}`}
-                                        className="group bg-slate-800/40 border border-slate-700/50 rounded-xl overflow-hidden hover:border-purple-500/50 transition-all hover:-translate-y-1"
+                                        className="group bg-white/5 border border-white/5 rounded-2xl overflow-hidden hover:border-white/10 hover:bg-white/10 transition-all hover:-translate-y-1"
                                     >
-                                        <div className="h-32 w-full bg-slate-700 relative overflow-hidden">
+                                        <div className="h-36 w-full bg-[#0a0f1d] relative overflow-hidden">
                                             <ArticleImage
                                                 src={related.coverImage}
                                                 alt={related.coverImageAlt || `ภาพหน้าปกบทความ ${related.title}`}
                                                 priority={false}
-                                                className="group-hover:scale-105 transition-transform duration-300"
+                                                className="group-hover:scale-105 transition-transform duration-500"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#050711]/90 via-transparent to-transparent" />
                                         </div>
-                                        <div className="p-4">
-                                            <div className="text-xs text-purple-400 mb-2">{related.category}</div>
-                                            <h4 className="text-sm font-medium text-white group-hover:text-purple-300 transition-colors line-clamp-2 leading-snug">
+                                        <div className="p-5">
+                                            <div className="text-xs font-medium text-[#c9933a] mb-2 uppercase tracking-wide">{related.category}</div>
+                                            <h4 className="text-sm font-medium text-white group-hover:text-slate-200 transition-colors line-clamp-2 leading-relaxed">
                                                 {related.title}
                                             </h4>
                                         </div>
@@ -664,28 +666,28 @@ export default async function ArticlePage({ params }: Props) {
                     )}
 
                     {/* SEO Bottom Content */}
-                    <section className="mt-12 pt-8 border-t border-white/10 bg-slate-800/30 rounded-xl p-6">
-                        <h3 className="text-lg font-bold text-amber-400 mb-4">เกี่ยวกับ NameMongkol</h3>
-                        <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                            <strong className="text-slate-300">NameMongkol</strong> คือเว็บไซต์วิเคราะห์ชื่อมงคลอันดับ 1 ของไทย
-                            ใช้ระบบ AI ผสานศาสตร์โบราณ ครอบคลุม <strong className="text-slate-300">เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6</strong>
-                            และ <strong className="text-slate-300">อักษรกาลกิณี</strong>
+                    <section className="mt-14 pt-10 border-t border-white/5 bg-white/5 rounded-2xl p-8 backdrop-blur-sm">
+                        <h3 className="text-lg font-bold text-[#c9933a] mb-4">เกี่ยวกับ NameMongkol</h3>
+                        <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                            <strong className="text-slate-300 font-medium">NameMongkol</strong> คือเว็บไซต์วิเคราะห์ชื่อมงคลอันดับ 1 ของไทย
+                            ใช้ระบบ AI ผสานศาสตร์โบราณ ครอบคลุม <strong className="text-slate-300 font-medium">เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6</strong>
+                            และ <strong className="text-slate-300 font-medium">อักษรกาลกิณี</strong>
                             ให้บริการทั้งวิเคราะห์ชื่อฟรีและค้นหาชื่อมงคล Premium พร้อมวอลเปเปอร์มงคลเสริมดวง
                         </p>
                         <div className="flex flex-wrap gap-2">
-                            <Link href="/" className="text-xs bg-slate-700/50 hover:bg-purple-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            <Link href="/" className="text-xs bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:border-white/20 transition-all">
                                 วิเคราะห์ชื่อมงคล
                             </Link>
-                            <Link href="/premium-search" className="text-xs bg-slate-700/50 hover:bg-purple-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            <Link href="/premium-search" className="text-xs bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:border-white/20 transition-all">
                                 ค้นหาชื่อมงคล Premium
                             </Link>
-                            <Link href="/phone-analysis" className="text-xs bg-slate-700/50 hover:bg-purple-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            <Link href="/phone-analysis" className="text-xs bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:border-white/20 transition-all">
                                 วิเคราะห์เบอร์มงคล
                             </Link>
-                            <Link href="/wallpapers" className="text-xs bg-slate-700/50 hover:bg-purple-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            <Link href="/wallpapers" className="text-xs bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:border-white/20 transition-all">
                                 วอลเปเปอร์มงคล
                             </Link>
-                            <Link href="/articles" className="text-xs bg-slate-700/50 hover:bg-purple-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            <Link href="/articles" className="text-xs bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:border-white/20 transition-all">
                                 บทความทั้งหมด
                             </Link>
                         </div>

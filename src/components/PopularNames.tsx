@@ -51,7 +51,7 @@ export default function PopularNames() {
           {popular.map((item, index) => (
             <div 
               key={index + item.name} 
-              className="group relative flex flex-col justify-between p-2 md:p-5 rounded-lg md:rounded-2xl bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 border border-white/10 hover:border-amber-500/40 hover:bg-[#1e293b] hover:shadow-[0_8px_30px_rgba(245,158,11,0.15)] hover:-translate-y-1.5 transition-all duration-300 cursor-pointer overflow-hidden backdrop-blur-md"
+              className="group relative flex flex-col justify-between p-2 md:p-5 rounded-lg md:rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/40 hover:bg-white/10 hover:shadow-[0_8px_30px_rgba(245,158,11,0.15)] hover:-translate-y-1.5 transition-all duration-300 cursor-pointer overflow-hidden backdrop-blur-xl"
             >
               {/* Ranking Badge */}
               <div className={`absolute top-0 right-0 w-6 h-6 md:w-10 md:h-10 rounded-bl-lg md:rounded-bl-2xl flex items-center justify-center text-[10px] md:text-sm font-bold border-b border-l border-white/5 z-10 transition-all duration-300 ${index < 3 ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-black border-amber-500/50 shadow-[-4px_4px_15px_rgba(245,158,11,0.3)]' : 'bg-white/5 text-slate-300 group-hover:bg-white/10'}`}>

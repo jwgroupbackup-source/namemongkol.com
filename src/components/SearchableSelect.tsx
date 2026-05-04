@@ -74,9 +74,9 @@ export const SearchableSelect: React.FC<SearchableSelectProps> = ({
                         setSearchTerm('');
                     }
                 }}
-                className={`w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-sm flex items-center justify-between cursor-pointer transition-all
-                    ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-amber-500/30'}
-                    ${isOpen ? 'border-amber-500/50 ring-2 ring-amber-500/10' : ''}
+                className={`w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-sm flex items-center justify-between cursor-pointer transition-all
+                    ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-amber-500/30 hover:bg-white/10'}
+                    ${isOpen ? 'border-amber-500/50 ring-2 ring-amber-500/10 bg-white/10' : ''}
                 `}
             >
                 <span className={`${!displayValue ? 'text-slate-500' : 'text-white'}`}>
@@ -86,13 +86,13 @@ export const SearchableSelect: React.FC<SearchableSelectProps> = ({
             </div>
 
             {isOpen && !disabled && (
-                <div className="absolute z-50 w-full mt-2 bg-slate-800 border border-white/10 rounded-xl shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-100">
+                <div className="absolute z-50 w-full mt-2 bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-100">
                     <div className="p-2 border-b border-white/5">
                         <div className="relative">
                             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
                             <input
                                 type="text"
-                                className="w-full bg-slate-900/50 rounded-lg pl-9 pr-3 py-2 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-amber-500/30"
+                                className="w-full bg-white/5 rounded-lg pl-9 pr-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-amber-500/30"
                                 placeholder={searchPlaceholder}
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}

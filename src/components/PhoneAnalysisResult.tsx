@@ -117,9 +117,9 @@ const PairBox = ({ type, pairs }: { type: 'good' | 'bad', pairs: IPhoneAnalysisR
     // const pairBg unused
 
     return (
-        <div className={`relative border rounded-lg rounded-tl-none pt-5 p-3 ${containerBorder} bg-[#1e293b]/50`}>
+        <div className={`relative border rounded-2xl rounded-tl-none pt-6 p-4 ${containerBorder} bg-white/5 backdrop-blur-sm`}>
             {/* Folder Tab */}
-            <div className={`absolute -top-[1px] -left-[1px] px-4 py-1 rounded-t-md rounded-br-md text-white text-[10px] font-bold uppercase tracking-wider shadow-md ${titleBg}`}>
+            <div className={`absolute -top-[1px] -left-[1px] px-4 py-1.5 rounded-t-lg rounded-br-lg text-white text-[10px] font-bold uppercase tracking-wider shadow-md ${titleBg}`}>
                 {title}
             </div>
 
@@ -150,40 +150,40 @@ const PairBox = ({ type, pairs }: { type: 'good' | 'bad', pairs: IPhoneAnalysisR
 // Moved SimpleGradeCard Component here
 const SimpleGradeCard = ({ grade, phoneNumber }: { grade: string; phoneNumber: string }) => {
     const getGradeColor = (g: string) => {
-        if (g === 'A') return 'text-emerald-500';
-        if (g === 'B') return 'text-emerald-500';
-        if (g === 'C') return 'text-slate-400';
-        if (g === 'D') return 'text-slate-500';
-        return 'text-rose-500';
+        if (g === 'A') return 'text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.3)]';
+        if (g === 'B') return 'text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.3)]';
+        if (g === 'C') return 'text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.3)]';
+        if (g === 'D') return 'text-orange-400 drop-shadow-[0_0_10px_rgba(251,146,60,0.3)]';
+        return 'text-rose-400 drop-shadow-[0_0_10px_rgba(244,63,94,0.3)]';
     };
 
     return (
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 text-center">
-            <h1 className="text-5xl sm:text-6xl font-bold text-rose-600 tracking-tight font-mono mb-6">
+        <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 shadow-2xl border border-white/10 text-center">
+            <h1 className="text-5xl sm:text-6xl font-bold text-white tracking-tight font-mono mb-6 drop-shadow-md">
                 {phoneNumber}
             </h1>
 
             <div className="flex flex-col items-center justify-center gap-2 mb-8">
                 <div className="relative">
                     {/* Sim Card Icon Style */}
-                    <div className="w-16 h-16 bg-rose-600 rounded-full flex items-center justify-center p-3 shadow-lg relative z-10">
-                        <div className="w-full h-full bg-white/20 rounded-md border-2 border-dashed border-white/50 backdrop-blur-sm" />
+                    <div className="w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center p-3 shadow-lg relative z-10 border border-amber-500/30">
+                        <div className="w-full h-full bg-white/10 rounded-md border-2 border-dashed border-white/30 backdrop-blur-sm" />
                     </div>
                     {/* Starburst behind */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-rose-200 rounded-full animate-pulse z-0" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-amber-500/20 blur-[20px] rounded-full animate-pulse z-0" />
                 </div>
 
-                <h2 className={`text-3xl font-bold ${getGradeColor(grade)} mt-2`}>
+                <h2 className={`text-3xl font-bold ${getGradeColor(grade)} mt-4`}>
                     เบอร์เกรด {grade}
                 </h2>
             </div>
 
-            <div className="space-y-1 text-sm font-medium text-slate-600 max-w-xs mx-auto">
-                <div className={`${grade === 'A' ? 'text-emerald-600 font-bold scale-105' : ''}`}>เบอร์เกรด A = เบอร์ดีมากๆ</div>
-                <div className={`${grade === 'B' ? 'text-emerald-600 font-bold scale-105' : ''}`}>เบอร์เกรด B = เบอร์ดี</div>
-                <div className={`${grade === 'C' ? 'text-slate-600 font-bold scale-105' : ''}`}>เบอร์เกรด C = เบอร์ทั่วไป</div>
-                <div className={`${grade === 'D' ? 'text-slate-600 font-bold scale-105' : ''}`}>เบอร์เกรด D = เบอร์ค่อนข้างเหนื่อย</div>
-                <div className={`${grade === 'F' ? 'text-rose-600 font-bold scale-105' : 'text-rose-500'}`}>เบอร์เกรด F = เบอร์เหนื่อยเปล่า</div>
+            <div className="space-y-1.5 text-sm font-medium text-slate-400 max-w-xs mx-auto">
+                <div className={`${grade === 'A' ? 'text-emerald-400 font-bold scale-105' : ''}`}>เบอร์เกรด A = เบอร์ดีมากๆ</div>
+                <div className={`${grade === 'B' ? 'text-emerald-400 font-bold scale-105' : ''}`}>เบอร์เกรด B = เบอร์ดี</div>
+                <div className={`${grade === 'C' ? 'text-amber-400 font-bold scale-105' : ''}`}>เบอร์เกรด C = เบอร์ทั่วไป</div>
+                <div className={`${grade === 'D' ? 'text-orange-400 font-bold scale-105' : ''}`}>เบอร์เกรด D = เบอร์ค่อนข้างเหนื่อย</div>
+                <div className={`${grade === 'F' ? 'text-rose-400 font-bold scale-105' : ''}`}>เบอร์เกรด F = เบอร์เหนื่อยเปล่า</div>
             </div>
         </div>
     );
@@ -234,7 +234,7 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
         <div className="w-full max-w-4xl animate-fade-in space-y-4 pb-8">
 
             {/* Main Result Card */}
-            <div className="bg-[#1e293b]/90 backdrop-blur-xl rounded-2xl p-4 lg:p-6 border border-slate-700/50 shadow-xl relative overflow-hidden">
+            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-5 lg:p-8 border border-white/5 shadow-2xl relative overflow-hidden">
                 {/* Background Decor */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-[60px] pointer-events-none" />
 
@@ -279,7 +279,7 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
                         <div className="absolute left-0 top-4 bottom-4 w-px bg-gradient-to-b from-transparent via-slate-700 to-transparent hidden lg:block" />
 
                         {/* Enhanced Desktop Grade Badge */}
-                        <div className="hidden lg:flex items-center gap-4 bg-slate-900/50 p-4 rounded-2xl border border-slate-700/50 mb-2 self-center w-full max-w-md relative group overflow-hidden">
+                        <div className="hidden lg:flex items-center gap-5 bg-white/5 p-5 rounded-3xl border border-white/5 mb-2 self-center w-full max-w-md relative group overflow-hidden backdrop-blur-sm">
                             <div className={`absolute inset-0 opacity-10 blur-xl transition-opacity group-hover:opacity-20
                                 ${result.grade.startsWith('A') ? 'bg-emerald-500' :
                                     result.grade.startsWith('B') ? 'bg-blue-500' : 'bg-amber-500'}
@@ -336,7 +336,7 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {result.pairs.map((pair, idx) => (
                         <div key={idx} className={`
-                            relative overflow-hidden group rounded-xl border bg-[#1e293b] transition-all hover:shadow-lg hover:-translate-y-0.5 duration-200
+                            relative overflow-hidden group rounded-2xl border bg-white/5 backdrop-blur-sm transition-all hover:-translate-y-0.5 duration-200
                             ${pair.level === 1
                                 ? 'border-emerald-500/20 hover:border-emerald-500/40 shadow-emerald-900/5'
                                 : pair.level === 2
@@ -439,9 +439,9 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
 
                 <SimpleGradeCard grade={result.grade} phoneNumber={result.phoneNumber} />
 
-                <div className="bg-[#1e293b] rounded-xl p-4 border border-slate-700/50 flex flex-col md:flex-row gap-4 items-center">
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/5 flex flex-col md:flex-row gap-4 items-center shadow-lg">
                     {/* URL Input */}
-                    <div className="flex-1 w-full bg-[#0f172a] rounded-lg border border-slate-700 flex items-center pl-4 pr-1 py-1 relative group">
+                    <div className="flex-1 w-full bg-slate-900/50 rounded-xl border border-white/10 flex items-center pl-4 pr-1 py-1.5 relative group">
                         <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
                             <LinkIcon size={14} className="text-slate-500" />
                         </div>

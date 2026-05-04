@@ -25,14 +25,14 @@ const PhoneHeader = () => {
                 <span className="text-xs md:text-sm font-semibold text-amber-100 tracking-wider uppercase">เช็คเบอร์มงคลฟรี</span>
             </div>
             
-            <div role="heading" aria-hidden="true" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-[1.2] tracking-tight drop-shadow-2xl">
+            <div role="heading" aria-hidden="true" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl">
                 {t('pages.phoneAnalysis.heroTitle')}{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-orange-400 drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">
                     {t('pages.phoneAnalysis.heroHighlight')}
                 </span>
             </div>
             
-            <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-300 max-w-[65ch] mx-auto leading-relaxed">
                 {t('pages.phoneAnalysis.heroSubtitle')}
             </p>
         </div>
@@ -65,8 +65,9 @@ const ClientPageFallback = () => {
 
                 {/* Input Section - Static/Disabled for fallback */}
                 <div className="w-full max-w-2xl relative z-10 animate-fade-in-up delay-100">
-                    <div className="phone-analysis-shell rounded-3xl p-2 sm:p-3">
-                        <div className="flex flex-col sm:flex-row gap-2">
+                    <div className="bg-white/5 border border-white/5 rounded-3xl p-2 sm:p-3 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
+                        <div className="flex flex-col sm:flex-row gap-2 relative z-10">
                             <input
                                 type="text"
                                 disabled
@@ -351,8 +352,9 @@ function ClientPageContent() {
                 {/* Input Section */}
                 {!result && (
                     <div className="w-full max-w-2xl relative z-10 animate-fade-in-up delay-100">
-                        <div className="phone-analysis-shell rounded-3xl p-2 sm:p-3">
-                            <div className="flex flex-col sm:flex-row gap-2">
+                        <div className="bg-white/5 border border-white/5 rounded-3xl p-2 sm:p-3 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
+                            <div className="flex flex-col sm:flex-row gap-2 relative z-10">
                                 <input
                                     type="text"
                                     value={phoneNumber}
@@ -369,10 +371,10 @@ function ClientPageContent() {
                                     disabled={loading || phoneNumber.length !== 10}
                                     data-track="phone.hero.analyze"
                                     className={`
-                                        px-8 py-4 rounded-2xl font-bold text-white transition-all transform hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center gap-2 min-w-[160px]
+                                        px-8 py-4 rounded-2xl font-bold text-white transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 min-w-[160px]
                                         ${phoneNumber.length === 10
-                                            ? 'phone-analysis-button cursor-pointer'
-                                            : 'phone-analysis-button-disabled cursor-not-allowed'}
+                                            ? 'bg-amber-500 hover:bg-amber-400 shadow-[0_0_24px_rgba(245,158,11,0.22)] hover:shadow-[0_0_32px_rgba(245,158,11,0.30)] border border-amber-400/20 cursor-pointer'
+                                            : 'bg-slate-800/50 text-slate-500 border border-white/5 cursor-not-allowed'}
                                     `}
                                 >
                                     {loading ? <Loader2 className="animate-spin" /> : <Search size={20} />}

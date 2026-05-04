@@ -288,14 +288,14 @@ export default function ClientPage() {
     }, [selectedCategory, dbReviews]);
 
     return (
-        <div className="min-h-screen bg-[#0f172a] text-slate-100 font-sans pb-28">
+        <div className="min-h-screen bg-[#050b14] text-slate-100 font-sans pb-28">
             {/* Header Section */}
             <div className="relative pt-12 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
                 {/* Background Decor */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-[-20%] left-1/4 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[120px] mix-blend-screen" />
                     <div className="absolute top-[20%] right-1/4 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[100px] mix-blend-screen" />
-                    <div className="absolute bottom-0 w-full h-[30%] bg-gradient-to-t from-[#0f172a] to-transparent" />
+                    <div className="absolute bottom-0 w-full h-[30%] bg-gradient-to-t from-[#050b14] to-transparent" />
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto text-center pt-8">
@@ -530,7 +530,7 @@ export default function ClientPage() {
                                                 className={`relative rounded-xl overflow-hidden border border-white/10 group ${review.images!.length === 1 ? 'aspect-video' : 'aspect-square'
                                                     }`}
                                             >
-                                                <div className="absolute inset-0 bg-slate-800/50" />
+                                                <div className="absolute inset-0 bg-white/5 backdrop-blur-sm" />
                                                 <Image
                                                     src={img}
                                                     alt={`ภาพรีวิวผลลัพธ์หลังใช้บริการ${review.service_type && SERVICE_INFO[review.service_type] ? SERVICE_INFO[review.service_type].name : 'ของ NameMongkol'} จากคุณ ${review.nickname} - ภาพที่ ${idx + 1}`}

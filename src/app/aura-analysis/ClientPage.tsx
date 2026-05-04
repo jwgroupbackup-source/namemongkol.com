@@ -392,13 +392,13 @@ export default function ClientPage() {
                         <span className="text-xs md:text-sm font-semibold text-amber-100 tracking-wider uppercase">AI Personality Analysis</span>
                     </div>
                     
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-[1.2] tracking-tight drop-shadow-2xl">
-                        ค้นหาตัวตนด้วย <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-orange-400 drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">ออร่า</span>
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl">
+                        ค้นหาตัวตนด้วย <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 drop-shadow-[0_0_30px_rgba(201,147,58,0.3)]">ออร่า</span>
                         <br className="hidden sm:block" /> และพลังงานจากชื่อ
                     </h1>
                     
-                    <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
-                        ถอดรหัสความหมายที่ซ่อนอยู่ในตัวอักษร ด้วยระบบ AI ขั้นสูง <br className="hidden md:block"/> ค้นพบ <span className="font-medium text-amber-200">12 Archetype</span> พลังงานสีมงคล และศาสตร์แห่งตัวตนที่แท้จริงของคุณ 
+                    <p className="text-sm sm:text-base text-slate-300 max-w-[65ch] mx-auto leading-relaxed">
+                        ถอดรหัสความหมายที่ซ่อนอยู่ในตัวอักษร ด้วยระบบ AI ขั้นสูง <br className="hidden md:block"/> ค้นพบ <span className="font-medium text-amber-300">12 Archetype</span> พลังงานสีมงคล และศาสตร์แห่งตัวตนที่แท้จริงของคุณ 
                     </p>
                 </div>
 
@@ -407,7 +407,9 @@ export default function ClientPage() {
                 {/* ============================================================= */}
                 {step === 'input' && (
                     <div className="max-w-lg mx-auto mt-2 sm:mt-3 animate-fade-in-up">
-                        <div className="aura-card-shell rounded-2xl backdrop-blur-xl p-6 sm:p-8 shadow-2xl">
+                        <div className="bg-white/5 border border-white/5 rounded-2xl backdrop-blur-xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
+                            <div className="relative z-10">
                             {/* Name Input */}
                             <label className="aura-form-label block mb-1.5 text-sm font-medium">
                                 ชื่อที่ต้องการวิเคราะห์
@@ -515,11 +517,12 @@ export default function ClientPage() {
                             <button
                                 onClick={handleSubmit}
                                 disabled={!name.trim() || cooldown > 0}
-                                className="aura-submit-button mt-3 w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-base transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] disabled:cursor-not-allowed disabled:hover:scale-100"
+                                className="mt-5 w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-amber-500 text-white font-bold text-base transition-all duration-200 hover:bg-amber-400 shadow-[0_0_24px_rgba(245,158,11,0.22)] hover:shadow-[0_0_32px_rgba(245,158,11,0.30)] hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:bg-slate-800/50 disabled:text-slate-500 disabled:shadow-none border border-amber-400/20 disabled:border-white/5"
                             >
                                 <Sparkles size={18} />
                                 เริ่มวิเคราะห์ออร่าด้วย AI
                             </button>
+                        </div>
                         </div>
                     </div>
                 )}
@@ -574,11 +577,11 @@ export default function ClientPage() {
                                                 </div>
                                             </div>
                                             {/* Name + Archetype */}
-                                            <div className="text-center">
-                                                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-1">{result.name}</h2>
-                                                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30">
+                                            <div className="text-center mt-2">
+                                                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 tracking-tight">{result.name}</h2>
+                                                <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 border border-white/5 backdrop-blur-sm">
                                                     <Crown size={14} className="text-amber-400" />
-                                                    <span className="text-xs sm:text-sm font-medium text-amber-300">{result.archetype}</span>
+                                                    <span className="text-xs sm:text-sm font-medium text-amber-400 tracking-wide uppercase">{result.archetype}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -636,12 +639,12 @@ export default function ClientPage() {
                                     </div>
 
                                     {/* Vibe Analysis */}
-                                    <div className="rounded-xl border border-amber-500/20 bg-gradient-to-br from-amber-500/5 to-transparent p-4">
-                                        <div className="flex items-center gap-2 mb-2">
+                                    <div className="rounded-2xl border border-white/5 bg-white/5 p-5 backdrop-blur-sm">
+                                        <div className="flex items-center gap-2 mb-3">
                                             <MessageCircle size={16} className="text-amber-400" />
-                                            <span className="text-xs text-slate-400 uppercase tracking-wider">Vibe Analysis</span>
+                                            <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Vibe Analysis</span>
                                         </div>
-                                        <p className="text-sm text-slate-200 leading-relaxed">{result.vibeAnalysis}</p>
+                                        <p className="text-sm text-slate-300 leading-relaxed">{result.vibeAnalysis}</p>
                                     </div>
 
                                     {/* 4-Grid Info */}
@@ -699,66 +702,66 @@ export default function ClientPage() {
                                     {/* ── Enhanced Analysis Sections ── */}
 
                                     {/* First Impression Score */}
-                                    <div className="rounded-xl border border-amber-500/20 bg-gradient-to-br from-amber-500/5 to-transparent p-4">
-                                        <div className="flex items-center justify-between mb-2">
+                                    <div className="rounded-2xl border border-white/5 bg-white/5 p-5 backdrop-blur-sm">
+                                        <div className="flex items-center justify-between mb-3">
                                             <div className="flex items-center gap-2">
                                                 <Eye size={16} className="text-amber-400" />
-                                                <span className="text-xs text-slate-400 uppercase tracking-wider">คะแนนความประทับใจแรก</span>
+                                                <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">คะแนนความประทับใจแรก</span>
                                             </div>
-                                            <span className="text-lg font-bold text-amber-300">{result.firstImpressionScore}/100</span>
+                                            <span className="text-lg font-bold text-amber-400">{result.firstImpressionScore}/100</span>
                                         </div>
-                                        <div className="w-full h-2.5 rounded-full bg-white/5 overflow-hidden">
+                                        <div className="w-full h-2.5 rounded-full bg-slate-800 overflow-hidden border border-white/5">
                                             <div
-                                                className="h-full rounded-full bg-gradient-to-r from-amber-500 to-amber-400 transition-all duration-1000"
+                                                className="h-full rounded-full bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)] transition-all duration-1000"
                                                 style={{ width: `${result.firstImpressionScore}%` }}
                                             />
                                         </div>
                                     </div>
 
                                     {/* Phonetic Analysis */}
-                                    <div className="rounded-xl border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 to-transparent p-4">
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <Volume2 size={16} className="text-indigo-400" />
-                                            <span className="text-xs text-slate-400 uppercase tracking-wider">การวิเคราะห์เสียงของชื่อ (Phonetics)</span>
+                                    <div className="rounded-2xl border border-white/5 bg-white/5 p-5 backdrop-blur-sm">
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <Volume2 size={16} className="text-amber-400" />
+                                            <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">การวิเคราะห์เสียงของชื่อ (Phonetics)</span>
                                         </div>
-                                        <p className="text-sm text-slate-200 leading-relaxed">{result.phoneticAnalysis}</p>
+                                        <p className="text-sm text-slate-300 leading-relaxed">{result.phoneticAnalysis}</p>
                                     </div>
 
                                     {/* Semantic Analysis */}
-                                    <div className="rounded-xl border border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-transparent p-4">
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <BookOpen size={16} className="text-purple-400" />
-                                            <span className="text-xs text-slate-400 uppercase tracking-wider">ความหมายเชิงสัญลักษณ์ (Semantics)</span>
+                                    <div className="rounded-2xl border border-white/5 bg-white/5 p-5 backdrop-blur-sm">
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <BookOpen size={16} className="text-amber-400" />
+                                            <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">ความหมายเชิงสัญลักษณ์ (Semantics)</span>
                                         </div>
-                                        <p className="text-sm text-slate-200 leading-relaxed">{result.semanticAnalysis}</p>
+                                        <p className="text-sm text-slate-300 leading-relaxed">{result.semanticAnalysis}</p>
                                     </div>
 
                                     {/* Name Energy Breakdown */}
-                                    <div className="rounded-xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/5 to-transparent p-4">
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <Zap size={16} className="text-emerald-400" />
-                                            <span className="text-xs text-slate-400 uppercase tracking-wider">พลังงานแต่ละพยางค์</span>
+                                    <div className="rounded-2xl border border-white/5 bg-white/5 p-5 backdrop-blur-sm">
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <Zap size={16} className="text-amber-400" />
+                                            <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">พลังงานแต่ละพยางค์</span>
                                         </div>
-                                        <p className="text-sm text-slate-200 leading-relaxed">{result.nameEnergyBreakdown}</p>
+                                        <p className="text-sm text-slate-300 leading-relaxed">{result.nameEnergyBreakdown}</p>
                                     </div>
 
                                     {/* Social Perception */}
-                                    <div className="rounded-xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 to-transparent p-4">
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <Users size={16} className="text-cyan-400" />
-                                            <span className="text-xs text-slate-400 uppercase tracking-wider">การรับรู้จากคนรอบข้าง</span>
+                                    <div className="rounded-2xl border border-white/5 bg-white/5 p-5 backdrop-blur-sm">
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <Users size={16} className="text-amber-400" />
+                                            <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">การรับรู้จากคนรอบข้าง</span>
                                         </div>
-                                        <p className="text-sm text-slate-200 leading-relaxed">{result.socialPerception}</p>
+                                        <p className="text-sm text-slate-300 leading-relaxed">{result.socialPerception}</p>
                                     </div>
 
                                     {/* ── NEW: Deep Analysis Sections ── */}
 
                                     {/* 📖 Meaning Breakdown */}
                                     {result.meaning && (
-                                        <div className="rounded-xl border border-amber-500/20 bg-gradient-to-br from-amber-500/5 to-transparent p-4">
-                                            <div className="flex items-center gap-2 mb-2">
+                                        <div className="rounded-2xl border border-white/5 bg-white/5 p-5 backdrop-blur-sm">
+                                            <div className="flex items-center gap-2 mb-3">
                                                 <BookOpen size={16} className="text-amber-400" />
-                                                <span className="text-xs text-slate-400 uppercase tracking-wider">📖 ถอดรหัสความหมายของชื่อ</span>
+                                                <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">📖 ถอดรหัสความหมายของชื่อ</span>
                                             </div>
                                             <p className="text-base font-semibold text-amber-200 mb-2">{result.meaning}</p>
                                             {result.meaningBreakdown && (
@@ -769,15 +772,15 @@ export default function ClientPage() {
 
                                     {/* 👤 Identity Analysis */}
                                     {result.identity && result.identity.length > 0 && (
-                                        <div className="rounded-xl border border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-transparent p-4">
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <User size={16} className="text-purple-400" />
-                                                <span className="text-xs text-slate-400 uppercase tracking-wider">👤 การวิเคราะห์ตัวตน (Identity)</span>
+                                        <div className="rounded-2xl border border-white/5 bg-white/5 p-5 backdrop-blur-sm">
+                                            <div className="flex items-center gap-2 mb-3">
+                                                <User size={16} className="text-amber-400" />
+                                                <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">👤 การวิเคราะห์ตัวตน (Identity)</span>
                                             </div>
                                             <ul className="space-y-1.5">
                                                 {result.identity.map((item, idx) => (
-                                                    <li key={idx} className="flex items-start gap-2 text-sm text-slate-200">
-                                                        <span className="text-purple-400 mt-1 flex-shrink-0">•</span>
+                                                    <li key={idx} className="flex items-start gap-2 text-sm text-slate-300">
+                                                        <span className="text-amber-400 mt-1 flex-shrink-0">•</span>
                                                         <span>{item}</span>
                                                     </li>
                                                 ))}
@@ -787,20 +790,20 @@ export default function ClientPage() {
 
                                     {/* ✨ Aura Colors */}
                                     {result.auraColors && result.auraColors.length > 0 && (
-                                        <div className="rounded-xl border border-violet-500/20 bg-gradient-to-br from-violet-500/5 to-transparent p-4">
-                                            <div className="flex items-center gap-2 mb-3">
-                                                <Sparkles size={16} className="text-violet-400" />
-                                                <span className="text-xs text-slate-400 uppercase tracking-wider">✨ การวิเคราะห์ออร่า (Aura & Energy)</span>
+                                        <div className="rounded-2xl border border-white/5 bg-white/5 p-5 backdrop-blur-sm">
+                                            <div className="flex items-center gap-2 mb-4">
+                                                <Sparkles size={16} className="text-amber-400" />
+                                                <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">✨ การวิเคราะห์ออร่า (Aura & Energy)</span>
                                             </div>
                                             <div className="space-y-3">
                                                 {result.auraColors.map((aura, idx) => (
-                                                    <div key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-white/[0.03] border border-white/5">
+                                                    <div key={idx} className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
                                                         <span className="text-2xl flex-shrink-0">{aura.emoji}</span>
                                                         <div>
-                                                            <p className="text-sm font-semibold text-violet-200">
+                                                            <p className="text-sm font-semibold text-amber-200 tracking-tight">
                                                                 {idx === 0 ? 'ออร่าหลัก' : 'ออร่ารอง'}: {aura.color}
                                                             </p>
-                                                            <p className="text-xs text-slate-400 mt-0.5">{aura.meaning}</p>
+                                                            <p className="text-xs text-slate-400 mt-1 leading-relaxed">{aura.meaning}</p>
                                                         </div>
                                                     </div>
                                                 ))}
@@ -810,27 +813,27 @@ export default function ClientPage() {
 
                                     {/* 🤝 Relationship */}
                                     {result.relationship && (
-                                        <div className="rounded-xl border border-rose-500/20 bg-gradient-to-br from-rose-500/5 to-transparent p-4">
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <Heart size={16} className="text-rose-400" />
-                                                <span className="text-xs text-slate-400 uppercase tracking-wider">🤝 ด้านความรักและความสัมพันธ์</span>
+                                        <div className="rounded-2xl border border-white/5 bg-white/5 p-5 backdrop-blur-sm">
+                                            <div className="flex items-center gap-2 mb-3">
+                                                <Heart size={16} className="text-amber-400" />
+                                                <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">🤝 ด้านความรักและความสัมพันธ์</span>
                                             </div>
-                                            <p className="text-sm text-slate-200 leading-relaxed">{result.relationship}</p>
+                                            <p className="text-sm text-slate-300 leading-relaxed">{result.relationship}</p>
                                         </div>
                                     )}
 
                                     {/* 🔢 Numerology */}
                                     {result.numerologyTotal > 0 && (
-                                        <div className="rounded-xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/5 to-transparent p-4">
-                                            <div className="flex items-center justify-between mb-2">
+                                        <div className="rounded-2xl border border-white/5 bg-white/5 p-5 backdrop-blur-sm">
+                                            <div className="flex items-center justify-between mb-3">
                                                 <div className="flex items-center gap-2">
-                                                    <Hash size={16} className="text-emerald-400" />
-                                                    <span className="text-xs text-slate-400 uppercase tracking-wider">🔢 พลังงานตัวเลข (Numerology)</span>
+                                                    <Hash size={16} className="text-amber-400" />
+                                                    <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">🔢 พลังงานตัวเลข (Numerology)</span>
                                                 </div>
-                                                <span className="text-lg font-bold text-emerald-300">{result.numerologyTotal}</span>
+                                                <span className="text-lg font-bold text-amber-400">{result.numerologyTotal}</span>
                                             </div>
                                             {result.numerologyMeaning && (
-                                                <p className="text-sm text-slate-200 leading-relaxed">{result.numerologyMeaning}</p>
+                                                <p className="text-sm text-slate-300 leading-relaxed">{result.numerologyMeaning}</p>
                                             )}
                                         </div>
                                     )}

@@ -378,7 +378,7 @@ export default function PremiumAnalysisPage() {
                                 <div className="flex items-center gap-3 mb-4">
                                     <div className={`px-3 py-1 rounded-lg text-xs font-bold font-mono border ${isPremium
                                         ? 'bg-amber-950/40 text-amber-300 border-amber-500/30'
-                                        : 'bg-slate-800 text-slate-400 border-slate-700'
+                                        : 'bg-white/5 text-slate-400 border-white/10'
                                         }`}>
                                         Grade {result.grade}
                                     </div>
@@ -536,8 +536,8 @@ export default function PremiumAnalysisPage() {
                                     {/* Tooltip for birth time */}
                                     <div className="relative group/tooltip">
                                         <Info size={14} className="text-slate-400 hover:text-amber-400 cursor-help transition-colors" />
-                                        <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-64 p-3 bg-slate-800 border border-amber-500/20 rounded-xl text-xs text-slate-300 opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all z-50 shadow-xl">
-                                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-slate-800 border-r border-b border-amber-500/20 rotate-45"></div>
+                                        <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-64 p-3 bg-slate-900/90 backdrop-blur-xl border border-amber-500/20 rounded-xl text-xs text-slate-300 opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all z-50 shadow-2xl">
+                                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-slate-900 border-r border-b border-amber-500/20 rotate-45"></div>
                                             <p className="leading-relaxed">
                                                 <strong className="text-amber-400">การระบุเวลาเกิด</strong> จะช่วยให้คำนวณลัคนาราศีได้แม่นยำขึ้น หากไม่ทราบให้เลือก &quot;ไม่ทราบเวลา&quot;
                                             </p>
@@ -636,7 +636,7 @@ export default function PremiumAnalysisPage() {
                                     {/* Icon Box */}
                                     <div className={`p-2.5 md:p-3 rounded-lg md:rounded-xl transition-all duration-300 shrink-0 ${isActive
                                         ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-[#140f0a] shadow-[0_0_15px_rgba(245,158,11,0.4)]'
-                                        : 'bg-slate-800 text-slate-400 group-hover:text-amber-300 group-hover:bg-slate-700'
+                                        : 'bg-white/5 text-slate-400 group-hover:text-amber-300 group-hover:bg-white/10'
                                         }`}>
                                         {React.cloneElement(option.icon as React.ReactElement<{ size: number }>, { size: 24 })}
                                     </div>

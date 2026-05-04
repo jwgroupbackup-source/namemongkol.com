@@ -474,7 +474,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
     };
 
     return (
-        <div className="w-full max-w-[1400px] px-4 pt-24 md:pt-32 pb-28 min-h-screen bg-[#0f172a] text-slate-200">
+        <div className="w-full max-w-[1400px] px-4 pt-24 md:pt-32 pb-28 min-h-screen bg-[#050b14] text-slate-200">
             <div className="max-w-7xl mx-auto space-y-8">
 
                 {/* Header */}
@@ -490,7 +490,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
 
                     {/* Main Tabs + Share */}
                     <div className="flex items-center gap-3 flex-wrap">
-                        <div className="flex bg-slate-900/80 p-1.5 rounded-2xl border border-white/10 w-fit">
+                        <div className="flex bg-white/5 backdrop-blur-md p-1.5 rounded-2xl border border-white/10 w-fit">
                             <button
                                 onClick={() => navigateTab('collection')}
                                 className={`px-6 py-3 rounded-xl text-sm font-bold whitespace-nowrap transition-all flex items-center gap-2 ${activeTab === 'collection'
@@ -542,7 +542,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                         className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                                             selectedCategory === 'day'
                                                 ? 'bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border border-amber-500/40 shadow-lg shadow-amber-500/10'
-                                                : 'bg-slate-800/50 text-slate-400 border border-white/10 hover:text-white hover:border-white/20'
+                                                : 'bg-white/5 text-slate-400 border border-white/10 hover:text-white hover:bg-white/10'
                                         }`}
                                     >
                                         <Sun size={16} />
@@ -553,7 +553,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                         className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                                             selectedCategory === 'zodiac'
                                                 ? 'bg-gradient-to-r from-purple-500/20 to-indigo-500/20 text-purple-300 border border-purple-500/40 shadow-lg shadow-purple-500/10'
-                                                : 'bg-slate-800/50 text-slate-400 border border-white/10 hover:text-white hover:border-white/20'
+                                                : 'bg-white/5 text-slate-400 border border-white/10 hover:text-white hover:bg-white/10'
                                         }`}
                                     >
                                         <Star size={16} />
@@ -563,7 +563,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
 
                                 {/* Day Filter - show when 'day' category is selected */}
                                 {selectedCategory === 'day' && (
-                                    <div className="flex bg-slate-900/50 p-1.5 rounded-xl border border-white/10 overflow-x-auto max-w-full no-scrollbar w-fit">
+                                    <div className="flex bg-white/5 backdrop-blur-md p-1.5 rounded-xl border border-white/10 overflow-x-auto max-w-full no-scrollbar w-fit">
                                         {DAYS.map((d) => (
                                             <button
                                                 key={d.value}
@@ -581,7 +581,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
 
                                 {/* Zodiac Filter - show when 'zodiac' category is selected */}
                                 {selectedCategory === 'zodiac' && (
-                                    <div className="flex bg-slate-900/50 p-1.5 rounded-xl border border-white/10 overflow-x-auto max-w-full no-scrollbar">
+                                    <div className="flex bg-white/5 backdrop-blur-md p-1.5 rounded-xl border border-white/10 overflow-x-auto max-w-full no-scrollbar">
                                         {ZODIAC_SIGNS.map((z) => (
                                             <button
                                                 key={z.value}
@@ -613,7 +613,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         whileHover={{ y: -5 }}
-                                        className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-slate-900 border border-white/10 hover:border-amber-500/50 transition-all duration-300 shadow-xl cursor-pointer"
+                                        className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md border border-white/10 hover:border-amber-500/50 transition-all duration-300 shadow-xl cursor-pointer"
                                         onClick={() => setSelectedWallpaper(wp)}
                                     >
                                         <Image
@@ -673,7 +673,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="relative w-full max-w-sm md:max-w-5xl h-[85vh] md:h-[80vh] bg-slate-900 border border-white/10 rounded-3xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
+                            className="relative w-full max-w-sm md:max-w-5xl h-[85vh] md:h-[80vh] bg-slate-900/90 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
                             onClick={e => e.stopPropagation()}
                         >
                             {/* Image Section */}
@@ -712,7 +712,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                             </div>
 
                             {/* Content Section */}
-                            <div className="flex-1 flex flex-col justify-between p-6 md:p-10 bg-slate-900/95 md:border-l border-white/5 overflow-y-auto">
+                            <div className="flex-1 flex flex-col justify-between p-6 md:p-10 bg-transparent md:border-l border-white/5 overflow-y-auto">
                                 <div className="space-y-4">
                                     <div>
                                         <div className="flex items-center gap-2 mb-3">

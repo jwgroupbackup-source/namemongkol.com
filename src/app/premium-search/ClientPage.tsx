@@ -85,7 +85,7 @@ function ScoreDropdown({
                 type="button"
                 disabled={disabled}
                 onClick={() => setOpen(v => !v)}
-                className={`block w-full px-4 py-4 bg-black/40 border border-white/10 rounded-xl text-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all cursor-pointer font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed text-left flex items-center justify-between ${open ? 'rounded-b-none border-b-white/5' : ''
+                className={`block w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all cursor-pointer font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed text-left flex items-center justify-between ${open ? 'rounded-b-none border-b-white/5' : ''
                     }`}
             >
                 <span>{selectedLabel}</span>
@@ -95,7 +95,7 @@ function ScoreDropdown({
 
 
             {open && (
-                <div className="absolute left-0 right-0 top-full mt-0 z-[200] max-h-80 overflow-y-auto bg-[#0c1224] border border-white/10 border-t-0 rounded-xl rounded-t-none shadow-[0_20px_60px_rgba(0,0,0,0.45)] custom-scrollbar">
+                <div className="absolute left-0 right-0 top-full mt-0 z-[200] max-h-80 overflow-y-auto bg-slate-900/90 backdrop-blur-xl border border-white/10 border-t-0 rounded-xl rounded-t-none shadow-2xl custom-scrollbar">
                     <button
                         type="button"
                         onClick={() => {
@@ -103,7 +103,7 @@ function ScoreDropdown({
                             setOpen(false);
                         }}
                         className={`w-full px-4 py-3 text-left transition-colors border-b border-white/5 ${value === ''
-                            ? 'bg-[#1d4ed8] text-white'
+                            ? 'bg-emerald-500/20 text-emerald-300'
                             : 'text-slate-200 hover:bg-white/5 hover:text-white'
                             }`}
                     >
@@ -120,7 +120,7 @@ function ScoreDropdown({
                                     setOpen(false);
                                 }}
                                 className={`w-full px-4 py-3 text-left transition-colors border-b border-white/5 last:border-0 flex items-center justify-between group/item ${value === score.toString()
-                                    ? 'bg-[#1d4ed8]/20 text-white'
+                                    ? 'bg-emerald-500/20 text-emerald-300'
                                     : 'text-slate-200 hover:bg-white/5 hover:text-white'
                                     }`}
                             >
@@ -412,18 +412,18 @@ export default function PremiumSearchPage() {
                             <Sparkles size={14} />
                             <span>{t('pages.premiumSearch.headerBadge')}</span>
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 via-teal-200 to-emerald-300 drop-shadow-[0_0_15px_rgba(52,211,153,0.3)]">
+                        <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 via-teal-200 to-emerald-300 drop-shadow-2xl tracking-tight leading-tight">
                             {t('pages.premiumSearch.headerTitle')}
                         </h1>
-                        <div className="max-w-2xl mx-auto space-y-2">
-                            <p className="text-slate-400">
+                        <div className="max-w-[65ch] mx-auto space-y-2">
+                            <p className="text-slate-400 leading-relaxed">
                                 {t('pages.premiumSearch.headerDesc').replace('{count}', allNames.length.toLocaleString())}
                             </p>
                             <p className="text-emerald-300 font-medium text-lg">
                                 {t('pages.premiumSearch.headerSub')}
                             </p>
 
-                            <div className="mt-4 mx-auto w-fit bg-[#0F1C2E] border border-emerald-500/30 rounded-xl px-6 py-3 shadow-lg shadow-emerald-900/20">
+                            <div className="mt-4 mx-auto w-fit bg-emerald-500/10 border border-emerald-500/30 rounded-xl px-6 py-3 shadow-lg shadow-emerald-900/20 backdrop-blur-md">
                                 <p className="text-emerald-400 font-medium text-sm md:text-base">
                                     {t('pages.premiumSearch.headerHint')}{' '}
                                     <Link href="/" className="underline decoration-emerald-500/50 hover:text-emerald-300 transition-colors">{t('sidebar.analyzeName')}</Link>
@@ -451,7 +451,7 @@ export default function PremiumSearchPage() {
                                             setSelectedDay(newVal);
                                             if (newVal === 'All') setLeadingCharType('Any');
                                         }}
-                                        className="block w-full px-4 py-4 bg-black/40 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="block w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                                         disabled={isLoading}
                                     >
                                         {dayOptions.map(day => (
@@ -477,7 +477,7 @@ export default function PremiumSearchPage() {
                                     <select
                                         value={selectedGender}
                                         onChange={(e) => setSelectedGender(e.target.value)}
-                                        className="block w-full px-4 py-4 bg-black/40 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="block w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                                         disabled={isLoading}
                                     >
                                         <option value="all" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderAll')}</option>
@@ -612,7 +612,7 @@ export default function PremiumSearchPage() {
                             </div>
 
                             {/* Tip Match Image */}
-                            <div className="mx-4 bg-[#0F1C2E] border border-emerald-500/30 rounded-xl p-4 flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/20">
+                            <div className="mx-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4 flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/20 backdrop-blur-md">
                                 <p className="text-emerald-400 font-medium text-sm md:text-base">
                                     {t('pages.premiumSearch.results.tip')}{' '}
                                     <Link href="/" className="underline decoration-emerald-500/50 hover:text-emerald-300 transition-colors">{t('sidebar.analyzeName')}</Link>
