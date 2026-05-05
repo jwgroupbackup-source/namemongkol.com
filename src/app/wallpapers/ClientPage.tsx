@@ -49,6 +49,19 @@ const DAYS = [
     { value: 'saturday', label: 'วันเสาร์' },
 ];
 
+// Day color dots — brand color per day
+const DAY_COLORS: Record<string, string> = {
+    all: 'bg-amber-500',
+    sunday: 'bg-red-500',
+    monday: 'bg-yellow-400',
+    tuesday: 'bg-pink-500',
+    wednesday: 'bg-green-500',
+    wednesday_night: 'bg-emerald-800 ring-1 ring-emerald-500',
+    thursday: 'bg-orange-500',
+    friday: 'bg-blue-500',
+    saturday: 'bg-purple-500',
+};
+
 // Zodiac categories
 type CategoryType = 'day' | 'zodiac';
 
@@ -194,6 +207,19 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
             window.removeEventListener('force_credits_update', handleCreditUpdate);
         };
     }, [fetchUserCredits]);
+
+    // ESC key closes the detail panel
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setSelectedWallpaper(null);
+        };
+        if (selectedWallpaper) {
+            document.addEventListener('keydown', handleKeyDown);
+        }
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [selectedWallpaper]);
 
     const filteredWallpapers = wallpapers.filter(wp =>
         selectedDay === 'all' || wp.day === selectedDay || wp.day === 'all'
@@ -480,7 +506,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                 {/* Header */}
                 <div className="flex flex-col gap-4">
                     <div>
-                        <h1 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200 animate-gradient-x mb-2">
+                        <h1 className="text-3xl md:text-5xl font-bold text-amber-200 mb-2">
                             วอลเปเปอร์มงคล เสริมดวงชะตา บารมี และโชคลาภ
                         </h1>
                         <p className="text-slate-400">
@@ -490,12 +516,12 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
 
                     {/* Main Tabs + Share */}
                     <div className="flex items-center gap-3 flex-wrap">
-                        <div className="flex bg-white/5 backdrop-blur-md p-1.5 rounded-2xl border border-white/10 w-fit">
+                        <div className="flex bg-slate-800 p-1.5 rounded-2xl border border-white/10 w-fit">
                             <button
                                 onClick={() => navigateTab('collection')}
                                 className={`px-6 py-3 rounded-xl text-sm font-bold whitespace-nowrap transition-all flex items-center gap-2 ${activeTab === 'collection'
-                                    ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-lg shadow-amber-500/20'
-                                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                                    ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
+                                    : 'text-slate-400 hover:text-white hover:bg-slate-700'
                                     }`}
                             >
                                 <ImageIcon size={18} />
@@ -504,8 +530,8 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                             <button
                                 onClick={() => navigateTab('custom')}
                                 className={`px-6 py-3 rounded-xl text-sm font-bold whitespace-nowrap transition-all flex items-center gap-2 ${activeTab === 'custom'
-                                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/20'
-                                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                                    ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/20'
+                                    : 'text-slate-400 hover:text-white hover:bg-slate-700'
                                     }`}
                             >
                                 <Palette size={18} />
@@ -516,7 +542,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                         {/* Share / Copy Link */}
                         <button
                             onClick={handleCopyLink}
-                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white transition-all"
+                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-800 border border-white/10 text-slate-300 hover:bg-slate-700 hover:text-white transition-all"
                         >
                             {showCopied ? <Check size={16} className="text-emerald-400" /> : <Share2 size={16} />}
                             {showCopied ? 'คัดลอกแล้ว!' : 'แชร์ลิงก์หมวดนี้'}
@@ -541,38 +567,39 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                         onClick={() => navigateCategory('day')}
                                         className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                                             selectedCategory === 'day'
-                                                ? 'bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border border-amber-500/40 shadow-lg shadow-amber-500/10'
-                                                : 'bg-white/5 text-slate-400 border border-white/10 hover:text-white hover:bg-white/10'
+                                                ? 'bg-amber-500/15 text-amber-300 border border-amber-500/40'
+                                                : 'bg-slate-800 text-slate-400 border border-white/10 hover:text-white hover:bg-slate-700'
                                         }`}
                                     >
                                         <Sun size={16} />
-                                        ตามวันเกิด
+                                        วันเกิด
                                     </button>
                                     <button
                                         onClick={() => navigateCategory('zodiac')}
                                         className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                                             selectedCategory === 'zodiac'
-                                                ? 'bg-gradient-to-r from-purple-500/20 to-indigo-500/20 text-purple-300 border border-purple-500/40 shadow-lg shadow-purple-500/10'
-                                                : 'bg-white/5 text-slate-400 border border-white/10 hover:text-white hover:bg-white/10'
+                                                ? 'bg-purple-500/15 text-purple-300 border border-purple-500/40'
+                                                : 'bg-slate-800 text-slate-400 border border-white/10 hover:text-white hover:bg-slate-700'
                                         }`}
                                     >
                                         <Star size={16} />
-                                        ตามราศี
+                                        ราศี
                                     </button>
                                 </div>
 
                                 {/* Day Filter - show when 'day' category is selected */}
                                 {selectedCategory === 'day' && (
-                                    <div className="flex bg-white/5 backdrop-blur-md p-1.5 rounded-xl border border-white/10 overflow-x-auto max-w-full no-scrollbar w-fit">
+                                    <div className="flex bg-slate-800/80 p-1.5 rounded-xl border border-white/10 overflow-x-auto max-w-full no-scrollbar w-fit">
                                         {DAYS.map((d) => (
                                             <button
                                                 key={d.value}
                                                 onClick={() => navigateDay(d.value)}
-                                                className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${selectedDay === d.value
-                                                    ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-lg shadow-amber-500/20'
-                                                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                                                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${selectedDay === d.value
+                                                    ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
+                                                    : 'text-slate-400 hover:text-white hover:bg-slate-700'
                                                     }`}
                                             >
+                                                <span className={`w-2 h-2 rounded-full flex-shrink-0 ${DAY_COLORS[d.value] ?? 'bg-slate-500'}`} />
                                                 {d.label}
                                             </button>
                                         ))}
@@ -581,14 +608,14 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
 
                                 {/* Zodiac Filter - show when 'zodiac' category is selected */}
                                 {selectedCategory === 'zodiac' && (
-                                    <div className="flex bg-white/5 backdrop-blur-md p-1.5 rounded-xl border border-white/10 overflow-x-auto max-w-full no-scrollbar">
+                                    <div className="flex bg-slate-800/80 p-1.5 rounded-xl border border-white/10 overflow-x-auto max-w-full no-scrollbar">
                                         {ZODIAC_SIGNS.map((z) => (
                                             <button
                                                 key={z.value}
                                                 onClick={() => navigateZodiac(z.value)}
                                                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${selectedZodiac === z.value
-                                                    ? 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-lg shadow-purple-500/20'
-                                                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                                                    ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/20'
+                                                    : 'text-slate-400 hover:text-white hover:bg-slate-700'
                                                     }`}
                                             >
                                                 <span className="text-base">{z.emoji}</span>
@@ -600,50 +627,61 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                             </div>
 
                             {selectedCategory === 'day' && loading && (
-                                <div className="flex items-center justify-center py-4">
-                                    <span className="animate-pulse text-slate-400">กำลังโหลดข้อมูล...</span>
+                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
+                                    {Array.from({ length: 6 }).map((_, i) => (
+                                        <div key={i} className="aspect-[9/16] rounded-2xl bg-slate-800 animate-pulse" />
+                                    ))}
                                 </div>
                             )}
 
                             {/* Grid */}
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
-                                {(selectedCategory === 'day' ? filteredWallpapers : filteredZodiacWallpapers).map((wp) => (
+                                {(selectedCategory === 'day' ? filteredWallpapers : filteredZodiacWallpapers).map((wp, idx) => {
+                                    // Featured card: first card shown when "ทั้งหมด" is selected and is the top-download special card
+                                    const isFeatured =
+                                        idx === 0 &&
+                                        ((selectedCategory === 'day' && selectedDay === 'all' && wp.day === 'all') ||
+                                         (selectedCategory === 'zodiac' && selectedZodiac === 'all'));
+                                    return (
                                     <motion.div
                                         key={wp.id}
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
-                                        whileHover={{ y: -5 }}
-                                        className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md border border-white/10 hover:border-amber-500/50 transition-all duration-300 shadow-xl cursor-pointer"
+                                        whileHover={{ y: -4 }}
+                                        className={`group relative rounded-2xl overflow-hidden bg-slate-800 border border-white/10 hover:border-amber-500/50 transition-all duration-300 shadow-xl cursor-pointer ${isFeatured ? 'col-span-2 row-span-2 aspect-auto' : 'aspect-[9/16]'}`}
                                         onClick={() => setSelectedWallpaper(wp)}
                                     >
                                         <Image
                                             src={wp.image}
                                             alt={`วอลเปเปอร์มงคล${wp.day === 'wednesday' ? 'วันพุธกลางวัน' : wp.day === 'wednesday_night' ? 'วันพุธกลางคืน' : ''} ${wp.name} เสริมดวง${wp.tags.join(' ')}`}
                                             fill
-                                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 20vw, 16vw"
-                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                            sizes={isFeatured ? "(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 40vw" : "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 20vw, 16vw"}
+                                            className="object-cover transition-transform duration-700 group-hover:scale-105"
                                         />
 
                                         {/* Overlay */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80" />
 
-                                        {/* Tags */}
+                                        {/* Badges */}
                                         <div className="absolute top-2 right-2 flex flex-col items-end gap-1">
                                             {wp.premium && (
                                                 <span className="bg-amber-500 text-black text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg flex items-center gap-1">
-                                                    <Lock size={8} /> PREMIUM
+                                                    <Lock size={8} /> {getWallpaperCost(wp)} เครดิต
                                                 </span>
                                             )}
-                                            <span className="bg-black/50 backdrop-blur-md text-white/80 text-[10px] font-medium px-2 py-1 rounded-full flex items-center gap-1">
+                                            <span className="bg-black/60 text-white/80 text-[10px] font-medium px-2 py-1 rounded-full flex items-center gap-1">
                                                 <Download size={8} /> {wp.downloads.toLocaleString()}
                                             </span>
                                         </div>
 
                                         {/* Content */}
                                         <div className="absolute bottom-0 left-0 w-full p-3">
-                                            <h3 className="text-white font-bold text-sm line-clamp-1 mb-1">{wp.name}</h3>
+                                            <h3 className={`text-white font-bold line-clamp-1 mb-1 ${isFeatured ? 'text-base' : 'text-sm'}`}>{wp.name}</h3>
+                                            {isFeatured && wp.description && (
+                                                <p className="text-slate-300 text-xs line-clamp-2 mb-2 leading-relaxed">{wp.description.slice(0, 80)}…</p>
+                                            )}
                                             <div className="flex flex-wrap gap-1">
-                                                {wp.tags.map(t => (
+                                                {wp.tags.slice(0, isFeatured ? 4 : 3).map(t => (
                                                     <span key={t} className="text-[9px] text-slate-300 bg-white/10 px-1.5 py-0.5 rounded-md">
                                                         #{t}
                                                     </span>
@@ -651,8 +689,17 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                             </div>
                                         </div>
                                     </motion.div>
-                                ))}
+                                    );
+                                })}
                             </div>
+
+                            {/* Empty state */}
+                            {!loading && (selectedCategory === 'day' ? filteredWallpapers : filteredZodiacWallpapers).length === 0 && (
+                                <div className="flex flex-col items-center justify-center py-20 text-center gap-3">
+                                    <ImageIcon size={36} className="text-slate-700" />
+                                    <p className="text-slate-500 text-sm">ยังไม่มีวอลเปเปอร์ในหมวดนี้</p>
+                                </div>
+                            )}
                         </motion.div>
                     ) : (
                         <motion.div
@@ -667,138 +714,138 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                     )}
                 </AnimatePresence>
 
-                {/* Modal - Only show in collection tab */}
+                {/* Slide-in Detail Panel - right side */}
+                <AnimatePresence>
                 {activeTab === 'collection' && selectedWallpaper && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm" onClick={() => setSelectedWallpaper(null)}>
+                    <>
+                        {/* Backdrop */}
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="relative w-full max-w-sm md:max-w-5xl h-[85vh] md:h-[80vh] bg-slate-900/90 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
-                            onClick={e => e.stopPropagation()}
+                            key="panel-backdrop"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="fixed inset-0 bg-black/60 z-40"
+                            onClick={() => setSelectedWallpaper(null)}
+                        />
+
+                        {/* Panel */}
+                        <motion.div
+                            key="panel"
+                            initial={{ x: '100%' }}
+                            animate={{ x: 0 }}
+                            exit={{ x: '100%' }}
+                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                            className="fixed top-0 right-0 h-full w-full max-w-xs sm:max-w-sm z-50 bg-slate-900 border-l border-white/10 flex flex-col overflow-y-auto shadow-2xl"
                         >
-                            {/* Image Section */}
-                            <div className="relative w-full h-[55%] md:h-full md:w-1/2 bg-black flex items-center justify-center overflow-hidden group">
-                                {/* Blur Background - decorative, same as main image */}
-                                <div className="absolute inset-0 opacity-30 blur-xl scale-110" aria-hidden="true">
-                                    <Image
-                                        src={selectedWallpaper.image}
-                                        alt=""
-                                        role="presentation"
-                                        aria-hidden="true"
-                                        fill
-                                        sizes="(max-width: 768px) 100vw, 50vw"
-                                        className="object-cover"
-                                    />
-                                </div>
-
-                                {/* Main Image */}
-                                <div className="relative w-full h-full p-4 md:p-6 transition-transform duration-500 group-hover:scale-105">
-                                    <Image
-                                        src={selectedWallpaper.image}
-                                        alt={`วอลเปเปอร์มงคล ${selectedWallpaper.name} เสริมดวง${selectedWallpaper.tags.join(' ')} NameMongkol`}
-                                        fill
-                                        sizes="(max-width: 768px) 100vw, 50vw"
-                                        className="object-contain drop-shadow-2xl"
-                                    />
-                                </div>
-
+                            {/* Close */}
+                            <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 flex-shrink-0">
+                                <span className="text-xs text-slate-500 font-medium uppercase tracking-wide">รายละเอียด</span>
                                 <button
                                     onClick={() => setSelectedWallpaper(null)}
-                                    className="absolute top-4 right-4 z-20 p-2 bg-black/50 text-white rounded-full hover:bg-white/20 backdrop-blur-md transition-colors border border-white/10"
+                                    className="p-1.5 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                                    aria-label="ปิด"
                                 >
-                                    <span className="sr-only">Close</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                                 </button>
                             </div>
 
-                            {/* Content Section */}
-                            <div className="flex-1 flex flex-col justify-between p-6 md:p-10 bg-transparent md:border-l border-white/5 overflow-y-auto">
-                                <div className="space-y-4">
-                                    <div>
-                                        <div className="flex items-center gap-2 mb-3">
-                                            {selectedWallpaper.premium ? (
-                                                <span className="bg-amber-500 text-black text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 w-fit">
-                                                    <Lock size={10} /> PREMIUM
-                                                </span>
-                                            ) : (
-                                                <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 w-fit border border-emerald-500/20">
-                                                    <Sparkles size={10} /> FREE
-                                                </span>
-                                            )}
-                                            <span className="text-xs text-slate-400 font-medium px-2 py-0.5 bg-white/5 rounded-full border border-white/5 uppercase">
-                                                {selectedWallpaper.day === 'all' ? 'All Days' : selectedWallpaper.day}
-                                            </span>
-                                            <span className="text-xs text-slate-400 font-medium px-2 py-0.5 bg-white/5 rounded-full border border-white/5 flex items-center gap-1">
-                                                <Download size={10} /> {selectedWallpaper.downloads.toLocaleString()} ครั้ง
-                                            </span>
-                                        </div>
-                                        <h2 className="text-xl md:text-3xl font-bold text-white mb-2 leading-tight">
-                                            {selectedWallpaper.name}
-                                        </h2>
-                                        <div className="flex flex-wrap gap-2 mt-3">
-                                            {selectedWallpaper.tags.map(t => (
-                                                <span key={t} className="text-xs md:text-sm text-slate-300 bg-white/5 px-2.5 py-1 rounded-lg border border-white/10">
-                                                    #{t}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
+                            {/* Image */}
+                            <div className="relative w-full aspect-[9/16] bg-black flex-shrink-0 overflow-hidden">
+                                <Image
+                                    src={selectedWallpaper.image}
+                                    alt={`วอลเปเปอร์มงคล ${selectedWallpaper.name} เสริมดวง${selectedWallpaper.tags.join(' ')} NameMongkol`}
+                                    fill
+                                    sizes="(max-width: 640px) 100vw, 384px"
+                                    className="object-contain"
+                                />
+                            </div>
 
-                                    <div className="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
-                                        <h4 className="text-sm font-bold text-amber-200 flex items-center gap-2">
-                                            <Sparkles size={14} /> คุณสมบัติมงคล
+                            {/* Info */}
+                            <div className="flex-1 flex flex-col px-5 py-5 space-y-4">
+                                {/* Badges */}
+                                <div className="flex items-center gap-2 flex-wrap">
+                                    {selectedWallpaper.premium ? (
+                                        <span className="bg-amber-500 text-black text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                                            <Lock size={10} /> {getWallpaperCost(selectedWallpaper)} เครดิต
+                                        </span>
+                                    ) : (
+                                        <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 border border-emerald-500/20">
+                                            <Sparkles size={10} /> ฟรี
+                                        </span>
+                                    )}
+                                    <span className="text-xs text-slate-500 flex items-center gap-1 px-2 py-0.5 bg-slate-800 rounded-full border border-white/5">
+                                        <Download size={10} /> {selectedWallpaper.downloads.toLocaleString()} ดาวน์โหลด
+                                    </span>
+                                </div>
+
+                                {/* Name */}
+                                <h2 className="text-lg font-bold text-white leading-tight">
+                                    {selectedWallpaper.name}
+                                </h2>
+
+                                {/* Description */}
+                                {selectedWallpaper.description && (
+                                    <div className="space-y-1.5">
+                                        <h4 className="text-xs font-bold text-amber-200 flex items-center gap-1.5">
+                                            <Sparkles size={12} /> คุณสมบัติมงคล
                                         </h4>
-                                        <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
-                                            {selectedWallpaper.description ? selectedWallpaper.description : `ภาพมงคลเสริมพลังด้าน ${selectedWallpaper.tags.join(' และ ')}
-                                            ออกแบบตามหลักทักษาและเลขศาสตร์เพื่อดึงดูดพลังงานบวกสูงสุด`}
+                                        <p className="text-xs text-slate-400 leading-relaxed">
+                                            {selectedWallpaper.description}
                                         </p>
                                     </div>
-                                </div>
+                                )}
 
-                                <div className="mt-6 pt-6 border-t border-white/5 space-y-4">
-                                    {selectedWallpaper.premium && (
-                                        <div className="flex justify-between items-center text-sm md:text-base">
-                                            <span className="text-slate-400">ราคาดาวน์โหลด</span>
-                                            <div className="text-right">
-                                                <span className="font-bold text-amber-500 text-xl">{getWallpaperCost(selectedWallpaper)}</span>
-                                                <span className="ml-1 text-xs text-slate-500">Credits</span>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    <button
-                                        onClick={() => handleDownload(selectedWallpaper)}
-                                        disabled={downloadingId === selectedWallpaper.id}
-                                        data-track="wallpapers.detail.download"
-                                        className={`w-full py-3.5 md:py-4 rounded-xl font-bold text-base md:text-lg flex items-center justify-center gap-2 transition-all ${
-                                            downloadingId === selectedWallpaper.id
-                                                ? 'opacity-80 cursor-not-allowed'
-                                                : 'hover:scale-[1.02] active:scale-[0.98]'
-                                        } ${selectedWallpaper.premium
-                                            ? 'bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black shadow-lg shadow-amber-500/20 ring-4 ring-amber-500/10'
-                                            : 'bg-white text-black hover:bg-slate-100 shadow-lg shadow-white/10'
-                                            }`}
-                                    >
-                                        {downloadingId === selectedWallpaper.id ? (
-                                            <>
-                                                <svg className="animate-spin h-5 w-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                                                </svg>
-                                                <span className="truncate">{downloadStep || 'กำลังดาวน์โหลด...'}</span>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Download size={20} />
-                                                {selectedWallpaper.premium ? `แลกด้วย ${getWallpaperCost(selectedWallpaper)} เครดิต` : 'ดาวน์โหลดฟรี'}
-                                            </>
-                                        )}
-                                    </button>
+                                {/* Tags */}
+                                <div className="flex flex-wrap gap-1.5">
+                                    {selectedWallpaper.tags.map(t => (
+                                        <span key={t} className="text-[10px] text-slate-300 bg-slate-800 px-2 py-0.5 rounded-lg border border-white/10">
+                                            #{t}
+                                        </span>
+                                    ))}
                                 </div>
                             </div>
+
+                            {/* CTA Footer */}
+                            <div className="flex-shrink-0 px-5 pb-6 pt-4 border-t border-white/10 space-y-3">
+                                {userCredits !== null && (
+                                    <p className="text-xs text-slate-500 text-right">
+                                        เครดิตของคุณ: <span className="text-amber-400 font-bold">{userCredits.toLocaleString()}</span>
+                                    </p>
+                                )}
+                                <button
+                                    onClick={() => handleDownload(selectedWallpaper)}
+                                    disabled={downloadingId === selectedWallpaper.id}
+                                    data-track="wallpapers.detail.download"
+                                    className={`w-full py-3.5 rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-all ${
+                                        downloadingId === selectedWallpaper.id
+                                            ? 'opacity-70 cursor-not-allowed'
+                                            : 'hover:scale-[1.02] active:scale-[0.98]'
+                                    } ${selectedWallpaper.premium
+                                        ? 'bg-amber-500 hover:bg-amber-400 text-black shadow-lg shadow-amber-500/20'
+                                        : 'bg-white text-black hover:bg-slate-100 shadow-lg shadow-white/10'
+                                    }`}
+                                >
+                                    {downloadingId === selectedWallpaper.id ? (
+                                        <>
+                                            <svg className="animate-spin h-5 w-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                            </svg>
+                                            <span>{downloadStep || 'กำลังดาวน์โหลด...'}</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Download size={18} />
+                                            {selectedWallpaper.premium ? `แลก ${getWallpaperCost(selectedWallpaper)} เครดิต` : 'ดาวน์โหลดฟรี'}
+                                        </>
+                                    )}
+                                </button>
+                            </div>
                         </motion.div>
-                    </div>
+                    </>
                 )}
+                </AnimatePresence>
             </div>
         </div>
     );
