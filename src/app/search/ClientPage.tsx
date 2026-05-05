@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 
 import { calculateScore } from '@/utils/numerologyUtils';
 import { getDayFromName, analyzeNameSuitability } from '@/utils/thaksaUtils';
+import { analyzeName } from '@/utils/nameAnalysis';
 import { thaksaConfig, DayKey } from '@/data/thaksa';
 import { getPrediction } from '@/utils/getPrediction';
 import { useLanguage } from '@/components/LanguageProvider';
@@ -29,12 +30,42 @@ const getDayBadgeProps = (d: string) => {
     return { label: d, className: 'bg-slate-500/15 text-slate-300 border border-slate-500/20' };
 };
 
+function GradeBadge({ grade }: { grade: 'A+' | 'A' | 'B' | 'C' }) {
+    if (grade === 'A+') {
+        return (
+            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold border bg-amber-500/20 text-amber-300 border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.15)]">
+                A+
+            </span>
+        );
+    }
+    if (grade === 'A') {
+        return (
+            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold border bg-emerald-500/20 text-emerald-300 border-emerald-500/30">
+                A
+            </span>
+        );
+    }
+    if (grade === 'B') {
+        return (
+            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold border bg-slate-500/15 text-slate-400 border-slate-500/20">
+                B
+            </span>
+        );
+    }
+    return (
+        <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold border bg-rose-500/15 text-rose-300 border-rose-500/20">
+            C
+        </span>
+    );
+}
+
 function NameRow({ name }: { name: string }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const day = getDayFromName(name);
     const score = calculateScore(name);
     // Always calculate to know if it's usable on multiple days
     const suitability = useMemo(() => analyzeNameSuitability(name), [name]);
+    const grade = useMemo((): 'A+' | 'A' | 'B' | 'C' => analyzeName(name)?.grade ?? 'B', [name]);
 
     return (
         <>
@@ -77,10 +108,13 @@ function NameRow({ name }: { name: string }) {
                         {score}
                     </span>
                 </td>
+                <td className="px-3 md:px-8 py-3 md:py-5 text-center">
+                    <GradeBadge grade={grade} />
+                </td>
             </tr>
             {isExpanded && suitability && (
                 <tr className="bg-white/[0.02] animate-fade-in">
-                    <td colSpan={3} className="p-0">
+                    <td colSpan={4} className="p-0">
                         <div className="px-4 md:px-8 py-4 md:py-6 space-y-3 md:space-y-4 border-b border-white/5 bg-gradient-to-b from-black/20 to-transparent shadow-inner">
                             <div className="flex items-start gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
                                 <div className="mt-1 min-w-[20px] md:min-w-[24px] text-emerald-400 p-1 rounded-full bg-emerald-500/10">
@@ -276,6 +310,23 @@ export default function SearchPage() {
             return true;
         }).map(item => item.name); // Return just names for display
     }, [selectedDay, selectedGender, selectedLetter, targetSum, names, loading]);
+
+    // Grade distribution across all filtered names (for banner + CTA)
+    const gradeStats = useMemo(() => {
+        if (filteredNames.length === 0) return null;
+        const counts: Record<string, number> = { 'A+': 0, 'A': 0, 'B': 0, 'C': 0 };
+        filteredNames.forEach(n => {
+            const g = analyzeName(n)?.grade ?? 'B';
+            counts[g] = (counts[g] || 0) + 1;
+        });
+        return counts;
+    }, [filteredNames]);
+
+    // Count A+ names hidden beyond visible rows (for teaser row)
+    const hiddenAplusCount = useMemo(() => {
+        if (filteredNames.length <= visibleCount) return 0;
+        return filteredNames.slice(visibleCount).filter(n => analyzeName(n)?.grade === 'A+').length;
+    }, [filteredNames, visibleCount]);
 
     // Reset to page 1 when filters change is now handled in event handlers
 
@@ -697,11 +748,60 @@ export default function SearchPage() {
                     </div>
                 </div>
 
-                {/* Helper / Recommendation */}
-                <div className="mb-6 bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 text-center">
-                    <p className="text-emerald-300 text-sm md:text-base font-medium">
-                        💡 {t('pages.search.helper')} <Link href="/" className="underline decoration-emerald-500/50 hover:text-emerald-200 transition-colors">{t('pages.search.links.l1Title')}</Link>
-                    </p>
+                {/* Grade Legend + CTA Banner */}
+                <div className="mb-6 space-y-3">
+                    {/* Grade legend strip */}
+                    <div className="flex flex-wrap items-center gap-2 md:gap-4 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs md:text-sm">
+                        <span className="text-slate-500 font-medium shrink-0">ระดับเกรด:</span>
+                        <span className="flex items-center gap-1.5">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-md font-bold border bg-amber-500/20 text-amber-300 border-amber-500/30 text-[11px]">A+</span>
+                            <span className="text-slate-400">เลขศาสตร์ดีเลิศ ทุกคู่มงคล</span>
+                        </span>
+                        <span className="text-slate-700 hidden md:inline">·</span>
+                        <span className="flex items-center gap-1.5">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-md font-bold border bg-emerald-500/20 text-emerald-300 border-emerald-500/30 text-[11px]">A</span>
+                            <span className="text-slate-400">เลขศาสตร์ดี ส่วนใหญ่มงคล</span>
+                        </span>
+                        <span className="text-slate-700 hidden md:inline">·</span>
+                        <span className="flex items-center gap-1.5">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-md font-semibold border bg-slate-500/15 text-slate-400 border-slate-500/20 text-[11px]">B</span>
+                            <span className="text-slate-400">ผ่านทักษา เลขศาสตร์ยังไม่เต็มระดับ</span>
+                        </span>
+                    </div>
+
+                    {/* CTA Banner — dynamic styling based on grade distribution */}
+                    {gradeStats && (() => {
+                        const total = filteredNames.length;
+                        const bCount = (gradeStats['B'] || 0) + (gradeStats['C'] || 0);
+                        const aplusCount = gradeStats['A+'] || 0;
+                        const isMostlyB = bCount > total * 0.5;
+
+                        return isMostlyB ? (
+                            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-500/30">
+                                <p className="text-amber-300 text-sm font-medium text-center sm:text-left">
+                                    ✨ มีชื่อเกรด A+ อีก <strong>{aplusCount}</strong> ชื่อที่ตรงเงื่อนไข ดูเฉพาะเกรด A+ และ A ได้ใน Premium Search
+                                </p>
+                                <Link
+                                    href="/premium-search"
+                                    className="shrink-0 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold transition-colors shadow-lg shadow-amber-500/20"
+                                >
+                                    ค้นหาชื่อมงคล Pro →
+                                </Link>
+                            </div>
+                        ) : (
+                            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10">
+                                <p className="text-slate-400 text-sm text-center sm:text-left">
+                                    🔒 ผลลัพธ์นี้รวมเกรด A+, A และ B &nbsp;|&nbsp; ดูเฉพาะเกรด A+ และ A ได้ใน Premium Search
+                                </p>
+                                <Link
+                                    href="/premium-search"
+                                    className="shrink-0 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors"
+                                >
+                                    ค้นหาชื่อมงคล Pro →
+                                </Link>
+                            </div>
+                        );
+                    })()}
                 </div>
 
                 {/* Results Table */}
@@ -712,6 +812,7 @@ export default function SearchPage() {
                                 <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase">{t('pages.search.table.name')}</th>
                                 <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase">{t('pages.search.table.day')}</th>
                                 <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase text-center">{t('pages.search.table.score')}</th>
+                                <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase text-center">เกรด</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5">
@@ -721,10 +822,25 @@ export default function SearchPage() {
                                         <NameRow key={index} name={name} />
                                     ))}
 
+                                    {/* Teaser row: show count of hidden A+ names to drive upgrade */}
+                                    {hiddenAplusCount > 0 && (
+                                        <tr className="bg-amber-500/5 border-t border-amber-500/10">
+                                            <td colSpan={4} className="px-4 py-3 text-center">
+                                                <Link
+                                                    href="/premium-search"
+                                                    className="inline-flex items-center gap-2 text-sm text-amber-400 hover:text-amber-300 transition-colors font-medium"
+                                                >
+                                                    ✨ มีชื่อเกรด A+ อีก <strong>{hiddenAplusCount}</strong> ชื่อที่ตรงเงื่อนไขของคุณใน Premium Search
+                                                    <span className="text-amber-500">→</span>
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    )}
+
                                     {/* Locked State / Load More Button */}
                                     {visibleCount < filteredNames.length && (
                                         <tr>
-                                            <td colSpan={3} className="p-0 relative h-32 overflow-hidden">
+                                            <td colSpan={4} className="p-0 relative h-32 overflow-hidden">
                                                 {/* Blurred content (fake rows) */}
                                                 <div className="absolute inset-0 w-full h-full blur-md opacity-30 select-none pointer-events-none flex flex-col gap-4 p-4">
                                                     <div className="h-10 bg-white/10 rounded-xl w-full"></div>
@@ -756,7 +872,7 @@ export default function SearchPage() {
                                 </>
                             ) : (
                                 <tr>
-                                    <td colSpan={3} className="px-8 py-16 text-center text-slate-500">
+                                    <td colSpan={4} className="px-8 py-16 text-center text-slate-500">
                                         <div className="flex flex-col items-center gap-3">
                                             <Sparkles className="w-8 h-8 opacity-20" />
                                             <span>{t('pages.search.empty')}</span>

@@ -430,6 +430,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                             const isActive = pathname === item.path;
                             const defaultLabel = t(item.nameKey, item.nameKey);
                             const proBadge = t('sidebar.proBadge', 'Pro');
+                            const basicBadge = t('sidebar.basicBadge', 'Basic');
                             const bulkBadge = t('sidebar.bulkBadge', 'Bulk');
                             const premiumBadge = t('sidebar.premiumBadge', 'Premium');
                             const premiumFeature = t('sidebar.premiumFeature', 'Premium Feature');
@@ -486,6 +487,13 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                                 {defaultLabel}
                                                 <span className="bg-emerald-500 text-black text-[10px] font-black px-1.5 py-0.5 rounded shadow-lg shadow-emerald-500/20">
                                                     {proBadge}
+                                                </span>
+                                            </span>
+                                        ) : item.path === '/search' ? (
+                                            <span className="flex items-center gap-2">
+                                                {defaultLabel}
+                                                <span className="bg-sky-500 text-black border border-sky-400/50 text-[10px] font-black px-1.5 py-0.5 rounded shadow-lg shadow-sky-500/25">
+                                                    {basicBadge}
                                                 </span>
                                             </span>
                                         ) : item.path === '/name-analysis' ? (

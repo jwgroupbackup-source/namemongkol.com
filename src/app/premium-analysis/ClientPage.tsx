@@ -411,6 +411,11 @@ export default function PremiumAnalysisPage() {
                 <p className="text-slate-400 text-sm max-w-2xl mx-auto">
                     รายชื่อเหล่านี้ถูกคัดสรรจากศาสตร์ทักษาปกรณ์และเลขศาสตร์ชั้นสูง โดยคำนวณจากวันเดือนปีเกิดและเวลาเกิดของท่านโดยเฉพาะ
                 </p>
+                <div className="flex items-center justify-center gap-2 mt-2">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold border bg-amber-500/15 text-amber-300 border-amber-500/25">
+                        ✦ ชื่อส่วนตัว — ไม่ใช่ผลการค้นหาทั่วไป
+                    </span>
+                </div>
             </div>
 
             {/* Results Grid */}
@@ -443,7 +448,7 @@ export default function PremiumAnalysisPage() {
                                         }`}>
                                         Grade {result.grade}
                                     </div>
-                                    {isPremium && <span className="text-[10px] text-amber-500 uppercase tracking-widest font-bold">Premium</span>}
+                                    {isPremium && <span className="text-[10px] text-amber-500 uppercase tracking-widest font-bold">เฉพาะสำหรับคุณ</span>}
                                 </div>
 
                                 <h3 className={`text-3xl font-bold mb-2 transition-colors ${isPremium ? 'text-white' : 'text-slate-200 group-hover:text-white'}`}>
