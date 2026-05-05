@@ -3,7 +3,7 @@ create table if not exists analysis_history (
   id uuid default gen_random_uuid() primary key,
   user_id uuid references auth.users not null,
   created_at timestamptz default now(),
-  type text check (type in ('premium_analysis', 'gacha', 'name_analysis', 'name_search')),
+  type text check (type in ('premium_analysis', 'gacha', 'name_search')),
   input_data jsonb, -- Stores surname, birthdate, focus, etc.
   result_data jsonb -- Stores the generated names and grades
 );

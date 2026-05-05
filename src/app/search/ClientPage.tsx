@@ -326,10 +326,10 @@ export default function SearchPage() {
                 return;
             }
 
-            const fetchLatestCredits = async () => {
+            const fetchLatestCredits = async (): Promise<{ total: number; tier: string } | null> => {
                 const { data, error } = await supabase
                     .from('user_profiles')
-                    .select('credits, welcome_credits, welcome_credits_granted_at')
+                    .select('tier, credits, welcome_credits, welcome_credits_granted_at')
                     .eq('id', user.id)
                     .maybeSingle();
 
@@ -347,16 +347,19 @@ export default function SearchPage() {
                         }
                     }
                     setUserCredits(total);
-                    return total;
+                    return {
+                        total,
+                        tier: (data.tier || 'free').toLowerCase()
+                    };
                 }
 
                 return null;
             };
 
             // Always refresh credits to avoid stale values
-            const latestCredits = await fetchLatestCredits();
+            const latestProfile = await fetchLatestCredits();
 
-            if (latestCredits === null) {
+            if (latestProfile === null) {
                 await Swal.fire({
                     title: 'ไม่สามารถดึงเครดิตได้',
                     text: 'กรุณาลองใหม่อีกครั้ง',
@@ -367,6 +370,8 @@ export default function SearchPage() {
                 });
                 return;
             }
+
+            const latestCredits = latestProfile.total;
 
             if (latestCredits < UNLOCK_COST) {
                 const result = await Swal.fire({
@@ -417,9 +422,40 @@ export default function SearchPage() {
             }
 
             const updatedCredits = latestCredits - UNLOCK_COST;
+            const unlockedNames = filteredNames.slice(visibleCount, visibleCount + UNLOCK_AMOUNT);
             setUserCredits(updatedCredits);
             setVisibleCount(prev => prev + UNLOCK_AMOUNT);
             window.dispatchEvent(new Event('force_credits_update'));
+
+            if ((latestProfile.tier === 'pro' || latestProfile.tier === 'vvip') && unlockedNames.length > 0) {
+                try {
+                    await supabase.rpc('cleanup_analysis_history_by_tier');
+
+                    const resultData = unlockedNames.map((name) => {
+                        const suitability = analyzeNameSuitability(name);
+                        return {
+                            name,
+                            totalScore: calculateScore(name),
+                            suitableDays: suitability.suitable
+                        };
+                    });
+
+                    await supabase.from('analysis_history').insert({
+                        user_id: user.id,
+                        type: 'name_search',
+                        input_data: {
+                            selectedDay,
+                            selectedGender,
+                            selectedLetter,
+                            selectedScore: targetSum || null,
+                            unlockedCount: unlockedNames.length
+                        },
+                        result_data: resultData
+                    });
+                } catch (historyError) {
+                    console.error('Failed to save search history:', historyError);
+                }
+            }
 
             await Swal.fire({
                 title: 'โหลดรายชื่อสำเร็จ!',

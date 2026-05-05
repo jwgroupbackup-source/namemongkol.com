@@ -336,21 +336,32 @@ export default function PremiumSearchPage() {
             // Note: If you want to force login, you might handle earlier.
             const { data: { user } } = await supabase.auth.getUser();
             if (user) {
-                await supabase.from('analysis_history').insert({
-                    user_id: user.id,
-                    type: 'gacha',
-                    input_data: {
-                        selectedDay,
-                        selectedScore: targetScore || 'All',
-                        leadingChar: leadingCharType
-                    },
-                    result_data: selected.map(item => ({
-                        name: item.name,
-                        totalScore: item.totalScore,
-                        meaning: `เหมาะกับวัน: ${item.suitableDays.join(', ')}`,
-                        notes: item.scoreBreakdown
-                    }))
-                });
+                const { data: profile } = await supabase
+                    .from('user_profiles')
+                    .select('tier')
+                    .eq('id', user.id)
+                    .maybeSingle();
+
+                const tier = (profile?.tier || 'free').toLowerCase();
+                if (tier === 'pro' || tier === 'vvip') {
+                    await supabase.rpc('cleanup_analysis_history_by_tier');
+
+                    await supabase.from('analysis_history').insert({
+                        user_id: user.id,
+                        type: 'gacha',
+                        input_data: {
+                            selectedDay,
+                            selectedScore: targetScore || 'All',
+                            leadingChar: leadingCharType
+                        },
+                        result_data: selected.map(item => ({
+                            name: item.name,
+                            totalScore: item.totalScore,
+                            meaning: `เหมาะกับวัน: ${item.suitableDays.join(', ')}`,
+                            notes: item.scoreBreakdown
+                        }))
+                    });
+                }
             }
 
             // Success Alert (Optional, maybe just show results? - User asked for improved alerts, maybe a quick toast?)

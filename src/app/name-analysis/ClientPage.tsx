@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Search, Trash2, ClipboardList, CheckCircle2, Download, XCircle, Info, Hash, Save, ArrowDownWideNarrow, Printer, Coins, PlayCircle, LogIn, Users, FileSpreadsheet, Zap, HelpCircle } from 'lucide-react';
+import { Search, Trash2, ClipboardList, CheckCircle2, Download, XCircle, Info, Hash, ArrowDownWideNarrow, Printer, Coins, PlayCircle, LogIn, Users, FileSpreadsheet, Zap, HelpCircle } from 'lucide-react';
 import { analyzeName } from '@/utils/nameAnalysis';
 import { NameAnalysisDetailCard } from '@/components/NameAnalysisDetailCard';
 // import { toPng } from 'html-to-image';
@@ -194,8 +194,6 @@ export default function NameAnalysisPage() {
         setResults(mapped);
         setIsAnalyzing(false);
 
-        // Auto Save History (Optional based on previous request, keeping logic manual or auto? Previous file had Manual Save button, let's keep manual to save DB space, OR auto? User didn't specify auto-save for Bulk, only Premium. I'll stick to manual save button existing in tool bar)
-        // Actually, user said "Auto Save" for Premium. For Bulk, let's leave the "Save" button as is for user control.
         if (cost > 0) {
             Swal.fire({
                 title: 'วิเคราะห์สำเร็จ!',
@@ -227,40 +225,6 @@ export default function NameAnalysisPage() {
         if (window.confirm("ต้องการล้างข้อมูลรายชื่อทั้งหมดใช่หรือไม่?")) {
             setInputText("");
             setResults([]);
-        }
-    };
-
-    const handleSaveHistory = async () => {
-        // -expect-error Temporary type mismatch with external/runtime data.
-            const Swal = (await import('sweetalert2')).default;
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) {
-            Swal.fire('แจ้งเตือน', 'กรุณาเข้าสู่ระบบเพื่อบันทึกประวัติ', 'warning');
-            return;
-        }
-
-        if (results.length === 0) return;
-
-        try {
-            const { error } = await supabase.from('analysis_history').insert({
-                user_id: user.id,
-                type: 'name_analysis',
-                input_data: {
-                    raw_text: inputText.substring(0, 1000),
-                    count: results.length
-                },
-                result_data: results.map(r => ({
-                    name: r.name,
-                    sum: r.sum,
-                    pairs: r.pairs.map(p => p.pair).join(',')
-                }))
-            });
-
-            if (error) throw error;
-            Swal.fire('บันทึกสำเร็จ', 'บันทึกประวัติเรียบร้อยแล้ว', 'success');
-        } catch (err) {
-            console.error('Error saving history:', err);
-            Swal.fire('ข้อผิดพลาด', 'เกิดข้อผิดพลาดในการบันทึก', 'error');
         }
     };
 
@@ -476,9 +440,6 @@ export default function NameAnalysisPage() {
                                         >
                                             <ArrowDownWideNarrow className="w-3 h-3" />
                                             {isSorted ? 'เรียงตามมงคล' : 'เรียงตามชื่อ'}
-                                        </button>
-                                        <button onClick={handleSaveHistory} className="flex items-center gap-2 px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 rounded-lg transition-all text-xs font-bold border border-emerald-500/20">
-                                            <Save className="w-3 h-3" /> บันทึก
                                         </button>
                                         <button onClick={exportCSV} className="flex items-center gap-2 px-4 py-2 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 rounded-lg transition-all text-xs font-bold border border-indigo-500/20">
                                             <Download className="w-3 h-3" /> CSV

@@ -292,6 +292,26 @@ export default function PremiumAnalysisPage() {
             const excludedNames = isNewBatch ? shownNames : [];
             const generatedResults = generatePremiumNames(surname, dayKey, focus, 20, excludedNames);
 
+            try {
+                await supabase.rpc('cleanup_analysis_history_by_tier');
+
+                await supabase.from('analysis_history').insert({
+                    user_id: user.id,
+                    type: 'premium_analysis',
+                    input_data: {
+                        surname,
+                        birthDate,
+                        birthTime: analysisBirthTime,
+                        focus,
+                        astDay: dayKey,
+                        isNewBatch
+                    },
+                    result_data: generatedResults
+                });
+            } catch (historyError) {
+                console.error('Failed to save premium analysis history:', historyError);
+            }
+
             if (isNewBatch) {
                 setResults(generatedResults);
                 setShownNames((prev) => [...prev, ...generatedResults.map((item) => item.name)]);

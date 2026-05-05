@@ -3,17 +3,36 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LogIn, Info, User as UserIcon, LogOut, Sparkles, Zap, BookOpen } from 'lucide-react';
+import { LogIn, Info, User as UserIcon, LogOut, Sparkles, Zap, BookOpen, Crown } from 'lucide-react';
 import { supabase } from '@/utils/supabase';
 import { User } from '@supabase/supabase-js';
 import { LanguageToggle } from './LanguageToggle';
 import { useLanguage } from './LanguageProvider';
+
+type MemberTier = 'free' | 'pro' | 'vvip';
+
+const normalizeTier = (tier?: string | null): MemberTier => {
+    const normalized = (tier || '').toLowerCase();
+    if (normalized === 'pro' || normalized === 'vvip') return normalized;
+    return 'free';
+};
+
+const getTierBadgeStyles = (tier: MemberTier) => {
+    if (tier === 'vvip') {
+        return 'bg-amber-500/20 text-amber-400 border border-amber-500/30';
+    }
+    if (tier === 'pro') {
+        return 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30';
+    }
+    return 'bg-slate-500/20 text-slate-400 border border-slate-500/30';
+};
 
 export const TopNav = () => {
     const [user, setUser] = useState<User | null>(null);
     const [credits, setCredits] = useState<number | null>(null);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [role, setRole] = useState<string | null>(null);
+    const [memberTier, setMemberTier] = useState<MemberTier>('free');
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
     const router = useRouter();
@@ -23,7 +42,7 @@ export const TopNav = () => {
     const fetchUserInfo = async (userId: string) => {
         const { data, error } = await supabase
             .from('user_profiles')
-            .select('credits, role, welcome_credits, welcome_credits_granted_at')
+            .select('credits, role, tier, welcome_credits, welcome_credits_granted_at')
             .eq('id', userId)
             .maybeSingle();
 
@@ -41,10 +60,12 @@ export const TopNav = () => {
 
             setCredits(totalCredits);
             setRole(data.role);
+            setMemberTier(normalizeTier(data.tier));
         } else {
             if (error) console.error('Error fetching user info:', error);
             setCredits(0);
             setRole(null);
+            setMemberTier('free');
         }
     };
 
@@ -66,6 +87,7 @@ export const TopNav = () => {
             } else {
                 setCredits(null);
                 setRole(null);
+                setMemberTier('free');
             }
         });
 
@@ -144,9 +166,15 @@ export const TopNav = () => {
                             <UserIcon size={16} />
                         </div>
                         <div className="flex flex-col items-start">
-                            <span className="text-xs font-bold text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white transition-colors max-w-[100px] truncate">
-                                {user.user_metadata?.name || user.email?.split('@')[0]}
-                            </span>
+                            <div className="flex items-center gap-1 max-w-[120px]">
+                                <span className="text-xs font-bold text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white transition-colors max-w-[84px] truncate">
+                                    {user.user_metadata?.name || user.email?.split('@')[0]}
+                                </span>
+                                <span className={`px-1.5 py-[1px] rounded-md text-[9px] font-black uppercase leading-none flex items-center gap-0.5 ${getTierBadgeStyles(memberTier)}`}>
+                                    {memberTier === 'vvip' && <Crown size={9} className="shrink-0" />}
+                                    {memberTier}
+                                </span>
+                            </div>
                             {credits !== null && (
                                 <span className="text-[10px] text-amber-500 dark:text-amber-400 font-bold flex items-center gap-1">
                                     <Sparkles size={10} /> {credits} {t('nav.credits', 'Credits')}

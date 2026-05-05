@@ -2,15 +2,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 import { supabase } from '@/utils/supabase';
-import { History, ChevronDown, ChevronUp, Calendar, Target, Clock, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { PremiumResult, FOCUS_TOPIC_LABELS, FocusTopic } from '@/utils/premiumAnalysisUtils';
+import { History, ChevronDown, ChevronUp, Target, Clock, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { FOCUS_TOPIC_LABELS, FocusTopic } from '@/utils/premiumAnalysisUtils';
+
+type MemberTier = 'free' | 'pro' | 'vvip';
+
+const normalizeTier = (tier?: string | null): MemberTier => {
+    const normalized = (tier || '').toLowerCase();
+    if (normalized === 'pro' || normalized === 'vvip') return normalized;
+    return 'free';
+};
 
 interface HistoryItem {
     id: string;
     created_at: string;
-    type: 'premium_analysis' | 'gacha' | 'name_analysis';
+    type: 'premium_analysis' | 'gacha' | 'name_search';
     input_data: {
         surname?: string;
         birthDate?: string;
@@ -19,6 +28,11 @@ interface HistoryItem {
         astDay?: string;
         raw_text?: string;
         count?: number;
+        selectedDay?: string;
+        selectedGender?: string;
+        selectedLetter?: string;
+        selectedScore?: string;
+        unlockedCount?: number;
     };
     result_data: any[]; // Flexible for diverse result types
 }
@@ -27,17 +41,42 @@ export default function HistoryPage() {
     const [history, setHistory] = useState<HistoryItem[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+    const [memberTier, setMemberTier] = useState<MemberTier>('free');
 
     useEffect(() => {
         const fetchHistory = async () => {
             const { data: { user } } = await supabase.auth.getUser();
-            if (!user) return;
+            if (!user) {
+                setIsLoading(false);
+                return;
+            }
+
+            await supabase.rpc('cleanup_analysis_history_by_tier');
+
+            const { data: profile } = await supabase
+                .from('user_profiles')
+                .select('tier')
+                .eq('id', user.id)
+                .maybeSingle();
+
+            const tier = normalizeTier(profile?.tier);
+            setMemberTier(tier);
+
+            if (tier === 'free') {
+                setHistory([]);
+                setIsLoading(false);
+                return;
+            }
 
             const { data, error } = await supabase
                 .from('analysis_history')
                 .select('*')
                 .eq('user_id', user.id)
                 .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error('Failed to fetch analysis history:', error);
+            }
 
             if (data) {
                 setHistory(data as HistoryItem[]);
@@ -85,7 +124,13 @@ export default function HistoryPage() {
                         </div>
                         <div>
                             <h1 className="text-3xl font-bold text-slate-100">ประวัติการใช้งาน</h1>
-                            <p className="text-slate-400">รายการวิเคราะห์ชื่อมงคลที่คุณเคยทำรายการไว้</p>
+                            <p className="text-slate-400">
+                                {memberTier === 'vvip'
+                                    ? 'รายการวิเคราะห์ชื่อมงคลย้อนหลัง (เก็บข้อมูลสูงสุด 90 วัน)'
+                                    : memberTier === 'pro'
+                                        ? 'รายการวิเคราะห์ชื่อมงคลย้อนหลัง (เก็บข้อมูลสูงสุด 30 วัน)'
+                                        : 'ฟีเจอร์ประวัติการใช้งานสำหรับสมาชิก Pro และ VVIP'}
+                            </p>
                         </div>
                     </div>
 
@@ -93,6 +138,18 @@ export default function HistoryPage() {
                         <div className="text-center py-20">
                             <span className="animate-spin text-4xl block mb-4">⏳</span>
                             <p className="text-slate-500">กำลังโหลดข้อมูล...</p>
+                        </div>
+                    ) : memberTier === 'free' ? (
+                        <div className="text-center py-20 bg-slate-900/50 rounded-3xl border border-white/5 border-dashed">
+                            <AlertCircle size={48} className="mx-auto mb-4 opacity-30 text-amber-400" />
+                            <p className="text-xl font-medium text-slate-300">ประวัติการใช้งานสำหรับสมาชิก Pro และ VVIP</p>
+                            <p className="text-sm mt-2 text-slate-500">อัปเกรดสมาชิกเพื่อเริ่มเก็บประวัติการวิเคราะห์ย้อนหลัง</p>
+                            <Link
+                                href="/topup?plan=vvip"
+                                className="inline-flex mt-5 px-5 py-2.5 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-300 hover:bg-amber-500/30 transition-colors font-semibold"
+                            >
+                                อัปเกรดสมาชิก
+                            </Link>
                         </div>
                     ) : history.length === 0 ? (
                         <div className="text-center py-20 bg-slate-900/50 rounded-3xl border border-white/5 border-dashed">
@@ -111,11 +168,11 @@ export default function HistoryPage() {
                                     >
                                         <div className="flex items-center gap-4">
                                             <div className={`w-2 h-12 rounded-full ${item.type === 'premium_analysis' ? 'bg-amber-500' :
-                                                item.type === 'name_analysis' ? 'bg-indigo-500' : 'bg-purple-500'}`} />
+                                                item.type === 'name_search' ? 'bg-indigo-500' : 'bg-purple-500'}`} />
                                             <div>
                                                 <h3 className="text-lg font-bold text-slate-200">
                                                     {item.type === 'premium_analysis' ? 'วิเคราะห์ชื่อมงคลขั้นสูง' :
-                                                        item.type === 'name_analysis' ? `วิเคราะห์ชื่อเบื้องต้น (${item.input_data.count} ชื่อ)` :
+                                                        item.type === 'name_search' ? `ค้นหาชื่อมงคล (${item.input_data.unlockedCount || item.result_data?.length || 0} ชื่อ)` :
                                                             'สุ่มชื่อมงคล (Gacha)'}
                                                 </h3>
                                                 <div className="flex flex-wrap items-center gap-3 text-sm text-slate-400 mt-1">
@@ -134,6 +191,16 @@ export default function HistoryPage() {
                                                             (นามสกุล: {item.input_data.surname})
                                                         </span>
                                                     )}
+                                                    {item.type === 'name_search' && (
+                                                        <>
+                                                            {item.input_data.selectedDay && item.input_data.selectedDay !== 'all' && (
+                                                                <span className="text-slate-500">วันเกิด: {item.input_data.selectedDay}</span>
+                                                            )}
+                                                            {item.input_data.selectedLetter && item.input_data.selectedLetter !== 'all' && (
+                                                                <span className="text-slate-500">อักษร: {item.input_data.selectedLetter}</span>
+                                                            )}
+                                                        </>
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
@@ -149,15 +216,17 @@ export default function HistoryPage() {
                                     {expandedIds.has(item.id) && (
                                         <div className="border-t border-white/5 bg-slate-950/30 p-6 animate-fade-in-up">
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                {item.type === 'name_analysis' ? (
+                                                {item.type === 'name_search' ? (
                                                     item.result_data.map((result: any, idx) => (
                                                         <div key={idx} className="p-4 rounded-xl bg-slate-900 border border-white/5 flex items-center justify-between gap-4">
                                                             <div>
                                                                 <h4 className="text-lg font-bold text-indigo-100">{result.name}</h4>
-                                                                <p className="text-xs text-slate-500 mt-1">คู่เลข: {result.pairs}</p>
+                                                                <p className="text-xs text-slate-500 mt-1">
+                                                                    วันมงคล: {Array.isArray(result.suitableDays) && result.suitableDays.length > 0 ? result.suitableDays.join(', ') : '-'}
+                                                                </p>
                                                             </div>
                                                             <div className="text-2xl font-black text-slate-700 opacity-30">
-                                                                {result.sum}
+                                                                {result.totalScore}
                                                             </div>
                                                         </div>
                                                     ))

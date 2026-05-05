@@ -15,10 +15,29 @@ interface SidebarProps {
     onClose: () => void;
 }
 
+type MemberTier = 'free' | 'pro' | 'vvip';
+
+const normalizeTier = (tier?: string | null): MemberTier => {
+    const normalized = (tier || '').toLowerCase();
+    if (normalized === 'pro' || normalized === 'vvip') return normalized;
+    return 'free';
+};
+
+const getTierBadgeStyles = (tier: MemberTier) => {
+    if (tier === 'vvip') {
+        return 'bg-amber-500/20 text-amber-400 border border-amber-500/30';
+    }
+    if (tier === 'pro') {
+        return 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30';
+    }
+    return 'bg-slate-500/20 text-slate-400 border border-slate-500/30';
+};
+
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
     const [user, setUser] = useState<User | null>(null);
     const [credits, setCredits] = useState<number | null>(null);
     const [role, setRole] = useState<string | null>(null);
+    const [memberTier, setMemberTier] = useState<MemberTier>('free');
     const pathname = usePathname();
     const router = useRouter();
     const { t } = useLanguage();
@@ -29,7 +48,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
     const fetchUserInfo = async (userId: string) => {
         const { data, error } = await supabase
             .from('user_profiles')
-            .select('credits, role, welcome_credits, welcome_credits_granted_at')
+            .select('credits, role, tier, welcome_credits, welcome_credits_granted_at')
             .eq('id', userId)
             .maybeSingle();
 
@@ -47,10 +66,12 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
 
             setCredits(totalCredits);
             setRole(data.role);
+            setMemberTier(normalizeTier(data.tier));
         } else {
             if (error) console.error('Error fetching user info:', error);
             setCredits(0);
             setRole(null);
+            setMemberTier('free');
         }
     };
 
@@ -72,6 +93,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             } else {
                 setCredits(null);
                 setRole(null);
+                setMemberTier('free');
             }
         });
 
@@ -509,7 +531,13 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                         </div>
                                         <div className="flex flex-col min-w-0">
                                             <span className="text-sm tracking-wide font-bold truncate">{user.user_metadata?.name || user.email?.split('@')[0]}</span>
-                                            <span className="text-[10px] text-slate-500">{t('sidebar.member', 'Member')}</span>
+                                            <div className="flex items-center gap-1.5 mt-0.5">
+                                                <span className="text-[10px] text-slate-500">{t('sidebar.member', 'Member')}</span>
+                                                <span className={`px-1.5 py-[1px] rounded-md text-[9px] font-black uppercase leading-none flex items-center gap-0.5 ${getTierBadgeStyles(memberTier)}`}>
+                                                    {memberTier === 'vvip' && <Crown size={9} className="shrink-0" />}
+                                                    {memberTier}
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                     {credits !== null && (
