@@ -40,9 +40,9 @@ const jsonLd = {
             'operatingSystem': 'Web',
             'offers': {
                 '@type': 'Offer',
-                'price': '30',
+                'price': '599',
                 'priceCurrency': 'THB',
-                'description': '30 เครดิตต่อการวิเคราะห์ 1 ครั้ง'
+                'description': 'สมัครสมาชิก VVIP 599 บาทเพื่อวิเคราะห์ชื่อมงคลขั้นสูง'
             },
             'aggregateRating': {
                 '@type': 'AggregateRating',
@@ -66,9 +66,9 @@ const jsonLd = {
             'url': `${siteUrl}/premium-analysis`,
             'offers': {
                 '@type': 'Offer',
-                'price': '30',
+                'price': '599',
                 'priceCurrency': 'THB',
-                'description': '30 เครดิตต่อการวิเคราะห์ 1 ครั้ง',
+                'description': 'สมัครสมาชิก VVIP 599 บาทเพื่อวิเคราะห์ชื่อมงคลขั้นสูง',
                 'availability': 'https://schema.org/InStock'
             },
             'hasOfferCatalog': {
@@ -125,10 +125,10 @@ const faqJsonLd = {
         },
         {
             '@type': 'Question',
-            'name': 'วิเคราะห์ชื่อมงคลขั้นสูงใช้กี่เครดิต?',
+            'name': 'วิเคราะห์ชื่อมงคลขั้นสูงต้องสมัครสมาชิกหรือไม่?',
             'acceptedAnswer': {
                 '@type': 'Answer',
-                'text': 'การวิเคราะห์ชื่อมงคลขั้นสูงใช้ 30 เครดิตต่อ 1 ครั้ง โดยระบบจะแสดงรายชื่อมงคล 20 ชื่อที่ถูกคัดสรรตามเกณฑ์ทักษาปกรณ์และเลขศาสตร์ชั้นสูง พร้อมคำอธิบายละเอียดและคะแนนของแต่ละชื่อ'
+                'text': 'การวิเคราะห์ชื่อมงคลขั้นสูงเฉพาะสมาชิก VVIP 599 บาท โดยระบบจะแสดงรายชื่อมงคล 20 ชื่อที่ถูกคัดสรรตามเกณฑ์ทักษาปกรณ์และเลขศาสตร์ชั้นสูง พร้อมคำอธิบายละเอียดและคะแนนของแต่ละชื่อ'
             }
         }
     ]

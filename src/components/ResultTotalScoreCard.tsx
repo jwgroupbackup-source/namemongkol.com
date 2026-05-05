@@ -7,6 +7,8 @@ interface ResultTotalScoreCardProps {
 }
 
 export const ResultTotalScoreCard: React.FC<ResultTotalScoreCardProps> = ({ result }) => {
+    const displayGrade = result.prediction.color.includes('emerald') ? 'A+' : result.grade;
+
     return (
         <div className="glass-card rounded-2xl p-4 sm:p-5 text-center relative overflow-hidden flex flex-col">
             <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${result.prediction.bgGradient}`}></div>
@@ -29,12 +31,12 @@ export const ResultTotalScoreCard: React.FC<ResultTotalScoreCardProps> = ({ resu
                 <div className="flex-1 flex justify-end">
                     <div className={`
                         w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg border shadow-lg backdrop-blur-md
-                        ${result.grade === 'A+' ? 'bg-emerald-500 text-white border-emerald-400 shadow-emerald-500/30' :
-                            result.grade === 'A' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
-                                result.grade === 'B' ? 'bg-blue-500/20 text-blue-400 border-blue-500/30' :
+                        ${displayGrade === 'A+' ? 'bg-emerald-500 text-white border-emerald-400 shadow-emerald-500/30' :
+                            displayGrade === 'A' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
+                                displayGrade === 'B' ? 'bg-blue-500/20 text-blue-400 border-blue-500/30' :
                                     'bg-rose-500/20 text-rose-400 border-rose-500/30'}
                     `}>
-                        {result.grade}
+                        {displayGrade}
                     </div>
                 </div>
             </div>

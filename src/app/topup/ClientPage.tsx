@@ -123,6 +123,33 @@ export default function TopUpPage({ gateway, promptpayNumber }: TopUpPageProps) 
         loadTiers();
     }, []);
 
+    useEffect(() => {
+        if (tiers.length === 0) return;
+
+        const plan = searchParams.get('plan')?.toLowerCase();
+        const priceParam = searchParams.get('price');
+        let preferredTier: PricingTier | undefined;
+
+        if (plan === 'vvip') {
+            preferredTier = tiers.find((tier) =>
+                tier.price === 599 ||
+                tier.id.toLowerCase().includes('vvip') ||
+                tier.name.toLowerCase().includes('vvip') ||
+                tier.name.toLowerCase().includes('fortune') ||
+                tier.name.toLowerCase().includes('whale')
+            );
+        } else if (priceParam) {
+            const price = Number(priceParam);
+            if (!Number.isNaN(price)) {
+                preferredTier = tiers.find((tier) => tier.price === price);
+            }
+        }
+
+        if (preferredTier) {
+            setSelectedTier(preferredTier);
+        }
+    }, [tiers, searchParams]);
+
     const handleSelectTier = async (tier: PricingTier) => {
         if (paymentMode === 'slip2go') {
             setSelectedTier(tier);
