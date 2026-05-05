@@ -177,7 +177,7 @@ export default function AdminUsersPage() {
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
                             <input
                                 type="text"
-                                placeholder="ค้นหา (ID / ชื่อ)..."
+                                placeholder="ค้นหา (ID / ชื่อ / อีเมล)..."
                                 value={search}
                                 onChange={(e) => { setSearch(e.target.value); setPage(1); }}
                                 className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-10 pr-4 py-2 text-slate-200 focus:outline-none focus:border-emerald-500 transition-all"

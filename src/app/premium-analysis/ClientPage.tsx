@@ -744,23 +744,23 @@ export default function PremiumAnalysisPage() {
                         data-track="premiumAnalysis.form.analyze"
                         className="group relative w-full md:max-w-xl mx-auto overflow-hidden rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 shadow-[0_0_30px_rgba(245,158,11,0.2)] transition-all hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(245,158,11,0.4)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 disabled:grayscale"
                     >
-                        <div className="relative flex items-center justify-between px-6 py-5 md:px-8 md:py-6">
-                            <div className="flex items-center gap-3 md:gap-5">
+                        <div className="relative flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5 md:px-8 md:py-6">
+                            <div className="flex min-w-0 items-center gap-3.5 sm:gap-5">
                                 <div className="bg-gradient-to-br from-amber-400 to-orange-500 p-2.5 md:p-3 rounded-lg md:rounded-xl text-[#0f172a] shadow-lg shrink-0">
                                     {isLoading ? <span className="animate-spin block"><RefreshCw className="w-5 h-5 md:w-7 md:h-7" /></span> : <Sparkles className="animate-pulse w-5 h-5 md:w-7 md:h-7" />}
                                 </div>
-                                <div className="text-left">
-                                    <h3 className="text-lg md:text-xl font-black text-[#140f0a] tracking-wide">วิเคราะห์ชื่อมงคล</h3>
-                                    <p className="text-[11px] md:text-sm text-[#2a1f14] font-medium mt-0.5 md:mt-1">ใช้ศาสตร์ชั้นสูง + พลังตัวเลข</p>
+                                <div className="min-w-0 text-left leading-tight">
+                                    <h3 className="text-base sm:text-lg md:text-xl font-black text-[#140f0a] tracking-[0.01em] leading-tight">วิเคราะห์ชื่อมงคล</h3>
+                                    <p className="mt-1 text-xs md:text-sm text-[#2a1f14] font-semibold leading-tight">ใช้ศาสตร์ชั้นสูง + พลังตัวเลข</p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-1.5 md:gap-2 bg-black/10 px-3 py-2 md:px-5 md:py-3 rounded-lg md:rounded-xl shadow-inner shrink-0">
-                                <span className="text-sm md:text-base font-bold text-[#140f0a]">
+                            <div className="inline-flex w-full sm:w-auto items-center justify-center gap-1.5 md:gap-2 self-start sm:self-auto bg-black/10 border border-black/5 px-3 py-2 sm:px-4 md:px-5 md:py-3 rounded-xl shadow-inner shrink-0">
+                                <span className="text-[11px] sm:text-sm md:text-base font-bold text-[#140f0a] leading-tight text-center">
                                     {userTier === 'vvip'
                                         ? `ใช้ ${PREMIUM_ANALYSIS_COST} เครดิต`
                                         : `สมัครสมาชิก VVIP ${VVIP_PRICE} บาท`}
                                 </span>
-                                <Coins className="w-4 h-4 md:w-5 md:h-5 text-[#140f0a]" />
+                                <Coins className="w-3.5 h-3.5 md:w-5 md:h-5 text-[#140f0a] shrink-0" />
                             </div>
                         </div>
                         {/* Shimmer Effect */}

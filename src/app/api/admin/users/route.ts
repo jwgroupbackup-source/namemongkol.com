@@ -7,6 +7,35 @@ export const dynamic = 'force-dynamic';
 
 const ALLOWED_MEMBER_TIERS = ['free', 'pro', 'vvip'] as const;
 type MemberTier = (typeof ALLOWED_MEMBER_TIERS)[number];
+type SearchableUserProfile = {
+    id: string | null;
+    first_name?: string | null;
+    last_name?: string | null;
+    email?: string | null;
+};
+
+function normalizeAdminUserSearch(value?: string | null) {
+    return (value || '').toLowerCase().trim().replace(/\s+/g, ' ');
+}
+
+function tokenizeAdminUserSearch(value: string) {
+    const normalized = normalizeAdminUserSearch(value);
+    return normalized ? normalized.split(' ').filter(Boolean) : [];
+}
+
+function buildAdminUserSearchableText(profile: SearchableUserProfile) {
+    const firstName = (profile.first_name || '').trim();
+    const lastName = (profile.last_name || '').trim();
+    const fullName = [firstName, lastName].filter(Boolean).join(' ');
+
+    return normalizeAdminUserSearch([
+        profile.id || '',
+        firstName,
+        lastName,
+        fullName,
+        profile.email || '',
+    ].join(' '));
+}
 
 async function createAuthedClient() {
     const cookieStore = await cookies();
@@ -46,10 +75,41 @@ export async function GET(request: Request) {
         const page = parseInt(searchParams.get('page') || '1');
         const limit = parseInt(searchParams.get('limit') || '20');
         const search = searchParams.get('search') || '';
+        const normalizedSearch = normalizeAdminUserSearch(search);
         const tier = (searchParams.get('tier') || '').toLowerCase();
 
         const from = (page - 1) * limit;
         const to = from + limit - 1;
+        const hasTierFilter = ALLOWED_MEMBER_TIERS.includes(tier as MemberTier);
+
+        if (normalizedSearch) {
+            let searchQuery = supabase
+                .from('user_profiles')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (hasTierFilter) {
+                searchQuery = searchQuery.eq('tier', tier);
+            }
+
+            const { data, error } = await searchQuery;
+
+            if (error) throw error;
+
+            const tokens = tokenizeAdminUserSearch(normalizedSearch);
+            const filteredUsers = (data || []).filter((profile) => {
+                const searchableText = buildAdminUserSearchableText(profile as SearchableUserProfile);
+                return tokens.every((token) => searchableText.includes(token));
+            });
+
+            return NextResponse.json({
+                success: true,
+                users: filteredUsers.slice(from, to + 1),
+                total: filteredUsers.length,
+                page,
+                limit
+            });
+        }
 
         let query = supabase
             .from('user_profiles')
@@ -57,11 +117,7 @@ export async function GET(request: Request) {
             .range(from, to)
             .order('created_at', { ascending: false });
 
-        if (search) {
-            query = query.or(`id.eq.${search},first_name.ilike.%${search}%,last_name.ilike.%${search}%,email.ilike.%${search}%`);
-        }
-
-        if (ALLOWED_MEMBER_TIERS.includes(tier as MemberTier)) {
+        if (hasTierFilter) {
             query = query.eq('tier', tier);
         }
 
