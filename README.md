@@ -28,6 +28,15 @@ Use the project guideline for writing alt text:
 
 - [docs/seo-alt-guideline.md](docs/seo-alt-guideline.md)
 
+## Member Tier Policy
+
+- Membership levels: `free`, `pro`, `vvip`
+- For now, topup payment does **not** auto-upgrade member tier
+- Admins can manually set member tier in Admin Users page
+- Member tier has no expiry in current policy
+- Admin Users page supports filtering by member tier
+- Tier changes are stored in `member_tier_history` for audit tracking
+
 ## Push to GitHub
 
 Use this standard flow:

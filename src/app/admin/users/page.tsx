@@ -16,7 +16,16 @@ interface UserProfile {
     welcome_credits?: number | null;
     welcome_credits_granted_at?: string | null;
     role: string;
+    tier?: 'free' | 'pro' | 'vvip' | string | null;
     created_at?: string;
+}
+
+type MemberTier = 'free' | 'pro' | 'vvip';
+const MEMBER_TIERS: MemberTier[] = ['free', 'pro', 'vvip'];
+
+function normalizeTier(tier?: string | null): MemberTier {
+    const normalized = (tier || '').toLowerCase();
+    return MEMBER_TIERS.includes(normalized as MemberTier) ? (normalized as MemberTier) : 'free';
 }
 
 export default function AdminUsersPage() {
@@ -53,6 +62,7 @@ export default function AdminUsersPage() {
     const [users, setUsers] = useState<UserProfile[]>([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
+    const [tierFilter, setTierFilter] = useState<'all' | MemberTier>('all');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
@@ -60,6 +70,7 @@ export default function AdminUsersPage() {
     const [editingUser, setEditingUser] = useState<UserProfile | null>(null);
     const [editCredits, setEditCredits] = useState(0);
     const [editRole, setEditRole] = useState('user');
+    const [editTier, setEditTier] = useState<MemberTier>('free');
     const [saving, setSaving] = useState(false);
 
     const fetchUsers = useCallback(async () => {
@@ -72,6 +83,9 @@ export default function AdminUsersPage() {
                 limit: '20',
                 search
             });
+            if (tierFilter !== 'all') {
+                query.set('tier', tierFilter);
+            }
             const res = await fetch(`/api/admin/users?${query}`, {
                 headers: {
                     Authorization: `Bearer ${session?.access_token || ''}`
@@ -88,7 +102,7 @@ export default function AdminUsersPage() {
         } finally {
             setLoading(false);
         }
-    }, [page, search]);
+    }, [page, search, tierFilter]);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -101,6 +115,7 @@ export default function AdminUsersPage() {
         setEditingUser(user);
         setEditCredits(user.credits ?? 0);
         setEditRole(user.role || 'user');
+        setEditTier(normalizeTier(user.tier));
     };
 
     const handleSave = async () => {
@@ -118,7 +133,8 @@ export default function AdminUsersPage() {
                 body: JSON.stringify({
                     id: editingUser.id,
                     credits: parseInt(editCredits.toString()),
-                    role: editRole
+                    role: editRole,
+                    tier: editTier
                 })
             });
             const data = await res.json();
@@ -128,7 +144,7 @@ export default function AdminUsersPage() {
                 Swal.fire({
                     icon: 'success',
                     title: 'Updated!',
-                    text: 'User data has been updated.',
+                    text: 'User data and membership tier have been updated.',
                     timer: 1500,
                     showConfirmButton: false,
                     background: '#1e293b',
@@ -156,15 +172,31 @@ export default function AdminUsersPage() {
                         <p className="text-slate-400 text-sm">ดูแลบัญชีและเครดิตสมาชิก</p>
                     </div>
 
-                    <div className="relative w-full md:w-64">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
-                        <input
-                            type="text"
-                            placeholder="ค้นหา (ID / ชื่อ)..."
-                            value={search}
-                            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-                            className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-10 pr-4 py-2 text-slate-200 focus:outline-none focus:border-emerald-500 transition-all"
-                        />
+                    <div className="w-full md:w-auto flex flex-col md:flex-row items-stretch md:items-center gap-3">
+                        <div className="relative w-full md:w-72">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
+                            <input
+                                type="text"
+                                placeholder="ค้นหา (ID / ชื่อ)..."
+                                value={search}
+                                onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+                                className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-10 pr-4 py-2 text-slate-200 focus:outline-none focus:border-emerald-500 transition-all"
+                            />
+                        </div>
+                        <select
+                            value={tierFilter}
+                            onChange={(e) => {
+                                const nextFilter = e.target.value as 'all' | MemberTier;
+                                setTierFilter(nextFilter);
+                                setPage(1);
+                            }}
+                            className="bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-slate-200 focus:outline-none focus:border-emerald-500 transition-all min-w-[160px]"
+                        >
+                            <option value="all">ทุกระดับสมาชิก</option>
+                            <option value="free">Free</option>
+                            <option value="pro">Pro</option>
+                            <option value="vvip">VVIP</option>
+                        </select>
                     </div>
                 </header>
 
@@ -177,6 +209,7 @@ export default function AdminUsersPage() {
                                     <th className="px-6 py-4">User Details</th>
                                     <th className="px-6 py-4">Provider</th>
                                     <th className="px-6 py-4 text-center">Registered</th>
+                                    <th className="px-6 py-4 text-center">Member Tier</th>
                                     <th className="px-6 py-4 text-center">Role</th>
                                     <th className="px-6 py-4 text-center">Credits</th>
                                     <th className="px-6 py-4 text-center">Actions</th>
@@ -185,7 +218,7 @@ export default function AdminUsersPage() {
                             <tbody className="divide-y divide-slate-800/50">
                                 {loading ? (
                                     <tr>
-                                        <td colSpan={5} className="px-6 py-12 text-center text-slate-500">
+                                        <td colSpan={7} className="px-6 py-12 text-center text-slate-500">
                                             <div className="flex justify-center mb-2">
                                                 <div className="animate-spin h-6 w-6 border-2 border-emerald-500 rounded-full border-t-transparent"></div>
                                             </div>
@@ -194,7 +227,7 @@ export default function AdminUsersPage() {
                                     </tr>
                                 ) : users.length === 0 ? (
                                     <tr>
-                                        <td colSpan={5} className="px-6 py-12 text-center text-slate-500">
+                                        <td colSpan={7} className="px-6 py-12 text-center text-slate-500">
                                             ไม่พบข้อมูลผู้ใช้งาน
                                         </td>
                                     </tr>
@@ -241,6 +274,22 @@ export default function AdminUsersPage() {
                                                             : ''}
                                                     </span>
                                                 </div>
+                                            </td>
+                                            <td className="px-6 py-4 text-center">
+                                                {(() => {
+                                                    const tier = normalizeTier(user.tier);
+                                                    const tierClassName = tier === 'vvip'
+                                                        ? 'bg-amber-500/10 text-amber-300 border border-amber-500/30'
+                                                        : tier === 'pro'
+                                                            ? 'bg-cyan-500/10 text-cyan-300 border border-cyan-500/30'
+                                                            : 'bg-slate-700/50 text-slate-300 border border-slate-600/50';
+
+                                                    return (
+                                                        <span className={`px-2 py-1 rounded-full text-xs font-bold uppercase ${tierClassName}`}>
+                                                            {tier}
+                                                        </span>
+                                                    );
+                                                })()}
                                             </td>
                                             <td className="px-6 py-4 text-center">
                                                 <span className={`px-2 py-1 rounded-full text-xs font-bold ${user.role === 'admin'
@@ -346,6 +395,19 @@ export default function AdminUsersPage() {
                                     className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500"
                                 />
                                 <p className="text-xs text-slate-500 mt-1">Welcome เครดิตจะคำนวณอัตโนมัติ ไม่ต้องรวมในช่องนี้</p>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-slate-300 mb-2">ระดับสมาชิก (Member Tier)</label>
+                                <select
+                                    value={editTier}
+                                    onChange={(e) => setEditTier(normalizeTier(e.target.value))}
+                                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500"
+                                >
+                                    <option value="free">Free</option>
+                                    <option value="pro">Pro</option>
+                                    <option value="vvip">VVIP</option>
+                                </select>
                             </div>
 
                             <div>

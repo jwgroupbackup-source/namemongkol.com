@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { supabase } from '@/utils/supabase';
 import { generatePremiumNames, PremiumResult, FocusTopic, getAstrologicalDay } from '@/utils/premiumAnalysisUtils';
 import { formatThaiBirthDate, ThaiDateResult } from '@/utils/thaiDateUtils';
+import { calculateEffectiveCredits } from '@/utils/credits';
 import { CertificateGenerator } from '@/components/CertificateGenerator';
 import { SearchableSelect } from '@/components/SearchableSelect';
 
@@ -30,6 +31,15 @@ const MINUTES = Array.from({ length: 60 }, (_, i) => i.toString().padStart(2, '0
 const START_BE = 2450;
 const END_BE = 2590;
 const VVIP_PRICE = 599;
+const PREMIUM_ANALYSIS_COST = 30;
+type MemberTier = 'free' | 'pro' | 'vvip';
+
+function normalizeTier(tier?: string | null): MemberTier {
+    const normalized = (tier || '').toLowerCase();
+    if (normalized === 'pro' || normalized === 'vvip') return normalized;
+    return 'free';
+}
+
 const YEARS = Array.from({ length: END_BE - START_BE + 1 }, (_, i) => {
     const be = START_BE + i;
     const ad = be - 543;
@@ -48,6 +58,8 @@ export default function PremiumAnalysisPage() {
     const [results, setResults] = useState<PremiumResult[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [hasAnalyzed, setHasAnalyzed] = useState(false);
+    const [userTier, setUserTier] = useState<MemberTier>('free');
+    const [userCredits, setUserCredits] = useState<number | null>(null);
 
     // New state for extended date details
     const [dateDetails, setDateDetails] = useState<ThaiDateResult | null>(null);
@@ -82,6 +94,44 @@ export default function PremiumAnalysisPage() {
             setBirthTime(`${selectedHour}:${selectedMinute}`);
         }
     }, [selectedHour, selectedMinute, isUnknownTime]);
+
+    useEffect(() => {
+        const syncUserMembership = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+
+            if (!user) {
+                setUserTier('free');
+                setUserCredits(null);
+                return;
+            }
+
+            const { data: profile } = await supabase
+                .from('user_profiles')
+                .select('tier, credits, welcome_credits, welcome_credits_granted_at')
+                .eq('id', user.id)
+                .maybeSingle();
+
+            if (!profile) {
+                setUserTier('free');
+                setUserCredits(0);
+                return;
+            }
+
+            setUserTier(normalizeTier(profile.tier));
+            setUserCredits(calculateEffectiveCredits(profile));
+        };
+
+        syncUserMembership();
+
+        const onForceCreditsUpdate = () => {
+            syncUserMembership();
+        };
+
+        window.addEventListener('force_credits_update', onForceCreditsUpdate);
+        return () => {
+            window.removeEventListener('force_credits_update', onForceCreditsUpdate);
+        };
+    }, []);
 
 
     // State สำหรับเก็บวันเกิดตามโหราศาสตร์
@@ -136,22 +186,142 @@ export default function PremiumAnalysisPage() {
             return;
         }
 
+        const { data: profile, error: profileError } = await supabase
+            .from('user_profiles')
+            .select('tier, credits, welcome_credits, welcome_credits_granted_at')
+            .eq('id', user.id)
+            .maybeSingle();
+
+        if (profileError || !profile) {
+            await Swal.fire({
+                title: 'เกิดข้อผิดพลาด',
+                text: 'ไม่สามารถตรวจสอบสถานะสมาชิกได้ กรุณาลองใหม่อีกครั้ง',
+                icon: 'error',
+                confirmButtonText: 'ตกลง',
+                background: '#1e293b',
+                color: '#fff'
+            });
+            return;
+        }
+
+        const normalizedTier = normalizeTier(profile.tier);
+        const latestCredits = calculateEffectiveCredits(profile);
+        setUserTier(normalizedTier);
+        setUserCredits(latestCredits);
+
+        if (normalizedTier !== 'vvip') {
+            const confirmation = await Swal.fire({
+                title: 'สมัครสมาชิก VVIP เพื่อวิเคราะห์',
+                text: `การวิเคราะห์ชื่อมงคลขั้นสูงจะเปิดให้เฉพาะสมาชิก VVIP เท่านั้น สมัครสมาชิก VVIP วันนี้เพียง ${VVIP_PRICE} บาท?`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: `ไปชำระ ${VVIP_PRICE} บาท`,
+                cancelButtonText: 'ยกเลิก',
+                confirmButtonColor: '#10b981',
+                cancelButtonColor: '#64748b',
+                background: '#1e293b',
+                color: '#fff',
+                iconColor: '#fcd34d'
+            });
+
+            if (confirmation.isConfirmed) {
+                router.push('/topup?plan=vvip');
+            }
+            return;
+        }
+
+        if (latestCredits < PREMIUM_ANALYSIS_COST) {
+            const topup = await Swal.fire({
+                title: 'เครดิตไม่เพียงพอ',
+                html: `<p style="color:#94a3b8">การวิเคราะห์ต้องใช้ <strong style="color:#fbbf24">${PREMIUM_ANALYSIS_COST} เครดิต</strong></p><p style="color:#94a3b8;margin-top:4px">คุณมี <strong style="color:#ef4444">${latestCredits} เครดิต</strong></p>`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'ไปเติมเครดิต',
+                cancelButtonText: 'ยกเลิก',
+                confirmButtonColor: '#f59e0b',
+                background: '#1e293b',
+                color: '#fff'
+            });
+
+            if (topup.isConfirmed) {
+                router.push('/topup');
+            }
+            return;
+        }
+
         const confirmation = await Swal.fire({
-            title: 'สมัครสมาชิก VVIP เพื่อวิเคราะห์',
-            text: `การวิเคราะห์ชื่อมงคลขั้นสูงจะเปิดให้เฉพาะสมาชิก VVIP เท่านั้น สมัครสมาชิก VVIP วันนี้เพียง ${VVIP_PRICE} บาท?`,
+            title: 'ยืนยันการวิเคราะห์ชื่อมงคล',
+            html: `<p style="color:#94a3b8">การวิเคราะห์จะใช้ <strong style="color:#fbbf24">${PREMIUM_ANALYSIS_COST} เครดิต</strong></p><p style="color:#94a3b8;margin-top:4px">คุณมี <strong style="color:#34d399">${latestCredits} เครดิต</strong> (คงเหลือ ${latestCredits - PREMIUM_ANALYSIS_COST} เครดิต)</p>`,
             icon: 'question',
             showCancelButton: true,
-            confirmButtonText: `ไปชำระ ${VVIP_PRICE} บาท`,
+            confirmButtonText: `ยืนยัน (ใช้ ${PREMIUM_ANALYSIS_COST} เครดิต)`,
             cancelButtonText: 'ยกเลิก',
             confirmButtonColor: '#10b981',
             cancelButtonColor: '#64748b',
             background: '#1e293b',
-            color: '#fff',
-            iconColor: '#fcd34d'
+            color: '#fff'
         });
 
-        if (confirmation.isConfirmed) {
-            router.push('/topup?plan=vvip');
+        if (!confirmation.isConfirmed) {
+            return;
+        }
+
+        let deducted = false;
+        setIsLoading(true);
+
+        try {
+            const { error: deductError } = await supabase.rpc('deduct_credits', { amount: PREMIUM_ANALYSIS_COST });
+            if (deductError) {
+                throw new Error('ไม่สามารถหักเครดิตได้ กรุณาลองใหม่');
+            }
+
+            deducted = true;
+            setUserCredits((prev) => {
+                if (prev === null) return latestCredits - PREMIUM_ANALYSIS_COST;
+                return Math.max(prev - PREMIUM_ANALYSIS_COST, 0);
+            });
+            window.dispatchEvent(new Event('force_credits_update'));
+
+            const analysisBirthTime = isUnknownTime ? '12:00' : birthTime;
+            const birthDateObj = new Date(`${birthDate}T00:00:00`);
+            const dayKey = getAstrologicalDay(birthDateObj, analysisBirthTime);
+
+            setAstrologicalDay(dayKey);
+            setDateDetails(formatThaiBirthDate(birthDate));
+
+            const excludedNames = isNewBatch ? shownNames : [];
+            const generatedResults = generatePremiumNames(surname, dayKey, focus, 20, excludedNames);
+
+            if (isNewBatch) {
+                setResults(generatedResults);
+                setShownNames((prev) => [...prev, ...generatedResults.map((item) => item.name)]);
+            } else {
+                setResults(generatedResults);
+                setShownNames(generatedResults.map((item) => item.name));
+                setHasAnalyzed(true);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        } catch (error: unknown) {
+            if (deducted) {
+                await supabase.rpc('deduct_credits', { amount: -PREMIUM_ANALYSIS_COST });
+                setUserCredits((prev) => (prev !== null ? prev + PREMIUM_ANALYSIS_COST : latestCredits));
+                window.dispatchEvent(new Event('force_credits_update'));
+            }
+
+            const errorMessage = error instanceof Error
+                ? error.message
+                : 'ไม่สามารถวิเคราะห์ชื่อมงคลได้ กรุณาลองใหม่';
+
+            await Swal.fire({
+                title: 'เกิดข้อผิดพลาด',
+                text: errorMessage,
+                icon: 'error',
+                confirmButtonText: 'ตกลง',
+                background: '#1e293b',
+                color: '#fff'
+            });
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -318,7 +488,7 @@ export default function PremiumAnalysisPage() {
                             </div>
                             <div className="ml-4 px-3 py-1 bg-amber-500/20 rounded-full border border-amber-500/20">
                                 <span className="text-xs font-bold text-amber-400 flex items-center gap-1">
-                                    -50 <Coins size={10} />
+                                    -{PREMIUM_ANALYSIS_COST} <Coins size={10} />
                                 </span>
                             </div>
                         </button>
@@ -560,7 +730,11 @@ export default function PremiumAnalysisPage() {
                                 </div>
                             </div>
                             <div className="flex items-center gap-1.5 md:gap-2 bg-black/10 px-3 py-2 md:px-5 md:py-3 rounded-lg md:rounded-xl shadow-inner shrink-0">
-                                <span className="text-sm md:text-base font-bold text-[#140f0a]">สมัครสมาชิก VVIP 599 บาท</span>
+                                <span className="text-sm md:text-base font-bold text-[#140f0a]">
+                                    {userTier === 'vvip'
+                                        ? `ใช้ ${PREMIUM_ANALYSIS_COST} เครดิต`
+                                        : `สมัครสมาชิก VVIP ${VVIP_PRICE} บาท`}
+                                </span>
                                 <Coins className="w-4 h-4 md:w-5 md:h-5 text-[#140f0a]" />
                             </div>
                         </div>
@@ -571,6 +745,9 @@ export default function PremiumAnalysisPage() {
                     <p className="text-slate-400 text-xs md:text-sm flex items-center gap-1.5 md:gap-2 opacity-80 hover:opacity-100 transition-opacity font-medium">
                         <Lock size={14} className="text-amber-500 w-3.5 h-3.5 md:w-4 md:h-4" />
                         ปลอดภัยสูงสุด • ข้อมูลของท่านจะถูกเก็บเป็นความลับ
+                        {userTier === 'vvip' && userCredits !== null && (
+                            <span className="text-amber-300">• เครดิตคงเหลือ {userCredits}</span>
+                        )}
                     </p>
                 </div>
             </div>
@@ -861,7 +1038,7 @@ export default function PremiumAnalysisPage() {
                                             Q: วิเคราะห์ชื่อมงคลขั้นสูงใช้กี่เครดิต?
                                         </h3>
                                         <p className="text-slate-300 leading-relaxed">
-                                            A: การวิเคราะห์ชื่อมงคลขั้นสูงเฉพาะสมาชิก VVIP 599 บาท โดยระบบจะแสดงรายชื่อมงคล 20 ชื่อ พร้อมคำอธิบายละเอียดและคะแนน หากต้องการสมัครสมาชิก สามารถไปที่หน้า <Link href="/topup?plan=vvip" className="text-amber-400 hover:text-amber-300 underline">สมัครสมาชิก VVIP</Link> ได้ทันที
+                                            A: การวิเคราะห์ชื่อมงคลขั้นสูงสำหรับสมาชิก VVIP และเมื่อกดวิเคราะห์ ระบบจะหัก <strong className="text-white">30 เครดิตต่อครั้ง</strong> โดยจะแสดงรายชื่อมงคล 20 ชื่อ พร้อมคำอธิบายละเอียดและคะแนน หากยังไม่เป็นสมาชิก สามารถไปที่หน้า <Link href="/topup?plan=vvip" className="text-amber-400 hover:text-amber-300 underline">สมัครสมาชิก VVIP</Link> ได้ทันที
                                         </p>
                                     </div>
                                 </div>

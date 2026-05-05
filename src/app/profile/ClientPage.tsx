@@ -4,11 +4,24 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/utils/supabase';
 import { User } from '@supabase/supabase-js';
-import { User as UserIcon, ArrowLeft, Mail } from 'lucide-react';
+import { User as UserIcon, ArrowLeft, Mail, Crown } from 'lucide-react';
 import Link from 'next/link';
+
+type MemberTier = 'free' | 'pro' | 'vvip';
+
+function normalizeTier(tier?: string | null): MemberTier {
+    const normalized = (tier || '').toLowerCase();
+    if (normalized === 'pro' || normalized === 'vvip') return normalized;
+    return 'free';
+}
+
+interface UserProfileData {
+    tier?: string | null;
+}
 
 export default function ProfileClientPage() {
     const [user, setUser] = useState<User | null>(null);
+    const [profile, setProfile] = useState<UserProfileData | null>(null);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
 
@@ -19,6 +32,14 @@ export default function ProfileClientPage() {
                 router.push('/login');
                 return;
             }
+
+            const { data: profileData } = await supabase
+                .from('user_profiles')
+                .select('tier')
+                .eq('id', user.id)
+                .maybeSingle();
+
+            setProfile(profileData || null);
             setUser(user);
             setLoading(false);
         };
@@ -36,6 +57,13 @@ export default function ProfileClientPage() {
             </div>
         );
     }
+
+    const memberTier = normalizeTier(profile?.tier);
+    const tierClassName = memberTier === 'vvip'
+        ? 'bg-amber-500/10 text-amber-300 border border-amber-500/30'
+        : memberTier === 'pro'
+            ? 'bg-cyan-500/10 text-cyan-300 border border-cyan-500/30'
+            : 'bg-slate-700/50 text-slate-300 border border-slate-600/50';
 
     return (
         <div className="min-h-screen bg-[#0f172a] pb-28">
@@ -74,6 +102,15 @@ export default function ProfileClientPage() {
                             <div className="bg-black/20 rounded-2xl p-4 border border-white/5">
                                 <label className="text-[11px] uppercase tracking-wider text-slate-500 font-bold mb-1 block">Account ID</label>
                                 <code className="text-xs text-slate-300 font-mono break-all">{user?.id}</code>
+                            </div>
+                            <div className="bg-black/20 rounded-2xl p-4 border border-white/5">
+                                <label className="text-[11px] uppercase tracking-wider text-slate-500 font-bold mb-2 block">Member Tier</label>
+                                <div className="flex items-center gap-2">
+                                    {memberTier === 'vvip' && <Crown size={16} className="text-amber-400" />}
+                                    <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase ${tierClassName}`}>
+                                        {memberTier}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>

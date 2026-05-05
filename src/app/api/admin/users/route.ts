@@ -5,6 +5,9 @@ import { cookies } from 'next/headers';
 
 export const dynamic = 'force-dynamic';
 
+const ALLOWED_MEMBER_TIERS = ['free', 'pro', 'vvip'] as const;
+type MemberTier = (typeof ALLOWED_MEMBER_TIERS)[number];
+
 async function createAuthedClient() {
     const cookieStore = await cookies();
     return createServerClient(
@@ -43,6 +46,7 @@ export async function GET(request: Request) {
         const page = parseInt(searchParams.get('page') || '1');
         const limit = parseInt(searchParams.get('limit') || '20');
         const search = searchParams.get('search') || '';
+        const tier = (searchParams.get('tier') || '').toLowerCase();
 
         const from = (page - 1) * limit;
         const to = from + limit - 1;
@@ -55,6 +59,10 @@ export async function GET(request: Request) {
 
         if (search) {
             query = query.or(`id.eq.${search},first_name.ilike.%${search}%,last_name.ilike.%${search}%,email.ilike.%${search}%`);
+        }
+
+        if (ALLOWED_MEMBER_TIERS.includes(tier as MemberTier)) {
+            query = query.eq('tier', tier);
         }
 
         const { data, error, count } = await query;
@@ -86,13 +94,29 @@ export async function PUT(request: Request) {
         if (profile?.role !== 'admin') return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
         const body = await request.json();
-        const { id, credits, role } = body;
+        const { id, credits, role, tier } = body;
 
         if (!id) throw new Error('User ID is required');
 
         const updates: any = {};
         if (credits !== undefined) updates.credits = credits;
         if (role !== undefined) updates.role = role;
+        let normalizedTier: MemberTier | undefined;
+        if (tier !== undefined) {
+            normalizedTier = String(tier).toLowerCase() as MemberTier;
+            if (!ALLOWED_MEMBER_TIERS.includes(normalizedTier)) {
+                return NextResponse.json({ success: false, error: 'Invalid tier value' }, { status: 400 });
+            }
+            updates.tier = normalizedTier;
+        }
+
+        const { data: existingProfile, error: existingProfileError } = await supabase
+            .from('user_profiles')
+            .select('tier')
+            .eq('id', id)
+            .single();
+
+        if (existingProfileError) throw existingProfileError;
 
         const { data, error } = await supabase
             .from('user_profiles')
@@ -102,6 +126,21 @@ export async function PUT(request: Request) {
             .single();
 
         if (error) throw error;
+
+        if (normalizedTier && existingProfile?.tier !== normalizedTier) {
+            const { error: historyError } = await supabase
+                .from('member_tier_history')
+                .insert({
+                    user_id: id,
+                    previous_tier: (existingProfile?.tier || 'free').toLowerCase(),
+                    new_tier: normalizedTier,
+                    changed_by: user.id,
+                });
+
+            if (historyError) {
+                console.error('Failed to insert member tier history:', historyError);
+            }
+        }
 
         return NextResponse.json({ success: true, user: data });
 
