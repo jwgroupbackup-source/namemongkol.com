@@ -5,7 +5,7 @@ export const articleThaksaGuide: Article = {
     slug: 'thaksa-pakorn-naming-guide',
     title: 'ทักษา-ปกรณ์: หลักคำตั้งชื่อลูกให้ตรงจุด — หลีกเลี่ยงอักษรกาลกิณี',
     excerpt: 'ศึกษาทักษา-ปกรณ์ — ศาสตร์การเลือกอักษรให้ตรงกับวันเกิด วิธีหลีกเลี่ยงอักษรกาลกิณี พยัญชนะที่มงคล และเทคนิกการตั้งชื่อลูกให้ปลอดภัยจากพลังเลวร้าย',
-    coverImage: '/cover-thaksa-guide.svg',
+    coverImage: '/images/articles/thaksa-pakorn-naming-guide.webp',
     coverImageAlt: 'ทักษา-ปกรณ์: ศาสตร์การตั้งชื่อตามวันเกิด 7 วัน | NameMongkol',
     date: '2026-04-28',
     author: 'อาจารย์ณัฐ (NameMongkol)',
@@ -17,7 +17,7 @@ export const articleThaksaGuide: Article = {
     ],
     metaTitle: 'ทักษา-ปกรณ์: หลักการตั้งชื่อลูกตามวันเกิด | NameMongkol',
     metaDescription: 'ศึกษาทักษา-ปกรณ์ วิธีหลีกเลี่ยงอักษรกาลกิณี ตารางอักษรมงคล-ศัตรูตามวันเกิด และเทคนิกตั้งชื่อลูกให้ปลอดภัยสูงสุด',
-    relatedSlugs: ['baby-naming-guide-2569', 'เลขศาสตร์-ตั้งชื่อมงคล', 'boy-names-2569-50-auspicious', 'girl-names-2569-50-auspicious'],
+    relatedSlugs: ['baby-naming-guide-2569', 'numerology-0-9-power-guide', 'boy-names-2569-50-auspicious', 'girl-names-2569-50-auspicious'],
     dateModified: '2026-04-28',
     toc: [
         { title: 'ทักษา-ปกรณ์ คืออะไร?', id: 'what-is-thaksa', level: 2 },

@@ -5,7 +5,7 @@ export const articleGirlNames50: Article = {
     slug: 'girl-names-2569-50-auspicious',
     title: 'ชื่อลูกสาว 2569 — 50 ชื่อมงคลเกรด A+ สวยงามเสริมดวง',
     excerpt: '50 ชื่อลูกสาวมงคลเกรด A+ ปี 2569 คัดสรรด้วย 4 ศาสตร์: เลขศาสตร์, ทักษา, อายตนะ 6, นิรันดร์ศาสตร์ พร้อมความหมาย ตารางผลรวมเลข วันใช้ได้ และเทคนิกการหลีกเลี่ยงอักษรร้าย',
-    coverImage: '/cover-girl-names-50.svg',
+    coverImage: '/images/articles/girl-names-2569-50-auspicious.webp',
     coverImageAlt: '50 ชื่อลูกสาวมงคลเกรด A+ สวยงาม ปี 2569 - ชื่อมงคลเสริมดวง | NameMongkol',
     date: '2026-04-28',
     author: 'อาจารย์ณัฐ (NameMongkol)',
@@ -15,8 +15,8 @@ export const articleGirlNames50: Article = {
         'ชื่อลูกสาว 50 ชื่อ', 'ตั้งชื่อลูกสาว', 'ชื่อสาวมงคล', 'ชื่อสาวมงคล 2569',
         'ชื่อเด็กสาวมงคล', 'ชื่อเด็กสาวเกรด A+', 'ตั้งชื่อมงคลลูกสาว', 'ชื่อสาวสวยงาม'
     ],
-    metaTitle: 'ชื่อลูกสาว 2569 — 50 ชื่อมงคลเกรด A+ สวยงาม | NameMongkol',
-    metaDescription: '50 ชื่อลูกสาวมงคลเกรด A+ ปี 2569 คัดด้วย 4 ศาสตร์ + ตารางผลรวมเลข ความหมายสวย วิธีเลือก และตรวจสอบด้วย NameMongkol ฟรี',
+    metaTitle: 'ชื่อลูกสาว 2569: 50 ชื่อมงคลเกรด A+ สวย ไพเราะ เสริมดวง | NameMongkol',
+    metaDescription: '50 ชื่อลูกสาวมงคลปี 2569 คัดสรรเกรด A+ ผ่าน 4 ศาสตร์ครบ: เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 นิรันดร์ศาสตร์ ชื่อสวยงาม ไพเราะ ความหมายดี พร้อมวิธีเลือกชื่อให้ตรงวันเกิดลูก',
     relatedSlugs: ['baby-naming-guide-2569', 'boy-names-2569-50-auspicious', 'thaksa-pakorn-naming-guide'],
     dateModified: '2026-04-28',
     toc: [
@@ -172,6 +172,9 @@ export const articleGirlNames50: Article = {
         </ul>
         <p class="text-amber-300 text-sm bg-amber-900/20 border border-amber-500/30 rounded-lg p-4">
             ➜ ชื่อที่ได้เกรด A+ สวยงาม ไม่มีกาลกิณี คือชื่อลูกสาวที่ดีแล้ว!
+        </p>
+        <p class="text-slate-400 mt-4 text-sm">
+            💡 มีหลายชื่อที่อยากเปรียบเทียบ? ลอง <a href="/name-analysis" class="text-amber-400 hover:underline">เช็คชื่อมงคลหลายชื่อพร้อมกัน</a> สูงสุด 1,000 ชื่อ
         </p>
     </section>
 

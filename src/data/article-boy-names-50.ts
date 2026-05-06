@@ -5,7 +5,7 @@ export const articleBoyNames50: Article = {
     slug: 'boy-names-2569-50-auspicious',
     title: 'ชื่อลูกชาย 2569 — 50 ชื่อมงคลเกรด A+ ด้วย 4 ศาสตร์',
     excerpt: '50 ชื่อลูกชายมงคลเกรด A+ ปี 2569 คัดสรรด้วย 4 ศาสตร์: เลขศาสตร์, ทักษา, อายตนะ 6, นิรันดร์ศาสตร์ พร้อมความหมาย ตารางผลรวมเลข วันใช้ได้ และวิธีเลือกให้ตรงจุด',
-    coverImage: '/cover-boy-names-50.svg',
+    coverImage: '/images/articles/boy-names-2569-50-auspicious.webp',
     coverImageAlt: '50 ชื่อลูกชายมงคลเกรด A+ ปี 2569 - ชื่อคัดสรรด้วย 4 ศาสตร์ | NameMongkol',
     date: '2026-04-28',
     author: 'อาจารย์ณัฐ (NameMongkol)',
@@ -15,8 +15,8 @@ export const articleBoyNames50: Article = {
         'ชื่อลูกชาย 50 ชื่อ', 'ตั้งชื่อลูกชาย', 'ชื่อชายมงคล', 'ชื่อชายมงคล 2569',
         'ชื่อเด็กชายมงคล', 'ชื่อเด็กชายเกรด A+', 'ตั้งชื่อมงคลลูกชาย'
     ],
-    metaTitle: 'ชื่อลูกชาย 2569 — 50 ชื่อมงคลเกรด A+ | NameMongkol',
-    metaDescription: '50 ชื่อลูกชายมงคลเกรด A+ ปี 2569 คัดด้วย 4 ศาสตร์ + ตารางผลรวมเลข วันใช้ได้ วิธีเลือก และตรวจสอบด้วย NameMongkol ฟรี',
+    metaTitle: 'ชื่อลูกชาย 2569: 50 ชื่อมงคลเกรด A+ คัดสรรด้วย 4 ศาสตร์ | NameMongkol',
+    metaDescription: '50 ชื่อลูกชายมงคลปี 2569 คัดสรรเกรด A+ ผ่าน 4 ศาสตร์ครบ: เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 นิรันดร์ศาสตร์ พร้อมคำอ่าน ความหมาย และวิธีเลือกชื่อให้ตรงวันเกิดลูก',
     relatedSlugs: ['baby-naming-guide-2569', 'girl-names-2569-50-auspicious', 'thaksa-pakorn-naming-guide'],
     dateModified: '2026-04-28',
     toc: [
@@ -171,6 +171,9 @@ export const articleBoyNames50: Article = {
         </ul>
         <p class="text-amber-300 text-sm bg-amber-900/20 border border-amber-500/30 rounded-lg p-4">
             ➜ ที่ได้เกรด A+ ร่วมกับนามสกุล นั่นคือชื่อที่ดีสำหรับลูกชายของคุณแล้ว!
+        </p>
+        <p class="text-slate-400 mt-4 text-sm">
+            💡 มีหลายชื่อที่อยากเปรียบเทียบ? ลอง <a href="/name-analysis" class="text-amber-400 hover:underline">เช็คชื่อมงคลหลายชื่อพร้อมกัน</a> สูงสุด 1,000 ชื่อ
         </p>
     </section>
 

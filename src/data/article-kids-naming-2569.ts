@@ -5,7 +5,7 @@ export const articleKidsNaming2569: Article = {
     slug: 'baby-naming-guide-2569',
     title: 'คู่มือตั้งชื่อลูก 2569 ฉบับสมบูรณ์ — หลักเลขศาสตร์ ทักษา อายตนะ 6',
     excerpt: 'คู่มือตั้งชื่อลูกชาย ลูกสาว 2569 ที่ครอบคลุม 4 ศาสตร์: เลขศาสตร์, ทักษา, อายตนะ 6, นิรันดร์ศาสตร์ พร้อมตารางอักษรกาลกิณี ตัวอย่างชื่อ 50+ เทคนิคการหลีกเลี่ยงกาลกิณี และวิธีเลือกฤกษ์ดีให้ชื่อมงคล',
-    coverImage: '/cover-kids-naming.svg',
+    coverImage: '/images/articles/baby-naming-guide-2569.webp',
     coverImageAlt: 'คู่มือตั้งชื่อลูก 2569 — 4 ศาสตร์ (เลขศาสตร์, ทักษา, อายตนะ 6, นิรันดร์) | NameMongkol',
     date: '2026-04-28',
     author: 'อาจารย์ณัฐ (NameMongkol)',
@@ -20,10 +20,10 @@ export const articleKidsNaming2569: Article = {
     metaTitle: 'คู่มือตั้งชื่อลูก 2569 — 4 ศาสตร์และ 50+ ตัวอย่างชื่อมงคล | NameMongkol',
     metaDescription: 'คู่มือตั้งชื่อลูกชาย ลูกสาว 2569 ครบ 4 ศาสตร์: เลขศาสตร์, ทักษา, อายตนะ 6, นิรันดร์ศาสตร์ มีตาราเช็กกาลกิณี 50+ ตัวอย่างชื่อมงคล เกรด A+ และเทคนิกการหลีกเลี่ยงอักษรร้าย',
     relatedSlugs: [
-        'ตั้งชื่อมงคล-ผู้ชาย-ผู้หญิง',
-        'เลขศาสตร์-ตั้งชื่อมงคล',
-        'ทักษา-ปกรณ์-ตั้งชื่อลูก',
-        'วิเคราะห์ชื่อ-นามสกุล-ฟรี'
+        'boy-names-2569-50-auspicious',
+        'girl-names-2569-50-auspicious',
+        'thaksa-pakorn-naming-guide',
+        'lucky-names-by-birthday-2569'
     ],
     dateModified: '2026-04-28',
     toc: [
@@ -491,6 +491,9 @@ export const articleKidsNaming2569: Article = {
             </ol>
             <p class="text-amber-300 mt-6 text-sm">
                 ✨ "ชื่อดีคือศรี เปลี่ยนชื่อมงคลเปลี่ยนชีวิตจริง"
+            </p>
+            <p class="text-slate-400 mt-4 text-sm">
+                อยากรู้ว่าชื่อของลูกดีแค่ไหน? <a href="/" class="text-amber-400 hover:underline">วิเคราะห์ชื่อมงคลฟรี</a> หรือ <a href="/name-analysis" class="text-amber-400 hover:underline">เช็คชื่อมงคลหลายชื่อพร้อมกัน</a>
             </p>
         </div>
     </section>

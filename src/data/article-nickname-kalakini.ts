@@ -5,7 +5,7 @@ export const articleNicknameKalakini: Article = {
     slug: 'nickname-kalakini-effect',
     title: 'ไขข้อข้องใจ: ชื่อจริงมงคลแล้ว "ชื่อเล่นมีกาลกิณีได้ไหม?" ทำไมยุคนี้ชื่อเล่นถึงส่งผลต่อดวงชะตามากกว่าที่คิด!',
     excerpt: 'ชื่อจริงไม่มีกาลกิณีแล้ว แต่ชื่อเล่นมีได้ไหม? พาไปเจาะลึกเหตุผลทางโหราศาสตร์ยุคใหม่ว่าทำไม "ชื่อที่ถูกเรียกบ่อย" ถึงดึงดูดพลังงานได้เร็วกว่าที่คุณคิด',
-    coverImage: '/images/articles/nickname-kalakini.png',
+    coverImage: '/images/articles/nickname-kalakini.webp',
     coverImageAlt: 'ชื่อเล่นมีกาลกิณีได้ไหม ผลกระทบของชื่อเล่นต่อดวงชะตา',
     date: '2026-04-24',
     author: 'อาจารย์ณัฐ (NameMongkol)',
@@ -135,6 +135,9 @@ export const articleNicknameKalakini: Article = {
             <a href="/" class="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold px-8 py-4 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all text-lg shadow-lg shadow-amber-500/20">
                 🔮 วิเคราะห์ชื่อฟรี
             </a>
+            <p class="text-slate-400 mt-6 text-sm">
+                💡 หรือหากต้องการตรวจสอบทีละหลายๆ ชื่อ แนะนำให้ <a href="/name-analysis" class="text-amber-400 hover:underline">เช็คชื่อมงคลหลายชื่อพร้อมกัน</a> ได้ฟรี
+            </p>
         </div>
     </div>
   </div>

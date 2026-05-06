@@ -5,7 +5,7 @@ export const articleLuckyNumbers2569: Article = {
     slug: 'lucky-phone-numbers-guide-2569',
     title: 'เบอร์มงคล 2569 — วิธีเลือกเบอร์โทรศัพท์เสริมดวง คู่เลขมงคล และเลขศัตรู',
     excerpt: 'คู่มือเบอร์มงคล 2569 เลือกเบอร์โทรศัพท์เสริมดวงให้ถูก ศึกษา 20+ คู่เลขมงคล คู่ศัตรู ผลรวมเบอร์ กราฟพลังงาน 6 ด้าน วิธีเช็คเบอร์ด้วย NameMongkol และเทคนิคหลีกเลี่ยงเบอร์ร้าย',
-    coverImage: '/cover-lucky-numbers.svg',
+    coverImage: '/images/articles/lucky-phone-numbers-guide-2569.webp',
     coverImageAlt: 'เบอร์มงคล 2569 - 20+ คู่เลขมงคล (24, 46, 15, 14 เป็นต้น) | NameMongkol',
     date: '2026-04-28',
     author: 'อาจารย์ณัฐ (NameMongkol)',
@@ -20,10 +20,10 @@ export const articleLuckyNumbers2569: Article = {
     metaTitle: 'เบอร์มงคล 2569 — 20+ คู่เลขมงคล วิธีเลือก และกราฟพลังงาน | NameMongkol',
     metaDescription: 'คู่มือเบอร์มงคล 2569 เลือกเบอร์โทรศัพท์สุดท้าย 4 หลักให้มงคล ศึกษา 20+ คู่เลขมงคล คู่ศัตรู ผลรวมเบอร์ กราฟ 6 ด้าน วิธีเช็คด้วย NameMongkol ฟรี',
     relatedSlugs: [
-        'เช็คเบอร์มงคล-ฟรี',
-        'วิเคราะห์เบอร์โทรศัพท์',
-        'คู่เลขมงคล-แบบครบ',
-        'เบอร์เสริมดวง-2569'
+        'auspicious-phone-number-guide-2026',
+        'most-accurate-phone-number-analysis-2026',
+        'lucky-numbers-2569-guide',
+        'numerology-0-9-power-guide'
     ],
     dateModified: '2026-04-28',
     toc: [

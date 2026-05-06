@@ -5,7 +5,7 @@ export const articleNameByBirthday: Article = {
     slug: 'lucky-names-by-birthday-2569',
     title: 'ชื่อมงคล ชาย/หญิง ตามวันเกิด 2569 — ทีละวัน ชื่อแต่ละวัน 7 ชื่อ',
     excerpt: 'ชื่อมงคลแยกตามวันเกิดทั้ง 7 วัน: จันทร์ อังคาร พุธ พฤหัสบดี ศุกร์ เสาร์ อาทิตย์ มีชื่อมงคลสำหรับชายและหญิง 7 ชื่อต่อวัน รวม 50+ ชื่อ พร้อมความหมาย ผลรวมเลข และการหลีกเลี่ยงกาลกิณี',
-    coverImage: '/cover-names-by-birthday.svg',
+    coverImage: '/images/articles/lucky-names-by-birthday-2569.webp',
     coverImageAlt: 'ชื่อมงคลชาย-หญิง ตามวันเกิด 7 วัน 2569 - 50+ ชื่อมงคลเกรด A+ | NameMongkol',
     date: '2026-04-28',
     author: 'อาจารย์ณัฐ (NameMongkol)',
@@ -1903,6 +1903,9 @@ export const articleNameByBirthday: Article = {
             <a href="/" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-purple-600 text-white font-bold hover:shadow-lg hover:shadow-purple-500/25 transition-all hover:-translate-y-0.5">
                 เริ่มวิเคราะห์ชื่อของคุณเลย
             </a>
+            <p class="text-slate-400 mt-6 text-sm">
+                💡 หรือหากต้องการตรวจสอบทีละหลายๆ ชื่อ แนะนำให้ <a href="/name-analysis" class="text-amber-400 hover:underline">เช็คชื่อมงคลหลายชื่อพร้อมกัน</a> ได้ฟรี
+            </p>
         </div>
     </section>
 
