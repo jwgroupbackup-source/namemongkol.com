@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Script from 'next/script';
+import Link from 'next/link';
 import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import ClientPage from '../../ClientPage';
@@ -147,11 +148,20 @@ export default async function DayWallpapersPage({ params }: Props) {
                     <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
                         {`วอลเปเปอร์มงคล${meta.label} ฟรี 2569 เหมาะกับใคร`}
                     </h2>
-                    <p className="text-slate-400 leading-relaxed">
+                    <p className="text-slate-400 leading-relaxed mb-6">
                         {`คอลเลกชันวอลเปเปอร์มงคล${meta.label}ชุดนี้ออกแบบให้สอดคล้องกับสีมงคลประจำวันและสัญลักษณ์เสริมดวงเด่นของวันเกิด ช่วยย้ำเป้าหมายด้านการเงิน การงาน และความรักเมื่อใช้งานเป็นหน้าจอประจำวัน`}
                     </p>
+                    <div className="border-t border-slate-800/50 pt-5">
+                        <h3 className="text-sm font-semibold text-slate-300 mb-3">ค้นหาวอลเปเปอร์ตามจุดประสงค์:</h3>
+                        <div className="flex flex-wrap gap-2">
+                            <Link href="/wallpapers/intent/finance" className="text-xs bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 px-3 py-1.5 rounded-full text-emerald-300 hover:text-emerald-200 transition-colors">💰 เสริมดวงการเงิน เรียกทรัพย์</Link>
+                            <Link href="/wallpapers/intent/work" className="text-xs bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 px-3 py-1.5 rounded-full text-amber-300 hover:text-amber-200 transition-colors">📈 เสริมดวงการงาน บารมี</Link>
+                            <Link href="/wallpapers/intent/love" className="text-xs bg-pink-500/10 hover:bg-pink-500/20 border border-pink-500/20 px-3 py-1.5 rounded-full text-pink-300 hover:text-pink-200 transition-colors">💖 เสริมดวงความรัก เมตตามหานิยม</Link>
+                        </div>
+                    </div>
                 </div>
             </section>
         </>
     );
 }
+

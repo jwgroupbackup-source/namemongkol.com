@@ -7,14 +7,27 @@ import ClientPage from '../../ClientPage';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
 const canonical = `${siteUrl}/wallpapers/intent/work`;
 
+// A/B Testing for CTR in GSC
+// Variant A: Short & Direct (Focus on keyword density)
+const titleA = 'วอลเปเปอร์มงคลเสริมดวงการงาน 2569 โหลดฟรี | NameMongkol';
+const descriptionA = 'รวมวอลเปเปอร์มงคลเสริมดวงการงาน บารมี เลื่อนตำแหน่ง และความก้าวหน้า เลือกตามวันเกิด ดาวน์โหลดฟรี';
+
+// Variant B: Long & Benefit-driven (Focus on emotion and CTR triggers)
+const titleB = 'แจกฟรี! วอลเปเปอร์มงคลเสริมดวงการงาน บารมี เลื่อนตำแหน่ง 2569';
+const descriptionB = 'ดาวน์โหลดวอลเปเปอร์เสริมดวงการงานฟรี คัดเฉพาะภาพเสริมบารมี ผู้ใหญ่อุปถัมภ์ เลื่อนขั้น เลื่อนตำแหน่ง การงานก้าวหน้าในปี 2569';
+
+// --- Active Variant (Change here to test) ---
+const activeTitle = titleA;
+const activeDescription = descriptionA;
+
 export const metadata: Metadata = {
-    title: 'วอลเปเปอร์มงคลเสริมดวงการงาน 2569 โหลดฟรี | NameMongkol',
-    description: 'รวมวอลเปเปอร์มงคลเสริมดวงการงาน บารมี เลื่อนตำแหน่ง และความก้าวหน้า เลือกตามวันเกิด ดาวน์โหลดฟรี',
+    title: activeTitle,
+    description: activeDescription,
     keywords: ['วอลเปเปอร์เสริมดวงการงาน', 'วอลเปเปอร์เลื่อนตำแหน่ง', 'วอลเปเปอร์เสริมบารมี', 'วอลเปเปอร์มงคลการงาน 2569', 'วอลเปเปอร์ความก้าวหน้า'],
     alternates: { canonical },
     openGraph: {
-        title: 'วอลเปเปอร์มงคลเสริมดวงการงาน 2569 โหลดฟรี',
-        description: 'คัดวอลเปเปอร์มงคลสำหรับเสริมบารมี การงาน และความก้าวหน้าในหน้าที่',
+        title: activeTitle,
+        description: activeDescription,
         url: canonical,
         siteName: 'NameMongkol',
         locale: 'th_TH',

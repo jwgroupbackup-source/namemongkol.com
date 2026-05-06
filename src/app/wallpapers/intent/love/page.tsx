@@ -7,14 +7,27 @@ import ClientPage from '../../ClientPage';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
 const canonical = `${siteUrl}/wallpapers/intent/love`;
 
+// A/B Testing for CTR in GSC
+// Variant A: Short & Direct (Focus on keyword density)
+const titleA = 'วอลเปเปอร์มงคลเสริมดวงความรัก 2569 โหลดฟรี | NameMongkol';
+const descriptionA = 'รวมวอลเปเปอร์มงคลเสริมความรัก เมตตามหานิยม เสน่ห์ และความสัมพันธ์ที่ดี เลือกตามวันเกิดและดาวน์โหลดฟรี';
+
+// Variant B: Long & Benefit-driven (Focus on emotion and CTR triggers)
+const titleB = 'แจกฟรี! วอลเปเปอร์มงคลเสริมดวงความรัก เสน่ห์ เมตตามหานิยม 2569';
+const descriptionB = 'ดาวน์โหลดวอลเปเปอร์เสริมดวงความรักฟรี ดึงดูดเนื้อคู่ เพิ่มเสน่ห์ เมตตามหานิยม คนรักคนหลง พร้อมเคล็ดลับเลือกสีให้ตรงวันเกิด 2569';
+
+// --- Active Variant (Change here to test) ---
+const activeTitle = titleA;
+const activeDescription = descriptionA;
+
 export const metadata: Metadata = {
-    title: 'วอลเปเปอร์มงคลเสริมดวงความรัก 2569 โหลดฟรี | NameMongkol',
-    description: 'รวมวอลเปเปอร์มงคลเสริมความรัก เมตตามหานิยม เสน่ห์ และความสัมพันธ์ที่ดี เลือกตามวันเกิดและดาวน์โหลดฟรี',
+    title: activeTitle,
+    description: activeDescription,
     keywords: ['วอลเปเปอร์เสริมดวงความรัก', 'วอลเปเปอร์เสน่ห์', 'วอลเปเปอร์เมตตามหานิยม', 'วอลเปเปอร์ความรัก 2569', 'วอลเปเปอร์มงคลความรัก'],
     alternates: { canonical },
     openGraph: {
-        title: 'วอลเปเปอร์มงคลเสริมดวงความรัก 2569 โหลดฟรี',
-        description: 'คัดวอลเปเปอร์มงคลสำหรับเสริมเสน่ห์ ความรัก และความสัมพันธ์ให้ราบรื่น',
+        title: activeTitle,
+        description: activeDescription,
         url: canonical,
         siteName: 'NameMongkol',
         locale: 'th_TH',

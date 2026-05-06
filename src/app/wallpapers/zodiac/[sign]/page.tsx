@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Script from 'next/script';
+import Link from 'next/link';
 import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import ClientPage from '../../ClientPage';
@@ -120,9 +121,17 @@ export default async function ZodiacWallpapersPage({ params }: Props) {
                     <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
                         {`วอลเปเปอร์มงคล${meta.label} 2569 เสริมดวงตามราศี`}
                     </h2>
-                    <p className="text-slate-400 leading-relaxed">
+                    <p className="text-slate-400 leading-relaxed mb-6">
                         {`สำหรับผู้ที่ต้องการวอลเปเปอร์มงคลตามราศีแบบเฉพาะเจาะจง หน้านี้รวบรวมดีไซน์ที่เชื่อมโยงกับพลังเด่นของ${meta.label} เพื่อใช้เสริมโฟกัสในเรื่องที่ต้องการผลักดันในปี 2569`}
                     </p>
+                    <div className="border-t border-slate-800/50 pt-5">
+                        <h3 className="text-sm font-semibold text-slate-300 mb-3">เจาะจงเสริมดวงเฉพาะด้าน:</h3>
+                        <div className="flex flex-wrap gap-2">
+                            <Link href="/wallpapers/intent/finance" className="text-xs bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 px-3 py-1.5 rounded-full text-emerald-300 hover:text-emerald-200 transition-colors">💰 เสริมการเงิน ค้าขาย โชคลาภ</Link>
+                            <Link href="/wallpapers/intent/work" className="text-xs bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 px-3 py-1.5 rounded-full text-amber-300 hover:text-amber-200 transition-colors">📈 เสริมการงาน เลื่อนตำแหน่ง</Link>
+                            <Link href="/wallpapers/intent/love" className="text-xs bg-pink-500/10 hover:bg-pink-500/20 border border-pink-500/20 px-3 py-1.5 rounded-full text-pink-300 hover:text-pink-200 transition-colors">💖 เสริมความรัก เสน่ห์ เมตตา</Link>
+                        </div>
+                    </div>
                 </div>
             </section>
         </>

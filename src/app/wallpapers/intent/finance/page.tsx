@@ -7,14 +7,27 @@ import ClientPage from '../../ClientPage';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
 const canonical = `${siteUrl}/wallpapers/intent/finance`;
 
+// A/B Testing for CTR in GSC
+// Variant A: Short & Direct (Focus on keyword density)
+const titleA = 'วอลเปเปอร์มงคลเสริมดวงการเงิน 2569 โหลดฟรี | NameMongkol';
+const descriptionA = 'รวมวอลเปเปอร์มงคลเสริมดวงการเงิน เรียกทรัพย์ โชคลาภ ค้าขาย พร้อมดีไซน์ตามวันเกิดและเลขมงคล ดาวน์โหลดฟรี 2569';
+
+// Variant B: Long & Benefit-driven (Focus on emotion and CTR triggers)
+const titleB = 'แจกฟรี! วอลเปเปอร์มงคลเสริมดวงการเงิน เรียกทรัพย์ โชคลาภ 2569';
+const descriptionB = 'ดาวน์โหลดวอลเปเปอร์เสริมดวงการเงินฟรี คัดเฉพาะภาพมงคลเรียกทรัพย์ เสริมโชคลาภ ค้าขายดี ปลดหนี้ รับปี 2569 พร้อมเคล็ดลับตั้งหน้าจอให้ปัง';
+
+// --- Active Variant (Change here to test) ---
+const activeTitle = titleA;
+const activeDescription = descriptionA;
+
 export const metadata: Metadata = {
-    title: 'วอลเปเปอร์มงคลเสริมดวงการเงิน 2569 โหลดฟรี | NameMongkol',
-    description: 'รวมวอลเปเปอร์มงคลเสริมดวงการเงิน เรียกทรัพย์ โชคลาภ ค้าขาย พร้อมดีไซน์ตามวันเกิดและเลขมงคล ดาวน์โหลดฟรี 2569',
+    title: activeTitle,
+    description: activeDescription,
     keywords: ['วอลเปเปอร์เสริมดวงการเงิน', 'วอลเปเปอร์เรียกทรัพย์', 'วอลเปเปอร์โชคลาภ', 'วอลเปเปอร์ค้าขาย', 'วอลเปเปอร์มงคลการเงิน 2569'],
     alternates: { canonical },
     openGraph: {
-        title: 'วอลเปเปอร์มงคลเสริมดวงการเงิน 2569 โหลดฟรี',
-        description: 'เลือกวอลเปเปอร์เสริมดวงการเงิน เรียกทรัพย์และโชคลาภ พร้อมดาวน์โหลดใช้งานได้ทันที',
+        title: activeTitle,
+        description: activeDescription,
         url: canonical,
         siteName: 'NameMongkol',
         locale: 'th_TH',
