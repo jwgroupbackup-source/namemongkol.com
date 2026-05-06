@@ -137,7 +137,7 @@ export default function TermsPage() {
                                         1. ลักษณะของบริการ
                                     </h2>
                                     <p className="text-slate-300">
-                                        ให้บริการวิเคราะห์ข้อมูลทางภาษาศาสตร์ (Onomastics) และสถิติเชิงตัวเลข เพื่อใช้เป็นแนวทางในการตั้งชื่อและสร้างสรรค์ผลงานดิจิทัล รวมถึงบริการเช็คเบอร์มงคลตามหลักเลขศาสตร์ และวิเคราะห์ลายมือออนไลน์ด้วยเทคโนโลยี AI ขั้นสูง (Gemini) ครอบคลุมเส้นชีวิต เส้นสมอง เส้นหัวใจ และเส้นวาสนา
+                                        ให้บริการวิเคราะห์ข้อมูลทางภาษาศาสตร์ (Onomastics) และสถิติเชิงตัวเลข เพื่อใช้เป็นแนวทางในการตั้งชื่อและสร้างสรรค์ผลงานดิจิทัล บริการของเราครอบคลุมถึง: การวิเคราะห์ชื่อแบบปกติและเจาะลึก (Premium), การวิเคราะห์ชื่อจำนวนมาก (Bulk Analysis), บริการเช็คเบอร์มงคลตามหลักเลขศาสตร์, บริการวิเคราะห์ลายมือด้วย AI ขั้นสูง, บริการวิเคราะห์พลังงานออร่า และบริการสร้างสรรค์วอลเปเปอร์มงคลเฉพาะบุคคลตามหลักโหราศาสตร์
                                     </p>
                                     <div className="mt-4 p-4 md:p-5 bg-amber-500/10 border border-amber-500/20 rounded-2xl text-sm md:text-base text-amber-100 flex gap-4 items-start">
                                         <AlertCircle className="shrink-0 mt-0.5 text-amber-400" size={20} />
@@ -165,7 +165,7 @@ export default function TermsPage() {
                                     <div className="grid md:grid-cols-2 gap-4">
                                         <div className="bg-black/20 p-4 rounded-xl border border-white/5">
                                             <h3 className="font-semibold text-white mb-2">💎 การใช้งานเครดิต</h3>
-                                            <p className="text-sm text-slate-400">ใช้แลกบริการ Premium เช่น ค้นหาชื่อระดับสูง ดาวน์โหลดวอลเปเปอร์พิเศษ หรือวิเคราะห์ลายมือด้วย AI (30 เครดิต/ครั้ง)</p>
+                                            <p className="text-sm text-slate-400">ใช้แลกบริการ Premium เช่น ค้นหาชื่อระดับสูง, ดาวน์โหลดวอลเปเปอร์พิเศษ, วิเคราะห์ลายมือด้วย AI (30 เครดิต/ครั้ง) หรือการวิเคราะห์ชื่อจำนวนมาก (Bulk Analysis)</p>
                                         </div>
                                         <div className="bg-black/20 p-4 rounded-xl border border-white/5">
                                             <h3 className="font-semibold text-white mb-2">🚫 นโยบายการคืนเงิน</h3>
@@ -207,7 +207,24 @@ export default function TermsPage() {
                             </div>
                         </section>
 
-                        {/* Section 4 - Customer Support */}
+                        {/* Section 4 - User Generated Content */}
+                        <section className="bg-[#1e293b]/50 p-6 md:p-8 rounded-3xl border border-white/5 hover:border-amber-500/20 transition-all duration-300 group">
+                            <div className="flex items-start gap-4 md:gap-6">
+                                <div className="shrink-0 p-3 rounded-2xl bg-fuchsia-500/10 text-fuchsia-400 group-hover:bg-fuchsia-500/20 transition-colors">
+                                    <Book size={24} />
+                                </div>
+                                <div className="space-y-4">
+                                    <h2 className="text-xl md:text-2xl font-bold text-white group-hover:text-fuchsia-200 transition-colors">
+                                        4. เนื้อหาที่สร้างโดยผู้ใช้ (User-Generated Content)
+                                    </h2>
+                                    <p className="text-slate-300">
+                                        ในการส่งคำติชม หรือรีวิวการใช้งาน (Reviews) บนแพลตฟอร์มของเรา ท่านตกลงที่จะใช้ถ้อยคำที่สุภาพและไม่ละเมิดสิทธิ์ของผู้อื่น โดยท่านอนุญาต (License) ให้ NameMongkol มีสิทธิ์ในการนำข้อความรีวิวและชื่อโปรไฟล์ของท่านไปแสดงผลบนเว็บไซต์หรือใช้ในสื่อเพื่อการประชาสัมพันธ์บริการของเรา
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Section 5 - Customer Support */}
                         <section className="bg-[#1e293b]/50 p-6 md:p-8 rounded-3xl border border-white/5 hover:border-amber-500/20 transition-all duration-300 group">
                             <div className="flex items-start gap-4 md:gap-6">
                                 <div className="shrink-0 p-3 rounded-2xl bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500/20 transition-colors">
@@ -215,7 +232,7 @@ export default function TermsPage() {
                                 </div>
                                 <div className="space-y-4">
                                     <h2 className="text-xl md:text-2xl font-bold text-white group-hover:text-emerald-200 transition-colors">
-                                        4. การสนับสนุนลูกค้า
+                                        5. การสนับสนุนลูกค้า
                                     </h2>
                                     <p className="text-slate-300">
                                         หากท่านประสบปัญหาในการใช้งาน หรือต้องการสอบถามข้อมูลเพิ่มเติมเกี่ยวกับบริการ สามารถติดต่อทีมงานได้ผ่านช่องทางดังนี้:
