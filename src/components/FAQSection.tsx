@@ -42,6 +42,22 @@ export const FAQSection = () => {
                         question={t('sections.faq.q5')}
                         answer={t('sections.faq.a5')}
                     />
+                    <FAQItem
+                        question={t('sections.faq.q6')}
+                        answer={t('sections.faq.a6')}
+                    />
+                    <FAQItem
+                        question={t('sections.faq.q7')}
+                        answer={t('sections.faq.a7')}
+                    />
+                    <FAQItem
+                        question={t('sections.faq.q8')}
+                        answer={t('sections.faq.a8')}
+                    />
+                    <FAQItem
+                        question={t('sections.faq.q9')}
+                        answer={t('sections.faq.a9')}
+                    />
                 </div>
             </div>
 

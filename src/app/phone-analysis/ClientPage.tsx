@@ -27,7 +27,7 @@ const PhoneHeader = () => {
             
             <div role="heading" aria-hidden="true" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl">
                 {t('pages.phoneAnalysis.heroTitle')}{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">
+                <span className="text-amber-400 drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">
                     {t('pages.phoneAnalysis.heroHighlight')}
                 </span>
             </div>

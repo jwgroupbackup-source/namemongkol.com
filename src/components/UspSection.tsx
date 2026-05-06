@@ -5,7 +5,7 @@ export const UspSection = () => {
     return (
         <section className="w-full max-w-6xl mx-auto px-4 py-8 sm:py-16 relative z-10">
             <div className="text-center mb-10 sm:mb-16">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-500 mb-6 tracking-tight">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400 mb-6 tracking-tight drop-shadow-[0_0_15px_rgba(251,191,36,0.2)]">
                     ทำไมต้องวิเคราะห์ชื่อกับ NameMongkol?
                 </h2>
                 <p className="text-slate-400 max-w-[65ch] mx-auto text-base sm:text-lg leading-relaxed">

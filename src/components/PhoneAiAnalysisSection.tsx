@@ -101,7 +101,7 @@ export const PhoneAiAnalysisSection: React.FC<PhoneAiAnalysisSectionProps> = ({
                 <div className="flex items-center gap-2 px-2">
                     <div className="w-1 h-5 bg-gradient-to-b from-amber-400 to-amber-600 rounded-full" />
                     <Sparkles className="w-5 h-5 text-amber-400" />
-                    <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">
+                    <h3 className="text-lg font-bold text-amber-400 drop-shadow-[0_0_15px_rgba(251,191,36,0.2)]">
                         วิเคราะห์เชิงลึกจากอาจารย์มงคล AI
                     </h3>
                 </div>
@@ -173,7 +173,7 @@ export const PhoneAiAnalysisSection: React.FC<PhoneAiAnalysisSectionProps> = ({
                 <div className="flex items-center gap-2 px-2">
                     <div className="w-1 h-5 bg-gradient-to-b from-amber-400 to-amber-600 rounded-full" />
                     <Sparkles className="w-5 h-5 text-amber-400" />
-                    <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">
+                    <h3 className="text-lg font-bold text-amber-400 drop-shadow-[0_0_15px_rgba(251,191,36,0.2)]">
                         วิเคราะห์เชิงลึกจากอาจารย์มงคล AI
                     </h3>
                 </div>

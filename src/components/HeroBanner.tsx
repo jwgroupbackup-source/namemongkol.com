@@ -21,8 +21,8 @@ export const HeroBanner = () => {
                     </div>
 
                     <h1 className="cosmic-text-crisp text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4 tracking-tight">
-                        {t('home.hero.titlePrefix')}<span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_0_18px_rgba(245,158,11,0.30)]">{t('home.hero.titleHighlight')}</span>{t('home.hero.titleFree') ? <span className="text-amber-400"> {t('home.hero.titleFree')}</span> : <span className="text-amber-400">:</span>}{' '}
-                        <span className="bg-gradient-to-r from-[#fde047] via-[#fbbf24] to-[#fde047] bg-clip-text text-transparent drop-shadow-[0_0_16px_rgba(253,224,71,0.28)]">{t('home.hero.titleSuffix')}</span>
+                        {t('home.hero.titlePrefix')}<span className="text-amber-400 drop-shadow-[0_0_18px_rgba(245,158,11,0.30)]">{t('home.hero.titleHighlight')}</span>{t('home.hero.titleFree') ? <span className="text-amber-400"> {t('home.hero.titleFree')}</span> : <span className="text-amber-400">:</span>}{' '}
+                        <span className="text-amber-300 drop-shadow-[0_0_16px_rgba(253,224,71,0.28)]">{t('home.hero.titleSuffix')}</span>
                     </h1>
 
                     <p className="cosmic-text-soft max-w-[65ch] mx-auto text-sm sm:text-base leading-relaxed mb-6 px-4">

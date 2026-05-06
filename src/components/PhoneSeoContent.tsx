@@ -10,7 +10,7 @@ export const PhoneSeoContent = () => {
                     🔢 ศาสตร์แห่งตัวเลข
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-                    ปลดล็อกพลังซ่อนเร้นใน<span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">เบอร์โทรศัพท์</span>ของคุณ
+                    ปลดล็อกพลังซ่อนเร้นใน<span className="text-amber-400 drop-shadow-[0_0_15px_rgba(251,191,36,0.2)]">เบอร์โทรศัพท์</span>ของคุณ
                 </h2>
                 <p className="phone-analysis-soft-text max-w-3xl mx-auto text-base md:text-lg leading-[1.95]">
                     คุณทราบหรือไม่? ตัวเลขที่คุณใช้โทรทุกวัน กำลังส่งพลังงานสั่นสะเทือนมาถึงคุณตลอดเวลา

@@ -27,7 +27,7 @@ export const ResultHeader: React.FC<ResultHeaderProps> = ({ result }) => {
                         <User className="w-6 h-6 text-amber-400" />
                     </div>
                 </div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400 text-center break-words px-2 leading-tight">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-100 text-center break-words px-2 leading-tight drop-shadow-sm">
                     {result.name} {result.surname}
                 </h2>
                 <div className="h-px w-32 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent mt-6"></div>

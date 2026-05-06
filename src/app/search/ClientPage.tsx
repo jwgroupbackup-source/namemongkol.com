@@ -925,6 +925,26 @@ export default function SearchPage() {
                                 {t('pages.search.faq.a3')}
                             </p>
                         </details>
+
+                        <details className="group bg-white/[0.03] border border-white/10 rounded-xl p-4 cursor-pointer open:bg-white/[0.05] transition-colors">
+                            <summary className="font-semibold text-slate-200 list-none flex justify-between items-center">
+                                {t('pages.search.faq.q4')}
+                                <span className="transition-transform group-open:rotate-180">▼</span>
+                            </summary>
+                            <p className="mt-3 text-slate-400 text-sm pl-4 border-l-2 border-amber-500">
+                                {t('pages.search.faq.a4')}
+                            </p>
+                        </details>
+
+                        <details className="group bg-white/[0.03] border border-white/10 rounded-xl p-4 cursor-pointer open:bg-white/[0.05] transition-colors">
+                            <summary className="font-semibold text-slate-200 list-none flex justify-between items-center">
+                                {t('pages.search.faq.q5')}
+                                <span className="transition-transform group-open:rotate-180">▼</span>
+                            </summary>
+                            <p className="mt-3 text-slate-400 text-sm pl-4 border-l-2 border-amber-500">
+                                {t('pages.search.faq.a5')}
+                            </p>
+                        </details>
                     </div>
                 </div>
 

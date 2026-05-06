@@ -44,7 +44,7 @@ export const WallpaperShowcase = () => {
         <div className="w-full max-w-5xl mx-auto mt-4 md:mt-16 mb-8 px-4">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                 <div>
-                    <h2 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 flex items-center gap-3">
+                    <h2 className="text-2xl md:text-3xl font-bold text-amber-400 flex items-center gap-3 drop-shadow-[0_0_15px_rgba(251,191,36,0.2)]">
                         <Sparkles className="text-amber-400" />
                         วอลเปเปอร์มงคล
                     </h2>

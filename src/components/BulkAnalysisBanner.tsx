@@ -108,7 +108,7 @@ export const BulkAnalysisBanner = () => {
 
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4">
                             วิเคราะห์ชื่อ<br />
-                            <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
+                            <span className="text-indigo-300 drop-shadow-[0_0_15px_rgba(165,180,252,0.3)]">
                                 ครั้งละ {count1.toLocaleString()} ชื่อ
                             </span>
                         </h2>

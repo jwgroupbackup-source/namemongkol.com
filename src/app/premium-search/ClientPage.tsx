@@ -423,7 +423,7 @@ export default function PremiumSearchPage() {
                             <Sparkles size={14} />
                             <span>{t('pages.premiumSearch.headerBadge')}</span>
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 via-teal-200 to-emerald-300 drop-shadow-2xl tracking-tight leading-tight">
+                        <h1 className="text-4xl md:text-5xl font-bold text-emerald-400 drop-shadow-2xl tracking-tight leading-tight">
                             {t('pages.premiumSearch.headerTitle')}
                         </h1>
                         <div className="max-w-[65ch] mx-auto space-y-2">
@@ -847,7 +847,7 @@ export default function PremiumSearchPage() {
                                         Q: ค้นหาชื่อมงคล Pro ต่างจากค้นหาทั่วไปอย่างไร?
                                     </h3>
                                     <p className="text-slate-300 leading-relaxed">
-                                        A: ระบบค้นหาชื่อมงคล Pro ใช้ Premium Database ที่ผ่านการคัดกรอง 3 ชั้น ได้แก่ คัดตามหลักทักษา (ไม่มีอักษรกาลกิณี), คัดเฉพาะผลรวมเลขศาสตร์ระดับ A+, และความหมายดี ไพเราะ ทันสมัย นอกจากนี้ยังสามารถเลือกอักษรนำวรรคเดช/ศรี ได้ตามต้องการ
+                                        A: ระบบค้นหาชื่อมงคล Pro ใช้ Premium Database ที่ผ่านการคัดกรอง 3 ชั้น: 1) คัดตามหลักทักษา ไม่มีอักษรกาลกิณี 2) คัดเฉพาะผลรวมเลขศาสตร์ระดับ A+ 3) ความหมายดี ไพเราะ ทันสมัย และสามารถเลือกอักษรนำวรรคเดช/ศรี ได้
                                     </p>
                                 </div>
 
@@ -865,7 +865,7 @@ export default function PremiumSearchPage() {
                                         Q: ค้นหาชื่อมงคล Pro ใช้กี่เครดิต?
                                     </h3>
                                     <p className="text-slate-300 leading-relaxed">
-                                        A: การค้นหาชื่อมงคล Pro ใช้ <strong className="text-white">15 เครดิต</strong> ต่อ 1 ครั้ง โดยระบบจะสุ่มแสดงผล 20 รายชื่อจากฐานข้อมูลที่ตรงตามเงื่อนไขที่คุณเลือก หากต้องการเติมเครดิต สามารถไปที่หน้า <Link href="/topup" className="text-emerald-400 hover:text-emerald-300 underline">เติมเครดิต</Link> ได้ทันที
+                                        A: การค้นหาชื่อมงคล Pro ใช้ <strong className="text-white">15 เครดิต</strong>ต่อ 1 ครั้ง โดยระบบจะสุ่มแสดงผล 20 รายชื่อจากฐานข้อมูลที่ตรงตามเงื่อนไขที่คุณเลือก
                                     </p>
                                 </div>
                             </div>

@@ -330,8 +330,8 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
             {/* Detailed Pairs Breakdown List */}
             <div className="space-y-3">
                 <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2 px-2">
-                    <div className="w-1 h-5 bg-gradient-to-b from-amber-400 to-amber-600 rounded-full"></div>
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">ความหมายคู่เลขของคุณ</span>
+                    <div className="w-1 h-5 bg-amber-500 rounded-full"></div>
+                    <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">ความหมายคู่เลขของคุณ</span>
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {result.pairs.map((pair, idx) => (
