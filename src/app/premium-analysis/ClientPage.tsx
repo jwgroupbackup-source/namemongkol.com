@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import {
     Sparkles, Clock, User, Target,
@@ -15,8 +16,12 @@ import { supabase } from '@/utils/supabase';
 import { generatePremiumNames, PremiumResult, FocusTopic, getAstrologicalDay } from '@/utils/premiumAnalysisUtils';
 import { formatThaiBirthDate, ThaiDateResult } from '@/utils/thaiDateUtils';
 import { calculateEffectiveCredits } from '@/utils/credits';
-import { CertificateGenerator } from '@/components/CertificateGenerator';
 import { SearchableSelect } from '@/components/SearchableSelect';
+
+const CertificateGenerator = dynamic(
+    () => import('@/components/CertificateGenerator').then((m) => m.CertificateGenerator),
+    { ssr: false }
+);
 
 const THAI_MONTHS = [
     'มกราคม (01)', 'กุมภาพันธ์ (02)', 'มีนาคม (03)', 'เมษายน (04)', 'พฤษภาคม (05)', 'มิถุนายน (06)',
@@ -809,7 +814,7 @@ export default function PremiumAnalysisPage() {
                         <p className="text-slate-300 text-lg md:text-2xl max-w-3xl mx-auto font-light leading-loose">
                             เจาะลึกชะตาชีวิตด้วย <strong className="text-amber-200 font-bold">ทักษาปกรณ์</strong> และ <strong className="text-amber-200 font-bold">เลขศาสตร์ชั้นสูง</strong>
                             <br className="hidden md:block" />
-                            เพื่อค้นหาชื่อที่ส่งเสริมดวงชะตาของท่านอย่างแท้จริง
+                            พร้อมคำนวณ <strong className="text-amber-200 font-bold">ลัคนาราศี</strong> จาก <strong className="text-amber-200 font-bold">เวลาตกฟาก</strong> เพื่อค้นหาชื่อที่ส่งเสริมดวงชะตาของท่านอย่างแท้จริง
                         </p>
                     </header>
 

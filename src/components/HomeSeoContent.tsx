@@ -4,6 +4,7 @@ import React from 'react';
 import { Book, Star, Shield, TrendingUp } from 'lucide-react';
 import { useLanguage } from './LanguageProvider';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const HomeSeoContent = () => {
     const { t } = useLanguage();
@@ -90,6 +91,62 @@ export const HomeSeoContent = () => {
                     className="w-full h-auto object-cover"
                     priority={false}
                 />
+            </div>
+
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Link
+                    href="/search"
+                    className="group rounded-2xl border border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10 p-5 transition-all backdrop-blur-sm"
+                >
+                    <p className="text-xs font-semibold uppercase tracking-wider text-amber-300/90 mb-2">
+                        ค้นหาชื่อมงคลฟรี
+                    </p>
+                    <p className="text-white font-bold leading-snug">
+                        ค้นหาชื่อมงคลฟรี 5,000+ ชื่อ
+                    </p>
+                    <p className="mt-2 text-sm text-slate-400 leading-relaxed">
+                        เหมาะสำหรับตั้งชื่อลูก/เปลี่ยนชื่อใหม่ แล้วค่อยนำชื่อที่ชอบไปวิเคราะห์ร่วมกับนามสกุล
+                    </p>
+                    <p className="mt-3 text-sm text-amber-300 group-hover:text-amber-200">
+                        ไปหน้า /search →
+                    </p>
+                </Link>
+
+                <Link
+                    href="/premium-search"
+                    className="group rounded-2xl border border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10 p-5 transition-all backdrop-blur-sm"
+                >
+                    <p className="text-xs font-semibold uppercase tracking-wider text-emerald-300/90 mb-2">
+                        Pro Search
+                    </p>
+                    <p className="text-white font-bold leading-snug">
+                        ค้นหาชื่อมงคล Pro (วรรคเดช/วรรคศรี)
+                    </p>
+                    <p className="mt-2 text-sm text-slate-400 leading-relaxed">
+                        ฐานข้อมูลคัดพิเศษ เลือกอักษรนำตามทักษา และคัดผลรวมเลขศาสตร์ระดับสูง
+                    </p>
+                    <p className="mt-3 text-sm text-emerald-300 group-hover:text-emerald-200">
+                        ไปหน้า /premium-search →
+                    </p>
+                </Link>
+
+                <Link
+                    href="/premium-analysis"
+                    className="group rounded-2xl border border-purple-500/20 bg-purple-500/5 hover:bg-purple-500/10 p-5 transition-all backdrop-blur-sm"
+                >
+                    <p className="text-xs font-semibold uppercase tracking-wider text-purple-300/90 mb-2">
+                        Premium Analysis
+                    </p>
+                    <p className="text-white font-bold leading-snug">
+                        วิเคราะห์ชื่อมงคลขั้นสูง (เวลาเกิด/ลัคนา)
+                    </p>
+                    <p className="mt-2 text-sm text-slate-400 leading-relaxed">
+                        เจาะลึกเฉพาะบุคคลด้วยวัน-เดือน-ปีและเวลาตกฟาก เพื่อคัดชื่อที่ “เหมาะกับดวง” มากขึ้น
+                    </p>
+                    <p className="mt-3 text-sm text-purple-300 group-hover:text-purple-200">
+                        ไปหน้า /premium-analysis →
+                    </p>
+                </Link>
             </div>
         </section>
     );

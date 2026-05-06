@@ -256,8 +256,8 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
             },
             search: {
                 badge: 'รวมชื่อมงคล 5,000+ ชื่อ 2569',
-                title: 'ตั้งชื่อมงคล ตั้งชื่อลูก ฟรี! เปลี่ยนชื่อใหม่ เสริมดวงชะตา',
-                description: 'รวมสุดยอดชื่อมงคลกว่า 5,000 รายชื่อ คัดเฉพาะเกรด A+ ความหมายดี เหมาะตั้งชื่อลูกและเปลี่ยนชื่อใหม่',
+                title: 'ค้นหาชื่อมงคลฟรี 5,000+ ชื่อ: ตั้งชื่อลูกชาย-หญิง และเปลี่ยนชื่อใหม่',
+                description: 'รวมชื่อมงคลกว่า 5,000 รายชื่อ คัดเกรด A+ ความหมายดี กรองตามวันเกิด เพศ และผลรวมเลขศาสตร์ เหมาะสำหรับตั้งชื่อลูกและเปลี่ยนชื่อใหม่',
                 tipTitle: 'ข้อแนะนำก่อนนำไปใช้',
                 tipBody: 'เลือกชื่อที่ชอบ 5-10 ชื่อ แล้วนำไปวิเคราะห์ชื่อร่วมกับนามสกุลอีกครั้ง เพื่อเช็คผลรวมเกรด A+',
                 filters: {
@@ -363,7 +363,7 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
             premiumSearch: {
                 headerBadge: 'Premium Database',
                 headerTitle: 'ค้นหาชื่อมงคล Pro',
-                headerDesc: 'เข้าถึงฐานข้อมูลรายชื่อมงคลกว่า {count} รายชื่อ คัดสรรมาอย่างดี',
+                headerDesc: 'เข้าถึงฐานข้อมูลรายชื่อมงคลกว่า {count} รายชื่อ (คัดสรรพิเศษ) เหมาะสำหรับตั้งชื่อจริงจังและเปลี่ยนชื่อใหม่',
                 headerSub: 'เลือกใช้อักษรทุกวรรค ยกเว้นวรรคกาลกิณี นำหน้าชื่อ',
                 headerHint: '💡 คำแนะนำ: ได้ชื่อที่ต้องการแล้วอย่าลืมนำไป วิเคราะห์ชื่อ - สกุล ก่อนนำไปใช้ด้วยนะครับ',
                 headerNote: 'แสดงผล 20 รายชื่อต่อการค้นหาโดยการสุ่มจากผลลัพธ์ที่ตรงเงื่อนไข',
@@ -596,8 +596,8 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
             },
             search: {
                 badge: '5,000+ auspicious names',
-                title: 'Free auspicious-name search: baby naming, renaming, destiny boost',
-                description: 'Over 5,000 curated A+ names with good meanings—ideal for babies or renaming.',
+                title: 'Free auspicious-name search (5,000+): baby naming and renaming',
+                description: 'Explore 5,000+ curated A+ auspicious names with good meanings. Filter by birth day, gender, and numerology sum—ideal for baby naming or renaming.',
                 tipTitle: 'Tip before using',
                 tipBody: 'Pick 5–10 names you like, then analyze with your surname to confirm an A+ total.',
                 filters: {
@@ -703,7 +703,7 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
             premiumSearch: {
                 headerBadge: 'Premium Database',
                 headerTitle: 'Premium name search',
-                headerDesc: 'Access {count} curated auspicious names.',
+                headerDesc: 'Access {count} curated auspicious names—ideal for serious renaming or baby naming.',
                 headerSub: 'Use any auspicious leading consonant—Kalinik letters removed.',
                 headerHint: '💡 Tip: After picking names, analyze with your surname before using.',
                 headerNote: 'Shows 20 random matching names per search.',
@@ -936,8 +936,8 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
             },
             search: {
                 badge: '5,000+ 吉祥姓名',
-                title: '免費搜尋吉祥姓名：寶寶取名、改名、強運加持',
-                description: '精選 5,000+ A+ 等級好名字，適合寶寶取名或改名。',
+                title: '免費搜尋吉祥姓名（5,000+）：寶寶取名與改名',
+                description: '探索 5,000+ 精選 A+ 等級吉祥姓名，支援依生日、性別與數字總分篩選，適合寶寶取名或改名。',
                 tipTitle: '使用前小提醒',
                 tipBody: '先選 5–10 個喜歡的名字，再與姓氏一起分析確認 A+ 總分。',
                 filters: {
