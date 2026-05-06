@@ -38,17 +38,54 @@ const breadcrumbJsonLd = {
     ],
 };
 
+const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+        {
+            '@type': 'Question',
+            name: 'วอลเปเปอร์มงคลตามราศีต่างจากตามวันเกิดอย่างไร?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'วอลเปเปอร์ตามราศีจะอิงพลังดาวและคาแรกเตอร์ของราศี ขณะที่วอลเปเปอร์ตามวันเกิดจะอิงสีและพลังของวันเกิด ทั้งสองแนวทางใช้เสริมดวงร่วมกันได้',
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'ควรเลือกราศีแบบ Tropical หรือแบบไทย?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'ในหน้านี้ใช้ช่วงวันที่ราศียอดนิยมสำหรับผู้ใช้งานไทย หากต้องการความแม่นยำเฉพาะบุคคล ควรตรวจข้อมูลวันเดือนปีเกิดร่วมกับบริการวิเคราะห์เชิงลึก',
+            },
+        },
+    ],
+};
+
 export default function ZodiacIndexPage() {
     return (
         <>
+            <h1 className="sr-only">วอลเปเปอร์มงคลตามราศี 2569 ฟรี เสริมดวงครบ 12 ราศี</h1>
             <Script
                 id="wallpapers-zodiac-breadcrumb"
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
+            <Script
+                id="wallpapers-zodiac-faq"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+            />
             <Suspense>
                 <ClientPage initialCategory="zodiac" initialTab="collection" />
             </Suspense>
+            <section className="w-full bg-[#050b14] text-slate-200 px-4 pb-12">
+                <div className="max-w-5xl mx-auto">
+                    <h2 className="text-xl md:text-2xl font-bold text-white mb-3">รวมวอลเปเปอร์มงคลตามราศีทั้ง 12 ราศี</h2>
+                    <p className="text-slate-400 leading-relaxed">
+                        เลือกราศีของคุณเพื่อดูวอลเปเปอร์มงคลที่ออกแบบตามธีมและพลังของแต่ละราศี พร้อมดาวน์โหลดและใช้งานได้ทันทีบนมือถือ
+                    </p>
+                </div>
+            </section>
         </>
     );
 }

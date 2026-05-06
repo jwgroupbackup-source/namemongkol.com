@@ -76,16 +76,55 @@ export default async function ZodiacWallpapersPage({ params }: Props) {
         ],
     };
 
+    const faqJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+            {
+                '@type': 'Question',
+                name: `วอลเปเปอร์มงคล${meta.label}ช่วยเสริมด้านไหน?`,
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: `วอลเปเปอร์มงคล${meta.label}ช่วยเสริมพลังตามคาแรกเตอร์ของราศี เช่น จุดแข็งด้านงาน การเงิน ความรัก หรือการตัดสินใจ โดยใช้สีและสัญลักษณ์ที่สอดคล้องกับราศี`,
+                },
+            },
+            {
+                '@type': 'Question',
+                name: `ควรตั้งวอลเปเปอร์ราศีเมื่อไรถึงจะเห็นผล?`,
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'ควรตั้งเป็นหน้าจอล็อกหรือหน้าจอหลักที่เห็นทุกวัน และใช้ต่อเนื่องอย่างน้อย 2-4 สัปดาห์ร่วมกับการตั้งเป้าหมายชัดเจนเพื่อเพิ่มผลลัพธ์เชิงพฤติกรรม',
+                },
+            },
+        ],
+    };
+
     return (
         <>
+            <h1 className="sr-only">{`วอลเปเปอร์มงคล${meta.label} ฟรี 2569 เสริมดวงตามราศี`}</h1>
             <Script
                 id={`wallpapers-zodiac-${sign}-breadcrumb`}
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
+            <Script
+                id={`wallpapers-zodiac-${sign}-faq`}
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+            />
             <Suspense>
                 <ClientPage initialCategory="zodiac" initialZodiac={sign} initialTab="collection" />
             </Suspense>
+            <section className="w-full bg-[#050b14] text-slate-200 px-4 pb-12">
+                <div className="max-w-5xl mx-auto">
+                    <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
+                        {`วอลเปเปอร์มงคล${meta.label} 2569 เสริมดวงตามราศี`}
+                    </h2>
+                    <p className="text-slate-400 leading-relaxed">
+                        {`สำหรับผู้ที่ต้องการวอลเปเปอร์มงคลตามราศีแบบเฉพาะเจาะจง หน้านี้รวบรวมดีไซน์ที่เชื่อมโยงกับพลังเด่นของ${meta.label} เพื่อใช้เสริมโฟกัสในเรื่องที่ต้องการผลักดันในปี 2569`}
+                    </p>
+                </div>
+            </section>
         </>
     );
 }

@@ -103,16 +103,55 @@ export default async function DayWallpapersPage({ params }: Props) {
         ],
     };
 
+    const faqJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+            {
+                '@type': 'Question',
+                name: `วอลเปเปอร์มงคล${meta.label}ช่วยเรื่องอะไร?`,
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: `วอลเปเปอร์มงคล${meta.label}เน้นเสริมพลังตามสีมงคลและสัญลักษณ์ประจำวันเกิด ช่วยเพิ่มโฟกัสและกำลังใจด้านการเงิน การงาน และความสัมพันธ์ในชีวิตประจำวัน`,
+                },
+            },
+            {
+                '@type': 'Question',
+                name: `ควรเลือกวอลเปเปอร์${meta.label}แบบไหนให้เหมาะกับเป้าหมาย?`,
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: `หากต้องการเน้นการเงินให้เลือกภาพที่มีสัญลักษณ์เรียกทรัพย์ หากต้องการเน้นงานให้เลือกภาพที่สื่อถึงอำนาจและความมั่นคง และควรตั้งภาพที่มองเห็นบ่อยเพื่อเสริมการย้ำเป้าหมาย`,
+                },
+            },
+        ],
+    };
+
     return (
         <>
+            <h1 className="sr-only">{`วอลเปเปอร์มงคล${meta.label} ฟรี 2569 เสริมดวงตามวันเกิด`}</h1>
             <Script
                 id={`wallpapers-day-${day}-breadcrumb`}
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
+            <Script
+                id={`wallpapers-day-${day}-faq`}
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+            />
             <Suspense>
                 <ClientPage initialCategory="day" initialDay={day} initialTab="collection" />
             </Suspense>
+            <section className="w-full bg-[#050b14] text-slate-200 px-4 pb-12">
+                <div className="max-w-5xl mx-auto">
+                    <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
+                        {`วอลเปเปอร์มงคล${meta.label} ฟรี 2569 เหมาะกับใคร`}
+                    </h2>
+                    <p className="text-slate-400 leading-relaxed">
+                        {`คอลเลกชันวอลเปเปอร์มงคล${meta.label}ชุดนี้ออกแบบให้สอดคล้องกับสีมงคลประจำวันและสัญลักษณ์เสริมดวงเด่นของวันเกิด ช่วยย้ำเป้าหมายด้านการเงิน การงาน และความรักเมื่อใช้งานเป็นหน้าจอประจำวัน`}
+                    </p>
+                </div>
+            </section>
         </>
     );
 }

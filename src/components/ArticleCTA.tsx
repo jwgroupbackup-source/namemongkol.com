@@ -15,6 +15,12 @@ export const ArticleCTA = () => {
                     เช็คชื่อมงคลหลายชื่อพร้อมกัน
                 </Link>
             </p>
+            <p className="text-slate-400 text-sm mb-4">
+                ต้องการเสริมดวงเฉพาะเป้าหมาย? ลองใช้{' '}
+                <Link href="/wallpapers/intent/finance" className="text-emerald-300 hover:text-emerald-200 underline underline-offset-2">วอลเปเปอร์การเงิน</Link>{' '}
+                / <Link href="/wallpapers/intent/love" className="text-pink-300 hover:text-pink-200 underline underline-offset-2">วอลเปเปอร์ความรัก</Link>{' '}
+                / <Link href="/wallpapers/intent/work" className="text-blue-300 hover:text-blue-200 underline underline-offset-2">วอลเปเปอร์การงาน</Link>
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-fade-in-up">
 
             {/* Mandatory: วิเคราะห์ชื่อมงคล - links to / (homepage) for primary keyword */}

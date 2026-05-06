@@ -79,6 +79,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: 'weekly' as const,
             priority: 0.7,
         })),
+        { url: `${baseUrl}/wallpapers/intent/finance`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.75 },
+        { url: `${baseUrl}/wallpapers/intent/love`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.75 },
+        { url: `${baseUrl}/wallpapers/intent/work`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.75 },
         { url: `${baseUrl}/wallpapers/custom`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.6 },
     ];
 

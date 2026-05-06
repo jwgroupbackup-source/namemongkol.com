@@ -219,6 +219,34 @@ export default function WallpapersPage() {
                                 );
                             })}
                         </div>
+                        <div className="mt-8">
+                            <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
+                                ลัดไปหน้าวอลเปเปอร์รายวันยอดนิยม
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                                <Link href="/wallpapers/day/monday" className="text-xs bg-slate-700/50 hover:bg-yellow-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                                    วอลเปเปอร์มงคลวันจันทร์ ฟรี 2569
+                                </Link>
+                                <Link href="/wallpapers/day/wednesday" className="text-xs bg-slate-700/50 hover:bg-emerald-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                                    วอลเปเปอร์เรียกทรัพย์วันพุธ
+                                </Link>
+                                <Link href="/wallpapers/day/friday" className="text-xs bg-slate-700/50 hover:bg-cyan-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                                    วอลเปเปอร์เสริมความรักวันศุกร์
+                                </Link>
+                                <Link href="/wallpapers/day/saturday" className="text-xs bg-slate-700/50 hover:bg-purple-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                                    วอลเปเปอร์บารมีวันเสาร์
+                                </Link>
+                                <Link href="/wallpapers/intent/finance" className="text-xs bg-slate-700/50 hover:bg-amber-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                                    วอลเปเปอร์เสริมดวงการเงิน
+                                </Link>
+                                <Link href="/wallpapers/intent/love" className="text-xs bg-slate-700/50 hover:bg-pink-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                                    วอลเปเปอร์เสริมดวงความรัก
+                                </Link>
+                                <Link href="/wallpapers/intent/work" className="text-xs bg-slate-700/50 hover:bg-blue-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                                    วอลเปเปอร์เสริมดวงการงาน
+                                </Link>
+                            </div>
+                        </div>
                     </section>
 
                     {/* --- Section 3: Special Deity Collection --- */}
@@ -378,8 +406,14 @@ export default function WallpapersPage() {
                             <Link href="/search" className="text-xs bg-slate-700/50 hover:bg-amber-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                                 ค้นหาชื่อมงคล
                             </Link>
+                            <Link href="/name-analysis" className="text-xs bg-slate-700/50 hover:bg-amber-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                                เช็คชื่อมงคลหลายชื่อพร้อมกัน
+                            </Link>
                             <Link href="/premium-search" className="text-xs bg-slate-700/50 hover:bg-amber-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                                 ค้นหาชื่อมงคล Premium
+                            </Link>
+                            <Link href="/premium-analysis" className="text-xs bg-slate-700/50 hover:bg-amber-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                                วิเคราะห์ชื่อ Premium
                             </Link>
                             <Link href="/phone-analysis" className="text-xs bg-slate-700/50 hover:bg-amber-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                                 วิเคราะห์เบอร์มงคล

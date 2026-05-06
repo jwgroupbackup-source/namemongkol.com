@@ -62,6 +62,36 @@ const DAY_COLORS: Record<string, string> = {
     saturday: 'bg-purple-500',
 };
 
+const DAY_LABELS: Record<string, string> = {
+    all: 'ทุกวัน',
+    sunday: 'วันอาทิตย์',
+    monday: 'วันจันทร์',
+    tuesday: 'วันอังคาร',
+    wednesday: 'วันพุธ(กลางวัน)',
+    wednesday_night: 'วันพุธ(กลางคืน)',
+    thursday: 'วันพฤหัสบดี',
+    friday: 'วันศุกร์',
+    saturday: 'วันเสาร์',
+    aries: 'ราศีเมษ',
+    taurus: 'ราศีพฤษภ',
+    gemini: 'ราศีเมถุน',
+    cancer: 'ราศีกรกฎ',
+    leo: 'ราศีสิงห์',
+    virgo: 'ราศีกันย์',
+    libra: 'ราศีตุลย์',
+    scorpio: 'ราศีพิจิก',
+    sagittarius: 'ราศีธนู',
+    capricorn: 'ราศีมังกร',
+    aquarius: 'ราศีกุมภ์',
+    pisces: 'ราศีมีน',
+};
+
+const buildWallpaperAlt = (wp: Wallpaper) => {
+    const dayLabel = DAY_LABELS[wp.day] || 'เสริมดวง';
+    const intent = wp.tags.slice(0, 3).join(', ');
+    return `วอลเปเปอร์มงคล ${wp.name} สำหรับ${dayLabel} ปี 2569 เสริมดวง ${intent} | NameMongkol`;
+};
+
 // Zodiac categories
 type CategoryType = 'day' | 'zodiac';
 
@@ -653,9 +683,9 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                     >
                                         <Image
                                             src={wp.image}
-                                            alt={`วอลเปเปอร์มงคล${wp.day === 'wednesday' ? 'วันพุธกลางวัน' : wp.day === 'wednesday_night' ? 'วันพุธกลางคืน' : ''} ${wp.name} เสริมดวง${wp.tags.join(' ')}`}
+                                            alt={buildWallpaperAlt(wp)}
                                             fill
-                                            sizes={isFeatured ? "(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 40vw" : "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 20vw, 16vw"}
+                                            sizes={isFeatured ? "(max-width: 640px) 100vw, (max-width: 1024px) 65vw, 42vw" : "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 20vw, 15vw"}
                                             className="object-cover transition-transform duration-700 group-hover:scale-105"
                                         />
 
@@ -754,7 +784,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                             <div className="relative w-full aspect-[9/16] bg-black flex-shrink-0 overflow-hidden">
                                 <Image
                                     src={selectedWallpaper.image}
-                                    alt={`วอลเปเปอร์มงคล ${selectedWallpaper.name} เสริมดวง${selectedWallpaper.tags.join(' ')} NameMongkol`}
+                                    alt={buildWallpaperAlt(selectedWallpaper)}
                                     fill
                                     sizes="(max-width: 640px) 100vw, 384px"
                                     className="object-contain"
