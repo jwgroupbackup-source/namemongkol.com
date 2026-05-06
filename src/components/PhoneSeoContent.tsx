@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Zap, Heart, Shield, Star, Sparkles, Target, Award, Banknote, Users, AlertTriangle } from 'lucide-react';
 
 export const PhoneSeoContent = () => {
@@ -497,7 +498,7 @@ export const PhoneSeoContent = () => {
             </div>
 
             {/* Trust Indicators */}
-            <div className="text-center">
+            <div className="text-center mb-12">
                 <div className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm phone-analysis-soft-text">
                     <div className="flex items-center gap-2">
                         <Award className="w-5 h-5 text-amber-500" />
@@ -513,6 +514,43 @@ export const PhoneSeoContent = () => {
                         <Shield className="w-5 h-5 text-emerald-500" />
                         <span>ใช้หลักเลขศาสตร์ <strong className="text-white">มาตรฐานสากล</strong></span>
                     </div>
+                </div>
+            </div>
+
+            {/* Internal Links — Related Services */}
+            <div className="phone-analysis-surface-card rounded-2xl p-6 md:p-8">
+                <h3 className="text-lg font-bold text-amber-300 mb-2">บริการอื่นๆ ที่คุณอาจสนใจ</h3>
+                <p className="text-sm phone-analysis-soft-text mb-5 leading-relaxed">
+                    นอกจากวิเคราะห์เบอร์มงคลแล้ว NameMongkol ยังมีบริการเสริมดวงอีกหลายอย่างในที่เดียว
+                </p>
+                <div className="grid sm:grid-cols-3 gap-4">
+                    <Link
+                        href="/palm-analysis"
+                        className="group rounded-xl border border-blue-500/20 bg-blue-500/5 hover:bg-blue-500/10 p-4 transition-all"
+                    >
+                        <p className="text-xs font-semibold uppercase tracking-wider text-blue-300/90 mb-1">Palm Analysis</p>
+                        <p className="text-white font-bold text-sm leading-snug mb-1">วิเคราะห์ลายมือออนไลน์ด้วย AI</p>
+                        <p className="text-xs text-slate-400 leading-relaxed">อ่านเส้นชีวิต เส้นสมอง เส้นหัวใจ เส้นวาสนาจากภาพฝ่ามือ</p>
+                        <p className="mt-2 text-xs text-blue-300 group-hover:text-blue-200">ไปหน้า /palm-analysis →</p>
+                    </Link>
+                    <Link
+                        href="/wallpapers"
+                        className="group rounded-xl border border-purple-500/20 bg-purple-500/5 hover:bg-purple-500/10 p-4 transition-all"
+                    >
+                        <p className="text-xs font-semibold uppercase tracking-wider text-purple-300/90 mb-1">Wallpapers</p>
+                        <p className="text-white font-bold text-sm leading-snug mb-1">วอลเปเปอร์มงคลเสริมดวง ฟรี</p>
+                        <p className="text-xs text-slate-400 leading-relaxed">คอลเลกชันวอลเปเปอร์มงคลตามวันเกิด สีมงคล และองค์เทพ</p>
+                        <p className="mt-2 text-xs text-purple-300 group-hover:text-purple-200">ไปหน้า /wallpapers →</p>
+                    </Link>
+                    <Link
+                        href="/"
+                        className="group rounded-xl border border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10 p-4 transition-all"
+                    >
+                        <p className="text-xs font-semibold uppercase tracking-wider text-amber-300/90 mb-1">Name Analysis</p>
+                        <p className="text-white font-bold text-sm leading-snug mb-1">วิเคราะห์ชื่อมงคล-นามสกุล ฟรี</p>
+                        <p className="text-xs text-slate-400 leading-relaxed">เช็คเกรด ผลรวมเลขศาสตร์ และทักษาปกรณ์จากชื่อ-นามสกุล</p>
+                        <p className="mt-2 text-xs text-amber-300 group-hover:text-amber-200">ไปหน้าหลัก →</p>
+                    </Link>
                 </div>
             </div>
         </section>

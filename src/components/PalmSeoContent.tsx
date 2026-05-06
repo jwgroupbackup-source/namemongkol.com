@@ -244,7 +244,8 @@ export const PalmSeoContent = () => {
       <div className="text-sm text-slate-400 leading-relaxed border-t border-amber-500/15 pt-6">
         ดูเพิ่มเติม: <Link href="/articles" className="text-amber-300 hover:text-amber-200">บทความความรู้เสริมดวง</Link> •{' '}
         <Link href="/name-analysis" className="text-amber-300 hover:text-amber-200">เช็คชื่อมงคลหลายชื่อพร้อมกัน</Link> •{' '}
-        <Link href="/phone-analysis" className="text-amber-300 hover:text-amber-200">เช็คเบอร์มงคลกราฟพลังงาน 6 ด้าน</Link>
+        <Link href="/phone-analysis" className="text-amber-300 hover:text-amber-200">เช็คเบอร์มงคลกราฟพลังงาน 6 ด้าน</Link> •{' '}
+        <Link href="/wallpapers" className="text-amber-300 hover:text-amber-200">วอลเปเปอร์มงคลเสริมดวง ดาวน์โหลดฟรี</Link>
       </div>
     </section>
   );

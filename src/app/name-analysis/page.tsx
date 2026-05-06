@@ -5,10 +5,10 @@ import { siteUrl } from '@/lib/seo';
 
 
 export const metadata: Metadata = {
-    title: 'เช็คชื่อมงคลหลายชื่อพร้อมกัน 2569 | Bulk Name Analysis | NameMongkol',
+    title: 'เช็คชื่อมงคลหลายชื่อพร้อมกัน 2569 (Bulk Analysis) | NameMongkol',
     alternates: { canonical: `${siteUrl.replace(/\/$/, '')}/name-analysis` },
-    description: 'เครื่องมือเช็คชื่อมงคลแบบกลุ่ม (Bulk Analysis) วิเคราะห์สูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลข กาลกิณี ส่งออก CSV/PDF เหมาะตั้งชื่อลูก เปลี่ยนชื่อ HR',
-    keywords: 'เช็คชื่อมงคลหลายชื่อ, เปรียบเทียบชื่อมงคล, จัดเกรดชื่อ A+, คู่เลขชื่อมงคล, กาลกิณีชื่อ, วิเคราะห์ชื่อหลายชื่อ, คัดกรองชื่อมงคล, Bulk Name Analysis, Export วิเคราะห์ชื่อ PDF, วิเคราะห์ชื่อพนักงาน HR, ผลรวมเลขศาสตร์ชื่อ',
+    description: 'เช็คชื่อมงคลแบบกลุ่ม (Bulk Analysis) วิเคราะห์และเปรียบเทียบสูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ คัดกรองคู่เลข-กาลกิณี ดูผลรวมเลขศาสตร์ และ Export CSV/PDF เหมาะตั้งชื่อลูก/เปลี่ยนชื่อ/งาน HR',
+    keywords: 'เช็คชื่อมงคลหลายชื่อ, วิเคราะห์ชื่อหลายชื่อ, เปรียบเทียบชื่อมงคล, Bulk Analysis, Bulk Name Analysis, คัดกรองชื่อมงคล, จัดเกรดชื่อ A+, ผลรวมเลขศาสตร์ชื่อ, คู่เลขชื่อมงคล, กาลกิณีชื่อ, Export CSV วิเคราะห์ชื่อ, Export PDF วิเคราะห์ชื่อ, วิเคราะห์ชื่อพนักงาน HR',
 
     openGraph: {
         title: 'เช็คชื่อมงคลหลายชื่อพร้อมกัน 2569 | Bulk Analysis',
@@ -28,6 +28,21 @@ export const metadata: Metadata = {
 };
 
 // JSON-LD Schemas for SEO
+const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${siteUrl}/name-analysis`,
+    'url': `${siteUrl}/name-analysis`,
+    'name': 'เช็คชื่อมงคลหลายชื่อพร้อมกัน 2569 | Bulk Name Analysis | NameMongkol',
+    'description': 'เครื่องมือเช็คชื่อมงคลแบบกลุ่ม (Bulk Analysis) วิเคราะห์สูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลข กาลกิณี และ Export CSV/PDF',
+    'inLanguage': 'th-TH',
+    'isPartOf': {
+        '@type': 'WebSite',
+        'name': 'NameMongkol',
+        'url': siteUrl,
+    },
+};
+
 const softwareAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -38,10 +53,9 @@ const softwareAppSchema = {
     'operatingSystem': 'Web Browser',
     'offers': {
         '@type': 'Offer',
-        'price': '5',
+        'price': '0',
         'priceCurrency': 'THB',
-        'priceValidUntil': '2026-12-31',
-        'description': 'เริ่มต้น 5 เครดิต สำหรับ 1-10 ชื่อ',
+        'description': 'ใช้งานผ่านระบบเครดิต (เริ่มต้น 5 เครดิต สำหรับ 1-10 ชื่อ)',
     },
     'aggregateRating': {
         '@type': 'AggregateRating',
@@ -191,6 +205,14 @@ const breadcrumbSchema = {
 export default function NameAnalysisPage() {
     return (
         <>
+            {/* SSR H1 for Googlebot — keep visually hidden to avoid duplicate visible H1 in client UI */}
+            <h1 className="sr-only">เช็คชื่อมงคลหลายชื่อพร้อมกัน 2569 (Bulk Name Analysis) — จัดเกรด A+ ตรวจคู่เลข กาลกิณี Export CSV/PDF</h1>
+
+            <Script
+                id="name-analysis-webpage-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+            />
             <Script
                 id="name-analysis-software-schema"
                 type="application/ld+json"
@@ -212,6 +234,38 @@ export default function NameAnalysisPage() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             <ClientPage />
+
+            {/* SSR Internal Links (lightweight) — helps crawlers discover related pages without relying on JS */}
+            <div className="w-full bg-[#0f172a] text-slate-200 px-4 pb-24">
+                <div className="max-w-4xl mx-auto border-t border-white/10 pt-10">
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
+                        บริการอื่นๆ ที่เกี่ยวข้อง
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                        <a href="/" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            วิเคราะห์ชื่อ-นามสกุล (ฟรี)
+                        </a>
+                        <a href="/search" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            ค้นหาชื่อมงคลฟรี 5,000+ ชื่อ
+                        </a>
+                        <a href="/premium-search" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            ค้นหาชื่อมงคล Pro
+                        </a>
+                        <a href="/premium-analysis" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            วิเคราะห์ชื่อขั้นสูง (Premium)
+                        </a>
+                        <a href="/phone-analysis" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            เช็คเบอร์มงคลกราฟพลังงาน 6 ด้าน
+                        </a>
+                        <a href="/palm-analysis" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            วิเคราะห์ลายมือออนไลน์ด้วย AI
+                        </a>
+                        <a href="/wallpapers" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            วอลเปเปอร์มงคลเสริมดวง ดาวน์โหลดฟรี
+                        </a>
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

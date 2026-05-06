@@ -163,6 +163,13 @@ export default function PalmAnalysisPage() {
         ],
       },
       {
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          { '@type': 'ListItem', position: 1, name: 'หน้าหลัก', item: siteUrl },
+          { '@type': 'ListItem', position: 2, name: 'วิเคราะห์ลายมือออนไลน์', item: canonicalUrl },
+        ],
+      },
+      {
         '@type': 'HowTo',
         name: 'วิธีวิเคราะห์ลายมือออนไลน์ด้วย AI',
         description: 'ขั้นตอนใช้งานเครื่องมือวิเคราะห์ลายมือออนไลน์บน NameMongkol ให้ได้ผลลัพธ์ที่ชัดเจน',

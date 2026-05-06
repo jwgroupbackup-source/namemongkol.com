@@ -36,6 +36,21 @@ export const metadata: Metadata = {
 };
 
 // --- JSON-LD Schemas ---
+const webPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${siteUrl}/wallpapers`,
+    'url': `${siteUrl}/wallpapers`,
+    'name': 'วอลเปเปอร์มงคล 2569 เสริมดวง งาน เงิน รัก บารมี | NameMongkol',
+    'description': 'ดาวน์โหลดวอลเปเปอร์มงคลเสริมดวงชะตา 2569 ฟรี! ออกแบบตามหลักฮวงจุ้ย โหราศาสตร์ไทย สีมงคลตามวันเกิด ท้าวเวสสุวรรณ เลขมงคล 4289 เสริมการเงิน การงาน ความรัก บารมี',
+    'inLanguage': 'th-TH',
+    'isPartOf': {
+        '@type': 'WebSite',
+        'name': 'NameMongkol',
+        'url': siteUrl,
+    },
+};
+
 const collectionJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -115,6 +130,11 @@ export default function WallpapersPage() {
         <>
             {/* JSON-LD Schemas */}
             <Script
+                id="wallpapers-webpage-json-ld"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+            />
+            <Script
                 id="wallpapers-collection-json-ld"
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
@@ -129,6 +149,9 @@ export default function WallpapersPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
+
+            {/* SSR H1 for Googlebot — hidden visually, H1 in ClientPage is visible */}
+            <h1 className="sr-only">วอลเปเปอร์มงคล 2569 เสริมดวง งาน เงิน รัก บารมี</h1>
 
             {/* ===== Interactive Client Gallery ===== */}
             <Suspense>

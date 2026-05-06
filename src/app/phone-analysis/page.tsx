@@ -172,6 +172,13 @@ export default function PhoneAnalysisPage() {
                 ]
             },
             {
+                '@type': 'BreadcrumbList',
+                'itemListElement': [
+                    { '@type': 'ListItem', 'position': 1, 'name': 'หน้าหลัก', 'item': siteUrl },
+                    { '@type': 'ListItem', 'position': 2, 'name': 'เช็คเบอร์มงคล', 'item': `${siteUrl}/phone-analysis` },
+                ]
+            },
+            {
                 '@type': 'HowTo',
                 'name': 'วิธีวิเคราะห์เบอร์โทรศัพท์มงคล',
                 'description': 'ขั้นตอนการวิเคราะห์เบอร์โทรศัพท์มงคลที่ NameMongkol',
@@ -212,7 +219,7 @@ export default function PhoneAnalysisPage() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             {/* Server-rendered H1 for SEO — always Thai for Googlebot */}
-            <h1 className="sr-only">วิเคราะห์เบอร์มงคล แม่นยำที่สุด! เช็คเกรดเบอร์โทรศัพท์ พร้อมกราฟเจาะลึกรอบด้าน</h1>
+            <h1 className="sr-only">เช็คเบอร์มงคล ฟรี! วิเคราะห์เบอร์โทรศัพท์ด้วย AI กราฟพลังงาน 6 ด้าน เกรด A-F วิเคราะห์คู่เลขมงคล</h1>
 
             <Suspense fallback={
                 <div className="min-h-screen flex items-center justify-center">
