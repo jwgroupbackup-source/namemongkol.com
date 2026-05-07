@@ -1900,7 +1900,7 @@ export const articleNameByBirthday: Article = {
             <p class="text-slate-300 text-sm mb-4">
                 <strong>💡 ไม่แน่ใจเลยหรือไม่?</strong> ลองเล่นกับตัวอย่างชื่อจากตารางด้านบน หลังจากนั้นค่อยไปเลือกชื่อของลูกของตัวเอง
             </p>
-            <a href="/" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-purple-600 text-white font-bold hover:shadow-lg hover:shadow-purple-500/25 transition-all hover:-translate-y-0.5">
+            <a href="/name-check" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-purple-600 text-white font-bold hover:shadow-lg hover:shadow-purple-500/25 transition-all hover:-translate-y-0.5">
                 เริ่มวิเคราะห์ชื่อของคุณเลย
             </a>
             <p class="text-slate-400 mt-6 text-sm">

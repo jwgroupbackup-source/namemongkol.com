@@ -29,8 +29,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Define static routes with proper priorities
     const routes = [
-        { path: '', priority: 1.0, changeFreq: 'daily' as const },
-        { path: '/name-check', priority: 0.9, changeFreq: 'daily' as const }, // Landing page: วิเคราะห์ชื่อ นามสกุล ฟรี
+        { path: '', priority: 0.9, changeFreq: 'daily' as const },
+        { path: '/name-check', priority: 1.0, changeFreq: 'daily' as const }, // Landing page: วิเคราะห์ชื่อ นามสกุล ฟรี
         { path: '/about', priority: 0.7, changeFreq: 'monthly' as const },
         { path: '/articles', priority: 0.9, changeFreq: 'daily' as const },
         { path: '/name-analysis', priority: 0.9, changeFreq: 'daily' as const }, // Bulk tool (differentiated from homepage)

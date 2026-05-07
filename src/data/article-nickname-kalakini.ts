@@ -132,7 +132,7 @@ export const articleNicknameKalakini: Article = {
         <div class="text-center mt-8">
             <p class="text-lg text-white mb-4">👉 อยากรู้ว่าชื่อเล่นของคุณมีกาลกิณีแฝงอยู่หรือไม่?</p>
             <p class="text-slate-300 mb-6">หรือกำลังมองหาไอเดียชื่อเล่นมงคลที่ความหมายดี ทันสมัย ลองใช้ระบบวิเคราะห์และตั้งชื่อของ NameMongkol เพื่อตรวจเช็กพลังงานชื่อของคุณได้ฟรีตั้งแต่วันนี้!</p>
-            <a href="/" class="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold px-8 py-4 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all text-lg shadow-lg shadow-amber-500/20">
+            <a href="/name-check" class="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold px-8 py-4 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all text-lg shadow-lg shadow-amber-500/20">
                 🔮 วิเคราะห์ชื่อฟรี
             </a>
             <p class="text-slate-400 mt-6 text-sm">

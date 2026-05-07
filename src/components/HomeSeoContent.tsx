@@ -93,7 +93,25 @@ export const HomeSeoContent = () => {
                 />
             </div>
 
-            <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+                <Link
+                    href="/name-check"
+                    className="group rounded-2xl border border-sky-500/20 bg-sky-500/5 hover:bg-sky-500/10 p-5 transition-all backdrop-blur-sm"
+                >
+                    <p className="text-xs font-semibold uppercase tracking-wider text-sky-300/90 mb-2">
+                        วิเคราะห์ชื่อฟรี
+                    </p>
+                    <p className="text-white font-bold leading-snug">
+                        วิเคราะห์ชื่อ-นามสกุล ฟรี รู้ผลทันที
+                    </p>
+                    <p className="mt-2 text-sm text-slate-400 leading-relaxed">
+                        ใช้สำหรับเช็กชื่อปัจจุบันว่าผลรวมเลขศาสตร์ กาลกิณี และความสมพงศ์กับนามสกุลอยู่ในเกณฑ์ดีหรือไม่
+                    </p>
+                    <p className="mt-3 text-sm text-sky-300 group-hover:text-sky-200">
+                        ไปหน้า /name-check →
+                    </p>
+                </Link>
+
                 <Link
                     href="/search"
                     className="group rounded-2xl border border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10 p-5 transition-all backdrop-blur-sm"

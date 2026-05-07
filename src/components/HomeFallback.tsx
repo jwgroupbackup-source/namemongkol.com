@@ -2,10 +2,14 @@ import React from 'react';
 import { HeroBanner } from '@/components/HeroBanner';
 import { RefreshCw, Sparkles } from 'lucide-react';
 
-export const HomeFallback = () => {
+type HomeFallbackProps = {
+    heroHeadingLevel?: 'h1' | 'h2';
+};
+
+export const HomeFallback = ({ heroHeadingLevel = 'h1' }: HomeFallbackProps) => {
     return (
         <div className="w-full max-w-lg animate-fade-in-up">
-            <HeroBanner />
+            <HeroBanner headingLevel={heroHeadingLevel} />
 
             <div className="glass-card p-5 sm:p-8 rounded-2xl shadow-2xl shadow-purple-900/20">
                 <div className="space-y-5 sm:space-y-6">

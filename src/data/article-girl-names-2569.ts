@@ -76,7 +76,7 @@ export const articleGirlNames2569: Article = {
     </div>
     <div class="bg-gradient-to-r from-amber-500/10 to-transparent border-l-4 border-amber-500 p-6 rounded-r-xl mb-8">
       <p class="text-amber-200 font-medium">💡 เคล็ดลับจาก NameMongkol</p>
-      <p class="text-slate-300 text-sm mt-2">เมื่อเลือกชื่อที่ชอบแล้ว อย่าลืม<strong class="text-amber-400">วิเคราะห์ชื่อ+นามสกุลพร้อมกัน</strong> ที่ <a href="/" class="text-amber-400 hover:underline">namemongkol.com</a> เพื่อตรวจสอบผลรวมเลขศาสตร์และอักษรกาลกิณีตามวันเกิด ก่อนนำไปใช้จริง</p>
+      <p class="text-slate-300 text-sm mt-2">เมื่อเลือกชื่อที่ชอบแล้ว อย่าลืม<strong class="text-amber-400">วิเคราะห์ชื่อ+นามสกุลพร้อมกัน</strong> ที่ <a href="/name-check" class="text-amber-400 hover:underline">namemongkol.com</a> เพื่อตรวจสอบผลรวมเลขศาสตร์และอักษรกาลกิณีตามวันเกิด ก่อนนำไปใช้จริง</p>
     </div>
   </div>
 
@@ -579,7 +579,7 @@ export const articleGirlNames2569: Article = {
       <p class="text-xl text-white font-bold mb-4">ได้ชื่อที่ชอบแล้วหรือยัง?</p>
       <p class="text-slate-300 mb-6">อย่าลืมนำชื่อที่เลือกไปวิเคราะห์คู่กับนามสกุล เพื่อตรวจสอบผลรวมเลขศาสตร์และกาลกิณี</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="/" class="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold px-6 py-3 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all">🔮 วิเคราะห์ชื่อ-นามสกุล ฟรี</a>
+        <a href="/name-check" class="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold px-6 py-3 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all">🔮 วิเคราะห์ชื่อ-นามสกุล ฟรี</a>
         <a href="/search" class="inline-block bg-gradient-to-r from-slate-700 to-slate-600 text-white font-bold px-6 py-3 rounded-xl hover:from-slate-600 hover:to-slate-500 transition-all">🔍 ค้นหาชื่อมงคล</a>
       </div>
     </div>

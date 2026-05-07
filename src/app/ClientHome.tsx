@@ -49,7 +49,11 @@ const SaveResultCTA = dynamic(() => import('@/components/SaveResultCTA').then(mo
 const BulkAnalysisUpsell = dynamic(() => import('@/components/BulkAnalysisUpsell').then(mod => mod.BulkAnalysisUpsell));
 const BulkAnalysisBanner = dynamic(() => import('@/components/BulkAnalysisBanner').then(mod => mod.BulkAnalysisBanner));
 
-function HomeContent() {
+type ClientHomeProps = {
+    heroHeadingLevel?: 'h1' | 'h2';
+};
+
+function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
     const searchParams = useSearchParams();
     const initialName = searchParams.get('name') ?? '';
     const initialSurname = searchParams.get('surname') ?? '';
@@ -160,7 +164,7 @@ function HomeContent() {
                     <div className="w-full max-w-2xl flex flex-col items-center">
                         {/* HeroBanner decoupled for LCP - No fade-in delay */}
                         <div className="w-full animate-fade-in">
-                            <HeroBanner />
+                            <HeroBanner headingLevel={heroHeadingLevel} />
                         </div>
                         <InputForm
                             name={name}
@@ -259,10 +263,10 @@ function HomeContent() {
     );
 }
 
-export default function ClientHome() {
+export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
     return (
-        <Suspense fallback={<HomeFallback />}>
-            <HomeContent />
+        <Suspense fallback={<HomeFallback heroHeadingLevel={heroHeadingLevel} />}>
+            <HomeContent heroHeadingLevel={heroHeadingLevel} />
             <WelcomeOffer />
         </Suspense>
     );
