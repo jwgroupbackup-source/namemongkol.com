@@ -32,7 +32,7 @@ export const ResultHeader: React.FC<ResultHeaderProps> = ({ result }) => {
                 </h2>
                 <div className="h-px w-32 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent mt-6"></div>
             </div>
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className={`grid ${result.surname ? 'grid-cols-2 gap-3 sm:gap-4' : 'grid-cols-1 max-w-sm mx-auto gap-4'}`}>
                 <div className="glass-card p-4 rounded-2xl text-center relative overflow-hidden group hover:scale-[1.02] transition-transform">
                     <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${result.namePrediction.bgGradient}`}></div>
                     {/* Grade Badge */}
@@ -70,28 +70,30 @@ export const ResultHeader: React.FC<ResultHeaderProps> = ({ result }) => {
                             )}
                     </div>
                 </div>
-                <div className="glass-card p-4 rounded-2xl text-center relative overflow-hidden group hover:scale-[1.02] transition-transform">
-                    <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${result.surnamePrediction.bgGradient}`}></div>
-                    {/* Grade Badge */}
-                    <div className="flex justify-end mb-1">
-                        <GradeBadge grade={result.surnameGrade} />
+                {result.surname && (
+                    <div className="glass-card p-4 rounded-2xl text-center relative overflow-hidden group hover:scale-[1.02] transition-transform">
+                        <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${result.surnamePrediction.bgGradient}`}></div>
+                        {/* Grade Badge */}
+                        <div className="flex justify-end mb-1">
+                            <GradeBadge grade={result.surnameGrade} />
+                        </div>
+                        <span className="text-slate-400 text-sm font-medium">ผลรวมนามสกุล</span>
+                        <div className={`text-4xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${result.surnamePrediction.bgGradient} mt-2 mb-1`}>
+                            {result.surnameScore}
+                        </div>
+                        <div className={`text-xs font-medium ${result.surnamePrediction.color} mb-1`}>
+                            {result.surnamePrediction.level}
+                        </div>
+                        <div className="flex justify-center gap-0.5">
+                            {[...Array(5)].map((_, i) => (
+                                <Star key={i} className={`w-3 h-3 ${i < result.surnamePrediction.stars ? result.surnamePrediction.color + ' fill-current' : 'text-slate-700'}`} />
+                            ))}
+                        </div>
+                        <div className="mt-3 pt-3 border-t border-white/5">
+                            <p className="text-xs text-slate-400 leading-relaxed">&quot;{result.surnamePrediction.desc}&quot;</p>
+                        </div>
                     </div>
-                    <span className="text-slate-400 text-sm font-medium">ผลรวมนามสกุล</span>
-                    <div className={`text-4xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${result.surnamePrediction.bgGradient} mt-2 mb-1`}>
-                        {result.surnameScore}
-                    </div>
-                    <div className={`text-xs font-medium ${result.surnamePrediction.color} mb-1`}>
-                        {result.surnamePrediction.level}
-                    </div>
-                    <div className="flex justify-center gap-0.5">
-                        {[...Array(5)].map((_, i) => (
-                            <Star key={i} className={`w-3 h-3 ${i < result.surnamePrediction.stars ? result.surnamePrediction.color + ' fill-current' : 'text-slate-700'}`} />
-                        ))}
-                    </div>
-                    <div className="mt-3 pt-3 border-t border-white/5">
-                        <p className="text-xs text-slate-400 leading-relaxed">&quot;{result.surnamePrediction.desc}&quot;</p>
-                    </div>
-                </div>
+                )}
             </div>
         </>
     );

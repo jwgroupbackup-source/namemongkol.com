@@ -205,8 +205,8 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
                         />
 
                         {/* ผลรวมชื่อ-สกุล + วิเคราะห์คู่ตัวเลข — side by side always */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                            <ResultTotalScoreCard result={result} />
+                        <div className={`grid grid-cols-1 ${result.surname ? 'sm:grid-cols-2' : 'max-w-xl mx-auto'} gap-3 sm:gap-4`}>
+                            {result.surname && <ResultTotalScoreCard result={result} />}
                             <PairAnalysisCard namePairs={result.namePairs} surnamePairs={result.surnamePairs} />
                         </div>
 
