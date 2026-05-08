@@ -180,7 +180,7 @@ const dayNames: Record<string, string> = {
     saturday: 'เสาร์',
 };
 
-const WALLPAPER_COST = 29;
+const WALLPAPER_COST = 15;
 
 // Vessavana Theme Variants - Different blessing types
 const vessavanaThemes = {
@@ -334,10 +334,25 @@ interface WallpaperContentProps {
     isPremiumUnlocked: boolean;
 }
 
+const getAdaptiveNameFontSize = (fullName: string, isMobile: boolean, canvasWidth: number): number => {
+    const baseFontSize = isMobile ? 62 : 52;
+    const padding = isMobile ? 100 : 240;
+    const availableWidth = canvasWidth - padding;
+    const charWidthRatio = 0.6;
+    const estimatedWidth = fullName.length * baseFontSize * charWidthRatio;
+
+    if (estimatedWidth <= availableWidth) return baseFontSize;
+
+    const scaledSize = Math.floor(availableWidth / (fullName.length * charWidthRatio));
+    const minSize = isMobile ? 36 : 30;
+    return Math.max(scaledSize, minSize);
+};
+
 const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>(
     ({ name, surname, luckyNumbers, theme, dayName, format, dimensions, isPremiumUnlocked }, ref) => {
         const isMobile = format === 'mobile';
         const fullName = surname ? `${name} ${surname}` : name;
+        const nameFontSize = getAdaptiveNameFontSize(fullName, isMobile, dimensions.width);
 
         return (
             <div
@@ -423,11 +438,11 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                             <div style={{ fontSize: isMobile ? 26 : 16, color: 'rgba(255,255,255,0.8)' }}>{theme.sacredSymbol}</div>
                         </div>
 
-                        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 16 : 12 }}>
-                            <div style={{ fontSize: isMobile ? 22 : 14, color: 'rgba(255,255,255,0.95)', letterSpacing: '0.15em', textShadow: '0 2px 12px rgba(0,0,0,0.9)', fontWeight: 600 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 16 : 12, whiteSpace: 'nowrap' as const }}>
+                            <div style={{ fontSize: isMobile ? 24 : 14, color: '#ffffff', letterSpacing: '0.15em', textShadow: '0 2px 12px rgba(0,0,0,0.9)', fontWeight: 700 }}>
                                 คนเกิดวัน{dayName}
                             </div>
-                            <div style={{ padding: isMobile ? '6px 16px' : '4px 12px', background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.4)', borderRadius: 20, fontSize: isMobile ? 18 : 12, color: '#ffffff', fontWeight: 700, textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
+                            <div style={{ padding: isMobile ? '6px 18px' : '4px 12px', background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.35)', borderRadius: 20, fontSize: isMobile ? 18 : 12, color: '#ffffff', fontWeight: 700, textShadow: '0 2px 8px rgba(0,0,0,0.8)', whiteSpace: 'nowrap' as const }}>
                                 {theme.element}
                             </div>
                         </div>
@@ -446,17 +461,24 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                         </div>
 
                         {/* Mantra */}
-                        <div style={{ fontSize: isMobile ? 24 : 15, color: '#ffffff', fontStyle: 'italic', marginBottom: isMobile ? 35 : 25, letterSpacing: '0.12em', textShadow: '0 2px 15px rgba(0,0,0,0.9)', fontWeight: 500 }}>
+                        <div style={{ fontSize: isMobile ? 24 : 15, color: 'rgba(255,255,255,0.9)', fontStyle: 'italic', marginBottom: isMobile ? 20 : 15, letterSpacing: '0.12em', textShadow: '0 2px 15px rgba(0,0,0,0.9)', fontWeight: 500, whiteSpace: 'nowrap' as const }}>
                             ✦ {theme.mantra} ✦
                         </div>
 
+                        {/* Decorative divider above name */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 16 : 12, marginBottom: isMobile ? 20 : 15 }}>
+                            <div style={{ width: isMobile ? 80 : 60, height: 1, background: `linear-gradient(90deg, transparent, ${theme.primary}80)` }} />
+                            <div style={{ fontSize: isMobile ? 18 : 12, color: theme.primary, filter: `drop-shadow(0 0 6px ${theme.primary})` }}>✦</div>
+                            <div style={{ width: isMobile ? 80 : 60, height: 1, background: `linear-gradient(90deg, ${theme.primary}80, transparent)` }} />
+                        </div>
+
                         {/* Name */}
-                        <div style={{ fontSize: isMobile ? 62 : 52, fontWeight: 800, color: '#ffffff', textShadow: '0 0 60px rgba(255,255,255,0.3), 0 4px 20px rgba(0,0,0,0.9)', letterSpacing: '0.06em', marginBottom: isMobile ? 30 : 25, lineHeight: 1.2 }}>
-                            {isPremiumUnlocked ? fullName : '●●● ●●●'}
+                        <div style={{ fontSize: nameFontSize, fontWeight: 800, color: '#ffffff', textShadow: `0 0 80px ${theme.primary}40, 0 0 40px rgba(255,255,255,0.2), 0 4px 20px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.8)`, letterSpacing: '0.08em', marginBottom: isMobile ? 16 : 12, lineHeight: 1.2, whiteSpace: 'nowrap' as const }}>
+                            {fullName}
                         </div>
 
                         {/* Blessing */}
-                        <div style={{ marginTop: isMobile ? 25 : 15, fontSize: isMobile ? 24 : 14, color: '#ffffff', maxWidth: '90%', lineHeight: 1.5, textShadow: '0 2px 15px rgba(0,0,0,0.9)', fontWeight: 600, letterSpacing: '0.05em' }}>
+                        <div style={{ fontSize: isMobile ? 26 : 16, color: 'rgba(255,255,255,0.85)', lineHeight: 1, textShadow: '0 2px 15px rgba(0,0,0,0.9)', fontWeight: 600, letterSpacing: '0.1em', whiteSpace: 'nowrap' as const }}>
                             「 {theme.blessing} 」
                         </div>
                     </div>
@@ -470,9 +492,9 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                                 <span style={{ color: '#ffffff' }}>◆</span>
                             </div>
                             <div style={{ display: 'flex', gap: isMobile ? 18 : 12, justifyContent: 'center' }}>
-                                {(isPremiumUnlocked ? luckyNumbers : [0, 0, 0, 0]).slice(0, 4).map((num, i) => (
-                                    <div key={i} style={{ width: isMobile ? 85 : 60, height: isMobile ? 85 : 60, borderRadius: isMobile ? 20 : 16, background: 'rgba(255,255,255,0.12)', border: '2px solid rgba(255,255,255,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: isMobile ? 38 : 26, fontWeight: 800, color: isPremiumUnlocked ? '#ffffff' : 'rgba(255,255,255,0.3)', boxShadow: '0 4px 25px rgba(0,0,0,0.4)', textShadow: isPremiumUnlocked ? '0 2px 10px rgba(0,0,0,0.7)' : 'none' }}>
-                                        {isPremiumUnlocked ? num : '?'}
+                                {(luckyNumbers || [0, 0, 0, 0]).slice(0, 4).map((num, i) => (
+                                    <div key={i} style={{ width: isMobile ? 85 : 60, height: isMobile ? 85 : 60, borderRadius: isMobile ? 20 : 16, background: 'rgba(255,255,255,0.12)', border: '2px solid rgba(255,255,255,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: isMobile ? 38 : 26, fontWeight: 800, color: '#ffffff', boxShadow: '0 4px 25px rgba(0,0,0,0.4)', textShadow: '0 2px 10px rgba(0,0,0,0.7)' }}>
+                                        {num}
                                     </div>
                                 ))}
                             </div>
@@ -486,14 +508,12 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                         </div>
                     </div>
 
-                    {/* Lock Overlay */}
+                    {/* Watermark Overlay */}
                     {!isPremiumUnlocked && (
-                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.3) 100%)', backdropFilter: 'blur(12px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 25 }}>
-                            <div style={{ padding: 25, background: `radial-gradient(circle, ${theme.primary}20 0%, transparent 70%)`, borderRadius: '50%' }}>
-                                <span style={{ fontSize: 70 }}>🔒</span>
+                        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+                            <div style={{ padding: '10px 30px', background: 'rgba(255,255,255,0.1)', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.3)', backdropFilter: 'blur(4px)', transform: 'rotate(-15deg)', boxShadow: '0 4px 30px rgba(0,0,0,0.1)' }}>
+                                <span style={{ fontSize: 32, color: 'rgba(255,255,255,0.9)', fontWeight: 800, letterSpacing: '0.2em', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>PREVIEW</span>
                             </div>
-                            <div style={{ fontSize: 26, color: 'white', fontWeight: 700, letterSpacing: '0.05em' }}>ปลดล็อกเพื่อดาวน์โหลด</div>
-                            <div style={{ fontSize: 16, color: 'rgba(255,255,255,0.5)' }}>{WALLPAPER_COST} เครดิต</div>
                         </div>
                     )}
                 </div>
@@ -520,6 +540,7 @@ const VessavanaWallpaperContent = React.forwardRef<HTMLDivElement, VessavanaWall
         void _vessavanaTheme; // Reserved for future theme customization
         const isMobile = format === 'mobile';
         const fullName = surname ? `${name} ${surname}` : name;
+        const nameFontSize = getAdaptiveNameFontSize(fullName, isMobile, dimensions.width);
 
         return (
             <div
@@ -549,7 +570,7 @@ const VessavanaWallpaperContent = React.forwardRef<HTMLDivElement, VessavanaWall
                 />
 
                 {/* Stamp เฉพาะชื่อผู้ใช้ - ตำแหน่งด้านล่างของภาพ (ไม่มีกรอบ) */}
-                {isPremiumUnlocked && fullName && (
+                {fullName && (
                     <div style={{
                         position: 'absolute',
                         bottom: isMobile ? '12%' : '10%',
@@ -559,12 +580,13 @@ const VessavanaWallpaperContent = React.forwardRef<HTMLDivElement, VessavanaWall
                         padding: '0 40px',
                     }}>
                         <p style={{
-                            fontSize: isMobile ? 56 : 40,
+                            fontSize: nameFontSize,
                             fontWeight: 700,
                             color: '#1a365d',
                             margin: 0,
                             letterSpacing: '0.15em',
                             lineHeight: 1.8,
+                            whiteSpace: 'nowrap' as const,
                             textShadow: '0 1px 2px rgba(255,255,255,0.5)',
                         }}>
                             {fullName}
@@ -572,21 +594,20 @@ const VessavanaWallpaperContent = React.forwardRef<HTMLDivElement, VessavanaWall
                     </div>
                 )}
 
-                {/* Premium Lock Overlay */}
+                {/* Watermark Overlay */}
                 {!isPremiumUnlocked && (
                     <div style={{
                         position: 'absolute',
                         inset: 0,
-                        background: 'rgba(0,0,0,0.6)',
-                        backdropFilter: 'blur(12px)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         flexDirection: 'column',
-                        gap: 20,
+                        pointerEvents: 'none',
                     }}>
-                        <Lock size={72} color="#fbbf24" />
-                        <span style={{ color: '#fbbf24', fontSize: 28, fontWeight: 600 }}>Premium</span>
+                        <div style={{ padding: '10px 30px', background: 'rgba(255,255,255,0.1)', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.3)', backdropFilter: 'blur(4px)', transform: 'rotate(-15deg)', boxShadow: '0 4px 30px rgba(0,0,0,0.1)' }}>
+                            <span style={{ fontSize: 32, color: 'rgba(255,255,255,0.9)', fontWeight: 800, letterSpacing: '0.2em', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>PREVIEW</span>
+                        </div>
                     </div>
                 )}
             </div>
@@ -1080,10 +1101,11 @@ export default function StandaloneWallpaperGenerator() {
                     >
                         {name.trim() ? (
                             <div
-                                className="w-full h-full"
                                 style={{
-                                    transform: `scale(${format === 'mobile' ? 0.25 : 0.3})`,
-                                    transformOrigin: 'top left',
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    transform: `translate(-50%, -50%) scale(${format === 'mobile' ? 0.25 : 0.3})`,
                                     width: dimensions.width,
                                     height: dimensions.height,
                                 }}

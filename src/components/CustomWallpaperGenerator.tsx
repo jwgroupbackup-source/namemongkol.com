@@ -258,7 +258,7 @@ export const CustomWallpaperGenerator: React.FC<CustomWallpaperGeneratorProps> =
     const luckyNumbers = providedLuckyNumbers || calculateLuckyNumbers(totalScore);
     const fullName = surname ? `${name} ${surname}` : name;
 
-    const CREDIT_COST = 29;
+    const CREDIT_COST = 15;
 
     useEffect(() => {
         const getUser = async () => {
@@ -693,10 +693,26 @@ const getSacredPattern = (pattern: string, color: string): React.ReactNode[] => 
     return patterns[pattern] || patterns.star;
 };
 
+const getAdaptiveNameFontSize = (fullName: string, isMobile: boolean, canvasWidth: number): number => {
+    const baseFontSize = isMobile ? 62 : 52;
+    const padding = isMobile ? 100 : 240; // horizontal padding from container
+    const availableWidth = canvasWidth - padding;
+    // Approximate character width as 0.6 * fontSize for Thai characters
+    const charWidthRatio = 0.6;
+    const estimatedWidth = fullName.length * baseFontSize * charWidthRatio;
+
+    if (estimatedWidth <= availableWidth) return baseFontSize;
+
+    const scaledSize = Math.floor(availableWidth / (fullName.length * charWidthRatio));
+    const minSize = isMobile ? 36 : 30;
+    return Math.max(scaledSize, minSize);
+};
+
 const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>(
     ({ name, surname, grade, totalScore, luckyNumbers, theme, gradeStyle, dayName, format, dimensions, isPremiumUnlocked, birthDay }, ref) => {
         const isMobile = format === 'mobile';
         const fullName = surname ? `${name} ${surname}` : name;
+        const nameFontSize = getAdaptiveNameFontSize(fullName, isMobile, dimensions.width);
 
         return (
             <div
@@ -955,27 +971,28 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                         </div>
 
                         {/* Day label with element */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 16 : 12 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 16 : 12, whiteSpace: 'nowrap' as const }}>
                             <div
                                 style={{
-                                    fontSize: isMobile ? 22 : 14,
-                                    color: 'rgba(255,255,255,0.95)',
+                                    fontSize: isMobile ? 24 : 14,
+                                    color: '#ffffff',
                                     letterSpacing: '0.15em',
                                     textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 1px 3px rgba(0,0,0,0.8)',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
                                 }}
                             >
                                 คนเกิดวัน{dayName}
                             </div>
                             <div style={{
-                                padding: isMobile ? '6px 16px' : '4px 12px',
-                                background: 'rgba(255,255,255,0.2)',
-                                border: '1px solid rgba(255,255,255,0.4)',
+                                padding: isMobile ? '6px 18px' : '4px 12px',
+                                background: 'rgba(255,255,255,0.15)',
+                                border: '1px solid rgba(255,255,255,0.35)',
                                 borderRadius: 20,
                                 fontSize: isMobile ? 18 : 12,
                                 color: '#ffffff',
                                 fontWeight: 700,
                                 textShadow: '0 2px 8px rgba(0,0,0,0.8)',
+                                whiteSpace: 'nowrap' as const,
                             }}>
                                 {theme.element}
                             </div>
@@ -1050,48 +1067,56 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                         <div
                             style={{
                                 fontSize: isMobile ? 24 : 15,
-                                color: '#ffffff',
+                                color: 'rgba(255,255,255,0.9)',
                                 fontStyle: 'italic',
-                                marginBottom: isMobile ? 35 : 25,
+                                marginBottom: isMobile ? 20 : 15,
                                 letterSpacing: '0.12em',
                                 textShadow: '0 2px 15px rgba(0,0,0,0.9), 0 1px 3px rgba(0,0,0,0.8)',
                                 fontWeight: 500,
+                                whiteSpace: 'nowrap' as const,
                             }}
                         >
                             ✦ {theme.mantra} ✦
                         </div>
 
+                        {/* Decorative divider above name */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 16 : 12, marginBottom: isMobile ? 20 : 15 }}>
+                            <div style={{ width: isMobile ? 80 : 60, height: 1, background: `linear-gradient(90deg, transparent, ${theme.primary}80)` }} />
+                            <div style={{ fontSize: isMobile ? 18 : 12, color: theme.primary, filter: `drop-shadow(0 0 6px ${theme.primary})` }}>✦</div>
+                            <div style={{ width: isMobile ? 80 : 60, height: 1, background: `linear-gradient(90deg, ${theme.primary}80, transparent)` }} />
+                        </div>
+
                         {/* Name Display - Enhanced with better contrast */}
                         <div
                             style={{
-                                fontSize: isMobile ? 62 : 52,
+                                fontSize: nameFontSize,
                                 fontWeight: 800,
                                 color: '#ffffff',
                                 textShadow: `
-                                    0 0 60px rgba(255,255,255,0.3), 
-                                    0 0 30px rgba(255,255,255,0.2),
+                                    0 0 80px ${theme.primary}40, 
+                                    0 0 40px rgba(255,255,255,0.2),
                                     0 4px 20px rgba(0,0,0,0.9),
                                     0 2px 4px rgba(0,0,0,0.8)
                                 `,
-                                letterSpacing: '0.06em',
-                                marginBottom: isMobile ? 30 : 25,
+                                letterSpacing: '0.08em',
+                                marginBottom: isMobile ? 16 : 12,
                                 lineHeight: 1.2,
+                                whiteSpace: 'nowrap' as const,
                             }}
                         >
-                            {isPremiumUnlocked ? fullName : '●●● ●●●'}
+                            {fullName}
                         </div>
 
                         {/* Blessing text - Better contrast */}
                         <div
                             style={{
-                                marginTop: isMobile ? 25 : 15,
-                                fontSize: isMobile ? 24 : 14,
-                                color: '#ffffff',
-                                maxWidth: '90%',
-                                lineHeight: 1.5,
+                                fontSize: isMobile ? 26 : 16,
+                                color: 'rgba(255,255,255,0.85)',
+                                lineHeight: 1,
                                 textShadow: '0 2px 15px rgba(0,0,0,0.9), 0 1px 3px rgba(0,0,0,0.8)',
                                 fontWeight: 600,
-                                letterSpacing: '0.05em',
+                                letterSpacing: '0.1em',
+                                whiteSpace: 'nowrap' as const,
                             }}
                         >
                             「 {theme.blessing} 」
@@ -1127,7 +1152,7 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                                     justifyContent: 'center',
                                 }}
                             >
-                                {(isPremiumUnlocked ? luckyNumbers : [0, 0, 0, 0]).slice(0, 4).map((num, i) => (
+                                {(luckyNumbers || [0, 0, 0, 0]).slice(0, 4).map((num, i) => (
                                     <div
                                         key={i}
                                         style={{
@@ -1141,12 +1166,12 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                                             justifyContent: 'center',
                                             fontSize: isMobile ? 38 : 26,
                                             fontWeight: 800,
-                                            color: isPremiumUnlocked ? '#ffffff' : 'rgba(255,255,255,0.3)',
+                                            color: '#ffffff',
                                             boxShadow: '0 4px 25px rgba(0,0,0,0.4), 0 8px 40px rgba(0,0,0,0.25)',
-                                            textShadow: isPremiumUnlocked ? '0 2px 10px rgba(0,0,0,0.7)' : 'none',
+                                            textShadow: '0 2px 10px rgba(0,0,0,0.7)',
                                         }}
                                     >
-                                        {isPremiumUnlocked ? num : '?'}
+                                        {num}
                                     </div>
                                 ))}
                             </div>
@@ -1181,35 +1206,33 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                         </div>
                     </div>
 
-                    {/* Lock Overlay if not unlocked */}
+                    {/* Watermark Overlay if not unlocked */}
                     {!isPremiumUnlocked && (
                         <div
                             style={{
                                 position: 'absolute',
                                 inset: 0,
-                                background: 'linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.3) 100%)',
-                                backdropFilter: 'blur(12px)',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                gap: 25,
+                                pointerEvents: 'none',
                             }}
                         >
                             <div
                                 style={{
-                                    padding: 25,
-                                    background: `radial-gradient(circle, ${theme.primary}20 0%, transparent 70%)`,
-                                    borderRadius: '50%',
+                                    padding: '10px 30px',
+                                    background: 'rgba(255,255,255,0.1)',
+                                    borderRadius: '100px',
+                                    border: '1px solid rgba(255,255,255,0.3)',
+                                    backdropFilter: 'blur(4px)',
+                                    transform: 'rotate(-15deg)',
+                                    boxShadow: '0 4px 30px rgba(0,0,0,0.1)',
                                 }}
                             >
-                                <span style={{ fontSize: 70 }}>🔒</span>
-                            </div>
-                            <div style={{ fontSize: 26, color: 'white', fontWeight: 700, letterSpacing: '0.05em' }}>
-                                ปลดล็อกเพื่อดาวน์โหลด
-                            </div>
-                            <div style={{ fontSize: 16, color: 'rgba(255,255,255,0.5)' }}>
-                                29 เครดิต
+                                <span style={{ fontSize: 32, color: 'rgba(255,255,255,0.9)', fontWeight: 800, letterSpacing: '0.2em', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
+                                    PREVIEW
+                                </span>
                             </div>
                         </div>
                     )}
