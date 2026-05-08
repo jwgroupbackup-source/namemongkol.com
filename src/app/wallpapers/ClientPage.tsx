@@ -545,34 +545,34 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                     </div>
 
                     {/* Main Tabs + Share */}
-                    <div className="flex items-center gap-3 flex-wrap">
-                        <div className="flex bg-slate-800 p-1.5 rounded-2xl border border-white/10 w-fit">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                        <div className="flex w-full sm:w-fit bg-slate-800 p-1.5 rounded-2xl border border-white/10">
                             <button
                                 onClick={() => navigateTab('collection')}
-                                className={`px-6 py-3 rounded-xl text-sm font-bold whitespace-nowrap transition-all flex items-center gap-2 ${activeTab === 'collection'
+                                className={`flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex items-center justify-center gap-1.5 sm:gap-2 ${activeTab === 'collection'
                                     ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
                                     : 'text-slate-400 hover:text-white hover:bg-slate-700'
                                     }`}
                             >
-                                <ImageIcon size={18} />
-                                คอลเลกชันมงคล
+                                <ImageIcon className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                                <span className="truncate">คอลเลกชันมงคล</span>
                             </button>
                             <button
                                 onClick={() => navigateTab('custom')}
-                                className={`px-6 py-3 rounded-xl text-sm font-bold whitespace-nowrap transition-all flex items-center gap-2 ${activeTab === 'custom'
+                                className={`flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex items-center justify-center gap-1.5 sm:gap-2 ${activeTab === 'custom'
                                     ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/20'
                                     : 'text-slate-400 hover:text-white hover:bg-slate-700'
                                     }`}
                             >
-                                <Palette size={18} />
-                                สร้างวอลเปเปอร์ส่วนตัว
-                                <Crown size={14} className="text-amber-400" />
+                                <Palette className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                                <span className="truncate">สร้างวอลเปเปอร์ส่วนตัว</span>
+                                <Crown className="w-3 h-3 sm:w-[14px] sm:h-[14px] text-amber-400 flex-shrink-0" />
                             </button>
                         </div>
                         {/* Share / Copy Link */}
                         <button
                             onClick={handleCopyLink}
-                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-800 border border-white/10 text-slate-300 hover:bg-slate-700 hover:text-white transition-all"
+                            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-800 border border-white/10 text-slate-300 hover:bg-slate-700 hover:text-white transition-all w-full sm:w-auto"
                         >
                             {showCopied ? <Check size={16} className="text-emerald-400" /> : <Share2 size={16} />}
                             {showCopied ? 'คัดลอกแล้ว!' : 'แชร์ลิงก์หมวดนี้'}

@@ -25,6 +25,7 @@ import { calculateGrade } from '@/utils/gradeResult';
 import { AnalysisResult } from '@/types';
 import { HeroBanner } from '@/components/HeroBanner';
 import { HomeFallback } from '@/components/HomeFallback';
+import { NumerologyDecodeTable } from '@/components/NumerologyDecodeTable';
 import { useLanguage } from '@/components/LanguageProvider';
 
 // Dynamic Imports for heavy components below the fold or conditional
@@ -107,7 +108,7 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
             thaksa: analyzeThaksa(cleanName, inputDay, cleanSurname),
             ayatana: calculateAyatana(totalScore),
             nameGrade: calculateGrade(nameScore, namePairs),
-            surnameGrade: calculateGrade(surnameScore, surnamePairs),
+            surnameGrade: (surnamePairs.length > 0 && surnamePairs.every(p => p.grade === 'good')) ? 'A+' : calculateGrade(surnameScore, surnamePairs),
             grade: calculateGrade(totalScore, [...namePairs, ...surnamePairs]),
             isNirun: isNirun
         };
@@ -191,8 +192,17 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
                             </button>
                         </div>
 
-                        {/* Row 1: ผลรวมชื่อ + ผลรวมนามสกุล (2 cols) + ผลรวมชื่อ-สกุล + วิเคราะห์คู่ตัวเลข (2 cols on mobile) */}
+                        {/* Row 1: ผลรวมชื่อ + ผลรวมนามสกุล (2 cols) */}
                         <ResultHeader result={result} />
+
+                        {/* ตารางถอดรหัสเลขศาสตร์ */}
+                        <NumerologyDecodeTable
+                            name={result.name}
+                            surname={result.surname}
+                            nameScore={result.nameScore}
+                            surnameScore={result.surnameScore}
+                            totalScore={result.totalScore}
+                        />
 
                         {/* ผลรวมชื่อ-สกุล + วิเคราะห์คู่ตัวเลข — side by side always */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
