@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Hash, ChevronDown, ChevronUp, BookOpen } from 'lucide-react';
-import { charValues } from '@/data/charValues';
+import { charValues } from '@/data/numerology';
 
 /* ─────────────────────────────────────────────────────────── */
 /*  Types & Helpers                                             */
@@ -24,7 +24,7 @@ interface CharEntry {
 function parseChars(text: string): CharEntry[] {
     const result: CharEntry[] = [];
     for (const char of text) {
-        const val = charValues[char];
+        const val = charValues[char] ?? charValues[char.toUpperCase()];
         if (val !== undefined) result.push({ char, value: val });
     }
     return result;

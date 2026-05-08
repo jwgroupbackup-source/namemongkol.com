@@ -1,4 +1,4 @@
-import { charValues } from '@/data/charValues';
+import { charValues } from '@/data/numerology';
 import { pairDefinitions } from '@/data/pairDefinitions';
 import { PairAnalysis, PairDefinition } from '@/types';
 
@@ -17,8 +17,9 @@ export const analyzePairs = (text: string): PairAnalysis[] => {
     // 1. Convert text to array of values, filtering only valid chars
     const numbers: number[] = [];
     for (const char of text) {
-        if (charValues[char]) {
-            numbers.push(charValues[char]);
+        const value = charValues[char] ?? charValues[char.toUpperCase()];
+        if (value !== undefined) {
+            numbers.push(value);
         }
     }
 
