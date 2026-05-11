@@ -3,7 +3,7 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
-import { Search, Sparkles, Calendar, Award, RotateCcw, Lock, ChevronDown, CheckCircle2, XCircle, Zap, Shield, Star, HelpCircle } from 'lucide-react';
+import { Search, Sparkles, Calendar, Award, RotateCcw, Lock, ChevronDown, CheckCircle2, XCircle, Zap, Shield, Star, HelpCircle, Type } from 'lucide-react';
 import { premiumNamesRaw } from '@/data/premiumNamesRaw';
 import { parsePremiumNames, PremiumNameData } from '@/utils/premiumDataParser';
 
@@ -26,6 +26,22 @@ const thaiDayToKey: Record<string, DayKey> = {
     'พฤหัสบดี': 'thursday',
     'ศุกร์': 'friday',
     'เสาร์': 'saturday'
+};
+
+// Thai consonants for first letter filter
+const THAI_LETTERS = [
+    'ก','ข','ฃ','ค','ฅ','ฆ','ง','จ','ฉ','ช','ซ','ฌ','ญ','ฎ','ฏ','ฐ','ฑ','ฒ','ณ',
+    'ด','ต','ถ','ท','ธ','น','บ','ป','ผ','ฝ','พ','ฟ','ภ','ม','ย','ร','ล','ว',
+    'ศ','ษ','ส','ห','ฬ','อ','ฮ',
+];
+
+// Thai leading vowels that appear before the consonant in written form
+const THAI_LEADING_VOWELS = new Set(['\u0E40', '\u0E41', '\u0E42', '\u0E43', '\u0E44']); // เ แ โ ใ ไ
+
+/** Returns the first consonant of a Thai name, skipping any leading vowels */
+const getFirstConsonant = (name: string): string => {
+    if (!name) return '';
+    return THAI_LEADING_VOWELS.has(name.charAt(0)) ? name.charAt(1) : name.charAt(0);
 };
 
 function ScoreDropdown({
@@ -85,7 +101,7 @@ function ScoreDropdown({
                 type="button"
                 disabled={disabled}
                 onClick={() => setOpen(v => !v)}
-                className={`block w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all cursor-pointer font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed text-left flex items-center justify-between ${open ? 'rounded-b-none border-b-white/5' : ''
+                className={`block w-full px-3 md:px-4 py-2.5 md:py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all cursor-pointer font-medium text-sm md:text-lg disabled:opacity-50 disabled:cursor-not-allowed text-left flex items-center justify-between ${open ? 'rounded-b-none border-b-white/5' : ''
                     }`}
             >
                 <span>{selectedLabel}</span>
@@ -157,12 +173,14 @@ export default function PremiumSearchPage() {
     const [selectedGender, setSelectedGender] = useState('all');
     const [targetScore, setTargetScore] = useState('');
     const [leadingCharType, setLeadingCharType] = useState<LeadingCharType>('Any');
+    const [selectedFirstLetters, setSelectedFirstLetters] = useState<Set<string>>(new Set());
 
     // Search State
     const [hasSearched, setHasSearched] = useState(false);
     const [searchResults, setSearchResults] = useState<PremiumNameData[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [userCredits, setUserCredits] = useState<number | null>(null);
+    const shownNameSet = useRef<Set<string>>(new Set());
 
     const dayOptions = useMemo(() => ([
         { value: 'All', label: t('pages.premiumSearch.filters.dayAll') },
@@ -181,10 +199,124 @@ export default function PremiumSearchPage() {
     // Load Data & Credits
     const allNames = useMemo(() => parsePremiumNames(premiumNamesRaw), []);
 
+    // Calculate filtered count for real-time display (before search)
+    const filteredCount = useMemo(() => {
+        return allNames.filter(item => {
+            // 1. Filter by Score (if selected)
+            const matchesScore = !targetScore || item.totalScore.toString() === targetScore;
+
+            // 2. Filter by Gender (if selected)
+            let matchesGender = true;
+            if (selectedGender !== 'all') {
+                if (selectedGender === 'male' && item.gender !== 'male' && item.gender !== 'neutral') matchesGender = false;
+                if (selectedGender === 'female' && item.gender !== 'female' && item.gender !== 'neutral') matchesGender = false;
+                if (selectedGender === 'neutral' && item.gender !== 'neutral') matchesGender = false;
+            }
+
+            // 3. Filter by Day (if selected)
+            const matchesDay = selectedDay === 'All' || item.suitableDays.includes(selectedDay);
+
+            // 4. Filter by Leading Character (if Day is selected and Filter is active)
+            let matchesLeadingChar = true;
+            if (selectedDay !== 'All' && leadingCharType !== 'Any') {
+                const dayKey = thaiDayToKey[selectedDay];
+                if (dayKey && thaksaConfig[dayKey]) {
+                    const firstChar = item.name.charAt(0);
+                    const config = thaksaConfig[dayKey];
+
+                    if (leadingCharType === 'Dech') {
+                        matchesLeadingChar = config.dech.includes(firstChar);
+                    } else if (leadingCharType === 'Si') {
+                        matchesLeadingChar = config.si.includes(firstChar);
+                    }
+                }
+            }
+
+            // 5. Filter by First Letter (multi-select)
+            const matchesFirstLetter = selectedFirstLetters.size === 0 || selectedFirstLetters.has(getFirstConsonant(item.name));
+
+            return matchesScore && matchesGender && matchesDay && matchesLeadingChar && matchesFirstLetter;
+        }).length;
+    }, [allNames, selectedDay, selectedGender, targetScore, leadingCharType, selectedFirstLetters]);
+
+    // Compute which first letters have ≥1 matching name (ignoring the first letter filter itself)
+    const availableFirstLetters = useMemo(() => {
+        const set = new Set<string>();
+        allNames.forEach(item => {
+            const matchesScore = !targetScore || item.totalScore.toString() === targetScore;
+            let matchesGender = true;
+            if (selectedGender !== 'all') {
+                if (selectedGender === 'male' && item.gender !== 'male' && item.gender !== 'neutral') matchesGender = false;
+                if (selectedGender === 'female' && item.gender !== 'female' && item.gender !== 'neutral') matchesGender = false;
+                if (selectedGender === 'neutral' && item.gender !== 'neutral') matchesGender = false;
+            }
+            const matchesDay = selectedDay === 'All' || item.suitableDays.includes(selectedDay);
+            let matchesLeadingChar = true;
+            if (selectedDay !== 'All' && leadingCharType !== 'Any') {
+                const dayKey = thaiDayToKey[selectedDay];
+                if (dayKey && thaksaConfig[dayKey]) {
+                    const firstChar = item.name.charAt(0);
+                    const config = thaksaConfig[dayKey];
+                    if (leadingCharType === 'Dech') matchesLeadingChar = config.dech.includes(firstChar);
+                    else if (leadingCharType === 'Si') matchesLeadingChar = config.si.includes(firstChar);
+                }
+            }
+            if (matchesScore && matchesGender && matchesDay && matchesLeadingChar) {
+                const letter = getFirstConsonant(item.name);
+                if (letter) set.add(letter);
+            }
+        });
+        return set;
+    }, [allNames, selectedDay, selectedGender, targetScore, leadingCharType]);
+
+    // Remove letters from selection if they become unavailable under current filters
+    useEffect(() => {
+        if (selectedFirstLetters.size === 0) return;
+        const toRemove = [...selectedFirstLetters].filter(l => !availableFirstLetters.has(l));
+        if (toRemove.length > 0) {
+            setSelectedFirstLetters(prev => {
+                const next = new Set(prev);
+                toRemove.forEach(l => next.delete(l));
+                return next;
+            });
+        }
+    }, [availableFirstLetters, selectedFirstLetters]);
+
+    // Only show scores that have ≥1 name matching current filters (excluding score filter itself)
     const uniqueScores = useMemo(() => {
-        const scores = new Set(allNames.map(item => item.totalScore));
+        const scores = new Set<number>();
+        allNames.forEach(item => {
+            let matchesGender = true;
+            if (selectedGender !== 'all') {
+                if (selectedGender === 'male' && item.gender !== 'male' && item.gender !== 'neutral') matchesGender = false;
+                if (selectedGender === 'female' && item.gender !== 'female' && item.gender !== 'neutral') matchesGender = false;
+                if (selectedGender === 'neutral' && item.gender !== 'neutral') matchesGender = false;
+            }
+            const matchesDay = selectedDay === 'All' || item.suitableDays.includes(selectedDay);
+            let matchesLeadingChar = true;
+            if (selectedDay !== 'All' && leadingCharType !== 'Any') {
+                const dayKey = thaiDayToKey[selectedDay];
+                if (dayKey && thaksaConfig[dayKey]) {
+                    const firstChar = item.name.charAt(0);
+                    const config = thaksaConfig[dayKey];
+                    if (leadingCharType === 'Dech') matchesLeadingChar = config.dech.includes(firstChar);
+                    else if (leadingCharType === 'Si') matchesLeadingChar = config.si.includes(firstChar);
+                }
+            }
+            const matchesFirstLetter = selectedFirstLetters.size === 0 || selectedFirstLetters.has(getFirstConsonant(item.name));
+            if (matchesGender && matchesDay && matchesLeadingChar && matchesFirstLetter) {
+                scores.add(item.totalScore);
+            }
+        });
         return Array.from(scores).sort((a, b) => a - b);
-    }, [allNames]);
+    }, [allNames, selectedDay, selectedGender, leadingCharType, selectedFirstLetters]);
+
+    // Auto-reset targetScore if selected score is no longer available under current filters
+    useEffect(() => {
+        if (targetScore && !uniqueScores.includes(Number(targetScore))) {
+            setTargetScore('');
+        }
+    }, [uniqueScores, targetScore]);
 
     useEffect(() => {
         const fetchCredits = async () => {
@@ -304,7 +436,7 @@ export default function PremiumSearchPage() {
                 // 3. Filter by Day (if selected)
                 const matchesDay = selectedDay === 'All' || item.suitableDays.includes(selectedDay);
 
-                // 3. Filter by Leading Character (if Day is selected and Filter is active)
+                // 4. Filter by Leading Character (if Day is selected and Filter is active)
                 let matchesLeadingChar = true;
                 if (selectedDay !== 'All' && leadingCharType !== 'Any') {
                     const dayKey = thaiDayToKey[selectedDay];
@@ -320,13 +452,17 @@ export default function PremiumSearchPage() {
                     }
                 }
 
-                return matchesScore && matchesGender && matchesDay && matchesLeadingChar;
+                // 5. Filter by First Letter (multi-select)
+                const matchesFirstLetter = selectedFirstLetters.size === 0 || selectedFirstLetters.has(getFirstConsonant(item.name));
+
+                return matchesScore && matchesGender && matchesDay && matchesLeadingChar && matchesFirstLetter;
             });
 
-            // Shuffle and Limit to 30
+            // Shuffle and Limit to 20 (exclude already shown)
             const shuffled = [...filtered].sort(() => 0.5 - Math.random());
             const selected = shuffled.slice(0, 20);
 
+            shownNameSet.current = new Set(selected.map(i => i.name));
             setSearchResults(selected);
             setHasSearched(true);
 
@@ -352,7 +488,8 @@ export default function PremiumSearchPage() {
                         input_data: {
                             selectedDay,
                             selectedScore: targetScore || 'All',
-                            leadingChar: leadingCharType
+                            leadingChar: leadingCharType,
+                            selectedFirstLetters: [...selectedFirstLetters]
                         },
                         result_data: selected.map(item => ({
                             name: item.name,
@@ -392,68 +529,142 @@ export default function PremiumSearchPage() {
         }
     };
 
+    const handleLoadMore = async () => {
+        const Swal = (await import('sweetalert2')).default;
+        if (userCredits !== null && userCredits < 15) {
+            const result = await Swal.fire({
+                title: t('pages.premiumSearch.alerts.creditsTitle'),
+                text: t('pages.premiumSearch.alerts.creditsText'),
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: t('pages.premiumSearch.alerts.creditsConfirm'),
+                cancelButtonText: t('pages.premiumSearch.alerts.creditsCancel'),
+                confirmButtonColor: '#10b981',
+                cancelButtonColor: '#64748b',
+                background: '#1e293b',
+                color: '#fff',
+                iconColor: '#f59e0b'
+            });
+            if (result.isConfirmed) router.push('/topup');
+            return;
+        }
+
+        setIsLoading(true);
+        try {
+            const { error } = await supabase.rpc('deduct_credits', { amount: 15 });
+            if (error) throw error;
+            setUserCredits(prev => (prev !== null ? prev - 15 : null));
+            window.dispatchEvent(new Event('force_credits_update'));
+
+            await new Promise(resolve => setTimeout(resolve, 600));
+
+            const filtered = allNames.filter(item => {
+                const matchesScore = !targetScore || item.totalScore.toString() === targetScore;
+                let matchesGender = true;
+                if (selectedGender !== 'all') {
+                    if (selectedGender === 'male' && item.gender !== 'male' && item.gender !== 'neutral') matchesGender = false;
+                    if (selectedGender === 'female' && item.gender !== 'female' && item.gender !== 'neutral') matchesGender = false;
+                    if (selectedGender === 'neutral' && item.gender !== 'neutral') matchesGender = false;
+                }
+                const matchesDay = selectedDay === 'All' || item.suitableDays.includes(selectedDay);
+                let matchesLeadingChar = true;
+                if (selectedDay !== 'All' && leadingCharType !== 'Any') {
+                    const dayKey = thaiDayToKey[selectedDay];
+                    if (dayKey && thaksaConfig[dayKey]) {
+                        const firstChar = item.name.charAt(0);
+                        const config = thaksaConfig[dayKey];
+                        if (leadingCharType === 'Dech') matchesLeadingChar = config.dech.includes(firstChar);
+                        else if (leadingCharType === 'Si') matchesLeadingChar = config.si.includes(firstChar);
+                    }
+                }
+                const matchesFirstLetter = selectedFirstLetters.size === 0 || selectedFirstLetters.has(getFirstConsonant(item.name));
+                return matchesScore && matchesGender && matchesDay && matchesLeadingChar && matchesFirstLetter
+                    && !shownNameSet.current.has(item.name);
+            });
+
+            const shuffled = [...filtered].sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, 20);
+            selected.forEach(i => shownNameSet.current.add(i.name));
+            setSearchResults(prev => [...prev, ...selected]);
+        } catch (err) {
+            console.error('Load More Error:', err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleFirstLetterChange = (letter: string) => {
+        setSelectedFirstLetters(prev => {
+            const next = new Set(prev);
+            if (next.has(letter)) {
+                next.delete(letter);
+            } else {
+                next.add(letter);
+            }
+            return next;
+        });
+    };
+
     const handleClear = () => {
         setHasSearched(false);
         setSearchResults([]);
-        // Keep inputs for re-search convenience? Or clear? 
-        // User said "When press search new...", implying keeping inputs but allowing search again is good.
-        // But "Reset" usually clears everything.
-        // setSearchTerm(''); // Gone
+        shownNameSet.current = new Set();
         setLeadingCharType('Any');
         setSelectedDay('All');
         setSelectedGender('all');
         setTargetScore('');
+        setSelectedFirstLetters(new Set());
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     return (
         <div className="min-h-screen bg-[#0f172a] text-slate-200 font-sans selection:bg-amber-500/30">
 
-            <main className="w-full max-w-[1400px] transition-all duration-300 min-h-screen px-4 pt-32 md:pt-32 pb-28 relative">
+            <main className="w-full max-w-[1400px] transition-all duration-300 min-h-screen px-4 pt-24 md:pt-32 pb-24 md:pb-28 relative">
                 {/* Background Gradients */}
                 <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
                     <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-amber-500/10 blur-[100px]" />
                     <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-blue-500/10 blur-[100px]" />
                 </div>
 
-                <div className="relative z-10 max-w-6xl space-y-8">
+                <div className="relative z-10 max-w-6xl space-y-5 md:space-y-8">
                     {/* Header */}
-                    <header className="text-center space-y-4">
+                    <header className="text-center space-y-3">
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium animate-pulse">
                             <Sparkles size={14} />
                             <span>{t('pages.premiumSearch.headerBadge')}</span>
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold text-emerald-400 drop-shadow-2xl tracking-tight leading-tight">
+                        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-emerald-400 drop-shadow-2xl tracking-tight leading-tight">
                             {t('pages.premiumSearch.headerTitle')}
                         </h1>
                         <div className="max-w-[65ch] mx-auto space-y-2">
-                            <p className="text-slate-400 leading-relaxed">
+                            <p className="text-slate-400 leading-relaxed text-sm md:text-base hidden md:block">
                                 {t('pages.premiumSearch.headerDesc').replace('{count}', allNames.length.toLocaleString())}
                             </p>
-                            <p className="text-emerald-300 font-medium text-lg">
+                            <p className="text-emerald-300 font-medium text-sm md:text-lg hidden md:block">
                                 {t('pages.premiumSearch.headerSub')}
                             </p>
 
-                            <div className="mt-4 mx-auto w-fit bg-emerald-500/10 border border-emerald-500/30 rounded-xl px-6 py-3 shadow-lg shadow-emerald-900/20 backdrop-blur-md">
-                                <p className="text-emerald-400 font-medium text-sm md:text-base">
+                            <div className="mt-2 md:mt-4 mx-auto w-fit bg-emerald-500/10 border border-emerald-500/30 rounded-xl px-3 py-2 md:px-6 md:py-3 shadow-lg shadow-emerald-900/20 backdrop-blur-md">
+                                <p className="text-emerald-400 font-medium text-xs md:text-base">
                                     {t('pages.premiumSearch.headerHint')}{' '}
                                     <Link href="/" className="underline decoration-emerald-500/50 hover:text-emerald-300 transition-colors">{t('sidebar.analyzeName')}</Link>
                                 </p>
                             </div>
-                            <p className="text-slate-500 text-sm pt-4">
-                                {t('pages.premiumSearch.headerNote')}
+                            <p className="text-slate-500 text-xs md:text-sm pt-2 md:pt-4">
+                                คาดว่าจะพบ <span className="text-emerald-400 font-semibold">{filteredCount}</span> รายชื่อจากเงื่อนไขนี้
                             </p>
                         </div>
                     </header>
 
                     {/* Search Controls */}
-                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl animate-fade-in-up md:mx-auto max-w-4xl relative overflow-visible group">
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl animate-fade-in-up md:mx-auto max-w-4xl relative overflow-visible group">
 
                         {/* inputs */}
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 relative z-10">
+                        <div className="grid grid-cols-2 md:grid-cols-12 gap-2.5 md:gap-6 relative z-10">
                             {/* Filters */}
-                            <div className="md:col-span-4">
-                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">{t('pages.premiumSearch.filters.dayLabel')}</label>
+                            <div className="col-span-1 md:col-span-4">
+                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 md:mb-2">{t('pages.premiumSearch.filters.dayLabel')}</label>
                                 <div className="relative">
                                     <select
                                         value={selectedDay}
@@ -462,7 +673,7 @@ export default function PremiumSearchPage() {
                                             setSelectedDay(newVal);
                                             if (newVal === 'All') setLeadingCharType('Any');
                                         }}
-                                        className="block w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="block w-full px-3 md:px-4 py-2.5 md:py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-sm md:text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                                         disabled={isLoading}
                                     >
                                         {dayOptions.map(day => (
@@ -477,18 +688,18 @@ export default function PremiumSearchPage() {
                                 </div>
                             </div>
 
-                            <div className="md:col-span-4">
-                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">{t('pages.premiumSearch.filters.scoreLabel')}</label>
+                            <div className="col-span-2 md:col-span-4">
+                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 md:mb-2">{t('pages.premiumSearch.filters.scoreLabel')}</label>
                                 <ScoreDropdown value={targetScore} onChange={setTargetScore} scores={uniqueScores} disabled={isLoading} />
                             </div>
 
-                            <div className="md:col-span-4">
-                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">{t('pages.premiumSearch.filters.genderLabel')}</label>
+                            <div className="col-span-1 md:col-span-4">
+                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 md:mb-2">{t('pages.premiumSearch.filters.genderLabel')}</label>
                                 <div className="relative">
                                     <select
                                         value={selectedGender}
                                         onChange={(e) => setSelectedGender(e.target.value)}
-                                        className="block w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="block w-full px-3 md:px-4 py-2.5 md:py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-sm md:text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                                         disabled={isLoading}
                                     >
                                         <option value="all" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderAll')}</option>
@@ -503,14 +714,14 @@ export default function PremiumSearchPage() {
                             </div>
 
                             {/* Leading Character Filter (Replaces Search) */}
-                            <div className="md:col-span-12">
-                                <label className="block text-xs font-bold uppercase tracking-wider mb-4 text-slate-400 transition-colors">
+                            <div className="col-span-2 md:col-span-12">
+                                <label className="block text-xs font-bold uppercase tracking-wider mb-2 md:mb-4 text-slate-400 transition-colors">
                                     {t('pages.premiumSearch.leading.label')}{' '}
                                     {selectedDay === 'All' && (
                                         <span className="text-amber-500/80 ml-2 normal-case font-normal">{t('pages.premiumSearch.leading.hint')}</span>
                                     )}
                                 </label>
-                                <div className="flex flex-wrap items-center gap-6">
+                                <div className="flex flex-wrap items-center gap-3 md:gap-6">
                                     <label className="flex items-center gap-3 cursor-pointer group">
                                         <div className="relative flex items-center">
                                             <input
@@ -519,11 +730,11 @@ export default function PremiumSearchPage() {
                                                 value="Dech"
                                                 checked={leadingCharType === 'Dech'}
                                                 onChange={() => setLeadingCharType('Dech')}
-                                                className="peer appearance-none w-6 h-6 border-2 border-slate-500 rounded-full bg-transparent checked:border-emerald-500 checked:bg-emerald-500/20 transition-all"
+                                                className="peer appearance-none w-5 h-5 md:w-6 md:h-6 border-2 border-slate-500 rounded-full bg-transparent checked:border-emerald-500 checked:bg-emerald-500/20 transition-all"
                                             />
-                                            <div className="absolute inset-0 m-auto w-3 h-3 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform"></div>
+                                            <div className="absolute inset-0 m-auto w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform"></div>
                                         </div>
-                                        <span className={`text-lg font-medium transition-colors ${leadingCharType === 'Dech' ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>
+                                        <span className={`text-sm md:text-lg font-medium transition-colors ${leadingCharType === 'Dech' ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>
                                             {t('pages.premiumSearch.leading.dech')}
                                         </span>
                                     </label>
@@ -536,11 +747,11 @@ export default function PremiumSearchPage() {
                                                 value="Si"
                                                 checked={leadingCharType === 'Si'}
                                                 onChange={() => setLeadingCharType('Si')}
-                                                className="peer appearance-none w-6 h-6 border-2 border-slate-500 rounded-full bg-transparent checked:border-emerald-500 checked:bg-emerald-500/20 transition-all"
+                                                className="peer appearance-none w-5 h-5 md:w-6 md:h-6 border-2 border-slate-500 rounded-full bg-transparent checked:border-emerald-500 checked:bg-emerald-500/20 transition-all"
                                             />
-                                            <div className="absolute inset-0 m-auto w-3 h-3 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform"></div>
+                                            <div className="absolute inset-0 m-auto w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform"></div>
                                         </div>
-                                        <span className={`text-lg font-medium transition-colors ${leadingCharType === 'Si' ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>
+                                        <span className={`text-sm md:text-lg font-medium transition-colors ${leadingCharType === 'Si' ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>
                                             {t('pages.premiumSearch.leading.si')}
                                         </span>
                                     </label>
@@ -553,29 +764,75 @@ export default function PremiumSearchPage() {
                                                 value="Any"
                                                 checked={leadingCharType === 'Any'}
                                                 onChange={() => setLeadingCharType('Any')}
-                                                className="peer appearance-none w-6 h-6 border-2 border-blue-500 rounded-full bg-transparent checked:border-blue-500 checked:bg-blue-500/20 transition-all"
+                                                className="peer appearance-none w-5 h-5 md:w-6 md:h-6 border-2 border-blue-500 rounded-full bg-transparent checked:border-blue-500 checked:bg-blue-500/20 transition-all"
                                             />
-                                            <div className="absolute inset-0 m-auto w-3 h-3 rounded-full bg-blue-500 scale-0 peer-checked:scale-100 transition-transform"></div>
+                                            <div className="absolute inset-0 m-auto w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-blue-500 scale-0 peer-checked:scale-100 transition-transform"></div>
                                         </div>
-                                        <span className={`text-lg font-medium transition-colors ${leadingCharType === 'Any' ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>
+                                        <span className={`text-sm md:text-lg font-medium transition-colors ${leadingCharType === 'Any' ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>
                                             {t('pages.premiumSearch.leading.any')}
                                         </span>
                                     </label>
                                 </div>
                             </div>
+
+                            {/* First Letter Filter (ก-ฮ) */}
+                            <div className="col-span-2 md:col-span-12">
+                                <div className="space-y-2">
+                                    <div className="flex items-center gap-2 text-xs md:text-sm text-slate-400">
+                                        <Type className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                                        <span>กรองตามตัวอักษรแรก</span>
+                                        {selectedFirstLetters.size > 0 && (
+                                            <span className="px-1.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 text-xs font-bold">{selectedFirstLetters.size}</span>
+                                        )}
+                                        {selectedFirstLetters.size > 0 && (
+                                            <button
+                                                onClick={() => setSelectedFirstLetters(new Set())}
+                                                className="ml-auto text-xs text-emerald-400 hover:text-emerald-300 transition-colors"
+                                            >
+                                                ล้างตัวกรอง
+                                            </button>
+                                        )}
+                                    </div>
+                                    <div className="flex flex-wrap gap-1 md:gap-1.5">
+                                        <button
+                                            onClick={() => setSelectedFirstLetters(new Set())}
+                                            className={`px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all ${
+                                                selectedFirstLetters.size === 0
+                                                    ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/20'
+                                                    : 'bg-white/5 text-slate-400 border border-white/10 hover:text-white hover:border-white/20'
+                                            }`}
+                                        >
+                                            ทั้งหมด
+                                        </button>
+                                        {THAI_LETTERS.filter(letter => availableFirstLetters.has(letter)).map((letter) => (
+                                            <button
+                                                key={letter}
+                                                onClick={() => handleFirstLetterChange(letter)}
+                                                className={`w-7 h-7 md:w-9 md:h-9 rounded-lg text-xs md:text-sm font-medium transition-all flex items-center justify-center ${
+                                                    selectedFirstLetters.has(letter)
+                                                        ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/20 scale-110'
+                                                        : 'bg-white/5 text-slate-400 border border-white/10 hover:text-white hover:border-white/20 hover:bg-white/10'
+                                                }`}
+                                            >
+                                                {letter}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         {/* Actions */}
-                        <div className="mt-8 pt-8 border-t border-white/10 flex flex-col md:flex-row gap-4 justify-center relative z-0">
+                        <div className="mt-5 pt-5 md:mt-8 md:pt-8 border-t border-white/10 flex flex-col md:flex-row gap-3 md:gap-4 justify-center relative z-0">
                             <button
                                 onClick={handleSearch}
                                 disabled={isLoading}
                                 data-track="premiumSearch.form.search"
-                                className="group relative inline-flex items-center gap-3 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-2xl shadow-lg shadow-emerald-500/20 transition-all hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 disabled:cursor-not-allowed flex-1 justify-center max-w-md"
+                                className="group relative inline-flex items-center gap-2 md:gap-3 px-5 py-3 md:px-8 md:py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl md:rounded-2xl shadow-lg shadow-emerald-500/20 transition-all hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 disabled:cursor-not-allowed flex-1 justify-center max-w-md"
                             >
                                 {isLoading ? <span className="animate-spin">⏳</span> : <Search size={20} />}
-                                <span className="text-lg">{t('pages.premiumSearch.actions.search')}</span>
-                                <span className="ml-2 bg-black/20 px-3 py-1 rounded-lg text-sm font-semibold flex items-center gap-1">
+                                <span className="text-sm md:text-lg">{t('pages.premiumSearch.actions.search')}</span>
+                                <span className="ml-1 md:ml-2 bg-emerald-700/40 px-2 md:px-3 py-0.5 md:py-1 rounded-md md:rounded-lg text-xs md:text-sm font-semibold flex items-center gap-1 border border-emerald-600/50">
                                     <Lock size={12} /> {t('pages.premiumSearch.actions.searchCost')}
                                 </span>
                             </button>
@@ -583,18 +840,24 @@ export default function PremiumSearchPage() {
                             {hasSearched && (
                                 <button
                                     onClick={handleClear}
-                                    className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold rounded-2xl transition-colors"
+                                    className="inline-flex items-center justify-center gap-2 px-4 py-3 md:px-6 md:py-4 bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold rounded-xl md:rounded-2xl transition-colors"
                                 >
                                     <RotateCcw size={18} />
                                     {t('pages.premiumSearch.actions.reset')}
                                 </button>
                             )}
                         </div>
-                        {hasSearched && (
-                            <p className="text-center text-slate-400 text-sm mt-4">
-                                {t('pages.premiumSearch.actions.rerollNote')}
+                        <div className="mt-4 pt-4 md:mt-6 md:pt-6 border-t border-white/10 text-center space-y-2">
+                            <p className="text-sm text-slate-300 flex items-center justify-center gap-2">
+                                <span className="text-xs text-slate-500">เครดิตคงเหลือ:</span>
+                                <span className="text-lg md:text-xl font-bold text-emerald-400">{userCredits !== null ? userCredits : '—'}</span>
                             </p>
-                        )}
+                            {hasSearched && (
+                                <p className="text-slate-500 text-xs mt-2 italic">
+                                    {t('pages.premiumSearch.actions.rerollNote')}
+                                </p>
+                            )}
+                        </div>
                     </div>
 
                     {/* Results Section */}
@@ -634,11 +897,11 @@ export default function PremiumSearchPage() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     {searchResults.map((item, index) => (
                                         <div
-                                            key={index}
-                                            className="group relative bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-emerald-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/10"
+                                            key={item.name + index}
+                                            className="group relative bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 hover:bg-white/10 hover:border-emerald-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/10"
                                         >
                                             <div className="flex justify-between items-start mb-4">
-                                                <h3 className="text-3xl font-bold text-white group-hover:text-emerald-300 transition-colors">
+                                                <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-emerald-300 transition-colors">
                                                     {item.name}
                                                 </h3>
                                                 <div className="flex items-center gap-1 px-3 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 font-bold">
@@ -682,6 +945,45 @@ export default function PremiumSearchPage() {
                                     <p className="text-slate-400">{t('pages.premiumSearch.results.emptyDesc')}</p>
                                 </div>
                             )}
+
+                            {/* Load More */}
+                            {searchResults.length > 0 && (() => {
+                                const remaining = filteredCount - shownNameSet.current.size;
+                                if (remaining <= 0) {
+                                    return (
+                                        <div className="text-center py-6">
+                                            <p className="text-slate-500 text-sm">✓ แสดงครบทุกชื่อแล้ว ({searchResults.length} ชื่อ)</p>
+                                        </div>
+                                    );
+                                }
+                                return (
+                                    <div className="flex flex-col items-center gap-3 pt-2 pb-4">
+                                        <p className="text-slate-400 text-sm">
+                                            แสดงแล้ว <span className="text-white font-semibold">{searchResults.length}</span> ชื่อ
+                                            {' · '}
+                                            ยังเหลืออีก <span className="text-emerald-400 font-semibold">{remaining}</span> ชื่อตามเงื่อนไขนี้
+                                        </p>
+                                        <button
+                                            onClick={handleLoadMore}
+                                            disabled={isLoading || (userCredits !== null && userCredits < 15)}
+                                            className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/40 text-slate-200 hover:text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >
+                                            {isLoading ? (
+                                                <span className="animate-spin text-base">⏳</span>
+                                            ) : (
+                                                <Search size={16} className="text-emerald-400" />
+                                            )}
+                                            <span>ดูเพิ่มอีก 20 ชื่อ</span>
+                                            <span className="bg-emerald-700/40 border border-emerald-600/50 px-2 py-0.5 rounded-md text-xs font-semibold flex items-center gap-1">
+                                                <Lock size={10} /> 15 เครดิต
+                                            </span>
+                                        </button>
+                                        {userCredits !== null && userCredits < 15 && (
+                                            <p className="text-amber-400 text-xs">เครดิตไม่พอ — <Link href="/topup" className="underline hover:text-amber-300">เติมเครดิต</Link></p>
+                                        )}
+                                    </div>
+                                );
+                            })()}
                         </div>
                     )}
 

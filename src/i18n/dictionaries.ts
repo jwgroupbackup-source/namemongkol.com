@@ -66,8 +66,8 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
                     any: '不限',
                 },
                 actions: {
-                    search: '搜尋姓名',
-                    searchCost: '-15 點數',
+                    search: '看 20 個吉祥姓名',
+                    searchCost: '使用 15 點數',
                     reset: '重設',
                     rerollNote: '* 重新搜尋會重新抽取名字並再次扣點。',
                 },
@@ -387,8 +387,8 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
                     any: 'ไม่กำหนด',
                 },
                 actions: {
-                    search: 'ค้นหารายชื่อ',
-                    searchCost: '-15 เครดิต',
+                    search: 'ดู 20 ชื่อมงคล Pro',
+                    searchCost: 'ใช้ 15 เครดิต',
                     reset: 'ล้างค่า',
                     rerollNote: '* การกดค้นหาใหม่ จะสุ่มรายชื่อใหม่และหักเครดิตทุกครั้ง',
                 },
@@ -727,8 +727,8 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
                     any: 'Any',
                 },
                 actions: {
-                    search: 'Search names',
-                    searchCost: '-15 credits',
+                    search: 'View 20 Premium Names',
+                    searchCost: 'Use 15 credits',
                     reset: 'Reset',
                     rerollNote: '* New searches reshuffle names and deduct credits each time.',
                 },

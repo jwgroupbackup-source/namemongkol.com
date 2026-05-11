@@ -8,14 +8,13 @@ import PopularNames from '@/components/PopularNames';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/utils/supabase';
-import { Sparkles, ChevronDown, ChevronUp, CheckCircle, XCircle, Filter, X, Lock, Unlock, Type } from 'lucide-react';
+import { Sparkles, ChevronDown, ChevronUp, CheckCircle, XCircle, Filter, Lock, Unlock, Type } from 'lucide-react';
 import Swal from 'sweetalert2';
 
 import { calculateScore } from '@/utils/numerologyUtils';
-import { getDayFromName, analyzeNameSuitability } from '@/utils/thaksaUtils';
+import { analyzeNameSuitability } from '@/utils/thaksaUtils';
 import { analyzeName } from '@/utils/nameAnalysis';
 import { thaksaConfig, DayKey } from '@/data/thaksa';
-import { getPrediction } from '@/utils/getPrediction';
 import { useLanguage } from '@/components/LanguageProvider';
 
 const getDayBadgeProps = (d: string) => {
@@ -30,42 +29,11 @@ const getDayBadgeProps = (d: string) => {
     return { label: d, className: 'bg-slate-500/15 text-slate-300 border border-slate-500/20' };
 };
 
-function GradeBadge({ grade }: { grade: 'A+' | 'A' | 'B' | 'C' }) {
-    if (grade === 'A+') {
-        return (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold border bg-amber-500/20 text-amber-300 border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.15)]">
-                A+
-            </span>
-        );
-    }
-    if (grade === 'A') {
-        return (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold border bg-emerald-500/20 text-emerald-300 border-emerald-500/30">
-                A
-            </span>
-        );
-    }
-    if (grade === 'B') {
-        return (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold border bg-slate-500/15 text-slate-400 border-slate-500/20">
-                B
-            </span>
-        );
-    }
-    return (
-        <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold border bg-rose-500/15 text-rose-300 border-rose-500/20">
-            C
-        </span>
-    );
-}
-
 function NameRow({ name }: { name: string }) {
     const [isExpanded, setIsExpanded] = useState(false);
-    const day = getDayFromName(name);
     const score = calculateScore(name);
     // Always calculate to know if it's usable on multiple days
     const suitability = useMemo(() => analyzeNameSuitability(name), [name]);
-    const grade = useMemo((): 'A+' | 'A' | 'B' | 'C' => analyzeName(name)?.grade ?? 'B', [name]);
 
     return (
         <>
@@ -108,13 +76,10 @@ function NameRow({ name }: { name: string }) {
                         {score}
                     </span>
                 </td>
-                <td className="px-3 md:px-8 py-3 md:py-5 text-center">
-                    <GradeBadge grade={grade} />
-                </td>
             </tr>
             {isExpanded && suitability && (
                 <tr className="bg-white/[0.02] animate-fade-in">
-                    <td colSpan={4} className="p-0">
+                    <td colSpan={3} className="p-0">
                         <div className="px-4 md:px-8 py-4 md:py-6 space-y-3 md:space-y-4 border-b border-white/5 bg-gradient-to-b from-black/20 to-transparent shadow-inner">
                             <div className="flex items-start gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
                                 <div className="mt-1 min-w-[20px] md:min-w-[24px] text-emerald-400 p-1 rounded-full bg-emerald-500/10">
@@ -201,9 +166,6 @@ export default function SearchPage() {
     const [selectedDay, setSelectedDay] = useState<DayKey | 'all'>('all');
     const [selectedGender, setSelectedGender] = useState<'all' | 'male' | 'female' | 'neutral'>('all');
     const [selectedLetter, setSelectedLetter] = useState<string>('all');
-    const [targetSum, setTargetSum] = useState('');
-    const [isSumFocused, setIsSumFocused] = useState(false);
-    const [hasTyped, setHasTyped] = useState(false);
 
     // Freemium State
     const [visibleCount, setVisibleCount] = useState(10);
@@ -269,13 +231,6 @@ export default function SearchPage() {
         fetchNames();
     }, []);
 
-    // Calculate unique scores for datalist
-    const uniqueScores = useMemo(() => {
-        if (loading) return [];
-        const scores = new Set(names.map(item => calculateScore(item.name)));
-        return Array.from(scores).sort((a, b) => a - b);
-    }, [names, loading]);
-
     // Filter Logic
     const filteredNames = useMemo(() => {
         if (loading) return [];
@@ -301,15 +256,9 @@ export default function SearchPage() {
                 if (getFirstConsonant(name) !== selectedLetter) return false;
             }
 
-            // 4. Numerology Sum Filter
-            if (targetSum) {
-                const score = calculateScore(name);
-                if (score !== parseInt(targetSum)) return false;
-            }
-
             return true;
         }).map(item => item.name); // Return just names for display
-    }, [selectedDay, selectedGender, selectedLetter, targetSum, names, loading]);
+    }, [selectedDay, selectedGender, selectedLetter, names, loading]);
 
     // Grade distribution across all filtered names (for banner + CTA)
     const gradeStats = useMemo(() => {
@@ -339,12 +288,6 @@ export default function SearchPage() {
 
     const handleLetterChange = (letter: string) => {
         setSelectedLetter(letter);
-        setVisibleCount(10);
-    };
-
-    const handleSumChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTargetSum(e.target.value);
-        setHasTyped(true);
         setVisibleCount(10);
     };
 
@@ -498,7 +441,6 @@ export default function SearchPage() {
                             selectedDay,
                             selectedGender,
                             selectedLetter,
-                            selectedScore: targetSum || null,
                             unlockedCount: unlockedNames.length
                         },
                         result_data: resultData
@@ -589,7 +531,7 @@ export default function SearchPage() {
 
 
                     {/* Filters */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                         {/* Day Filter */}
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -632,76 +574,6 @@ export default function SearchPage() {
                             </select>
                             <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
                                 <ChevronDown className="h-4 w-4 text-slate-400" />
-                            </div>
-                        </div>
-
-                        {/* Sum Filter */}
-                        <div className="relative group">
-                            <input
-                                type="number"
-                                value={targetSum}
-                                onChange={handleSumChange}
-                                onFocus={(e) => {
-                                    setIsSumFocused(true);
-                                    setHasTyped(false);
-                                    e.target.select();
-                                }}
-                                onBlur={() => setTimeout(() => setIsSumFocused(false), 200)} // Delay to allow click
-                                className="block w-full px-4 py-2.5 md:py-3 text-sm md:text-base bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent backdrop-blur-xl transition-all appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                                placeholder={t('pages.search.filters.sumPlaceholder')}
-                            />
-
-                            <div className={`absolute top-full left-0 w-full mt-2 max-h-80 overflow-y-auto bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl z-50 transition-all duration-200 custom-scrollbar ${isSumFocused ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-2 invisible'}`}>
-                                {uniqueScores
-                                    .filter(score => (isSumFocused && !hasTyped) || !targetSum || score.toString().includes(targetSum))
-                                    .map(score => {
-                                        const { desc, color, level } = getPrediction(score);
-                                        return (
-                                            <div
-                                                key={score}
-                                                onClick={() => {
-                                                    setTargetSum(score.toString());
-                                                }}
-                                                className="px-4 py-3 hover:bg-white/5 cursor-pointer text-slate-300 transition-colors border-b border-white/5 last:border-0 flex items-center justify-between group/item"
-                                            >
-                                                <div className="flex flex-col flex-1 min-w-0 mr-4">
-                                                    <div className="flex items-center gap-2 mb-0.5">
-                                                        <span className="font-medium text-slate-200 group-hover/item:text-amber-400 transition-colors">ผลรวม {score}</span>
-                                                        <span className={`text-[10px] px-1.5 py-0.5 rounded-md bg-white/5 border border-white/5 ${color}`}>
-                                                            {level}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-xs text-slate-500 truncate group-hover/item:text-slate-400 transition-colors">
-                                                        {desc}
-                                                    </span>
-                                                </div>
-                                                {targetSum === score.toString() && <CheckCircle size={16} className="text-emerald-400 flex-shrink-0" />}
-                                            </div>
-                                        );
-                                    })}
-                                {uniqueScores.filter(score => !targetSum || score.toString().includes(targetSum)).length === 0 && (
-                                    <div className="px-4 py-3 text-slate-500 text-center italic text-sm">
-                                        {t('pages.search.filters.sumNoResult')}
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
-                                {targetSum ? (
-                                    <button
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            setTargetSum('');
-                                            setHasTyped(false);
-                                            setIsSumFocused(false);
-                                        }}
-                                        className="text-slate-400 hover:text-rose-400 transition-colors"
-                                    >
-                                        <X size={16} />
-                                    </button>
-                                ) : (
-                                    <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform duration-300 ${isSumFocused ? 'rotate-180' : ''}`} />
-                                )}
                             </div>
                         </div>
                     </div>
@@ -812,7 +684,6 @@ export default function SearchPage() {
                                 <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase">{t('pages.search.table.name')}</th>
                                 <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase">{t('pages.search.table.day')}</th>
                                 <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase text-center">{t('pages.search.table.score')}</th>
-                                <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase text-center">เกรด</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5">
@@ -825,7 +696,7 @@ export default function SearchPage() {
                                     {/* Teaser row: show count of hidden A+ names to drive upgrade */}
                                     {hiddenAplusCount > 0 && (
                                         <tr className="bg-amber-500/5 border-t border-amber-500/10">
-                                            <td colSpan={4} className="px-4 py-3 text-center">
+                                            <td colSpan={3} className="px-4 py-3 text-center">
                                                 <Link
                                                     href="/premium-search"
                                                     className="inline-flex items-center gap-2 text-sm text-amber-400 hover:text-amber-300 transition-colors font-medium"
@@ -840,7 +711,7 @@ export default function SearchPage() {
                                     {/* Locked State / Load More Button */}
                                     {visibleCount < filteredNames.length && (
                                         <tr>
-                                            <td colSpan={4} className="p-0 relative h-32 overflow-hidden">
+                                            <td colSpan={3} className="p-0 relative h-32 overflow-hidden">
                                                 {/* Blurred content (fake rows) */}
                                                 <div className="absolute inset-0 w-full h-full blur-md opacity-30 select-none pointer-events-none flex flex-col gap-4 p-4">
                                                     <div className="h-10 bg-white/10 rounded-xl w-full"></div>
@@ -872,7 +743,7 @@ export default function SearchPage() {
                                 </>
                             ) : (
                                 <tr>
-                                    <td colSpan={4} className="px-8 py-16 text-center text-slate-500">
+                                    <td colSpan={3} className="px-8 py-16 text-center text-slate-500">
                                         <div className="flex flex-col items-center gap-3">
                                             <Sparkles className="w-8 h-8 opacity-20" />
                                             <span>{t('pages.search.empty')}</span>
