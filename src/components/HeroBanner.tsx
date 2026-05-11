@@ -21,8 +21,12 @@ export const HeroBanner = ({ headingLevel = 'h1' }: HeroBannerProps) => {
                 <div className="absolute inset-y-0 left-[-5%] w-[16rem] rounded-full bg-[radial-gradient(circle,rgba(104,67,177,0.14)_0%,transparent_70%)] blur-3xl" />
 
                 <div className="text-center z-10 relative">
-                    <div className="mb-4 inline-flex items-center rounded-full border border-amber-200/20 bg-black/25 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-amber-50/90 backdrop-blur-md shadow-[0_0_18px_rgba(245,158,11,0.08)]">
-                        ✦ วิเคราะห์ชื่อ-นามสกุล ✦ ดูพลังชื่อมงคล
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-200/20 bg-black/25 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.15em] text-amber-50/90 backdrop-blur-md shadow-[0_0_18px_rgba(245,158,11,0.08)]">
+                        <span>🇹🇭 ชื่อไทย</span>
+                        <span className="text-amber-500/50">·</span>
+                        <span>🇬🇧 English</span>
+                        <span className="text-amber-500/50">✦</span>
+                        <span>วิเคราะห์พลังชื่อมงคล</span>
                     </div>
 
                     <HeadingTag className="cosmic-text-crisp text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4 tracking-tight">

@@ -112,8 +112,14 @@ async function getArticles() {
     // Combine
     const allArticles = [...enrichedDbArticles, ...uniqueLocalArticles];
 
+    // Keep the first article for each slug so duplicated DB rows or migrated slugs
+    // do not crash React with duplicate keys.
+    const uniqueBySlug = Array.from(
+        new Map(allArticles.map(article => [article.slug, article])).values()
+    );
+
     // Sort by date descending
-    const sorted = allArticles.sort((a, b) => parseThaiDate(b.date) - parseThaiDate(a.date));
+    const sorted = uniqueBySlug.sort((a, b) => parseThaiDate(b.date) - parseThaiDate(a.date));
 
     return sorted;
 }

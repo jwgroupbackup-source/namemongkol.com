@@ -182,7 +182,7 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
                         <InlineSignupCTA />
                     </div>
                 ) : (
-                    <div className="w-full max-w-5xl animate-fade-in flex flex-col gap-6">
+                    <div className="w-full max-w-5xl animate-fade-in flex flex-col gap-5 sm:gap-6 md:gap-8">
                         <div className="flex justify-start">
                             <button
                                 onClick={resetForm}
@@ -192,8 +192,14 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
                             </button>
                         </div>
 
-                        {/* Row 1: ผลรวมชื่อ + ผลรวมนามสกุล (2 cols) */}
+                        {/* Summary first on mobile */}
                         <ResultHeader result={result} />
+
+                        {/* Main score first */}
+                        <div className={`grid grid-cols-1 ${result.surname ? 'sm:grid-cols-2' : 'max-w-xl mx-auto'} gap-3 sm:gap-4`}>
+                            {result.surname && <ResultTotalScoreCard result={result} />}
+                            <PairAnalysisCard namePairs={result.namePairs} surnamePairs={result.surnamePairs} />
+                        </div>
 
                         {/* ตารางถอดรหัสเลขศาสตร์ */}
                         <NumerologyDecodeTable
@@ -203,12 +209,6 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
                             surnameScore={result.surnameScore}
                             totalScore={result.totalScore}
                         />
-
-                        {/* ผลรวมชื่อ-สกุล + วิเคราะห์คู่ตัวเลข — side by side always */}
-                        <div className={`grid grid-cols-1 ${result.surname ? 'sm:grid-cols-2' : 'max-w-xl mx-auto'} gap-3 sm:gap-4`}>
-                            {result.surname && <ResultTotalScoreCard result={result} />}
-                            <PairAnalysisCard namePairs={result.namePairs} surnamePairs={result.surnamePairs} />
-                        </div>
 
                         {/* Upsell: วิเคราะห์หลายชื่อ */}
                         <BulkAnalysisUpsell currentName={result.name} />

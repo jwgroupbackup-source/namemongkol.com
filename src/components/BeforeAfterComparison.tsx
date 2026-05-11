@@ -31,16 +31,16 @@ export const BeforeAfterComparison: React.FC<BeforeAfterComparisonProps> = ({
     if (!showComparison) return null;
 
     const currentIssues = isLowScore
-        ? ['อุปสรรคในการงาน', 'การเงินรั่วไหล', 'สุขภาพไม่แข็งแรง']
+        ? ['งานติดขัด', 'เงินรั่ว', 'สุขภาพอ่อน']
         : isMediumScore
-            ? ['พลังยังไม่เต็มที่', 'โอกาสถูกจำกัด', 'ต้องใช้ความพยายามมาก']
-            : ['ยังพัฒนาได้อีก'];
+            ? ['พลังยังไม่เต็ม', 'โอกาสยังน้อย', 'ต้องลุยต่อ']
+            : ['ยังไปได้อีก'];
 
     const projectedBenefits = [
-        { icon: Wallet, text: 'การเงินมั่นคง เงินทองไหลมาเทมา', color: 'text-emerald-400' },
-        { icon: Heart, text: 'ความรักราบรื่น คนรักใคร่', color: 'text-pink-400' },
-        { icon: Shield, text: 'บารมีเด่น ปกป้องภัยอันตราย', color: 'text-blue-400' },
-        { icon: Crown, text: 'เจริญก้าวหน้า มีคนนับหน้าถือตา', color: 'text-amber-400' },
+        { icon: Wallet, text: 'เงินมั่นคง', color: 'text-emerald-400' },
+        { icon: Heart, text: 'รักราบรื่น', color: 'text-pink-400' },
+        { icon: Shield, text: 'บารมีเด่น', color: 'text-blue-400' },
+        { icon: Crown, text: 'คนยอมรับ', color: 'text-amber-400' },
     ];
 
     return (
@@ -50,13 +50,13 @@ export const BeforeAfterComparison: React.FC<BeforeAfterComparisonProps> = ({
             <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-rose-500/10 rounded-full blur-3xl pointer-events-none" />
 
             {/* Header */}
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-5">
                 <div className="p-2 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 border border-amber-500/30">
                     <Zap className="w-5 h-5 text-amber-400" />
                 </div>
                 <div>
-                    <h3 className="text-lg font-bold text-white">เปรียบเทียบพลังชื่อ</h3>
-                    <p className="text-xs text-slate-400">ถ้าเปลี่ยนชื่อมงคล ชีวิตจะดีขึ้นแค่ไหน?</p>
+                    <h3 className="text-lg font-bold text-white">เปรียบเทียบก่อน-หลัง</h3>
+                    <p className="text-xs text-slate-400">ถ้าปรับชื่อใหม่ พลังจะขยับแค่ไหน</p>
                 </div>
             </div>
 
@@ -65,7 +65,7 @@ export const BeforeAfterComparison: React.FC<BeforeAfterComparisonProps> = ({
                 {/* Before - Current Name */}
                 <div className="relative">
                     <div className="text-center mb-3">
-                        <span className="text-xs text-slate-500 uppercase tracking-wider">ชื่อปัจจุบัน</span>
+                        <span className="text-xs text-slate-500 uppercase tracking-wider">ชื่อเดิม</span>
                         <div className="flex items-center justify-center gap-1 mt-1">
                             <TrendingDown className="w-4 h-4 text-rose-400" />
                             <span className="text-rose-400 font-bold">{currentGrade}</span>
@@ -106,7 +106,7 @@ export const BeforeAfterComparison: React.FC<BeforeAfterComparisonProps> = ({
                         </svg>
                         <div className="absolute inset-0 flex flex-col items-center justify-center">
                             <span className="text-2xl font-bold text-rose-400">{currentPercent}%</span>
-                            <span className="text-[10px] text-slate-500">พลังชื่อ</span>
+                            <span className="text-[10px] text-slate-500">พลัง</span>
                         </div>
                     </div>
 
@@ -131,7 +131,7 @@ export const BeforeAfterComparison: React.FC<BeforeAfterComparisonProps> = ({
                 {/* After - Projected with New Name */}
                 <div className="relative">
                     <div className="text-center mb-3">
-                        <span className="text-xs text-slate-500 uppercase tracking-wider">ชื่อมงคลใหม่</span>
+                        <span className="text-xs text-slate-500 uppercase tracking-wider">ชื่อใหม่</span>
                         <div className="flex items-center justify-center gap-1 mt-1">
                             <TrendingUp className="w-4 h-4 text-emerald-400" />
                             <span className="text-emerald-400 font-bold">A+</span>
@@ -172,7 +172,7 @@ export const BeforeAfterComparison: React.FC<BeforeAfterComparisonProps> = ({
                         </svg>
                         <div className="absolute inset-0 flex flex-col items-center justify-center">
                             <span className="text-2xl font-bold text-emerald-400">{projectedPercent}%</span>
-                            <span className="text-[10px] text-slate-500">พลังชื่อ</span>
+                            <span className="text-[10px] text-slate-500">พลัง</span>
                         </div>
                         {/* Glow Effect */}
                         <div className="absolute inset-0 rounded-full bg-emerald-500/10 blur-xl animate-pulse" />
@@ -199,9 +199,9 @@ export const BeforeAfterComparison: React.FC<BeforeAfterComparisonProps> = ({
                         </div>
                         <div>
                             <p className="text-sm font-bold text-emerald-400">
-                                +{projectedPercent - currentPercent}% พลังชีวิต
+                                +{projectedPercent - currentPercent}% พลัง
                             </p>
-                            <p className="text-xs text-slate-400">หลังเปลี่ยนชื่อมงคล</p>
+                            <p className="text-xs text-slate-400">ถ้าปรับชื่อใหม่</p>
                         </div>
                     </div>
                     <div className="flex -space-x-1">

@@ -41,8 +41,8 @@ export const ResultTotalScoreCard: React.FC<ResultTotalScoreCardProps> = ({ resu
                 </div>
             </div>
 
-            <h3 className="text-sm text-slate-400 mb-1">ผลรวมชื่อ-สกุล</h3>
-            <div className={`text-4xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${result.prediction.bgGradient} mb-2`}>
+            <h3 className="text-xs sm:text-sm text-slate-400 mb-1 uppercase tracking-wide">ผลรวมชื่อ-สกุล</h3>
+            <div className={`text-3xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${result.prediction.bgGradient} mb-2`}>
                 {result.totalScore}
             </div>
             <div className="flex justify-center gap-1 mb-2">
@@ -51,7 +51,7 @@ export const ResultTotalScoreCard: React.FC<ResultTotalScoreCardProps> = ({ resu
                 ))}
             </div>
 
-            <div className="text-slate-300 text-xs leading-relaxed px-2 mb-2 flex-grow">
+            <div className="text-slate-300 text-xs leading-relaxed px-2 mb-2 flex-grow line-clamp-2 sm:line-clamp-none">
                 &quot;{result.prediction.desc}&quot;
             </div>
             <div className="flex flex-col items-center gap-2 mt-auto">
@@ -69,7 +69,7 @@ export const ResultTotalScoreCard: React.FC<ResultTotalScoreCardProps> = ({ resu
                             className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white rounded-xl shadow-lg shadow-amber-900/20 transition-all hover:-translate-y-0.5 hover:shadow-amber-500/30"
                         >
                                 <Sparkles className="w-3.5 h-3.5" />
-                                <span className="font-bold text-xs">ออกแบบชื่อมงคลใหม่</span>
+                                <span className="font-bold text-xs">ดูชื่อใหม่</span>
                         </Link>
                     )}
             </div>

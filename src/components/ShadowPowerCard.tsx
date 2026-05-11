@@ -38,11 +38,48 @@ export const ShadowPowerCard: React.FC<ShadowPowerCardProps> = ({ name, surname 
         }
     };
 
+    const compactDesc = (text?: string) => {
+        if (!text) return '';
+        return text.replace(/\s+/g, ' ').split('。')[0].split('. ')[0].trim();
+    };
+
     return (
         <div className="space-y-6 animate-fade-in-up font-sans">
 
-            {/* 1. Summary Table Card */}
-            <div className="rounded-xl overflow-hidden shadow-lg border border-teal-800/50">
+            {/* Mobile: condensed summary */}
+            <div className="lg:hidden rounded-2xl overflow-hidden shadow-lg border border-teal-800/30 bg-slate-900/50">
+                <div className="bg-teal-900 px-4 py-3 border-b border-teal-800 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-amber-400" />
+                    <h3 className="font-bold text-amber-400 text-sm">พลังเงา & อายตนะ 6</h3>
+                </div>
+                <div className="p-4 space-y-3 text-sm text-slate-300">
+                    <div className="flex items-center justify-between gap-3 rounded-xl bg-white/5 px-3 py-2">
+                        <span className="text-slate-400">ชื่อ</span>
+                        <div className="text-right">
+                            <div className="font-semibold text-white">{name}</div>
+                            <div className={`text-xs ${getLevelColor(firstNamePred.level)}`}>อายตนะ {firstNameAyatana}, พลังเงา {firstNameScore}</div>
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-between gap-3 rounded-xl bg-white/5 px-3 py-2">
+                        <span className="text-slate-400">นามสกุล</span>
+                        <div className="text-right">
+                            <div className="font-semibold text-white">{surname}</div>
+                            <div className={`text-xs ${getLevelColor(lastNamePred.level)}`}>อายตนะ {lastNameAyatana}, พลังเงา {lastNameScore}</div>
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-between gap-3 rounded-xl bg-teal-500/10 border border-teal-500/20 px-3 py-2">
+                        <span className="text-slate-400">รวม</span>
+                        <div className="text-right">
+                            <div className="font-semibold text-amber-300">{totalScore}</div>
+                            <div className={`text-xs ${getLevelColor(totalPred.level)}`}>{totalPred.title}</div>
+                        </div>
+                    </div>
+                    <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">{compactDesc(totalPred.desc)}</p>
+                </div>
+            </div>
+
+            {/* Desktop summary table */}
+            <div className="hidden lg:block rounded-xl overflow-hidden shadow-lg border border-teal-800/50">
                 {/* Header */}
                 <div className="grid grid-cols-5 bg-teal-900 text-amber-400 text-xs sm:text-sm font-bold border-b border-teal-800">
                     <div className="col-span-2 py-3 text-center border-r border-teal-800 flex flex-col justify-center">
@@ -76,25 +113,25 @@ export const ShadowPowerCard: React.FC<ShadowPowerCardProps> = ({ name, surname 
                 </div>
             </div>
 
-            {/* 2. Detail Cards Stack */}
-            <div className="space-y-4">
+            {/* Desktop detail cards */}
+            <div className="hidden lg:block space-y-4">
 
                 {/* Name Card */}
                 <div className="rounded-xl overflow-hidden shadow-lg border border-teal-800/30">
                     <div className="bg-teal-900 px-4 py-2 border-b border-teal-800 flex items-center gap-2">
                         <Sparkles className="w-4 h-4 text-amber-400" />
-                        <h3 className="font-bold text-amber-400 text-sm sm:text-base">พลังอายตนะ และพลังเงา ได้ผลดังนี้</h3>
+                        <h3 className="font-bold text-amber-400 text-sm sm:text-base">พลังอายตนะและพลังเงา</h3>
                     </div>
                     <div className="bg-slate-800/50 px-4 py-2 border-b border-white/5">
-                        <span className="text-slate-300 font-bold">ชื่อ <span className="text-amber-400">{name}</span> อายตนะ ๖ คือ เลข {firstNameAyatana}</span>
+                        <span className="text-slate-300 font-bold">ชื่อ <span className="text-amber-400">{name}</span> ได้อายตนะ {firstNameAyatana}</span>
                     </div>
                     <div className="p-4 bg-slate-900/50 text-slate-300 text-sm leading-relaxed space-y-3">
                         <div>
-                            <span className="text-teal-400 font-bold">เลขดายตนะ ๖ ได้แก่ หมายเลข {firstNameAyatana}:</span> {firstNameAyatanaPred?.desc}
+                            <span className="text-teal-400 font-bold">อายตนะ {firstNameAyatana}:</span> {compactDesc(firstNameAyatanaPred?.desc)}
                         </div>
                         <div className="h-px bg-white/10"></div>
                         <div>
-                            <span className={`font-bold ${getLevelColor(firstNamePred.level)}`}>พลังเงา {name} หมายเลข {firstNameScore} {firstNamePred.title} /</span> {firstNamePred.desc}
+                            <span className={`font-bold ${getLevelColor(firstNamePred.level)}`}>พลังเงา {name} หมายเลข {firstNameScore} {firstNamePred.title} /</span> {compactDesc(firstNamePred.desc)}
                         </div>
                     </div>
                 </div>
@@ -103,18 +140,18 @@ export const ShadowPowerCard: React.FC<ShadowPowerCardProps> = ({ name, surname 
                 <div className="rounded-xl overflow-hidden shadow-lg border border-teal-800/30">
                     <div className="bg-teal-900 px-4 py-2 border-b border-teal-800 flex items-center gap-2">
                         <Sparkles className="w-4 h-4 text-amber-400" />
-                        <h3 className="font-bold text-amber-400 text-sm sm:text-base">พลังอายตนะ และพลังเงา ได้ผลดังนี้</h3>
+                        <h3 className="font-bold text-amber-400 text-sm sm:text-base">พลังอายตนะและพลังเงา</h3>
                     </div>
                     <div className="bg-slate-800/50 px-4 py-2 border-b border-white/5">
-                        <span className="text-slate-300 font-bold">นามสกุล <span className="text-amber-400">{surname}</span> อายตนะ ๖ คือ เลข {lastNameAyatana}</span>
+                        <span className="text-slate-300 font-bold">นามสกุล <span className="text-amber-400">{surname}</span> ได้อายตนะ {lastNameAyatana}</span>
                     </div>
                     <div className="p-4 bg-slate-900/50 text-slate-300 text-sm leading-relaxed space-y-3">
                         <div>
-                            <span className="text-teal-400 font-bold">เลขดายตนะ ๖ ได้แก่ หมายเลข {lastNameAyatana}:</span> {lastNameAyatanaPred?.desc}
+                            <span className="text-teal-400 font-bold">อายตนะ {lastNameAyatana}:</span> {compactDesc(lastNameAyatanaPred?.desc)}
                         </div>
                         <div className="h-px bg-white/10"></div>
                         <div>
-                            <span className={`font-bold ${getLevelColor(lastNamePred.level)}`}>พลังเงา {surname} หมายเลข {lastNameScore} {lastNamePred.title} /</span> {lastNamePred.desc}
+                            <span className={`font-bold ${getLevelColor(lastNamePred.level)}`}>พลังเงา {surname} หมายเลข {lastNameScore} {lastNamePred.title} /</span> {compactDesc(lastNamePred.desc)}
                         </div>
                     </div>
                 </div>
@@ -129,7 +166,7 @@ export const ShadowPowerCard: React.FC<ShadowPowerCardProps> = ({ name, surname 
                             <span className={`font-bold text-lg ${getLevelColor(totalPred.level)}`}>หมายเลข {totalScore} {totalPred.title}</span>
                         </div>
                         <div>
-                            {totalPred.desc}
+                            {compactDesc(totalPred.desc)}
                         </div>
                     </div>
                 </div>
