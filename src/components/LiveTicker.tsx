@@ -6,6 +6,18 @@ import { auspiciousNames } from '@/data/auspiciousNames';
 
 type MessageType = 'analysis' | 'grade' | 'online' | 'review' | 'phone' | 'palm' | 'wallpaper' | 'premium';
 
+interface LiveStats {
+    onlineNow: number;
+    counts: {
+        analysis: number;
+        wallpaper: number;
+        phone: number;
+        palm: number;
+        premium: number;
+        total: number;
+    };
+}
+
 interface TickerMessage {
     id: number;
     type: MessageType;
@@ -45,12 +57,15 @@ const pick = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
 // --- Message generators (varied phrasing) ---
 
-const analysisMessages = (): TickerMessage => {
+const analysisMessages = (stats: LiveStats | null): TickerMessage => {
     const templates = [
         () => `${getRandomName()} เพิ่งวิเคราะห์ชื่อ ${timeAgo()}`,
         () => `มีคนจาก${pick(provinces)}วิเคราะห์ชื่อ ${timeAgo()}`,
         () => `${getRandomName()} กำลังดูผลวิเคราะห์ชื่อ`,
         () => `มีคนวิเคราะห์ชื่อใหม่ ${timeAgo()}`,
+        ...(stats && stats.counts.analysis > 0
+            ? [() => `${stats.counts.analysis} คนวิเคราะห์ชื่อใน 30 นาทีที่ผ่านมา`]
+            : []),
     ];
     return {
         id: Date.now() + Math.random(),
@@ -61,7 +76,7 @@ const analysisMessages = (): TickerMessage => {
     };
 };
 
-const gradeMessages = (): TickerMessage => {
+const gradeMessages = (_stats: LiveStats | null): TickerMessage => {
     const grade = pick(grades);
     const templates = [
         () => `${getRandomName()} ได้ชื่อเกรด ${grade} !`,
@@ -77,12 +92,13 @@ const gradeMessages = (): TickerMessage => {
     };
 };
 
-const onlineMessages = (): TickerMessage => {
-    const count = Math.floor(Math.random() * 30) + 8;
+const onlineMessages = (stats: LiveStats | null): TickerMessage => {
+    const count = stats ? stats.onlineNow : Math.floor(Math.random() * 30) + 8;
+    const isReal = stats !== null;
     const templates = [
         () => `${count} คนกำลังใช้งานตอนนี้`,
         () => `ขณะนี้มี ${count} คนออนไลน์`,
-        () => `มีผู้ใช้งาน ${count} คน ในขณะนี้`,
+        () => isReal ? `${count} คนออนไลน์อยู่ในขณะนี้ 🟢` : `มีผู้ใช้งาน ${count} คน ในขณะนี้`,
     ];
     return {
         id: Date.now() + Math.random(),
@@ -93,7 +109,7 @@ const onlineMessages = (): TickerMessage => {
     };
 };
 
-const reviewMessages = (): TickerMessage => {
+const reviewMessages = (_stats: LiveStats | null): TickerMessage => {
     const ratings = [5, 5, 5, 4, 5, 4];
     const stars = pick(ratings);
     const snippets = [
@@ -109,11 +125,14 @@ const reviewMessages = (): TickerMessage => {
     };
 };
 
-const phoneMessages = (): TickerMessage => {
+const phoneMessages = (stats: LiveStats | null): TickerMessage => {
     const templates = [
         () => `มีคนวิเคราะห์เบอร์มงคล ${timeAgo()}`,
         () => `${getRandomName()} เช็คเบอร์โทรศัพท์`,
         () => `เบอร์มงคลถูกวิเคราะห์ ${timeAgo()}`,
+        ...(stats && stats.counts.phone > 0
+            ? [() => `${stats.counts.phone} คนเช็คเบอร์มงคลใน 30 นาทีที่ผ่านมา`]
+            : []),
     ];
     return {
         id: Date.now() + Math.random(),
@@ -124,10 +143,13 @@ const phoneMessages = (): TickerMessage => {
     };
 };
 
-const palmMessages = (): TickerMessage => {
+const palmMessages = (stats: LiveStats | null): TickerMessage => {
     const templates = [
         () => `${getRandomName()} เพิ่งดูลายมือ ${timeAgo()}`,
         () => `มีคนวิเคราะห์ลายมือ ${timeAgo()}`,
+        ...(stats && stats.counts.palm > 0
+            ? [() => `${stats.counts.palm} คนวิเคราะห์ดวงใน 30 นาทีที่ผ่านมา`]
+            : []),
     ];
     return {
         id: Date.now() + Math.random(),
@@ -138,10 +160,13 @@ const palmMessages = (): TickerMessage => {
     };
 };
 
-const wallpaperMessages = (): TickerMessage => {
+const wallpaperMessages = (stats: LiveStats | null): TickerMessage => {
     const templates = [
         () => `วอลเปเปอร์มงคลถูกดาวน์โหลด ${timeAgo()}`,
         () => `มีคนจาก${pick(provinces)}โหลดวอลเปเปอร์`,
+        ...(stats && stats.counts.wallpaper > 0
+            ? [() => `${stats.counts.wallpaper} คนโหลดวอลเปเปอร์มงคลใน 30 นาที`]
+            : []),
     ];
     return {
         id: Date.now() + Math.random(),
@@ -152,10 +177,13 @@ const wallpaperMessages = (): TickerMessage => {
     };
 };
 
-const premiumMessages = (): TickerMessage => {
+const premiumMessages = (stats: LiveStats | null): TickerMessage => {
     const templates = [
         () => `${getRandomName()} ปลดล็อกผลวิเคราะห์แบบเต็ม`,
         () => `มีคนใช้บริการ Premium ${timeAgo()}`,
+        ...(stats && stats.counts.premium > 0
+            ? [() => `${stats.counts.premium} คนใช้บริการ Premium ใน 30 นาทีที่ผ่านมา`]
+            : []),
     ];
     return {
         id: Date.now() + Math.random(),
@@ -166,27 +194,39 @@ const premiumMessages = (): TickerMessage => {
     };
 };
 
-// Weighted random selection
-const messageGenerators: { fn: () => TickerMessage; weight: number }[] = [
-    { fn: analysisMessages, weight: 25 },
+// Weighted random selection (stats injected at call-time for real data blending)
+interface Generator {
+    fn: (stats: LiveStats | null) => TickerMessage;
+    weight: number;
+    countKey?: keyof LiveStats['counts'];
+}
+
+const messageGenerators: Generator[] = [
+    { fn: analysisMessages, weight: 25, countKey: 'analysis' },
     { fn: gradeMessages, weight: 18 },
     { fn: onlineMessages, weight: 8 },
     { fn: reviewMessages, weight: 15 },
-    { fn: phoneMessages, weight: 12 },
-    { fn: palmMessages, weight: 8 },
-    { fn: wallpaperMessages, weight: 7 },
-    { fn: premiumMessages, weight: 7 },
+    { fn: phoneMessages, weight: 12, countKey: 'phone' },
+    { fn: palmMessages, weight: 8, countKey: 'palm' },
+    { fn: wallpaperMessages, weight: 7, countKey: 'wallpaper' },
+    { fn: premiumMessages, weight: 7, countKey: 'premium' },
 ];
 
-const totalWeight = messageGenerators.reduce((sum, g) => sum + g.weight, 0);
-
-const generateMessage = (): TickerMessage => {
-    let r = Math.random() * totalWeight;
-    for (const g of messageGenerators) {
+const generateMessage = (stats: LiveStats | null): TickerMessage => {
+    // Boost weight of generators that have real activity data
+    const generators = messageGenerators.map((g) => ({
+        ...g,
+        weight: g.countKey && stats && (stats.counts[g.countKey] ?? 0) > 0
+            ? g.weight + 10
+            : g.weight,
+    }));
+    const total = generators.reduce((sum, g) => sum + g.weight, 0);
+    let r = Math.random() * total;
+    for (const g of generators) {
         r -= g.weight;
-        if (r <= 0) return g.fn();
+        if (r <= 0) return g.fn(stats);
     }
-    return messageGenerators[0].fn();
+    return generators[0].fn(stats);
 };
 
 // --- Component ---
@@ -198,14 +238,39 @@ export const LiveTicker: React.FC = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [isClient, setIsClient] = useState(false);
     const [isDismissed, setIsDismissed] = useState(false);
+    const [liveStats, setLiveStats] = useState<LiveStats | null>(null);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const lastTypeRef = useRef<MessageType | null>(null);
+    const liveStatsRef = useRef<LiveStats | null>(null);
+
+    // Keep ref in sync so showNextMessage closure always reads latest stats
+    useEffect(() => {
+        liveStatsRef.current = liveStats;
+    }, [liveStats]);
 
     useEffect(() => {
         setIsClient(true);
         if (sessionStorage.getItem(DISMISS_KEY) === '1') {
             setIsDismissed(true);
         }
+    }, []);
+
+    // Fetch live stats on mount and every 60 seconds
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const res = await fetch('/api/live-stats');
+                if (res.ok) {
+                    const data: LiveStats = await res.json();
+                    setLiveStats(data);
+                }
+            } catch {
+                // Silently fail — LiveTicker continues with random messages
+            }
+        };
+        fetchStats();
+        const interval = setInterval(fetchStats, 60_000);
+        return () => clearInterval(interval);
     }, []);
 
     const dismiss = useCallback(() => {
@@ -218,10 +283,10 @@ export const LiveTicker: React.FC = () => {
         if (isDismissed) return;
 
         // Avoid showing same type twice in a row
-        let msg = generateMessage();
+        let msg = generateMessage(liveStatsRef.current);
         let attempts = 0;
         while (msg.type === lastTypeRef.current && attempts < 3) {
-            msg = generateMessage();
+            msg = generateMessage(liveStatsRef.current);
             attempts++;
         }
         lastTypeRef.current = msg.type;
