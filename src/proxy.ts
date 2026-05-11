@@ -1,7 +1,7 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
-// Simple in-memory rate limiting for middleware
+// Simple in-memory rate limiting for proxy
 // Note: This is reset on server restart. For production with multiple instances, use Redis.
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
@@ -16,7 +16,7 @@ function getClientIp(request: NextRequest): string {
     return 'unknown';
 }
 
-function checkMiddlewareRateLimit(
+function checkProxyRateLimit(
     key: string,
     maxRequests: number,
     windowMs: number
@@ -44,14 +44,14 @@ function checkMiddlewareRateLimit(
     return { allowed: true, remaining: maxRequests - entry.count, resetTime: entry.resetTime };
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
     const ip = getClientIp(request);
 
     // Rate limit for auth API endpoints
     if (pathname.startsWith('/api/auth')) {
-        const key = `middleware:auth:${ip}`;
-        const { allowed, resetTime } = checkMiddlewareRateLimit(key, 30, 60 * 1000); // 30 req/min
+        const key = `proxy:auth:${ip}`;
+        const { allowed, resetTime } = checkProxyRateLimit(key, 30, 60 * 1000); // 30 req/min
 
         if (!allowed) {
             const retryAfter = Math.ceil((resetTime - Date.now()) / 1000);
@@ -70,8 +70,8 @@ export async function middleware(request: NextRequest) {
 
     // Stricter rate limit for login endpoint specifically
     if (pathname === '/api/auth/login' && request.method === 'POST') {
-        const key = `middleware:login:${ip}`;
-        const { allowed, remaining } = checkMiddlewareRateLimit(key, 10, 5 * 60 * 1000); // 10 req/5min
+        const key = `proxy:login:${ip}`;
+        const { allowed, remaining } = checkProxyRateLimit(key, 10, 5 * 60 * 1000); // 10 req/5min
 
         if (!allowed) {
             return NextResponse.json(
@@ -83,7 +83,7 @@ export async function middleware(request: NextRequest) {
         // Add rate limit headers
         const response = NextResponse.next();
         response.headers.set('X-RateLimit-Remaining', remaining.toString());
-        // Continue to next middleware/handler with headers
+        // Continue to next proxy/handler with headers
     }
 
     // Skip Supabase auth for public paths (faster response)
@@ -176,14 +176,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
     matcher: [
-        /*
-         * Match all request paths except for the ones starting with:
-         * - _next/static (static files)
-         * - _next/image (image optimization files)
-         * - favicon.ico (favicon file)
-         * - public folder
-         * Feel free to modify this pattern to include more paths.
-         */
         '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
     ],
 };
