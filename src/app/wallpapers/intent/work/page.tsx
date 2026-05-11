@@ -84,10 +84,21 @@ export default function WorkWallpapersIntentPage() {
                     <p className="text-slate-400 leading-relaxed mb-5">
                         เริ่มจากคอลเลกชันที่เด่นเรื่องบารมีและความก้าวหน้า เช่น วันอาทิตย์ วันอังคาร และวันพฤหัสบดี เพื่อช่วยย้ำเป้าหมายด้านการเติบโตในอาชีพ
                     </p>
+                    <p className="text-slate-400 leading-relaxed mb-5">
+                        ถ้าต้องการความแม่นยำเพิ่มขึ้นในบริบทงานของคุณ สามารถ{' '}
+                        <Link
+                            href="/wallpapers/custom"
+                            className="font-medium text-emerald-300 hover:text-emerald-200 underline decoration-emerald-400/50 underline-offset-2"
+                        >
+                            สร้างวอลเปเปอร์เสริมการงานแบบกำหนดเอง
+                        </Link>{' '}
+                        เพื่อเลือกธีมบารมีและพลังการตัดสินใจที่เหมาะกับบทบาทปัจจุบัน
+                    </p>
                     <div className="flex flex-wrap gap-2">
                         <Link href="/wallpapers/day/sunday" className="text-xs bg-slate-700/50 hover:bg-red-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">วันอาทิตย์ เสริมบารมีผู้นำ</Link>
                         <Link href="/wallpapers/day/tuesday" className="text-xs bg-slate-700/50 hover:bg-pink-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">วันอังคาร เสริมความกล้าตัดสินใจ</Link>
                         <Link href="/wallpapers/day/thursday" className="text-xs bg-slate-700/50 hover:bg-orange-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">วันพฤหัสบดี เสริมปัญญาและผู้ใหญ่อุปถัมภ์</Link>
+                        <Link href="/wallpapers/custom" className="text-xs bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 px-3 py-1.5 rounded-full text-emerald-300 hover:text-emerald-200 transition-colors">✨ ตั้งค่าภาพงานเฉพาะเป้าหมาย</Link>
                     </div>
                 </div>
             </section>

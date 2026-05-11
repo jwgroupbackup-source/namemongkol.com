@@ -24,6 +24,21 @@ const ZODIAC_META: Record<string, { label: string; emoji: string; desc: string; 
 
 const VALID_SIGNS = Object.keys(ZODIAC_META);
 
+const CUSTOM_CTA_BY_SIGN: Record<string, { inlineAnchor: string; chipAnchor: string; focusCopy: string }> = {
+    aries: { inlineAnchor: 'สร้างวอลเปเปอร์สายผู้นำเฉพาะตัว', chipAnchor: '✨ Custom พลังผู้นำเมษ', focusCopy: 'เร่งความมั่นใจและพลังการเริ่มต้น' },
+    taurus: { inlineAnchor: 'ออกแบบภาพมงคลเน้นความมั่นคง', chipAnchor: '✨ Custom เสถียรภาพพฤษภ', focusCopy: 'เสริมฐานะและความมั่นคงระยะยาว' },
+    gemini: { inlineAnchor: 'สร้างวอลเปเปอร์เสริมการสื่อสารส่วนตัว', chipAnchor: '✨ Custom วาทศิลป์เมถุน', focusCopy: 'หนุนการเจรจาและความคิดสร้างสรรค์' },
+    cancer: { inlineAnchor: 'ปรับวอลเปเปอร์สายความรักและครอบครัว', chipAnchor: '✨ Custom อบอุ่นกรกฎ', focusCopy: 'เพิ่มพลังความสัมพันธ์ที่สมดุล' },
+    leo: { inlineAnchor: 'ออกแบบวอลเปเปอร์เสริมบารมีเฉพาะคุณ', chipAnchor: '✨ Custom ออร่าสิงห์', focusCopy: 'ผลักดันภาพลักษณ์และความโดดเด่น' },
+    virgo: { inlineAnchor: 'สร้างภาพมงคลโฟกัสปัญญาและวินัย', chipAnchor: '✨ Custom โฟกัสกันย์', focusCopy: 'จัดระเบียบเป้าหมายให้คมชัดขึ้น' },
+    libra: { inlineAnchor: 'ออกแบบวอลเปเปอร์เสริมเสน่ห์เฉพาะบุคคล', chipAnchor: '✨ Custom สมดุลตุลย์', focusCopy: 'เน้นเสน่ห์และความสัมพันธ์เชิงบวก' },
+    scorpio: { inlineAnchor: 'สร้างวอลเปเปอร์พลังลึกแบบส่วนตัว', chipAnchor: '✨ Custom เข้มพิจิก', focusCopy: 'เพิ่มพลังตัดสินใจและความเด็ดขาด' },
+    sagittarius: { inlineAnchor: 'ออกแบบภาพมงคลสายโอกาสและการเดินทาง', chipAnchor: '✨ Custom วิสัยทัศน์ธนู', focusCopy: 'เปิดทางโอกาสใหม่และโชคลาภ' },
+    capricorn: { inlineAnchor: 'สร้างวอลเปเปอร์เสริมความสำเร็จมืออาชีพ', chipAnchor: '✨ Custom เป้าหมายมังกร', focusCopy: 'หนุนความก้าวหน้าและวินัยการทำงาน' },
+    aquarius: { inlineAnchor: 'ออกแบบวอลเปเปอร์ครีเอทีฟเฉพาะทาง', chipAnchor: '✨ Custom นวัตกรรมกุมภ์', focusCopy: 'ปล่อยศักยภาพไอเดียและนวัตกรรม' },
+    pisces: { inlineAnchor: 'สร้างภาพมงคลสายจิตวิญญาณส่วนตัว', chipAnchor: '✨ Custom พลังมีน', focusCopy: 'เสริมสมดุลใจและพลังบวกภายใน' },
+};
+
 type Props = { params: Promise<{ sign: string }> };
 
 export async function generateStaticParams() {
@@ -65,6 +80,7 @@ export default async function ZodiacWallpapersPage({ params }: Props) {
     if (!VALID_SIGNS.includes(sign)) notFound();
 
     const meta = ZODIAC_META[sign];
+    const customCta = CUSTOM_CTA_BY_SIGN[sign];
 
     const breadcrumbJsonLd = {
         '@context': 'https://schema.org',
@@ -124,12 +140,23 @@ export default async function ZodiacWallpapersPage({ params }: Props) {
                     <p className="text-slate-400 leading-relaxed mb-6">
                         {`สำหรับผู้ที่ต้องการวอลเปเปอร์มงคลตามราศีแบบเฉพาะเจาะจง หน้านี้รวบรวมดีไซน์ที่เชื่อมโยงกับพลังเด่นของ${meta.label} เพื่อใช้เสริมโฟกัสในเรื่องที่ต้องการผลักดันในปี 2569`}
                     </p>
+                    <p className="text-slate-400 leading-relaxed mb-6">
+                        ถ้าต้องการปรับภาพให้เข้ากับเป้าหมายเฉพาะช่วงชีวิตของ{meta.label} เช่น {customCta.focusCopy} ลอง{' '}
+                        <Link
+                            href="/wallpapers/custom"
+                            className="font-medium text-cyan-300 hover:text-cyan-200 underline decoration-cyan-400/50 underline-offset-2"
+                        >
+                            {customCta.inlineAnchor}
+                        </Link>{' '}
+                        ผ่านโหมด custom
+                    </p>
                     <div className="border-t border-slate-800/50 pt-5">
                         <h3 className="text-sm font-semibold text-slate-300 mb-3">เจาะจงเสริมดวงเฉพาะด้าน:</h3>
                         <div className="flex flex-wrap gap-2">
                             <Link href="/wallpapers/intent/finance" className="text-xs bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 px-3 py-1.5 rounded-full text-emerald-300 hover:text-emerald-200 transition-colors">💰 เสริมการเงิน ค้าขาย โชคลาภ</Link>
                             <Link href="/wallpapers/intent/work" className="text-xs bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 px-3 py-1.5 rounded-full text-amber-300 hover:text-amber-200 transition-colors">📈 เสริมการงาน เลื่อนตำแหน่ง</Link>
                             <Link href="/wallpapers/intent/love" className="text-xs bg-pink-500/10 hover:bg-pink-500/20 border border-pink-500/20 px-3 py-1.5 rounded-full text-pink-300 hover:text-pink-200 transition-colors">💖 เสริมความรัก เสน่ห์ เมตตา</Link>
+                            <Link href="/wallpapers/custom" className="text-xs bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/20 px-3 py-1.5 rounded-full text-cyan-300 hover:text-cyan-200 transition-colors">{customCta.chipAnchor}</Link>
                         </div>
                     </div>
                 </div>

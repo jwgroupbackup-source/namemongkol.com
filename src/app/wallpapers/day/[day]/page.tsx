@@ -151,12 +151,23 @@ export default async function DayWallpapersPage({ params }: Props) {
                     <p className="text-slate-400 leading-relaxed mb-6">
                         {`คอลเลกชันวอลเปเปอร์มงคล${meta.label}ชุดนี้ออกแบบให้สอดคล้องกับสีมงคลประจำวันและสัญลักษณ์เสริมดวงเด่นของวันเกิด ช่วยย้ำเป้าหมายด้านการเงิน การงาน และความรักเมื่อใช้งานเป็นหน้าจอประจำวัน`}
                     </p>
+                    <p className="text-slate-400 leading-relaxed mb-6">
+                        ต้องการโทนภาพที่เฉพาะกับเป้าหมายของคุณมากขึ้น?{' '}
+                        <Link
+                            href="/wallpapers/custom"
+                            className="font-medium text-amber-300 hover:text-amber-200 underline decoration-amber-400/50 underline-offset-2"
+                        >
+                            ลองสร้างวอลเปเปอร์มงคลส่วนตัว
+                        </Link>{' '}
+                        เพื่อปรับธีม สี และความหมายให้ตรงกับจังหวะชีวิตของคุณในปี 2569
+                    </p>
                     <div className="border-t border-slate-800/50 pt-5">
                         <h3 className="text-sm font-semibold text-slate-300 mb-3">ค้นหาวอลเปเปอร์ตามจุดประสงค์:</h3>
                         <div className="flex flex-wrap gap-2">
                             <Link href="/wallpapers/intent/finance" className="text-xs bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 px-3 py-1.5 rounded-full text-emerald-300 hover:text-emerald-200 transition-colors">💰 เสริมดวงการเงิน เรียกทรัพย์</Link>
                             <Link href="/wallpapers/intent/work" className="text-xs bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 px-3 py-1.5 rounded-full text-amber-300 hover:text-amber-200 transition-colors">📈 เสริมดวงการงาน บารมี</Link>
                             <Link href="/wallpapers/intent/love" className="text-xs bg-pink-500/10 hover:bg-pink-500/20 border border-pink-500/20 px-3 py-1.5 rounded-full text-pink-300 hover:text-pink-200 transition-colors">💖 เสริมดวงความรัก เมตตามหานิยม</Link>
+                            <Link href="/wallpapers/custom" className="text-xs bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/20 px-3 py-1.5 rounded-full text-cyan-300 hover:text-cyan-200 transition-colors">✨ สร้างวอลเปเปอร์มงคลส่วนตัว</Link>
                         </div>
                     </div>
                 </div>

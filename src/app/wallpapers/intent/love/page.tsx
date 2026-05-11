@@ -84,10 +84,21 @@ export default function LoveWallpapersIntentPage() {
                     <p className="text-slate-400 leading-relaxed mb-5">
                         แนะนำเริ่มจากคอลเลกชันวันจันทร์และวันศุกร์ที่เน้นพลังเมตตาและความรัก หรือใช้ร่วมกับบริการวิเคราะห์ชื่อเพื่อเพิ่มความสอดคล้องด้านดวงความรัก
                     </p>
+                    <p className="text-slate-400 leading-relaxed mb-5">
+                        สำหรับคนที่อยากกำหนด mood ภาพให้ตรงกับสถานะความสัมพันธ์ของตัวเอง ลอง{' '}
+                        <Link
+                            href="/wallpapers/custom"
+                            className="font-medium text-amber-300 hover:text-amber-200 underline decoration-amber-400/50 underline-offset-2"
+                        >
+                            สร้างวอลเปเปอร์สายความรักแบบส่วนตัว
+                        </Link>{' '}
+                        เพื่อปรับโทน สี และสัญลักษณ์ให้เข้ากับเป้าหมายหัวใจของคุณ
+                    </p>
                     <div className="flex flex-wrap gap-2">
                         <Link href="/wallpapers/day/monday" className="text-xs bg-slate-700/50 hover:bg-yellow-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">วันจันทร์ เมตตามหานิยม</Link>
                         <Link href="/wallpapers/day/friday" className="text-xs bg-slate-700/50 hover:bg-cyan-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">วันศุกร์ เสริมความรัก</Link>
                         <Link href="/premium-analysis" className="text-xs bg-slate-700/50 hover:bg-purple-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">วิเคราะห์ชื่อ Premium (เจาะลึกดวง)</Link>
+                        <Link href="/wallpapers/custom" className="text-xs bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 px-3 py-1.5 rounded-full text-amber-300 hover:text-amber-200 transition-colors">✨ ออกแบบภาพรักเฉพาะคุณ</Link>
                     </div>
                 </div>
             </section>

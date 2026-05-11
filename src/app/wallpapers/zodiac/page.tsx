@@ -81,8 +81,18 @@ export default function ZodiacIndexPage() {
             <section className="w-full bg-[#050b14] text-slate-200 px-4 pb-12">
                 <div className="max-w-5xl mx-auto">
                     <h2 className="text-xl md:text-2xl font-bold text-white mb-3">รวมวอลเปเปอร์มงคลตามราศีทั้ง 12 ราศี</h2>
-                    <p className="text-slate-400 leading-relaxed">
+                    <p className="text-slate-400 leading-relaxed mb-4">
                         เลือกราศีของคุณเพื่อดูวอลเปเปอร์มงคลที่ออกแบบตามธีมและพลังของแต่ละราศี พร้อมดาวน์โหลดและใช้งานได้ทันทีบนมือถือ
+                    </p>
+                    <p className="text-slate-400 leading-relaxed">
+                        หากต้องการภาพที่ปรับตามเป้าหมายส่วนตัวมากขึ้น สามารถไปที่{' '}
+                        <Link
+                            href="/wallpapers/custom"
+                            className="font-medium text-amber-300 hover:text-amber-200 underline decoration-amber-400/50 underline-offset-2"
+                        >
+                            เครื่องมือสร้างวอลเปเปอร์เฉพาะบุคคล
+                        </Link>{' '}
+                        เพื่อกำหนดธีม สี และคอนเซ็ปต์ให้ตรงเจตนาของคุณ
                     </p>
                 </div>
             </section>

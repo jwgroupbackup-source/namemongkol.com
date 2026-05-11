@@ -84,10 +84,21 @@ export default function FinanceWallpapersIntentPage() {
                     <p className="text-slate-400 leading-relaxed mb-5">
                         เน้นคอลเลกชันที่เกี่ยวข้องกับการเงิน เช่น วันพุธกลางวัน, วันศุกร์ และชุดท้าวเวสสุวรรณ เพื่อช่วยย้ำเป้าหมายด้านรายรับและโชคลาภ
                     </p>
+                    <p className="text-slate-400 leading-relaxed mb-5">
+                        ถ้าต้องการภาพที่เน้นเป้าการเงินแบบเฉพาะตัวมากขึ้น ลอง{' '}
+                        <Link
+                            href="/wallpapers/custom"
+                            className="font-medium text-cyan-300 hover:text-cyan-200 underline decoration-cyan-400/50 underline-offset-2"
+                        >
+                            สร้างพื้นหลังมงคลตามเป้าหมายของคุณ
+                        </Link>{' '}
+                        แล้วกำหนดธีมเรียกทรัพย์ที่ตรงกับแผนปี 2569
+                    </p>
                     <div className="flex flex-wrap gap-2">
                         <Link href="/wallpapers/day/wednesday" className="text-xs bg-slate-700/50 hover:bg-emerald-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">วันพุธ(กลางวัน) เรียกทรัพย์</Link>
                         <Link href="/wallpapers/day/friday" className="text-xs bg-slate-700/50 hover:bg-cyan-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">วันศุกร์ เสริมโชคลาภ</Link>
                         <Link href="/wallpapers/day/saturday" className="text-xs bg-slate-700/50 hover:bg-purple-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">วันเสาร์ เสริมบารมีการเงิน</Link>
+                        <Link href="/wallpapers/custom" className="text-xs bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/20 px-3 py-1.5 rounded-full text-cyan-300 hover:text-cyan-200 transition-colors">✨ Custom การเงินเฉพาะบุคคล</Link>
                     </div>
                 </div>
             </section>
