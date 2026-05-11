@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, Suspense, useEffect, useCallback } from 'react';
+import React, { useState, Suspense, useEffect, useCallback, startTransition } from 'react';
 import Image from 'next/image';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Download, Sparkles, Lock, Palette, ImageIcon, Crown, Sun, Star, Share2, Check } from 'lucide-react';
@@ -288,38 +288,46 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
     };
 
     // Navigate to sub-route when category buttons are pressed
-    const navigateDay = (day: string) => {
-        setSelectedDay(day);
-        if (day === 'all') {
-            router.push('/wallpapers', { scroll: false });
-        } else {
-            router.push(`/wallpapers/day/${day}`, { scroll: false });
-        }
-    };
-    const navigateZodiac = (sign: string) => {
-        setSelectedZodiac(sign);
-        if (sign === 'all') {
-            router.push('/wallpapers', { scroll: false });
-        } else {
-            router.push(`/wallpapers/zodiac/${sign}`, { scroll: false });
-        }
-    };
-    const navigateCategory = (cat: CategoryType) => {
-        setSelectedCategory(cat);
-        if (cat === 'zodiac') {
-            router.push('/wallpapers/zodiac', { scroll: false });
-        } else {
-            router.push('/wallpapers', { scroll: false });
-        }
-    };
-    const navigateTab = (tab: TabType) => {
-        setActiveTab(tab);
-        if (tab === 'custom') {
-            router.push('/wallpapers/custom', { scroll: false });
-        } else {
-            router.push('/wallpapers', { scroll: false });
-        }
-    };
+    const navigateDay = useCallback((day: string) => {
+        startTransition(() => {
+            setSelectedDay(day);
+            if (day === 'all') {
+                router.push('/wallpapers', { scroll: false });
+            } else {
+                router.push(`/wallpapers/day/${day}`, { scroll: false });
+            }
+        });
+    }, [router]);
+    const navigateZodiac = useCallback((sign: string) => {
+        startTransition(() => {
+            setSelectedZodiac(sign);
+            if (sign === 'all') {
+                router.push('/wallpapers', { scroll: false });
+            } else {
+                router.push(`/wallpapers/zodiac/${sign}`, { scroll: false });
+            }
+        });
+    }, [router]);
+    const navigateCategory = useCallback((cat: CategoryType) => {
+        startTransition(() => {
+            setSelectedCategory(cat);
+            if (cat === 'zodiac') {
+                router.push('/wallpapers/zodiac', { scroll: false });
+            } else {
+                router.push('/wallpapers', { scroll: false });
+            }
+        });
+    }, [router]);
+    const navigateTab = useCallback((tab: TabType) => {
+        startTransition(() => {
+            setActiveTab(tab);
+            if (tab === 'custom') {
+                router.push('/wallpapers/custom', { scroll: false });
+            } else {
+                router.push('/wallpapers', { scroll: false });
+            }
+        });
+    }, [router]);
 
     const updateLocalDownloads = (wallpaper: Wallpaper, newCount?: number) => {
         const updater = (item: Wallpaper) =>
@@ -656,14 +664,6 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                 )}
                             </div>
 
-                            {selectedCategory === 'day' && loading && (
-                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
-                                    {Array.from({ length: 6 }).map((_, i) => (
-                                        <div key={i} className="aspect-[9/16] rounded-2xl bg-slate-800 animate-pulse" />
-                                    ))}
-                                </div>
-                            )}
-
                             {/* Grid */}
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
                                 {(selectedCategory === 'day' ? filteredWallpapers : filteredZodiacWallpapers).map((wp, idx) => {
@@ -673,12 +673,9 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                         ((selectedCategory === 'day' && selectedDay === 'all' && wp.day === 'all') ||
                                          (selectedCategory === 'zodiac' && selectedZodiac === 'all'));
                                     return (
-                                    <motion.div
+                                    <div
                                         key={wp.id}
-                                        initial={{ opacity: 0, scale: 0.9 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        whileHover={{ y: -4 }}
-                                        className={`group relative rounded-2xl overflow-hidden bg-slate-800 border border-white/10 hover:border-amber-500/50 transition-all duration-300 shadow-xl cursor-pointer ${isFeatured ? 'col-span-2 row-span-2 aspect-auto' : 'aspect-[9/16]'}`}
+                                        className={`group relative rounded-2xl overflow-hidden bg-slate-800 border border-white/10 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-xl cursor-pointer ${isFeatured ? 'col-span-2 row-span-2 aspect-auto' : 'aspect-[9/16]'}`}
                                         onClick={() => setSelectedWallpaper(wp)}
                                     >
                                         <Image
@@ -687,6 +684,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                             fill
                                             sizes={isFeatured ? "(max-width: 640px) 100vw, (max-width: 1024px) 65vw, 42vw" : "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 20vw, 15vw"}
                                             className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                            priority={isFeatured || idx < 2}
                                         />
 
                                         {/* Overlay */}
@@ -718,7 +716,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                                 ))}
                                             </div>
                                         </div>
-                                    </motion.div>
+                                    </div>
                                     );
                                 })}
                             </div>

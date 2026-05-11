@@ -144,16 +144,16 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
         }
     }, [performAnalysis, initialName, initialSurname, initialDay]);
 
-    const handleAnalyzeClick = () => {
+    const handleAnalyzeClick = useCallback(() => {
         performAnalysis(name, surname, day);
-    };
+    }, [performAnalysis, name, surname, day]);
 
-    const resetForm = () => {
+    const resetForm = useCallback(() => {
         setResult(null);
         setName('');
         setSurname('');
         window.history.pushState({}, '', '/');
-    };
+    }, []);
 
     const { t } = useLanguage();
 
@@ -163,8 +163,8 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
 
                 {!result ? (
                     <div className="w-full max-w-2xl flex flex-col items-center">
-                        {/* HeroBanner decoupled for LCP - No fade-in delay */}
-                        <div className="w-full animate-fade-in">
+                        {/* HeroBanner: no delay — renders immediately for LCP */}
+                        <div className="w-full">
                             <HeroBanner headingLevel={heroHeadingLevel} />
                         </div>
                         <InputForm
