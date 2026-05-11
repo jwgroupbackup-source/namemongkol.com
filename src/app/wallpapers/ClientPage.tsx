@@ -6,6 +6,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { Download, Sparkles, Lock, Palette, ImageIcon, Crown, Sun, Star, Share2, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/utils/supabase';
+import { trackEvent } from '@/lib/analytics';
 import dynamic from 'next/dynamic';
 
 import { Wallpaper } from '@/types';
@@ -92,6 +93,29 @@ const buildWallpaperAlt = (wp: Wallpaper) => {
     return `วอลเปเปอร์มงคล ${wp.name} สำหรับ${dayLabel} ปี 2569 เสริมดวง ${intent} | NameMongkol`;
 };
 
+const classifyTrafficSource = (params: URLSearchParams): string => {
+    if (typeof document === 'undefined') return 'unknown';
+
+    const utmSource = params.get('utm_source')?.toLowerCase() || '';
+    const utmMedium = params.get('utm_medium')?.toLowerCase() || '';
+    const hasPaidSignal = Boolean(params.get('gclid')) || ['cpc', 'ppc', 'paid'].includes(utmMedium);
+
+    const referrer = document.referrer || '';
+    if (!referrer) return 'direct';
+
+    try {
+        const host = new URL(referrer).hostname.toLowerCase();
+        const isGoogleReferrer = host.includes('google.') || host.includes('googleadservices.com');
+        if ((isGoogleReferrer || utmSource === 'google') && !hasPaidSignal) {
+            return 'google_organic';
+        }
+    } catch {
+        return 'other';
+    }
+
+    return 'other';
+};
+
 // Zodiac categories
 type CategoryType = 'day' | 'zodiac';
 
@@ -160,6 +184,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
     const [showCopied, setShowCopied] = useState(false);
     const [downloadingId, setDownloadingId] = useState<number | null>(null);
     const [downloadStep, setDownloadStep] = useState<string>('');
+    const [trafficSource, setTrafficSource] = useState<string>('unknown');
 
     // Fetch Wallpapers from Supabase
     useEffect(() => {
@@ -198,6 +223,18 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
             if (wp) setSelectedWallpaper(wp);
         }
     }, [wallpaperId, wallpapers]);
+
+    useEffect(() => {
+        setTrafficSource(classifyTrafficSource(searchParams));
+    }, [searchParams]);
+
+    useEffect(() => {
+        trackEvent('wallpapers.page.view', {
+            metadata: {
+                traffic_source: trafficSource,
+            },
+        });
+    }, [trafficSource]);
 
 
     // Reusable function to fetch user credits from DB
@@ -350,6 +387,14 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
     };
 
     const handleDownload = async (wallpaper: Wallpaper) => {
+        trackEvent('wallpapers.detail.download_click', {
+            metadata: {
+                wallpaper_id: wallpaper.id,
+                premium: wallpaper.premium,
+                traffic_source: trafficSource,
+            },
+        });
+
         // Dynamic import SweetAlert2
         const Swal = (await import('sweetalert2')).default;
 
@@ -358,7 +403,17 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
         setDownloadStep('กำลังตรวจสอบสิทธิ์...');
         const { data: { session } } = await supabase.auth.getSession();
 
-        if (!session) {
+        const canAnonymousDownload = !wallpaper.premium && trafficSource === 'google_organic';
+
+        if (!session && !canAnonymousDownload) {
+            trackEvent('wallpapers.download.auth_gate', {
+                metadata: {
+                    wallpaper_id: wallpaper.id,
+                    premium: wallpaper.premium,
+                    traffic_source: trafficSource,
+                },
+            });
+
             setDownloadingId(null);
             setDownloadStep('');
             Swal.fire({
@@ -374,10 +429,28 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                 color: '#fff'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    router.push('/login');
+                    trackEvent('wallpapers.download.login_click', {
+                        metadata: {
+                            wallpaper_id: wallpaper.id,
+                            premium: wallpaper.premium,
+                            traffic_source: trafficSource,
+                        },
+                    });
+                    const returnPath = `${window.location.pathname}${window.location.search}`;
+                    router.push(`/login?redirect=${encodeURIComponent(returnPath)}`);
                 }
             });
             return;
+        }
+
+        if (!session && canAnonymousDownload) {
+            trackEvent('wallpapers.download.guest_allowed', {
+                metadata: {
+                    wallpaper_id: wallpaper.id,
+                    premium: wallpaper.premium,
+                    traffic_source: trafficSource,
+                },
+            });
         }
 
         // 2. Handle Premium Logic
@@ -440,6 +513,14 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
         }
 
         // 3. Increment Download Count
+        trackEvent('wallpapers.download.start', {
+            metadata: {
+                wallpaper_id: wallpaper.id,
+                premium: wallpaper.premium,
+                traffic_source: trafficSource,
+            },
+        });
+
         setDownloadStep('กำลังบันทึกยอดดาวน์โหลด...');
         try {
             const { data: rpcData, error: rpcError } = await supabase.rpc('increment_wallpaper_downloads', { wallpaper_id: wallpaper.id });
@@ -457,6 +538,13 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
             }
         } catch (e) {
             console.error('Failed to increment downloads:', e);
+            trackEvent('wallpapers.download.count_increment_failed', {
+                metadata: {
+                    wallpaper_id: wallpaper.id,
+                    premium: wallpaper.premium,
+                    traffic_source: trafficSource,
+                },
+            });
             // ตาม policy: ให้ดาวน์โหลดต่อได้ แต่แจ้งเตือนว่าเคาน์เตอร์อาจไม่อัปเดตทันที
             Swal.fire({
                 icon: 'warning',
@@ -503,6 +591,14 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
+            trackEvent('wallpapers.download.success', {
+                metadata: {
+                    wallpaper_id: wallpaper.id,
+                    premium: wallpaper.premium,
+                    traffic_source: trafficSource,
+                    format: 'png',
+                },
+            });
         } catch {
             // Fallback: download original WebP if PNG conversion fails
             const link = document.createElement('a');
@@ -511,6 +607,14 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            trackEvent('wallpapers.download.success', {
+                metadata: {
+                    wallpaper_id: wallpaper.id,
+                    premium: wallpaper.premium,
+                    traffic_source: trafficSource,
+                    format: 'webp_fallback',
+                },
+            });
         }
 
         setDownloadStep('เสร็จสิ้น! 🎉');
@@ -534,6 +638,48 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                 background: '#1e293b',
                 color: '#fff'
             });
+        } else if (!session && canAnonymousDownload) {
+            trackEvent('wallpapers.download.soft_cta_impression', {
+                metadata: {
+                    wallpaper_id: wallpaper.id,
+                    traffic_source: trafficSource,
+                },
+            });
+
+            const softCta = await Swal.fire({
+                title: 'ดาวน์โหลดสำเร็จฟรี',
+                text: 'สมัครสมาชิกฟรีเพื่อบันทึกประวัติและปลดล็อกวอลเปเปอร์พรีเมียม',
+                icon: 'success',
+                showCancelButton: true,
+                showDenyButton: true,
+                confirmButtonText: 'สมัครสมาชิกฟรี',
+                denyButtonText: 'เข้าสู่ระบบ',
+                cancelButtonText: 'ไว้ทีหลัง',
+                confirmButtonColor: '#10b981',
+                denyButtonColor: '#f59e0b',
+                background: '#1e293b',
+                color: '#fff',
+            });
+
+            if (softCta.isConfirmed) {
+                trackEvent('wallpapers.download.soft_cta_register_click', {
+                    metadata: {
+                        wallpaper_id: wallpaper.id,
+                        traffic_source: trafficSource,
+                    },
+                });
+                const returnPath = `${window.location.pathname}${window.location.search}`;
+                router.push(`/register?redirect=${encodeURIComponent(returnPath)}`);
+            } else if (softCta.isDenied) {
+                trackEvent('wallpapers.download.soft_cta_login_click', {
+                    metadata: {
+                        wallpaper_id: wallpaper.id,
+                        traffic_source: trafficSource,
+                    },
+                });
+                const returnPath = `${window.location.pathname}${window.location.search}`;
+                router.push(`/login?redirect=${encodeURIComponent(returnPath)}`);
+            }
         }
     };
 
@@ -676,7 +822,19 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                     <div
                                         key={wp.id}
                                         className={`group relative rounded-2xl overflow-hidden bg-slate-800 border border-white/10 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-xl cursor-pointer ${isFeatured ? 'col-span-2 row-span-2 aspect-auto' : 'aspect-[9/16]'}`}
-                                        onClick={() => setSelectedWallpaper(wp)}
+                                        onClick={() => {
+                                            setSelectedWallpaper(wp);
+                                            trackEvent('wallpapers.card.open_detail', {
+                                                metadata: {
+                                                    wallpaper_id: wp.id,
+                                                    premium: wp.premium,
+                                                    category: selectedCategory,
+                                                    day_filter: selectedDay,
+                                                    zodiac_filter: selectedZodiac,
+                                                    traffic_source: trafficSource,
+                                                },
+                                            });
+                                        }}
                                     >
                                         <Image
                                             src={wp.image}

@@ -30,6 +30,12 @@ export default function LoginClientPage() {
     const [showForgotPassword, setShowForgotPassword] = useState(false);
     const isPasswordResetSuccess = searchParams.get('reset') === 'success';
 
+    const getSafeRedirectPath = useCallback((): string => {
+        const candidate = searchParams.get('redirect') || '/';
+        if (!candidate.startsWith('/') || candidate.startsWith('//')) return '/';
+        return candidate;
+    }, [searchParams]);
+
     // Format retry time for display
     const formatRetryTime = useCallback((seconds: number): string => {
         if (seconds < 60) return `${seconds} วินาที`;
@@ -96,7 +102,7 @@ export default function LoginClientPage() {
             }
 
             router.refresh();
-            router.push('/');
+            router.push(getSafeRedirectPath());
 
         } catch (err: unknown) {
             console.error('Login error:', err);
@@ -114,7 +120,7 @@ export default function LoginClientPage() {
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
                 options: {
-                    redirectTo: `${window.location.origin}/auth/callback`,
+                    redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(getSafeRedirectPath())}`,
                 },
             });
             if (error) throw error;
@@ -133,7 +139,7 @@ export default function LoginClientPage() {
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'facebook',
                 options: {
-                    redirectTo: `${window.location.origin}/auth/callback`,
+                    redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(getSafeRedirectPath())}`,
                 },
             });
             if (error) throw error;

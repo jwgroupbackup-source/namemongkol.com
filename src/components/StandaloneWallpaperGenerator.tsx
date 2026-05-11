@@ -43,7 +43,7 @@ const dayThemes: Record<string, {
         deityEmoji: '☀️',
         yantra: 'ॐ सूर्याय',
         mantra: 'โอม สุริยายะ นะมะฮา',
-        element: 'อัคนี (ไฟ)',
+        element: 'ธาตุไฟ (เตโช)',
         blessing: 'เดชะบารมี อำนาจวาสนา',
         sacredSymbol: '۞',
         pattern: 'star',
@@ -63,7 +63,7 @@ const dayThemes: Record<string, {
         deityEmoji: '🌙',
         yantra: 'ॐ चन्द्राय',
         mantra: 'โอม จันทรายะ นะมะฮา',
-        element: 'อาโป (น้ำ)',
+        element: 'ธาตุน้ำ (อาโป)',
         blessing: 'เมตตามหานิยม เสน่ห์แรงกล้า',
         sacredSymbol: '☽',
         pattern: 'moon',
@@ -83,7 +83,7 @@ const dayThemes: Record<string, {
         deityEmoji: '🔥',
         yantra: 'ॐ अंगारक',
         mantra: 'โอม อังคารกายะ นะมะฮา',
-        element: 'เตโช (ไฟ)',
+        element: 'ธาตุไฟ (เตโช)',
         blessing: 'ชัยชนะ เดชานุภาพ',
         sacredSymbol: '♂',
         pattern: 'flame',
@@ -103,7 +103,7 @@ const dayThemes: Record<string, {
         deityEmoji: '🌿',
         yantra: 'ॐ बुधाय',
         mantra: 'โอม พุทธายะ นะมะฮา',
-        element: 'ปฐวี (ดิน)',
+        element: 'ธาตุดิน (ปฐวี)',
         blessing: 'ปัญญาเฉียบแหลม การค้าเจริญ',
         sacredSymbol: '☿',
         pattern: 'leaf',
@@ -123,7 +123,7 @@ const dayThemes: Record<string, {
         deityEmoji: '⚡',
         yantra: 'ॐ गुरवे',
         mantra: 'โอม คุรเว นะมะฮา',
-        element: 'อากาศ (ลม)',
+        element: 'ธาตุลม (วาโย)',
         blessing: 'ครูบาอาจารย์ ความรู้สูงส่ง',
         sacredSymbol: '♃',
         pattern: 'lotus',
@@ -143,7 +143,7 @@ const dayThemes: Record<string, {
         deityEmoji: '💎',
         yantra: 'ॐ शुक्राय',
         mantra: 'โอม ศุกรายะ นะมะฮา',
-        element: 'อาโป (น้ำ)',
+        element: 'ธาตุน้ำ (อาโป)',
         blessing: 'โชคลาภ ความมั่งคั่ง ความรัก',
         sacredSymbol: '♀',
         pattern: 'diamond',
@@ -163,7 +163,7 @@ const dayThemes: Record<string, {
         deityEmoji: '🪐',
         yantra: 'ॐ शनैश्चर',
         mantra: 'โอม ศไนศจรายะ นะมะฮา',
-        element: 'ปฐวี (ดิน)',
+        element: 'ธาตุดิน (ปฐวี)',
         blessing: 'ความมั่นคง อดทน ป้องกันภัย',
         sacredSymbol: '♄',
         pattern: 'saturn',
@@ -353,6 +353,7 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
         const isMobile = format === 'mobile';
         const fullName = surname ? `${name} ${surname}` : name;
         const nameFontSize = getAdaptiveNameFontSize(fullName, isMobile, dimensions.width);
+        const safeBottomPadding = isMobile ? 240 : 120;
 
         return (
             <div
@@ -361,7 +362,7 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                 style={{
                     width: dimensions.width,
                     height: dimensions.height,
-                    background: `linear-gradient(180deg, #050510 0%, #0a0a18 20%, #0d1020 50%, #0a0a18 80%, #050510 100%)`,
+                    background: `linear-gradient(180deg, #050510 0%, #080a18 30%, #0a1024 58%, #080a18 82%, #050510 100%)`,
                     fontFamily: 'var(--font-geist-sans), "Sarabun", sans-serif',
                     position: 'relative',
                     overflow: 'hidden',
@@ -369,6 +370,19 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
             >
                 {/* Base Background */}
                 <div style={{ position: 'absolute', inset: 0, background: theme.bgGradient }} />
+
+                {/* Cosmic depth layers */}
+                <div
+                    style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: `
+                            radial-gradient(ellipse 120% 65% at 50% 8%, ${theme.primary}26 0%, transparent 65%),
+                            radial-gradient(ellipse 95% 50% at 50% 38%, rgba(140, 92, 246, 0.16) 0%, transparent 70%),
+                            radial-gradient(ellipse 120% 70% at 50% 88%, ${theme.secondary}20 0%, transparent 70%)
+                        `,
+                    }}
+                />
 
                 {/* Sacred Pattern */}
                 {getSacredPattern(theme.pattern, theme.primary)}
@@ -413,9 +427,9 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        justifyContent: 'space-between',
+                        justifyContent: 'flex-start',
                         height: '100%',
-                        padding: isMobile ? '90px 50px' : '70px 120px',
+                        padding: isMobile ? `78px 50px ${safeBottomPadding}px` : `70px 120px ${safeBottomPadding}px`,
                         textAlign: 'center',
                     }}
                 >
@@ -449,19 +463,37 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                     </div>
 
                     {/* Center - Yantra & Name */}
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, justifyContent: 'center' }}>
-                        {/* Yantra */}
-                        <div style={{ position: 'relative', marginBottom: isMobile ? 40 : 35 }}>
-                            <div style={{ position: 'absolute', inset: -60, background: `radial-gradient(circle, ${theme.primary}15 0%, transparent 50%)`, borderRadius: '50%' }} />
-                            <div style={{ position: 'relative', padding: isMobile ? '30px 45px' : '25px 40px', background: `linear-gradient(145deg, ${theme.primary}15 0%, ${theme.secondary}08 50%, ${theme.tertiary}05 100%)`, border: `3px solid ${theme.primary}60`, borderRadius: 24, boxShadow: `0 0 50px ${theme.primary}25, inset 0 0 40px ${theme.primary}10` }}>
-                                <div style={{ fontSize: isMobile ? 90 : 75, fontWeight: 900, background: `linear-gradient(135deg, ${theme.primary} 0%, ${theme.secondary} 40%, ${theme.tertiary} 70%, ${theme.primary} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontFamily: 'serif', lineHeight: 1 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: isMobile ? 28 : 34, flex: 1, justifyContent: 'center' }}>
+                        {/* Yantra - engraved metallic emblem */}
+                        <div style={{ position: 'relative', marginBottom: isMobile ? 36 : 28 }}>
+                            <div style={{ position: 'absolute', inset: isMobile ? -62 : -48, background: `radial-gradient(circle, ${theme.primary}20 0%, transparent 62%)`, borderRadius: '50%', filter: 'blur(1px)' }} />
+                            <div
+                                style={{
+                                    position: 'relative',
+                                    padding: isMobile ? '24px 34px' : '20px 28px',
+                                    borderRadius: isMobile ? 34 : 28,
+                                    background: `linear-gradient(155deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.08) 14%, ${theme.primary}40 45%, ${theme.secondary}42 76%, rgba(0,0,0,0.45) 100%)`,
+                                    border: '1px solid rgba(255,255,255,0.50)',
+                                    boxShadow: `0 12px 36px rgba(0,0,0,0.45), 0 0 46px ${theme.primary}35, inset 0 2px 10px rgba(255,255,255,0.32), inset 0 -8px 18px rgba(0,0,0,0.36)`,
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        position: 'absolute',
+                                        inset: isMobile ? 7 : 6,
+                                        borderRadius: isMobile ? 28 : 22,
+                                        border: '1px solid rgba(255,255,255,0.25)',
+                                        opacity: 0.65,
+                                    }}
+                                />
+                                <div style={{ fontSize: isMobile ? 70 : 54, fontWeight: 900, background: `linear-gradient(160deg, #fffef8 0%, ${theme.tertiary} 24%, ${theme.secondary} 52%, #ffffff 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1, letterSpacing: '0.01em', textShadow: '0 2px 12px rgba(0,0,0,0.45)' }}>
                                     {theme.yantra}
                                 </div>
                             </div>
                         </div>
 
                         {/* Mantra */}
-                        <div style={{ fontSize: isMobile ? 24 : 15, color: 'rgba(255,255,255,0.9)', fontStyle: 'italic', marginBottom: isMobile ? 20 : 15, letterSpacing: '0.12em', textShadow: '0 2px 15px rgba(0,0,0,0.9)', fontWeight: 500, whiteSpace: 'nowrap' as const }}>
+                        <div style={{ fontSize: isMobile ? 23 : 15, color: 'rgba(255,255,255,0.92)', marginBottom: isMobile ? 20 : 14, letterSpacing: '0.11em', lineHeight: 1.2, textShadow: '0 2px 15px rgba(0,0,0,0.9)', fontWeight: 600, whiteSpace: 'nowrap' as const }}>
                             ✦ {theme.mantra} ✦
                         </div>
 
@@ -473,27 +505,57 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                         </div>
 
                         {/* Name */}
-                        <div style={{ fontSize: nameFontSize, fontWeight: 800, color: '#ffffff', textShadow: `0 0 80px ${theme.primary}40, 0 0 40px rgba(255,255,255,0.2), 0 4px 20px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.8)`, letterSpacing: '0.08em', marginBottom: isMobile ? 16 : 12, lineHeight: 1.2, whiteSpace: 'nowrap' as const }}>
+                        <div style={{ fontSize: nameFontSize, fontWeight: 800, color: '#ffffff', textShadow: `0 0 80px ${theme.primary}40, 0 0 40px rgba(255,255,255,0.2), 0 4px 20px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.8)`, letterSpacing: '0.12em', marginBottom: isMobile ? 18 : 14, lineHeight: 1.28, whiteSpace: 'nowrap' as const }}>
                             {fullName}
                         </div>
 
                         {/* Blessing */}
-                        <div style={{ fontSize: isMobile ? 26 : 16, color: 'rgba(255,255,255,0.85)', lineHeight: 1, textShadow: '0 2px 15px rgba(0,0,0,0.9)', fontWeight: 600, letterSpacing: '0.1em', whiteSpace: 'nowrap' as const }}>
+                        <div style={{ fontSize: isMobile ? 26 : 16, color: 'rgba(255,255,255,0.85)', lineHeight: 1.2, textShadow: '0 2px 15px rgba(0,0,0,0.9)', fontWeight: 600, letterSpacing: '0.13em', whiteSpace: 'nowrap' as const }}>
                             「 {theme.blessing} 」
                         </div>
                     </div>
 
                     {/* Bottom - Lucky Numbers */}
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: isMobile ? 40 : 30 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: isMobile ? 24 : 24, marginTop: 'auto', transform: isMobile ? 'translateY(-4px)' : 'translateY(-6px)' }}>
                         <div>
-                            <div style={{ fontSize: isMobile ? 22 : 13, color: '#ffffff', marginBottom: isMobile ? 24 : 18, letterSpacing: '0.15em', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: isMobile ? 14 : 10, textShadow: '0 2px 12px rgba(0,0,0,0.9)', fontWeight: 600 }}>
+                            <div style={{ fontSize: isMobile ? 22 : 13, color: '#ffffff', marginBottom: isMobile ? 22 : 16, letterSpacing: '0.15em', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: isMobile ? 14 : 10, textShadow: '0 2px 12px rgba(0,0,0,0.9)', fontWeight: 700 }}>
                                 <span style={{ color: '#ffffff' }}>◆</span>
                                 เลขมงคลประจำตัว
                                 <span style={{ color: '#ffffff' }}>◆</span>
                             </div>
-                            <div style={{ display: 'flex', gap: isMobile ? 18 : 12, justifyContent: 'center' }}>
+                            <div style={{ display: 'flex', gap: isMobile ? 14 : 12, justifyContent: 'center' }}>
                                 {(luckyNumbers || [0, 0, 0, 0]).slice(0, 4).map((num, i) => (
-                                    <div key={i} style={{ width: isMobile ? 85 : 60, height: isMobile ? 85 : 60, borderRadius: isMobile ? 20 : 16, background: 'rgba(255,255,255,0.12)', border: '2px solid rgba(255,255,255,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: isMobile ? 38 : 26, fontWeight: 800, color: '#ffffff', boxShadow: '0 4px 25px rgba(0,0,0,0.4)', textShadow: '0 2px 10px rgba(0,0,0,0.7)' }}>
+                                    <div
+                                        key={i}
+                                        style={{
+                                            width: isMobile ? 78 : 60,
+                                            height: isMobile ? 78 : 60,
+                                            borderRadius: '50%',
+                                            background: `radial-gradient(circle at 28% 22%, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.30) 18%, ${theme.tertiary}22 46%, ${theme.primary}50 76%, rgba(8,10,24,0.95) 100%)`,
+                                            border: '1px solid rgba(255,255,255,0.55)',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: isMobile ? 34 : 26,
+                                            fontWeight: 800,
+                                            color: '#ffffff',
+                                            boxShadow: `0 10px 24px rgba(0,0,0,0.42), 0 0 20px ${theme.primary}35, inset 0 2px 8px rgba(255,255,255,0.35), inset 0 -8px 12px rgba(0,0,0,0.28)`,
+                                            textShadow: '0 2px 10px rgba(0,0,0,0.7)',
+                                            position: 'relative',
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                position: 'absolute',
+                                                top: isMobile ? 9 : 7,
+                                                left: isMobile ? 12 : 10,
+                                                width: isMobile ? 18 : 14,
+                                                height: isMobile ? 7 : 6,
+                                                borderRadius: 999,
+                                                background: 'rgba(255,255,255,0.58)',
+                                                filter: 'blur(0.2px)',
+                                            }}
+                                        />
                                         {num}
                                     </div>
                                 ))}
@@ -501,10 +563,10 @@ const WallpaperContent = React.forwardRef<HTMLDivElement, WallpaperContentProps>
                         </div>
 
                         {/* Branding */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 14 : 10, padding: isMobile ? '16px 40px' : '12px 30px', background: 'linear-gradient(135deg, rgba(251,191,36,0.15) 0%, rgba(251,191,36,0.05) 100%)', border: '1px solid rgba(251,191,36,0.40)', borderRadius: 100, boxShadow: '0 4px 30px rgba(0,0,0,0.4)' }}>
-                            <span style={{ fontSize: isMobile ? 26 : 16 }}>⭐</span>
-                            <span style={{ fontSize: isMobile ? 24 : 15, color: '#fde68a', fontWeight: 700, letterSpacing: '0.1em', textShadow: '0 2px 10px rgba(0,0,0,0.6)' }}>NAMEMONGKOL</span>
-                            <span style={{ fontSize: isMobile ? 16 : 10, color: 'rgba(255,255,255,0.6)' }}>• namemongkol.com</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 10, padding: isMobile ? '12px 30px' : '12px 30px', background: 'linear-gradient(135deg, rgba(251,191,36,0.15) 0%, rgba(251,191,36,0.05) 100%)', border: '1px solid rgba(251,191,36,0.40)', borderRadius: 100, boxShadow: '0 4px 30px rgba(0,0,0,0.4)' }}>
+                            <span style={{ fontSize: isMobile ? 22 : 16 }}>⭐</span>
+                            <span style={{ fontSize: isMobile ? 20 : 15, color: '#fde68a', fontWeight: 700, letterSpacing: '0.1em', textShadow: '0 2px 10px rgba(0,0,0,0.6)' }}>NAMEMONGKOL</span>
+                            <span style={{ fontSize: isMobile ? 13 : 10, color: 'rgba(255,255,255,0.6)' }}>• namemongkol.com</span>
                         </div>
                     </div>
 
@@ -747,10 +809,14 @@ export default function StandaloneWallpaperGenerator() {
             setUserCredits(prev => prev - WALLPAPER_COST);
             setIsPremiumUnlocked(true);
 
+            const downloaded = await handleDownload(true);
+
             Swal.fire({
                 icon: 'success',
-                title: 'ปลดล็อกสำเร็จ!',
-                text: 'ท่านสามารถดาวน์โหลดวอลเปเปอร์ได้แล้ว',
+                title: downloaded ? 'สำเร็จ!' : 'ปลดล็อกสำเร็จ!',
+                text: downloaded
+                    ? 'ปลดล็อกและดาวน์โหลดวอลเปเปอร์เรียบร้อยแล้ว'
+                    : 'ปลดล็อกแล้ว แต่ดาวน์โหลดไม่สำเร็จ กรุณากดดาวน์โหลดอีกครั้ง',
                 background: '#1e293b',
                 color: '#fff',
                 timer: 2000,
@@ -768,93 +834,100 @@ export default function StandaloneWallpaperGenerator() {
         }
     };
 
-    const handleDownload = async () => {
+    const handleDownload = async (bypassPremiumCheck = false): Promise<boolean> => {
         const targetRef = template === 'vessavana' ? vessavanaWallpaperRef : wallpaperRef;
-        if (!targetRef.current || !isPremiumUnlocked) return;
+        if (!targetRef.current || (!isPremiumUnlocked && !bypassPremiumCheck)) return false;
 
         setIsGenerating(true);
         try {
-            // Create a temporary container with inline styles only
-            const tempContainer = document.createElement('div');
-            tempContainer.style.position = 'fixed';
-            tempContainer.style.left = '-99999px';
-            tempContainer.style.top = '0';
-            tempContainer.style.zIndex = '-9999';
-            document.body.appendChild(tempContainer);
+            // Ensure web fonts are fully loaded so text metrics match preview.
+            if (document.fonts?.ready) {
+                await document.fonts.ready;
+            }
 
-            // Deep clone the element
-            const clonedElement = targetRef.current.cloneNode(true) as HTMLElement;
-            tempContainer.appendChild(clonedElement);
-
-            // Function to compute and inline all styles
-            const inlineAllStyles = (original: Element, clone: Element) => {
-                if (original instanceof HTMLElement && clone instanceof HTMLElement) {
-                    const computed = window.getComputedStyle(original);
-                    const unsupportedColorRegex = /lab\(|oklch\(|oklab\(|lch\(/;
-
-                    // Copy computed styles but replace unsupported color functions
-                    const importantProps = [
-                        'color', 'background-color', 'background', 'border-color',
-                        'font-size', 'font-weight', 'font-family', 'text-align',
-                        'padding', 'margin', 'width', 'height', 'display',
-                        'flex-direction', 'align-items', 'justify-content', 'gap',
-                        'position', 'top', 'left', 'right', 'bottom', 'transform',
-                        'border-radius', 'opacity', 'overflow', 'letter-spacing',
-                        'line-height', 'text-shadow', 'box-shadow'
-                    ];
-
-                    importantProps.forEach(prop => {
-                        let value = computed.getPropertyValue(prop);
-                        if (value && unsupportedColorRegex.test(value)) {
-                            // Replace lab/oklch colors with fallbacks
-                            if (prop.includes('background')) {
-                                value = 'transparent';
-                            } else if (prop.includes('shadow')) {
-                                value = 'none';
-                            } else {
-                                value = 'rgb(255, 255, 255)';
-                            }
-                        }
-                        if (value) {
-                            clone.style.setProperty(prop, value);
-                        }
-                    });
-                }
-
-                const originalChildren = Array.from(original.children);
-                const cloneChildren = Array.from(clone.children);
-                originalChildren.forEach((child, i) => {
-                    if (cloneChildren[i]) {
-                        inlineAllStyles(child, cloneChildren[i]);
-                    }
-                });
-            };
-
-            inlineAllStyles(targetRef.current, clonedElement);
-
-            const canvas = await html2canvas(clonedElement, {
+            const canvas = await html2canvas(targetRef.current, {
                 useCORS: true,
                 allowTaint: true,
-                background: undefined,
+                backgroundColor: null,
                 width: dimensions.width,
                 height: dimensions.height,
+                windowWidth: dimensions.width,
+                windowHeight: dimensions.height,
+                scrollX: 0,
+                scrollY: 0,
+                scale: 1,
                 logging: false,
                 foreignObjectRendering: false,
-                ignoreElements: (element: Element) => {
-                    // Ignore style and link elements to prevent CSS parsing
-                    return element.tagName === 'STYLE' ||
-                        (element.tagName === 'LINK' && element.getAttribute('rel') === 'stylesheet');
+                onclone: (clonedDoc: Document) => {
+                    // Remove global stylesheets in cloned document to avoid parser errors with unsupported color functions.
+                    clonedDoc.querySelectorAll('style, link[rel="stylesheet"]').forEach((node) => node.remove());
+
+                    const clonedTarget = clonedDoc.querySelector('[data-wallpaper-content="true"]') as HTMLElement | null;
+                    if (clonedTarget) {
+                        clonedTarget.style.position = 'relative';
+                        clonedTarget.style.left = '0';
+                        clonedTarget.style.top = '0';
+                        clonedTarget.style.transform = 'none';
+                        clonedTarget.style.margin = '0';
+
+                        const originalTarget = targetRef.current;
+                        if (originalTarget) {
+                            const inlineComputedStyles = (original: Element, clone: Element) => {
+                                if (original instanceof HTMLElement && clone instanceof HTMLElement) {
+                                    const computed = window.getComputedStyle(original);
+                                    const supportedFallbackColor = 'rgb(255, 255, 255)';
+                                    const unsupportedColorRegex = /lab\(|oklch\(|oklab\(|lch\(/;
+
+                                    const importantProps = [
+                                        'color', 'background-color', 'background', 'border-color',
+                                        'font-size', 'font-weight', 'font-family', 'font-style',
+                                        'text-align', 'padding', 'margin', 'width', 'height', 'display',
+                                        'flex-direction', 'align-items', 'justify-content', 'gap',
+                                        'position', 'top', 'left', 'right', 'bottom', 'transform',
+                                        'border-radius', 'border', 'opacity', 'overflow', 'letter-spacing',
+                                        'line-height', 'text-shadow', 'box-shadow', 'white-space',
+                                        'filter', 'backdrop-filter', 'z-index'
+                                    ];
+
+                                    importantProps.forEach((prop) => {
+                                        let value = computed.getPropertyValue(prop);
+                                        if (value && unsupportedColorRegex.test(value)) {
+                                            if (prop.includes('background')) {
+                                                value = 'transparent';
+                                            } else if (prop.includes('shadow')) {
+                                                value = 'none';
+                                            } else {
+                                                value = supportedFallbackColor;
+                                            }
+                                        }
+
+                                        if (value) {
+                                            clone.style.setProperty(prop, value);
+                                        }
+                                    });
+                                }
+
+                                const originalChildren = Array.from(original.children);
+                                const cloneChildren = Array.from(clone.children);
+                                originalChildren.forEach((child, i) => {
+                                    if (cloneChildren[i]) {
+                                        inlineComputedStyles(child, cloneChildren[i]);
+                                    }
+                                });
+                            };
+
+                            inlineComputedStyles(originalTarget, clonedTarget);
+                        }
+                    }
                 },
             } as Parameters<typeof html2canvas>[1]);
-
-            // Cleanup
-            document.body.removeChild(tempContainer);
 
             const link = document.createElement('a');
             const templateName = template === 'vessavana' ? 'vessavana' : day;
             link.download = `namemongkol-${name}-${templateName}-${Date.now()}.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
+            return true;
         } catch (error) {
             console.error('Download error:', error);
             // Show error to user
@@ -866,6 +939,7 @@ export default function StandaloneWallpaperGenerator() {
                 background: '#1e293b',
                 color: '#fff'
             });
+            return false;
         } finally {
             setIsGenerating(false);
         }
@@ -1055,15 +1129,24 @@ export default function StandaloneWallpaperGenerator() {
                         {!isPremiumUnlocked ? (
                             <button
                                 onClick={handleUnlock}
-                                disabled={!name.trim()}
+                                disabled={!name.trim() || isGenerating}
                                 className="w-full py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-xl flex items-center justify-center gap-2 hover:from-purple-400 hover:to-pink-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-purple-500/20"
                             >
-                                <Lock size={20} />
-                                ปลดล็อก ({WALLPAPER_COST} เครดิต)
+                                {isGenerating ? (
+                                    <>
+                                        <Loader2 size={20} className="animate-spin" />
+                                        กำลังสร้างภาพ...
+                                    </>
+                                ) : (
+                                    <>
+                                        <Lock size={20} />
+                                        ปลดล็อกและดาวน์โหลด ({WALLPAPER_COST} เครดิต)
+                                    </>
+                                )}
                             </button>
                         ) : (
                             <button
-                                onClick={handleDownload}
+                                onClick={() => { void handleDownload(); }}
                                 disabled={isGenerating}
                                 className="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold rounded-xl flex items-center justify-center gap-2 hover:from-emerald-400 hover:to-teal-400 transition-all disabled:opacity-50 shadow-lg shadow-emerald-500/20"
                             >
