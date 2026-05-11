@@ -12,13 +12,17 @@ const getSupabase = () => createClient(
 export async function GET() {
     const supabase = getSupabase();
     try {
-        const [analysisRes, usersRes, reviewsRes] = await Promise.all([
+        const weekAgoIso = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+
+        const [analysisRes, weeklyAnalysisRes, usersRes, reviewsRes] = await Promise.all([
             supabase.from('analysis_results').select('*', { count: 'exact', head: true }),
+            supabase.from('analysis_results').select('*', { count: 'exact', head: true }).gte('created_at', weekAgoIso),
             supabase.from('user_profiles').select('*', { count: 'exact', head: true }),
             supabase.from('reviews').select('rating').eq('status', 'approved'),
         ]);
 
         const totalAnalyses = analysisRes.count ?? 0;
+        const weeklyAnalyses = weeklyAnalysisRes.count ?? 0;
         const totalUsers = usersRes.count ?? 0;
 
         const reviews = reviewsRes.data ?? [];
@@ -31,6 +35,7 @@ export async function GET() {
             success: true,
             stats: {
                 totalAnalyses,
+                weeklyAnalyses,
                 totalUsers,
                 avgRating: parseFloat(avgRating),
                 reviewCount,
@@ -42,7 +47,7 @@ export async function GET() {
         });
     } catch {
         return NextResponse.json(
-            { success: false, stats: { totalAnalyses: 0, totalUsers: 0, avgRating: 5.0, reviewCount: 0 } },
+            { success: false, stats: { totalAnalyses: 0, weeklyAnalyses: 0, totalUsers: 0, avgRating: 5.0, reviewCount: 0 } },
             { status: 500 },
         );
     }

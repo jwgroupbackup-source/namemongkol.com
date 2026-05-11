@@ -160,6 +160,14 @@ const getFirstConsonant = (name: string): string => {
     return THAI_LEADING_VOWELS.has(name.charAt(0)) ? name.charAt(1) : name.charAt(0);
 };
 
+type PublicStats = {
+    totalAnalyses: number;
+    weeklyAnalyses: number;
+    totalUsers: number;
+    avgRating: number;
+    reviewCount: number;
+};
+
 export default function SearchPage() {
     const router = useRouter();
     const { t } = useLanguage();
@@ -174,6 +182,13 @@ export default function SearchPage() {
 
     const [names, setNames] = useState<{ name: string; gender: string }[]>([]); // Update type
     const [loading, setLoading] = useState(true);
+    const [publicStats, setPublicStats] = useState<PublicStats>({
+        totalAnalyses: 12000,
+        weeklyAnalyses: 12000,
+        totalUsers: 0,
+        avgRating: 4.8,
+        reviewCount: 512,
+    });
 
     // Fetch credits
     useEffect(() => {
@@ -229,6 +244,31 @@ export default function SearchPage() {
             }
         };
         fetchNames();
+    }, []);
+
+    useEffect(() => {
+        const fetchPublicStats = async () => {
+            try {
+                const res = await fetch('/api/public/stats');
+                const json = await res.json();
+
+                if (!json?.success || !json?.stats) return;
+
+                const stats = json.stats as Partial<PublicStats>;
+
+                setPublicStats((prev) => ({
+                    totalAnalyses: typeof stats.totalAnalyses === 'number' ? stats.totalAnalyses : prev.totalAnalyses,
+                    weeklyAnalyses: typeof stats.weeklyAnalyses === 'number' ? stats.weeklyAnalyses : prev.weeklyAnalyses,
+                    totalUsers: typeof stats.totalUsers === 'number' ? stats.totalUsers : prev.totalUsers,
+                    avgRating: typeof stats.avgRating === 'number' ? stats.avgRating : prev.avgRating,
+                    reviewCount: typeof stats.reviewCount === 'number' ? stats.reviewCount : prev.reviewCount,
+                }));
+            } catch (err) {
+                console.error('Error fetching public stats:', err);
+            }
+        };
+
+        fetchPublicStats();
     }, []);
 
     // Filter Logic
@@ -495,8 +535,8 @@ export default function SearchPage() {
                                 {/* Social Proof & Engagement Section */}
                                 <div className="flex flex-col items-center gap-3 mb-6 md:mb-8">
                                     <div className="flex flex-wrap gap-2 md:gap-3 justify-center">
-                                        <ReviewBadge rating={4.8} count={512} />
-                                        <UserStatsBadge users={12000} />
+                                        <ReviewBadge rating={publicStats.avgRating} count={publicStats.reviewCount} />
+                                        <UserStatsBadge users={publicStats.weeklyAnalyses} label="มีผู้ค้นหาสัปดาห์นี้แล้ว" />
                                     </div>
                                     <PopularNames />
                                 </div>
