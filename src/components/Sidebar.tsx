@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { Home, Search, Info, Sparkles, LogIn, LogOut, User as UserIcon, ClipboardList, Crown, Zap, History as HistoryIcon, Settings, Image as ImageIcon, BookOpen, Smartphone, ChevronDown, MessageCircle, Hand } from 'lucide-react';
+import { Home, Search, Info, Sparkles, LogIn, LogOut, User as UserIcon, ClipboardList, Crown, Zap, History as HistoryIcon, Settings, Image as ImageIcon, BookOpen, Smartphone, ChevronDown, MessageCircle, Hand, Wand2 } from 'lucide-react';
 import { supabase } from '@/utils/supabase';
 import { User } from '@supabase/supabase-js';
 import { LineOAButton } from './LineOAButton';
@@ -151,6 +151,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
 
     if (role === 'admin') {
         menuItems.push(
+            { key: 'name-generator', nameKey: 'AI Name Generator', icon: Wand2, path: '/name-generator' },
             { key: 'admin-articles', nameKey: 'sidebar.adminArticles', icon: BookOpen, path: '/admin/articles' },
             { key: 'admin-users', nameKey: 'sidebar.adminUsers', icon: UserIcon, path: '/admin/users' },
             { key: 'admin-settings', nameKey: 'sidebar.adminSettings', icon: Settings, path: '/admin/settings' }
@@ -253,6 +254,12 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                 icon: 'text-slate-400 group-hover:text-slate-300 drop-shadow-[0_0_4px_rgba(148,163,184,0.25)]',
                 activeWrapper: 'bg-slate-400/16 border-slate-400/30 shadow-slate-400/18',
                 activeIcon: 'text-slate-300 drop-shadow-[0_0_6px_rgba(148,163,184,0.4)]'
+            },
+            'name-generator': {
+                wrapper: 'bg-amber-500/10 border-amber-400/20 shadow-amber-500/8 group-hover:bg-amber-500/16 group-hover:border-amber-400/35',
+                icon: 'text-amber-400 group-hover:text-amber-300 drop-shadow-[0_0_4px_rgba(251,191,36,0.3)]',
+                activeWrapper: 'bg-amber-500/16 border-amber-400/30 shadow-amber-500/18',
+                activeIcon: 'text-amber-300 drop-shadow-[0_0_6px_rgba(251,191,36,0.5)]'
             }
         };
 
