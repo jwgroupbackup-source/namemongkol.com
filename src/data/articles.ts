@@ -10,6 +10,7 @@ import { articleGirlNames50 } from './article-girl-names-50';
 import { articleThaksaGuide } from './article-thaksa-guide';
 import { articleNameByBirthday } from './article-name-by-birthday';
 import { articleWhatIsNameAnalysis } from './article-what-is-name-analysis';
+import { articleNumberPairs } from './article-number-pairs';
 
 export interface FaqItem {
     question: string;
@@ -38,6 +39,7 @@ export interface Article {
 
 export const articles: Article[] = [
     articleWhatIsNameAnalysis,
+    articleNumberPairs,
     articleNicknameKalakini,
     articleBoyNames2569,
     articleGirlNames2569,

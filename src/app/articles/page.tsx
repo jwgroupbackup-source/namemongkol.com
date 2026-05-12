@@ -428,7 +428,7 @@ export default async function ArticlesPage() {
                         </div>
 
                         {/* Search Bar */}
-                        <form role="search" aria-label="ค้นหาบทความชื่อมงคล" className="mt-8 relative max-w-lg">
+                        <form role="search" aria-label="ค้นหาบทความชื่อมงคล" action="/search" method="GET" className="mt-8 relative max-w-lg">
                             <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400">
                                 <Search size={20} />
                             </div>
@@ -439,6 +439,9 @@ export default async function ArticlesPage() {
                                 aria-label="ค้นหาบทความ"
                                 className="w-full bg-slate-800/50 border border-slate-700 rounded-xl py-3 pl-12 pr-4 text-slate-200 placeholder:text-slate-500 focus:ring-2 focus:ring-purple-500/50 focus:border-transparent outline-none transition-all"
                             />
+                            <button type="submit" className="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400 hover:text-white transition-colors">
+                                <Search size={16} />
+                            </button>
                         </form>
                     </div>
 
@@ -556,22 +559,25 @@ export default async function ArticlesPage() {
                                             <span className="text-red-400 font-bold">วันอาทิตย์:</span> ศ ษ ส ห ฬ ฮ
                                         </div>
                                         <div className="bg-orange-500/10 border border-orange-500/20 p-3 rounded-lg">
-                                            <span className="text-orange-400 font-bold">วันจันทร์:</span> บ ป ผ ฝ พ ฟ ภ
+                                            <span className="text-orange-400 font-bold">วันจันทร์:</span> อ + สระทั้งหมด
                                         </div>
                                         <div className="bg-pink-500/10 border border-pink-500/20 p-3 rounded-lg">
-                                            <span className="text-pink-400 font-bold">วันอังคาร:</span> ศ ษ ส ห ฬ ฮ
+                                            <span className="text-pink-400 font-bold">วันอังคาร:</span> ก ข ค ฆ ง
                                         </div>
                                         <div className="bg-green-500/10 border border-green-500/20 p-3 rounded-lg">
-                                            <span className="text-green-400 font-bold">วันพุธ:</span> ก ข ค ฆ ง
+                                            <span className="text-green-400 font-bold">วันพุธ (กลางวัน):</span> จ ฉ ช ซ ฌ ญ
+                                        </div>
+                                        <div className="bg-teal-500/10 border border-teal-500/20 p-3 rounded-lg">
+                                            <span className="text-teal-400 font-bold">วันพุธ (กลางคืน/ราหู):</span> บ ป ผ ฝ พ ฟ ภ ม
                                         </div>
                                         <div className="bg-yellow-500/10 border border-yellow-500/20 p-3 rounded-lg">
-                                            <span className="text-yellow-400 font-bold">วันพฤหัสบดี:</span> บ ป ผ ฝ พ ฟ ภ
+                                            <span className="text-yellow-400 font-bold">วันพฤหัสบดี:</span> ด ต ถ ท ธ น
                                         </div>
                                         <div className="bg-blue-500/10 border border-blue-500/20 p-3 rounded-lg">
-                                            <span className="text-blue-400 font-bold">วันศุกร์:</span> ฎ ฏ ฐ ฑ ฒ ณ ด ต ถ ท ธ น
+                                            <span className="text-blue-400 font-bold">วันศุกร์:</span> ย ร ล ว
                                         </div>
-                                        <div className="bg-purple-500/10 border border-purple-500/20 p-3 rounded-lg md:col-span-2">
-                                            <span className="text-purple-400 font-bold">วันเสาร์:</span> จ ฉ ช ซ ฌ ญ
+                                        <div className="bg-purple-500/10 border border-purple-500/20 p-3 rounded-lg">
+                                            <span className="text-purple-400 font-bold">วันเสาร์:</span> ฎ ฏ ฐ ฑ ฒ ณ
                                         </div>
                                     </div>
                                 </div>
@@ -637,8 +643,8 @@ export default async function ArticlesPage() {
                                 <span>วิเคราะห์ชื่อมงคลฟรี</span>
                                 <ArrowLeft size={18} className="rotate-180" />
                             </Link>
-                            <Link href="/premium-analysis" className="inline-flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-8 rounded-full transition-all">
-                                <span>ค้นหาชื่อมงคล Premium</span>
+                            <Link href="/premium-search" className="inline-flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-8 rounded-full transition-all">
+                                <span>👑 ค้นหาชื่อมงคล Premium</span>
                             </Link>
                         </div>
                     </section>
