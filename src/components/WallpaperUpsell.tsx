@@ -66,7 +66,8 @@ export const WallpaperUpsell = ({ result, day = 'sunday' }: WallpaperUpsellProps
                                     src={wallpaperImage}
                                     alt={`วอลเปเปอร์มงคลเสริมดวงสำหรับคนเกิดวัน${dayLabel}`}
                                     fill
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 25vw"
+                                    sizes="(max-width: 768px) 80vw, (max-width: 1024px) 33vw, 25vw"
+                                    quality={75}
                                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl" />

@@ -20,8 +20,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
   images: {
-    formats: ['image/avif', 'image/webp'],
-    qualities: [75, 85],
+    formats: ['image/webp'],          // webp only — avif requires heavier CPU transform
+    minimumCacheTTL: 2592000,          // Cache 30 days — prevents re-transformation on every request
+    qualities: [75],                   // Single quality — eliminates duplicate transform variants
     remotePatterns,
   },
   compiler: {

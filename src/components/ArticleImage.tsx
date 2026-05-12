@@ -50,10 +50,10 @@ export const ArticleImage: React.FC<ArticleImageProps> = ({
             loading={priority ? 'eager' : 'lazy'}
             className={`${objectFitClass} transition-transform duration-500 ${className || 'group-hover:scale-105'}`}
             style={{ objectPosition }}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes="(max-width: 640px) 95vw, (max-width: 1024px) 48vw, 320px"
             onError={() => setError(true)}
             unoptimized={isExternal}
-            quality={85}
+            quality={75}
         />
     );
 };

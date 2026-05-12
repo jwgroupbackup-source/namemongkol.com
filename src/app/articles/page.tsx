@@ -462,7 +462,7 @@ export default async function ArticlesPage() {
                                         <ArticleImage
                                             src={article.coverImage as string}
                                             alt={(article as any).coverImageAlt || `บทความ: ${article.title} - เคล็ดลับตั้งชื่อมงคล`}
-                                            priority={index < 8}
+                                            priority={index < 4}
                                             className="group-hover:scale-105"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent opacity-60" />
