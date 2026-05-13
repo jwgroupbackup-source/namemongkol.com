@@ -403,9 +403,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
         setDownloadStep('กำลังตรวจสอบสิทธิ์...');
         const { data: { session } } = await supabase.auth.getSession();
 
-        const canAnonymousDownload = !wallpaper.premium && trafficSource === 'google_organic';
-
-        if (!session && !canAnonymousDownload) {
+        if (!session) {
             trackEvent('wallpapers.download.auth_gate', {
                 metadata: {
                     wallpaper_id: wallpaper.id,
@@ -441,16 +439,6 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                 }
             });
             return;
-        }
-
-        if (!session && canAnonymousDownload) {
-            trackEvent('wallpapers.download.guest_allowed', {
-                metadata: {
-                    wallpaper_id: wallpaper.id,
-                    premium: wallpaper.premium,
-                    traffic_source: trafficSource,
-                },
-            });
         }
 
         // 2. Handle Premium Logic
@@ -638,48 +626,6 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                 background: '#1e293b',
                 color: '#fff'
             });
-        } else if (!session && canAnonymousDownload) {
-            trackEvent('wallpapers.download.soft_cta_impression', {
-                metadata: {
-                    wallpaper_id: wallpaper.id,
-                    traffic_source: trafficSource,
-                },
-            });
-
-            const softCta = await Swal.fire({
-                title: 'ดาวน์โหลดสำเร็จฟรี',
-                text: 'สมัครสมาชิกฟรีเพื่อบันทึกประวัติและปลดล็อกวอลเปเปอร์พรีเมียม',
-                icon: 'success',
-                showCancelButton: true,
-                showDenyButton: true,
-                confirmButtonText: 'สมัครสมาชิกฟรี',
-                denyButtonText: 'เข้าสู่ระบบ',
-                cancelButtonText: 'ไว้ทีหลัง',
-                confirmButtonColor: '#10b981',
-                denyButtonColor: '#f59e0b',
-                background: '#1e293b',
-                color: '#fff',
-            });
-
-            if (softCta.isConfirmed) {
-                trackEvent('wallpapers.download.soft_cta_register_click', {
-                    metadata: {
-                        wallpaper_id: wallpaper.id,
-                        traffic_source: trafficSource,
-                    },
-                });
-                const returnPath = `${window.location.pathname}${window.location.search}`;
-                router.push(`/register?redirect=${encodeURIComponent(returnPath)}`);
-            } else if (softCta.isDenied) {
-                trackEvent('wallpapers.download.soft_cta_login_click', {
-                    metadata: {
-                        wallpaper_id: wallpaper.id,
-                        traffic_source: trafficSource,
-                    },
-                });
-                const returnPath = `${window.location.pathname}${window.location.search}`;
-                router.push(`/login?redirect=${encodeURIComponent(returnPath)}`);
-            }
         }
     };
 
