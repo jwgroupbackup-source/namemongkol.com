@@ -29,11 +29,19 @@ const getDayBadgeProps = (d: string) => {
     return { label: d, className: 'bg-slate-500/15 text-slate-300 border border-slate-500/20' };
 };
 
-function NameRow({ name }: { name: string }) {
+function NameRow({ name, meaning }: { name: string; meaning?: string }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const score = calculateScore(name);
     // Always calculate to know if it's usable on multiple days
     const suitability = useMemo(() => analyzeNameSuitability(name), [name]);
+
+    const displayMeaning = useMemo(() => {
+        if (!meaning) return undefined;
+        if (meaning.includes('=')) {
+            return meaning.split('=').pop()?.trim();
+        }
+        return meaning;
+    }, [meaning]);
 
     return (
         <>
@@ -71,6 +79,13 @@ function NameRow({ name }: { name: string }) {
                         <span className="text-slate-500">-</span>
                     )}
                 </td>
+                <td className="px-3 md:px-8 py-3 md:py-5 text-xs md:text-sm text-slate-400 group-hover:text-slate-300 transition-colors w-1/3 max-w-[120px] md:max-w-[200px]">
+                    {displayMeaning ? (
+                        <div className="line-clamp-2 md:line-clamp-1" title={displayMeaning}>{displayMeaning}</div>
+                    ) : (
+                        <div className="text-slate-600 italic">- รอการอัปเดต -</div>
+                    )}
+                </td>
                 <td className="px-3 md:px-8 py-3 md:py-5 text-center">
                     <span className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 text-sm md:text-base rounded-lg md:rounded-xl bg-gradient-to-br from-amber-500/10 to-purple-500/10 text-amber-300 font-bold border border-amber-500/20 shadow-[0_0_15px_rgba(245,158,11,0.05)] group-hover:border-amber-500/40 group-hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] group-hover:text-amber-200 group-hover:scale-110 transition-all duration-300">
                         {score}
@@ -79,8 +94,19 @@ function NameRow({ name }: { name: string }) {
             </tr>
             {isExpanded && suitability && (
                 <tr className="bg-white/[0.02] animate-fade-in">
-                    <td colSpan={3} className="p-0">
+                    <td colSpan={4} className="p-0">
                         <div className="px-4 md:px-8 py-4 md:py-6 space-y-3 md:space-y-4 border-b border-white/5 bg-gradient-to-b from-black/20 to-transparent shadow-inner">
+                            {displayMeaning && (
+                                <div className="flex items-start gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-amber-500/5 border border-amber-500/10">
+                                    <div className="mt-1 min-w-[20px] md:min-w-[24px] text-amber-400 p-1 rounded-full bg-amber-500/10">
+                                        <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                                    </div>
+                                    <div>
+                                        <span className="font-semibold text-amber-300 block mb-1 md:mb-2 text-xs md:text-sm uppercase tracking-wider">ความหมาย (พจนานุกรมราชบัณฑิตยสถาน)</span>
+                                        <p className="text-slate-300 text-sm leading-relaxed">{displayMeaning}</p>
+                                    </div>
+                                </div>
+                            )}
                             <div className="flex items-start gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
                                 <div className="mt-1 min-w-[20px] md:min-w-[24px] text-emerald-400 p-1 rounded-full bg-emerald-500/10">
                                     <CheckCircle className="w-3.5 h-3.5 md:w-4 md:h-4" />
@@ -180,7 +206,7 @@ export default function SearchPage() {
     const [userCredits, setUserCredits] = useState<number | null>(null);
     const [isUnlocking, setIsUnlocking] = useState(false);
 
-    const [names, setNames] = useState<{ name: string; gender: string }[]>([]); // Update type
+    const [names, setNames] = useState<{ name: string; gender: string; meaning?: string }[]>([]); // Update type
     const [loading, setLoading] = useState(true);
     const [publicStats, setPublicStats] = useState<PublicStats>({
         totalAnalyses: 12000,
@@ -231,10 +257,11 @@ export default function SearchPage() {
                 const json = await res.json();
                 
                 if (json.success && json.data) {
-                    const allData = json.data as { name: string; gender: string | null }[];
+                    const allData = json.data as { name: string; gender: string | null; meaning: string | null }[];
                     setNames(allData.map(d => ({ 
                         name: stripInvisible(d.name), 
-                        gender: d.gender || 'neutral' 
+                        gender: d.gender || 'neutral',
+                        meaning: d.meaning || undefined
                     })).filter(d => d.name));
                 }
             } catch (err) {
@@ -297,15 +324,15 @@ export default function SearchPage() {
             }
 
             return true;
-        }).map(item => item.name); // Return just names for display
+        }); // Return whole item
     }, [selectedDay, selectedGender, selectedLetter, names, loading]);
 
     // Grade distribution across all filtered names (for banner + CTA)
     const gradeStats = useMemo(() => {
         if (filteredNames.length === 0) return null;
         const counts: Record<string, number> = { 'A+': 0, 'A': 0, 'B': 0, 'C': 0 };
-        filteredNames.forEach(n => {
-            const g = analyzeName(n)?.grade ?? 'B';
+        filteredNames.forEach(item => {
+            const g = analyzeName(item.name)?.grade ?? 'B';
             counts[g] = (counts[g] || 0) + 1;
         });
         return counts;
@@ -314,7 +341,7 @@ export default function SearchPage() {
     // Count A+ names hidden beyond visible rows (for teaser row)
     const hiddenAplusCount = useMemo(() => {
         if (filteredNames.length <= visibleCount) return 0;
-        return filteredNames.slice(visibleCount).filter(n => analyzeName(n)?.grade === 'A+').length;
+        return filteredNames.slice(visibleCount).filter(item => analyzeName(item.name)?.grade === 'A+').length;
     }, [filteredNames, visibleCount]);
 
     // Reset to page 1 when filters change is now handled in event handlers
@@ -465,11 +492,11 @@ export default function SearchPage() {
                 try {
                     await supabase.rpc('cleanup_analysis_history_by_tier');
 
-                    const resultData = unlockedNames.map((name) => {
-                        const suitability = analyzeNameSuitability(name);
+                    const resultData = unlockedNames.map((item) => {
+                        const suitability = analyzeNameSuitability(item.name);
                         return {
-                            name,
-                            totalScore: calculateScore(name),
+                            name: item.name,
+                            totalScore: calculateScore(item.name),
                             suitableDays: suitability.suitable
                         };
                     });
@@ -723,20 +750,21 @@ export default function SearchPage() {
                             <tr className="bg-white/5 border-b border-white/10 text-amber-300 backdrop-blur-md">
                                 <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase">{t('pages.search.table.name')}</th>
                                 <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase">{t('pages.search.table.day')}</th>
+                                <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase">ความหมาย</th>
                                 <th className="px-3 md:px-8 py-3 md:py-5 font-semibold text-sm md:text-base tracking-wide uppercase text-center">{t('pages.search.table.score')}</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5">
                             {filteredNames.length > 0 ? (
                                 <>
-                                    {filteredNames.slice(0, visibleCount).map((name, index) => (
-                                        <NameRow key={index} name={name} />
+                                    {filteredNames.slice(0, visibleCount).map((item, index) => (
+                                        <NameRow key={index} name={item.name} meaning={item.meaning} />
                                     ))}
 
                                     {/* Teaser row: show count of hidden A+ names to drive upgrade */}
                                     {hiddenAplusCount > 0 && (
                                         <tr className="bg-amber-500/5 border-t border-amber-500/10">
-                                            <td colSpan={3} className="px-4 py-3 text-center">
+                                            <td colSpan={4} className="px-4 py-3 text-center">
                                                 <Link
                                                     href="/premium-search"
                                                     className="inline-flex items-center gap-2 text-sm text-amber-400 hover:text-amber-300 transition-colors font-medium"
@@ -751,7 +779,7 @@ export default function SearchPage() {
                                     {/* Locked State / Load More Button */}
                                     {visibleCount < filteredNames.length && (
                                         <tr>
-                                            <td colSpan={3} className="p-0 relative h-32 overflow-hidden">
+                                            <td colSpan={4} className="p-0 relative h-32 overflow-hidden">
                                                 {/* Blurred content (fake rows) */}
                                                 <div className="absolute inset-0 w-full h-full blur-md opacity-30 select-none pointer-events-none flex flex-col gap-4 p-4">
                                                     <div className="h-10 bg-white/10 rounded-xl w-full"></div>
@@ -783,7 +811,7 @@ export default function SearchPage() {
                                 </>
                             ) : (
                                 <tr>
-                                    <td colSpan={3} className="px-8 py-16 text-center text-slate-500">
+                                    <td colSpan={4} className="px-8 py-16 text-center text-slate-500">
                                         <div className="flex flex-col items-center gap-3">
                                             <Sparkles className="w-8 h-8 opacity-20" />
                                             <span>{t('pages.search.empty')}</span>

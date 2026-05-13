@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-// Cache for 24 hours (86400 seconds)
+// Cache the data for 24 hours to improve performance
 export const revalidate = 86400;
 
 const getSupabase = () => createClient(
@@ -13,7 +13,7 @@ export async function GET() {
     const supabase = getSupabase();
     
     try {
-        let allData: { name: string; gender: string | null }[] = [];
+        let allData: { name: string; gender: string | null; meaning: string | null }[] = [];
         let from = 0;
         const pageSize = 1000;
         let hasMore = true;
@@ -21,7 +21,7 @@ export async function GET() {
         while (hasMore) {
             const { data, error } = await supabase
                 .from('auspicious_names')
-                .select('name, gender')
+                .select('name, gender, meaning')
                 .order('name', { ascending: true })
                 .range(from, from + pageSize - 1);
 
@@ -46,7 +46,7 @@ export async function GET() {
             data: allData
         }, {
             headers: {
-                'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800',
+                'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=43200',
             },
         });
 
