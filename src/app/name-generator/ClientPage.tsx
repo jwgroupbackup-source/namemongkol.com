@@ -1,7 +1,8 @@
 'use client';
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { Sparkles, Wand2, RefreshCw, AlertTriangle, Play, Download } from 'lucide-react';
-import { charValues, pairDefinitions } from '@/data/numerology';
+import { pairDefinitions } from '@/data/numerology';
+import { getCharValue } from '@/data/numerologyLookup';
 import { KALAKINI_RULES } from '@/utils/nameAnalysis';
 import { AUSPICIOUS_SUMS } from '@/utils/gradeResult';
 
@@ -14,6 +15,9 @@ const SAFE_CHARS = ['ก','ด','ถ','ท','ภ','ฤ','า','ำ','ุ','่',
 
 const SAFE_GROUPS = [1, 4, 5, 6, 9];
 const ALL_CONSONANTS = 'กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮ'.split('');
+const FRAGMENTS = [
+    'ณัฐ','ณัฏฐ์','นันท์','มนต์','รวิ','วิณ','ดิณ','ภณ','มิน','นนท์','กร','วัณ','ธาม','คุณ','กัณ','กัน','กิจ','กิณ','กิม','กะ','กิ','กม','กณ','ดน','นต','รณ','วร','อณ','อร','อิม','โณ','ชณ','ชล','ชน','ชิน','พณ','พิม','พิน','ศร','สน','สิร'
+];
 
 // Thai syllable building blocks (Onsets, Nuclei, Codas, Markers) to prevent gibberish
 const ONSETS = ['ก','ค','จ','ฉ','ช','ซ','ณ','ด','ต','ถ','ท','ธ','น','บ','ป','ผ','ฝ','พ','ฟ','ภ','ม','ย','ร','ล','ว','ศ','ษ','ส','ห','อ'];
@@ -30,6 +34,16 @@ const isAplusSequence = (seq: number[]) => {
     return AUSPICIOUS_SUMS.includes(sum);
 };
 
+const VALID_FRAGMENTS = FRAGMENTS.filter(f => {
+    const seq = Array.from(f).map(c => getCharValue(c)).filter((v): v is number => v !== undefined);
+    for (let i = 0; i < seq.length - 1; i++) {
+        const p = `${seq[i]}${seq[i + 1]}`;
+        const level = pairDefinitions[p]?.level ?? 2;
+        if (level !== 1) return false;
+    }
+    return true;
+});
+
 export default function ClientPage() {
     const [startChar, setStartChar] = useState('ก');
     const [isGenerating, setIsGenerating] = useState(false);
@@ -42,18 +56,7 @@ export default function ClientPage() {
         
         // This runs asynchronously so it doesn't freeze the browser completely
         setTimeout(() => {
-            const fragments = [
-                'ณัฐ','ณัฏฐ์','นันท์','มนต์','รวิ','วิณ','ดิณ','ภณ','มิน','นนท์','กร','วัณ','ธาม','คุณ','กัณ','กัน','กิจ','กิณ','กิม','กะ','กิ','กม','กณ','ดน','นต','รณ','วร','อณ','อร','อิม','โณ','ชณ','ชล','ชน','ชิน','พณ','พิม','พิน','ศร','สน','สิร'
-            ].filter(f => {
-                // Filter fragments to only keep ones where internal math is 100% green
-                const seq = Array.from(f).map(c => charValues[c]).filter(v => v !== undefined);
-                for (let i = 0; i < seq.length - 1; i++) {
-                    const p = `${seq[i]}${seq[i + 1]}`;
-                    const level = pairDefinitions[p]?.level ?? 2;
-                    if (level !== 1) return false;
-                }
-                return true;
-            });
+            const fragments = VALID_FRAGMENTS;
 
             // Prefix list based on user input
             const prefixes = fragments.filter(f => f.startsWith(startChar));
@@ -76,7 +79,7 @@ export default function ClientPage() {
                 if (generated.has(name) || name.length > 8) continue;
                 generated.add(name);
                 
-                const seq = Array.from(name).map(c => charValues[c]).filter(v => v !== undefined);
+                const seq = Array.from(name).map(c => getCharValue(c)).filter((v): v is number => v !== undefined);
                 if (seq.length < 2) continue;
                 
                 if (isAplusSequence(seq)) {
@@ -139,11 +142,11 @@ export default function ClientPage() {
                             <select 
                                 value={startChar}
                                 onChange={(e) => setStartChar(e.target.value)}
-                                className={`w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-xl focus:ring-2 focus:ring-amber-500 focus:outline-none transition-all appearance-none cursor-pointer ${SAFE_GROUPS.includes(charValues[startChar] || 0) ? 'text-white' : 'text-red-400'}`}
+                                className={`w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-xl focus:ring-2 focus:ring-amber-500 focus:outline-none transition-all appearance-none cursor-pointer ${SAFE_GROUPS.includes(getCharValue(startChar) || 0) ? 'text-white' : 'text-red-400'}`}
                                 style={{ backgroundImage: 'url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\\\'http://www.w3.org/2000/svg\\\' viewBox=\\\'0 0 24 24\\\' fill=\\\'none\\\' stroke=\\\'white\\\' stroke-width=\\\'2\\\' stroke-linecap=\\\'round\\\' stroke-linejoin=\\\'round\\\'%3e%3cpolyline points=\\\'6 9 12 15 18 9\\\'%3e%3c/polyline%3e%3c/svg%3e")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.2em' }}
                             >
                                 {ALL_CONSONANTS.map(char => {
-                                    const isSafe = SAFE_GROUPS.includes(charValues[char] || 0);
+                                    const isSafe = SAFE_GROUPS.includes(getCharValue(char) || 0);
                                     return (
                                         <option 
                                             key={char} 

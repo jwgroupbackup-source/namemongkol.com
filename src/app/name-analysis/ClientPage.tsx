@@ -358,7 +358,7 @@ export default function NameAnalysisPage() {
                                 </div>
                                 <div>
                                     <textarea
-                                        className="w-full h-[280px] p-6 text-lg border border-white/5 rounded-2xl focus:ring-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 outline-none transition-all resize-none bg-indigo-950/20 text-slate-200 placeholder:text-slate-600 font-medium custom-scrollbar leading-loose shadow-inner"
+                                        className="w-full h-[280px] p-6 text-lg border border-white/5 rounded-2xl focus:ring-1 focus:ring-amber-500/40 focus:border-amber-500/40 outline-none transition-all resize-none bg-slate-900/30 text-slate-200 placeholder:text-slate-600 font-medium custom-scrollbar leading-loose shadow-inner"
                                         placeholder="วางรายชื่อที่นี่...&#10;เช่น:&#10;ณวิธ&#10;กลิ่นหอม"
                                         value={inputText}
                                         onChange={(e) => setInputText(e.target.value)}
@@ -616,7 +616,7 @@ export default function NameAnalysisPage() {
                             เครื่องมือที่ช่วยให้คุณตรวจสอบและเปรียบเทียบชื่อหลายชื่อได้ในคลิกเดียว ประหยัดเวลา และตัดสินใจได้แม่นยำขึ้น
                         </p>
                         <div className="grid md:grid-cols-4 gap-6">
-                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 text-center hover:border-indigo-500/30 transition-all group">
+                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 text-center hover:border-amber-500/25 transition-all group">
                                 <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                                     <Zap className="w-7 h-7 text-indigo-400" />
                                 </div>
@@ -625,7 +625,7 @@ export default function NameAnalysisPage() {
                                     วิเคราะห์ได้สูงสุด 1,000 ชื่อพร้อมกันในไม่กี่วินาที ไม่ต้องพิมพ์ทีละชื่อ
                                 </p>
                             </article>
-                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 text-center hover:border-indigo-500/30 transition-all group">
+                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 text-center hover:border-amber-500/25 transition-all group">
                                 <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                                     <ArrowDownWideNarrow className="w-7 h-7 text-emerald-400" />
                                 </div>
@@ -634,7 +634,7 @@ export default function NameAnalysisPage() {
                                     ระบบจัดเกรด A+, A, B, C อัตโนมัติ พร้อมเรียงลำดับจากดีที่สุด
                                 </p>
                             </article>
-                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 text-center hover:border-indigo-500/30 transition-all group">
+                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 text-center hover:border-amber-500/25 transition-all group">
                                 <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                                     <FileSpreadsheet className="w-7 h-7 text-amber-400" />
                                 </div>
@@ -643,7 +643,7 @@ export default function NameAnalysisPage() {
                                     ดาวน์โหลดผลลัพธ์เป็น Excel หรือ PDF สำหรับพิมพ์หรือแชร์ได้ทันที
                                 </p>
                             </article>
-                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 text-center hover:border-indigo-500/30 transition-all group">
+                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 text-center hover:border-amber-500/25 transition-all group">
                                 <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-rose-500/20 to-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                                     <Users className="w-7 h-7 text-rose-400" />
                                 </div>
@@ -985,7 +985,7 @@ export default function NameAnalysisPage() {
                         <div className="grid md:grid-cols-2 gap-6">
                             <Link
                                 href="/"
-                                className="group block bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-indigo-500/30 hover:bg-white/[0.05] transition-all"
+                                className="group block bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-amber-500/25 hover:bg-white/[0.05] transition-all"
                             >
                                 <h3 className="font-semibold text-slate-200 mb-2 group-hover:text-indigo-400 transition-colors">
                                     🔮 วิเคราะห์ชื่อ-นามสกุล (ฟรี)
@@ -996,7 +996,7 @@ export default function NameAnalysisPage() {
                             </Link>
                             <Link
                                 href="/search"
-                                className="group block bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-indigo-500/30 hover:bg-white/[0.05] transition-all"
+                                className="group block bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-amber-500/25 hover:bg-white/[0.05] transition-all"
                             >
                                 <h3 className="font-semibold text-slate-200 mb-2 group-hover:text-indigo-400 transition-colors">
                                     🔍 ค้นหาชื่อมงคล
@@ -1018,7 +1018,7 @@ export default function NameAnalysisPage() {
                             </Link>
                             <Link
                                 href="/phone-analysis"
-                                className="group block bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-indigo-500/30 hover:bg-white/[0.05] transition-all"
+                                className="group block bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-amber-500/25 hover:bg-white/[0.05] transition-all"
                             >
                                 <h3 className="font-semibold text-slate-200 mb-2 group-hover:text-indigo-400 transition-colors">
                                     📱 เช็คเบอร์มงคลกราฟพลังงาน 6 ด้าน

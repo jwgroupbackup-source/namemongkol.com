@@ -9,12 +9,12 @@ const canonical = `${siteUrl}/wallpapers/intent/finance`;
 
 // A/B Testing for CTR in GSC
 // Variant A: Short & Direct (Focus on keyword density)
-const titleA = 'วอลเปเปอร์มงคลเสริมดวงการเงิน 2569 โหลดฟรี | NameMongkol';
-const descriptionA = 'รวมวอลเปเปอร์มงคลเสริมดวงการเงิน เรียกทรัพย์ โชคลาภ ค้าขาย พร้อมดีไซน์ตามวันเกิดและเลขมงคล ดาวน์โหลดฟรี 2569';
+const titleA = 'วอลเปเปอร์มงคลเสริมดวงการเงิน โหลดฟรี | NameMongkol';
+const descriptionA = 'รวมวอลเปเปอร์มงคลเสริมดวงการเงิน เรียกทรัพย์ โชคลาภ ค้าขาย พร้อมดีไซน์ตามวันเกิดและเลขมงคล ดาวน์โหลดฟรี';
 
 // Variant B: Long & Benefit-driven (Focus on emotion and CTR triggers)
-const titleB = 'แจกฟรี! วอลเปเปอร์มงคลเสริมดวงการเงิน เรียกทรัพย์ โชคลาภ 2569';
-const descriptionB = 'ดาวน์โหลดวอลเปเปอร์เสริมดวงการเงินฟรี คัดเฉพาะภาพมงคลเรียกทรัพย์ เสริมโชคลาภ ค้าขายดี ปลดหนี้ รับปี 2569 พร้อมเคล็ดลับตั้งหน้าจอให้ปัง';
+const titleB = 'แจกฟรี! วอลเปเปอร์มงคลเสริมดวงการเงิน เรียกทรัพย์ โชคลาภ';
+const descriptionB = 'ดาวน์โหลดวอลเปเปอร์เสริมดวงการเงินฟรี คัดเฉพาะภาพมงคลเรียกทรัพย์ เสริมโชคลาภ ค้าขายดี ปลดหนี้ พร้อมเคล็ดลับตั้งหน้าจอให้ปัง';
 
 // --- Active Variant (Change here to test) ---
 const activeTitle = titleA;
@@ -23,7 +23,7 @@ const activeDescription = descriptionA;
 export const metadata: Metadata = {
     title: activeTitle,
     description: activeDescription,
-    keywords: ['วอลเปเปอร์เสริมดวงการเงิน', 'วอลเปเปอร์เรียกทรัพย์', 'วอลเปเปอร์โชคลาภ', 'วอลเปเปอร์ค้าขาย', 'วอลเปเปอร์มงคลการเงิน 2569'],
+    keywords: ['วอลเปเปอร์เสริมดวงการเงิน', 'วอลเปเปอร์เรียกทรัพย์', 'วอลเปเปอร์โชคลาภ', 'วอลเปเปอร์ค้าขาย', 'วอลเปเปอร์มงคลการเงิน'],
     alternates: { canonical },
     openGraph: {
         title: activeTitle,
@@ -71,7 +71,7 @@ const faqJsonLd = {
 export default function FinanceWallpapersIntentPage() {
     return (
         <>
-            <h1 className="sr-only">วอลเปเปอร์มงคลเสริมดวงการเงิน เรียกทรัพย์ โชคลาภ 2569</h1>
+            <h1 className="sr-only">วอลเปเปอร์มงคลเสริมดวงการเงิน เรียกทรัพย์ โชคลาภ</h1>
             <Script id="wallpapers-intent-finance-breadcrumb" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
             <Script id="wallpapers-intent-finance-faq" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
             <Suspense>
@@ -92,7 +92,7 @@ export default function FinanceWallpapersIntentPage() {
                         >
                             สร้างพื้นหลังมงคลตามเป้าหมายของคุณ
                         </Link>{' '}
-                        แล้วกำหนดธีมเรียกทรัพย์ที่ตรงกับแผนปี 2569
+                        แล้วกำหนดธีมเรียกทรัพย์ที่ตรงกับแผนของคุณ
                     </p>
                     <div className="flex flex-wrap gap-2">
                         <Link href="/wallpapers/day/wednesday" className="text-xs bg-slate-700/50 hover:bg-emerald-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">วันพุธ(กลางวัน) เรียกทรัพย์</Link>

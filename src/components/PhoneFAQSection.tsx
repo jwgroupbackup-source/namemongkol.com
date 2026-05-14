@@ -3,7 +3,7 @@ import { HelpCircle, ChevronDown } from 'lucide-react';
 
 export const PhoneFAQSection = () => {
     return (
-        <section className="py-16 md:py-24 relative overflow-hidden">
+        <section id="phone-faq" className="py-16 md:py-24 relative overflow-hidden">
             <div className="container mx-auto px-4 relative z-10 max-w-5xl">
                 <div className="text-center mb-12">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-slate-400 text-sm mb-4">

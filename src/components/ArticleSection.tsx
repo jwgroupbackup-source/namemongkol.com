@@ -93,7 +93,7 @@ export const ArticleSection: React.FC = () => {
                         <Link
                             key={article.id}
                             href={`/articles/${article.slug}`}
-                            className="group relative flex flex-col h-full bg-slate-900/40 backdrop-blur-sm border border-white/5 rounded-2xl overflow-hidden hover:border-purple-500/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10"
+                            className="group relative flex flex-col h-full bg-slate-900/40 backdrop-blur-sm border border-white/5 rounded-2xl overflow-hidden hover:border-amber-500/25 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-900/15"
                         >
                             <div className="h-48 w-full bg-slate-800 relative overflow-hidden">
                                 <ArticleImage

@@ -3,7 +3,7 @@
 import React, { useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { Sparkles, ArrowRight, Zap, Crown, Heart, Lightbulb, Star, TrendingUp } from 'lucide-react';
-import { charValues } from '@/data/numerology';
+import { getCharValue } from '@/data/numerologyLookup';
 import { calculateScore } from '@/utils/numerologyUtils';
 import { getSumPrediction } from '@/data/sumPredictions';
 
@@ -35,7 +35,7 @@ function computeEnergyBars(name: string): number[] {
     const chars = [...name];
     const values: number[] = [];
     for (const c of chars) {
-        const value = charValues[c] ?? charValues[c.toUpperCase()];
+        const value = getCharValue(c);
         if (value !== undefined) values.push(value);
     }
 

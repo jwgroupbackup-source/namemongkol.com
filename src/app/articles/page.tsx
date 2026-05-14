@@ -131,9 +131,9 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE
 
 export const metadata: Metadata = {
     metadataBase: new URL(baseUrl),
-    title: 'บทความชื่อมงคล 2569 - คู่มือตั้งชื่อลูก เลขศาสตร์ ทักษา อายตนะ 6 | NameMongkol',
-    description: 'รวม 50+ บทความศาสตร์ตั้งชื่อมงคล 2569 ครบทุกเรื่อง: วิธีตั้งชื่อลูกชายหญิง เลขศาสตร์ผลรวมมงคล ทักษาปกรณ์ อายตนะ 6 อักษรกาลกิณี เปลี่ยนชื่อเสริมดวง พร้อมตัวอย่างชื่อมงคลกว่า 500 ชื่อ โดยผู้เชี่ยวชาญ',
-    keywords: 'บทความชื่อมงคล 2569, ตั้งชื่อลูก 2569, หลักการตั้งชื่อ, เลขศาสตร์ชื่อ, ทักษาปกรณ์, อายตนะ 6, ผลรวมมงคล, อักษรกาลกิณี, เปลี่ยนชื่อเสริมดวง, ชื่อลูกชายมงคล, ชื่อลูกสาวมงคล, ความหมายชื่อ, ชื่อมงคลปีมะเมีย, วิเคราะห์ชื่อ AI',
+    title: 'บทความชื่อมงคล - คู่มือตั้งชื่อลูก เลขศาสตร์ ทักษา อายตนะ 6 | NameMongkol',
+    description: 'รวมบทความศาสตร์ตั้งชื่อมงคล ครบทุกเรื่อง: วิธีตั้งชื่อลูกชายหญิง เลขศาสตร์ผลรวมมงคล ทักษาปกรณ์ อายตนะ 6 และอักษรกาลกิณี',
+    keywords: 'บทความชื่อมงคล, ตั้งชื่อลูก, หลักการตั้งชื่อ, เลขศาสตร์ชื่อ, ทักษาปกรณ์, อายตนะ 6, ผลรวมมงคล, อักษรกาลกิณี, เปลี่ยนชื่อเสริมดวง, ชื่อลูกชายมงคล, ชื่อลูกสาวมงคล, ความหมายชื่อ',
 
     alternates: { canonical: `${baseUrl.replace(/\/$/, '')}/articles` },
 
@@ -151,29 +151,29 @@ export const metadata: Metadata = {
     },
 
     openGraph: {
-        title: 'บทความชื่อมงคล 2569 - คู่มือตั้งชื่อลูก เลขศาสตร์ ทักษา | NameMongkol',
-        description: 'รวม 50+ บทความศาสตร์ตั้งชื่อมงคลครบทุกเรื่อง วิธีตั้งชื่อลูก เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 พร้อมตัวอย่างชื่อมงคลกว่า 500 ชื่อ',
-        url: '/articles',
+        title: 'บทความชื่อมงคล - คู่มือตั้งชื่อลูก เลขศาสตร์ ทักษา | NameMongkol',
+        description: 'รวมบทความศาสตร์ตั้งชื่อมงคลครบทุกเรื่อง วิธีตั้งชื่อลูก เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 พร้อมตัวอย่างชื่อมงคล',
+        url: `${baseUrl}/articles`,
         siteName: 'NameMongkol',
         locale: 'th_TH',
         type: 'website',
         images: [
             {
-                url: `${baseUrl}/api/og?variant=default&title=บทความชื่อมงคล%202569&subtitle=รวมความรู้ศาสตร์การตั้งชื่อ%20เลขศาสตร์%20ทักษา%20อายตนะ&tag=Articles`,
+                url: `${baseUrl}/api/og?variant=default&title=บทความชื่อมงคล&subtitle=รวมความรู้ศาสตร์การตั้งชื่อ%20เลขศาสตร์%20ทักษา%20อายตนะ&tag=Articles`,
                 width: 1200,
                 height: 630,
-                alt: 'บทความชื่อมงคล 2569 – NameMongkol คลังความรู้การตั้งชื่อ เลขศาสตร์ ทักษาปกรณ์',
+                alt: 'บทความชื่อมงคล – NameMongkol คลังความรู้การตั้งชื่อ เลขศาสตร์ ทักษาปกรณ์',
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'บทความชื่อมงคล 2569 - คู่มือตั้งชื่อลูก เลขศาสตร์ ทักษา | NameMongkol',
-        description: 'รวม 50+ บทความศาสตร์ตั้งชื่อมงคล วิธีตั้งชื่อลูก เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6',
+        title: 'บทความชื่อมงคล - คู่มือตั้งชื่อลูก เลขศาสตร์ ทักษา | NameMongkol',
+        description: 'รวมบทความศาสตร์ตั้งชื่อมงคล วิธีตั้งชื่อลูก เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6',
         images: [
             {
-                url: `${baseUrl}/api/og?variant=default&title=บทความชื่อมงคล%202569`,
-                alt: 'บทความชื่อมงคล 2569 – NameMongkol',
+                url: `${baseUrl}/api/og?variant=default&title=บทความชื่อมงคล`,
+                alt: 'บทความชื่อมงคล – NameMongkol',
             },
         ],
     },
@@ -223,8 +223,8 @@ export default async function ArticlesPage() {
         '@type': 'CollectionPage',
         '@id': 'https://www.namemongkol.com/articles#webpage',
         'url': 'https://www.namemongkol.com/articles',
-        'name': 'บทความชื่อมงคล 2569 - คู่มือตั้งชื่อลูก เลขศาสตร์ ทักษา อายตนะ 6',
-        'description': 'รวม 50+ บทความศาสตร์ตั้งชื่อมงคล 2569 ครบทุกเรื่อง: วิธีตั้งชื่อลูกชายหญิง เลขศาสตร์ผลรวมมงคล ทักษาปกรณ์ อายตนะ 6 อักษรกาลกิณี เปลี่ยนชื่อเสริมดวง โดยผู้เชี่ยวชาญ',
+        'name': 'บทความชื่อมงคล - คู่มือตั้งชื่อลูก เลขศาสตร์ ทักษา อายตนะ 6',
+        'description': 'รวมบทความศาสตร์ตั้งชื่อมงคลครบทุกเรื่อง: วิธีตั้งชื่อลูกชายหญิง เลขศาสตร์ผลรวมมงคล ทักษาปกรณ์ อายตนะ 6 และอักษรกาลกิณี',
         'isPartOf': { '@id': 'https://www.namemongkol.com/#website' },
         'publisher': { '@id': 'https://www.namemongkol.com/#organization' },
         'inLanguage': 'th-TH',
@@ -243,7 +243,7 @@ export default async function ArticlesPage() {
         },
         'mainEntity': {
             '@type': 'ItemList',
-            'name': 'รายการบทความชื่อมงคล 2569',
+            'name': 'รายการบทความชื่อมงคล',
             'numberOfItems': articles.length,
             'itemListElement': articles.slice(0, 15).map((article, index) => ({
                 '@type': 'ListItem',
@@ -294,10 +294,10 @@ export default async function ArticlesPage() {
         'mainEntity': [
             {
                 '@type': 'Question',
-                'name': 'ตั้งชื่อลูก 2569 ใช้หลักอะไรบ้าง?',
+                'name': 'ตั้งชื่อลูกควรใช้หลักอะไรบ้าง?',
                 'acceptedAnswer': {
                     '@type': 'Answer',
-                    'text': 'การตั้งชื่อลูกปี 2569 ควรใช้หลักเลขศาสตร์ (ผลรวมตัวเลขมงคล) ทักษาปกรณ์ (อักษรตามวันเกิด) และอายตนะ 6 (ความสมดุลพลังชีวิต) รวมถึงหลีกเลี่ยงอักษรกาลกิณีประจำวันเกิด',
+                    'text': 'การตั้งชื่อลูกควรใช้หลักเลขศาสตร์ (ผลรวมตัวเลขมงคล) ทักษาปกรณ์ (อักษรตามวันเกิด) และอายตนะ 6 (ความสมดุลพลังชีวิต) รวมถึงหลีกเลี่ยงอักษรกาลกิณีประจำวันเกิด',
                 },
             },
             {
@@ -390,7 +390,7 @@ export default async function ArticlesPage() {
                         </Link>
 
                         <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400">
-                            บทความชื่อมงคล 2569
+                            บทความชื่อมงคล
                         </h1>
                         <p className="text-slate-300 text-lg mb-4">
                             รวมบทความศาสตร์มงคล เคล็ดลับการตั้งชื่อ และเกร็ดความรู้เพื่อชีวิตที่ดีกว่า
@@ -403,7 +403,7 @@ export default async function ArticlesPage() {
                                 คลังความรู้การตั้งชื่อครบวงจร
                             </h2>
                             <p className="text-slate-300 leading-relaxed mb-4">
-                                ยินดีต้อนรับสู่คลังบทความ <strong className="text-white">NameMongkol</strong> แหล่งรวมความรู้ด้านศาสตร์การตั้งชื่อที่ครบถ้วนที่สุดในประเทศไทย
+                                ยินดีต้อนรับสู่คลังบทความ <strong className="text-white">NameMongkol</strong> แหล่งรวมความรู้ด้านศาสตร์การตั้งชื่อที่ครบถ้วนและอัปเดตต่อเนื่อง
                                 ไม่ว่าคุณกำลังมองหา <strong className="text-amber-300">ชื่อมงคลสำหรับลูกน้อย</strong> ต้องการเรียนรู้หลัก <strong className="text-amber-300">เลขศาสตร์</strong> และ <strong className="text-amber-300">ทักษาปกรณ์</strong>
                                 หรือกำลังพิจารณา <strong className="text-amber-300">เปลี่ยนชื่อเสริมดวง</strong> เรามีบทความครอบคลุมทุกหัวข้อ
                             </p>
@@ -421,7 +421,7 @@ export default async function ArticlesPage() {
                                     <div className="text-slate-400">หมวดหมู่</div>
                                 </div>
                                 <div className="bg-slate-900/50 p-3 rounded-lg text-center">
-                                    <div className="text-2xl font-bold text-blue-400">2569</div>
+                                    <div className="text-2xl font-bold text-blue-400">ต่อเนื่อง</div>
                                     <div className="text-slate-400">อัปเดตล่าสุด</div>
                                 </div>
                             </div>
@@ -437,7 +437,7 @@ export default async function ArticlesPage() {
                                 name="q"
                                 placeholder="ค้นหาบทความ... เช่น ชื่อลูกชาย, เลขศาสตร์, ทักษา"
                                 aria-label="ค้นหาบทความ"
-                                className="w-full bg-slate-800/50 border border-slate-700 rounded-xl py-3 pl-12 pr-4 text-slate-200 placeholder:text-slate-500 focus:ring-2 focus:ring-purple-500/50 focus:border-transparent outline-none transition-all"
+                                className="w-full bg-slate-800/50 border border-slate-700 rounded-xl py-3 pl-12 pr-4 text-slate-200 placeholder:text-slate-500 focus:ring-2 focus:ring-amber-500/50 focus:border-transparent outline-none transition-all"
                             />
                             <button type="submit" className="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400 hover:text-white transition-colors">
                                 <Search size={16} />
@@ -451,7 +451,7 @@ export default async function ArticlesPage() {
                             <Link
                                 key={article.slug}
                                 href={`/articles/${article.slug}`}
-                                className="group bg-slate-900/40 backdrop-blur-sm border border-white/5 rounded-2xl overflow-hidden hover:border-purple-500/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10"
+                                className="group bg-slate-900/40 backdrop-blur-sm border border-white/5 rounded-2xl overflow-hidden hover:border-amber-500/25 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-900/15"
                             >
                                 <article
                                     className="flex flex-col h-full"
@@ -518,11 +518,11 @@ export default async function ArticlesPage() {
                         <div className="space-y-4">
                             <details className="bg-slate-800/40 border border-slate-700/50 rounded-xl overflow-hidden group">
                                 <summary className="p-5 cursor-pointer font-medium text-white hover:bg-slate-700/30 transition-colors flex items-center justify-between">
-                                    <span>ตั้งชื่อลูก 2569 (ปีมะเมีย) ใช้หลักอะไรบ้าง?</span>
+                                    <span>ตั้งชื่อลูกควรใช้หลักอะไรบ้าง?</span>
                                     <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
                                 <div className="p-5 pt-0 text-slate-300 leading-relaxed">
-                                    <p>การตั้งชื่อลูกปี 2569 ควรใช้หลักสำคัญ 4 ประการ:</p>
+                                    <p>การตั้งชื่อลูกควรใช้หลักสำคัญ 4 ประการ:</p>
                                     <ul className="mt-3 space-y-2 text-sm">
                                         <li className="flex items-start gap-2"><span className="text-amber-400">1.</span> <strong>เลขศาสตร์:</strong> คำนวณผลรวมชื่อให้ตกเลขมงคล เช่น 14, 15, 24, 32, 36, 41, 45, 59</li>
                                         <li className="flex items-start gap-2"><span className="text-amber-400">2.</span> <strong>ทักษาปกรณ์:</strong> เลือกอักษรนำหน้าชื่อที่ตรงกับหลักทักษาดี เช่น บริวาร ศรี เดช อายุ</li>
@@ -631,15 +631,15 @@ export default async function ArticlesPage() {
                     </section>
 
                     {/* CTA Section */}
-                    <section className="max-w-4xl mx-auto mt-16 bg-gradient-to-r from-purple-900/40 to-blue-900/40 border border-purple-500/30 rounded-2xl p-8 text-center">
+                    <section className="max-w-4xl mx-auto mt-16 bg-gradient-to-r from-amber-900/30 to-slate-900/60 border border-amber-500/25 rounded-2xl p-8 text-center">
                         <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
                             อยากรู้ว่าชื่อของคุณเป็นมงคลไหม?
                         </h2>
                         <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-                            ใช้ระบบ AI วิเคราะห์ชื่อมงคลฟรี! ตรวจสอบเลขศาสตร์ ทักษา อายตนะ 6 และอักษรกาลกิณี ภายในไม่กี่วินาที
+                            ใช้ระบบ AI วิเคราะห์ชื่อมงคลฟรี! ตรวจสอบเลขศาสตร์ ทักษา อายตนะ 6 และอักษรกาลกิณีได้ภายในไม่กี่วินาที
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link href="/" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-bold py-4 px-8 rounded-full transition-all hover:scale-105 shadow-lg shadow-amber-900/40">
+                            <Link href="/name-check" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-bold py-4 px-8 rounded-full transition-all hover:scale-105 shadow-lg shadow-amber-900/40">
                                 <span>วิเคราะห์ชื่อมงคลฟรี</span>
                                 <ArrowLeft size={18} className="rotate-180" />
                             </Link>

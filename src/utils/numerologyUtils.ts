@@ -1,10 +1,11 @@
 import { charValues, pairDefinitions } from '../data/numerology';
+import { getCharValue } from '../data/numerologyLookup';
 
 export const calculateScore = (text: string): number => {
     if (!text) return 0;
     let score = 0;
     for (const char of text) {
-        const value = charValues[char] ?? charValues[char.toUpperCase()];
+        const value = getCharValue(char);
         if (value !== undefined) {
             score += value;
         }
@@ -25,7 +26,7 @@ export const analyzePairs = (text: string): PairAnalysis[] => {
     // 1. Convert text to array of values, filtering only valid chars
     const numbers: number[] = [];
     for (const char of text) {
-        const value = charValues[char] ?? charValues[char.toUpperCase()];
+        const value = getCharValue(char);
         if (value !== undefined) {
             numbers.push(value);
         }

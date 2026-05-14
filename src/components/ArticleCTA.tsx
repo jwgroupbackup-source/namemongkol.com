@@ -8,7 +8,7 @@ export const ArticleCTA = () => {
         <div className="my-8">
             <p className="text-slate-300 mb-4">
                 อยากรู้ว่าชื่อของคุณดีแค่ไหน?{' '}
-                <Link href="/" className="text-amber-400 hover:text-amber-300 font-semibold underline underline-offset-2">
+                <Link href="/name-check" className="text-amber-400 hover:text-amber-300 font-semibold underline underline-offset-2">
                     วิเคราะห์ชื่อมงคลฟรี
                 </Link>{' '}หรือ{' '}
                 <Link href="/name-analysis" className="text-amber-400 hover:text-amber-300 font-semibold underline underline-offset-2">
@@ -23,8 +23,8 @@ export const ArticleCTA = () => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-fade-in-up">
 
-            {/* Mandatory: วิเคราะห์ชื่อมงคล - links to / (homepage) for primary keyword */}
-            <Link href="/" className="group relative overflow-hidden rounded-xl bg-amber-500/10 border border-amber-500/30 hover:border-amber-500/50 transition-all p-5 hover:bg-amber-500/20">
+            {/* Mandatory: วิเคราะห์ชื่อมงคล - links to /name-check (Golden Rule) */}
+            <Link href="/name-check" className="group relative overflow-hidden rounded-xl bg-amber-500/10 border border-amber-500/30 hover:border-amber-500/50 transition-all p-5 hover:bg-amber-500/20">
                 <div className="flex items-start justify-between">
                     <div>
                         <span className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 block">แนะนำ</span>
@@ -117,16 +117,16 @@ export const ArticleCTA = () => {
                 </div>
             </Link>
 
-            {/* Bulk Analysis Card */}
-            <Link href="/name-analysis" className="group relative overflow-hidden rounded-xl bg-slate-800/40 border border-slate-700/50 hover:border-blue-500/40 transition-all p-5 hover:bg-slate-800/60">
+            {/* Name Generator Card - replaces duplicate name-analysis link */}
+            <Link href="/name-generator" className="group relative overflow-hidden rounded-xl bg-slate-800/40 border border-slate-700/50 hover:border-blue-500/40 transition-all p-5 hover:bg-slate-800/60">
                 <div className="flex items-start justify-between">
                     <div>
                         <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center mb-3 text-blue-400">
-                            <Users className="w-4 h-4" />
+                            <Sparkles className="w-4 h-4" />
                         </div>
-                        <h3 className="text-lg font-bold text-white mb-1 group-hover:text-blue-300 transition-colors">คัดกรองชื่อมงคลแบบกลุ่ม</h3>
+                        <h3 className="text-lg font-bold text-white mb-1 group-hover:text-blue-300 transition-colors">สร้างชื่อมงคลด้วย AI</h3>
                         <p className="text-slate-400 text-xs mb-0 line-clamp-2">
-                            ตรวจสอบหลายชื่อพร้อมกัน เหมาะสำหรับตั้งชื่อลูก
+                            ให้ AI สร้างชื่อมงคลเกรด A+ ตามวันเกิดและความต้องการเฉพาะ
                         </p>
                     </div>
                     <ArrowRight className="w-5 h-5 text-slate-600 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />

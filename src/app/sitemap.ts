@@ -85,26 +85,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { url: `${baseUrl}/wallpapers/custom`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.6 },
     ];
 
-    // Fetch dynamic wallpapers (individual IDs for deep-link)
-    let wallpaperUrls: MetadataRoute.Sitemap = [];
-    try {
-        if (!supabase) throw new Error('Supabase is not configured');
-        const { data: wallpapers } = await supabase
-            .from('wallpapers')
-            .select('id, created_at');
-
-        if (wallpapers) {
-            wallpaperUrls = wallpapers.map((wp) => ({
-                url: `${baseUrl}/wallpapers?id=${wp.id}`,
-                lastModified: wp.created_at ? new Date(wp.created_at) : new Date(),
-                changeFrequency: 'weekly' as const,
-                priority: 0.6,
-            }))
-        }
-    } catch (error) {
-        console.error('Sitemap generation error (wallpapers):', error);
-    }
-
     // Fetch dynamic articles from database
     let articleUrls: MetadataRoute.Sitemap = [];
     try {
@@ -138,5 +118,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const allArticleSlugs = new Set(localArticleUrls.map(a => a.url));
     const dbOnlyArticles = articleUrls.filter(a => !allArticleSlugs.has(a.url));
 
-    return [...staticUrls, ...meaningUrls, ...wallpaperCategoryUrls, ...wallpaperUrls, ...localArticleUrls, ...dbOnlyArticles];
+    return [...staticUrls, ...meaningUrls, ...wallpaperCategoryUrls, ...localArticleUrls, ...dbOnlyArticles];
 }

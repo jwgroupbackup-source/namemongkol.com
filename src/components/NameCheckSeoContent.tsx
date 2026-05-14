@@ -99,7 +99,7 @@ export function NameCheckSeoContent() {
                     </div>
                 </div>
 
-                <div className="mt-10">
+                <div id="name-check-faq" className="mt-10">
                     <h2 className="text-xl font-bold text-white sm:text-2xl">คำถามที่พบบ่อยเกี่ยวกับการวิเคราะห์ชื่อ</h2>
                     <div className="mt-5 grid gap-4">
                         {faqItems.map((item) => (

@@ -7,11 +7,11 @@ import ClientPage from '../ClientPage';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
 
 export const metadata: Metadata = {
-    title: 'วอลเปเปอร์มงคลตามราศี 2569 เสริมดวงชะตา | NameMongkol',
+    title: 'วอลเปเปอร์มงคลตามราศี เสริมดวงชะตา | NameMongkol',
     description: 'รวมวอลเปเปอร์มงคลเสริมดวงตาม 12 ราศี เมษ พฤษภ เมถุน กรกฎ สิงห์ กันย์ ตุลย์ พิจิก ธนู มังกร กุมภ์ มีน ดาวน์โหลดฟรี',
     keywords: ['วอลเปเปอร์ราศี', 'วอลเปเปอร์มงคลราศี', 'เสริมดวงตามราศี', 'NameMongkol'],
     openGraph: {
-        title: 'วอลเปเปอร์มงคลตามราศี 2569 | NameMongkol',
+        title: 'วอลเปเปอร์มงคลตามราศี | NameMongkol',
         description: 'รวมวอลเปเปอร์มงคลเสริมดวงครบทั้ง 12 ราศี',
         url: `${siteUrl}/wallpapers/zodiac`,
         siteName: 'NameMongkol',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'วอลเปเปอร์มงคลตามราศี 2569 | NameMongkol',
+        title: 'วอลเปเปอร์มงคลตามราศี | NameMongkol',
         description: 'รวมวอลเปเปอร์มงคลเสริมดวงครบทั้ง 12 ราศี',
         images: [`${siteUrl}/api/og?variant=default&title=วอลเปเปอร์ตามราศี&subtitle=เสริมดวงครบ%2012%20ราศี&tag=Wallpapers`],
     },
@@ -65,7 +65,7 @@ const faqJsonLd = {
 export default function ZodiacIndexPage() {
     return (
         <>
-            <h1 className="sr-only">วอลเปเปอร์มงคลตามราศี 2569 ฟรี เสริมดวงครบ 12 ราศี</h1>
+            <h1 className="sr-only">วอลเปเปอร์มงคลตามราศี ฟรี เสริมดวงครบ 12 ราศี</h1>
             <Script
                 id="wallpapers-zodiac-breadcrumb"
                 type="application/ld+json"

@@ -9,12 +9,12 @@ const canonical = `${siteUrl}/wallpapers/intent/work`;
 
 // A/B Testing for CTR in GSC
 // Variant A: Short & Direct (Focus on keyword density)
-const titleA = 'วอลเปเปอร์มงคลเสริมดวงการงาน 2569 โหลดฟรี | NameMongkol';
+const titleA = 'วอลเปเปอร์มงคลเสริมดวงการงาน โหลดฟรี | NameMongkol';
 const descriptionA = 'รวมวอลเปเปอร์มงคลเสริมดวงการงาน บารมี เลื่อนตำแหน่ง และความก้าวหน้า เลือกตามวันเกิด ดาวน์โหลดฟรี';
 
 // Variant B: Long & Benefit-driven (Focus on emotion and CTR triggers)
-const titleB = 'แจกฟรี! วอลเปเปอร์มงคลเสริมดวงการงาน บารมี เลื่อนตำแหน่ง 2569';
-const descriptionB = 'ดาวน์โหลดวอลเปเปอร์เสริมดวงการงานฟรี คัดเฉพาะภาพเสริมบารมี ผู้ใหญ่อุปถัมภ์ เลื่อนขั้น เลื่อนตำแหน่ง การงานก้าวหน้าในปี 2569';
+const titleB = 'แจกฟรี! วอลเปเปอร์มงคลเสริมดวงการงาน บารมี เลื่อนตำแหน่ง';
+const descriptionB = 'ดาวน์โหลดวอลเปเปอร์เสริมดวงการงานฟรี คัดเฉพาะภาพเสริมบารมี ผู้ใหญ่อุปถัมภ์ เลื่อนขั้น เลื่อนตำแหน่ง การงานก้าวหน้า';
 
 // --- Active Variant (Change here to test) ---
 const activeTitle = titleA;
@@ -23,7 +23,7 @@ const activeDescription = descriptionA;
 export const metadata: Metadata = {
     title: activeTitle,
     description: activeDescription,
-    keywords: ['วอลเปเปอร์เสริมดวงการงาน', 'วอลเปเปอร์เลื่อนตำแหน่ง', 'วอลเปเปอร์เสริมบารมี', 'วอลเปเปอร์มงคลการงาน 2569', 'วอลเปเปอร์ความก้าวหน้า'],
+    keywords: ['วอลเปเปอร์เสริมดวงการงาน', 'วอลเปเปอร์เลื่อนตำแหน่ง', 'วอลเปเปอร์เสริมบารมี', 'วอลเปเปอร์มงคลการงาน', 'วอลเปเปอร์ความก้าวหน้า'],
     alternates: { canonical },
     openGraph: {
         title: activeTitle,
@@ -71,7 +71,7 @@ const faqJsonLd = {
 export default function WorkWallpapersIntentPage() {
     return (
         <>
-            <h1 className="sr-only">วอลเปเปอร์มงคลเสริมดวงการงาน บารมี และความก้าวหน้า 2569</h1>
+            <h1 className="sr-only">วอลเปเปอร์มงคลเสริมดวงการงาน บารมี และความก้าวหน้า</h1>
             <Script id="wallpapers-intent-work-breadcrumb" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
             <Script id="wallpapers-intent-work-faq" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
             <Suspense>

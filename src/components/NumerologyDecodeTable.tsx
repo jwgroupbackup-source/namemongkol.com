@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Hash, ChevronDown, ChevronUp, BookOpen } from 'lucide-react';
 import { charValues } from '@/data/numerology';
+import { getCharValue } from '@/data/numerologyLookup';
 
 /* ─────────────────────────────────────────────────────────── */
 /*  Types & Helpers                                             */
@@ -24,7 +25,7 @@ interface CharEntry {
 function parseChars(text: string): CharEntry[] {
     const result: CharEntry[] = [];
     for (const char of text) {
-        const val = charValues[char] ?? charValues[char.toUpperCase()];
+        const val = getCharValue(char);
         if (val !== undefined) result.push({ char, value: val });
     }
     return result;
@@ -98,12 +99,14 @@ function CharRow({ label, chars, score }: { label: string; chars: CharEntry[]; s
 /* ─────────────────────────────────────────────────────────── */
 
 function NumerologyReferenceGrid() {
-    // สร้าง Map: เลข → อักขระทั้งหมด
-    const groupedChars: Record<number, string[]> = {};
-    for (const [char, val] of Object.entries(charValues)) {
-        if (!groupedChars[val]) groupedChars[val] = [];
-        groupedChars[val].push(char);
-    }
+    const groupedChars = useMemo(() => {
+        const groups: Record<number, string[]> = {};
+        for (const [char, val] of Object.entries(charValues)) {
+            if (!groups[val]) groups[val] = [];
+            groups[val].push(char);
+        }
+        return groups;
+    }, []);
 
     return (
         <div className="space-y-3">
@@ -174,8 +177,8 @@ export const NumerologyDecodeTable: React.FC<NumerologyDecodeTableProps> = ({
     const [isExpanded, setIsExpanded] = useState(true);
     const [showRef, setShowRef] = useState(true);
 
-    const nameChars    = parseChars(name.replace(/\s/g, ''));
-    const surnameChars = parseChars(surname.replace(/\s/g, ''));
+    const nameChars = useMemo(() => parseChars(name.replace(/\s/g, '')), [name]);
+    const surnameChars = useMemo(() => parseChars(surname.replace(/\s/g, '')), [surname]);
 
     if (nameChars.length === 0 && surnameChars.length === 0) return null;
 

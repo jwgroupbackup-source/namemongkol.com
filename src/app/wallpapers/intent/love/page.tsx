@@ -9,12 +9,12 @@ const canonical = `${siteUrl}/wallpapers/intent/love`;
 
 // A/B Testing for CTR in GSC
 // Variant A: Short & Direct (Focus on keyword density)
-const titleA = 'วอลเปเปอร์มงคลเสริมดวงความรัก 2569 โหลดฟรี | NameMongkol';
+const titleA = 'วอลเปเปอร์มงคลเสริมดวงความรัก โหลดฟรี | NameMongkol';
 const descriptionA = 'รวมวอลเปเปอร์มงคลเสริมความรัก เมตตามหานิยม เสน่ห์ และความสัมพันธ์ที่ดี เลือกตามวันเกิดและดาวน์โหลดฟรี';
 
 // Variant B: Long & Benefit-driven (Focus on emotion and CTR triggers)
-const titleB = 'แจกฟรี! วอลเปเปอร์มงคลเสริมดวงความรัก เสน่ห์ เมตตามหานิยม 2569';
-const descriptionB = 'ดาวน์โหลดวอลเปเปอร์เสริมดวงความรักฟรี ดึงดูดเนื้อคู่ เพิ่มเสน่ห์ เมตตามหานิยม คนรักคนหลง พร้อมเคล็ดลับเลือกสีให้ตรงวันเกิด 2569';
+const titleB = 'แจกฟรี! วอลเปเปอร์มงคลเสริมดวงความรัก เสน่ห์ เมตตามหานิยม';
+const descriptionB = 'ดาวน์โหลดวอลเปเปอร์เสริมดวงความรักฟรี ดึงดูดเนื้อคู่ เพิ่มเสน่ห์ เมตตามหานิยม คนรักคนหลง พร้อมเคล็ดลับเลือกสีให้ตรงวันเกิด';
 
 // --- Active Variant (Change here to test) ---
 const activeTitle = titleA;
@@ -23,7 +23,7 @@ const activeDescription = descriptionA;
 export const metadata: Metadata = {
     title: activeTitle,
     description: activeDescription,
-    keywords: ['วอลเปเปอร์เสริมดวงความรัก', 'วอลเปเปอร์เสน่ห์', 'วอลเปเปอร์เมตตามหานิยม', 'วอลเปเปอร์ความรัก 2569', 'วอลเปเปอร์มงคลความรัก'],
+    keywords: ['วอลเปเปอร์เสริมดวงความรัก', 'วอลเปเปอร์เสน่ห์', 'วอลเปเปอร์เมตตามหานิยม', 'วอลเปเปอร์ความรัก', 'วอลเปเปอร์มงคลความรัก'],
     alternates: { canonical },
     openGraph: {
         title: activeTitle,
@@ -71,7 +71,7 @@ const faqJsonLd = {
 export default function LoveWallpapersIntentPage() {
     return (
         <>
-            <h1 className="sr-only">วอลเปเปอร์มงคลเสริมดวงความรัก เสน่ห์ เมตตามหานิยม 2569</h1>
+            <h1 className="sr-only">วอลเปเปอร์มงคลเสริมดวงความรัก เสน่ห์ เมตตามหานิยม</h1>
             <Script id="wallpapers-intent-love-breadcrumb" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
             <Script id="wallpapers-intent-love-faq" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
             <Suspense>

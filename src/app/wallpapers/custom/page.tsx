@@ -7,30 +7,29 @@ import ClientPage from '../ClientPage';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
 
 export const metadata: Metadata = {
-    title: 'สร้างวอลเปเปอร์มงคล 2569 แบบส่วนตัว | NameMongkol',
-    description: 'สร้างวอลเปเปอร์มงคลส่วนตัวด้วย AI ปรับตามชื่อ วันเกิด และเป้าหมายชีวิต เหมาะสำหรับเสริมการเงิน การงาน ความรัก และพลังใจในปี 2569',
+    title: 'สร้างวอลเปเปอร์มงคลแบบส่วนตัว | NameMongkol',
+    description: 'สร้างวอลเปเปอร์มงคลส่วนตัวด้วย AI ปรับตามชื่อ วันเกิด และเป้าหมายชีวิต เหมาะสำหรับเสริมการเงิน การงาน ความรัก และพลังใจ',
     keywords: [
         'สร้างวอลเปเปอร์มงคล',
-        'สร้างวอลเปเปอร์มงคล 2569',
         'วอลเปเปอร์มงคลส่วนตัว',
         'วอลเปเปอร์เสริมดวงส่วนตัว AI',
         'ออกแบบพื้นหลังมงคล',
         'NameMongkol',
     ],
     openGraph: {
-        title: 'สร้างวอลเปเปอร์มงคล 2569 แบบส่วนตัว | NameMongkol',
+        title: 'สร้างวอลเปเปอร์มงคลแบบส่วนตัว | NameMongkol',
         description: 'สร้างวอลเปเปอร์เสริมดวงส่วนตัวด้วย AI เพื่อโฟกัสการเงิน การงาน ความรัก และเป้าหมายเฉพาะของคุณ',
         url: `${siteUrl}/wallpapers/custom`,
         siteName: 'NameMongkol',
         locale: 'th_TH',
         type: 'website',
-        images: [`${siteUrl}/api/og?variant=default&title=สร้างวอลเปเปอร์มงคล%202569&subtitle=ออกแบบส่วนตัวด้วย%20AI&tag=Custom%20Wallpaper`],
+        images: [`${siteUrl}/api/og?variant=default&title=สร้างวอลเปเปอร์มงคล&subtitle=ออกแบบส่วนตัวด้วย%20AI&tag=Custom%20Wallpaper`],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'สร้างวอลเปเปอร์มงคล 2569 แบบส่วนตัว | NameMongkol',
+        title: 'สร้างวอลเปเปอร์มงคลแบบส่วนตัว | NameMongkol',
         description: 'สร้างภาพวอลเปเปอร์มงคลจากชื่อและเป้าหมายของคุณ พร้อมใช้งานทันทีบนมือถือ',
-        images: [`${siteUrl}/api/og?variant=default&title=สร้างวอลเปเปอร์มงคล%202569&subtitle=ออกแบบส่วนตัวด้วย%20AI&tag=Custom%20Wallpaper`],
+        images: [`${siteUrl}/api/og?variant=default&title=สร้างวอลเปเปอร์มงคล&subtitle=ออกแบบส่วนตัวด้วย%20AI&tag=Custom%20Wallpaper`],
     },
     alternates: {
         canonical: `${siteUrl}/wallpapers/custom`,
@@ -42,7 +41,7 @@ const webPageJsonLd = {
     '@type': 'WebPage',
     '@id': `${siteUrl}/wallpapers/custom`,
     url: `${siteUrl}/wallpapers/custom`,
-    name: 'สร้างวอลเปเปอร์มงคล 2569 แบบส่วนตัว | NameMongkol',
+    name: 'สร้างวอลเปเปอร์มงคลแบบส่วนตัว | NameMongkol',
     description:
         'เครื่องมือสร้างวอลเปเปอร์มงคลส่วนตัวด้วย AI ปรับตามชื่อ วันเกิด และเป้าหมายชีวิต เพื่อใช้งานจริงบนมือถือทุกวัน',
     inLanguage: 'th-TH',
@@ -83,7 +82,7 @@ const faqJsonLd = {
     mainEntity: [
         {
             '@type': 'Question',
-            name: 'สร้างวอลเปเปอร์มงคล 2569 ต้องเริ่มจากอะไร?',
+            name: 'สร้างวอลเปเปอร์มงคลต้องเริ่มจากอะไร?',
             acceptedAnswer: {
                 '@type': 'Answer',
                 text: 'เริ่มจากกำหนดเป้าหมายที่ต้องการเสริม เช่น การเงินหรือการงาน แล้วเลือกโทนภาพและสีมงคลที่เหมาะกับคุณ ระบบจะช่วยสร้างภาพให้ทันที.',

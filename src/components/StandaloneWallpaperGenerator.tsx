@@ -1021,7 +1021,7 @@ export default function StandaloneWallpaperGenerator() {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="กรอกชื่อ"
-                                className="w-full px-4 py-3 bg-slate-800 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                className="w-full px-4 py-3 bg-slate-800 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/60"
                             />
                         </div>
 
@@ -1035,7 +1035,7 @@ export default function StandaloneWallpaperGenerator() {
                                 value={surname}
                                 onChange={(e) => setSurname(e.target.value)}
                                 placeholder="กรอกนามสกุล"
-                                className="w-full px-4 py-3 bg-slate-800 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                className="w-full px-4 py-3 bg-slate-800 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/60"
                             />
                         </div>
 

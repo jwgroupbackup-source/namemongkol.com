@@ -7,31 +7,30 @@ import { Sparkles, Sun, Moon, Flame, MessageCircle, BookOpen, Heart, Shield, Cro
 import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
-    title: 'วอลเปเปอร์มงคล 2569 เสริมดวง งาน เงิน รัก บารมี | NameMongkol',
+    title: 'วอลเปเปอร์มงคล เสริมดวง งาน เงิน รัก บารมี | NameMongkol',
     alternates: { canonical: `${siteUrl}/wallpapers` },
-    description: 'ดาวน์โหลดวอลเปเปอร์มงคลเสริมดวงชะตา 2569 ฟรี! ออกแบบตามหลักฮวงจุ้ย โหราศาสตร์ไทย สีมงคลตามวันเกิด พร้อมสัญลักษณ์ศักดิ์สิทธิ์ ท้าวเวสสุวรรณ เลขมงคล 4289 เสริมการเงิน การงาน ความรัก สุขภาพ และบารมี',
+    description: 'ดาวน์โหลดวอลเปเปอร์มงคลเสริมดวงชะตา ออกแบบตามหลักฮวงจุ้ย โหราศาสตร์ไทย สีมงคลตามวันเกิด พร้อมสัญลักษณ์ศักดิ์สิทธิ์ ท้าวเวสสุวรรณ และเลขมงคล 4289',
     keywords: [
         'วอลเปเปอร์มงคล', 'วอลเปเปอร์เสริมดวง', 'วอลเปเปอร์สายมู',
-        'พื้นหลังมงคล', 'ฮวงจุ้ย', 'เสริมดวงการเงิน',
+        'พื้นหลังมงคล', 'ฮวงจุ้ย', 'ดาวน์โหลดวอลเปเปอร์มงคล',
         'วอลเปเปอร์ท้าวเวสสุวรรณ', 'วอลเปเปอร์ตามวันเกิด',
-        'วอลเปเปอร์เรียกทรัพย์', 'วอลเปเปอร์โชคลาภ',
-        'เลขมงคล 4289', 'สีมงคลตามวันเกิด',
-        'วอลเปเปอร์มงคล 2569', 'NameMongkol',
+        'วอลเปเปอร์มงคลฟรี', 'เลขมงคล 4289', 'สีมงคลตามวันเกิด',
+        'NameMongkol',
     ],
     openGraph: {
-        title: 'วอลเปเปอร์มงคล 2569 เสริมดวง งาน เงิน รัก บารมี',
+        title: 'วอลเปเปอร์มงคล เสริมดวง งาน เงิน รัก บารมี',
         description: 'แจกฟรี! วอลเปเปอร์มงคลเสริมดวงรอบด้าน การเงิน ความรัก การงาน ออกแบบตามศาสตร์มงคลแท้',
         url: `${siteUrl}/wallpapers`,
         siteName: 'NameMongkol',
         locale: 'th_TH',
         type: 'website',
-        images: [`${siteUrl}/api/og?variant=default&title=วอลเปเปอร์มงคล%202569&subtitle=แจกฟรี%20ดีไซน์เสริมดวง%20การเงิน%20การงาน%20ความรัก%20บารมี&tag=Wallpapers`],
+        images: [`${siteUrl}/api/og?variant=default&title=วอลเปเปอร์มงคล&subtitle=แจกฟรี%20ดีไซน์เสริมดวง%20การเงิน%20การงาน%20ความรัก%20บารมี&tag=Wallpapers`],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'วอลเปเปอร์มงคล 2569 | NameMongkol',
+        title: 'วอลเปเปอร์มงคล | NameMongkol',
         description: 'แจกฟรี! วอลเปเปอร์สายมู เสริมดวงรอบด้าน ออกแบบตามหลักฮวงจุ้ยและโหราศาสตร์',
-        images: [`${siteUrl}/api/og?variant=default&title=วอลเปเปอร์มงคล%202569`],
+        images: [`${siteUrl}/api/og?variant=default&title=วอลเปเปอร์มงคล`],
     },
 };
 
@@ -41,8 +40,8 @@ const webPageJsonLd = {
     '@type': 'WebPage',
     '@id': `${siteUrl}/wallpapers`,
     'url': `${siteUrl}/wallpapers`,
-    'name': 'วอลเปเปอร์มงคล 2569 เสริมดวง งาน เงิน รัก บารมี | NameMongkol',
-    'description': 'ดาวน์โหลดวอลเปเปอร์มงคลเสริมดวงชะตา 2569 ฟรี! ออกแบบตามหลักฮวงจุ้ย โหราศาสตร์ไทย สีมงคลตามวันเกิด ท้าวเวสสุวรรณ เลขมงคล 4289 เสริมการเงิน การงาน ความรัก บารมี',
+    'name': 'วอลเปเปอร์มงคล เสริมดวง งาน เงิน รัก บารมี | NameMongkol',
+    'description': 'ดาวน์โหลดวอลเปเปอร์มงคลเสริมดวงชะตา ออกแบบตามหลักฮวงจุ้ย โหราศาสตร์ไทย สีมงคลตามวันเกิด ท้าวเวสสุวรรณ และเลขมงคล 4289',
     'inLanguage': 'th-TH',
     'isPartOf': {
         '@type': 'WebSite',
@@ -54,7 +53,7 @@ const webPageJsonLd = {
 const collectionJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    'name': 'วอลเปเปอร์มงคล 2569 เสริมดวงชะตา',
+    'name': 'วอลเปเปอร์มงคล เสริมดวงชะตา',
     'description': 'คอลเลกชันวอลเปเปอร์มงคลเสริมดวงชะตาตามหลักฮวงจุ้ย โหราศาสตร์ไทย และสีมงคลตามวันเกิด ดาวน์โหลดฟรี',
     'url': `${siteUrl}/wallpapers`,
     'inLanguage': 'th-TH',
@@ -151,7 +150,7 @@ export default function WallpapersPage() {
             />
 
             {/* SSR H1 for Googlebot — hidden visually, H1 in ClientPage is visible */}
-            <h1 className="sr-only">วอลเปเปอร์มงคล 2569 เสริมดวง งาน เงิน รัก บารมี</h1>
+            <h1 className="sr-only">วอลเปเปอร์มงคล เสริมดวง งาน เงิน รัก บารมี</h1>
 
             {/* ===== Interactive Client Gallery ===== */}
             <Suspense>
@@ -225,7 +224,7 @@ export default function WallpapersPage() {
                             </p>
                             <div className="flex flex-wrap gap-2">
                                 <Link href="/wallpapers/day/monday" className="text-xs bg-slate-700/50 hover:bg-yellow-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
-                                    วอลเปเปอร์มงคลวันจันทร์ ฟรี 2569
+                                    วอลเปเปอร์มงคลวันจันทร์ ฟรี
                                 </Link>
                                 <Link href="/wallpapers/day/wednesday" className="text-xs bg-slate-700/50 hover:bg-emerald-500/20 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                                     วอลเปเปอร์เรียกทรัพย์วันพุธ

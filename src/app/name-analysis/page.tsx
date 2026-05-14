@@ -5,14 +5,14 @@ import { siteUrl } from '@/lib/seo';
 
 
 export const metadata: Metadata = {
-    title: 'เช็คชื่อมงคลหลายชื่อพร้อมกัน 2569 (Bulk Analysis) | NameMongkol',
+    title: 'เช็คชื่อมงคลหลายชื่อพร้อมกัน (Bulk Analysis) | NameMongkol',
     alternates: { canonical: `${siteUrl.replace(/\/$/, '')}/name-analysis` },
-    description: 'เช็คชื่อมงคลแบบกลุ่ม (Bulk Analysis) วิเคราะห์และเปรียบเทียบสูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ คัดกรองคู่เลข-กาลกิณี ดูผลรวมเลขศาสตร์ และ Export CSV/PDF เหมาะตั้งชื่อลูก/เปลี่ยนชื่อ/งาน HR',
+    description: 'วิเคราะห์ชื่อแบบกลุ่ม สูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลขมงคล กาลกิณี และส่งออก CSV/PDF',
     keywords: 'เช็คชื่อมงคลหลายชื่อ, วิเคราะห์ชื่อหลายชื่อ, เปรียบเทียบชื่อมงคล, Bulk Analysis, Bulk Name Analysis, คัดกรองชื่อมงคล, จัดเกรดชื่อ A+, ผลรวมเลขศาสตร์ชื่อ, คู่เลขชื่อมงคล, กาลกิณีชื่อ, Export CSV วิเคราะห์ชื่อ, Export PDF วิเคราะห์ชื่อ, วิเคราะห์ชื่อพนักงาน HR',
 
     openGraph: {
-        title: 'เช็คชื่อมงคลหลายชื่อพร้อมกัน 2569 | Bulk Analysis',
-        description: 'วิเคราะห์ชื่อสูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลข กาลกิณี ส่งออก CSV/PDF',
+        title: 'เช็คชื่อมงคลหลายชื่อพร้อมกัน | Bulk Analysis',
+        description: 'วิเคราะห์ชื่อสูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลข กาลกิณี และส่งออก CSV/PDF',
         url: `${siteUrl}/name-analysis`,
         siteName: 'NameMongkol',
         locale: 'th_TH',
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'เช็คชื่อมงคลหลายชื่อพร้อมกัน 2569 | Bulk Analysis',
-        description: 'วิเคราะห์ชื่อสูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลข กาลกิณี ส่งออก CSV/PDF',
-        images: [`${siteUrl}/api/og?variant=default&title=Bulk%20Name%20Analysis`],
+        title: 'เช็คชื่อมงคลหลายชื่อพร้อมกัน | Bulk Analysis',
+        description: 'วิเคราะห์ชื่อสูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลข กาลกิณี และส่งออก CSV/PDF',
+                'text': '🟢 = คู่มงคลส่งเสริมโชคลาภ, 🟠 = ปานกลางต้องอาศัยความอดทน, 🔴 = ควรระวังอุปสรรค',
     },
 };
 
@@ -33,8 +33,8 @@ const webPageSchema = {
     '@type': 'WebPage',
     '@id': `${siteUrl}/name-analysis`,
     'url': `${siteUrl}/name-analysis`,
-    'name': 'เช็คชื่อมงคลหลายชื่อพร้อมกัน 2569 | Bulk Name Analysis | NameMongkol',
-    'description': 'เครื่องมือเช็คชื่อมงคลแบบกลุ่ม (Bulk Analysis) วิเคราะห์สูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลข กาลกิณี และ Export CSV/PDF',
+    'name': 'เช็คชื่อมงคลหลายชื่อพร้อมกัน | Bulk Name Analysis | NameMongkol',
+    'description': 'เครื่องมือวิเคราะห์ชื่อแบบกลุ่ม สูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลข กาลกิณี และ Export CSV/PDF',
     'inLanguage': 'th-TH',
     'isPartOf': {
         '@type': 'WebSite',
@@ -57,13 +57,6 @@ const softwareAppSchema = {
         'priceCurrency': 'THB',
         'description': 'ใช้งานผ่านระบบเครดิต (เริ่มต้น 5 เครดิต สำหรับ 1-10 ชื่อ)',
     },
-    'aggregateRating': {
-        '@type': 'AggregateRating',
-        'ratingValue': '4.8',
-        'ratingCount': '1280',
-        'bestRating': '5',
-        'worstRating': '1',
-    },
     'featureList': [
         'วิเคราะห์ชื่อพร้อมกันสูงสุด 1,000 ชื่อ',
         'จัดเกรดความมงคลอัตโนมัติ (A+, A, B, C)',
@@ -85,7 +78,7 @@ const faqSchema = {
             'name': 'Bulk Analysis วิเคราะห์ได้กี่ชื่อพร้อมกัน?',
             'acceptedAnswer': {
                 '@type': 'Answer',
-                'text': 'ระบบ Bulk Analysis รองรับการวิเคราะห์ได้สูงสุด 1,000 ชื่อต่อครั้ง โดยแบ่งเป็น 3 ระดับ: Entry (1-10 ชื่อ = 5 เครดิต), Standard (11-100 ชื่อ = 30 เครดิต), Power User (101-1,000 ชื่อ = 100 เครดิต)',
+                'text': 'สูงสุด 1,000 ชื่อต่อครั้ง แบ่ง 3 ระดับ: Entry (1-10 ชื่อ = 5 เครดิต), Standard (11-100 ชื่อ = 30 เครดิต), Power User (101-1,000 ชื่อ = 100 เครดิต)',
             },
         },
         {
@@ -93,7 +86,7 @@ const faqSchema = {
             'name': 'เกรด A+ หมายความว่าอย่างไร?',
             'acceptedAnswer': {
                 '@type': 'Answer',
-                'text': 'เกรด A+ หมายถึงชื่อที่มีผลรวมเลขศาสตร์เป็นมงคลสูงสุด มีคู่ตัวเลขที่ดี (🟢) และใช้ได้กับหลายวันเกิด ถือเป็นชื่อที่แนะนำอย่างยิ่ง',
+                'text': 'เกรด A+ คือชื่อที่มีผลรวมเลขศาสตร์มงคล คู่ตัวเลขดี (🟢) และใช้ได้หลายวันเกิด จึงเป็นชื่อที่แนะนำอย่างยิ่ง',
             },
         },
         {
@@ -101,7 +94,7 @@ const faqSchema = {
             'name': 'คู่ตัวเลข 🟢🟠🔴 หมายความว่าอย่างไร?',
             'acceptedAnswer': {
                 '@type': 'Answer',
-                'text': '🟢 (สีเขียว) = คู่ตัวเลขมงคล ส่งเสริมโชคลาภและบารมี, 🟠 (สีส้ม) = ปานกลาง ต้องอดทนแต่จะสำเร็จ, 🔴 (สีแดง) = ควรระวัง อาจมีอุปสรรคหรือปัญหาสุขภาพ',
+                'text': '🟢 = คู่มงคลส่งเสริมโชคลาภ, 🟠 = ปานกลางต้องอาศัยความอดทน, 🔴 = ควรระวังอุปสรรค',
             },
         },
         {
@@ -206,7 +199,7 @@ export default function NameAnalysisPage() {
     return (
         <>
             {/* SSR H1 for Googlebot — keep visually hidden to avoid duplicate visible H1 in client UI */}
-            <h1 className="sr-only">เช็คชื่อมงคลหลายชื่อพร้อมกัน 2569 (Bulk Name Analysis) — จัดเกรด A+ ตรวจคู่เลข กาลกิณี Export CSV/PDF</h1>
+            <h1 className="sr-only">เช็คชื่อมงคลหลายชื่อพร้อมกัน (Bulk Name Analysis) — จัดเกรด A+ ตรวจคู่เลข กาลกิณี Export CSV/PDF</h1>
 
             <Script
                 id="name-analysis-webpage-schema"
@@ -244,6 +237,12 @@ export default function NameAnalysisPage() {
                     <div className="flex flex-wrap gap-2">
                         <a href="/" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             วิเคราะห์ชื่อ-นามสกุล (ฟรี)
+                        </a>
+                        <a href="/about" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            เกี่ยวกับ NameMongkol
+                        </a>
+                        <a href="/name-generator" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            สร้างชื่อมงคล AI
                         </a>
                         <a href="/search" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             ค้นหาชื่อมงคลฟรี 5,000+ ชื่อ

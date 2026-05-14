@@ -564,7 +564,7 @@ export default async function ArticlePage({ params }: Props) {
                         <div className="mt-10 p-8 bg-white/5 border border-[#c9933a]/20 rounded-2xl text-center backdrop-blur-md relative overflow-hidden">
                             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#c9933a]/10 via-transparent to-transparent pointer-events-none"></div>
                             <h3 className="text-xl font-bold text-white mb-3 relative z-10">อยากลองวิเคราะห์ลายมือของคุณด้วย AI?</h3>
-                            <p className="text-slate-300 text-sm mb-6 max-w-lg mx-auto relative z-10">ระบบ AI ของ NameMongkol อ่านเส้นชีวิต เส้นสมอง เส้นหัวใจ และเส้นวาสนา ให้คำแนะนำเชิงสร้างสรรค์ ฟรี 100%</p>
+                            <p className="text-slate-300 text-sm mb-6 max-w-lg mx-auto relative z-10">ระบบ AI ของ NameMongkol อ่านเส้นชีวิต เส้นสมอง เส้นหัวใจ และเส้นวาสนา พร้อมให้คำแนะนำเชิงสร้างสรรค์</p>
                             <Link href="/palm-analysis" className="inline-block px-8 py-3.5 bg-[#c9933a] hover:bg-[#d4a54e] text-white font-bold rounded-xl transition-all shadow-[0_0_24px_rgba(245,158,11,0.22)] hover:shadow-[0_0_32px_rgba(245,158,11,0.30)] hover:-translate-y-0.5 relative z-10">วิเคราะห์ลายมือฟรีที่นี่</Link>
                         </div>
                     )}
@@ -591,7 +591,7 @@ export default async function ArticlePage({ params }: Props) {
                                 <Link href="/about" className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
                                     <BookOpen size={12} className="text-[#c9933a]" /> เกี่ยวกับผู้เขียน
                                 </Link>
-                                <Link href="/" className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
+                                <Link href="/name-check" className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
                                     <ExternalLink size={12} className="text-[#c9933a]" /> วิเคราะห์ชื่อฟรี
                                 </Link>
                                 <Link href="/reviews" className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
@@ -608,10 +608,10 @@ export default async function ArticlePage({ params }: Props) {
                             อยากรู้ว่าชื่อของคุณดีแค่ไหน?
                         </p>
                         <p className="text-slate-300 mb-8 max-w-lg mx-auto relative z-10">
-                            วิเคราะห์ครบ 4 ศาสตร์: เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และกาลกิณี ฟรี 100%
+                            วิเคราะห์ครบ 4 ศาสตร์: เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และกาลกิณี
                         </p>
                         <Link
-                            href="/"
+                            href="/name-check"
                             className="inline-block bg-[#c9933a] text-white font-bold px-8 py-4 rounded-xl hover:bg-[#d4a54e] transition-all shadow-[0_0_24px_rgba(245,158,11,0.22)] hover:shadow-[0_0_32px_rgba(245,158,11,0.30)] hover:-translate-y-0.5 text-lg relative z-10"
                         >
                             วิเคราะห์ชื่อฟรีที่นี่
@@ -675,8 +675,8 @@ export default async function ArticlePage({ params }: Props) {
                             ให้บริการทั้งวิเคราะห์ชื่อฟรีและค้นหาชื่อมงคล Premium พร้อมวอลเปเปอร์มงคลเสริมดวง
                         </p>
                         <div className="flex flex-wrap gap-2">
-                            <Link href="/" className="text-xs bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:border-white/20 transition-all">
-                                วิเคราะห์ชื่อมงคล
+                            <Link href="/name-check" className="text-xs bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:border-white/20 transition-all">
+                                เช็คชื่อมงคลฟรี
                             </Link>
                             <Link href="/premium-search" className="text-xs bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:border-white/20 transition-all">
                                 ค้นหาชื่อมงคล Premium

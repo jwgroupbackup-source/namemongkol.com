@@ -57,7 +57,11 @@ export default function PhoneAnalysisPage() {
                     '@type': 'WebSite',
                     'name': 'NameMongkol',
                     'url': siteUrl
-                }
+                },
+                'speakable': {
+                    '@type': 'SpeakableSpecification',
+                    'cssSelector': ['h1', '#phone-faq'],
+                },
             },
             {
                 '@type': 'SoftwareApplication',

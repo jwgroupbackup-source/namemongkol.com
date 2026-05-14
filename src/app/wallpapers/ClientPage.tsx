@@ -90,7 +90,7 @@ const DAY_LABELS: Record<string, string> = {
 const buildWallpaperAlt = (wp: Wallpaper) => {
     const dayLabel = DAY_LABELS[wp.day] || 'เสริมดวง';
     const intent = wp.tags.slice(0, 3).join(', ');
-    return `วอลเปเปอร์มงคล ${wp.name} สำหรับ${dayLabel} ปี 2569 เสริมดวง ${intent} | NameMongkol`;
+    return `วอลเปเปอร์มงคล ${wp.name} สำหรับ${dayLabel} เสริมดวง ${intent} | NameMongkol`;
 };
 
 const classifyTrafficSource = (params: URLSearchParams): string => {

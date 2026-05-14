@@ -830,7 +830,7 @@ export default function SearchPage() {
                 )}
 
                 {/* FAQ Section */}
-                <div className="mt-16 mb-12 max-w-3xl mx-auto">
+                <div id="search-faq" className="mt-16 mb-12 max-w-3xl mx-auto">
                     <h2 className="text-2xl font-bold text-center text-amber-400 mb-8">
                         {t('pages.search.faqTitle')}
                     </h2>
