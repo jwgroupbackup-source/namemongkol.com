@@ -134,12 +134,12 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
 
     const baseMenuItems: MenuItem[] = [
         { key: 'analyze', nameKey: 'sidebar.analyzeName', icon: Home, iconImage: '/icon/วิเคราะห์ชื่อ.png', iconPadding: 'p-2.5', path: '/' },
-        { key: 'aura-analysis', nameKey: 'sidebar.auraAnalysis', icon: Sparkles, iconImage: '/icon/วิเคราะห์ออร่า.png', iconPadding: 'p-2.5', path: '/aura-analysis' },
-        { key: 'phone', nameKey: 'sidebar.phoneAnalysis', icon: Smartphone, iconImage: '/icon/วิเคราะห์เบอร์โทร.png', iconPadding: 'p-2', path: '/phone-analysis' },
-        { key: 'palm-analysis', nameKey: 'sidebar.palmAnalysis', icon: Hand, iconImage: '/icon/วิเคราะห์ลายมือ.png', iconPadding: 'p-2.5', path: '/palm-analysis' },
         { key: 'search', nameKey: 'sidebar.search', icon: Search, iconImage: '/icon/ค้นหาชื่อมงคล.png', iconPadding: 'p-2.5', path: '/search' },
         { key: 'premium-search', nameKey: 'sidebar.premiumSearch', icon: Sparkles, iconImage: '/icon/คัดสรรชื่อมงคล.png', iconPadding: 'p-2', path: '/premium-search' },
         { key: 'premium-analysis', nameKey: 'sidebar.premiumAnalysis', icon: Crown, iconImage: '/icon/ออกแบบชื่อมงคล.png', path: '/premium-analysis' },
+        { key: 'aura-analysis', nameKey: 'sidebar.auraAnalysis', icon: Sparkles, iconImage: '/icon/วิเคราะห์ออร่า.png', iconPadding: 'p-2.5', path: '/aura-analysis' },
+        { key: 'phone', nameKey: 'sidebar.phoneAnalysis', icon: Smartphone, iconImage: '/icon/วิเคราะห์เบอร์โทร.png', iconPadding: 'p-2', path: '/phone-analysis' },
+        { key: 'palm-analysis', nameKey: 'sidebar.palmAnalysis', icon: Hand, iconImage: '/icon/วิเคราะห์ลายมือ.png', iconPadding: 'p-2.5', path: '/palm-analysis' },
         { key: 'wallpapers', nameKey: 'sidebar.wallpapers', icon: ImageIcon, iconImage: '/icon/วอลเปเปอร์มงคล.png', iconPadding: 'p-2.5', path: '/wallpapers' },
         { key: 'reviews', nameKey: 'sidebar.reviews', icon: MessageCircle, iconImage: '/icon/รีวิวจากทางบ้าน.png', iconPadding: 'p-2.5', path: '/reviews' },
         { key: 'name-analysis', nameKey: 'sidebar.bulkNameFilter', icon: ClipboardList, iconImage: '/icon/ระบบคัดกรองชื่อ.png', iconPadding: 'p-2.5', path: '/name-analysis' },
@@ -447,7 +447,12 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                 <Link
                                     key={item.path}
                                     href={item.path}
-                                    onClick={() => onClose()}
+                                    onClick={() => {
+                                        if (item.path === '/') {
+                                            window.dispatchEvent(new Event('resetHomeForm'));
+                                        }
+                                        onClose();
+                                    }}
                                     className={`flex items-center gap-3 lg:gap-4 px-4 py-3 lg:px-5 lg:py-4 rounded-xl lg:rounded-2xl transition-all duration-200 group relative overflow-hidden ${isActive
                                         ? 'bg-gradient-to-r from-slate-100 to-slate-50 dark:from-white/10 dark:to-white/5 text-slate-900 dark:text-white shadow-lg shadow-black/5 dark:shadow-black/20 border border-slate-200 dark:border-white/10'
                                         : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-white hover:pl-6'

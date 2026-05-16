@@ -20,11 +20,6 @@ const WelcomeCreditModal = dynamic(() => import('./WelcomeCreditModal').then(mod
     ssr: false
 });
 
-const LiveTicker = dynamic(() => import('./LiveTicker').then(mod => mod.LiveTicker), {
-    ssr: false,
-    loading: () => null
-});
-
 
 export const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
@@ -66,7 +61,6 @@ export const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
                 {children}
             </div>
             <WelcomeCreditModal user={user} />
-            <LiveTicker />
             <BottomNav />
         </div>
     );

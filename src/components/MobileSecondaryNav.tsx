@@ -4,16 +4,20 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Home, Smartphone, BookOpen, Info, Hand, Sparkles } from 'lucide-react';
+import { Home, Smartphone, BookOpen, Info, Hand, Sparkles, Search, Crown, ImageIcon } from 'lucide-react';
 
 export const MobileSecondaryNav = () => {
     const pathname = usePathname();
 
     const navItems = [
         { name: 'วิเคราะห์ชื่อ', icon: Home, iconImage: '/icon/วิเคราะห์ชื่อ.png', path: '/' },
+        { name: 'ค้นหาชื่อมงคล', icon: Search, iconImage: '/icon/ค้นหาชื่อมงคล.png', path: '/search' },
+        { name: 'คัดสรรชื่อมงคล', icon: Sparkles, iconImage: '/icon/คัดสรรชื่อมงคล.png', path: '/premium-search' },
+        { name: 'ออกแบบชื่อมงคล', icon: Crown, iconImage: '/icon/ออกแบบชื่อมงคล.png', path: '/premium-analysis' },
         { name: 'วิเคราะห์ออร่า', icon: Sparkles, iconImage: '/icon/วิเคราะห์ออร่า.png', path: '/aura-analysis' },
         { name: 'วิเคราะห์เบอร์', icon: Smartphone, iconImage: '/icon/วิเคราะห์เบอร์โทร.png', path: '/phone-analysis' },
         { name: 'วิเคราะห์ลายมือ', icon: Hand, iconImage: '/icon/วิเคราะห์ลายมือ.png', path: '/palm-analysis' },
+        { name: 'วอลเปเปอร์มงคล', icon: ImageIcon, iconImage: '/icon/วอลเปเปอร์มงคล.png', path: '/wallpapers' },
         { name: 'บทความ', icon: BookOpen, path: '/articles' },
         { name: 'เกี่ยวกับเรา', icon: Info, iconImage: '/icon/เกี่ยวกับเรา.png', path: '/about' },
     ];
@@ -30,6 +34,11 @@ export const MobileSecondaryNav = () => {
                             <Link
                                 key={item.path}
                                 href={item.path}
+                                onClick={() => {
+                                    if (item.path === '/') {
+                                        window.dispatchEvent(new Event('resetHomeForm'));
+                                    }
+                                }}
                                 className={`flex items-center gap-1 px-2.5 py-1 rounded-lg whitespace-nowrap transition-all duration-300 border ${isActive
                                     ? 'bg-amber-500/15 text-amber-300 border-amber-500/35 shadow-[0_0_12px_rgba(201,147,58,0.3)]'
                                     : 'bg-slate-800/60 border-white/10 text-slate-300 hover:bg-slate-700/80 hover:text-white hover:border-white/25 active:scale-95'

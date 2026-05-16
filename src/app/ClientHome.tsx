@@ -104,7 +104,7 @@ function DeferredSection({
     }, [isVisible, rootMargin]);
 
     return (
-        <div ref={sectionRef} className={isVisible ? undefined : minHeightClassName}>
+        <div ref={sectionRef} className={minHeightClassName}>
             {isVisible ? children : null}
         </div>
     );
@@ -276,6 +276,15 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
         setSurname('');
         window.history.pushState({}, '', '/');
     }, []);
+
+    useEffect(() => {
+        const handleReset = () => {
+            resetForm();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        window.addEventListener('resetHomeForm', handleReset);
+        return () => window.removeEventListener('resetHomeForm', handleReset);
+    }, [resetForm]);
 
     const { t } = useLanguage();
 
