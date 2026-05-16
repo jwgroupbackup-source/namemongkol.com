@@ -62,6 +62,7 @@ import {
     getWallpaperCost,
     buildWallpaperAlt,
     classifyTrafficSource,
+    ZODIAC_IDS,
 } from '@/data/wallpapers';
 
 // Types

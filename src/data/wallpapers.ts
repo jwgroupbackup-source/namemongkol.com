@@ -92,7 +92,7 @@ export const ZODIAC_WALLPAPERS: Wallpaper[] = [
     { id: 1012, name: 'ราศีมีน', image: '/wallpapers/ราศีมีน.webp', day: 'pisces', tags: ['ราศีมีน', 'จิตวิญญาณ', 'เมตตา', 'ญาณทิพย์'], premium: true, downloads: 0, description: 'วอลเปเปอร์มงคลราศีมีน: ผสานพลังพระโพสิดอน (เทพเจ้าแห่งท้องทะเลและพลังจิต) กับสัญลักษณ์ปลาคู่ทองคำของราศีมีน ตัวแทนแห่งญาณทิพย์ พลังจิตวิญญาณ และเมตตาบารมีอันยิ่งใหญ่ รหัสเลขมงคลช่วยเชื่อมต่อพลังงานจักรวาลและดึงดูดสิ่งดีๆ ภาพใช้โทนสีฟ้าครามลึก เขียวมรกต และทองคำ สื่อถึงมหาสมุทรแห่งจิตวิญญาณ เหมาะสำหรับผู้เกิดราศีมีน (14 มี.ค. – 13 เม.ย.) ที่ต้องการเสริมญาณทิพย์ ความสงบสุขภายใน และดึงดูดพลังงานบวกจากจักรวาลเข้ามาในชีวิต' },
 ];
 
-const ZODIAC_IDS = new Set(ZODIAC_WALLPAPERS.map(w => w.id));
+export const ZODIAC_IDS = new Set(ZODIAC_WALLPAPERS.map(w => w.id));
 export const getWallpaperCost = (wallpaper: Wallpaper) => ZODIAC_IDS.has(wallpaper.id) ? 10 : 15;
 
 export const buildWallpaperAlt = (wp: Wallpaper) => {
