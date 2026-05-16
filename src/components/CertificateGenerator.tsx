@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import { Download, Award, Sparkles, Loader2, Share2, X, Coins } from 'lucide-react';
+import Image from 'next/image';
+import { Download, Award, Sparkles, Loader2, Share2, X } from 'lucide-react';
 
 import { analyzePairs } from '@/utils/analyzePairs';
 import { supabase } from '@/utils/supabase';
@@ -51,7 +52,7 @@ export const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({
     const [isGenerating, setIsGenerating] = useState(false);
     const [showCertificate, setShowCertificate] = useState(false);
     const [user, setUser] = useState<User | null>(null);
-    const [credits, setCredits] = useState<number | null>(null);
+    const [, setCredits] = useState<number | null>(null);
 
     const currentDate = new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
     const gs = gradeColors[grade] || gradeColors['B'];
@@ -338,7 +339,13 @@ export const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({
 
                         <div style={{ position: 'relative', zIndex: 10, padding: '16px 18px 14px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginBottom: '2px' }}>
-                                <img src="/icon-192.png" alt="โลโก้ NameMongkol - วิเคราะห์ชื่อมงคล" style={{ width: '20px', height: '20px', borderRadius: '4px', boxShadow: '0 2px 6px rgba(245,158,11,0.3)' }} />
+                                <Image
+                                    src="/icon-192.png"
+                                    alt="โลโก้ NameMongkol - วิเคราะห์ชื่อมงคล"
+                                    width={20}
+                                    height={20}
+                                    style={{ borderRadius: '4px', boxShadow: '0 2px 6px rgba(245,158,11,0.3)' }}
+                                />
                                 <span style={{ fontSize: '13px', fontWeight: 'bold', color: '#fbbf24' }}>NameMongkol</span>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', width: '75%', marginBottom: '10px' }}>

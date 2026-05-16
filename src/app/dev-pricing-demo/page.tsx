@@ -159,11 +159,11 @@ export default function DevPricingDemo() {
                                     <div className="w-3 h-3 rounded-full bg-emerald-500/80"></div>
                                 </div>
                                 <div className="pt-8 text-zinc-300 space-y-2">
-                                    <p><span className="text-pink-400">import</span> {'{'} Client {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-400">'@devtool/sdk'</span>;</p>
+                                    <p><span className="text-pink-400">import</span> {'{'} Client {'}'} <span className="text-pink-400">from</span> <span className="text-emerald-400">{"'@devtool/sdk'"}</span>;</p>
                                     <br/>
                                     <p><span className="text-pink-400">const</span> db = <span className="text-pink-400">new</span> <span className="text-cyan-400">Client</span>({'{'} apiKey: process.env.API_KEY {'}'});</p>
                                     <br/>
-                                    <p><span className="text-zinc-500">// Initialize connection instantly</span></p>
+                                    <p><span className="text-zinc-500">{'// Initialize connection instantly'}</span></p>
                                     <p><span className="text-pink-400">await</span> db.<span className="text-cyan-400">connect</span>();</p>
                                 </div>
                             </div>

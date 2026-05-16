@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { createClient } from '@supabase/supabase-js'
 import { articles as localArticles } from '@/data/articles'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 // Popular names for meaning pages (SEO-important pages — topical cluster for "วิเคราะห์ชื่อมงคล")
 const popularNames = [

@@ -1,11 +1,14 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Sparkles, ArrowRight, Download } from 'lucide-react';
 import Image from 'next/image';
-import { supabase } from '@/utils/supabase';
 
+export interface WallpaperShowcaseStat {
+    id: number;
+    downloads: number;
+}
 
 const INITIAL_WALLPAPERS = [
     { id: 1, name: 'สิงห์ทองนำโชค (วันอาทิตย์)', image: '/wallpapers/sunday.webp', day: 'sunday', downloads: 2540 },
@@ -14,31 +17,15 @@ const INITIAL_WALLPAPERS = [
     { id: 4, name: 'พระแม่ลักษมี เรียกทรัพย์ (พุธกลางวัน)', image: '/wallpapers/Wednesday_lunch.webp', day: 'wednesday', downloads: 2100 },
 ];
 
-export const WallpaperShowcase = () => {
-    const [wallpapers, setWallpapers] = useState(INITIAL_WALLPAPERS);
+type WallpaperShowcaseProps = {
+    stats?: WallpaperShowcaseStat[];
+};
 
-    useEffect(() => {
-        const fetchWallpapers = async () => {
-            const { data } = await supabase
-                .from('wallpapers')
-                .select('*')
-                .in('id', [1, 2, 3, 4]);
-
-            if (data && data.length > 0) {
-                // Map DB data to UI format if needed, primarily updating downloads
-                // We preserve the shorter names from INITIAL_WALLPAPERS for design if we want, 
-                // but let's try using the real DB names or just updating stats.
-                // For now, let's just update the downloads count to match reality.
-                const merged = INITIAL_WALLPAPERS.map(initWp => {
-                    const dbWp = data.find(d => d.id === initWp.id);
-                    return dbWp ? { ...initWp, downloads: dbWp.downloads } : initWp;
-                });
-                setWallpapers(merged);
-            }
-        };
-
-        fetchWallpapers();
-    }, []);
+export const WallpaperShowcase = ({ stats = [] }: WallpaperShowcaseProps) => {
+    const wallpapers = INITIAL_WALLPAPERS.map((initial) => {
+        const stat = stats.find((item) => item.id === initial.id);
+        return stat ? { ...initial, downloads: stat.downloads } : initial;
+    });
 
     return (
         <div className="w-full max-w-5xl mx-auto mt-4 md:mt-16 mb-8 px-4">

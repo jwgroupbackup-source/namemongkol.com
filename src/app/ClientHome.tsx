@@ -27,6 +27,8 @@ import { HeroBanner } from '@/components/HeroBanner';
 import { HomeFallback } from '@/components/HomeFallback';
 import { NumerologyDecodeTable } from '@/components/NumerologyDecodeTable';
 import { useLanguage } from '@/components/LanguageProvider';
+import type { WallpaperShowcaseStat } from '@/components/WallpaperShowcase';
+import type { ArticleSectionItem } from '@/components/ArticleSection';
 
 // Dynamic Imports for heavy components below the fold or conditional
 const WallpaperShowcase = dynamic(() => import('@/components/WallpaperShowcase').then(mod => mod.WallpaperShowcase), {
@@ -54,6 +56,60 @@ type ClientHomeProps = {
     heroHeadingLevel?: 'h1' | 'h2';
 };
 
+type HomeSectionsData = {
+    wallpapers: WallpaperShowcaseStat[];
+    articles: ArticleSectionItem[];
+};
+
+type HomeSectionsApiResponse = {
+    success: boolean;
+    data: HomeSectionsData;
+};
+
+type WindowWithIdleCallback = Window & {
+    requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+    cancelIdleCallback?: (handle: number) => void;
+};
+
+type DeferredSectionProps = {
+    children: React.ReactNode;
+    minHeightClassName?: string;
+    rootMargin?: string;
+};
+
+function DeferredSection({
+    children,
+    minHeightClassName = 'min-h-[280px]',
+    rootMargin = '500px 0px',
+}: DeferredSectionProps) {
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        const element = sectionRef.current;
+        if (!element || isVisible) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { rootMargin },
+        );
+
+        observer.observe(element);
+        return () => observer.disconnect();
+    }, [isVisible, rootMargin]);
+
+    return (
+        <div ref={sectionRef} className={isVisible ? undefined : minHeightClassName}>
+            {isVisible ? children : null}
+        </div>
+    );
+}
+
 function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
     const searchParams = useSearchParams();
     const initialName = searchParams.get('name') ?? '';
@@ -66,12 +122,46 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
     const [result, setResult] = useState<AnalysisResult | null>(null);
     const [loading, setLoading] = useState(false);
     const [isPremiumUnlocked, setIsPremiumUnlocked] = useState(false);
+    const [homeSectionsData, setHomeSectionsData] = useState<HomeSectionsData>({
+        wallpapers: [],
+        articles: [],
+    });
+    const [homeSectionsLoading, setHomeSectionsLoading] = useState(false);
     const didInitFromParams = useRef(false);
+    const didFetchHomeSections = useRef(false);
+    const analysisRequestIdRef = useRef(0);
+
+    const fetchHomeSections = useCallback(async () => {
+        setHomeSectionsLoading(true);
+        try {
+            const response = await fetch('/api/public/home-sections', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            });
+
+            if (!response.ok) return;
+
+            const json = (await response.json()) as HomeSectionsApiResponse;
+            if (!json.success || !json.data) return;
+
+            setHomeSectionsData({
+                wallpapers: json.data.wallpapers ?? [],
+                articles: json.data.articles ?? [],
+            });
+        } catch {
+            // Use local defaults from each section when fetch fails.
+        } finally {
+            setHomeSectionsLoading(false);
+        }
+    }, []);
 
     const performAnalysis = useCallback(async (inputName: string, inputSurname: string, inputDay: string) => {
         if (!inputName.trim()) return;
 
+        const requestId = ++analysisRequestIdRef.current;
         setLoading(true);
+
+        const nirunPromise = checkNirunName(inputName).catch(() => false);
 
         const nameScore = calculateScore(inputName);
         const surnameScore = calculateScore(inputSurname);
@@ -81,13 +171,6 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
         const surnamePairs = analyzePairs(inputSurname);
         const cleanName = inputName.replace(/\s/g, '');
         const cleanSurname = inputSurname.replace(/\s/g, '');
-
-        // Parallel execution for server check and local calculations
-        const [isNirun] = await Promise.all([
-            checkNirunName(inputName),
-            // Artificial delay to minimalize flicker if needed
-            new Promise(resolve => setTimeout(resolve, 300))
-        ]);
 
         // Get predictions
         const namePrediction = getPrediction(nameScore);
@@ -110,25 +193,36 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
             nameGrade: calculateGrade(nameScore, namePairs),
             surnameGrade: (surnamePairs.length > 0 && surnamePairs.every(p => p.grade === 'good')) ? 'A+' : calculateGrade(surnameScore, surnamePairs),
             grade: calculateGrade(totalScore, [...namePairs, ...surnamePairs]),
-            isNirun: isNirun
+            isNirun: false,
         };
+
+        if (requestId !== analysisRequestIdRef.current) return;
 
         setResult(newResult);
         setLoading(false);
 
+        void nirunPromise.then((isNirun) => {
+            if (requestId !== analysisRequestIdRef.current) return;
+
+            setResult((prev) => {
+                if (!prev) return prev;
+                if (prev.name !== inputName || prev.surname !== inputSurname) return prev;
+                if (prev.isNirun === isNirun) return prev;
+                return { ...prev, isNirun };
+            });
+        });
+
         // Auto-save to Supabase
-        try {
-            await saveAnalysisResult({
+        void saveAnalysisResult({
                 name: inputName,
                 surname: inputSurname,
                 day: inputDay,
                 nameScore,
                 surnameScore,
                 totalScore
+            }).catch((error) => {
+                console.error('Failed to auto-save:', error);
             });
-        } catch (error) {
-            console.error('Failed to auto-save:', error);
-        }
     }, []);
 
     // Handle URL params on first mount
@@ -143,6 +237,34 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
             }, 0);
         }
     }, [performAnalysis, initialName, initialSurname, initialDay]);
+
+    useEffect(() => {
+        if (result || didFetchHomeSections.current) return;
+        didFetchHomeSections.current = true;
+
+        const windowWithIdle = window as WindowWithIdleCallback;
+        let timeoutId: number | null = null;
+        let idleId: number | null = null;
+
+        const run = () => {
+            void fetchHomeSections();
+        };
+
+        if (windowWithIdle.requestIdleCallback) {
+            idleId = windowWithIdle.requestIdleCallback(run, { timeout: 1200 });
+        } else {
+            timeoutId = window.setTimeout(run, 450);
+        }
+
+        return () => {
+            if (idleId !== null && windowWithIdle.cancelIdleCallback) {
+                windowWithIdle.cancelIdleCallback(idleId);
+            }
+            if (timeoutId !== null) {
+                window.clearTimeout(timeoutId);
+            }
+        };
+    }, [fetchHomeSections, result]);
 
     const handleAnalyzeClick = useCallback(() => {
         performAnalysis(name, surname, day);
@@ -251,17 +373,42 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
 
             {!result && (
                 <>
-                    <WallpaperShowcase />
-                    <BulkAnalysisBanner />
-                    <UspSection />
-                    <HowItWorksSection />
-                    <ComparisonSection />
-                    <HomeSeoContent />
-                    <BirthdayThaksaSection />
-                    <KnowledgeSection />
-                    <TestimonialSection />
-                    <FAQSection />
-                    <ArticleSection />
+                    <DeferredSection minHeightClassName="min-h-[420px]">
+                        <WallpaperShowcase stats={homeSectionsData.wallpapers} />
+                    </DeferredSection>
+                    <DeferredSection minHeightClassName="min-h-[320px]">
+                        <BulkAnalysisBanner />
+                    </DeferredSection>
+                    <DeferredSection minHeightClassName="min-h-[300px]">
+                        <UspSection />
+                    </DeferredSection>
+                    <DeferredSection minHeightClassName="min-h-[320px]">
+                        <HowItWorksSection />
+                    </DeferredSection>
+                    <DeferredSection minHeightClassName="min-h-[320px]">
+                        <ComparisonSection />
+                    </DeferredSection>
+                    <DeferredSection minHeightClassName="min-h-[280px]">
+                        <HomeSeoContent />
+                    </DeferredSection>
+                    <DeferredSection minHeightClassName="min-h-[360px]">
+                        <BirthdayThaksaSection />
+                    </DeferredSection>
+                    <DeferredSection minHeightClassName="min-h-[320px]">
+                        <KnowledgeSection />
+                    </DeferredSection>
+                    <DeferredSection minHeightClassName="min-h-[260px]">
+                        <TestimonialSection />
+                    </DeferredSection>
+                    <DeferredSection minHeightClassName="min-h-[260px]">
+                        <FAQSection />
+                    </DeferredSection>
+                    <DeferredSection minHeightClassName="min-h-[420px]">
+                        <ArticleSection
+                            articles={homeSectionsData.articles}
+                            loading={homeSectionsLoading}
+                        />
+                    </DeferredSection>
                 </>
             )}
 

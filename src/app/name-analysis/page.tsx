@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Script from 'next/script';
+import Link from 'next/link';
 import ClientPage from './ClientPage';
 import { siteUrl } from '@/lib/seo';
 
@@ -234,33 +235,33 @@ export default function NameAnalysisPage() {
                         บริการอื่นๆ ที่เกี่ยวข้อง
                     </p>
                     <div className="flex flex-wrap gap-2">
-                        <a href="/" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        <Link href="/" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             วิเคราะห์ชื่อ-นามสกุล (ฟรี)
-                        </a>
-                        <a href="/about" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        </Link>
+                        <Link href="/about" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             เกี่ยวกับ NameMongkol
-                        </a>
-                        <a href="/name-generator" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        </Link>
+                        <Link href="/name-generator" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             สร้างชื่อมงคล AI
-                        </a>
-                        <a href="/search" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        </Link>
+                        <Link href="/search" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             ค้นหาชื่อมงคลฟรี 5,000+ ชื่อ
-                        </a>
-                        <a href="/premium-search" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        </Link>
+                        <Link href="/premium-search" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             ค้นหาชื่อมงคล Pro
-                        </a>
-                        <a href="/premium-analysis" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        </Link>
+                        <Link href="/premium-analysis" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             วิเคราะห์ชื่อขั้นสูง (Premium)
-                        </a>
-                        <a href="/phone-analysis" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        </Link>
+                        <Link href="/phone-analysis" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             เช็คเบอร์มงคลกราฟพลังงาน 6 ด้าน
-                        </a>
-                        <a href="/palm-analysis" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        </Link>
+                        <Link href="/palm-analysis" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             วิเคราะห์ลายมือออนไลน์ด้วย AI
-                        </a>
-                        <a href="/wallpapers" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        </Link>
+                        <Link href="/wallpapers" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             วอลเปเปอร์มงคลเสริมดวง ดาวน์โหลดฟรี
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -76,12 +76,15 @@ const analysisMessages = (stats: LiveStats | null): TickerMessage => {
     };
 };
 
-const gradeMessages = (_stats: LiveStats | null): TickerMessage => {
+const gradeMessages = (stats: LiveStats | null): TickerMessage => {
     const grade = pick(grades);
     const templates = [
         () => `${getRandomName()} ได้ชื่อเกรด ${grade} !`,
         () => `ชื่อเกรด ${grade} — วิเคราะห์${timeAgo()}`,
         () => `ผลวิเคราะห์ล่าสุด: เกรด ${grade}`,
+        ...(stats && stats.counts.analysis > 0
+            ? [() => `ผลวิเคราะห์ใหม่ ${stats.counts.analysis} รายการล่าสุด`]
+            : []),
     ];
     return {
         id: Date.now() + Math.random(),
@@ -109,17 +112,18 @@ const onlineMessages = (stats: LiveStats | null): TickerMessage => {
     };
 };
 
-const reviewMessages = (_stats: LiveStats | null): TickerMessage => {
+const reviewMessages = (stats: LiveStats | null): TickerMessage => {
     const ratings = [5, 5, 5, 4, 5, 4];
     const stars = pick(ratings);
     const snippets = [
         'แม่นมาก!', 'ดีเกินคาด', 'คุ้มค่ามากค่ะ', 'ชอบมาก',
         'ละเอียดดี', 'จะกลับมาอีก', 'แนะนำเลย', 'เจ๋งมาก!',
     ];
+    const reviewSuffix = stats && stats.counts.total > 0 ? ` • อัปเดตล่าสุด` : '';
     return {
         id: Date.now() + Math.random(),
         type: 'review',
-        message: `"${pick(snippets)}" — ${'⭐'.repeat(stars)}`,
+        message: `"${pick(snippets)}" — ${'⭐'.repeat(stars)}${reviewSuffix}`,
         icon: Heart,
         color: 'text-pink-400',
     };
@@ -236,8 +240,10 @@ const DISMISS_KEY = 'liveTicker_dismissed';
 export const LiveTicker: React.FC = () => {
     const [currentMessage, setCurrentMessage] = useState<TickerMessage | null>(null);
     const [isVisible, setIsVisible] = useState(false);
-    const [isClient, setIsClient] = useState(false);
-    const [isDismissed, setIsDismissed] = useState(false);
+    const [isDismissed, setIsDismissed] = useState(() => {
+        if (typeof window === 'undefined') return false;
+        return sessionStorage.getItem(DISMISS_KEY) === '1';
+    });
     const [liveStats, setLiveStats] = useState<LiveStats | null>(null);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const lastTypeRef = useRef<MessageType | null>(null);
@@ -247,13 +253,6 @@ export const LiveTicker: React.FC = () => {
     useEffect(() => {
         liveStatsRef.current = liveStats;
     }, [liveStats]);
-
-    useEffect(() => {
-        setIsClient(true);
-        if (sessionStorage.getItem(DISMISS_KEY) === '1') {
-            setIsDismissed(true);
-        }
-    }, []);
 
     // Fetch live stats on mount and every 60 seconds
     useEffect(() => {
@@ -303,7 +302,7 @@ export const LiveTicker: React.FC = () => {
     }, [isDismissed]);
 
     useEffect(() => {
-        if (!isClient || isDismissed) return;
+        if (isDismissed) return;
 
         // Initial delay: 3–6 seconds (don't show immediately)
         const initialDelay = 3000 + Math.random() * 3000;
@@ -328,9 +327,9 @@ export const LiveTicker: React.FC = () => {
             clearTimeout(nextTimeout);
             if (timeoutRef.current) clearTimeout(timeoutRef.current);
         };
-    }, [showNextMessage, isClient, isDismissed]);
+    }, [showNextMessage, isDismissed]);
 
-    if (!isClient || !currentMessage || isDismissed) return null;
+    if (!currentMessage || isDismissed) return null;
 
     const IconComponent = currentMessage.icon;
 

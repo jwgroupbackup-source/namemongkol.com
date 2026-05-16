@@ -28,6 +28,7 @@ const getTierBadgeStyles = (tier: MemberTier) => {
 };
 
 export const TopNav = () => {
+    const [isDesktop, setIsDesktop] = useState(false);
     const [user, setUser] = useState<User | null>(null);
     const [credits, setCredits] = useState<number | null>(null);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -38,6 +39,18 @@ export const TopNav = () => {
     const router = useRouter();
     const menuRef = React.useRef<HTMLDivElement>(null);
     const { t } = useLanguage();
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(min-width: 1024px)');
+        const updateDesktopState = () => setIsDesktop(mediaQuery.matches);
+
+        updateDesktopState();
+        mediaQuery.addEventListener('change', updateDesktopState);
+
+        return () => {
+            mediaQuery.removeEventListener('change', updateDesktopState);
+        };
+    }, []);
 
     const fetchUserInfo = async (userId: string) => {
         const { data, error } = await supabase
@@ -70,6 +83,8 @@ export const TopNav = () => {
     };
 
     useEffect(() => {
+        if (!isDesktop) return;
+
         const getUser = async () => {
             const { data: { user } } = await supabase.auth.getUser();
             setUser(user);
@@ -94,9 +109,11 @@ export const TopNav = () => {
         return () => {
             subscription.unsubscribe();
         };
-    }, []);
+    }, [isDesktop]);
 
     useEffect(() => {
+        if (!isDesktop) return;
+
         const handleCreditUpdate = () => {
             if (user) fetchUserInfo(user.id);
         };
@@ -105,10 +122,12 @@ export const TopNav = () => {
         return () => {
             window.removeEventListener('force_credits_update', handleCreditUpdate);
         };
-    }, [user]);
+    }, [isDesktop, user]);
 
     // Close dropdown when clicking outside
     useEffect(() => {
+        if (!isDesktop) return;
+
         const handleClickOutside = (event: MouseEvent) => {
             if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
                 setIsOpen(false);
@@ -119,7 +138,7 @@ export const TopNav = () => {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, []);
+    }, [isDesktop]);
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
@@ -130,7 +149,7 @@ export const TopNav = () => {
     // Only show on desktop (hidden on mobile/tablet)
     // Adjust breakpoint to match Sidebar (lg)
     // Hide on Auth pages to prevent overlap
-    if (pathname === '/login' || pathname === '/register') return null;
+    if (!isDesktop || pathname === '/login' || pathname === '/register') return null;
 
     return (
         <div className="hidden lg:flex fixed top-4 right-6 z-50 items-center gap-6">

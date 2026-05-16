@@ -1,21 +1,14 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Cookie, X } from 'lucide-react';
+import { Cookie } from 'lucide-react';
 
 export default function CookieConsent() {
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-        // Check if user has already consented
-        const consented = localStorage.getItem('cookieConsent');
-        if (!consented) {
-            // Show banner after a small delay for better UX
-            const timer = setTimeout(() => setIsVisible(true), 1000);
-            return () => clearTimeout(timer);
-        }
-    }, []);
+    const [isVisible, setIsVisible] = useState(() => {
+        if (typeof window === 'undefined') return false;
+        return !localStorage.getItem('cookieConsent');
+    });
 
     const handleAccept = () => {
         localStorage.setItem('cookieConsent', 'true');

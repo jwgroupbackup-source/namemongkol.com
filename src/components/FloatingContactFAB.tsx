@@ -20,9 +20,6 @@ const contacts = [
 
 export const FloatingContactFAB = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => { setMounted(true); }, []);
 
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
         if (e.key === 'Escape') setIsOpen(false);
@@ -34,8 +31,6 @@ export const FloatingContactFAB = () => {
             return () => document.removeEventListener('keydown', handleKeyDown);
         }
     }, [isOpen, handleKeyDown]);
-
-    if (!mounted) return null;
 
     return (
         <>

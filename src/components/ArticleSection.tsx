@@ -1,58 +1,60 @@
 
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { BookOpen, ArrowRight, Calendar, User } from 'lucide-react';
-import { supabase } from '@/utils/supabase';
 import { ArticleImage } from './ArticleImage';
 import { useLanguage } from './LanguageProvider';
 
-// Define the interface locally or import from types if available
-interface Article {
+export interface ArticleSectionItem {
     id: string;
     slug: string;
     title: string;
     excerpt: string;
-    cover_image: string; // DB uses snake_case
-    coverImage?: string; // Fallback for older static data if mixed (though we are fully migrating)
+    cover_image: string;
+    coverImage?: string;
     date: string;
     author: string;
     category: string;
 }
 
-export const ArticleSection: React.FC = () => {
-    const [recentArticles, setRecentArticles] = useState<Article[]>([]);
-    const [loading, setLoading] = useState(true);
+type ArticleSectionProps = {
+    articles?: ArticleSectionItem[];
+    loading?: boolean;
+};
+
+export const ArticleSection: React.FC<ArticleSectionProps> = ({
+    articles = [],
+    loading = false,
+}) => {
     const { t } = useLanguage();
 
-    useEffect(() => {
-        const fetchArticles = async () => {
-            try {
-                const { data, error } = await supabase
-                    .from('articles')
-                    .select('*')
-                    .eq('is_published', true)
-                    .order('date', { ascending: false }) // Latest first
-                    .limit(3);
-
-                if (error) throw error;
-                if (data) setRecentArticles(data);
-            } catch (error) {
-                console.error('Error fetching recent articles:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchArticles();
-    }, []);
-
     if (loading) {
-        return null; // or a skeleton loader
+        return (
+            <section className="py-16 px-4 md:px-8 relative overflow-hidden" aria-busy="true" aria-live="polite">
+                <div className="max-w-6xl mx-auto relative z-10">
+                    <div className="h-6 w-56 rounded bg-slate-700/40 animate-pulse mb-3" />
+                    <div className="h-4 w-80 max-w-full rounded bg-slate-700/30 animate-pulse mb-10" />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {Array.from({ length: 3 }).map((_, idx) => (
+                            <div key={idx} className="rounded-2xl overflow-hidden border border-white/5 bg-slate-900/30">
+                                <div className="h-48 w-full bg-slate-700/40 animate-pulse" />
+                                <div className="p-5 space-y-3">
+                                    <div className="h-3 w-28 rounded bg-slate-700/40 animate-pulse" />
+                                    <div className="h-5 w-5/6 rounded bg-slate-700/40 animate-pulse" />
+                                    <div className="h-4 w-full rounded bg-slate-700/30 animate-pulse" />
+                                    <div className="h-4 w-2/3 rounded bg-slate-700/30 animate-pulse" />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
     }
 
-    if (recentArticles.length === 0) {
+    if (articles.length === 0) {
         return null; // Don't show section if no articles
     }
 
@@ -89,7 +91,7 @@ export const ArticleSection: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {recentArticles.map((article) => (
+                    {articles.map((article) => (
                         <Link
                             key={article.id}
                             href={`/articles/${article.slug}`}
