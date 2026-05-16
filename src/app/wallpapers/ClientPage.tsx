@@ -64,7 +64,8 @@ import {
     classifyTrafficSource,
 } from '@/data/wallpapers';
 
-// Tab types
+// Types
+type CategoryType = 'day' | 'zodiac';
 type TabType = 'collection' | 'custom';
 
 export interface WallpaperPageProps {
