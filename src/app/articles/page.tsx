@@ -228,7 +228,7 @@ export default async function ArticlesPage() {
         'isPartOf': { '@id': 'https://www.namemongkol.com/#website' },
         'publisher': { '@id': 'https://www.namemongkol.com/#organization' },
         'inLanguage': 'th-TH',
-        'dateModified': new Date().toISOString(),
+        'dateModified': (() => { const dates = articles.map(a => { try { return new Date(a.date).getTime(); } catch { return 0; } }).filter(d => d > 0); return dates.length ? new Date(Math.max(...dates)).toISOString() : new Date().toISOString(); })(),
         // speakable: tells AI assistants which CSS selectors contain the most important content
         'speakable': {
             '@type': 'SpeakableSpecification',
@@ -580,6 +580,51 @@ export default async function ArticlesPage() {
                                             <span className="text-purple-400 font-bold">วันเสาร์:</span> ฎ ฏ ฐ ฑ ฒ ณ
                                         </div>
                                     </div>
+                                </div>
+                            </details>
+
+                            <details className="bg-slate-800/40 border border-slate-700/50 rounded-xl overflow-hidden group">
+                                <summary className="p-5 cursor-pointer font-medium text-white hover:bg-slate-700/30 transition-colors flex items-center justify-between">
+                                    <span>ทักษาปกรณ์ มีหลักอะไรบ้าง?</span>
+                                    <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div className="p-5 pt-0 text-slate-300 leading-relaxed">
+                                    <p><strong>ทักษาปกรณ์</strong> เป็นตำราโบราณที่แบ่งอักษรไทยออกเป็น 8 หมวด ตามวันเกิด:</p>
+                                    <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                        <div className="bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-lg text-center">
+                                            <span className="text-emerald-400 font-bold block mb-1">🤝 บริวาร</span>
+                                            ลูกหลาน คู่ครอง
+                                        </div>
+                                        <div className="bg-pink-500/10 border border-pink-500/20 p-3 rounded-lg text-center">
+                                            <span className="text-pink-400 font-bold block mb-1">🌸 ศรี</span>
+                                            โชคลาภ สำเร็จ
+                                        </div>
+                                        <div className="bg-purple-500/10 border border-purple-500/20 p-3 rounded-lg text-center">
+                                            <span className="text-purple-400 font-bold block mb-1">👑 เดช</span>
+                                            อำนาจ เกียรติยศ
+                                        </div>
+                                        <div className="bg-teal-500/10 border border-teal-500/20 p-3 rounded-lg text-center">
+                                            <span className="text-teal-400 font-bold block mb-1">💚 อายุ</span>
+                                            สุขภาพ อายุยืน
+                                        </div>
+                                        <div className="bg-blue-500/10 border border-blue-500/20 p-3 rounded-lg text-center">
+                                            <span className="text-blue-400 font-bold block mb-1">🏛️ มนตรี</span>
+                                            ผู้ใหญ่อุปถัมภ์
+                                        </div>
+                                        <div className="bg-red-500/10 border border-red-500/20 p-3 rounded-lg text-center">
+                                            <span className="text-red-400 font-bold block mb-1">⛔ กาลกิณี</span>
+                                            อักษรต้องห้าม
+                                        </div>
+                                        <div className="bg-amber-500/10 border border-amber-500/20 p-3 rounded-lg text-center">
+                                            <span className="text-amber-400 font-bold block mb-1">💪 อุตสาหะ</span>
+                                            ความขยัน มานะ
+                                        </div>
+                                        <div className="bg-yellow-500/10 border border-yellow-500/20 p-3 rounded-lg text-center">
+                                            <span className="text-yellow-400 font-bold block mb-1">💰 มูละ</span>
+                                            ทรัพย์สิน มรดก
+                                        </div>
+                                    </div>
+                                    <p className="mt-4 text-sm">แต่ละวันเกิดจะมีอักษรที่เหมาะสมต่างกัน ต้องตรวจสอบว่าอักษรนำในชื่อตรงกับหมวดที่ต้องการเสริม</p>
                                 </div>
                             </details>
 

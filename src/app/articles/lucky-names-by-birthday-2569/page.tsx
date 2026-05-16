@@ -1,11 +1,12 @@
 
 import Link from 'next/link';
 import Script from 'next/script';
-import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
+import { ArrowLeft, Calendar, User, Tag, RefreshCw, Award } from 'lucide-react';
 import { Metadata } from 'next';
 import { ArticleImage } from '@/components/ArticleImage';
 import dynamic from 'next/dynamic';
 import { articleNameByBirthday } from '@/data/article-name-by-birthday';
+import { articles as localArticles } from '@/data/articles';
 
 const ArticleShareButtons = dynamic(() => import('@/components/ArticleShareButtons').then(mod => mod.ArticleShareButtons), {
     loading: () => <div className="h-10 w-24 bg-slate-800/50 rounded-full animate-pulse" />,
@@ -82,11 +83,11 @@ export default function ArticleLuckyNamesByBirthday2569() {
     } : null;
 
     return (
-        <div className="min-h-screen bg-[#0f172a] text-slate-100 font-sans selection:bg-purple-500 selection:text-white relative overflow-hidden pb-28">
+        <div className="min-h-screen bg-[#050711] text-slate-100 font-sans selection:bg-amber-500 selection:text-white relative overflow-hidden pb-28">
             {/* Background Decor */}
             <div className="absolute top-0 left-0 w-full h-[600px] overflow-hidden pointer-events-none">
-                <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px]"></div>
-                <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
+                <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#c9933a]/5 rounded-full blur-[120px]"></div>
+                <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-amber-600/5 rounded-full blur-[120px]"></div>
             </div>
 
             {/* Article Schema */}
@@ -100,9 +101,19 @@ export default function ArticleLuckyNamesByBirthday2569() {
                         "headline": article.metaTitle || article.title,
                         "description": article.metaDescription || article.excerpt,
                         "image": article.coverImage?.startsWith('http') ? article.coverImage : `${baseUrl}${article.coverImage}`,
-                        "datePublished": article.date,
-                        "dateModified": article.dateModified || article.date,
-                        "author": [{ "@type": "Person", "name": article.author, "url": baseUrl }],
+                        "datePublished": (() => { try { return new Date(article.date).toISOString(); } catch { return article.date; } })(),
+                        "dateModified": (() => { try { return new Date(article.dateModified || article.date).toISOString(); } catch { return article.dateModified || article.date; } })(),
+                        "author": [{
+                            "@type": "Person",
+                            "name": article.author,
+                            "url": `${baseUrl}/about`,
+                            "jobTitle": "นักวิเคราะห์ชื่อมงคลและเลขศาสตร์",
+                            "affiliation": {
+                                "@type": "Organization",
+                                "name": "NameMongkol",
+                                "url": baseUrl
+                            }
+                        }],
                         "publisher": {
                             "@type": "Organization",
                             "name": "NameMongkol",
@@ -140,7 +151,7 @@ export default function ArticleLuckyNamesByBirthday2569() {
                             <li className="text-slate-600">/</li>
                             <li><Link href="/articles" className="hover:text-white transition-colors">บทความ</Link></li>
                             <li className="text-slate-600">/</li>
-                            <li className="text-purple-400 font-medium truncate max-w-[200px] md:max-w-none">{article.title}</li>
+                            <li className="text-amber-400 font-medium truncate max-w-[200px] md:max-w-none">{article.title}</li>
                         </ol>
                     </nav>
 
@@ -152,7 +163,7 @@ export default function ArticleLuckyNamesByBirthday2569() {
 
                     {/* Meta */}
                     <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400 mb-6 font-medium">
-                        <span className="px-3 py-1 bg-purple-500/10 text-purple-400 rounded-full border border-purple-500/20 inline-flex items-center gap-1.5">
+                        <span className="px-3 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20 inline-flex items-center gap-1.5">
                             <Tag size={12} />
                             {article.category}
                         </span>
@@ -168,6 +179,12 @@ export default function ArticleLuckyNamesByBirthday2569() {
                             <span>•</span>
                             <span>อ่าน ~{readingTimeMinutes} นาที</span>
                         </div>
+                        {article.dateModified && article.dateModified !== article.date && (
+                            <div className="flex items-center gap-2 text-slate-500">
+                                <RefreshCw size={14} />
+                                <span>อัปเดต: {article.dateModified}</span>
+                            </div>
+                        )}
                     </div>
 
                     {/* Title */}
@@ -188,7 +205,7 @@ export default function ArticleLuckyNamesByBirthday2569() {
 
                     {/* Table of Contents */}
                     {article.toc && article.toc.length > 0 && (
-                        <nav className="bg-slate-800/50 rounded-xl p-6 mb-8 border border-slate-700/50" aria-label="สารบัญบทความ">
+                        <nav className="bg-white/5 backdrop-blur-md rounded-xl p-6 mb-8 border border-white/5" aria-label="สารบัญบทความ">
                             <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                                 <span className="text-xl">📚</span> สารบัญ
                                 <span className="text-xs font-normal text-slate-500 ml-auto">{article.toc.filter(t => t.level === 2).length} หัวข้อหลัก</span>
@@ -202,7 +219,7 @@ export default function ArticleLuckyNamesByBirthday2569() {
                                             <li key={item.id} style={{ paddingLeft: (item.level - 2) * 16 }}>
                                                 <a href={`#${item.id}`} className="text-slate-400 hover:text-purple-400 transition-colors text-sm flex items-center gap-2 py-0.5">
                                                     {item.level === 2 ? (
-                                                        <span className="w-5 h-5 bg-purple-500/20 text-purple-400 rounded text-xs flex items-center justify-center flex-shrink-0 font-bold">{h2Counter}</span>
+                                                        <span className="w-5 h-5 bg-amber-500/20 text-amber-400 rounded text-xs flex items-center justify-center flex-shrink-0 font-bold">{h2Counter}</span>
                                                     ) : (
                                                         <span className="w-1.5 h-1.5 bg-slate-600 rounded-full flex-shrink-0 ml-1.5" />
                                                     )}
@@ -269,8 +286,7 @@ export default function ArticleLuckyNamesByBirthday2569() {
                         </div>
                     )}
 
-                    {/* Aura Vibe Widget — End-of-Article */}
-                    <AuraVibeWidget />
+                    {/* Aura Vibe Widget removed — single instance at mid-article is sufficient */}
 
                     {/* CTA Section */}
                     <div className="mt-8 pt-8 border-t border-white/10">
@@ -284,7 +300,43 @@ export default function ArticleLuckyNamesByBirthday2569() {
                         <ArticleShareButtons title={article.title} slug={article.slug} />
                     </div>
 
-                    {/* Related Articles */}
+                    {/* Mandatory CTA — "วิเคราะห์ชื่อฟรี" */}
+                    <section className="mt-12 bg-gradient-to-r from-amber-900/30 to-slate-900/60 border border-amber-500/25 rounded-2xl p-8 text-center">
+                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                            อยากรู้ว่าชื่อของคุณดีแค่ไหน?
+                        </h2>
+                        <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
+                            ใช้ระบบ AI วิเคราะห์ชื่อมงคลฟรี! ตรวจสอบเลขศาสตร์ ทักษา อายตนะ 6 และอักษรกาลกิณีได้ภายในไม่กี่วินาที
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <Link href="/name-check" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-bold py-4 px-8 rounded-full transition-all hover:scale-105 shadow-lg shadow-amber-900/40">
+                                <span>🔮 วิเคราะห์ชื่อมงคลฟรี</span>
+                            </Link>
+                            <Link href="/premium-search" className="inline-flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-8 rounded-full transition-all">
+                                <span>👑 ค้นหาชื่อมงคล Premium</span>
+                            </Link>
+                        </div>
+                    </section>
+
+                    {/* Author Bio Card — EEAT signal */}
+                    <section className="mt-12 bg-white/5 backdrop-blur-md border border-white/5 rounded-2xl p-8 flex flex-col md:flex-row items-start gap-6">
+                        <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-800/20 flex items-center justify-center text-amber-400 border border-amber-500/20 flex-shrink-0">
+                            <Award size={36} />
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-bold text-white mb-1">{article.author}</h3>
+                            <p className="text-amber-400/80 text-sm mb-3">นักวิเคราะห์ชื่อมงคลและเลขศาสตร์</p>
+                            <p className="text-slate-400 text-sm leading-relaxed">
+                                ผู้เชี่ยวชาญด้านเลขศาสตร์ ทักษาปกรณ์ และอายตนะ 6 ผู้พัฒนาระบบ AI วิเคราะห์ชื่อมงคลที่ครบถ้วนที่สุดในประเทศไทย
+                                บทความนี้เขียนขึ้นจากประสบการณ์ตรงและข้อมูลวิจัยเชิงลึก เพื่อให้ผู้อ่านได้รับข้อมูลที่ถูกต้องและครบถ้วนที่สุด
+                            </p>
+                            <Link href="/about" className="inline-flex items-center gap-1.5 text-amber-400 hover:text-amber-300 text-sm mt-2 transition-colors">
+                                เรียนรู้เพิ่มเติมเกี่ยวกับผู้เขียน →
+                            </Link>
+                        </div>
+                    </section>
+
+                    {/* Related Articles — with readable titles */}
                     {article.relatedSlugs && article.relatedSlugs.length > 0 && (
                         <section className="mt-12 pt-8 border-t border-white/10">
                             <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
@@ -292,15 +344,19 @@ export default function ArticleLuckyNamesByBirthday2569() {
                                 บทความที่เกี่ยวข้อง
                             </h3>
                             <div className="flex flex-wrap gap-3">
-                                {article.relatedSlugs.map((slug) => (
-                                    <Link
-                                        key={slug}
-                                        href={`/articles/${slug}`}
-                                        className="text-sm bg-slate-800/60 border border-slate-700/50 hover:border-purple-500/50 text-slate-300 hover:text-purple-300 px-4 py-2 rounded-full transition-all hover:-translate-y-0.5"
-                                    >
-                                        → {slug.replace(/-/g, ' ')}
-                                    </Link>
-                                ))}
+                                {article.relatedSlugs.map((slug) => {
+                                    const relatedArticle = localArticles.find(a => a.slug === slug);
+                                    const displayTitle = relatedArticle?.title || slug.replace(/-/g, ' ');
+                                    return (
+                                        <Link
+                                            key={slug}
+                                            href={`/articles/${slug}`}
+                                            className="text-sm bg-slate-800/60 border border-slate-700/50 hover:border-amber-500/50 text-slate-300 hover:text-amber-300 px-4 py-2 rounded-full transition-all hover:-translate-y-0.5"
+                                        >
+                                            → {displayTitle}
+                                        </Link>
+                                    );
+                                })}
                             </div>
                         </section>
                     )}
@@ -315,19 +371,22 @@ export default function ArticleLuckyNamesByBirthday2569() {
                             ให้บริการทั้งวิเคราะห์ชื่อฟรีและค้นหาชื่อมงคล Premium พร้อมวอลเปเปอร์มงคลเสริมดวง
                         </p>
                         <div className="flex flex-wrap gap-2">
-                            <Link href="/" className="text-xs bg-slate-700/50 hover:bg-purple-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            <Link href="/" className="text-xs bg-slate-700/50 hover:bg-amber-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                                 วิเคราะห์ชื่อมงคล
                             </Link>
-                            <Link href="/premium-search" className="text-xs bg-slate-700/50 hover:bg-purple-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            <Link href="/name-check" className="text-xs bg-slate-700/50 hover:bg-amber-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                                เช็คชื่อมงคลฟรี
+                            </Link>
+                            <Link href="/premium-search" className="text-xs bg-slate-700/50 hover:bg-amber-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                                 ค้นหาชื่อมงคล Premium
                             </Link>
-                            <Link href="/phone-analysis" className="text-xs bg-slate-700/50 hover:bg-purple-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            <Link href="/phone-analysis" className="text-xs bg-slate-700/50 hover:bg-amber-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                                 วิเคราะห์เบอร์มงคล
                             </Link>
-                            <Link href="/wallpapers" className="text-xs bg-slate-700/50 hover:bg-purple-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            <Link href="/wallpapers" className="text-xs bg-slate-700/50 hover:bg-amber-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                                 วอลเปเปอร์มงคล
                             </Link>
-                            <Link href="/articles" className="text-xs bg-slate-700/50 hover:bg-purple-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                            <Link href="/articles" className="text-xs bg-slate-700/50 hover:bg-amber-600/30 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                                 บทความทั้งหมด
                             </Link>
                         </div>

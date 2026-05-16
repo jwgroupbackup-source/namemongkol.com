@@ -6,6 +6,7 @@ import { ArrowLeft, Calendar, User, Tag, RefreshCw, BookOpen, Award, ExternalLin
 import { Metadata } from 'next';
 import { ArticleImage } from '@/components/ArticleImage';
 import dynamic from 'next/dynamic';
+import { unstable_cache } from 'next/cache';
 
 const ArticleShareButtons = dynamic(() => import('@/components/ArticleShareButtons').then(mod => mod.ArticleShareButtons), {
     loading: () => <div className="h-10 w-24 bg-slate-800/50 rounded-full animate-pulse" />
@@ -65,7 +66,7 @@ type DbArticleRow = {
 
 import { supabase } from '@/utils/supabase';
 
-async function getPublishedArticlesDb(): Promise<Article[]> {
+async function fetchPublishedArticlesDb(): Promise<Article[]> {
     const { data, error } = await supabase
         .from('articles')
         .select('*')
@@ -96,12 +97,34 @@ async function getPublishedArticlesDb(): Promise<Article[]> {
     }));
 }
 
+// Cache DB queries for 1 hour (matches ISR revalidate)
+const getPublishedArticlesDb = unstable_cache(
+    fetchPublishedArticlesDb,
+    ['articles-detail-list'],
+    { revalidate: 3600, tags: ['articles'] }
+);
+
 async function getRelatedArticlePool(): Promise<Article[]> {
     const dbArticles = await getPublishedArticlesDb();
     const existingSlugs = new Set(dbArticles.map((article) => article.slug));
     const existingTitles = new Set(dbArticles.map((article) => article.title));
     const localFallback = localArticles.filter((article) => !existingSlugs.has(article.slug) && !existingTitles.has(article.title));
     return [...dbArticles, ...localFallback];
+}
+
+// Pre-render all known article pages at build time
+export async function generateStaticParams() {
+    try {
+        const dbArticles = await fetchPublishedArticlesDb();
+        const allSlugs = new Set([
+            ...dbArticles.map(a => a.slug),
+            ...localArticles.map(a => a.slug),
+        ]);
+        return Array.from(allSlugs).map(slug => ({ slug }));
+    } catch {
+        // Fallback to local articles only if DB is unavailable during build
+        return localArticles.map(a => ({ slug: a.slug }));
+    }
 }
 
 // DB-first article fetch for detail page
@@ -348,8 +371,8 @@ export default async function ArticlePage({ params }: Props) {
                         "headline": article.metaTitle || article.title,
                         "description": article.metaDescription || article.excerpt,
                         "image": article.coverImage?.startsWith('http') ? article.coverImage : `${baseUrl}${article.coverImage}`,
-                        "datePublished": article.date,
-                        "dateModified": article.dateModified || article.date,
+                        "datePublished": (() => { try { return new Date(article.date).toISOString(); } catch { return article.date; } })(),
+                        "dateModified": (() => { try { return new Date(article.dateModified || article.date).toISOString(); } catch { return article.dateModified || article.date; } })(),
                         "author": [{
                             "@type": "Person",
                             "name": article.author,
@@ -569,8 +592,7 @@ export default async function ArticlePage({ params }: Props) {
                         </div>
                     )}
 
-                    {/* Aura Vibe Widget — End-of-Article (ก่อน CTA section) */}
-                    <AuraVibeWidget />
+                    {/* Aura Vibe Widget removed — single instance at mid-article is sufficient */}
 
                     {/* Author Bio Card — EEAT signal */}
                     <section className="mt-12 bg-white/5 backdrop-blur-md border border-white/5 rounded-2xl p-8 flex flex-col md:flex-row items-start gap-6">
