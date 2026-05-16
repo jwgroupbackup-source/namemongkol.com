@@ -1,7 +1,5 @@
-'use client';
 
 import React from 'react';
-
 const EdgeConstellation = ({ className }: { className: string }) => (
     <svg
         className={className}
