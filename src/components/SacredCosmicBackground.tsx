@@ -81,7 +81,7 @@ function YantraGlyph({ x, y, rotate, scale }: { x: number; y: number; rotate: nu
 
 export function SacredCosmicBackground({ className = '' }: { className?: string }) {
     return (
-        <div className={`pointer-events-none fixed inset-0 overflow-hidden ${className}`.trim()} aria-hidden="true">
+        <div className={`pointer-events-none fixed inset-0 overflow-hidden ${className}`.trim()} aria-hidden="true" style={{ contain: 'layout style paint' }}>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(80,53,142,0.26),transparent_34%),linear-gradient(180deg,#040610_0%,#080b16_38%,#05070f_100%)]" />
             <div className="absolute inset-0 opacity-80 bg-[radial-gradient(circle_at_18%_22%,rgba(225,184,99,0.09),transparent_16%),radial-gradient(circle_at_76%_18%,rgba(114,72,185,0.20),transparent_20%),radial-gradient(circle_at_84%_66%,rgba(225,184,99,0.10),transparent_18%),radial-gradient(circle_at_16%_78%,rgba(82,56,157,0.16),transparent_20%)]" />
             <div className="absolute inset-0 opacity-50 bg-[radial-gradient(#f7e0aa_0.7px,transparent_0.9px)] [background-size:120px_120px]" />
@@ -93,8 +93,8 @@ export function SacredCosmicBackground({ className = '' }: { className?: string 
             <div className="absolute left-[20%] bottom-[14%] h-52 w-[14rem] rotate-[20deg] rounded-full bg-gradient-to-r from-transparent via-yellow-100/8 to-transparent blur-3xl animate-cosmic-drift-slow" />
             <div className="absolute right-[20%] bottom-[14%] h-52 w-[14rem] -rotate-[20deg] rounded-full bg-gradient-to-r from-transparent via-amber-200/8 to-transparent blur-3xl animate-cosmic-drift" />
 
-            <div className="absolute left-1/2 lg:left-[calc(50%_+_180px)] top-[32%] lg:top-[41%] h-[min(78vw,58rem)] w-[min(78vw,58rem)] lg:h-[min(74vw,60rem)] lg:w-[min(74vw,60rem)] -translate-x-1/2 -translate-y-1/2 opacity-[0.92] mix-blend-screen">
-                <svg viewBox="0 0 1200 1200" className="h-full w-full animate-cosmic-drift-slow" fill="none">
+            <div className="absolute left-1/2 lg:left-[calc(50%_+_180px)] top-[32%] lg:top-[41%] h-[min(78vw,58rem)] w-[min(78vw,58rem)] lg:h-[min(74vw,60rem)] lg:w-[min(74vw,60rem)] -translate-x-1/2 -translate-y-1/2 opacity-[0.92] mix-blend-screen" style={{ contentVisibility: 'auto', containIntrinsicSize: '900px 900px' }}>
+                <svg viewBox="0 0 1200 1200" className="h-full w-full animate-cosmic-drift-slow" fill="none" aria-hidden="true">
                     <defs>
                         <radialGradient id="wheelCoreGlow" cx="50%" cy="50%" r="50%">
                             <stop offset="0%" stopColor="rgba(248,224,171,0.32)" />

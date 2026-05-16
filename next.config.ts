@@ -20,16 +20,18 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
   images: {
-    formats: ['image/webp'],          // webp only — avif requires heavier CPU transform
+    formats: ['image/avif', 'image/webp'],  // avif first for ~30% smaller payloads on mobile
     minimumCacheTTL: 2592000,          // Cache 30 days — prevents re-transformation on every request
-    qualities: [75],                   // Single quality — eliminates duplicate transform variants
+    qualities: [50, 75],                   // Single quality — eliminates duplicate transform variants
+    deviceSizes: [640, 750, 1080, 1920],  // Reduced set — covers mobile to desktop efficiently
+    imageSizes: [16, 32, 48, 64, 96, 128, 256],
     remotePatterns,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion', 'canvas-confetti', 'date-fns'],
+    optimizePackageImports: ['lucide-react', 'framer-motion', 'canvas-confetti', 'date-fns', 'sweetalert2'],
   },
   async redirects() {
     const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];

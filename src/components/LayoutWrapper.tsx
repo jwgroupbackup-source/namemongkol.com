@@ -21,7 +21,8 @@ const WelcomeCreditModal = dynamic(() => import('./WelcomeCreditModal').then(mod
 });
 
 const LiveTicker = dynamic(() => import('./LiveTicker').then(mod => mod.LiveTicker), {
-    ssr: false
+    ssr: false,
+    loading: () => null
 });
 
 
@@ -30,7 +31,7 @@ export const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const pathname = usePathname();
     const backgroundExcludedPaths = ['/phone-analysis', '/aura-analysis'];
-    const shouldShowSacredBackground = !backgroundExcludedPaths.includes(pathname);
+    const shouldShowSacredBackground = !backgroundExcludedPaths.includes(pathname) && !pathname.startsWith('/wallpapers');
     const isAdminPage = pathname.startsWith('/admin');
 
     useEffect(() => {

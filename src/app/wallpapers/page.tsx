@@ -1,10 +1,15 @@
 import { Metadata } from 'next';
-import Script from 'next/script';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import ClientPage from './ClientPage';
 import { Sparkles, Sun, Moon, Flame, MessageCircle, BookOpen, Heart, Shield, Crown, Star, Zap, Download, ChevronRight, HelpCircle } from 'lucide-react';
 import { siteUrl } from '@/lib/seo';
+
+// Inline style for content-visibility sections (avoids Tailwind purge issues)
+const deferredSectionStyle = {
+    contentVisibility: 'auto' as const,
+    containIntrinsicSize: 'auto 600px',
+} as React.CSSProperties;
 
 export const metadata: Metadata = {
     title: 'วอลเปเปอร์มงคล เสริมดวง งาน เงิน รัก บารมี | NameMongkol',
@@ -127,24 +132,20 @@ const deityCollections = [
 export default function WallpapersPage() {
     return (
         <>
-            {/* JSON-LD Schemas */}
-            <Script
-                id="wallpapers-webpage-json-ld"
+            {/* JSON-LD Schemas — using native script tags for zero JS overhead */}
+            <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
             />
-            <Script
-                id="wallpapers-collection-json-ld"
+            <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
             />
-            <Script
-                id="wallpapers-faq-json-ld"
+            <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
             />
-            <Script
-                id="wallpapers-breadcrumb-json-ld"
+            <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
@@ -153,7 +154,21 @@ export default function WallpapersPage() {
             <h1 className="sr-only">วอลเปเปอร์มงคล เสริมดวง งาน เงิน รัก บารมี</h1>
 
             {/* ===== Interactive Client Gallery ===== */}
-            <Suspense>
+            <Suspense fallback={
+                <div className="w-full max-w-[1400px] px-4 pt-24 md:pt-32 pb-28 min-h-screen bg-[#050b14] text-slate-200">
+                    <div className="max-w-7xl mx-auto space-y-8">
+                        <div className="flex flex-col gap-4">
+                            <div className="h-12 w-3/4 bg-slate-800 rounded-xl animate-pulse" />
+                            <div className="h-6 w-1/2 bg-slate-800/60 rounded-lg animate-pulse" />
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
+                            {Array.from({ length: 8 }).map((_, i) => (
+                                <div key={i} className="aspect-[9/16] bg-slate-800 rounded-2xl animate-pulse" />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            }>
                 <ClientPage />
             </Suspense>
 
@@ -185,7 +200,7 @@ export default function WallpapersPage() {
                     </section>
 
                     {/* --- Section 2: Day-based Collection --- */}
-                    <section>
+                    <section style={deferredSectionStyle}>
                         <div className="text-center mb-10">
                             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
                                 เลือก<span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-400">วอลเปเปอร์มงคลเสริมดวง</span>ตามวันเกิด
@@ -200,7 +215,7 @@ export default function WallpapersPage() {
                                 return (
                                     <article
                                         key={item.day}
-                                        className={`group relative bg-slate-800/50 rounded-2xl border ${item.borderColor} p-5 hover:bg-slate-800/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl`}
+                                        className={`group relative bg-slate-800/50 rounded-2xl border ${item.borderColor} p-5 hover:bg-slate-800/80 transition-[transform,background-color,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl`}
                                     >
                                         <div className="flex items-center gap-3 mb-3">
                                             <div className={`p-2.5 rounded-xl ${item.bgColor}`}>
@@ -249,7 +264,7 @@ export default function WallpapersPage() {
                     </section>
 
                     {/* --- Section 3: Special Deity Collection --- */}
-                    <section>
+                    <section style={deferredSectionStyle}>
                         <div className="text-center mb-10">
                             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
                                 วอลเปเปอร์<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">องค์เทพยอดนิยม</span> เสริมดวงเฉพาะจุด
@@ -262,7 +277,7 @@ export default function WallpapersPage() {
                             {deityCollections.map((item) => (
                                 <article
                                     key={item.name}
-                                    className="group bg-slate-800/50 rounded-2xl border border-purple-500/20 p-6 hover:bg-slate-800/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-purple-500/40"
+                                    className="group bg-slate-800/50 rounded-2xl border border-purple-500/20 p-6 hover:bg-slate-800/80 transition-[transform,background-color,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-purple-500/40"
                                 >
                                     <div className="flex items-start gap-4">
                                         <span className="text-3xl flex-shrink-0 mt-1">{item.emoji}</span>
@@ -315,7 +330,7 @@ export default function WallpapersPage() {
                     </section>
 
                     {/* --- Section 5: FAQ --- */}
-                    <section>
+                    <section style={deferredSectionStyle}>
                         <div className="text-center mb-10">
                             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 flex items-center justify-center gap-3">
                                 <HelpCircle className="w-7 h-7 text-amber-400" />
