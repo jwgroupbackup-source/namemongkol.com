@@ -19,6 +19,9 @@ Track SEO impact after the wallpaper intent updates and reduce keyword cannibali
 - `name-search-free`: `/search`
 - `name-search-pro`: `/premium-search`
 - `name-bulk-analysis`: `/name-analysis`
+- `boy-names-pillar`: `/articles/boy-names-2569-50-auspicious`
+- `boy-names-ideas`: `/articles/auspicious-boy-names-2569`
+- `boy-names-free-100`: `/articles/100-auspicious-boy-names-2569`
 
 ## Query Cohorts
 
@@ -31,6 +34,9 @@ Track SEO impact after the wallpaper intent updates and reduce keyword cannibali
 - `name-search-free`: `ค้นหาชื่อมงคลฟรี*`
 - `name-search-pro`: `ค้นหาชื่อมงคล pro*`
 - `name-bulk`: `(เช็คชื่อมงคลหลายชื่อ|bulk name analysis)*`
+- `boy-names-primary`: `ชื่อผู้ชายมงคล*`
+- `boy-names-baby`: `ชื่อลูกชายมงคล*`
+- `boy-names-realname`: `ชื่อจริงลูกชายมงคล*`
 
 ## KPI Thresholds (Quick Win Targets)
 
@@ -39,6 +45,9 @@ Track SEO impact after the wallpaper intent updates and reduce keyword cannibali
 - wallpaper cohort average position: improve by 0.8+
 - wallpaper cohort CTR: +0.7% absolute
 - reduce shared-query overlap between `/`, `/search`, `/premium-search`, `/name-analysis` by at least 15%
+- `boy-names-primary` impressions: +15% within 14 days
+- `boy-names-pillar` clicks: +30% within 28 days
+- reduce shared-query overlap between 3 boy-name URLs by at least 20% within 28 days
 
 ## Reporting Cadence
 
@@ -51,3 +60,5 @@ Track SEO impact after the wallpaper intent updates and reduce keyword cannibali
 - If impressions rise but CTR drops: rewrite title/description for affected pages.
 - If CTR rises but position stagnates: add stronger internal links from `/wallpapers` and update supporting content blocks.
 - If overlap persists in name cluster: tighten metadata language and on-page H1 copy by route intent.
+- If `boy-names-primary` queries are split across 2+ URLs: re-balance internal anchors to push primary intent to `/articles/boy-names-2569-50-auspicious`.
+- If `boy-names-pillar` CTR is lower than cluster pages for 2 consecutive weeks: test new title variant with exact phrase at the beginning.

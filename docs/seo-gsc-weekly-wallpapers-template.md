@@ -1,16 +1,20 @@
-# Weekly GSC Report Template (Wallpapers SEO)
+# Weekly GSC Report Template
 
 ## Auto-fill Helper (CSV -> Markdown)
 
-Use this command to generate a weekly markdown summary from a GSC CSV export:
+Use these commands to generate a weekly markdown summary from a GSC CSV export:
 
 ```bash
 npm run gsc:weekly -- --input path/to/gsc-export.csv --output docs/reports/gsc-weekly-2026-05-10.md --period "2026-05-04 to 2026-05-10"
+npm run gsc:weekly -- --preset boy-names --input path/to/gsc-boy-names-current.csv --compare path/to/gsc-boy-names-previous.csv --output docs/reports/gsc-boy-names-2026-05-10.md --period "2026-05-04 to 2026-05-10"
+npm run gsc:weekly:boy-names -- --input path/to/gsc-boy-names-current.csv --compare path/to/gsc-boy-names-previous.csv --output docs/reports/gsc-boy-names-2026-05-10.md --period "2026-05-04 to 2026-05-10"
 ```
 
 Notes:
 - Required columns in CSV: `query`, `page`, `clicks`, `impressions`, `position` (header names can vary; script supports common aliases)
 - If `--output` is omitted, the markdown report is printed to terminal
+- `--preset` supports `wallpapers` and `boy-names`
+- `--compare` lets the script auto-calculate click deltas, position deltas, and shared-query overlap changes
 
 ## Week Summary
 

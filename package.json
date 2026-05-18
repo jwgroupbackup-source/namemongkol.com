@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "gsc:weekly": "node scripts/generate-gsc-weekly-report.js"
+    "gsc:weekly": "node scripts/generate-gsc-weekly-report.js",
+    "gsc:weekly:boy-names": "node scripts/generate-gsc-weekly-report.js --preset boy-names"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

@@ -107,11 +107,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
 
     // Add local articles from articles.ts (these are hardcoded articles)
+    const localArticlePriority: Record<string, number> = {
+        'boy-names-2569-50-auspicious': 0.95,
+        'auspicious-boy-names-2569': 0.85,
+        '100-auspicious-boy-names-2569': 0.8,
+    };
+
     const localArticleUrls: MetadataRoute.Sitemap = localArticles.map((article) => ({
         url: `${baseUrl}/articles/${article.slug}`,
         lastModified: article.date ? new Date(article.date) : new Date(),
         changeFrequency: 'weekly' as const,
-        priority: 0.9,
+        priority: localArticlePriority[article.slug] ?? 0.9,
     }));
 
     // Merge and deduplicate articles (local articles take priority)

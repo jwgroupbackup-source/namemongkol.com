@@ -111,23 +111,109 @@ function weightedPosition(rows) {
     return weighted / totalImpressions;
 }
 
-function summarize(rows) {
-    const cohortMatchers = [
-        { key: 'wallpapers-hub', label: '/wallpapers', match: (u) => /\/wallpapers$/.test(u) },
-        { key: 'wallpapers-day', label: '/wallpapers/day/*', match: (u) => /\/wallpapers\/day\//.test(u) },
-        { key: 'wallpapers-zodiac', label: '/wallpapers/zodiac/*', match: (u) => /\/wallpapers\/zodiac/.test(u) },
-        { key: 'wallpapers-intent', label: '/wallpapers/intent/*', match: (u) => /\/wallpapers\/intent\//.test(u) },
-        { key: 'wallpapers-custom', label: '/wallpapers/custom', match: (u) => /\/wallpapers\/custom$/.test(u) },
-    ];
+const PRESETS = {
+    wallpapers: {
+        title: 'Weekly GSC Report (Wallpapers SEO)',
+        cohortMatchers: [
+            { key: 'wallpapers-hub', label: '/wallpapers', match: (u) => /\/wallpapers$/.test(u) },
+            { key: 'wallpapers-day', label: '/wallpapers/day/*', match: (u) => /\/wallpapers\/day\//.test(u) },
+            { key: 'wallpapers-zodiac', label: '/wallpapers/zodiac/*', match: (u) => /\/wallpapers\/zodiac/.test(u) },
+            { key: 'wallpapers-intent', label: '/wallpapers/intent/*', match: (u) => /\/wallpapers\/intent\//.test(u) },
+            { key: 'wallpapers-custom', label: '/wallpapers/custom', match: (u) => /\/wallpapers\/custom$/.test(u) },
+        ],
+        queryMatchers: [
+            { key: 'wallpapers-year', pattern: /วอลเปเปอร์.*2569/i },
+            { key: 'wallpapers-day', pattern: /วอลเปเปอร์.*วัน(จันทร์|อังคาร|พุธ|พฤหัส|ศุกร์|เสาร์|อาทิตย์)/i },
+            { key: 'wallpapers-finance', pattern: /วอลเปเปอร์.*(การเงิน|โชค|ลาภ|เรียกทรัพย์)/i },
+            { key: 'wallpapers-love', pattern: /วอลเปเปอร์.*(ความรัก|เสน่ห์|เมตตา)/i },
+            { key: 'wallpapers-work', pattern: /วอลเปเปอร์.*(การงาน|บารมี|เลื่อนตำแหน่ง)/i },
+            { key: 'wallpapers-custom-core', pattern: /(สร้างวอลเปเปอร์มงคล|วอลเปเปอร์มงคลส่วนตัว)/i },
+        ],
+        cannibalizationPages: [
+            { key: 'wallpapers-day', label: '/wallpapers/day/*', match: (u) => /\/wallpapers\/day\//.test(u) },
+            { key: 'wallpapers-zodiac', label: '/wallpapers/zodiac/*', match: (u) => /\/wallpapers\/zodiac/.test(u) },
+            { key: 'wallpapers-intent', label: '/wallpapers/intent/*', match: (u) => /\/wallpapers\/intent\//.test(u) },
+            { key: 'wallpapers-custom', label: '/wallpapers/custom', match: (u) => /\/wallpapers\/custom$/.test(u) },
+        ],
+    },
+    'boy-names': {
+        title: 'Weekly GSC Report (Boy Names SEO)',
+        cohortMatchers: [
+            { key: 'boy-names-pillar', label: '/articles/boy-names-2569-50-auspicious', match: (u) => /\/articles\/boy-names-2569-50-auspicious$/.test(u) },
+            { key: 'boy-names-ideas', label: '/articles/auspicious-boy-names-2569', match: (u) => /\/articles\/auspicious-boy-names-2569$/.test(u) },
+            { key: 'boy-names-free-100', label: '/articles/100-auspicious-boy-names-2569', match: (u) => /\/articles\/100-auspicious-boy-names-2569$/.test(u) },
+        ],
+        queryMatchers: [
+            { key: 'boy-names-primary', pattern: /ชื่อผู้ชายมงคล/i },
+            { key: 'boy-names-baby', pattern: /ชื่อลูกชายมงคล/i },
+            { key: 'boy-names-realname', pattern: /ชื่อจริงลูกชายมงคล/i },
+            { key: 'boy-names-year', pattern: /(ชื่อผู้ชาย|ชื่อลูกชาย).*2569/i },
+        ],
+        cannibalizationPages: [
+            { key: 'boy-names-pillar', label: '/articles/boy-names-2569-50-auspicious', match: (u) => /\/articles\/boy-names-2569-50-auspicious$/.test(u) },
+            { key: 'boy-names-ideas', label: '/articles/auspicious-boy-names-2569', match: (u) => /\/articles\/auspicious-boy-names-2569$/.test(u) },
+            { key: 'boy-names-free-100', label: '/articles/100-auspicious-boy-names-2569', match: (u) => /\/articles\/100-auspicious-boy-names-2569$/.test(u) },
+        ],
+    },
+};
 
-    const queryMatchers = [
-        { key: 'wallpapers-year', pattern: /วอลเปเปอร์.*2569/i },
-        { key: 'wallpapers-day', pattern: /วอลเปเปอร์.*วัน(จันทร์|อังคาร|พุธ|พฤหัส|ศุกร์|เสาร์|อาทิตย์)/i },
-        { key: 'wallpapers-finance', pattern: /วอลเปเปอร์.*(การเงิน|โชค|ลาภ|เรียกทรัพย์)/i },
-        { key: 'wallpapers-love', pattern: /วอลเปเปอร์.*(ความรัก|เสน่ห์|เมตตา)/i },
-        { key: 'wallpapers-work', pattern: /วอลเปเปอร์.*(การงาน|บารมี|เลื่อนตำแหน่ง)/i },
-        { key: 'wallpapers-custom-core', pattern: /(สร้างวอลเปเปอร์มงคล|วอลเปเปอร์มงคลส่วนตัว)/i },
-    ];
+function buildCannibalizationSummary(rows, trackedPages) {
+    if (!trackedPages || trackedPages.length === 0) {
+        return { totalOverlapQueries: 0, sharedQueryClicks: 0, sharedQueryImpressions: 0, topSharedQueries: [] };
+    }
+
+    const byQuery = new Map();
+
+    for (const row of rows) {
+        const matchedPages = trackedPages.filter((page) => page.match(row.page));
+        if (matchedPages.length === 0) continue;
+
+        const queryKey = row.query.trim();
+        const entry = byQuery.get(queryKey) || {
+            query: queryKey,
+            clicks: 0,
+            impressions: 0,
+            weightedPos: 0,
+            pages: new Map(),
+        };
+
+        entry.clicks += row.clicks;
+        entry.impressions += row.impressions;
+        entry.weightedPos += row.position * row.impressions;
+
+        for (const page of matchedPages) {
+            const pageEntry = entry.pages.get(page.key) || { key: page.key, label: page.label, clicks: 0, impressions: 0 };
+            pageEntry.clicks += row.clicks;
+            pageEntry.impressions += row.impressions;
+            entry.pages.set(page.key, pageEntry);
+        }
+
+        byQuery.set(queryKey, entry);
+    }
+
+    const overlaps = Array.from(byQuery.values())
+        .filter((entry) => entry.pages.size >= 2)
+        .map((entry) => ({
+            query: entry.query,
+            clicks: entry.clicks,
+            impressions: entry.impressions,
+            ctr: entry.impressions > 0 ? (entry.clicks / entry.impressions) * 100 : 0,
+            position: entry.impressions > 0 ? entry.weightedPos / entry.impressions : 0,
+            pages: Array.from(entry.pages.values()).sort((a, b) => b.impressions - a.impressions),
+        }))
+        .sort((a, b) => b.impressions - a.impressions);
+
+    return {
+        totalOverlapQueries: overlaps.length,
+        sharedQueryClicks: overlaps.reduce((sum, entry) => sum + entry.clicks, 0),
+        sharedQueryImpressions: overlaps.reduce((sum, entry) => sum + entry.impressions, 0),
+        topSharedQueries: overlaps.slice(0, 10),
+    };
+}
+
+function summarize(rows, preset) {
+    const cohortMatchers = preset.cohortMatchers;
+    const queryMatchers = preset.queryMatchers;
 
     const cohortSummary = cohortMatchers.map((cohort) => {
         const bucket = rows.filter((r) => cohort.match(r.page));
@@ -181,7 +267,59 @@ function summarize(rows) {
         .sort((a, b) => b.clicks - a.clicks)
         .slice(0, 10);
 
-    return { cohortSummary, querySummary, topQueries };
+    const cannibalization = buildCannibalizationSummary(rows, preset.cannibalizationPages);
+
+    return { cohortSummary, querySummary, topQueries, cannibalization };
+}
+
+function mapByKey(items) {
+    return new Map(items.map((item) => [item.key, item]));
+}
+
+function compareMetrics(currentValue, previousValue) {
+    if (!Number.isFinite(previousValue) || previousValue <= 0) return 'new';
+    const deltaPct = ((currentValue - previousValue) / previousValue) * 100;
+    const sign = deltaPct > 0 ? '+' : '';
+    return `${sign}${deltaPct.toFixed(1)}%`;
+}
+
+function comparePosition(currentValue, previousValue) {
+    if (!Number.isFinite(previousValue) || previousValue <= 0) return 'new';
+    const delta = previousValue - currentValue;
+    const sign = delta > 0 ? '+' : '';
+    return `${sign}${delta.toFixed(1)} pos`;
+}
+
+function decorateSummaryWithPrevious(current, previous) {
+    if (!previous) return current;
+
+    const prevCohorts = mapByKey(previous.cohortSummary);
+    const prevQueries = mapByKey(previous.querySummary);
+
+    current.cohortSummary = current.cohortSummary.map((item) => {
+        const prev = prevCohorts.get(item.key);
+        return {
+            ...item,
+            wowDelta: prev ? compareMetrics(item.clicks, prev.clicks) : 'new',
+            positionDelta: prev ? comparePosition(item.position, prev.position) : 'new',
+        };
+    });
+
+    current.querySummary = current.querySummary.map((item) => {
+        const prev = prevQueries.get(item.key);
+        return {
+            ...item,
+            wowDelta: prev ? compareMetrics(item.clicks, prev.clicks) : 'new',
+            positionDelta: prev ? comparePosition(item.position, prev.position) : 'new',
+        };
+    });
+
+    const prevOverlap = previous.cannibalization ? previous.cannibalization.totalOverlapQueries : 0;
+    current.cannibalization.overlapDelta = prevOverlap > 0
+        ? compareMetrics(current.cannibalization.totalOverlapQueries, prevOverlap)
+        : 'new';
+
+    return current;
 }
 
 function pct(value) {
@@ -196,13 +334,13 @@ function pos(value) {
     return value > 0 ? value.toFixed(1) : '-';
 }
 
-function generateMarkdown(summary, period, sourceFile) {
+function generateMarkdown(summary, period, sourceFile, options) {
     const cohortRows = summary.cohortSummary
-        .map((c) => `| ${c.key} (\`${c.label}\`) | ${num(c.clicks)} | ${num(c.impressions)} | ${pct(c.ctr)} | ${pos(c.position)} | n/a | n/a |`)
+        .map((c) => `| ${c.key} (\`${c.label}\`) | ${num(c.clicks)} | ${num(c.impressions)} | ${pct(c.ctr)} | ${pos(c.position)} | ${c.wowDelta || 'n/a'} | ${c.positionDelta || 'n/a'} |`)
         .join('\n');
 
     const queryRows = summary.querySummary
-        .map((c) => `| ${c.key} | ${num(c.clicks)} | ${num(c.impressions)} | ${pct(c.ctr)} | ${pos(c.position)} | n/a |`)
+        .map((c) => `| ${c.key} | ${num(c.clicks)} | ${num(c.impressions)} | ${pct(c.ctr)} | ${pos(c.position)} | ${c.wowDelta || 'n/a'} |`)
         .join('\n');
 
     const winners = summary.topQueries
@@ -210,16 +348,28 @@ function generateMarkdown(summary, period, sourceFile) {
         .map((q, i) => `${i + 1}. ${q.query} | clicks: ${num(q.clicks)} | impressions: ${num(q.impressions)} | ctr: ${pct(q.ctr)} | position: ${pos(q.position)}`)
         .join('\n');
 
+    const sharedQueries = summary.cannibalization.topSharedQueries.length > 0
+        ? summary.cannibalization.topSharedQueries
+            .slice(0, 5)
+            .map((entry, index) => {
+                const pages = entry.pages.map((page) => `${page.key} (${num(page.impressions)} imp)`).join(', ');
+                return `${index + 1}. ${entry.query} | impressions: ${num(entry.impressions)} | position: ${pos(entry.position)} | pages: ${pages}`;
+            })
+            .join('\n')
+        : '1. n/a';
+
     return [
-        '# Weekly GSC Report (Auto-generated)',
+        `# ${options.title}`,
         '',
         `- Report period: ${period}`,
-        '- Compare window: last 7 days vs previous 7 days',
+        `- Compare window: ${options.compareWindow}`,
+        `- Preset: ${options.presetKey}`,
         `- Source CSV: ${sourceFile}`,
+        ...(options.compareSourceFile ? [`- Previous CSV: ${options.compareSourceFile}`] : []),
         '',
         '## KPI Snapshot',
         '',
-        '| Cohort | Clicks | Impressions | CTR | Avg Position | WoW Delta | Target Status |',
+        '| Cohort | Clicks | Impressions | CTR | Avg Position | Click Delta | Position Delta |',
         '| --- | ---: | ---: | ---: | ---: | --- | --- |',
         cohortRows,
         '',
@@ -233,10 +383,19 @@ function generateMarkdown(summary, period, sourceFile) {
         '',
         winners || '1. n/a',
         '',
+        '## Cannibalization Watch',
+        '',
+        `- Overlap queries across tracked URLs: ${num(summary.cannibalization.totalOverlapQueries)}`,
+        `- Shared-query impressions: ${num(summary.cannibalization.sharedQueryImpressions)}`,
+        `- Shared-query clicks: ${num(summary.cannibalization.sharedQueryClicks)}`,
+        `- Overlap delta vs previous export: ${summary.cannibalization.overlapDelta || 'n/a'}`,
+        '',
+        sharedQueries,
+        '',
         '## Notes',
         '',
-        '- Fill WoW Delta and Target Status after comparing with previous period export.',
-        '- Paste this section into docs/seo-gsc-weekly-wallpapers-template.md if needed.',
+        '- Use --compare with the previous period CSV to auto-fill click/position deltas and overlap changes.',
+        '- Paste this section into your weekly SEO report document if needed.',
         '',
     ].join('\n');
 }
@@ -244,11 +403,19 @@ function generateMarkdown(summary, period, sourceFile) {
 function main() {
     const args = parseArgs(process.argv);
     const input = args.input;
+    const compare = args.compare;
     const output = args.output;
     const period = args.period || 'not specified';
+    const presetKey = args.preset || 'wallpapers';
+    const preset = PRESETS[presetKey];
+
+    if (!preset) {
+        console.error(`Unknown preset: ${presetKey}. Available presets: ${Object.keys(PRESETS).join(', ')}`);
+        process.exit(1);
+    }
 
     if (!input) {
-        console.error('Usage: node scripts/generate-gsc-weekly-report.js --input <gsc.csv> [--output <out.md>] [--period "YYYY-MM-DD to YYYY-MM-DD"]');
+        console.error('Usage: node scripts/generate-gsc-weekly-report.js --input <gsc.csv> [--compare <previous-gsc.csv>] [--preset wallpapers|boy-names] [--output <out.md>] [--period "YYYY-MM-DD to YYYY-MM-DD"]');
         process.exit(1);
     }
 
@@ -259,8 +426,22 @@ function main() {
     }
 
     const rows = parseCsv(inputPath);
-    const summary = summarize(rows);
-    const markdown = generateMarkdown(summary, period, inputPath);
+    const comparePath = compare ? path.resolve(compare) : null;
+    if (comparePath && !fs.existsSync(comparePath)) {
+        console.error(`Compare file not found: ${comparePath}`);
+        process.exit(1);
+    }
+
+    const previousRows = comparePath ? parseCsv(comparePath) : null;
+    const currentSummary = summarize(rows, preset);
+    const previousSummary = previousRows ? summarize(previousRows, preset) : null;
+    const summary = decorateSummaryWithPrevious(currentSummary, previousSummary);
+    const markdown = generateMarkdown(summary, period, inputPath, {
+        title: preset.title,
+        presetKey,
+        compareWindow: comparePath ? 'current export vs previous export' : 'single export snapshot',
+        compareSourceFile: comparePath,
+    });
 
     if (output) {
         const outPath = path.resolve(output);
