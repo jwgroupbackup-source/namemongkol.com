@@ -10,16 +10,32 @@ export const WelcomeOffer = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
+        let timeoutId: number | null = null;
+        let cancelled = false;
+
         const checkUser = async () => {
+            if (sessionStorage.getItem('welcome_offer_dismissed') === 'true') return;
+
             const { data: { user } } = await supabase.auth.getUser();
+            if (cancelled) return;
+
             if (user) {
                 setIsLoggedIn(true);
             } else {
                 // Show offer after a short delay for better UX
-                setTimeout(() => setIsVisible(true), 2000);
+                timeoutId = window.setTimeout(() => {
+                    setIsVisible(true);
+                }, 3200);
             }
         };
         checkUser();
+
+        return () => {
+            cancelled = true;
+            if (timeoutId !== null) {
+                window.clearTimeout(timeoutId);
+            }
+        };
     }, []);
 
     const handleClose = () => {

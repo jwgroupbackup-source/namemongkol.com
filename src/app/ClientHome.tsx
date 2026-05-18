@@ -27,6 +27,9 @@ import { HeroBanner } from '@/components/HeroBanner';
 import { HomeFallback } from '@/components/HomeFallback';
 import { NumerologyDecodeTable } from '@/components/NumerologyDecodeTable';
 import { useLanguage } from '@/components/LanguageProvider';
+import { WelcomeOffer } from '@/components/WelcomeOffer';
+import { InlineSignupCTA } from '@/components/InlineSignupCTA';
+import { SaveResultCTA } from '@/components/SaveResultCTA';
 import type { WallpaperShowcaseStat } from '@/components/WallpaperShowcase';
 import type { ArticleSectionItem } from '@/components/ArticleSection';
 
@@ -40,15 +43,12 @@ const ArticleSection = dynamic(() => import('@/components/ArticleSection').then(
 const FAQSection = dynamic(() => import('@/components/FAQSection').then(mod => mod.FAQSection));
 const HomeSeoContent = dynamic(() => import('@/components/HomeSeoContent').then(mod => mod.HomeSeoContent));
 const TestimonialSection = dynamic(() => import('@/components/TestimonialSection').then(mod => mod.TestimonialSection));
-const WelcomeOffer = dynamic(() => import('@/components/WelcomeOffer').then(mod => mod.WelcomeOffer), { ssr: false });
 const UspSection = dynamic(() => import('@/components/UspSection').then(mod => mod.UspSection));
 const ComparisonSection = dynamic(() => import('@/components/ComparisonSection').then(mod => mod.ComparisonSection));
 const BirthdayThaksaSection = dynamic(() => import('@/components/BirthdayThaksaSection').then(mod => mod.BirthdayThaksaSection));
 const TrustStrip = dynamic(() => import('@/components/TrustStrip').then(mod => mod.TrustStrip));
 const PrivacyStrip = dynamic(() => import('@/components/PrivacyStrip').then(mod => mod.PrivacyStrip));
 const HowItWorksSection = dynamic(() => import('@/components/HowItWorksSection').then(mod => mod.HowItWorksSection));
-const InlineSignupCTA = dynamic(() => import('@/components/InlineSignupCTA').then(mod => mod.InlineSignupCTA), { ssr: false });
-const SaveResultCTA = dynamic(() => import('@/components/SaveResultCTA').then(mod => mod.SaveResultCTA), { ssr: false });
 const BulkAnalysisUpsell = dynamic(() => import('@/components/BulkAnalysisUpsell').then(mod => mod.BulkAnalysisUpsell));
 const BulkAnalysisBanner = dynamic(() => import('@/components/BulkAnalysisBanner').then(mod => mod.BulkAnalysisBanner));
 
@@ -75,15 +75,48 @@ type DeferredSectionProps = {
     children: React.ReactNode;
     minHeightClassName?: string;
     rootMargin?: string;
+    preloadDelayMs?: number;
+    intrinsicSize?: string;
 };
 
 function DeferredSection({
     children,
     minHeightClassName = 'min-h-[280px]',
-    rootMargin = '500px 0px',
+    rootMargin = '1200px 0px',
+    preloadDelayMs = 0,
+    intrinsicSize = '800px',
 }: DeferredSectionProps) {
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (isVisible) return;
+
+        const windowWithIdle = window as WindowWithIdleCallback;
+        let timeoutId: number | null = null;
+        let idleId: number | null = null;
+
+        const reveal = () => {
+            setIsVisible(true);
+        };
+
+        timeoutId = window.setTimeout(() => {
+            if (windowWithIdle.requestIdleCallback) {
+                idleId = windowWithIdle.requestIdleCallback(reveal, { timeout: 900 });
+            } else {
+                reveal();
+            }
+        }, preloadDelayMs);
+
+        return () => {
+            if (timeoutId !== null) {
+                window.clearTimeout(timeoutId);
+            }
+            if (idleId !== null && windowWithIdle.cancelIdleCallback) {
+                windowWithIdle.cancelIdleCallback(idleId);
+            }
+        };
+    }, [isVisible, preloadDelayMs]);
 
     useEffect(() => {
         const element = sectionRef.current;
@@ -104,7 +137,11 @@ function DeferredSection({
     }, [isVisible, rootMargin]);
 
     return (
-        <div ref={sectionRef} className={minHeightClassName}>
+        <div
+            ref={sectionRef}
+            className={minHeightClassName}
+            style={{ contentVisibility: 'auto', containIntrinsicSize: intrinsicSize }}
+        >
             {isVisible ? children : null}
         </div>
     );
@@ -382,37 +419,37 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
 
             {!result && (
                 <>
-                    <DeferredSection minHeightClassName="min-h-[420px]">
+                    <DeferredSection minHeightClassName="min-h-[640px]" preloadDelayMs={250} intrinsicSize="640px">
                         <WallpaperShowcase stats={homeSectionsData.wallpapers} />
                     </DeferredSection>
-                    <DeferredSection minHeightClassName="min-h-[320px]">
+                    <DeferredSection minHeightClassName="min-h-[360px]" preloadDelayMs={500} intrinsicSize="360px">
                         <BulkAnalysisBanner />
                     </DeferredSection>
-                    <DeferredSection minHeightClassName="min-h-[300px]">
+                    <DeferredSection minHeightClassName="min-h-[360px]" preloadDelayMs={750} intrinsicSize="360px">
                         <UspSection />
                     </DeferredSection>
-                    <DeferredSection minHeightClassName="min-h-[320px]">
+                    <DeferredSection minHeightClassName="min-h-[360px]" preloadDelayMs={1000} intrinsicSize="360px">
                         <HowItWorksSection />
                     </DeferredSection>
-                    <DeferredSection minHeightClassName="min-h-[320px]">
+                    <DeferredSection minHeightClassName="min-h-[420px]" preloadDelayMs={1250} intrinsicSize="420px">
                         <ComparisonSection />
                     </DeferredSection>
-                    <DeferredSection minHeightClassName="min-h-[280px]">
+                    <DeferredSection minHeightClassName="min-h-[900px]" preloadDelayMs={1500} intrinsicSize="900px">
                         <HomeSeoContent />
                     </DeferredSection>
-                    <DeferredSection minHeightClassName="min-h-[360px]">
+                    <DeferredSection minHeightClassName="min-h-[520px]" preloadDelayMs={1750} intrinsicSize="520px">
                         <BirthdayThaksaSection />
                     </DeferredSection>
-                    <DeferredSection minHeightClassName="min-h-[320px]">
+                    <DeferredSection minHeightClassName="min-h-[520px]" preloadDelayMs={2000} intrinsicSize="520px">
                         <KnowledgeSection />
                     </DeferredSection>
-                    <DeferredSection minHeightClassName="min-h-[260px]">
+                    <DeferredSection minHeightClassName="min-h-[360px]" preloadDelayMs={2250} intrinsicSize="360px">
                         <TestimonialSection />
                     </DeferredSection>
-                    <DeferredSection minHeightClassName="min-h-[260px]">
+                    <DeferredSection minHeightClassName="min-h-[360px]" preloadDelayMs={2500} intrinsicSize="360px">
                         <FAQSection />
                     </DeferredSection>
-                    <DeferredSection minHeightClassName="min-h-[420px]">
+                    <DeferredSection minHeightClassName="min-h-[560px]" preloadDelayMs={2750} intrinsicSize="560px">
                         <ArticleSection
                             articles={homeSectionsData.articles}
                             loading={homeSectionsLoading}

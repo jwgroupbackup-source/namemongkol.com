@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { User } from '@supabase/supabase-js';
 import { X, Sparkles, Gift, Clock, Star } from 'lucide-react';
 import Link from 'next/link';
-import confetti from 'canvas-confetti';
 import { supabase } from '@/utils/supabase';
 
 interface WelcomeCreditModalProps {
@@ -18,6 +17,10 @@ export const WelcomeCreditModal: React.FC<WelcomeCreditModalProps> = ({ user }) 
 
     useEffect(() => {
         if (!user) return;
+
+        let cancelled = false;
+        let timer: number | null = null;
+        let animationFrame: number | null = null;
 
         const checkWelcomeBonus = async () => {
             // 1. เช็ค localStorage ก่อน (fast path)
@@ -69,34 +72,42 @@ export const WelcomeCreditModal: React.FC<WelcomeCreditModalProps> = ({ user }) 
                 }
 
                 // แสดง Modal พร้อม confetti
-                const timer = setTimeout(() => {
+                timer = window.setTimeout(() => {
+                    if (cancelled) return;
+
                     setIsOpen(true);
                     const duration = 3 * 1000;
                     const end = Date.now() + duration;
 
-                    (function frame() {
-                        confetti({
-                            particleCount: 3,
-                            angle: 60,
-                            spread: 55,
-                            origin: { x: 0 },
-                            colors: ['#fbbf24', '#f59e0b', '#d97706']
-                        });
-                        confetti({
-                            particleCount: 3,
-                            angle: 120,
-                            spread: 55,
-                            origin: { x: 1 },
-                            colors: ['#fbbf24', '#f59e0b', '#d97706']
-                        });
+                    void import('canvas-confetti').then(({ default: confetti }) => {
+                        if (cancelled) return;
 
-                        if (Date.now() < end) {
-                            requestAnimationFrame(frame);
-                        }
-                    }());
+                        const frame = () => {
+                            if (cancelled) return;
+
+                            confetti({
+                                particleCount: 3,
+                                angle: 60,
+                                spread: 55,
+                                origin: { x: 0 },
+                                colors: ['#fbbf24', '#f59e0b', '#d97706']
+                            });
+                            confetti({
+                                particleCount: 3,
+                                angle: 120,
+                                spread: 55,
+                                origin: { x: 1 },
+                                colors: ['#fbbf24', '#f59e0b', '#d97706']
+                            });
+
+                            if (Date.now() < end) {
+                                animationFrame = window.requestAnimationFrame(frame);
+                            }
+                        };
+
+                        frame();
+                    });
                 }, 1500);
-
-                return () => clearTimeout(timer);
             } catch {
                 // ถ้า query ล้มเหลว ไม่แสดง modal (fail silently)
                 return;
@@ -104,6 +115,16 @@ export const WelcomeCreditModal: React.FC<WelcomeCreditModalProps> = ({ user }) 
         };
 
         checkWelcomeBonus();
+
+        return () => {
+            cancelled = true;
+            if (timer !== null) {
+                window.clearTimeout(timer);
+            }
+            if (animationFrame !== null) {
+                window.cancelAnimationFrame(animationFrame);
+            }
+        };
     }, [user]);
 
     const handleClose = () => {

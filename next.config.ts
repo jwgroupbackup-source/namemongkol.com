@@ -20,6 +20,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
   images: {
+    // Most site images are pre-compressed WebP/PNG assets or Supabase-hosted user uploads.
+    // Serving them directly avoids consuming Vercel Hobby Image Optimization Transformations.
+    unoptimized: true,
     formats: ['image/avif', 'image/webp'],  // avif first for ~30% smaller payloads on mobile
     minimumCacheTTL: 2592000,          // Cache 30 days — prevents re-transformation on every request
     qualities: [50, 75],                   // Single quality — eliminates duplicate transform variants

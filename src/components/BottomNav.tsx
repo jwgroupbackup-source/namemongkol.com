@@ -9,6 +9,7 @@ import { Search, Crown, Sparkles, Image as ImageIcon, Home } from 'lucide-react'
 export const BottomNav = () => {
     const pathname = usePathname();
     const [visible, setVisible] = useState(true);
+    const visibleRef = useRef(true);
     const lastScrollY = useRef(0);
     const ticking = useRef(false);
 
@@ -19,13 +20,20 @@ export const BottomNav = () => {
 
             requestAnimationFrame(() => {
                 const currentY = window.scrollY;
+                let nextVisible = visibleRef.current;
+
                 // Show when scrolling up or near top; hide when scrolling down
                 if (currentY <= 10) {
-                    setVisible(true);
+                    nextVisible = true;
                 } else if (currentY < lastScrollY.current) {
-                    setVisible(true);
+                    nextVisible = true;
                 } else if (currentY > lastScrollY.current + 5) {
-                    setVisible(false);
+                    nextVisible = false;
+                }
+
+                if (nextVisible !== visibleRef.current) {
+                    visibleRef.current = nextVisible;
+                    setVisible(nextVisible);
                 }
                 lastScrollY.current = currentY;
                 ticking.current = false;

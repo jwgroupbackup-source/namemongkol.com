@@ -8,17 +8,9 @@ import { MobileHeader } from './MobileHeader';
 import { TopNav } from './TopNav';
 import { supabase } from '@/utils/supabase';
 import { User } from '@supabase/supabase-js';
-import dynamic from 'next/dynamic';
-
-const SacredCosmicBackground = dynamic(
-    () => import('./SacredCosmicBackground').then(mod => ({ default: mod.SacredCosmicBackground })),
-    { ssr: false, loading: () => null }
-);
-const BottomNav = dynamic(() => import('./BottomNav').then(mod => mod.BottomNav), { ssr: false });
-
-const WelcomeCreditModal = dynamic(() => import('./WelcomeCreditModal').then(mod => mod.WelcomeCreditModal), {
-    ssr: false
-});
+import { SacredCosmicBackground } from './SacredCosmicBackground';
+import { BottomNav } from './BottomNav';
+import { WelcomeCreditModal } from './WelcomeCreditModal';
 
 
 export const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
