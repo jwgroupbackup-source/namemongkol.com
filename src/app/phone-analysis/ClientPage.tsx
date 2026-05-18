@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Search, Loader2 } from 'lucide-react';
 import { analyzePhone, PhoneAnalysisResult as IPhoneAnalysisResult } from '@/utils/analyzePhone';
@@ -25,7 +25,7 @@ const PhoneHeader = () => {
                 <span className="text-xs md:text-sm font-semibold text-amber-100 tracking-wider uppercase">เช็คเบอร์มงคลฟรี</span>
             </div>
             
-            <div role="heading" aria-hidden="true" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl">
+            <div aria-hidden="true" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl">
                 {t('pages.phoneAnalysis.heroTitle')}{' '}
                 <span className="text-amber-400 drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">
                     {t('pages.phoneAnalysis.heroHighlight')}
@@ -120,7 +120,7 @@ function ClientPageContent() {
     const [aiProfession, setAiProfession] = useState('');
     const aiInFlightRef = useRef(false);
 
-    const performAnalysis = async (number: string) => {
+    const performAnalysis = useCallback(async (number: string) => {
         setLoading(true);
         setError('');
 
@@ -135,7 +135,7 @@ function ClientPageContent() {
         }
 
         setLoading(false);
-    };
+    }, [t]);
 
     // Check URL for number on mount/update
     useEffect(() => {
@@ -151,7 +151,7 @@ function ClientPageContent() {
                 performAnalysis(numberParam);
             }, 0);
         }
-    }, [searchParams]);
+    }, [searchParams, performAnalysis, result]);
 
 
 
@@ -343,7 +343,7 @@ function ClientPageContent() {
 
     return (
         <div className="min-h-screen bg-[#0f172a] text-slate-200 font-sans selection:bg-indigo-500/30">
-            <main className="w-full max-w-[1400px] transition-all duration-300 min-h-screen px-4 pt-20 md:pt-28 pb-24 md:pb-28 relative flex flex-col items-center">
+            <main className="w-full max-w-[1400px] transition-all duration-300 min-h-screen px-4 pt-20 md:pt-28 pb-36 md:pb-28 relative flex flex-col items-center">
                 <PhoneSacredBackground />
 
                 {/* Header Section */}
@@ -352,7 +352,7 @@ function ClientPageContent() {
                 {/* Input Section */}
                 {!result && (
                     <div className="w-full max-w-2xl relative z-10 animate-fade-in-up delay-100">
-                        <div className="bg-white/5 border border-white/5 rounded-3xl p-2 sm:p-3 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+                        <div className="bg-white/5 border border-white/5 rounded-3xl p-2.5 sm:p-3 backdrop-blur-xl shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
                             <div className="flex flex-col sm:flex-row gap-2 relative z-10">
                                 <input
@@ -364,14 +364,14 @@ function ClientPageContent() {
                                     }}
                                     onKeyDown={handleKeyDown}
                                     placeholder={t('pages.phoneAnalysis.placeholder')}
-                                    className="phone-analysis-input flex-1 px-6 py-4 rounded-2xl outline-none transition-all text-lg font-medium text-center sm:text-left tracking-wider"
+                                    className="phone-analysis-input flex-1 px-5 py-4 rounded-2xl outline-none transition-all text-lg font-medium text-center sm:text-left tracking-wider"
                                 />
                                 <button
                                     onClick={handleAnalyze}
                                     disabled={loading || phoneNumber.length !== 10}
                                     data-track="phone.hero.analyze"
                                     className={`
-                                        px-8 py-4 rounded-2xl font-bold text-white transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 min-w-[160px]
+                                        px-6 sm:px-8 py-4 rounded-2xl font-bold text-white transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 min-w-full sm:min-w-[160px]
                                         ${phoneNumber.length === 10
                                             ? 'bg-amber-500 hover:bg-amber-400 shadow-[0_0_24px_rgba(245,158,11,0.22)] hover:shadow-[0_0_32px_rgba(245,158,11,0.30)] border border-amber-400/20 cursor-pointer'
                                             : 'bg-slate-800/50 text-slate-500 border border-white/5 cursor-not-allowed'}
@@ -384,7 +384,7 @@ function ClientPageContent() {
                         </div>
 
                         {/* Helper text + counter */}
-                        <div className="flex items-center justify-between mt-3 px-3">
+                        <div className="flex items-center justify-between mt-3 px-3 gap-3">
                             <p className="text-xs text-amber-400/70" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}>
                                 ฟรี! วิเคราะห์ได้ไม่จำกัดจำนวนครั้ง
                             </p>
@@ -404,6 +404,32 @@ function ClientPageContent() {
                                 {error}
                             </p>
                         )}
+                    </div>
+                )}
+
+                {!result && (
+                    <div className="md:hidden fixed inset-x-4 bottom-4 z-30">
+                        <div className="rounded-2xl border border-white/10 bg-slate-950/95 backdrop-blur-xl px-4 py-3 shadow-2xl shadow-black/30">
+                            <div className="flex items-center gap-3">
+                                <div className="min-w-0 flex-1">
+                                    <p className="text-[11px] uppercase tracking-[0.2em] text-slate-500">พร้อมวิเคราะห์</p>
+                                    <p className="text-sm font-semibold text-white truncate">
+                                        {phoneNumber.length > 0 ? `${phoneNumber.length}/10 หมายเลข` : 'กรอกหมายเลข 10 หลักเพื่อเริ่ม'}
+                                    </p>
+                                </div>
+                                <button
+                                    onClick={handleAnalyze}
+                                    disabled={loading || phoneNumber.length !== 10}
+                                    className={`shrink-0 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold transition-all ${phoneNumber.length === 10
+                                        ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20 active:scale-95'
+                                        : 'bg-slate-800/70 text-slate-500 border border-white/5'
+                                        }`}
+                                >
+                                    {loading ? <Loader2 className="animate-spin" size={16} /> : <Search size={16} />}
+                                    วิเคราะห์
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 )}
 

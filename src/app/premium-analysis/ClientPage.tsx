@@ -501,12 +501,12 @@ export default function PremiumAnalysisPage() {
 
                 {/* Load More Button */}
                 {results.length > 0 && (
-                    <div className="col-span-full pt-8 flex justify-center pb-12">
+                    <div className="col-span-full pt-4 md:pt-8 flex justify-center pb-12">
                         <button
                             onClick={() => handleAnalyze(true)}
                             disabled={isLoading}
                             data-track="premiumAnalysis.results.reroll"
-                            className="group relative inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-b from-slate-800 to-slate-900 rounded-2xl border border-amber-500/20 hover:border-amber-500/50 shadow-lg shadow-black/40 transition-all hover:-translate-y-1 hover:shadow-amber-500/10 overflow-hidden"
+                            className="group relative inline-flex w-full sm:w-auto items-center justify-center gap-3 md:gap-4 px-4 sm:px-8 md:px-10 py-4 md:py-5 bg-gradient-to-b from-slate-800 to-slate-900 rounded-2xl border border-amber-500/20 hover:border-amber-500/50 shadow-lg shadow-black/40 transition-all hover:-translate-y-1 hover:shadow-amber-500/10 overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <div className="bg-amber-500/20 p-2 rounded-full group-hover:bg-amber-500/30 transition-colors">
@@ -516,7 +516,7 @@ export default function PremiumAnalysisPage() {
                                 <span className="text-lg font-bold text-amber-100 group-hover:text-white">ค้นหารายชื่อชุดใหม่</span>
                                 <span className="text-xs text-amber-500/80">สุ่มใหม่โดยใช้เงื่อนไขเดิม</span>
                             </div>
-                            <div className="ml-4 px-3 py-1 bg-amber-500/20 rounded-full border border-amber-500/20">
+                            <div className="ml-0 md:ml-4 px-3 py-1 bg-amber-500/20 rounded-full border border-amber-500/20">
                                 <span className="text-xs font-bold text-amber-400 flex items-center gap-1">
                                     -{PREMIUM_ANALYSIS_COST} <Coins size={10} />
                                 </span>
@@ -529,16 +529,16 @@ export default function PremiumAnalysisPage() {
     );
 
     const formContent = (
-        <div className="animate-fade-in-up max-w-6xl mx-auto relative overflow-visible px-4 md:px-8">
+        <div className="animate-fade-in-up max-w-6xl mx-auto relative overflow-visible px-0 sm:px-4 md:px-8">
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-16 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 lg:gap-16 relative z-10">
 
                 {/* Left Column: Personal Inputs (User Data) */}
-                <div className="lg:col-span-5 space-y-6 md:space-y-8">
+                <div className="lg:col-span-5 space-y-5 md:space-y-8">
 
                     <div className="flex items-center gap-3 text-amber-400 mb-2">
                         <div className="w-1.5 h-6 md:h-7 bg-gradient-to-b from-amber-400 to-amber-600 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
-                        <h3 className="text-lg md:text-xl font-extrabold uppercase tracking-widest drop-shadow-md">ข้อมูลส่วนตัว</h3>
+                        <h3 className="text-base md:text-xl font-extrabold uppercase tracking-wide md:tracking-widest drop-shadow-md">ข้อมูลส่วนตัว</h3>
                     </div>
 
                     {/* Surname */}
@@ -660,10 +660,10 @@ export default function PremiumAnalysisPage() {
                     {/* Gender */}
                     <div className="space-y-2 md:space-y-3">
                         <label className="text-sm font-bold text-slate-200 ml-1">เพศ</label>
-                        <div className="grid grid-cols-2 gap-3 p-1">
+                        <div className="grid grid-cols-2 gap-2.5 md:gap-3 p-0 md:p-1">
                             <button
                                 onClick={() => setGender('male')}
-                                className={`py-3 md:py-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border ${gender === 'male'
+                                className={`min-h-12 py-3 md:py-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border ${gender === 'male'
                                     ? 'bg-blue-500/10 text-blue-300 border-blue-500/30 ring-1 ring-blue-500/30'
                                     : 'bg-white/5 border-transparent text-slate-400 hover:bg-white/10'
                                     }`}
@@ -672,7 +672,7 @@ export default function PremiumAnalysisPage() {
                             </button>
                             <button
                                 onClick={() => setGender('female')}
-                                className={`py-3 md:py-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border ${gender === 'female'
+                                className={`min-h-12 py-3 md:py-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border ${gender === 'female'
                                     ? 'bg-pink-500/10 text-pink-300 border-pink-500/30 ring-1 ring-pink-500/30'
                                     : 'bg-white/5 border-transparent text-slate-400 hover:bg-white/10'
                                     }`}
@@ -687,7 +687,7 @@ export default function PremiumAnalysisPage() {
                 <div className="lg:col-span-7 flex flex-col h-full mt-2 md:mt-0">
                     <div className="flex items-center gap-3 text-amber-400 mb-4 md:mb-8">
                         <div className="w-1.5 h-6 md:h-7 bg-gradient-to-b from-amber-400 to-amber-600 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
-                        <h3 className="text-lg md:text-xl font-extrabold uppercase tracking-widest drop-shadow-md">เลือกสิ่งที่คุณต้องการเน้น (FOCUS)</h3>
+                        <h3 className="text-base md:text-xl font-extrabold uppercase tracking-wide md:tracking-widest drop-shadow-md">เลือกสิ่งที่คุณต้องการเน้น (FOCUS)</h3>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 flex-1">
@@ -697,7 +697,7 @@ export default function PremiumAnalysisPage() {
                                 <button
                                     key={option.key}
                                     onClick={() => setFocus(option.key)}
-                                    className={`group relative p-4 rounded-2xl border-0 transition-all duration-300 flex items-center gap-4 overflow-hidden
+                                    className={`group relative min-h-20 p-3.5 md:p-4 rounded-2xl border-0 transition-all duration-300 flex items-center gap-3 md:gap-4 overflow-hidden
                                         ${isActive
                                             ? 'bg-amber-500/10 shadow-inner ring-1 ring-amber-500/50'
                                             : 'bg-white/5 hover:bg-white/10'
@@ -741,7 +741,7 @@ export default function PremiumAnalysisPage() {
             </div>
 
             {/* Bottom Action Area */}
-            <div className="mt-12 pt-8 border-t border-white/5 relative z-10">
+            <div className="mt-8 md:mt-12 pt-5 md:pt-8 border-t border-white/5 relative z-10">
                 <div className="flex flex-col items-center justify-center space-y-4">
                     <button
                         onClick={() => handleAnalyze(false)}
@@ -787,7 +787,7 @@ export default function PremiumAnalysisPage() {
     return (
         <div className="min-h-screen bg-[#050b14] text-slate-200 font-sans selection:bg-amber-500/30">
 
-            <main className="w-full max-w-[1400px] min-h-screen relative overflow-hidden pb-20 px-4">
+            <main className="w-full max-w-[1400px] min-h-screen relative overflow-hidden pb-32 md:pb-20 px-3 sm:px-4">
                 {/* Background Decor - Fixed Position */}
                 <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
                     <div className="absolute top-[-20%] left-[20%] w-[1000px] h-[1000px] rounded-full bg-blue-900/10 blur-[130px] opacity-70 animate-pulse" style={{ animationDuration: '8s' }} />
@@ -795,17 +795,17 @@ export default function PremiumAnalysisPage() {
                     <div className="absolute top-[30%] left-[-10%] w-[600px] h-[600px] rounded-full bg-purple-900/10 blur-[120px]" />
                 </div>
 
-                <div className="relative z-10 max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
+                <div className="relative z-10 max-w-7xl px-0 sm:px-6 lg:px-8 space-y-6 md:space-y-8">
 
                     {/* Header Section */}
-                    <header className="text-center space-y-6 pt-6 md:pt-32 pb-8">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/5 border border-amber-500/20 text-amber-400/90 text-xs font-bold tracking-wider uppercase shadow-lg shadow-amber-900/10 backdrop-blur-sm mb-4">
+                    <header className="text-center space-y-4 md:space-y-6 pt-16 md:pt-32 pb-5 md:pb-8">
+                        <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/5 border border-amber-500/20 text-amber-400/90 text-[11px] md:text-xs font-bold tracking-wide md:tracking-wider uppercase shadow-lg shadow-amber-900/10 backdrop-blur-sm mb-1 md:mb-4">
                             <Crown size={14} />
                             <span>Professional Naming Analysis</span>
                         </div>
 
                         <div className="space-y-2">
-                            <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-amber-100 to-amber-500 drop-shadow-sm tracking-tight">
+                            <h1 className="text-[2rem] sm:text-4xl md:text-6xl font-black text-white md:text-transparent md:bg-clip-text md:bg-gradient-to-br md:from-white md:via-amber-100 md:to-amber-500 drop-shadow-sm tracking-tight leading-tight">
                                 วิเคราะห์ชื่อมงคลขั้นสูง
                             </h1>
                             <div className="h-1 w-24 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto rounded-full opacity-50"></div>

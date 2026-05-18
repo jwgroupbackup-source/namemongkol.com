@@ -305,32 +305,32 @@ export default function NameAnalysisPage() {
 
     return (
         <div className="min-h-screen bg-[#0f172a] text-slate-200 font-sans selection:bg-indigo-500/30">
-            <main className="w-full max-w-[1400px] transition-all duration-300 min-h-screen px-4 pt-20 md:pt-32 pb-28 relative overflow-hidden">
+            <main className="w-full max-w-[1400px] transition-all duration-300 min-h-screen px-3 sm:px-4 pt-16 md:pt-32 pb-32 relative overflow-hidden">
                 {/* Background Decor */}
                 <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
                     <div className="absolute top-[10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px]" />
                     <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-fuchsia-500/10 blur-[120px]" />
                 </div>
 
-                <div className="relative z-10 max-w-7xl space-y-8 pt-8">
+                <div className="relative z-10 max-w-7xl space-y-5 sm:space-y-8 pt-3 sm:pt-8">
                     {/* Header Section */}
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                        <div className="flex items-center gap-6">
-                            <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-violet-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
-                                <ClipboardList className="w-8 h-8" />
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
+                        <div className="flex items-start sm:items-center gap-3 sm:gap-6">
+                            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-indigo-600 to-violet-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 shrink-0">
+                                <ClipboardList className="w-6 h-6 sm:w-8 sm:h-8" />
                             </div>
                             <div>
-                                <h1 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-200 via-purple-200 to-indigo-200">
+                                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-indigo-100 leading-tight">
                                     เช็คชื่อมงคล วิเคราะห์หลายชื่อพร้อมกัน
                                 </h1>
-                                <p className="text-indigo-300/80 font-medium text-sm flex items-center gap-2 mt-2">
-                                    <CheckCircle2 className="w-4 h-4" /> จัดเกรด A+ ตรวจคู่เลข กาลกิณี สูงสุด 1,000 ชื่อ
+                                <p className="text-indigo-300/80 font-medium text-xs sm:text-sm flex items-start sm:items-center gap-2 mt-2 leading-relaxed">
+                                    <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 sm:mt-0" /> จัดเกรด A+ ตรวจคู่เลข กาลกิณี สูงสุด 1,000 ชื่อ
                                 </p>
                             </div>
                         </div>
                         {/* Credits Balance (Optional Display) */}
                         {userCredits !== null && (
-                            <div className="bg-white/5 border border-white/10 px-4 py-2 rounded-xl flex items-center gap-3">
+                            <div className="bg-white/5 border border-white/10 px-4 py-2 rounded-xl flex items-center justify-between gap-3">
                                 <span className="text-slate-400 text-sm">เครดิตคงเหลือ</span>
                                 <div className="flex items-center gap-1.5">
                                     <span className="text-amber-400 font-bold text-xl">{userCredits}</span>
@@ -340,10 +340,10 @@ export default function NameAnalysisPage() {
                         )}
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start">
                         {/* Input Panel */}
-                        <div className="lg:col-span-4 space-y-6 sticky top-8">
-                            <div className="flex flex-col gap-4">
+                        <div className="lg:col-span-4 space-y-4 sm:space-y-6 lg:sticky lg:top-8">
+                            <div className="flex flex-col gap-3 sm:gap-4">
                                 <div className="flex justify-between items-center px-1">
                                     <h3 className="font-bold text-slate-300 uppercase tracking-wider text-xs flex items-center gap-2">
                                         <Hash className="w-4 h-4 text-indigo-400" />
@@ -358,7 +358,7 @@ export default function NameAnalysisPage() {
                                 </div>
                                 <div>
                                     <textarea
-                                        className="w-full h-[280px] p-6 text-lg border border-white/5 rounded-2xl focus:ring-1 focus:ring-amber-500/40 focus:border-amber-500/40 outline-none transition-all resize-none bg-slate-900/30 text-slate-200 placeholder:text-slate-600 font-medium custom-scrollbar leading-loose shadow-inner"
+                                        className="w-full h-[220px] sm:h-[280px] p-4 sm:p-6 text-base sm:text-lg border border-white/5 rounded-2xl focus:ring-1 focus:ring-amber-500/40 focus:border-amber-500/40 outline-none transition-all resize-none bg-slate-900/30 text-slate-200 placeholder:text-slate-600 font-medium custom-scrollbar leading-loose shadow-inner"
                                         placeholder="วางรายชื่อที่นี่...&#10;เช่น:&#10;ณวิธ&#10;กลิ่นหอม"
                                         value={inputText}
                                         onChange={(e) => setInputText(e.target.value)}
@@ -367,7 +367,7 @@ export default function NameAnalysisPage() {
 
                                 {/* Analysis Action */}
                                 <div>
-                                    <div className="flex flex-col gap-4">
+                                    <div className="flex flex-col gap-3 sm:gap-4">
                                         <div className="flex justify-between items-center text-sm px-1">
                                             <span className="text-slate-400">รายการวิเคราะห์:</span>
                                             <span className="font-bold text-white">{currentCount} รายชื่อ</span>
@@ -383,7 +383,7 @@ export default function NameAnalysisPage() {
                                             onClick={handleAnalyzeClick}
                                             disabled={isAnalyzing || currentCount === 0 || currentCount > 1000}
                                             data-track="nameAnalysis.form.analyze"
-                                            className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl shadow-[0_0_20px_rgba(79,70,229,0.15)] transition-all font-bold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden text-lg"
+                                            className="w-full py-3.5 sm:py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl shadow-[0_0_20px_rgba(79,70,229,0.15)] transition-all font-bold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden text-base sm:text-lg"
                                         >
                                             {isAnalyzing ? (
                                                 <>
@@ -402,7 +402,7 @@ export default function NameAnalysisPage() {
 
                                 {/* Pricing Info */}
                                 <div>
-                                    <div className="bg-white/5 p-5 rounded-2xl border border-white/5 space-y-3">
+                                    <div className="bg-white/5 p-4 sm:p-5 rounded-2xl border border-white/5 space-y-3">
                                         <p className="text-xs font-bold text-slate-300 uppercase flex items-center gap-2">
                                             <Info className="w-4 h-4" /> อัตราค่าบริการ (Credit)
                                         </p>
@@ -427,10 +427,10 @@ export default function NameAnalysisPage() {
 
                         {/* Results Display */}
                         <div className="lg:col-span-8">
-                            <div ref={printRef} className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl min-h-[720px] flex flex-col pt-0">
+                            <div ref={printRef} className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl min-h-[520px] sm:min-h-[720px] flex flex-col pt-0">
                                 {/* Actions Toolbar */}
                                 {(results.length > 0) && (
-                                    <div className="p-4 border-b border-white/[0.02] flex gap-3 justify-end bg-white/[0.01]">
+                                    <div className="p-3 sm:p-4 border-b border-white/[0.02] flex gap-2 sm:gap-3 justify-start sm:justify-end bg-white/[0.01] overflow-x-auto">
                                         <button
                                             onClick={() => setIsSorted(!isSorted)}
                                             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-xs font-bold border ${isSorted
@@ -466,13 +466,13 @@ export default function NameAnalysisPage() {
                                     </div>
                                 </div>
 
-                                <div className="p-6 border-b border-white/5 bg-white/[0.02] font-bold text-slate-200 flex justify-between items-center">
-                                    <span className="flex items-center gap-2 text-lg">ตารางวิเคราะห์ผลลัพธ์</span>
+                                <div className="p-4 sm:p-6 border-b border-white/5 bg-white/[0.02] font-bold text-slate-200 flex justify-between items-center gap-3">
+                                    <span className="flex items-center gap-2 text-base sm:text-lg">ตารางวิเคราะห์ผลลัพธ์</span>
                                     {isSorted && <span className="text-xs text-amber-400 bg-amber-500/10 px-2 py-1 rounded border border-amber-500/20">เรียงตามความมงคล</span>}
                                 </div>
                                 <div className="flex-1 overflow-auto custom-scrollbar">
                                     {sortedResults.length > 0 ? (
-                                        <table className="w-full text-left border-collapse min-w-[700px]">
+                                        <table className="w-full text-left border-collapse min-w-[640px]">
                                             <thead className="bg-indigo-950/40 sticky top-0 z-10 backdrop-blur-md">
                                                 <tr className="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-white/5">
                                                     <th className="px-6 py-4 w-16 text-center">#</th>
@@ -555,7 +555,7 @@ export default function NameAnalysisPage() {
                                             </tbody>
                                         </table>
                                     ) : (
-                                        <div className="flex-1 flex flex-col items-center justify-center text-slate-500 gap-6 py-32">
+                                        <div className="flex-1 flex flex-col items-center justify-center text-slate-500 gap-5 sm:gap-6 py-20 sm:py-32 px-4">
                                             <div className="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center border border-white/5">
                                                 <Search className="w-8 h-8 opacity-30 text-white" />
                                             </div>

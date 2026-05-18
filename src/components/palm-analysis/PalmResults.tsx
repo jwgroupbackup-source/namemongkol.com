@@ -54,8 +54,8 @@ function ScoreRing({
   const c = colorMap[color] || colorMap.blue;
 
   return (
-    <div className={`flex flex-col items-center gap-2 p-4 rounded-2xl bg-gradient-to-b ${c.bg} backdrop-blur-xl border border-white/10`}>
-      <div className={`relative w-24 h-24 ${c.glow}`}>
+    <div className={`flex flex-col items-center gap-2 p-3 sm:p-4 rounded-2xl bg-gradient-to-b ${c.bg} backdrop-blur-xl border border-white/10`}>
+      <div className={`relative w-20 h-20 sm:w-24 sm:h-24 ${c.glow}`}>
         <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r={radius} fill="none" className="stroke-slate-800" strokeWidth="6" />
           <circle
@@ -71,12 +71,12 @@ function ScoreRing({
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className={`text-2xl font-bold ${c.text}`}>{score}</span>
+          <span className={`text-xl sm:text-2xl font-bold ${c.text}`}>{score}</span>
         </div>
       </div>
       <div className="flex items-center gap-1.5">
         <Icon className={`w-4 h-4 ${c.text}`} />
-        <span className="text-slate-200 text-sm font-medium">{label}</span>
+        <span className="text-slate-200 text-xs sm:text-sm font-medium">{label}</span>
       </div>
     </div>
   );
@@ -101,10 +101,10 @@ function LineCard({
   const c = colorMap[accentColor] || colorMap.blue;
 
   return (
-    <div className={`bg-slate-900/40 backdrop-blur-xl border ${c.border} border-white/5 rounded-2xl p-5 shadow-xl`}>
+    <div className={`bg-slate-900/40 backdrop-blur-xl border ${c.border} border-white/5 rounded-2xl p-4 sm:p-5 shadow-xl`}>
       <div className="flex items-center gap-2 mb-3">
         <Icon className={`w-5 h-5 ${c.icon}`} />
-        <h4 className="text-white font-semibold text-lg">{analysis.title}</h4>
+        <h4 className="text-white font-semibold text-base sm:text-lg">{analysis.title}</h4>
       </div>
       <p className="text-slate-300 text-sm leading-relaxed mb-2">{analysis.description}</p>
       {analysis.prediction && (
@@ -129,15 +129,15 @@ export default function PalmResults({ result }: PalmResultsProps) {
   return (
     <section className="w-full max-w-3xl mx-auto space-y-6" aria-label="ผลการวิเคราะห์ลายมือ">
       {/* Header */}
-      <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 p-5 sm:p-6">
-        <h2 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-amber-300 mb-2 flex items-center gap-2">
+      <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 p-4 sm:p-6">
+        <h2 className="text-xl sm:text-3xl font-bold text-amber-200 mb-2 flex items-center gap-2">
           <Sparkles className="w-6 h-6 text-amber-400" />
           ผลการวิเคราะห์ลายมือ
         </h2>
         <p className="text-slate-300 text-sm sm:text-base">สรุปภาพรวมจาก AI ตามหลักหัตถศาสตร์ ใช้เป็นแนวโน้มเพื่อสะท้อนตัวเองและวางแผนเชิงบวก</p>
       </div>
 
-      <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 p-5 sm:p-6">
+      <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 p-4 sm:p-6">
         <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
           <Star className="w-5 h-5 text-amber-400" />
           สรุปผลการวิเคราะห์
@@ -146,7 +146,7 @@ export default function PalmResults({ result }: PalmResultsProps) {
       </div>
 
       {/* ── Score Rings (Love / Career / Health / Destiny) ── */}
-      <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 p-5 sm:p-6">
+      <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 p-4 sm:p-6">
         <h3 className="text-lg font-semibold text-white mb-4">คะแนนภาพรวม 4 ด้าน</h3>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           <ScoreRing score={result.scores.love} label="ความรัก" icon={Heart} color="pink" />
@@ -157,8 +157,8 @@ export default function PalmResults({ result }: PalmResultsProps) {
       </div>
 
       {/* ── Line Analysis (Life / Head / Heart) ── */}
-      <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 p-5 sm:p-6">
-        <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+      <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 p-4 sm:p-6">
+        <h3 className="text-lg sm:text-xl font-semibold text-white mb-4 flex items-center gap-2">
           <Eye className="w-5 h-5 text-purple-400" />
           วิเคราะห์เส้นลายมือ
         </h3>

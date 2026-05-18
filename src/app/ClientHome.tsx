@@ -327,7 +327,7 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
 
     return (
         <div className="relative min-h-screen overflow-hidden font-sans text-slate-100 selection:bg-amber-500 selection:text-white">
-            <main className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 pt-16 md:pt-28 pb-6 md:pb-28 flex flex-col items-center min-h-[80vh]">
+            <main className="relative z-10 w-full max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-12 xl:px-16 pt-14 md:pt-28 pb-24 md:pb-28 flex flex-col items-center min-h-[80vh]">
 
                 {!result ? (
                     <div className="w-full max-w-2xl flex flex-col items-center">

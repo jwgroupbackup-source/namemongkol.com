@@ -620,21 +620,21 @@ export default function PremiumSearchPage() {
     return (
         <div className="min-h-screen bg-[#0f172a] text-slate-200 font-sans selection:bg-amber-500/30">
 
-            <main className="w-full max-w-[1400px] transition-all duration-300 min-h-screen px-4 pt-24 md:pt-32 pb-24 md:pb-28 relative">
+            <main className="w-full max-w-[1400px] transition-all duration-300 min-h-screen px-3 sm:px-4 pt-16 md:pt-32 pb-32 md:pb-28 relative">
                 {/* Background Gradients */}
                 <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
                     <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-amber-500/10 blur-[100px]" />
                     <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-blue-500/10 blur-[100px]" />
                 </div>
 
-                <div className="relative z-10 max-w-6xl space-y-5 md:space-y-8">
+                <div className="relative z-10 max-w-6xl space-y-4 md:space-y-8">
                     {/* Header */}
-                    <header className="text-center space-y-3">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium animate-pulse">
+                    <header className="text-center space-y-2.5 md:space-y-3">
+                        <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs sm:text-sm font-medium">
                             <Sparkles size={14} />
                             <span>{t('pages.premiumSearch.headerBadge')}</span>
                         </div>
-                        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-emerald-400 drop-shadow-2xl tracking-tight leading-tight">
+                        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-emerald-300 drop-shadow-2xl tracking-tight leading-tight">
                             {t('pages.premiumSearch.headerTitle')}
                         </h1>
                         <div className="max-w-[65ch] mx-auto space-y-2">
@@ -651,19 +651,19 @@ export default function PremiumSearchPage() {
                                     <Link href="/" className="underline decoration-emerald-500/50 hover:text-emerald-300 transition-colors">{t('sidebar.analyzeName')}</Link>
                                 </p>
                             </div>
-                            <p className="text-slate-500 text-xs md:text-sm pt-2 md:pt-4">
+                            <p className="text-slate-500 text-xs md:text-sm pt-1 md:pt-4">
                                 คาดว่าจะพบ <span className="text-emerald-400 font-semibold">{filteredCount}</span> รายชื่อจากเงื่อนไขนี้
                             </p>
                         </div>
                     </header>
 
                     {/* Search Controls */}
-                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl animate-fade-in-up md:mx-auto max-w-4xl relative overflow-visible group">
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-3xl p-3.5 sm:p-6 md:p-8 shadow-2xl animate-fade-in-up md:mx-auto max-w-4xl relative overflow-visible group">
 
                         {/* inputs */}
-                        <div className="grid grid-cols-2 md:grid-cols-12 gap-2.5 md:gap-6 relative z-10">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3 md:gap-6 relative z-10">
                             {/* Filters */}
-                            <div className="col-span-1 md:col-span-4">
+                            <div className="md:col-span-4">
                                 <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 md:mb-2">{t('pages.premiumSearch.filters.dayLabel')}</label>
                                 <div className="relative">
                                     <select
@@ -688,12 +688,12 @@ export default function PremiumSearchPage() {
                                 </div>
                             </div>
 
-                            <div className="col-span-2 md:col-span-4">
+                            <div className="md:col-span-4">
                                 <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 md:mb-2">{t('pages.premiumSearch.filters.scoreLabel')}</label>
                                 <ScoreDropdown value={targetScore} onChange={setTargetScore} scores={uniqueScores} disabled={isLoading} />
                             </div>
 
-                            <div className="col-span-1 md:col-span-4">
+                            <div className="md:col-span-4">
                                 <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 md:mb-2">{t('pages.premiumSearch.filters.genderLabel')}</label>
                                 <div className="relative">
                                     <select
@@ -714,15 +714,15 @@ export default function PremiumSearchPage() {
                             </div>
 
                             {/* Leading Character Filter (Replaces Search) */}
-                            <div className="col-span-2 md:col-span-12">
+                            <div className="sm:col-span-2 md:col-span-12">
                                 <label className="block text-xs font-bold uppercase tracking-wider mb-2 md:mb-4 text-slate-400 transition-colors">
                                     {t('pages.premiumSearch.leading.label')}{' '}
                                     {selectedDay === 'All' && (
                                         <span className="text-amber-500/80 ml-2 normal-case font-normal">{t('pages.premiumSearch.leading.hint')}</span>
                                     )}
                                 </label>
-                                <div className="flex flex-wrap items-center gap-3 md:gap-6">
-                                    <label className="flex items-center gap-3 cursor-pointer group">
+                                <div className="grid grid-cols-1 sm:flex sm:flex-wrap sm:items-center gap-2.5 md:gap-6">
+                                    <label className="flex items-center gap-3 cursor-pointer group rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0">
                                         <div className="relative flex items-center">
                                             <input
                                                 type="radio"
@@ -739,7 +739,7 @@ export default function PremiumSearchPage() {
                                         </span>
                                     </label>
 
-                                    <label className="flex items-center gap-3 cursor-pointer group">
+                                    <label className="flex items-center gap-3 cursor-pointer group rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0">
                                         <div className="relative flex items-center">
                                             <input
                                                 type="radio"
@@ -756,7 +756,7 @@ export default function PremiumSearchPage() {
                                         </span>
                                     </label>
 
-                                    <label className="flex items-center gap-3 cursor-pointer group">
+                                    <label className="flex items-center gap-3 cursor-pointer group rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0">
                                         <div className="relative flex items-center">
                                             <input
                                                 type="radio"
@@ -776,7 +776,7 @@ export default function PremiumSearchPage() {
                             </div>
 
                             {/* First Letter Filter (ก-ฮ) */}
-                            <div className="col-span-2 md:col-span-12">
+                            <div className="sm:col-span-2 md:col-span-12">
                                 <div className="space-y-2">
                                     <div className="flex items-center gap-2 text-xs md:text-sm text-slate-400">
                                         <Type className="w-3.5 h-3.5 md:w-4 md:h-4" />
@@ -793,7 +793,7 @@ export default function PremiumSearchPage() {
                                             </button>
                                         )}
                                     </div>
-                                    <div className="flex flex-wrap gap-1 md:gap-1.5">
+                                    <div className="flex max-h-24 flex-wrap gap-1 md:gap-1.5 overflow-y-auto pr-1 custom-scrollbar sm:max-h-none sm:overflow-visible">
                                         <button
                                             onClick={() => setSelectedFirstLetters(new Set())}
                                             className={`px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all ${
@@ -828,11 +828,11 @@ export default function PremiumSearchPage() {
                                 onClick={handleSearch}
                                 disabled={isLoading}
                                 data-track="premiumSearch.form.search"
-                                className="group relative inline-flex items-center gap-2 md:gap-3 px-5 py-3 md:px-8 md:py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl md:rounded-2xl shadow-lg shadow-emerald-500/20 transition-all hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 disabled:cursor-not-allowed flex-1 justify-center max-w-md"
+                                className="group relative inline-flex items-center gap-2 md:gap-3 px-5 py-3.5 md:px-8 md:py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl md:rounded-2xl shadow-lg shadow-emerald-500/20 transition-all hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 disabled:cursor-not-allowed flex-1 justify-center max-w-md"
                             >
                                 {isLoading ? <span className="animate-spin">⏳</span> : <Search size={20} />}
                                 <span className="text-sm md:text-lg">{t('pages.premiumSearch.actions.search')}</span>
-                                <span className="ml-1 md:ml-2 bg-emerald-700/40 px-2 md:px-3 py-0.5 md:py-1 rounded-md md:rounded-lg text-xs md:text-sm font-semibold flex items-center gap-1 border border-emerald-600/50">
+                                <span className="ml-1 md:ml-2 bg-emerald-700/40 px-2 md:px-3 py-0.5 md:py-1 rounded-md md:rounded-lg text-[11px] md:text-sm font-semibold flex items-center gap-1 border border-emerald-600/50">
                                     <Lock size={12} /> {t('pages.premiumSearch.actions.searchCost')}
                                 </span>
                             </button>

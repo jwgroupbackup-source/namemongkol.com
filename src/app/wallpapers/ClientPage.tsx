@@ -542,26 +542,26 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
     };
 
     return (
-        <div className="w-full max-w-[1400px] px-4 pt-24 md:pt-32 pb-28 min-h-screen bg-[#050b14] text-slate-200">
-            <div className="max-w-7xl mx-auto space-y-8">
+        <div className="w-full max-w-[1400px] px-3 sm:px-4 pt-16 md:pt-32 pb-28 min-h-screen bg-[#050b14] text-slate-200">
+            <div className="max-w-7xl mx-auto space-y-5 md:space-y-8">
 
                 {/* Header */}
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-3 md:gap-4">
                     <div>
-                        <h1 className="text-3xl md:text-5xl font-bold text-amber-200 mb-2">
+                        <h1 className="text-[1.9rem] sm:text-3xl md:text-5xl font-bold text-amber-200 mb-1.5 md:mb-2 leading-tight">
                             วอลเปเปอร์มงคล เสริมดวงชะตา บารมี และโชคลาภ
                         </h1>
-                        <p className="text-slate-400">
+                        <p className="text-sm md:text-base text-slate-400 leading-relaxed max-w-[70ch]">
                             ยกระดับพลังบวกให้กับชีวิตทุกครั้งที่เปิดหน้าจอมือถือ ด้วยพลังแห่งภาพมงคลและสีมงคลตามวันเกิด
                         </p>
                     </div>
 
                     {/* Main Tabs + Share */}
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                        <div className="flex w-full sm:w-fit bg-slate-800 p-1.5 rounded-2xl border border-white/10">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 md:gap-3">
+                        <div className="flex w-full sm:w-fit bg-slate-800 p-1 rounded-xl md:p-1.5 md:rounded-2xl border border-white/10">
                             <button
                                 onClick={() => navigateTab('collection')}
-                                className={`flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex items-center justify-center gap-1.5 sm:gap-2 ${activeTab === 'collection'
+                                className={`flex-1 sm:flex-none px-2.5 sm:px-6 py-2.5 sm:py-3 rounded-lg md:rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex items-center justify-center gap-1.5 sm:gap-2 ${activeTab === 'collection'
                                     ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
                                     : 'text-slate-400 hover:text-white hover:bg-slate-700'
                                     }`}
@@ -571,7 +571,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                             </button>
                             <button
                                 onClick={() => navigateTab('custom')}
-                                className={`flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex items-center justify-center gap-1.5 sm:gap-2 ${activeTab === 'custom'
+                                className={`flex-1 sm:flex-none px-2.5 sm:px-6 py-2.5 sm:py-3 rounded-lg md:rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex items-center justify-center gap-1.5 sm:gap-2 ${activeTab === 'custom'
                                     ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/20'
                                     : 'text-slate-400 hover:text-white hover:bg-slate-700'
                                     }`}
@@ -584,7 +584,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                         {/* Share / Copy Link */}
                         <button
                             onClick={handleCopyLink}
-                            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-800 border border-white/10 text-slate-300 hover:bg-slate-700 hover:text-white transition-all w-full sm:w-auto"
+                            className="flex min-h-10 items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-800 border border-white/10 text-slate-300 hover:bg-slate-700 hover:text-white transition-all w-full sm:w-auto"
                         >
                             {showCopied ? <Check size={16} className="text-emerald-400" /> : <Share2 size={16} />}
                             {showCopied ? 'คัดลอกแล้ว!' : 'แชร์ลิงก์หมวดนี้'}
@@ -596,14 +596,14 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                     {activeTab === 'collection' ? (
                         <div
                             key="collection"
-                            className="space-y-6 animate-fade-in-up"
+                            className="space-y-4 md:space-y-6 animate-fade-in-up"
                         >
                             {/* Category Selector */}
-                            <div className="space-y-4">
-                                <div className="flex gap-2">
+                            <div className="sticky top-[58px] z-30 -mx-3 space-y-2.5 border-y border-white/5 bg-[#050b14]/92 px-3 py-2.5 backdrop-blur-xl md:static md:mx-0 md:space-y-4 md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
+                                <div className="grid grid-cols-2 gap-2 sm:flex">
                                     <button
                                         onClick={() => navigateCategory('day')}
-                                        className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                                        className={`flex min-h-11 items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                                             selectedCategory === 'day'
                                                 ? 'bg-amber-500/15 text-amber-300 border border-amber-500/40'
                                                 : 'bg-slate-800 text-slate-400 border border-white/10 hover:text-white hover:bg-slate-700'
@@ -614,7 +614,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                     </button>
                                     <button
                                         onClick={() => navigateCategory('zodiac')}
-                                        className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                                        className={`flex min-h-11 items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                                             selectedCategory === 'zodiac'
                                                 ? 'bg-purple-500/15 text-purple-300 border border-purple-500/40'
                                                 : 'bg-slate-800 text-slate-400 border border-white/10 hover:text-white hover:bg-slate-700'
@@ -627,39 +627,47 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
 
                                 {/* Day Filter - show when 'day' category is selected */}
                                 {selectedCategory === 'day' && (
-                                    <div className="flex bg-slate-800/80 p-1.5 rounded-xl border border-white/10 overflow-x-auto max-w-full no-scrollbar w-fit">
-                                        {DAYS.map((d) => (
-                                            <button
-                                                key={d.value}
-                                                onClick={() => navigateDay(d.value)}
-                                                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${selectedDay === d.value
-                                                    ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
-                                                    : 'text-slate-400 hover:text-white hover:bg-slate-700'
-                                                    }`}
-                                            >
-                                                <span className={`w-2 h-2 rounded-full flex-shrink-0 ${DAY_COLORS[d.value] ?? 'bg-slate-500'}`} />
-                                                {d.label}
-                                            </button>
-                                        ))}
+                                    <div className="relative">
+                                        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-5 rounded-l-xl bg-gradient-to-r from-[#050b14] to-transparent md:hidden" />
+                                        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 rounded-r-xl bg-gradient-to-l from-[#050b14] to-transparent md:hidden" />
+                                        <div className="flex w-full max-w-full overflow-x-auto no-scrollbar rounded-xl border border-white/10 bg-slate-800/80 p-1.5 pr-4">
+                                            {DAYS.map((d) => (
+                                                <button
+                                                    key={d.value}
+                                                    onClick={() => navigateDay(d.value)}
+                                                    className={`flex min-h-10 items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${selectedDay === d.value
+                                                        ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
+                                                        : 'text-slate-400 hover:text-white hover:bg-slate-700'
+                                                        }`}
+                                                >
+                                                    <span className={`w-2 h-2 rounded-full flex-shrink-0 ${DAY_COLORS[d.value] ?? 'bg-slate-500'}`} />
+                                                    {d.label}
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
                                 )}
 
                                 {/* Zodiac Filter - show when 'zodiac' category is selected */}
                                 {selectedCategory === 'zodiac' && (
-                                    <div className="flex bg-slate-800/80 p-1.5 rounded-xl border border-white/10 overflow-x-auto max-w-full no-scrollbar">
-                                        {ZODIAC_SIGNS.map((z) => (
-                                            <button
-                                                key={z.value}
-                                                onClick={() => navigateZodiac(z.value)}
-                                                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${selectedZodiac === z.value
-                                                    ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/20'
-                                                    : 'text-slate-400 hover:text-white hover:bg-slate-700'
-                                                    }`}
-                                            >
-                                                <span className="text-base">{z.emoji}</span>
-                                                {z.label}
-                                            </button>
-                                        ))}
+                                    <div className="relative">
+                                        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-5 rounded-l-xl bg-gradient-to-r from-[#050b14] to-transparent md:hidden" />
+                                        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 rounded-r-xl bg-gradient-to-l from-[#050b14] to-transparent md:hidden" />
+                                        <div className="flex w-full max-w-full overflow-x-auto no-scrollbar rounded-xl border border-white/10 bg-slate-800/80 p-1.5 pr-4">
+                                            {ZODIAC_SIGNS.map((z) => (
+                                                <button
+                                                    key={z.value}
+                                                    onClick={() => navigateZodiac(z.value)}
+                                                    className={`flex min-h-10 items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${selectedZodiac === z.value
+                                                        ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/20'
+                                                        : 'text-slate-400 hover:text-white hover:bg-slate-700'
+                                                        }`}
+                                                >
+                                                    <span className="text-base">{z.emoji}</span>
+                                                    {z.label}
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
                                 )}
                             </div>
@@ -675,7 +683,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                     return (
                                     <div
                                         key={wp.id}
-                                        className={`group relative rounded-2xl overflow-hidden bg-slate-800 border border-white/10 hover:border-amber-500/50 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-xl cursor-pointer will-change-transform ${isFeatured ? 'col-span-2 row-span-2 aspect-auto' : 'aspect-[9/16]'}`}
+                                        className={`group relative rounded-2xl overflow-hidden bg-slate-800 border border-white/10 hover:border-amber-500/50 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-xl cursor-pointer will-change-transform ${isFeatured ? 'col-span-2 aspect-[4/5] md:aspect-[9/16] lg:row-span-2 lg:min-h-[420px] lg:aspect-auto' : 'aspect-[9/16]'}`}
                                         onClick={() => {
                                             setSelectedWallpaper(wp);
                                             trackIdle('wallpapers.card.open_detail', {
@@ -694,7 +702,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                             src={wp.image}
                                             alt={buildWallpaperAlt(wp)}
                                             fill
-                                            sizes={isFeatured ? "(max-width: 640px) 100vw, (max-width: 1024px) 65vw, 42vw" : "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 20vw, 15vw"}
+                                            sizes={isFeatured ? "(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 38vw" : "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 20vw, 15vw"}
                                             className="object-cover transition-transform duration-500 will-change-transform group-hover:scale-105"
                                             priority={idx < 4}
                                             loading={idx < 4 ? 'eager' : 'lazy'}
@@ -705,6 +713,31 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                         {/* Overlay */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80" />
 
+                                        {/* Direct CTA */}
+                                        <button
+                                            type="button"
+                                            onClick={(event) => {
+                                                event.stopPropagation();
+                                                handleDownload(wp);
+                                            }}
+                                            disabled={downloadingId === wp.id}
+                                            className={`absolute left-2 top-2 z-20 inline-flex min-h-8 items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold shadow-lg transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-70 ${
+                                                wp.premium
+                                                    ? 'bg-amber-500 text-black shadow-amber-500/20 hover:bg-amber-400'
+                                                    : 'bg-white text-slate-950 shadow-white/10 hover:bg-slate-100'
+                                            }`}
+                                            aria-label={wp.premium ? `แลก ${getWallpaperCost(wp)} เครดิต` : 'ดาวน์โหลดฟรี'}
+                                        >
+                                            <Download size={11} />
+                                            <span className="hidden min-[390px]:inline">
+                                                {downloadingId === wp.id
+                                                    ? 'กำลังโหลด'
+                                                    : wp.premium
+                                                        ? `${getWallpaperCost(wp)} เครดิต`
+                                                        : 'ดาวน์โหลด'}
+                                            </span>
+                                        </button>
+
                                         {/* Badges */}
                                         <div className="absolute top-2 right-2 flex flex-col items-end gap-1">
                                             {wp.premium && (
@@ -712,19 +745,24 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                                     <Lock size={8} /> {getWallpaperCost(wp)} เครดิต
                                                 </span>
                                             )}
-                                            <span className="bg-black/60 text-white/80 text-[10px] font-medium px-2 py-1 rounded-full flex items-center gap-1">
+                                            <span className={`${isFeatured ? 'flex' : 'hidden sm:flex'} bg-black/60 text-white/80 text-[10px] font-medium px-2 py-1 rounded-full items-center gap-1`}>
                                                 <Download size={8} /> {wp.downloads.toLocaleString()}
                                             </span>
                                         </div>
 
                                         {/* Content */}
-                                        <div className="absolute bottom-0 left-0 w-full p-3">
-                                            <h3 className={`text-white font-bold line-clamp-1 mb-1 ${isFeatured ? 'text-base' : 'text-sm'}`}>{wp.name}</h3>
-                                            {isFeatured && wp.description && (
-                                                <p className="text-slate-300 text-xs line-clamp-2 mb-2 leading-relaxed">{wp.description.slice(0, 80)}…</p>
+                                        <div className="absolute bottom-0 left-0 w-full p-2.5 md:p-3">
+                                            {isFeatured && (
+                                                <span className="mb-2 inline-flex rounded-full bg-amber-500/90 px-2.5 py-1 text-[10px] font-black text-black shadow-lg shadow-amber-500/20">
+                                                    ยอดนิยม
+                                                </span>
                                             )}
-                                            <div className="flex flex-wrap gap-1">
-                                                {wp.tags.slice(0, isFeatured ? 4 : 3).map(t => (
+                                            <h3 className={`text-white font-bold line-clamp-1 mb-1 ${isFeatured ? 'text-base md:text-lg' : 'text-sm'}`}>{wp.name}</h3>
+                                            {isFeatured && wp.description && (
+                                                <p className="text-slate-300 text-xs md:text-sm line-clamp-2 mb-2 leading-relaxed">{wp.description.slice(0, 96)}…</p>
+                                            )}
+                                            <div className={`${isFeatured ? 'flex' : 'hidden sm:flex'} flex-wrap gap-1`}>
+                                                {wp.tags.slice(0, isFeatured ? 3 : 2).map(t => (
                                                     <span key={t} className="text-[9px] text-slate-300 bg-white/10 px-1.5 py-0.5 rounded-md">
                                                         #{t}
                                                     </span>

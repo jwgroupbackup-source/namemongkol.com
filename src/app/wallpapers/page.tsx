@@ -155,11 +155,11 @@ export default function WallpapersPage() {
 
             {/* ===== Interactive Client Gallery ===== */}
             <Suspense fallback={
-                <div className="w-full max-w-[1400px] px-4 pt-24 md:pt-32 pb-28 min-h-screen bg-[#050b14] text-slate-200">
-                    <div className="max-w-7xl mx-auto space-y-8">
-                        <div className="flex flex-col gap-4">
-                            <div className="h-12 w-3/4 bg-slate-800 rounded-xl animate-pulse" />
-                            <div className="h-6 w-1/2 bg-slate-800/60 rounded-lg animate-pulse" />
+                <div className="w-full max-w-[1400px] px-3 sm:px-4 pt-16 md:pt-32 pb-28 min-h-screen bg-[#050b14] text-slate-200">
+                    <div className="max-w-7xl mx-auto space-y-5 md:space-y-8">
+                        <div className="flex flex-col gap-3 md:gap-4">
+                            <div className="h-9 md:h-12 w-4/5 md:w-3/4 bg-slate-800 rounded-xl animate-pulse" />
+                            <div className="h-5 md:h-6 w-2/3 md:w-1/2 bg-slate-800/60 rounded-lg animate-pulse" />
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
                             {Array.from({ length: 8 }).map((_, i) => (
@@ -173,27 +173,23 @@ export default function WallpapersPage() {
             </Suspense>
 
             {/* ===== SEO Content Sections (Server-Rendered) ===== */}
-            <div className="w-full max-w-[1400px] px-4 pb-28 bg-[#0f172a] text-slate-200">
-                <div className="max-w-5xl mx-auto space-y-16">
+            <div className="w-full max-w-[1400px] px-3 sm:px-4 pb-28 bg-[#0f172a] text-slate-200">
+                <div className="max-w-5xl mx-auto space-y-12 md:space-y-16">
 
                     {/* --- Section 1: Hero Intro --- */}
-                    <section className="relative">
-                        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                            <div className="absolute top-[-50%] left-[-20%] w-[500px] h-[500px] bg-amber-600/5 rounded-full blur-[120px]"></div>
-                            <div className="absolute bottom-[-50%] right-[-20%] w-[400px] h-[400px] bg-purple-600/5 rounded-full blur-[120px]"></div>
-                        </div>
-                        <div className="relative bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-sm rounded-3xl border border-white/10 p-8 md:p-12">
+                    <section className="relative border-t border-white/10 pt-8 md:pt-12">
+                        <div className="relative max-w-3xl">
                             <div className="flex items-center gap-2 mb-4">
                                 <Sparkles className="w-5 h-5 text-amber-400" />
                                 <span className="text-xs font-bold text-amber-300 uppercase tracking-widest">Auspicious Wallpapers</span>
                             </div>
-                            <h2 className="text-2xl md:text-4xl font-bold text-white mb-6 leading-tight">
-                                เปลี่ยนหน้าจอมือถือให้เป็น<span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-400">ขุมทรัพย์แห่งความโชคดี</span>
+                            <h2 className="text-2xl md:text-4xl font-bold text-white mb-5 leading-tight">
+                                เปลี่ยนหน้าจอมือถือให้เป็น<span className="text-amber-300">ขุมทรัพย์แห่งความโชคดี</span>
                             </h2>
-                            <p className="text-slate-300 leading-relaxed text-base md:text-lg mb-6">
+                            <p className="text-slate-300 leading-relaxed text-base md:text-lg mb-5 max-w-[70ch]">
                                 ยกระดับพลังบวกให้กับชีวิตทุกครั้งที่เปิดหน้าจอมือถือ! <strong className="text-white">NameMongkol</strong> ขอนำเสนอคอลเลกชัน <strong className="text-amber-300">วอลเปเปอร์มงคล (Auspicious Wallpapers)</strong> ที่ออกแบบอย่างประณีตโดยผสานศาสตร์แห่งสัญลักษณ์มงคล สีมงคลตามวันเกิด และพลังเลขศาสตร์เข้าด้วยกัน เพื่อเป็นเครื่องยึดเหนี่ยวจิตใจและดึงดูดพลังงานดีๆ เข้ามาสู่ตัวคุณในทุกวัน
                             </p>
-                            <p className="text-slate-400 leading-relaxed text-sm md:text-base">
+                            <p className="text-slate-400 leading-relaxed text-sm md:text-base max-w-[70ch]">
                                 เช่นเดียวกับที่เราใส่ใจในการ<Link href="/" className="text-amber-400 hover:text-amber-300 underline underline-offset-2 transition-colors">วิเคราะห์ชื่อมงคลเกรด A+</Link> วอลเปเปอร์ทุกชิ้นถูกสร้างสรรค์ด้วยความละเอียดสูง ผสานพลังจากสีมงคลตามจิตวิทยาสี (Color Psychology) สัญลักษณ์ศักดิ์สิทธิ์ตามตำรา และพลังเลขศาสตร์ เพื่อส่งผลดีที่สุดต่อผู้ใช้งาน
                             </p>
                         </div>
@@ -201,24 +197,24 @@ export default function WallpapersPage() {
 
                     {/* --- Section 2: Day-based Collection --- */}
                     <section style={deferredSectionStyle}>
-                        <div className="text-center mb-10">
+                        <div className="mb-7 md:mb-10 max-w-3xl">
                             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                                เลือก<span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-400">วอลเปเปอร์มงคลเสริมดวง</span>ตามวันเกิด
+                                เลือก<span className="text-amber-300">วอลเปเปอร์มงคลเสริมดวง</span>ตามวันเกิด
                             </h2>
-                            <p className="text-slate-400 max-w-2xl mx-auto">
+                            <p className="text-slate-400 max-w-[70ch] leading-relaxed">
                                 แต่ละวันเกิดมีสีมงคลและพลังประจำวันที่แตกต่างกัน เลือกวอลเปเปอร์ที่ตรงกับวันเกิดของคุณเพื่อเสริมดวงชะตาอย่างตรงจุด
                             </p>
                         </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                             {dayCollections.map((item) => {
                                 const IconComponent = item.icon;
                                 return (
                                     <article
                                         key={item.day}
-                                        className={`group relative bg-slate-800/50 rounded-2xl border ${item.borderColor} p-5 hover:bg-slate-800/80 transition-[transform,background-color,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl`}
+                                        className={`group relative border-b border-white/10 pb-4 md:pb-5`}
                                     >
-                                        <div className="flex items-center gap-3 mb-3">
-                                            <div className={`p-2.5 rounded-xl ${item.bgColor}`}>
+                                        <div className="flex items-center gap-3 mb-2.5">
+                                            <div className={`p-2 rounded-lg ${item.bgColor}`}>
                                                 <IconComponent className={`w-5 h-5 ${item.textColor}`} />
                                             </div>
                                             <div>
@@ -226,7 +222,7 @@ export default function WallpapersPage() {
                                                 <p className="text-white font-bold text-base">{item.name}</p>
                                             </div>
                                         </div>
-                                        <p className="text-slate-400 text-xs leading-relaxed">
+                                        <p className="text-slate-400 text-sm leading-relaxed">
                                             {item.desc}
                                         </p>
                                     </article>
@@ -265,19 +261,19 @@ export default function WallpapersPage() {
 
                     {/* --- Section 3: Special Deity Collection --- */}
                     <section style={deferredSectionStyle}>
-                        <div className="text-center mb-10">
+                        <div className="mb-7 md:mb-10 max-w-3xl">
                             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                                วอลเปเปอร์<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">องค์เทพยอดนิยม</span> เสริมดวงเฉพาะจุด
+                                วอลเปเปอร์<span className="text-purple-300">องค์เทพยอดนิยม</span> เสริมดวงเฉพาะจุด
                             </h2>
-                            <p className="text-slate-400 max-w-2xl mx-auto">
+                            <p className="text-slate-400 max-w-[70ch] leading-relaxed">
                                 นอกจากวอลเปเปอร์ตามวันเกิดแล้ว เรายังมีคอลเลกชันพิเศษจากองค์เทพและสัญลักษณ์ศักดิ์สิทธิ์ เพื่อเสริมดวงชะตาเฉพาะด้าน
                             </p>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                             {deityCollections.map((item) => (
                                 <article
                                     key={item.name}
-                                    className="group bg-slate-800/50 rounded-2xl border border-purple-500/20 p-6 hover:bg-slate-800/80 transition-[transform,background-color,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-purple-500/40"
+                                    className="group border-b border-white/10 pb-4 md:pb-5"
                                 >
                                     <div className="flex items-start gap-4">
                                         <span className="text-3xl flex-shrink-0 mt-1">{item.emoji}</span>
@@ -294,32 +290,32 @@ export default function WallpapersPage() {
                     </section>
 
                     {/* --- Section 4: Value Proposition --- */}
-                    <section className="bg-gradient-to-br from-amber-900/20 to-amber-800/10 rounded-3xl border border-amber-500/20 p-8 md:p-12">
-                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 text-center">
+                    <section className="border-t border-amber-500/20 pt-8 md:pt-12">
+                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">
                             ทำไมวอลเปเปอร์มงคลจาก <span className="text-amber-400">NameMongkol</span> ถึงแตกต่าง?
                         </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div className="text-center space-y-3">
-                                <div className="mx-auto w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-                                    <Crown className="w-7 h-7 text-amber-400" />
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
+                            <div className="space-y-3">
+                                <div className="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+                                    <Crown className="w-5 h-5 text-amber-400" />
                                 </div>
                                 <h3 className="text-white font-bold text-lg">การออกแบบระดับ A+</h3>
                                 <p className="text-slate-400 text-sm leading-relaxed">
                                     ทุกภาพถูกสร้างสรรค์ด้วยความละเอียดสูง (High Resolution) สวยงามทันสมัยแบบพรีเมียม ไม่ใช่ภาพสำเร็จรูปทั่วไป แต่ออกแบบขึ้นมาเฉพาะสำหรับ NameMongkol
                                 </p>
                             </div>
-                            <div className="text-center space-y-3">
-                                <div className="mx-auto w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-                                    <Star className="w-7 h-7 text-amber-400" />
+                            <div className="space-y-3">
+                                <div className="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+                                    <Star className="w-5 h-5 text-amber-400" />
                                 </div>
                                 <h3 className="text-white font-bold text-lg">ศาสตร์มงคลที่ถูกต้อง</h3>
                                 <p className="text-slate-400 text-sm leading-relaxed">
                                     ผสานพลังจากสีมงคล (Color Psychology) และสัญลักษณ์ศักดิ์สิทธิ์ตามตำรา ไม่ว่าจะเป็นหลักฮวงจุ้ย โหราศาสตร์ไทย หรือศาสตร์เลขมงคลจีน ทุกรายละเอียดถูกตรวจสอบ
                                 </p>
                             </div>
-                            <div className="text-center space-y-3">
-                                <div className="mx-auto w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-                                    <Zap className="w-7 h-7 text-amber-400" />
+                            <div className="space-y-3">
+                                <div className="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+                                    <Zap className="w-5 h-5 text-amber-400" />
                                 </div>
                                 <h3 className="text-white font-bold text-lg">พลังเลขศาสตร์หนุนดวง</h3>
                                 <p className="text-slate-400 text-sm leading-relaxed">
@@ -331,46 +327,46 @@ export default function WallpapersPage() {
 
                     {/* --- Section 5: FAQ --- */}
                     <section style={deferredSectionStyle}>
-                        <div className="text-center mb-10">
-                            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 flex items-center justify-center gap-3">
+                        <div className="mb-7 md:mb-10">
+                            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 flex items-center gap-3">
                                 <HelpCircle className="w-7 h-7 text-amber-400" />
                                 คำถามที่พบบ่อยเกี่ยวกับวอลเปเปอร์มงคล
                             </h2>
                         </div>
-                        <div className="space-y-4 max-w-3xl mx-auto">
-                            <details className="group bg-slate-800/50 rounded-2xl border border-white/10 overflow-hidden" open>
-                                <summary className="flex items-center justify-between p-5 cursor-pointer hover:bg-white/5 transition-colors">
+                        <div className="space-y-3 max-w-3xl">
+                            <details className="group border-b border-white/10 overflow-hidden" open>
+                                <summary className="flex items-center justify-between py-4 cursor-pointer hover:text-amber-200 transition-colors">
                                     <h3 className="font-bold text-white text-base">วอลเปเปอร์มงคลช่วยเรื่องอะไร?</h3>
                                     <ChevronRight className="w-5 h-5 text-slate-400 group-open:rotate-90 transition-transform" />
                                 </summary>
-                                <div className="px-5 pb-5 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+                                <div className="pb-5 text-slate-400 text-sm leading-relaxed">
                                     ช่วยเสริมกำลังใจ สร้างโฟกัส และดึงดูดพลังงานบวกผ่านการเห็นสัญลักษณ์มงคลบ่อยๆ ในแต่ละวัน ตามหลักจิตวิทยาสี (Color Psychology) การเห็นสีและภาพมงคลอย่างสม่ำเสมอสามารถส่งผลเชิงบวกต่อจิตใจและการตัดสินใจ เป็นการเสริมดวงชะตาในเชิงจิตวิทยาที่มีประสิทธิภาพ
                                 </div>
                             </details>
-                            <details className="group bg-slate-800/50 rounded-2xl border border-white/10 overflow-hidden">
-                                <summary className="flex items-center justify-between p-5 cursor-pointer hover:bg-white/5 transition-colors">
+                            <details className="group border-b border-white/10 overflow-hidden">
+                                <summary className="flex items-center justify-between py-4 cursor-pointer hover:text-amber-200 transition-colors">
                                     <h3 className="font-bold text-white text-base">ควรเปลี่ยนวอลเปเปอร์มงคลตอนไหน?</h3>
                                     <ChevronRight className="w-5 h-5 text-slate-400 group-open:rotate-90 transition-transform" />
                                 </summary>
-                                <div className="px-5 pb-5 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+                                <div className="pb-5 text-slate-400 text-sm leading-relaxed">
                                     สามารถเปลี่ยนได้ตามเป้าหมายของชีวิตในช่วงนั้น เช่น ต้องการเน้นเรื่องงานหรือเน้นเรื่องความรักเป็นพิเศษ นอกจากนี้ยังสามารถเปลี่ยนตามวันพิเศษต่างๆ เช่น วันขึ้นปีใหม่ วันมงคลตั้งชื่อ วันเปลี่ยนงานใหม่ หรือเมื่อต้องการเริ่มต้นสิ่งใหม่ หลักสำคัญคือเปลี่ยนเมื่อ "จิตพร้อม" และตั้งมั่นในเป้าหมายใหม่
                                 </div>
                             </details>
-                            <details className="group bg-slate-800/50 rounded-2xl border border-white/10 overflow-hidden">
-                                <summary className="flex items-center justify-between p-5 cursor-pointer hover:bg-white/5 transition-colors">
+                            <details className="group border-b border-white/10 overflow-hidden">
+                                <summary className="flex items-center justify-between py-4 cursor-pointer hover:text-amber-200 transition-colors">
                                     <h3 className="font-bold text-white text-base">มีวอลเปเปอร์สำหรับแก้ชงไหม?</h3>
                                     <ChevronRight className="w-5 h-5 text-slate-400 group-open:rotate-90 transition-transform" />
                                 </summary>
-                                <div className="px-5 pb-5 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+                                <div className="pb-5 text-slate-400 text-sm leading-relaxed">
                                     มีครับ เรามีคอลเลกชันพิเศษสำหรับเสริมดวงตามปีนักษัตรเพื่อบรรเทาเคราะห์และเสริมโชค โดยเฉพาะวอลเปเปอร์ท้าวเวสสุวรรณที่ช่วยเรื่องปลดหนี้ ป้องกันภัย และกันสิ่งชั่วร้าย เหมาะสำหรับทุกคนที่ต้องการเสริมความมั่นคงในชีวิต
                                 </div>
                             </details>
-                            <details className="group bg-slate-800/50 rounded-2xl border border-white/10 overflow-hidden">
-                                <summary className="flex items-center justify-between p-5 cursor-pointer hover:bg-white/5 transition-colors">
+                            <details className="group border-b border-white/10 overflow-hidden">
+                                <summary className="flex items-center justify-between py-4 cursor-pointer hover:text-amber-200 transition-colors">
                                     <h3 className="font-bold text-white text-base">วอลเปเปอร์มงคลต่างจากวอลเปเปอร์ทั่วไปอย่างไร?</h3>
                                     <ChevronRight className="w-5 h-5 text-slate-400 group-open:rotate-90 transition-transform" />
                                 </summary>
-                                <div className="px-5 pb-5 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+                                <div className="pb-5 text-slate-400 text-sm leading-relaxed">
                                     วอลเปเปอร์มงคลจาก NameMongkol ถูกออกแบบโดยคำนึงถึงหลักศาสตร์มงคลหลายแขนง ทั้งสีมงคลตามวันเกิด สัญลักษณ์ศักดิ์สิทธิ์ตามหลักฮวงจุ้ย และพลังตัวเลขเลขศาสตร์ ไม่ใช่ภาพสวยอย่างเดียว แต่ทุกองค์ประกอบมีความหมายและเจตนาในการเสริมดวงชะตาอย่างแท้จริง
                                 </div>
                             </details>
@@ -378,7 +374,7 @@ export default function WallpapersPage() {
                     </section>
 
                     {/* --- Section 6: CTA --- */}
-                    <section className="text-center bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-3xl border border-white/10 p-8 md:p-12">
+                    <section className="border-t border-white/10 pt-8 md:pt-12">
                         <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20">
                             <Download className="w-4 h-4 text-amber-400" />
                             <span className="text-xs font-bold text-amber-300 uppercase tracking-wider">เตรียมรับพลังบวกวันนี้!</span>
@@ -386,20 +382,20 @@ export default function WallpapersPage() {
                         <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
                             เลือกคอลเลกชันที่คุณต้องการ แล้วเปลี่ยนหน้าจอมือถือ
                         </h2>
-                        <p className="text-slate-400 max-w-xl mx-auto mb-8">
+                        <p className="text-slate-400 max-w-xl mb-8">
                             ดาวน์โหลดวอลเปเปอร์มงคลเพื่อเปลี่ยนหน้าจอมือถือของคุณให้เป็นขุมทรัพย์แห่งความโชคดี หรือสร้างวอลเปเปอร์ส่วนตัวเฉพาะของคุณเอง
                         </p>
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 md:gap-4">
                             <Link
                                 href="/wallpapers"
-                                className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-bold text-base shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105 transition-all flex items-center gap-2"
+                                className="justify-center px-6 md:px-8 py-3.5 rounded-xl bg-amber-500 text-black font-bold text-base shadow-lg shadow-amber-500/20 hover:bg-amber-400 hover:shadow-amber-500/40 transition-all flex items-center gap-2"
                             >
                                 <Download className="w-5 h-5" />
                                 ดูวอลเปเปอร์ทั้งหมด
                             </Link>
                             <Link
                                 href="/wallpapers/custom"
-                                className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-base shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:scale-105 transition-all flex items-center gap-2"
+                                className="justify-center px-6 md:px-8 py-3.5 rounded-xl bg-white/10 text-white font-bold text-base border border-white/10 hover:bg-white/15 transition-all flex items-center gap-2"
                             >
                                 <Sparkles className="w-5 h-5" />
                                 ออกแบบวอลเปเปอร์ส่วนตัว
@@ -408,7 +404,7 @@ export default function WallpapersPage() {
                     </section>
 
                     {/* --- Section 7: Internal Links SEO Footer --- */}
-                    <section className="bg-slate-800/30 rounded-2xl p-6 border border-white/5">
+                    <section className="border-t border-white/10 pt-8">
                         <h3 className="text-lg font-bold text-amber-400 mb-4">บริการอื่นๆ ของ NameMongkol</h3>
                         <p className="text-slate-400 text-sm leading-relaxed mb-4">
                             นอกจากวอลเปเปอร์มงคลแล้ว <strong className="text-slate-300">NameMongkol</strong> ยังมีบริการครบวงจรเกี่ยวกับชื่อมงคลและเลขศาสตร์ ใช้ระบบ AI ผสานศาสตร์โบราณ ครอบคลุม <strong className="text-slate-300">เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6</strong> และ <strong className="text-slate-300">อักษรกาลกิณี</strong>

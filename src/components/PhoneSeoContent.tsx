@@ -4,16 +4,16 @@ import { Zap, Heart, Shield, Star, Sparkles, Target, Award, Banknote, Users, Ale
 
 export const PhoneSeoContent = () => {
     return (
-        <section className="w-full max-w-5xl mx-auto mt-20 md:mt-24 mb-12 md:mb-16 px-4 relative z-10">
+        <section className="w-full max-w-5xl mx-auto mt-12 md:mt-24 mb-12 md:mb-16 px-4 relative z-10">
             {/* Hero Content Section */}
-            <div className="text-center mb-12 md:mb-16">
+            <div className="text-center mb-10 md:mb-16">
                 <span className="px-4 py-1.5 rounded-full bg-amber-500/10 text-amber-400 text-sm font-semibold border border-amber-500/20 mb-6 inline-block">
                     🔢 ศาสตร์แห่งตัวเลข
                 </span>
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
+                <h2 className="text-2xl md:text-4xl font-bold text-white mb-5 md:mb-6 leading-tight">
                     ปลดล็อกพลังซ่อนเร้นใน<span className="text-amber-400 drop-shadow-[0_0_15px_rgba(251,191,36,0.2)]">เบอร์โทรศัพท์</span>ของคุณ
                 </h2>
-                <p className="phone-analysis-soft-text max-w-3xl mx-auto text-base md:text-lg leading-[1.95]">
+                <p className="phone-analysis-soft-text max-w-3xl mx-auto text-sm md:text-lg leading-[1.8] md:leading-[1.95]">
                     คุณทราบหรือไม่? ตัวเลขที่คุณใช้โทรทุกวัน กำลังส่งพลังงานสั่นสะเทือนมาถึงคุณตลอดเวลา
                     เบอร์โทรศัพท์ไม่ใช่แค่ตัวเลขสุ่ม แต่คือ <strong>&quot;คลื่นพลังงาน&quot;</strong> ที่มีผลต่อ
                     <strong className="text-amber-400"> ความสำเร็จ การเงิน ความรัก และสุขภาพ</strong> ของคุณโดยตรง!
@@ -21,17 +21,17 @@ export const PhoneSeoContent = () => {
             </div>
 
             {/* Why Phone Number Matters */}
-            <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-12 md:mb-16">
-                <div className="phone-analysis-surface-card p-6 md:p-7 rounded-2xl hover:border-amber-500/30 transition-colors">
-                    <h3 className="text-2xl font-bold text-amber-400 mb-4 flex items-center gap-2">
+            <div className="grid md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 mb-12 md:mb-16">
+                <div className="phone-analysis-surface-card p-5 md:p-7 rounded-2xl hover:border-amber-500/30 transition-colors">
+                    <h3 className="text-xl md:text-2xl font-bold text-amber-400 mb-4 flex items-center gap-2">
                         <Zap className="w-6 h-6" />
                         ทำไมต้องเช็คเบอร์มงคล?
                     </h3>
-                    <p className="leading-[1.95] mb-4">
+                    <p className="text-sm md:text-base leading-[1.8] md:leading-[1.95] mb-4">
                         ตามหลัก <strong>เลขศาสตร์</strong> และ <strong>โหราศาสตร์ไทย</strong> ตัวเลขแต่ละตัวมีความถี่พลังงานเฉพาะตัว
                         เบอร์โทรศัพท์ที่คุณใช้ทุกวัน จะส่งคลื่นพลังงานมากระทบชีวิตคุณตลอดเวลา ไม่ว่าจะรู้ตัวหรือไม่ก็ตาม
                     </p>
-                    <p className="leading-[1.95]">
+                    <p className="text-sm md:text-base leading-[1.8] md:leading-[1.95]">
                         <strong>เบอร์มงคล</strong> จะช่วยดึงดูดโอกาสดีๆ ความเจริญก้าวหน้า และความราบรื่นเข้ามา
                         ในขณะที่ <strong className="text-rose-400">เบอร์อัปมงคล</strong> อาจเป็นอุปสรรคขัดขวางที่มองไม่เห็น
                         ทำให้ต้องเหนื่อยมากกว่าปกติ หรือพลาดโอกาสดีๆ ไปอย่างน่าเสียดาย
