@@ -725,7 +725,7 @@ export default function SearchPage() {
                                     href="/premium-search"
                                     className="shrink-0 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold transition-colors shadow-lg shadow-amber-500/20"
                                 >
-                                    ค้นหาชื่อมงคล Pro →
+                                    เปลี่ยนชื่อมงคล Pro →
                                 </Link>
                             </div>
                         ) : (
@@ -737,7 +737,7 @@ export default function SearchPage() {
                                     href="/premium-search"
                                     className="shrink-0 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors"
                                 >
-                                    ค้นหาชื่อมงคล Pro →
+                                    เปลี่ยนชื่อมงคล Pro →
                                 </Link>
                             </div>
                         );

@@ -8,6 +8,7 @@ import { Calendar, ArrowLeft, Search, BookOpen } from 'lucide-react';
 import { articles as localArticles } from '@/data/articles';
 import { shimmer, toBase64 } from '@/utils/imageUtils';
 import { ArticleImage } from '@/components/ArticleImage';
+import { siteUrl } from '@/lib/seo';
 
 type ArticleRow = {
     id?: string;
@@ -127,7 +128,7 @@ async function getArticles() {
 import { Metadata } from 'next';
 
 // Base URL for metadata
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'https://www.namemongkol.com';
+const baseUrl = siteUrl;
 
 export const metadata: Metadata = {
     metadataBase: new URL(baseUrl),
@@ -186,9 +187,9 @@ export default async function ArticlesPage() {
     const organizationJsonLd = {
         '@context': 'https://schema.org',
         '@type': 'Organization',
-        '@id': 'https://www.namemongkol.com/#organization',
+        '@id': `${baseUrl}/#organization`,
         'name': 'NameMongkol',
-        'url': 'https://www.namemongkol.com',
+        'url': baseUrl,
         'logo': {
             '@type': 'ImageObject',
             'url': `${baseUrl}/logo.png`,
@@ -205,14 +206,14 @@ export default async function ArticlesPage() {
     const websiteJsonLd = {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        '@id': 'https://www.namemongkol.com/#website',
-        'url': 'https://www.namemongkol.com',
+        '@id': `${baseUrl}/#website`,
+        'url': baseUrl,
         'name': 'NameMongkol',
-        'publisher': { '@id': 'https://www.namemongkol.com/#organization' },
+        'publisher': { '@id': `${baseUrl}/#organization` },
         'inLanguage': 'th-TH',
         'potentialAction': {
             '@type': 'SearchAction',
-            'target': 'https://www.namemongkol.com/search?q={search_term_string}',
+            'target': `${baseUrl}/search?q={search_term_string}`,
             'query-input': 'required name=search_term_string',
         },
     };
@@ -221,12 +222,12 @@ export default async function ArticlesPage() {
     const webpageJsonLd = {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        '@id': 'https://www.namemongkol.com/articles#webpage',
-        'url': 'https://www.namemongkol.com/articles',
+        '@id': `${baseUrl}/articles#webpage`,
+        'url': `${baseUrl}/articles`,
         'name': 'บทความชื่อมงคล - คู่มือตั้งชื่อลูก เลขศาสตร์ ทักษา อายตนะ 6',
         'description': 'รวมบทความศาสตร์ตั้งชื่อมงคลครบทุกเรื่อง: วิธีตั้งชื่อลูกชายหญิง เลขศาสตร์ผลรวมมงคล ทักษาปกรณ์ อายตนะ 6 และอักษรกาลกิณี',
-        'isPartOf': { '@id': 'https://www.namemongkol.com/#website' },
-        'publisher': { '@id': 'https://www.namemongkol.com/#organization' },
+        'isPartOf': { '@id': `${baseUrl}/#website` },
+        'publisher': { '@id': `${baseUrl}/#organization` },
         'inLanguage': 'th-TH',
         'dateModified': (() => { const dates = articles.map(a => { try { return new Date(a.date).getTime(); } catch { return 0; } }).filter(d => d > 0); return dates.length ? new Date(Math.max(...dates)).toISOString() : new Date().toISOString(); })(),
         // speakable: tells AI assistants which CSS selectors contain the most important content
@@ -237,8 +238,8 @@ export default async function ArticlesPage() {
         'breadcrumb': {
             '@type': 'BreadcrumbList',
             'itemListElement': [
-                { '@type': 'ListItem', 'position': 1, 'name': 'หน้าหลัก', 'item': 'https://www.namemongkol.com' },
-                { '@type': 'ListItem', 'position': 2, 'name': 'บทความชื่อมงคล', 'item': 'https://www.namemongkol.com/articles' },
+                { '@type': 'ListItem', 'position': 1, 'name': 'หน้าหลัก', 'item': baseUrl },
+                { '@type': 'ListItem', 'position': 2, 'name': 'บทความชื่อมงคล', 'item': `${baseUrl}/articles` },
             ],
         },
         'mainEntity': {
@@ -250,36 +251,36 @@ export default async function ArticlesPage() {
                 'position': index + 1,
                 'item': {
                     '@type': 'Article',
-                    '@id': `https://www.namemongkol.com/articles/${article.slug}`,
+                    '@id': `${baseUrl}/articles/${article.slug}`,
                     'headline': article.title,
                     'description': article.excerpt,
-                    'url': `https://www.namemongkol.com/articles/${article.slug}`,
+                    'url': `${baseUrl}/articles/${article.slug}`,
                     'datePublished': article.date,
                     'dateModified': article.date,
                     'inLanguage': 'th-TH',
                     ...(article.coverImage && {
                         'image': {
                             '@type': 'ImageObject',
-                            'url': `https://www.namemongkol.com${article.coverImage}`,
+                            'url': `${baseUrl}${article.coverImage}`,
                             'width': 1200,
                             'height': 630,
                         },
                     }),
                     'author': {
                         '@type': 'Organization',
-                        '@id': 'https://www.namemongkol.com/#organization',
+                        '@id': `${baseUrl}/#organization`,
                         'name': article.author || 'NameMongkol',
                     },
                     'publisher': {
                         '@type': 'Organization',
-                        '@id': 'https://www.namemongkol.com/#organization',
+                        '@id': `${baseUrl}/#organization`,
                         'name': 'NameMongkol',
                         'logo': {
                             '@type': 'ImageObject',
                             'url': `${baseUrl}/logo.png`,
                         },
                     },
-                    'isPartOf': { '@id': 'https://www.namemongkol.com/articles#webpage' },
+                    'isPartOf': { '@id': `${baseUrl}/articles#webpage` },
                 },
             })),
         },
@@ -289,8 +290,8 @@ export default async function ArticlesPage() {
     const faqJsonLd = {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
-        '@id': 'https://www.namemongkol.com/articles#faq',
-        'isPartOf': { '@id': 'https://www.namemongkol.com/articles#webpage' },
+        '@id': `${baseUrl}/articles#faq`,
+        'isPartOf': { '@id': `${baseUrl}/articles#webpage` },
         'mainEntity': [
             {
                 '@type': 'Question',
@@ -489,7 +490,7 @@ export default async function ArticlesPage() {
                                         <p className="text-slate-400 text-xs leading-relaxed mb-4 line-clamp-2" itemProp="description">
                                             {article.excerpt}
                                         </p>
-                                        <meta itemProp="url" content={`https://www.namemongkol.com/articles/${article.slug}`} />
+                                        <meta itemProp="url" content={`${baseUrl}/articles/${article.slug}`} />
                                         <meta itemProp="author" content={article.author || 'NameMongkol'} />
 
                                         <div className="mt-auto pt-3 border-t border-white/5 flex justify-between items-center">

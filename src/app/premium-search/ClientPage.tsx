@@ -990,13 +990,13 @@ export default function PremiumSearchPage() {
                     {/* ==================== SEO CONTENT SECTION (Below the Fold) ==================== */}
                     <section className="mt-20 pt-16 border-t border-white/10 space-y-16">
 
-                        {/* Section A: ทำไมต้อง "ค้นหาชื่อมงคล Pro"? */}
+                        {/* Section A: ทำไมต้อง "เปลี่ยนชื่อมงคล Pro"? */}
                         <div className="max-w-4xl mx-auto">
                             <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-8">
-                                ทำไมต้อง <span className="text-emerald-400">&quot;ค้นหาชื่อมงคล Pro&quot;</span>?
+                                ทำไมต้อง <span className="text-emerald-400">&quot;เปลี่ยนชื่อมงคล Pro&quot;</span>?
                             </h2>
                             <p className="text-lg text-slate-300 leading-relaxed mb-8 text-center">
-                                ระบบค้นหาชื่อมงคล Pro ของ NameMongkol แตกต่างจากการตั้งชื่อทั่วไป เพราะเราใช้ <strong className="text-emerald-400">Premium Database</strong> ที่ผ่านการคัดกรองมาแล้วถึง 3 ชั้น
+                                ระบบเปลี่ยนชื่อมงคล Pro ของ NameMongkol แตกต่างจากการตั้งชื่อทั่วไป เพราะเราใช้ <strong className="text-emerald-400">Premium Database</strong> ที่ผ่านการคัดกรองมาแล้วถึง 3 ชั้น
                             </p>
 
                             <div className="grid md:grid-cols-3 gap-6">
@@ -1035,7 +1035,7 @@ export default function PremiumSearchPage() {
                         {/* Section B: ตารางเปรียบเทียบ Free vs Pro */}
                         <div className="max-w-4xl mx-auto">
                             <h2 className="text-3xl font-bold text-center text-white mb-8">
-                                เปรียบเทียบ <span className="text-slate-400">ค้นหาทั่วไป</span> vs <span className="text-emerald-400">ค้นหาชื่อมงคล Pro</span>
+                                เปรียบเทียบ <span className="text-slate-400">ค้นหาทั่วไป</span> vs <span className="text-emerald-400">เปลี่ยนชื่อมงคล Pro</span>
                             </h2>
 
                             <div className="overflow-x-auto">
@@ -1044,7 +1044,7 @@ export default function PremiumSearchPage() {
                                         <tr className="border-b border-white/10">
                                             <th className="text-left py-4 px-4 text-slate-400 font-medium">คุณสมบัติ</th>
                                             <th className="text-center py-4 px-4 text-slate-400 font-medium">ค้นหาทั่วไป</th>
-                                            <th className="text-center py-4 px-4 text-emerald-400 font-medium">ค้นหาชื่อมงคล Pro</th>
+                                            <th className="text-center py-4 px-4 text-emerald-400 font-medium">เปลี่ยนชื่อมงคล Pro</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1086,10 +1086,10 @@ export default function PremiumSearchPage() {
                         {/* Section C: วิธีใช้งาน */}
                         <div className="max-w-4xl mx-auto">
                             <h2 className="text-3xl font-bold text-center text-white mb-4">
-                                วิธีใช้งาน<span className="text-emerald-400">ค้นหาชื่อมงคล Pro</span>
+                                วิธีใช้งาน<span className="text-emerald-400">เปลี่ยนชื่อมงคล Pro</span>
                             </h2>
                             <p className="text-center text-slate-400 mb-8">
-                                เหมาะสำหรับผู้ที่กำลังมองหา <Link href="/name-analysis" className="text-emerald-400 hover:text-emerald-300 underline decoration-emerald-500/30">วิธีตั้งชื่อลูก</Link> หรือ <Link href="/name-analysis" className="text-emerald-400 hover:text-emerald-300 underline decoration-emerald-500/30">เปลี่ยนชื่อมงคลด้วยตัวเอง</Link>
+                                เหมาะสำหรับผู้ที่กำลังมองหา <Link href="/search" className="text-emerald-400 hover:text-emerald-300 underline decoration-emerald-500/30">วิธีตั้งชื่อลูก</Link> หรือ <Link href="/name-check" className="text-emerald-400 hover:text-emerald-300 underline decoration-emerald-500/30">วิเคราะห์ชื่อเดิมก่อนเปลี่ยน</Link>
                             </p>
 
                             <div className="grid md:grid-cols-3 gap-6">
@@ -1146,10 +1146,10 @@ export default function PremiumSearchPage() {
                             <div className="space-y-4">
                                 <div className="bg-white/5 border border-white/10 rounded-xl p-6">
                                     <h3 className="text-lg font-bold text-emerald-400 mb-2">
-                                        Q: ค้นหาชื่อมงคล Pro ต่างจากค้นหาทั่วไปอย่างไร?
+                                        Q: เปลี่ยนชื่อมงคล Pro ต่างจากค้นหาทั่วไปอย่างไร?
                                     </h3>
                                     <p className="text-slate-300 leading-relaxed">
-                                        A: ระบบค้นหาชื่อมงคล Pro ใช้ Premium Database ที่ผ่านการคัดกรอง 3 ชั้น: 1) คัดตามหลักทักษา ไม่มีอักษรกาลกิณี 2) คัดเฉพาะผลรวมเลขศาสตร์ระดับ A+ 3) ความหมายดี ไพเราะ ทันสมัย และสามารถเลือกอักษรนำวรรคเดช/ศรี ได้
+                                        A: ระบบเปลี่ยนชื่อมงคล Pro ใช้ Premium Database ที่ผ่านการคัดกรอง 3 ชั้น: 1) คัดตามหลักทักษา ไม่มีอักษรกาลกิณี 2) คัดเฉพาะผลรวมเลขศาสตร์ระดับ A+ 3) ความหมายดี ไพเราะ ทันสมัย และสามารถเลือกอักษรนำวรรคเดช/ศรี ได้
                                     </p>
                                 </div>
 
@@ -1164,10 +1164,10 @@ export default function PremiumSearchPage() {
 
                                 <div className="bg-white/5 border border-white/10 rounded-xl p-6">
                                     <h3 className="text-lg font-bold text-emerald-400 mb-2">
-                                        Q: ค้นหาชื่อมงคล Pro ใช้กี่เครดิต?
+                                        Q: เปลี่ยนชื่อมงคล Pro ใช้กี่เครดิต?
                                     </h3>
                                     <p className="text-slate-300 leading-relaxed">
-                                        A: การค้นหาชื่อมงคล Pro ใช้ <strong className="text-white">15 เครดิต</strong>ต่อ 1 ครั้ง โดยระบบจะสุ่มแสดงผล 20 รายชื่อจากฐานข้อมูลที่ตรงตามเงื่อนไขที่คุณเลือก
+                                        A: การคัดชื่อในระบบเปลี่ยนชื่อมงคล Pro ใช้ <strong className="text-white">15 เครดิต</strong>ต่อ 1 ครั้ง โดยระบบจะสุ่มแสดงผล 20 รายชื่อจากฐานข้อมูลที่ตรงตามเงื่อนไขที่คุณเลือก
                                     </p>
                                 </div>
                             </div>

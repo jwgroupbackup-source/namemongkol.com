@@ -4,8 +4,7 @@ import { Suspense } from 'react';
 import ClientHome from '@/app/ClientHome';
 import { HomeFallback } from '@/components/HomeFallback';
 import { NameCheckSeoContent } from '@/components/NameCheckSeoContent';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
     title: 'วิเคราะห์ชื่อ นามสกุล ฟรี ทันที ด้วย AI 4 ศาสตร์ | NameMongkol',
@@ -183,7 +182,7 @@ export default function NameCheckPage() {
             <section className="relative z-10 mx-auto mt-10 w-full max-w-5xl px-4 text-center sm:mt-16 md:mt-20">
                 <div className="rounded-[1.75rem] border border-white/8 bg-slate-950/35 px-5 py-8 shadow-[0_18px_55px_rgba(5,8,20,0.24)] backdrop-blur-xl sm:px-8 md:px-12">
                     <p className="mx-auto mb-4 inline-flex rounded-full border border-amber-400/20 bg-amber-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-amber-200">
-                        หน้าเฉพาะสำหรับคีย์เวิร์ด วิเคราะห์ชื่อ
+                        เครื่องมือวิเคราะห์ชื่อฟรี
                     </p>
                     <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
                         วิเคราะห์ชื่อ-นามสกุล ฟรี ด้วย AI 4 ศาสตร์ ไม่ต้องสมัคร รู้ผลทันที

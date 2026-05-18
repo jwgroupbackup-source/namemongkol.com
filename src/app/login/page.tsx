@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 import Script from 'next/script';
 import { Suspense } from 'react';
 import LoginClientPage from './ClientPage';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
     title: 'เข้าสู่ระบบ | NameMongkol - วิเคราะห์ชื่อมงคล',
@@ -29,8 +28,8 @@ export const metadata: Metadata = {
         canonical: `${siteUrl}/login`,
     },
     robots: {
-        index: true,
-        follow: true,
+        index: false,
+        follow: false,
     },
 };
 

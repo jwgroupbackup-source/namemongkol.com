@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import UpdatePasswordClientPage from './ClientPage';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
     title: 'ตั้งรหัสผ่านใหม่ | NameMongkol',

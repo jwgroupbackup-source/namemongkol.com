@@ -1,8 +1,7 @@
 import { Metadata } from 'next';
 import Script from 'next/script';
 import RegisterClientPage from './ClientPage';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
     title: 'สมัครสมาชิก | NameMongkol - วิเคราะห์ชื่อมงคลฟรี',
@@ -28,8 +27,8 @@ export const metadata: Metadata = {
         canonical: `${siteUrl}/register`,
     },
     robots: {
-        index: true,
-        follow: true,
+        index: false,
+        follow: false,
     },
 };
 

@@ -34,6 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { path: '/about', priority: 0.7, changeFreq: 'monthly' as const },
         { path: '/articles', priority: 0.9, changeFreq: 'daily' as const },
         { path: '/name-analysis', priority: 0.9, changeFreq: 'daily' as const }, // Bulk tool (differentiated from homepage)
+        { path: '/name-generator', priority: 0.85, changeFreq: 'weekly' as const },
         { path: '/phone-analysis', priority: 1.0, changeFreq: 'daily' as const },
         { path: '/premium-analysis', priority: 0.9, changeFreq: 'weekly' as const },
         { path: '/aura-analysis', priority: 0.9, changeFreq: 'daily' as const },
@@ -44,6 +45,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { path: '/terms', priority: 0.2, changeFreq: 'yearly' as const },
         { path: '/palm-analysis', priority: 0.9, changeFreq: 'daily' as const },
         { path: '/wallpapers', priority: 0.8, changeFreq: 'daily' as const }, // New designs often
+        { path: '/wallpapers/custom', priority: 0.65, changeFreq: 'monthly' as const },
     ];
 
     const staticUrls = routes.map((route) => ({
@@ -82,7 +84,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { url: `${baseUrl}/wallpapers/intent/finance`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.75 },
         { url: `${baseUrl}/wallpapers/intent/love`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.75 },
         { url: `${baseUrl}/wallpapers/intent/work`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.75 },
-        { url: `${baseUrl}/wallpapers/custom`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.6 },
     ];
 
     // Fetch dynamic articles from database

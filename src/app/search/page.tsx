@@ -1,28 +1,29 @@
 import { Metadata } from 'next';
 import ClientPage from './ClientPage';
+import { siteUrl } from '@/lib/seo';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+const baseUrl = siteUrl.replace(/\/$/, '');
 
 export const metadata: Metadata = {
-    title: 'ค้นหาชื่อมงคลฟรี: รวม 5,000+ ชื่อเกรด A+ ชาย-หญิง | NameMongkol',
-    alternates: { canonical: `${siteUrl.replace(/\/$/, '')}/search` },
-    description: 'ค้นหาชื่อมงคลฟรีจากฐานข้อมูลกว่า 5,000 ชื่อ คัดเกรด A+ ชาย-หญิง ความหมายดี กรองตามวันเกิด เพศ และผลรวมเลขศาสตร์',
-    keywords: ['ตั้งชื่อมงคล', 'ค้นหาชื่อมงคล', 'ชื่อมงคลฟรี', 'เปลี่ยนชื่อ', 'ชื่อเสริมดวง', 'ชื่อเกรด A', 'ชื่อความหมายดี', 'ชื่อตามวันเกิด', 'ตั้งชื่อมงคลวันเกิด', 'ผลรวมเลขศาสตร์', 'อักษรกาลกิณี', 'รวมชื่อมงคล'],
+    title: 'ค้นหาชื่อมงคล ตั้งชื่อลูกชาย-หญิง 5,000+ ชื่อ | NameMongkol',
+    alternates: { canonical: `${baseUrl}/search` },
+    description: 'ค้นหาชื่อมงคลสำหรับตั้งชื่อลูกหรือเปลี่ยนชื่อ จากฐานข้อมูล 5,000+ ชื่อชาย-หญิง ความหมายดี กรองตามวันเกิด เพศ และผลรวมเลขศาสตร์',
+    keywords: ['ค้นหาชื่อมงคล', 'ตั้งชื่อลูก', 'ตั้งชื่อลูกชาย', 'ตั้งชื่อลูกหญิง', 'ชื่อมงคลชาย', 'ชื่อมงคลหญิง', 'ชื่อมงคลฟรี', 'ชื่อเสริมดวง', 'ชื่อเกรด A', 'ชื่อความหมายดี', 'ชื่อตามวันเกิด', 'ผลรวมเลขศาสตร์', 'อักษรกาลกิณี', 'รวมชื่อมงคล'],
 
     openGraph: {
-        title: 'ค้นหาชื่อมงคลฟรี: รวม 5,000+ ชื่อเกรด A+ | NameMongkol',
-        description: 'ค้นหาชื่อเกรด A+ ชาย-หญิง ความหมายดี กรองตามวันเกิด และหลีกเลี่ยงกาลกิณี',
-        url: `${siteUrl}/search`,
+        title: 'ค้นหาชื่อมงคล ตั้งชื่อลูกชาย-หญิง 5,000+ ชื่อ | NameMongkol',
+        description: 'ค้นหาชื่อมงคลชาย-หญิง ความหมายดี กรองตามวันเกิด เพศ และผลรวมเลขศาสตร์',
+        url: `${baseUrl}/search`,
         siteName: 'NameMongkol',
         locale: 'th_TH',
         type: 'website',
-        images: [`${siteUrl}/api/og?variant=default&title=ค้นหาชื่อมงคลฟรี&subtitle=ตั้งชื่อลูก%20เปลี่ยนชื่อใหม่%20เสริมดวง&tag=Free%20Names`],
+        images: [`${baseUrl}/api/og?variant=default&title=ค้นหาชื่อมงคลฟรี&subtitle=ตั้งชื่อลูก%20เปลี่ยนชื่อใหม่%20เสริมดวง&tag=Free%20Names`],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'ตั้งชื่อมงคลฟรี! รวม 5,000+ ชื่อเกรด A+ | NameMongkol',
-        description: 'ค้นหาชื่อเกรด A+ กว่า 5,000 ชื่อ ชาย-หญิง ครบทุกวันเกิด',
-        images: [`${siteUrl}/api/og?variant=default&title=ค้นหาชื่อมงคลฟรี`],
+        title: 'ค้นหาชื่อมงคล ตั้งชื่อลูกชาย-หญิง 5,000+ ชื่อ | NameMongkol',
+        description: 'ค้นหาชื่อมงคลชาย-หญิงกว่า 5,000 ชื่อ ครบทุกวันเกิด',
+        images: [`${baseUrl}/api/og?variant=default&title=ค้นหาชื่อมงคลฟรี`],
     },
 };
 
@@ -30,12 +31,12 @@ export default function SearchPage() {
     const webPageJsonLd = {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
-        '@id': `${siteUrl}/search#webpage`,
-        'url': `${siteUrl}/search`,
-        'name': 'ค้นหาชื่อมงคลฟรี: รวม 5,000+ ชื่อเกรด A+ ชาย-หญิง | NameMongkol',
+        '@id': `${baseUrl}/search#webpage`,
+        'url': `${baseUrl}/search`,
+        'name': 'ค้นหาชื่อมงคล ตั้งชื่อลูกชาย-หญิง 5,000+ ชื่อ | NameMongkol',
         'description': 'ระบบค้นหาชื่อมงคลฟรี รวมกว่า 5,000 ชื่อเกรด A+ คัดสรรแล้ว กรองตามวันเกิด เพศ ผลรวมเลขศาสตร์ เหมาะสำหรับตั้งชื่อลูกและเปลี่ยนชื่อใหม่',
         'inLanguage': 'th-TH',
-        'isPartOf': { '@id': `${siteUrl}/#website` },
+        'isPartOf': { '@id': `${baseUrl}/#website` },
         'speakable': {
             '@type': 'SpeakableSpecification',
             'cssSelector': ['h1', '#search-faq'],
@@ -46,10 +47,10 @@ export default function SearchPage() {
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'WebApplication',
-        'name': 'ตั้งชื่อมงคล ฟรี - NameMongkol',
+        'name': 'ค้นหาชื่อมงคลฟรีสำหรับตั้งชื่อลูก - NameMongkol',
         'alternateName': 'NameMongkol Free Auspicious Name Search',
         'description': 'ระบบค้นหาชื่อมงคลฟรี รวมกว่า 5,000 ชื่อเกรด A+ คัดสรรแล้ว กรองตามวันเกิด เพศ ผลรวมเลขศาสตร์ เหมาะสำหรับตั้งชื่อลูกและเปลี่ยนชื่อใหม่',
-        'url': `${siteUrl}/search`,
+        'url': `${baseUrl}/search`,
         'applicationCategory': 'LifestyleApplication',
         'operatingSystem': 'Web',
         'offers': {
@@ -107,7 +108,7 @@ export default function SearchPage() {
             },
             {
                 '@type': 'Question',
-                'name': 'ค้นหาชื่อมงคลฟรีต่างจากค้นหาชื่อมงคล Pro อย่างไร?',
+                'name': 'ค้นหาชื่อมงคลฟรีต่างจากเปลี่ยนชื่อมงคล Pro อย่างไร?',
                 'acceptedAnswer': {
                     '@type': 'Answer',
                     'text': 'ค้นหาชื่อมงคลฟรีให้บริการฟรีจากฐานข้อมูล 5,000+ ชื่อ ส่วนเปลี่ยนชื่อมงคล Pro ใช้ Premium Database ที่ผ่านการคัดกรอง 3 ชั้น สามารถเลือกอักษรนำวรรคเดช/ศรี และผลรวมเลขศาสตร์เกรด A+ เท่านั้น'
@@ -134,6 +135,25 @@ export default function SearchPage() {
         'itemListOrder': 'https://schema.org/ItemListOrderAscending'
     };
 
+    const breadcrumbJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+            {
+                '@type': 'ListItem',
+                'position': 1,
+                'name': 'หน้าแรก',
+                'item': baseUrl,
+            },
+            {
+                '@type': 'ListItem',
+                'position': 2,
+                'name': 'ค้นหาชื่อมงคล ตั้งชื่อลูกชาย-หญิง',
+                'item': `${baseUrl}/search`,
+            },
+        ],
+    };
+
     return (
         <>
             <script
@@ -151,6 +171,10 @@ export default function SearchPage() {
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
             <ClientPage />
         </>

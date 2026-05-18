@@ -853,7 +853,7 @@ export default function NameAnalysisPage() {
                                     <span className="transition-transform group-open:rotate-180 text-violet-400">▼</span>
                                 </summary>
                                 <p className="mt-4 text-slate-400 text-sm pl-4 border-l-2 border-violet-500">
-                                    <Link href="/" className="text-violet-400 hover:underline">หน้าแรก</Link> วิเคราะห์ทีละ 1 ชื่อ+นามสกุล ฟรี<br />
+                                    <Link href="/name-check" className="text-violet-400 hover:underline">วิเคราะห์ชื่อฟรี</Link> ทีละ 1 ชื่อ+นามสกุล<br />
                                     <strong className="text-violet-300">Bulk Analysis</strong> วิเคราะห์หลายชื่อพร้อมกัน (สูงสุด 1,000 ชื่อ) พร้อมจัดเกรดและเปรียบเทียบ
                                 </p>
                             </details>
@@ -984,7 +984,7 @@ export default function NameAnalysisPage() {
                         </h2>
                         <div className="grid md:grid-cols-2 gap-6">
                             <Link
-                                href="/"
+                                href="/name-check"
                                 className="group block bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-amber-500/25 hover:bg-white/[0.05] transition-all"
                             >
                                 <h3 className="font-semibold text-slate-200 mb-2 group-hover:text-indigo-400 transition-colors">

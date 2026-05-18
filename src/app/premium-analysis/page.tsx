@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
 import Script from 'next/script';
 import ClientPage from './ClientPage';
+import { siteUrl } from '@/lib/seo';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+const baseUrl = siteUrl.replace(/\/$/, '');
 
 export const metadata: Metadata = {
     title: 'วิเคราะห์ชื่อมงคลขั้นสูง - เจาะลึกดวงชะตาด้วยทักษาและเลขศาสตร์ | NameMongkol',
@@ -12,20 +13,20 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'วิเคราะห์ชื่อมงคลขั้นสูง - เจาะลึกดวงชะตาด้วยทักษาและเลขศาสตร์',
         description: 'วิเคราะห์ชื่อมงคลขั้นสูงด้วยการคำนวณจากวันเดือนปีและเวลาตกฟาก เจาะลึกกราฟชีวิตรายด้าน',
-        url: `${siteUrl}/premium-analysis`,
+        url: `${baseUrl}/premium-analysis`,
         siteName: 'NameMongkol',
         locale: 'th_TH',
         type: 'website',
-        images: [`${siteUrl}/api/og?variant=default&title=วิเคราะห์ชื่อมงคลขั้นสูง&subtitle=เจาะลึกตามวันเดือนปี%20และเวลาตกฟาก%20แม่นยำที่สุด&tag=Premium%20Analysis`],
+        images: [`${baseUrl}/api/og?variant=default&title=วิเคราะห์ชื่อมงคลขั้นสูง&subtitle=เจาะลึกตามวันเดือนปี%20และเวลาตกฟาก%20แม่นยำที่สุด&tag=Premium%20Analysis`],
     },
     twitter: {
         card: 'summary_large_image',
         title: 'วิเคราะห์ชื่อมงคลขั้นสูง - เจาะลึกดวงชะตา | NameMongkol',
         description: 'วิเคราะห์ชื่อมงคลขั้นสูง แม่นยำกว่าด้วยเวลาตกฟากและลัคนาราศี',
-        images: [`${siteUrl}/api/og?variant=default&title=วิเคราะห์ชื่อมงคลขั้นสูง`],
+        images: [`${baseUrl}/api/og?variant=default&title=วิเคราะห์ชื่อมงคลขั้นสูง`],
     },
     alternates: {
-        canonical: `${siteUrl}/premium-analysis`,
+        canonical: `${baseUrl}/premium-analysis`,
     },
 };
 
@@ -34,7 +35,17 @@ const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
         {
+            '@type': 'WebPage',
+            '@id': `${baseUrl}/premium-analysis#webpage`,
+            'url': `${baseUrl}/premium-analysis`,
+            'name': 'วิเคราะห์ชื่อมงคลขั้นสูง - เจาะลึกดวงชะตาด้วยทักษาและเลขศาสตร์ | NameMongkol',
+            'description': 'บริการวิเคราะห์ชื่อมงคลขั้นสูงด้วยการคำนวณจากวันเดือนปีและเวลาตกฟาก เจาะลึกกราฟชีวิตรายด้าน พร้อมแนวทางแก้เคล็ดเสริมดวง',
+            'inLanguage': 'th-TH',
+            'isPartOf': { '@id': `${baseUrl}/#website` },
+        },
+        {
             '@type': 'SoftwareApplication',
+            '@id': `${baseUrl}/premium-analysis#software`,
             'name': 'NameMongkol Premium Analysis',
             'applicationCategory': 'LifestyleApplication',
             'operatingSystem': 'Web',
@@ -53,11 +64,11 @@ const jsonLd = {
             'provider': {
                 '@type': 'Organization',
                 'name': 'NameMongkol',
-                'url': siteUrl
+                'url': baseUrl
             },
             'serviceType': 'Astrology and Numerology Consultation',
             'areaServed': 'TH',
-            'url': `${siteUrl}/premium-analysis`,
+            'url': `${baseUrl}/premium-analysis`,
             'offers': {
                 '@type': 'Offer',
                 'price': '599',
@@ -92,6 +103,24 @@ const jsonLd = {
                     }
                 ]
             }
+        },
+        {
+            '@type': 'BreadcrumbList',
+            '@id': `${baseUrl}/premium-analysis#breadcrumb`,
+            'itemListElement': [
+                {
+                    '@type': 'ListItem',
+                    'position': 1,
+                    'name': 'หน้าแรก',
+                    'item': baseUrl,
+                },
+                {
+                    '@type': 'ListItem',
+                    'position': 2,
+                    'name': 'วิเคราะห์ชื่อมงคลขั้นสูง',
+                    'item': `${baseUrl}/premium-analysis`,
+                },
+            ],
         }
     ]
 };

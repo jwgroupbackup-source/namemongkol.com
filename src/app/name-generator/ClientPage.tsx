@@ -125,13 +125,13 @@ export default function ClientPage() {
                 <div className="text-center mb-10">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-300 text-sm mb-4">
                         <Wand2 className="w-4 h-4" />
-                        <span>AI Name Generator (Beta)</span>
+                        <span>สร้างชื่อมงคลด้วย AI</span>
                     </div>
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
-                        สร้างชื่อมงคล <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">Grade A+</span>
+                        สร้างชื่อมงคลด้วย AI <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">Grade A+</span>
                     </h1>
                     <p className="text-slate-300 max-w-2xl mx-auto">
-                        ระบบจะใช้หลักคณิตศาสตร์ประกอบตัวอักษรขึ้นมาใหม่ เพื่อบังคับให้ได้ผลรวมมงคลและคู่เลขสีเขียวล้วน (100% ไม่มีกาลกิณีคู่เลข)
+                        ระบบจะประกอบตัวอักษรเป็นชื่อใหม่สำหรับตั้งชื่อลูก เปลี่ยนชื่อ หรือชื่อแบรนด์ โดยคัดเฉพาะผลรวมมงคลและคู่เลขสีเขียวล้วน
                     </p>
                 </div>
 

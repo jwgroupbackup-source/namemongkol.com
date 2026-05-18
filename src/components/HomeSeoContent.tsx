@@ -135,10 +135,10 @@ export const HomeSeoContent = () => {
                     className="group rounded-2xl border border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10 p-5 transition-all backdrop-blur-sm"
                 >
                     <p className="text-xs font-semibold uppercase tracking-wider text-emerald-300/90 mb-2">
-                        Pro Search
+                        เปลี่ยนชื่อ Pro
                     </p>
                     <p className="text-white font-bold leading-snug">
-                        ค้นหาชื่อมงคล Pro (วรรคเดช/วรรคศรี)
+                        เปลี่ยนชื่อมงคล Pro คัดชื่อเสริมดวง
                     </p>
                     <p className="mt-2 text-sm text-slate-400 leading-relaxed">
                         ฐานข้อมูลคัดพิเศษ เลือกอักษรนำตามทักษา และคัดผลรวมเลขศาสตร์ระดับสูง

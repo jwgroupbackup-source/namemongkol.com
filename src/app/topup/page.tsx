@@ -3,8 +3,7 @@ import Script from 'next/script';
 import { Suspense } from 'react';
 import ClientPage from './ClientPage';
 import { createClient } from '@/utils/supabaseServer';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
     title: 'เติมเครดิต (Top Up) - แพ็กเกจสุดคุ้ม | NameMongkol',
@@ -30,8 +29,8 @@ export const metadata: Metadata = {
         canonical: `${siteUrl}/topup`,
     },
     robots: {
-        index: true,
-        follow: true,
+        index: false,
+        follow: false,
     },
 };
 

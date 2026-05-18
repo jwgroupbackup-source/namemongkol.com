@@ -6,14 +6,14 @@ import { siteUrl } from '@/lib/seo';
 
 
 export const metadata: Metadata = {
-    title: 'เช็คชื่อมงคลหลายชื่อพร้อมกัน (Bulk Analysis) | NameMongkol',
+    title: 'วิเคราะห์ชื่อหลายชื่อพร้อมกัน Bulk Name Analysis | NameMongkol',
     alternates: { canonical: `${siteUrl.replace(/\/$/, '')}/name-analysis` },
-    description: 'วิเคราะห์ชื่อแบบกลุ่ม สูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลขมงคล กาลกิณี และส่งออก CSV/PDF',
+    description: 'วิเคราะห์ชื่อหลายชื่อพร้อมกันสูงสุด 1,000 ชื่อ จัดเกรด A+ ตรวจคู่เลขมงคล กาลกิณี และส่งออก CSV/PDF สำหรับคัดกรองรายชื่อจำนวนมาก',
     keywords: 'เช็คชื่อมงคลหลายชื่อ, วิเคราะห์ชื่อหลายชื่อ, เปรียบเทียบชื่อมงคล, Bulk Analysis, Bulk Name Analysis, คัดกรองชื่อมงคล, จัดเกรดชื่อ A+, ผลรวมเลขศาสตร์ชื่อ, คู่เลขชื่อมงคล, กาลกิณีชื่อ, Export CSV วิเคราะห์ชื่อ, Export PDF วิเคราะห์ชื่อ, วิเคราะห์ชื่อพนักงาน HR',
 
     openGraph: {
-        title: 'เช็คชื่อมงคลหลายชื่อพร้อมกัน | Bulk Analysis',
-        description: 'วิเคราะห์ชื่อสูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลข กาลกิณี และส่งออก CSV/PDF',
+        title: 'วิเคราะห์ชื่อหลายชื่อพร้อมกัน | Bulk Name Analysis',
+        description: 'คัดกรองชื่อสูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลข กาลกิณี และส่งออก CSV/PDF',
         url: `${siteUrl}/name-analysis`,
         siteName: 'NameMongkol',
         locale: 'th_TH',
@@ -22,8 +22,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'เช็คชื่อมงคลหลายชื่อพร้อมกัน | Bulk Analysis',
-        description: 'วิเคราะห์ชื่อสูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลข กาลกิณี และส่งออก CSV/PDF',
+        title: 'วิเคราะห์ชื่อหลายชื่อพร้อมกัน | Bulk Name Analysis',
+        description: 'คัดกรองชื่อสูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลข กาลกิณี และส่งออก CSV/PDF',
     },
 };
 
@@ -33,8 +33,8 @@ const webPageSchema = {
     '@type': 'WebPage',
     '@id': `${siteUrl}/name-analysis`,
     'url': `${siteUrl}/name-analysis`,
-    'name': 'เช็คชื่อมงคลหลายชื่อพร้อมกัน | Bulk Name Analysis | NameMongkol',
-    'description': 'เครื่องมือวิเคราะห์ชื่อแบบกลุ่ม สูงสุด 1,000 ชื่อพร้อมกัน จัดเกรด A+ ตรวจคู่เลข กาลกิณี และ Export CSV/PDF',
+    'name': 'วิเคราะห์ชื่อหลายชื่อพร้อมกัน | Bulk Name Analysis | NameMongkol',
+    'description': 'เครื่องมือวิเคราะห์ชื่อหลายชื่อพร้อมกัน สูงสุด 1,000 ชื่อ จัดเกรด A+ ตรวจคู่เลข กาลกิณี และ Export CSV/PDF',
     'inLanguage': 'th-TH',
     'isPartOf': {
         '@type': 'WebSite',
@@ -199,7 +199,7 @@ export default function NameAnalysisPage() {
     return (
         <>
             {/* SSR H1 for Googlebot — keep visually hidden to avoid duplicate visible H1 in client UI */}
-            <h1 className="sr-only">เช็คชื่อมงคลหลายชื่อพร้อมกัน (Bulk Name Analysis) — จัดเกรด A+ ตรวจคู่เลข กาลกิณี Export CSV/PDF</h1>
+            <h1 className="sr-only">วิเคราะห์ชื่อหลายชื่อพร้อมกัน Bulk Name Analysis จัดเกรด A+ ตรวจคู่เลข กาลกิณี Export CSV/PDF</h1>
 
             <Script
                 id="name-analysis-webpage-schema"
@@ -235,20 +235,20 @@ export default function NameAnalysisPage() {
                         บริการอื่นๆ ที่เกี่ยวข้อง
                     </p>
                     <div className="flex flex-wrap gap-2">
-                        <Link href="/" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        <Link href="/name-check" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             วิเคราะห์ชื่อ-นามสกุล (ฟรี)
                         </Link>
                         <Link href="/about" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             เกี่ยวกับ NameMongkol
                         </Link>
                         <Link href="/name-generator" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
-                            สร้างชื่อมงคล AI
+                            สร้างชื่อมงคลด้วย AI
                         </Link>
                         <Link href="/search" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             ค้นหาชื่อมงคลฟรี 5,000+ ชื่อ
                         </Link>
                         <Link href="/premium-search" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
-                            ค้นหาชื่อมงคล Pro
+                            เปลี่ยนชื่อมงคล Pro
                         </Link>
                         <Link href="/premium-analysis" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
                             วิเคราะห์ชื่อขั้นสูง (Premium)
