@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, Suspense, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { ChevronRight } from 'lucide-react';
+import { supabase } from '@/utils/supabase';
 import { saveAnalysisResult } from '@/services/analysisService';
 import { checkNirunName } from '@/app/actions/checkNirunName';
 import { InputForm } from '@/components/InputForm';
@@ -24,7 +25,7 @@ import { calculateAyatana } from '@/utils/ayatana';
 import { calculateGrade } from '@/utils/gradeResult';
 import { AnalysisResult } from '@/types';
 import { HeroBanner } from '@/components/HeroBanner';
-import { HomeFallback } from '@/components/HomeFallback';
+
 import { NumerologyDecodeTable } from '@/components/NumerologyDecodeTable';
 import { useLanguage } from '@/components/LanguageProvider';
 import { WelcomeOffer } from '@/components/WelcomeOffer';
@@ -140,22 +141,24 @@ function DeferredSection({
         <div
             ref={sectionRef}
             className={minHeightClassName}
-            style={{ contentVisibility: 'auto', containIntrinsicSize: intrinsicSize }}
+            style={{
+                contentVisibility: 'auto',
+                containIntrinsicSize: intrinsicSize,
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 0.4s ease-out',
+            }}
         >
             {isVisible ? children : null}
         </div>
     );
 }
 
-function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
-    const searchParams = useSearchParams();
-    const initialName = searchParams.get('name') ?? '';
-    const initialSurname = searchParams.get('surname') ?? '';
-    const initialDay = searchParams.get('day') ?? 'sunday';
+export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
+    const router = useRouter();
 
-    const [name, setName] = useState(initialName);
-    const [surname, setSurname] = useState(initialSurname);
-    const [day, setDay] = useState(initialDay);
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [day, setDay] = useState('sunday');
     const [result, setResult] = useState<AnalysisResult | null>(null);
     const [loading, setLoading] = useState(false);
     const [isPremiumUnlocked, setIsPremiumUnlocked] = useState(false);
@@ -194,6 +197,27 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
 
     const performAnalysis = useCallback(async (inputName: string, inputSurname: string, inputDay: string) => {
         if (!inputName.trim()) return;
+
+        // Check Login
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+            const Swal = (await import('sweetalert2')).default;
+            const result = await Swal.fire({
+                title: 'กรุณาเข้าสู่ระบบ',
+                text: 'ท่านต้องเข้าสู่ระบบก่อนทำการวิเคราะห์ชื่อ',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'เข้าสู่ระบบ',
+                cancelButtonText: 'ยกเลิก',
+                confirmButtonColor: '#f59e0b',
+                background: '#1e293b',
+                color: '#fff'
+            });
+            if (result.isConfirmed) {
+                router.push('/login');
+            }
+            return;
+        }
 
         const requestId = ++analysisRequestIdRef.current;
         setLoading(true);
@@ -260,20 +284,28 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
             }).catch((error) => {
                 console.error('Failed to auto-save:', error);
             });
-    }, []);
+    }, [router]);
 
-    // Handle URL params on first mount
+    // Handle URL params on first mount from client-side only (to preserve SSG)
     useEffect(() => {
         if (didInitFromParams.current) return;
         didInitFromParams.current = true;
 
-        if (initialName) {
+        const params = new URLSearchParams(window.location.search);
+        const urlName = params.get('name') ?? '';
+        const urlSurname = params.get('surname') ?? '';
+        const urlDay = params.get('day') ?? 'sunday';
+
+        if (urlName) {
+            setName(urlName);
+            setSurname(urlSurname);
+            setDay(urlDay);
             // Defer execution to avoid synchronous state update warning
             setTimeout(() => {
-                performAnalysis(initialName, initialSurname, initialDay);
+                performAnalysis(urlName, urlSurname, urlDay);
             }, 0);
         }
-    }, [performAnalysis, initialName, initialSurname, initialDay]);
+    }, [performAnalysis]);
 
     useEffect(() => {
         if (result || didFetchHomeSections.current) return;
@@ -304,6 +336,7 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
     }, [fetchHomeSections, result]);
 
     const handleAnalyzeClick = useCallback(() => {
+        if (!name.trim()) return;
         performAnalysis(name, surname, day);
     }, [performAnalysis, name, surname, day]);
 
@@ -462,15 +495,8 @@ function HomeContent({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
             <footer className="relative z-10 w-full px-4 py-6 text-center text-sm text-amber-100/45">
                 <p>{t('home.footer')}</p>
             </footer>
-        </div>
-    );
-}
 
-export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
-    return (
-        <Suspense fallback={<HomeFallback heroHeadingLevel={heroHeadingLevel} />}>
-            <HomeContent heroHeadingLevel={heroHeadingLevel} />
             <WelcomeOffer />
-        </Suspense>
+        </div>
     );
 }

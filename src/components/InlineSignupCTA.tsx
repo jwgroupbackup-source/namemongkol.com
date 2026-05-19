@@ -7,14 +7,16 @@ import { supabase } from '@/utils/supabase';
 
 export const InlineSignupCTA = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(true); // Default hidden
+    const [ready, setReady] = useState(false);
 
     useEffect(() => {
         supabase.auth.getUser().then(({ data: { user } }) => {
             setIsLoggedIn(!!user);
+            setReady(true);
         });
     }, []);
 
-    if (isLoggedIn) return null;
+    if (!ready || isLoggedIn) return null;
 
     return (
         <div className="w-full max-w-lg mt-5 animate-fade-in">

@@ -1,83 +1,50 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { Suspense } from 'react';
+
 import ClientHome from './ClientHome';
 import { calculateScore } from '@/utils/calculateScore';
 import { getPrediction } from '@/utils/getPrediction';
 import { siteUrl } from '@/lib/seo';
 
-type Props = {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
-
-export async function generateMetadata(
-  props: Props
-): Promise<Metadata> {
-  const searchParams = await props.searchParams;
-  const name = searchParams.name as string | undefined;
-  const surname = searchParams.surname as string | undefined;
-
+export async function generateMetadata(): Promise<Metadata> {
   const canonicalUrl = siteUrl.replace(/\/$/, '') || 'https://www.namemongkol.com';
 
-  if (!name) {
-    return {
-      title: 'NameMongkol | แพลตฟอร์มวิเคราะห์ชื่อ เบอร์ ลายมือ และออร่า',
-      description: 'ศูนย์รวมเครื่องมือ NameMongkol สำหรับวิเคราะห์ชื่อ เบอร์โทร ลายมือ ออร่า ค้นหาชื่อมงคล และวอลเปเปอร์เสริมดวงในเว็บเดียว',
-      keywords: 'NameMongkol, วิเคราะห์ชื่อ, วิเคราะห์เบอร์, วิเคราะห์ลายมือ, วิเคราะห์ออร่า, ค้นหาชื่อมงคล, วอลเปเปอร์มงคล, เลขศาสตร์, ทักษาปกรณ์, อายตนะ 6, นิรันดร์ศาสตร์',
-      alternates: { canonical: canonicalUrl },
-      openGraph: {
-        title: 'NameMongkol | แพลตฟอร์มวิเคราะห์ชื่อ เบอร์ ลายมือ และออร่า',
-        description: 'รวมเครื่องมือวิเคราะห์ชื่อ ค้นหาชื่อมงคล วิเคราะห์เบอร์ ลายมือ ออร่า และวอลเปเปอร์เสริมดวงในเว็บเดียว',
-        images: [{
-          url: `${siteUrl}/api/og?variant=default&title=NameMongkol%20-%20AI%20Naming%20Platform&subtitle=ตั้งชื่อมงคล%20วิเคราะห์ชื่อ%20เบอร์%20ลายมือ%20และออร่า`,
-          width: 1200,
-          height: 630,
-          alt: 'NameMongkol แพลตฟอร์มตั้งชื่อมงคลและวิเคราะห์ดวงด้วย AI',
-          type: 'image/png',
-        }],
-        url: canonicalUrl,
-        siteName: 'NameMongkol',
-        locale: 'th_TH',
-        type: 'website',
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: 'NameMongkol | แพลตฟอร์มวิเคราะห์ชื่อ เบอร์ ลายมือ และออร่า',
-        description: 'รวมเครื่องมือวิเคราะห์ชื่อ ค้นหาชื่อมงคล วิเคราะห์เบอร์ ลายมือ ออร่า และวอลเปเปอร์เสริมดวงในเว็บเดียว',
-        images: [{
-          url: `${siteUrl}/api/og?variant=default`,
-          width: 1200,
-          height: 630,
-          alt: 'NameMongkol แพลตฟอร์มตั้งชื่อมงคลและวิเคราะห์ดวงด้วย AI',
-        }],
-      },
-
-    }
-  }
-
-  const cleanName = name.trim();
-  const cleanSurname = (surname || '').trim();
-  const totalScore = calculateScore(cleanName) + calculateScore(cleanSurname);
-  const prediction = getPrediction(totalScore);
-
-  const title = `วิเคราะห์ชื่อ: ${cleanName} ${cleanSurname} (ผลรวม ${totalScore})`;
-  const description = `ความหมาย: ${prediction.desc} - ระดับ: ${prediction.level}`;
-
   return {
-    title: `${title} - NameMongkol`,
-    description: description,
+    title: 'NameMongkol | แพลตฟอร์มวิเคราะห์ชื่อ เบอร์ ลายมือ และออร่า',
+    description: 'ศูนย์รวมเครื่องมือ NameMongkol สำหรับวิเคราะห์ชื่อ เบอร์โทร ลายมือ ออร่า ค้นหาชื่อมงคล และวอลเปเปอร์เสริมดวงในเว็บเดียว',
+    keywords: 'NameMongkol, วิเคราะห์ชื่อ, วิเคราะห์เบอร์, วิเคราะห์ลายมือ, วิเคราะห์ออร่า, ค้นหาชื่อมงคล, วอลเปเปอร์มงคล, เลขศาสตร์, ทักษาปกรณ์, อายตนะ 6, นิรันดร์ศาสตร์',
     alternates: { canonical: canonicalUrl },
     openGraph: {
-      title: title,
-      description: description,
-      images: [`${siteUrl}/api/og?variant=analysis&name=${encodeURIComponent(cleanName)}&surname=${encodeURIComponent(cleanSurname)}&score=${totalScore}&subtitle=${encodeURIComponent(description)}`],
-      url: `/?name=${encodeURIComponent(cleanName)}&surname=${encodeURIComponent(cleanSurname)}&day=${searchParams.day || 'sunday'}`,
+      title: 'NameMongkol | แพลตฟอร์มวิเคราะห์ชื่อ เบอร์ ลายมือ และออร่า',
+      description: 'รวมเครื่องมือวิเคราะห์ชื่อ ค้นหาชื่อมงคล วิเคราะห์เบอร์ ลายมือ ออร่า และวอลเปเปอร์เสริมดวงในเว็บเดียว',
+      images: [{
+        url: `${siteUrl}/api/og?variant=default&title=NameMongkol%20-%20AI%20Naming%20Platform&subtitle=ตั้งชื่อมงคล%20วิเคราะห์ชื่อ%20เบอร์%20ลายมือ%20และออร่า`,
+        width: 1200,
+        height: 630,
+        alt: 'NameMongkol แพลตฟอร์มตั้งชื่อมงคลและวิเคราะห์ดวงด้วย AI',
+        type: 'image/png',
+      }],
+      url: canonicalUrl,
+      siteName: 'NameMongkol',
+      locale: 'th_TH',
       type: 'website',
-    }
-  }
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'NameMongkol | แพลตฟอร์มวิเคราะห์ชื่อ เบอร์ ลายมือ และออร่า',
+      description: 'รวมเครื่องมือวิเคราะห์ชื่อ ค้นหาชื่อมงคล วิเคราะห์เบอร์ ลายมือ ออร่า และวอลเปเปอร์เสริมดวงในเว็บเดียว',
+      images: [{
+        url: `${siteUrl}/api/og?variant=default`,
+        width: 1200,
+        height: 630,
+        alt: 'NameMongkol แพลตฟอร์มตั้งชื่อมงคลและวิเคราะห์ดวงด้วย AI',
+      }],
+    },
+  };
 }
 
-export default function Page() {
+export default async function Page() {
+
   const baseUrl = siteUrl.replace(/\/$/, '');
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -247,9 +214,7 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Suspense>
-        <ClientHome />
-      </Suspense>
+      <ClientHome />
     </>
   );
 }

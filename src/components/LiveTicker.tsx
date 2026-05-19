@@ -268,7 +268,7 @@ export const LiveTicker: React.FC = () => {
             }
         };
         fetchStats();
-        const interval = setInterval(fetchStats, 60_000);
+        const interval = setInterval(fetchStats, 300_000); // 5 minutes
         return () => clearInterval(interval);
     }, []);
 
