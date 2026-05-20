@@ -375,7 +375,6 @@ export default function PremiumSearchPage() {
     }, []);
 
     const performUnlock = async (letter: string, amount: number) => {
-        // @ts-expect-error Temporary type mismatch
         const Swal = (await import('sweetalert2')).default;
         
         const { data: { user } } = await supabase.auth.getUser();
