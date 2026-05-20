@@ -1,9 +1,8 @@
-
 'use client';
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
-import { Search, Sparkles, Calendar, Award, RotateCcw, Lock, ChevronDown, CheckCircle2, XCircle, Zap, Shield, Star, HelpCircle, Type } from 'lucide-react';
+import { Search, Sparkles, Calendar, Award, Lock, ChevronDown, CheckCircle2, XCircle, Zap, Shield, Star, HelpCircle, Type } from 'lucide-react';
 import { premiumNamesRaw } from '@/data/premiumNamesRaw';
 import { parsePremiumNames, PremiumNameData } from '@/utils/premiumDataParser';
 
@@ -28,17 +27,14 @@ const thaiDayToKey: Record<string, DayKey> = {
     'เสาร์': 'saturday'
 };
 
-// Thai consonants for first letter filter
 const THAI_LETTERS = [
     'ก','ข','ฃ','ค','ฅ','ฆ','ง','จ','ฉ','ช','ซ','ฌ','ญ','ฎ','ฏ','ฐ','ฑ','ฒ','ณ',
     'ด','ต','ถ','ท','ธ','น','บ','ป','ผ','ฝ','พ','ฟ','ภ','ม','ย','ร','ล','ว',
     'ศ','ษ','ส','ห','ฬ','อ','ฮ',
 ];
 
-// Thai leading vowels that appear before the consonant in written form
-const THAI_LEADING_VOWELS = new Set(['\u0E40', '\u0E41', '\u0E42', '\u0E43', '\u0E44']); // เ แ โ ใ ไ
+const THAI_LEADING_VOWELS = new Set(['\u0E40', '\u0E41', '\u0E42', '\u0E43', '\u0E44']);
 
-/** Returns the first consonant of a Thai name, skipping any leading vowels */
 const getFirstConsonant = (name: string): string => {
     if (!name) return '';
     return THAI_LEADING_VOWELS.has(name.charAt(0)) ? name.charAt(1) : name.charAt(0);
@@ -108,8 +104,6 @@ function ScoreDropdown({
                 <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform ${open ? 'rotate-180' : ''}`} />
             </button>
 
-
-
             {open && (
                 <div className="absolute left-0 right-0 top-full mt-0 z-[200] max-h-80 overflow-y-auto bg-slate-900/90 backdrop-blur-xl border border-white/10 border-t-0 rounded-xl rounded-t-none shadow-2xl custom-scrollbar">
                     <button
@@ -163,24 +157,80 @@ function ScoreDropdown({
     );
 }
 
+const NameCard = ({ item, isUnlocked }: { item: PremiumNameData; isUnlocked: boolean }) => {
+    const { t } = useLanguage();
+    
+    const dayOptions = [
+        { value: 'All', label: t('pages.premiumSearch.filters.dayAll') },
+        { value: 'อาทิตย์', label: t('pages.premiumSearch.days.sunday') },
+        { value: 'จันทร์', label: t('pages.premiumSearch.days.monday') },
+        { value: 'อังคาร', label: t('pages.premiumSearch.days.tuesday') },
+        { value: 'พุธ(กลางวัน)', label: t('pages.premiumSearch.days.wednesday') },
+        { value: 'พุธ(กลางคืน)', label: t('pages.premiumSearch.days.wednesday_night') },
+        { value: 'พฤหัสบดี', label: t('pages.premiumSearch.days.thursday') },
+        { value: 'ศุกร์', label: t('pages.premiumSearch.days.friday') },
+        { value: 'เสาร์', label: t('pages.premiumSearch.days.saturday') },
+    ];
+    
+    const getDayLabel = (value: string) => dayOptions.find(opt => opt.value === value)?.label || value;
+    
+    return (
+        <div className="group relative bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 hover:bg-white/10 hover:border-emerald-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/10">
+            <div className="flex justify-between items-start mb-4">
+                <h3 
+                    className="text-2xl md:text-3xl font-bold text-white group-hover:text-emerald-300 transition-colors"
+                    style={!isUnlocked ? { filter: 'blur(8px)', userSelect: 'none' } : {}}
+                >
+                    {item.name}
+                </h3>
+                <div className="flex items-center gap-1 px-3 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 font-bold shrink-0">
+                    <Award size={16} />
+                    <span>{item.totalScore}</span>
+                </div>
+            </div>
+
+            <div className="space-y-4">
+                <div className="flex items-start gap-2 text-sm text-slate-400">
+                    <Calendar size={16} className="mt-1 shrink-0 text-slate-500" />
+                    <div className="flex flex-wrap gap-2">
+                        {item.suitableDays.map((day: string, i: number) => (
+                            <span key={i} className="inline-block px-2 py-0.5 rounded bg-slate-800/50 border border-white/5 text-slate-300 text-xs text-center">
+                                {getDayLabel(day)}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="pt-4 border-t border-white/5">
+                    <p className="text-xs text-slate-500 mb-2 font-medium uppercase tracking-wider">พลังเลขคู่</p>
+                    <div className="flex flex-wrap gap-2">
+                        {item.scoreBreakdown.map((score: string, i: number) => (
+                            <span key={i} className="px-2 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
+                                {score}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 export default function PremiumSearchPage() {
     const router = useRouter();
     const { t } = useLanguage();
-    // Inputs
-    // Inputs
-    // const [searchTerm, setSearchTerm] = useState(''); // Removed
+    
+    // Filters
     const [selectedDay, setSelectedDay] = useState('All');
     const [selectedGender, setSelectedGender] = useState('all');
     const [targetScore, setTargetScore] = useState('');
     const [leadingCharType, setLeadingCharType] = useState<LeadingCharType>('Any');
-    const [selectedFirstLetters, setSelectedFirstLetters] = useState<Set<string>>(new Set());
 
-    // Search State
-    const [hasSearched, setHasSearched] = useState(false);
-    const [searchResults, setSearchResults] = useState<PremiumNameData[]>([]);
+    // Display State
+    const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
+    const [unlockedCounts, setUnlockedCounts] = useState<Record<string, number>>({});
     const [isLoading, setIsLoading] = useState(false);
     const [userCredits, setUserCredits] = useState<number | null>(null);
-    const shownNameSet = useRef<Set<string>>(new Set());
 
     const dayOptions = useMemo(() => ([
         { value: 'All', label: t('pages.premiumSearch.filters.dayAll') },
@@ -194,18 +244,13 @@ export default function PremiumSearchPage() {
         { value: 'เสาร์', label: t('pages.premiumSearch.days.saturday') },
     ]), [t]);
 
-    const getDayLabel = (value: string) => dayOptions.find(opt => opt.value === value)?.label || value;
-
-    // Load Data & Credits
     const allNames = useMemo(() => parsePremiumNames(premiumNamesRaw), []);
 
-    // Calculate filtered count for real-time display (before search)
-    const filteredCount = useMemo(() => {
+    // Filter Logic
+    const filteredNames = useMemo(() => {
         return allNames.filter(item => {
-            // 1. Filter by Score (if selected)
             const matchesScore = !targetScore || item.totalScore.toString() === targetScore;
 
-            // 2. Filter by Gender (if selected)
             let matchesGender = true;
             if (selectedGender !== 'all') {
                 if (selectedGender === 'male' && item.gender !== 'male' && item.gender !== 'neutral') matchesGender = false;
@@ -213,10 +258,8 @@ export default function PremiumSearchPage() {
                 if (selectedGender === 'neutral' && item.gender !== 'neutral') matchesGender = false;
             }
 
-            // 3. Filter by Day (if selected)
             const matchesDay = selectedDay === 'All' || item.suitableDays.includes(selectedDay);
 
-            // 4. Filter by Leading Character (if Day is selected and Filter is active)
             let matchesLeadingChar = true;
             if (selectedDay !== 'All' && leadingCharType !== 'Any') {
                 const dayKey = thaiDayToKey[selectedDay];
@@ -232,57 +275,42 @@ export default function PremiumSearchPage() {
                 }
             }
 
-            // 5. Filter by First Letter (multi-select)
-            const matchesFirstLetter = selectedFirstLetters.size === 0 || selectedFirstLetters.has(getFirstConsonant(item.name));
-
-            return matchesScore && matchesGender && matchesDay && matchesLeadingChar && matchesFirstLetter;
-        }).length;
-    }, [allNames, selectedDay, selectedGender, targetScore, leadingCharType, selectedFirstLetters]);
-
-    // Compute which first letters have ≥1 matching name (ignoring the first letter filter itself)
-    const availableFirstLetters = useMemo(() => {
-        const set = new Set<string>();
-        allNames.forEach(item => {
-            const matchesScore = !targetScore || item.totalScore.toString() === targetScore;
-            let matchesGender = true;
-            if (selectedGender !== 'all') {
-                if (selectedGender === 'male' && item.gender !== 'male' && item.gender !== 'neutral') matchesGender = false;
-                if (selectedGender === 'female' && item.gender !== 'female' && item.gender !== 'neutral') matchesGender = false;
-                if (selectedGender === 'neutral' && item.gender !== 'neutral') matchesGender = false;
-            }
-            const matchesDay = selectedDay === 'All' || item.suitableDays.includes(selectedDay);
-            let matchesLeadingChar = true;
-            if (selectedDay !== 'All' && leadingCharType !== 'Any') {
-                const dayKey = thaiDayToKey[selectedDay];
-                if (dayKey && thaksaConfig[dayKey]) {
-                    const firstChar = item.name.charAt(0);
-                    const config = thaksaConfig[dayKey];
-                    if (leadingCharType === 'Dech') matchesLeadingChar = config.dech.includes(firstChar);
-                    else if (leadingCharType === 'Si') matchesLeadingChar = config.si.includes(firstChar);
-                }
-            }
-            if (matchesScore && matchesGender && matchesDay && matchesLeadingChar) {
-                const letter = getFirstConsonant(item.name);
-                if (letter) set.add(letter);
-            }
+            return matchesScore && matchesGender && matchesDay && matchesLeadingChar;
         });
-        return set;
     }, [allNames, selectedDay, selectedGender, targetScore, leadingCharType]);
 
-    // Remove letters from selection if they become unavailable under current filters
-    useEffect(() => {
-        if (selectedFirstLetters.size === 0) return;
-        const toRemove = [...selectedFirstLetters].filter(l => !availableFirstLetters.has(l));
-        if (toRemove.length > 0) {
-            setSelectedFirstLetters(prev => {
-                const next = new Set(prev);
-                toRemove.forEach(l => next.delete(l));
-                return next;
-            });
-        }
-    }, [availableFirstLetters, selectedFirstLetters]);
+    // Grouping by letter
+    const groupedByLetter = useMemo(() => {
+        const group = new Map<string, PremiumNameData[]>();
+        filteredNames.forEach(item => {
+            const letter = getFirstConsonant(item.name);
+            if (!letter) return;
+            if (!group.has(letter)) {
+                group.set(letter, []);
+            }
+            group.get(letter)!.push(item);
+        });
+        
+        // Sort names inside groups
+        group.forEach(names => {
+            names.sort((a, b) => a.name.localeCompare(b.name, 'th'));
+        });
+        
+        return group;
+    }, [filteredNames]);
 
-    // Only show scores that have ≥1 name matching current filters (excluding score filter itself)
+    const availableLetters = useMemo(() => {
+        return THAI_LETTERS.filter(letter => groupedByLetter.has(letter));
+    }, [groupedByLetter]);
+
+    // Select first letter by default if current selection is invalid
+    useEffect(() => {
+        if (!selectedLetter || !availableLetters.includes(selectedLetter)) {
+            setSelectedLetter(availableLetters.length > 0 ? availableLetters[0] : null);
+        }
+    }, [availableLetters, selectedLetter]);
+
+    // Unique scores for dropdown
     const uniqueScores = useMemo(() => {
         const scores = new Set<number>();
         allNames.forEach(item => {
@@ -303,15 +331,13 @@ export default function PremiumSearchPage() {
                     else if (leadingCharType === 'Si') matchesLeadingChar = config.si.includes(firstChar);
                 }
             }
-            const matchesFirstLetter = selectedFirstLetters.size === 0 || selectedFirstLetters.has(getFirstConsonant(item.name));
-            if (matchesGender && matchesDay && matchesLeadingChar && matchesFirstLetter) {
+            if (matchesGender && matchesDay && matchesLeadingChar) {
                 scores.add(item.totalScore);
             }
         });
         return Array.from(scores).sort((a, b) => a - b);
-    }, [allNames, selectedDay, selectedGender, leadingCharType, selectedFirstLetters]);
+    }, [allNames, selectedDay, selectedGender, leadingCharType]);
 
-    // Auto-reset targetScore if selected score is no longer available under current filters
     useEffect(() => {
         if (targetScore && !uniqueScores.includes(Number(targetScore))) {
             setTargetScore('');
@@ -340,12 +366,18 @@ export default function PremiumSearchPage() {
             }
         };
         fetchCredits();
+        
+        const handleForceCreditsUpdate = () => {
+            fetchCredits();
+        };
+        window.addEventListener('force_credits_update', handleForceCreditsUpdate);
+        return () => window.removeEventListener('force_credits_update', handleForceCreditsUpdate);
     }, []);
 
-    const handleSearch = async () => {
-        // -expect-error Temporary type mismatch with external/runtime data.
-            const Swal = (await import('sweetalert2')).default;
-        // Check Authentication
+    const performUnlock = async (letter: string, amount: number) => {
+        // @ts-expect-error Temporary type mismatch
+        const Swal = (await import('sweetalert2')).default;
+        
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) {
             const result = await Swal.fire({
@@ -366,7 +398,6 @@ export default function PremiumSearchPage() {
             return;
         }
 
-        // Check for insufficient credits first
         if (userCredits !== null && userCredits < 15) {
             const result = await Swal.fire({
                 title: t('pages.premiumSearch.alerts.creditsTitle'),
@@ -375,11 +406,11 @@ export default function PremiumSearchPage() {
                 showCancelButton: true,
                 confirmButtonText: t('pages.premiumSearch.alerts.creditsConfirm'),
                 cancelButtonText: t('pages.premiumSearch.alerts.creditsCancel'),
-                confirmButtonColor: '#10b981', // Emerald 500
-                cancelButtonColor: '#64748b', // Slate 500
+                confirmButtonColor: '#10b981',
+                cancelButtonColor: '#64748b',
                 background: '#1e293b',
                 color: '#fff',
-                iconColor: '#f59e0b' // Amber
+                iconColor: '#f59e0b'
             });
 
             if (result.isConfirmed) {
@@ -388,131 +419,67 @@ export default function PremiumSearchPage() {
             return;
         }
 
-        // Confirm Search
-        const result = await Swal.fire({
-            title: t('pages.premiumSearch.alerts.confirmTitle'),
-            text: t('pages.premiumSearch.alerts.confirmText'),
+        const confirmResult = await Swal.fire({
+            title: `ยืนยันการปลดล็อก?`,
+            text: `ใช้ 15 เครดิตเพื่อแสดง 20 รายชื่อ ในหมวดอักษร "${letter}"`,
             icon: 'question',
             showCancelButton: true,
-            confirmButtonText: t('pages.premiumSearch.alerts.confirmConfirm'),
-            cancelButtonText: t('pages.premiumSearch.alerts.confirmCancel'),
-            confirmButtonColor: '#059669', // Emerald 600
-            cancelButtonColor: '#ef4444', // Red 500
-            background: '#1e293b', // Slate 800
+            confirmButtonText: 'ปลดล็อก',
+            cancelButtonText: 'ยกเลิก',
+            confirmButtonColor: '#059669',
+            cancelButtonColor: '#ef4444',
+            background: '#1e293b',
             color: '#fff',
-            iconColor: '#34d399' // Emerald 400
+            iconColor: '#34d399'
         });
 
-        if (!result.isConfirmed) return;
+        if (!confirmResult.isConfirmed) return;
 
         setIsLoading(true);
 
         try {
-            // 1. Deduct Credits
             const { error } = await supabase.rpc('deduct_credits', { amount: 15 });
             if (error) throw error;
 
-            // Update local credits
             setUserCredits(prev => (prev !== null ? prev - 15 : null));
             window.dispatchEvent(new Event('force_credits_update'));
 
-            // 2. Perform Search
-            await new Promise(resolve => setTimeout(resolve, 800)); // Fake delay for UX
+            await new Promise(resolve => setTimeout(resolve, 800)); // UX delay
 
-            // Filter
-            // Filter
-            const filtered = allNames.filter(item => {
-                // 1. Filter by Score (if selected)
-                const matchesScore = !targetScore || item.totalScore.toString() === targetScore;
+            setUnlockedCounts(prev => ({
+                ...prev,
+                [letter]: (prev[letter] || 0) + 20
+            }));
+            
+            // Log history
+            const { data: profile } = await supabase
+                .from('user_profiles')
+                .select('tier')
+                .eq('id', user.id)
+                .maybeSingle();
 
-                // 2. Filter by Gender (if selected)
-                let matchesGender = true;
-                if (selectedGender !== 'all') {
-                    if (selectedGender === 'male' && item.gender !== 'male' && item.gender !== 'neutral') matchesGender = false;
-                    if (selectedGender === 'female' && item.gender !== 'female' && item.gender !== 'neutral') matchesGender = false;
-                    if (selectedGender === 'neutral' && item.gender !== 'neutral') matchesGender = false;
-                }
-
-                // 3. Filter by Day (if selected)
-                const matchesDay = selectedDay === 'All' || item.suitableDays.includes(selectedDay);
-
-                // 4. Filter by Leading Character (if Day is selected and Filter is active)
-                let matchesLeadingChar = true;
-                if (selectedDay !== 'All' && leadingCharType !== 'Any') {
-                    const dayKey = thaiDayToKey[selectedDay];
-                    if (dayKey && thaksaConfig[dayKey]) {
-                        const firstChar = item.name.charAt(0);
-                        const config = thaksaConfig[dayKey];
-
-                        if (leadingCharType === 'Dech') {
-                            matchesLeadingChar = config.dech.includes(firstChar);
-                        } else if (leadingCharType === 'Si') {
-                            matchesLeadingChar = config.si.includes(firstChar);
-                        }
-                    }
-                }
-
-                // 5. Filter by First Letter (multi-select)
-                const matchesFirstLetter = selectedFirstLetters.size === 0 || selectedFirstLetters.has(getFirstConsonant(item.name));
-
-                return matchesScore && matchesGender && matchesDay && matchesLeadingChar && matchesFirstLetter;
-            });
-
-            // Shuffle and Limit to 20 (exclude already shown)
-            const shuffled = [...filtered].sort(() => 0.5 - Math.random());
-            const selected = shuffled.slice(0, 20);
-
-            shownNameSet.current = new Set(selected.map(i => i.name));
-            setSearchResults(selected);
-            setHasSearched(true);
-
-            // 3. Save History (Only if user exists, but we checked logic)
-            // Note: If you want to force login, you might handle earlier.
-            // 3. Save History (Only if user exists, but we checked logic)
-            // Note: If you want to force login, you might handle earlier.
-            const { data: { user } } = await supabase.auth.getUser();
-            if (user) {
-                const { data: profile } = await supabase
-                    .from('user_profiles')
-                    .select('tier')
-                    .eq('id', user.id)
-                    .maybeSingle();
-
-                const tier = (profile?.tier || 'free').toLowerCase();
-                if (tier === 'pro' || tier === 'vvip') {
-                    await supabase.rpc('cleanup_analysis_history_by_tier');
-
-                    await supabase.from('analysis_history').insert({
-                        user_id: user.id,
-                        type: 'gacha',
-                        input_data: {
-                            selectedDay,
-                            selectedScore: targetScore || 'All',
-                            leadingChar: leadingCharType,
-                            selectedFirstLetters: [...selectedFirstLetters]
-                        },
-                        result_data: selected.map(item => ({
-                            name: item.name,
-                            totalScore: item.totalScore,
-                            meaning: `เหมาะกับวัน: ${item.suitableDays.join(', ')}`,
-                            notes: item.scoreBreakdown
-                        }))
-                    });
-                }
+            const tier = (profile?.tier || 'free').toLowerCase();
+            if (tier === 'pro' || tier === 'vvip') {
+                await supabase.rpc('cleanup_analysis_history_by_tier');
+                const unlockedNames = groupedByLetter.get(letter)?.slice(0, (unlockedCounts[letter] || 0) + 20) || [];
+                
+                await supabase.from('analysis_history').insert({
+                    user_id: user.id,
+                    type: 'gacha',
+                    input_data: {
+                        selectedDay,
+                        selectedScore: targetScore || 'All',
+                        leadingChar: leadingCharType,
+                        selectedLetter
+                    },
+                    result_data: unlockedNames.map(item => ({
+                        name: item.name,
+                        totalScore: item.totalScore,
+                        meaning: `เหมาะกับวัน: ${item.suitableDays.join(', ')}`,
+                        notes: item.scoreBreakdown
+                    }))
+                });
             }
-
-            // Success Alert (Optional, maybe just show results? - User asked for improved alerts, maybe a quick toast?)
-            // Let's just scroll to results.
-
-            // Swal.fire({
-            //     title: 'ค้นหาสำเร็จ!',
-            //     text: `พบ ${selected.length} รายชื่อ`,
-            //     icon: 'success',
-            //     timer: 1500,
-            //     showConfirmButton: false,
-            //     background: '#1e293b',
-            //     color: '#fff'
-            // });
 
         } catch (err) {
             console.error('Search Error:', err);
@@ -529,105 +496,26 @@ export default function PremiumSearchPage() {
         }
     };
 
-    const handleLoadMore = async () => {
-        const Swal = (await import('sweetalert2')).default;
-        if (userCredits !== null && userCredits < 15) {
-            const result = await Swal.fire({
-                title: t('pages.premiumSearch.alerts.creditsTitle'),
-                text: t('pages.premiumSearch.alerts.creditsText'),
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: t('pages.premiumSearch.alerts.creditsConfirm'),
-                cancelButtonText: t('pages.premiumSearch.alerts.creditsCancel'),
-                confirmButtonColor: '#10b981',
-                cancelButtonColor: '#64748b',
-                background: '#1e293b',
-                color: '#fff',
-                iconColor: '#f59e0b'
-            });
-            if (result.isConfirmed) router.push('/topup');
-            return;
-        }
-
-        setIsLoading(true);
-        try {
-            const { error } = await supabase.rpc('deduct_credits', { amount: 15 });
-            if (error) throw error;
-            setUserCredits(prev => (prev !== null ? prev - 15 : null));
-            window.dispatchEvent(new Event('force_credits_update'));
-
-            await new Promise(resolve => setTimeout(resolve, 600));
-
-            const filtered = allNames.filter(item => {
-                const matchesScore = !targetScore || item.totalScore.toString() === targetScore;
-                let matchesGender = true;
-                if (selectedGender !== 'all') {
-                    if (selectedGender === 'male' && item.gender !== 'male' && item.gender !== 'neutral') matchesGender = false;
-                    if (selectedGender === 'female' && item.gender !== 'female' && item.gender !== 'neutral') matchesGender = false;
-                    if (selectedGender === 'neutral' && item.gender !== 'neutral') matchesGender = false;
-                }
-                const matchesDay = selectedDay === 'All' || item.suitableDays.includes(selectedDay);
-                let matchesLeadingChar = true;
-                if (selectedDay !== 'All' && leadingCharType !== 'Any') {
-                    const dayKey = thaiDayToKey[selectedDay];
-                    if (dayKey && thaksaConfig[dayKey]) {
-                        const firstChar = item.name.charAt(0);
-                        const config = thaksaConfig[dayKey];
-                        if (leadingCharType === 'Dech') matchesLeadingChar = config.dech.includes(firstChar);
-                        else if (leadingCharType === 'Si') matchesLeadingChar = config.si.includes(firstChar);
-                    }
-                }
-                const matchesFirstLetter = selectedFirstLetters.size === 0 || selectedFirstLetters.has(getFirstConsonant(item.name));
-                return matchesScore && matchesGender && matchesDay && matchesLeadingChar && matchesFirstLetter
-                    && !shownNameSet.current.has(item.name);
-            });
-
-            const shuffled = [...filtered].sort(() => 0.5 - Math.random());
-            const selected = shuffled.slice(0, 20);
-            selected.forEach(i => shownNameSet.current.add(i.name));
-            setSearchResults(prev => [...prev, ...selected]);
-        } catch (err) {
-            console.error('Load More Error:', err);
-        } finally {
-            setIsLoading(false);
-        }
+    const handleUnlockFirstBatch = () => {
+        if (!selectedLetter) return;
+        performUnlock(selectedLetter, 15);
     };
 
-    const handleFirstLetterChange = (letter: string) => {
-        setSelectedFirstLetters(prev => {
-            const next = new Set(prev);
-            if (next.has(letter)) {
-                next.delete(letter);
-            } else {
-                next.add(letter);
-            }
-            return next;
-        });
-    };
-
-    const handleClear = () => {
-        setHasSearched(false);
-        setSearchResults([]);
-        shownNameSet.current = new Set();
-        setLeadingCharType('Any');
-        setSelectedDay('All');
-        setSelectedGender('all');
-        setTargetScore('');
-        setSelectedFirstLetters(new Set());
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    const handleLoadMore = () => {
+        if (!selectedLetter) return;
+        performUnlock(selectedLetter, 15);
     };
 
     return (
         <div className="min-h-screen bg-[#0f172a] text-slate-200 font-sans selection:bg-amber-500/30">
 
-            <main className="w-full max-w-[1400px] transition-all duration-300 min-h-screen px-3 sm:px-4 pt-16 md:pt-32 pb-32 md:pb-28 relative">
-                {/* Background Gradients */}
+            <main className="w-full max-w-[1400px] mx-auto transition-all duration-300 min-h-screen px-3 sm:px-4 pt-16 md:pt-32 pb-32 md:pb-28 relative">
                 <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
                     <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-amber-500/10 blur-[100px]" />
                     <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-blue-500/10 blur-[100px]" />
                 </div>
 
-                <div className="relative z-10 max-w-6xl space-y-4 md:space-y-8">
+                <div className="relative z-10 max-w-6xl mx-auto space-y-4 md:space-y-8">
                     {/* Header */}
                     <header className="text-center space-y-2.5 md:space-y-3">
                         <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs sm:text-sm font-medium">
@@ -652,17 +540,21 @@ export default function PremiumSearchPage() {
                                 </p>
                             </div>
                             <p className="text-slate-500 text-xs md:text-sm pt-1 md:pt-4">
-                                คาดว่าจะพบ <span className="text-emerald-400 font-semibold">{filteredCount}</span> รายชื่อจากเงื่อนไขนี้
+                                พบทั้งหมด <span className="text-emerald-400 font-semibold">{filteredNames.length}</span> รายชื่อจากเงื่อนไขนี้
                             </p>
+                            <div className="mt-4 text-center">
+                                <p className="text-sm text-slate-300 flex items-center justify-center gap-2">
+                                    <span className="text-xs text-slate-500">เครดิตคงเหลือ:</span>
+                                    <span className="text-lg md:text-xl font-bold text-emerald-400">{userCredits !== null ? userCredits : '—'}</span>
+                                </p>
+                            </div>
                         </div>
                     </header>
 
-                    {/* Search Controls */}
-                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-3xl p-3.5 sm:p-6 md:p-8 shadow-2xl animate-fade-in-up md:mx-auto max-w-4xl relative overflow-visible group">
-
-                        {/* inputs */}
+                    {/* Filters Section */}
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-3xl p-3.5 sm:p-6 md:p-8 shadow-2xl md:mx-auto max-w-4xl relative overflow-visible">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3 md:gap-6 relative z-10">
-                            {/* Filters */}
+                            
                             <div className="md:col-span-4">
                                 <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 md:mb-2">{t('pages.premiumSearch.filters.dayLabel')}</label>
                                 <div className="relative">
@@ -673,7 +565,7 @@ export default function PremiumSearchPage() {
                                             setSelectedDay(newVal);
                                             if (newVal === 'All') setLeadingCharType('Any');
                                         }}
-                                        className="block w-full px-3 md:px-4 py-2.5 md:py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-sm md:text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="block w-full px-3 md:px-4 py-2.5 md:py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-sm md:text-lg"
                                         disabled={isLoading}
                                     >
                                         {dayOptions.map(day => (
@@ -699,7 +591,7 @@ export default function PremiumSearchPage() {
                                     <select
                                         value={selectedGender}
                                         onChange={(e) => setSelectedGender(e.target.value)}
-                                        className="block w-full px-3 md:px-4 py-2.5 md:py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-sm md:text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="block w-full px-3 md:px-4 py-2.5 md:py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-sm md:text-lg"
                                         disabled={isLoading}
                                     >
                                         <option value="all" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderAll')}</option>
@@ -713,7 +605,6 @@ export default function PremiumSearchPage() {
                                 </div>
                             </div>
 
-                            {/* Leading Character Filter (Replaces Search) */}
                             <div className="sm:col-span-2 md:col-span-12">
                                 <label className="block text-xs font-bold uppercase tracking-wider mb-2 md:mb-4 text-slate-400 transition-colors">
                                     {t('pages.premiumSearch.leading.label')}{' '}
@@ -774,216 +665,125 @@ export default function PremiumSearchPage() {
                                     </label>
                                 </div>
                             </div>
-
-                            {/* First Letter Filter (ก-ฮ) */}
-                            <div className="sm:col-span-2 md:col-span-12">
-                                <div className="space-y-2">
-                                    <div className="flex items-center gap-2 text-xs md:text-sm text-slate-400">
-                                        <Type className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                                        <span>กรองตามตัวอักษรแรก</span>
-                                        {selectedFirstLetters.size > 0 && (
-                                            <span className="px-1.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 text-xs font-bold">{selectedFirstLetters.size}</span>
-                                        )}
-                                        {selectedFirstLetters.size > 0 && (
-                                            <button
-                                                onClick={() => setSelectedFirstLetters(new Set())}
-                                                className="ml-auto text-xs text-emerald-400 hover:text-emerald-300 transition-colors"
-                                            >
-                                                ล้างตัวกรอง
-                                            </button>
-                                        )}
-                                    </div>
-                                    <div className="flex max-h-24 flex-wrap gap-1 md:gap-1.5 overflow-y-auto pr-1 custom-scrollbar sm:max-h-none sm:overflow-visible">
-                                        <button
-                                            onClick={() => setSelectedFirstLetters(new Set())}
-                                            className={`px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all ${
-                                                selectedFirstLetters.size === 0
-                                                    ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/20'
-                                                    : 'bg-white/5 text-slate-400 border border-white/10 hover:text-white hover:border-white/20'
-                                            }`}
-                                        >
-                                            ทั้งหมด
-                                        </button>
-                                        {THAI_LETTERS.filter(letter => availableFirstLetters.has(letter)).map((letter) => (
-                                            <button
-                                                key={letter}
-                                                onClick={() => handleFirstLetterChange(letter)}
-                                                className={`w-7 h-7 md:w-9 md:h-9 rounded-lg text-xs md:text-sm font-medium transition-all flex items-center justify-center ${
-                                                    selectedFirstLetters.has(letter)
-                                                        ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/20 scale-110'
-                                                        : 'bg-white/5 text-slate-400 border border-white/10 hover:text-white hover:border-white/20 hover:bg-white/10'
-                                                }`}
-                                            >
-                                                {letter}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Actions */}
-                        <div className="mt-5 pt-5 md:mt-8 md:pt-8 border-t border-white/10 flex flex-col md:flex-row gap-3 md:gap-4 justify-center relative z-0">
-                            <button
-                                onClick={handleSearch}
-                                disabled={isLoading}
-                                data-track="premiumSearch.form.search"
-                                className="group relative inline-flex items-center gap-2 md:gap-3 px-5 py-3.5 md:px-8 md:py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl md:rounded-2xl shadow-lg shadow-emerald-500/20 transition-all hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 disabled:cursor-not-allowed flex-1 justify-center max-w-md"
-                            >
-                                {isLoading ? <span className="animate-spin">⏳</span> : <Search size={20} />}
-                                <span className="text-sm md:text-lg">{t('pages.premiumSearch.actions.search')}</span>
-                                <span className="ml-1 md:ml-2 bg-emerald-700/40 px-2 md:px-3 py-0.5 md:py-1 rounded-md md:rounded-lg text-[11px] md:text-sm font-semibold flex items-center gap-1 border border-emerald-600/50">
-                                    <Lock size={12} /> {t('pages.premiumSearch.actions.searchCost')}
-                                </span>
-                            </button>
-
-                            {hasSearched && (
-                                <button
-                                    onClick={handleClear}
-                                    className="inline-flex items-center justify-center gap-2 px-4 py-3 md:px-6 md:py-4 bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold rounded-xl md:rounded-2xl transition-colors"
-                                >
-                                    <RotateCcw size={18} />
-                                    {t('pages.premiumSearch.actions.reset')}
-                                </button>
-                            )}
-                        </div>
-                        <div className="mt-4 pt-4 md:mt-6 md:pt-6 border-t border-white/10 text-center space-y-2">
-                            <p className="text-sm text-slate-300 flex items-center justify-center gap-2">
-                                <span className="text-xs text-slate-500">เครดิตคงเหลือ:</span>
-                                <span className="text-lg md:text-xl font-bold text-emerald-400">{userCredits !== null ? userCredits : '—'}</span>
-                            </p>
-                            {hasSearched && (
-                                <p className="text-slate-500 text-xs mt-2 italic">
-                                    {t('pages.premiumSearch.actions.rerollNote')}
-                                </p>
-                            )}
                         </div>
                     </div>
 
-                    {/* Results Section */}
-                    {hasSearched && (
+                    {/* Results Alphabet Tabs */}
+                    {availableLetters.length > 0 ? (
                         <div id="results-section" className="space-y-6 animate-fade-in-up">
-                            <div className="flex items-center justify-between px-4">
-                                <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                                    <Sparkles className="text-emerald-400" />
-                                    {t('pages.premiumSearch.results.title')}{' '}
-                                    {searchResults.length > 0 ? t('pages.premiumSearch.results.countLabel') : t('pages.premiumSearch.results.zeroLabel')}
-                                </h2>
-                            </div>
-
-                            {/* Recommendation Context */}
-                            <div className="mx-4 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 rounded-xl p-6 text-center">
-                                <p className="text-emerald-300 font-medium text-lg leading-relaxed">
-                                    {t('pages.premiumSearch.results.recommendationPrefix')}{' '}
-                                    <span className="text-white font-bold underline decoration-amber-500/50 underline-offset-4">
-                                        {selectedDay === 'All'
-                                            ? t('pages.premiumSearch.results.recommendationDayAll')
-                                            : t('pages.premiumSearch.results.recommendationDay').replace('{day}', getDayLabel(selectedDay))}
-                                    </span>{' '}
-                                    — {t('pages.premiumSearch.headerSub')}{' '}
-                                    ({searchResults.length})
-                                </p>
-                            </div>
-
-                            {/* Tip Match Image */}
-                            <div className="mx-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4 flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/20 backdrop-blur-md">
-                                <p className="text-emerald-400 font-medium text-sm md:text-base">
-                                    {t('pages.premiumSearch.results.tip')}{' '}
-                                    <Link href="/" className="underline decoration-emerald-500/50 hover:text-emerald-300 transition-colors">{t('sidebar.analyzeName')}</Link>
-                                </p>
-                            </div>
-
-                            {searchResults.length > 0 ? (
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {searchResults.map((item, index) => (
-                                        <div
-                                            key={item.name + index}
-                                            className="group relative bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 hover:bg-white/10 hover:border-emerald-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/10"
-                                        >
-                                            <div className="flex justify-between items-start mb-4">
-                                                <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-emerald-300 transition-colors">
-                                                    {item.name}
-                                                </h3>
-                                                <div className="flex items-center gap-1 px-3 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 font-bold">
-                                                    <Award size={16} />
-                                                    <span>{item.totalScore}</span>
-                                                </div>
-                                            </div>
-
-                                            <div className="space-y-4">
-                                                <div className="flex items-start gap-2 text-sm text-slate-400">
-                                                    <Calendar size={16} className="mt-1 shrink-0 text-slate-500" />
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {item.suitableDays.map((day: string, i: number) => (
-                                                            <span key={i} className="inline-block px-2 py-0.5 rounded bg-slate-800/50 border border-white/5 text-slate-300 text-xs text-center">
-                                                                {getDayLabel(day)}
-                                                            </span>
-                                                        ))}
-                                                    </div>
-                                                </div>
-
-                                                <div className="pt-4 border-t border-white/5">
-                                                    <p className="text-xs text-slate-500 mb-2 font-medium uppercase tracking-wider">พลังเลขคู่</p>
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {item.scoreBreakdown.map((score: string, i: number) => (
-                                                            <span key={i} className="px-2 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
-                                                                {score}
-                                                            </span>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
+                            
+                            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 overflow-x-auto custom-scrollbar">
+                                <div className="flex gap-2 w-max pb-2">
+                                    {availableLetters.map(letter => {
+                                        const count = groupedByLetter.get(letter)?.length || 0;
+                                        const isSelected = selectedLetter === letter;
+                                        return (
+                                            <button
+                                                key={letter}
+                                                onClick={() => setSelectedLetter(letter)}
+                                                className={`flex flex-col items-center justify-center min-w-[3.5rem] py-2 px-3 rounded-xl transition-all ${
+                                                    isSelected 
+                                                    ? 'bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/20' 
+                                                    : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white'
+                                                }`}
+                                            >
+                                                <span className="text-lg font-bold">{letter}</span>
+                                                <span className={`text-[10px] font-semibold mt-1 px-2 rounded-full ${isSelected ? 'bg-white/20 text-white' : 'bg-white/10 text-slate-400'}`}>
+                                                    {count}
+                                                </span>
+                                            </button>
+                                        );
+                                    })}
                                 </div>
-                            ) : (
-                                <div className="bg-white/5 border border-white/10 rounded-3xl p-12 text-center">
-                                    <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
-                                        <Search size={32} className="text-slate-500" />
+                            </div>
+
+                            {selectedLetter && (
+                                <div className="space-y-6">
+                                    <div className="flex items-center justify-between px-2 md:px-4">
+                                        <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                                            <Type className="text-emerald-400" />
+                                            หมวดอักษร {selectedLetter} <span className="text-slate-400 text-sm font-normal">({groupedByLetter.get(selectedLetter)?.length || 0} ชื่อ)</span>
+                                        </h2>
                                     </div>
-                                    <h3 className="text-xl font-bold text-white mb-2">{t('pages.premiumSearch.results.emptyTitle')}</h3>
-                                    <p className="text-slate-400">{t('pages.premiumSearch.results.emptyDesc')}</p>
+                                    
+                                    {(() => {
+                                        const namesForLetter = groupedByLetter.get(selectedLetter) || [];
+                                        const currentUnlocked = unlockedCounts[selectedLetter] || 0;
+                                        const displayCount = currentUnlocked === 0 ? 20 : currentUnlocked;
+                                        const visibleNames = namesForLetter.slice(0, displayCount);
+                                        const isFullyUnlocked = currentUnlocked > 0;
+                                        const hasMore = namesForLetter.length > displayCount;
+                                        
+                                        return (
+                                            <>
+                                                {/* Unlock Banner if not unlocked */}
+                                                {!isFullyUnlocked && (
+                                                    <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/30 rounded-2xl p-6 text-center shadow-lg shadow-amber-900/20 backdrop-blur-md relative overflow-hidden">
+                                                        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay"></div>
+                                                        <Lock className="w-10 h-10 text-amber-400 mx-auto mb-3" />
+                                                        <h3 className="text-xl font-bold text-amber-300 mb-2">ปลดล็อกหมวดอักษร &quot;{selectedLetter}&quot;</h3>
+                                                        <p className="text-slate-300 text-sm md:text-base mb-6 max-w-lg mx-auto">
+                                                            ดูรายชื่อมงคลในหมวดนี้ชัดๆ สูงสุด 20 ชื่อต่อครั้ง (ชื่ออื่นๆ ถูกเบลอไว้)
+                                                        </p>
+                                                        <button
+                                                            onClick={handleUnlockFirstBatch}
+                                                            disabled={isLoading}
+                                                            className="relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-900 font-bold rounded-xl shadow-lg transition-all hover:-translate-y-0.5 disabled:opacity-70"
+                                                        >
+                                                            {isLoading ? <span className="animate-spin">⏳</span> : <Lock size={18} />}
+                                                            ปลดล็อกเพื่อดูชื่อ (15 เครดิต)
+                                                        </button>
+                                                    </div>
+                                                )}
+
+                                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
+                                                    {visibleNames.map((item, index) => (
+                                                        <NameCard key={item.name + index} item={item} isUnlocked={isFullyUnlocked} />
+                                                    ))}
+                                                </div>
+
+                                                {/* Load More Button */}
+                                                {isFullyUnlocked && hasMore && (
+                                                    <div className="flex flex-col items-center gap-3 pt-4 pb-4">
+                                                        <p className="text-slate-400 text-sm">
+                                                            แสดงแล้ว <span className="text-white font-semibold">{visibleNames.length}</span> ชื่อ
+                                                            {' · '}
+                                                            ยังมีชื่อที่เหลืออีก <span className="text-emerald-400 font-semibold">{namesForLetter.length - visibleNames.length}</span> ชื่อ
+                                                        </p>
+                                                        <button
+                                                            onClick={handleLoadMore}
+                                                            disabled={isLoading}
+                                                            className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/40 text-slate-200 hover:text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                                        >
+                                                            {isLoading ? (
+                                                                <span className="animate-spin text-base">⏳</span>
+                                                            ) : (
+                                                                <Lock size={16} className="text-emerald-400" />
+                                                            )}
+                                                            <span>ดูเพิ่มอีก 20 ชื่อ (15 เครดิต)</span>
+                                                        </button>
+                                                    </div>
+                                                )}
+
+                                                {/* End of list */}
+                                                {isFullyUnlocked && !hasMore && (
+                                                    <div className="text-center py-6 border-t border-white/5 mt-8">
+                                                        <p className="text-slate-500 text-sm">✓ แสดงครบทุกชื่อในหมวด &quot;{selectedLetter}&quot; แล้ว ({namesForLetter.length} ชื่อ)</p>
+                                                    </div>
+                                                )}
+                                            </>
+                                        );
+                                    })()}
                                 </div>
                             )}
-
-                            {/* Load More */}
-                            {searchResults.length > 0 && (() => {
-                                const remaining = filteredCount - shownNameSet.current.size;
-                                if (remaining <= 0) {
-                                    return (
-                                        <div className="text-center py-6">
-                                            <p className="text-slate-500 text-sm">✓ แสดงครบทุกชื่อแล้ว ({searchResults.length} ชื่อ)</p>
-                                        </div>
-                                    );
-                                }
-                                return (
-                                    <div className="flex flex-col items-center gap-3 pt-2 pb-4">
-                                        <p className="text-slate-400 text-sm">
-                                            แสดงแล้ว <span className="text-white font-semibold">{searchResults.length}</span> ชื่อ
-                                            {' · '}
-                                            ยังเหลืออีก <span className="text-emerald-400 font-semibold">{remaining}</span> ชื่อตามเงื่อนไขนี้
-                                        </p>
-                                        <button
-                                            onClick={handleLoadMore}
-                                            disabled={isLoading || (userCredits !== null && userCredits < 15)}
-                                            className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/40 text-slate-200 hover:text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                                        >
-                                            {isLoading ? (
-                                                <span className="animate-spin text-base">⏳</span>
-                                            ) : (
-                                                <Search size={16} className="text-emerald-400" />
-                                            )}
-                                            <span>ดูเพิ่มอีก 20 ชื่อ</span>
-                                            <span className="bg-emerald-700/40 border border-emerald-600/50 px-2 py-0.5 rounded-md text-xs font-semibold flex items-center gap-1">
-                                                <Lock size={10} /> 15 เครดิต
-                                            </span>
-                                        </button>
-                                        {userCredits !== null && userCredits < 15 && (
-                                            <p className="text-amber-400 text-xs">เครดิตไม่พอ — <Link href="/topup" className="underline hover:text-amber-300">เติมเครดิต</Link></p>
-                                        )}
-                                    </div>
-                                );
-                            })()}
+                        </div>
+                    ) : (
+                        <div className="bg-white/5 border border-white/10 rounded-3xl p-12 text-center animate-fade-in-up mt-8">
+                            <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <Search size={32} className="text-slate-500" />
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-2">{t('pages.premiumSearch.results.emptyTitle')}</h3>
+                            <p className="text-slate-400">{t('pages.premiumSearch.results.emptyDesc')}</p>
                         </div>
                     )}
 
@@ -1112,8 +912,8 @@ export default function PremiumSearchPage() {
                                 <div className="bg-white/5 border border-white/10 rounded-2xl p-6 text-center relative">
                                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm">3</div>
                                     <div className="pt-4">
-                                        <h3 className="text-lg font-bold text-white mb-2">รับผลลัพธ์</h3>
-                                        <p className="text-slate-400 text-sm">ระบบจะประมวลผลและแสดง 20 ชื่อมงคลที่ตรงกับความต้องการของคุณ</p>
+                                        <h3 className="text-lg font-bold text-white mb-2">เลือกหมวดอักษร</h3>
+                                        <p className="text-slate-400 text-sm">เลือกหมวดพยัญชนะต้นที่คุณชอบ แล้วใช้เครดิตปลดล็อกเพื่อดูชื่อมงคล</p>
                                     </div>
                                 </div>
                             </div>
@@ -1167,7 +967,7 @@ export default function PremiumSearchPage() {
                                         Q: เปลี่ยนชื่อมงคล Pro ใช้กี่เครดิต?
                                     </h3>
                                     <p className="text-slate-300 leading-relaxed">
-                                        A: การคัดชื่อในระบบเปลี่ยนชื่อมงคล Pro ใช้ <strong className="text-white">15 เครดิต</strong>ต่อ 1 ครั้ง โดยระบบจะสุ่มแสดงผล 20 รายชื่อจากฐานข้อมูลที่ตรงตามเงื่อนไขที่คุณเลือก
+                                        A: การปลดล็อกชื่อใช้ <strong className="text-white">15 เครดิต</strong>ต่อการปลดล็อก 1 ครั้ง (สูงสุด 20 รายชื่อ) ในแต่ละหมวดอักษร
                                     </p>
                                 </div>
                             </div>
