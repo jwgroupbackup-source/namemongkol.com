@@ -53,7 +53,7 @@ export const HeroBanner = ({ headingLevel = 'h1' }: HeroBannerProps) => {
                     </div>
 
                     <p className="mt-3 sm:mt-5 text-xs sm:text-sm text-emerald-300/80 font-medium tracking-wide">
-                        ✨ ลองฟรีทันที ไม่ต้องสมัครสมาชิก
+                        ✨ เข้าสู่ระบบเพื่อเริ่มต้นวิเคราะห์ชื่อฟรี
                     </p>
                 </div>
 

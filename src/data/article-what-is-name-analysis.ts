@@ -236,7 +236,7 @@ export const articleWhatIsNameAnalysis = {
         <a href="/name-check" class="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold px-8 py-4 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all text-lg shadow-lg shadow-amber-500/20 mb-4">
             🔮 วิเคราะห์ชื่อฟรี
         </a>
-        <p class="text-sm text-slate-400">ไม่ต้องสมัครสมาชิก • รู้ผลทันที • ครบทั้ง 4 ศาสตร์</p>
+        <p class="text-sm text-slate-400">สมัครสมาชิกเพื่อใช้งานฟรี • รู้ผลทันที • ครบทั้ง 4 ศาสตร์</p>
     </div>
 
     <div class="bg-slate-900/30 border border-white/10 rounded-xl p-6 my-8">

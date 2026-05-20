@@ -41,7 +41,7 @@ export const HowItWorksSection = () => {
                     วิเคราะห์ชื่อใน <span className="text-amber-400">3 ขั้นตอน</span>
                 </h2>
                 <p className="text-slate-400 max-w-xl mx-auto text-sm sm:text-base">
-                    ง่าย รวดเร็ว และไม่ต้องสมัครสมาชิกก่อนใช้งาน
+                    ง่าย รวดเร็ว และใช้งานได้ฟรีเพียงสมัครสมาชิก
                 </p>
             </div>
 

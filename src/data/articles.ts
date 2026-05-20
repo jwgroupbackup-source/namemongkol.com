@@ -6235,7 +6235,7 @@ export const articles: Article[] = [
                 <a href="/name-analysis" class="inline-block px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg shadow-lg transition-colors">
                     วิเคราะห์ชื่อลูกฟรี →
                 </a>
-                <p class="text-xs text-indigo-300/50 mt-3">ใช้เวลาไม่ถึง 30 วินาที • ไม่ต้องสมัครสมาชิก</p>
+                <p class="text-xs text-indigo-300/50 mt-3">ใช้เวลาไม่ถึง 30 วินาที • สมัครสมาชิกเพื่อใช้งานฟรี</p>
             </div>
 
             <div class="my-10 p-8 rounded-2xl bg-gradient-to-r from-emerald-900/40 to-teal-900/40 border border-emerald-500/20 text-center relative overflow-hidden">
@@ -8860,7 +8860,7 @@ export const articles: Article[] = [
                     วิเคราะห์แบบ Premium
                 </a>
             </div>
-            <p class="text-xs text-indigo-300/50 mt-3">ใช้เวลาไม่ถึง 30 วินาที • ไม่ต้องสมัครสมาชิก</p>
+            <p class="text-xs text-indigo-300/50 mt-3">ใช้เวลาไม่ถึง 30 วินาที • สมัครสมาชิกเพื่อใช้งานฟรี</p>
         </div>
 
         <!-- Related Articles CTA -->
@@ -9281,7 +9281,7 @@ export const articles: Article[] = [
                 📖 อ่านต่อ: 17 แมวมงคลไทย
             </a>
         </div>
-        <p class="text-xs text-indigo-300/50 mt-3">ใช้เวลาไม่ถึง 30 วินาที • ไม่ต้องสมัครสมาชิก</p>
+        <p class="text-xs text-indigo-300/50 mt-3">ใช้เวลาไม่ถึง 30 วินาที • สมัครสมาชิกเพื่อใช้งานฟรี</p>
     </div>
 
     <!-- Related Articles -->
