@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
-import { Search, Sparkles, Calendar, Award, Lock, ChevronDown, CheckCircle2, XCircle, Zap, Shield, Star, HelpCircle, Type } from 'lucide-react';
+import { Search, Sparkles, Calendar, Award, Lock, ChevronDown, CheckCircle2, XCircle, Zap, Shield, Star, HelpCircle, Type, RotateCcw, SlidersHorizontal, Coins, BadgeCheck } from 'lucide-react';
 import { premiumNamesRaw } from '@/data/premiumNamesRaw';
 import { parsePremiumNames, PremiumNameData } from '@/utils/premiumDataParser';
 
@@ -97,7 +97,7 @@ function ScoreDropdown({
                 type="button"
                 disabled={disabled}
                 onClick={() => setOpen(v => !v)}
-                className={`block w-full px-3 md:px-4 py-2.5 md:py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all cursor-pointer font-medium text-sm md:text-lg disabled:opacity-50 disabled:cursor-not-allowed text-left flex items-center justify-between ${open ? 'rounded-b-none border-b-white/5' : ''
+                className={`block w-full px-3 md:px-4 py-2 md:py-4 bg-slate-950/40 border border-white/10 rounded-xl text-slate-200 focus:outline-none focus:ring-1 focus:ring-amber-400/40 focus:border-amber-300/40 backdrop-blur-xl transition-all cursor-pointer font-medium text-xs sm:text-sm md:text-lg disabled:opacity-50 disabled:cursor-not-allowed text-left flex items-center justify-between ${open ? 'rounded-b-none border-b-white/5' : ''
                     }`}
             >
                 <span>{selectedLabel}</span>
@@ -112,8 +112,8 @@ function ScoreDropdown({
                             onChange('');
                             setOpen(false);
                         }}
-                        className={`w-full px-4 py-3 text-left transition-colors border-b border-white/5 ${value === ''
-                            ? 'bg-emerald-500/20 text-emerald-300'
+                        className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 text-left transition-colors border-b border-white/5 text-sm ${value === ''
+                            ? 'bg-amber-400/15 text-amber-100'
                             : 'text-slate-200 hover:bg-white/5 hover:text-white'
                             }`}
                     >
@@ -129,14 +129,14 @@ function ScoreDropdown({
                                     onChange(score.toString());
                                     setOpen(false);
                                 }}
-                                className={`w-full px-4 py-3 text-left transition-colors border-b border-white/5 last:border-0 flex items-center justify-between group/item ${value === score.toString()
-                                    ? 'bg-emerald-500/20 text-emerald-300'
+                                className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 text-left transition-colors border-b border-white/5 last:border-0 flex items-center justify-between group/item ${value === score.toString()
+                                    ? 'bg-amber-400/15 text-amber-100'
                                     : 'text-slate-200 hover:bg-white/5 hover:text-white'
                                     }`}
                             >
                                 <div className="flex flex-col flex-1 min-w-0 mr-4">
                                     <div className="flex items-center gap-2 mb-0.5">
-                                        <span className={`font-medium transition-colors ${value === score.toString() ? 'text-white' : 'text-slate-200 group-hover/item:text-amber-400'}`}>
+                                        <span className={`font-medium transition-colors ${value === score.toString() ? 'text-white' : 'text-slate-200 group-hover/item:text-amber-300'}`}>
                                             {(t('pages.premiumSearch.filters.scorePrefix') || '').trim()} {score}
                                         </span>
                                         <span className={`text-[10px] px-1.5 py-0.5 rounded-md bg-white/5 border border-white/5 ${color}`}>
@@ -147,7 +147,7 @@ function ScoreDropdown({
                                         {desc}
                                     </span>
                                 </div>
-                                {value === score.toString() && <div className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />}
+                                {value === score.toString() && <div className="w-2 h-2 rounded-full bg-amber-300 shrink-0" />}
                             </button>
                         );
                     })}
@@ -173,39 +173,47 @@ const NameCard = ({ item, isUnlocked }: { item: PremiumNameData; isUnlocked: boo
     ];
     
     const getDayLabel = (value: string) => dayOptions.find(opt => opt.value === value)?.label || value;
+    const firstConsonant = getFirstConsonant(item.name) || item.name.charAt(0);
     
     return (
-        <div className="group relative bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 hover:bg-white/10 hover:border-emerald-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/10">
-            <div className="flex justify-between items-start mb-4">
+        <div className="group relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl border border-amber-200/12 bg-[linear-gradient(145deg,rgba(22,25,39,0.92),rgba(8,12,24,0.86)_46%,rgba(27,20,12,0.76))] p-2.5 shadow-[inset_0_1px_0_rgba(255,245,220,0.08),0_14px_34px_rgba(1,4,15,0.24)] backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:border-amber-300/32 hover:shadow-[inset_0_1px_0_rgba(255,245,220,0.12),0_22px_52px_rgba(1,4,15,0.34),0_0_28px_rgba(201,147,58,0.10)] sm:p-4 md:p-6">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(245,205,125,0.12),transparent_34%),radial-gradient(circle_at_86%_88%,rgba(74,113,166,0.10),transparent_36%)]" />
+            <div className="pointer-events-none absolute right-2 top-0 text-6xl font-black leading-none text-amber-100/[0.045] transition-colors group-hover:text-amber-100/[0.075] sm:right-3 sm:text-7xl md:text-8xl">
+                {firstConsonant}
+            </div>
+            {!isUnlocked && (
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-amber-400/12 to-transparent" />
+            )}
+            <div className="relative flex flex-col gap-1.5 sm:gap-2 sm:flex-row sm:items-start sm:justify-between mb-2.5 md:mb-4">
                 <h3 
-                    className="text-2xl md:text-3xl font-bold text-white group-hover:text-emerald-300 transition-colors"
+                    className="max-w-full break-words text-lg font-bold leading-tight text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)] transition-colors group-hover:text-amber-100 sm:text-2xl md:text-2xl 2xl:text-3xl"
                     style={!isUnlocked ? { filter: 'blur(8px)', userSelect: 'none' } : {}}
                 >
                     {item.name}
                 </h3>
-                <div className="flex items-center gap-1 px-3 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 font-bold shrink-0">
-                    <Award size={16} />
+                <div className="flex w-fit shrink-0 items-center gap-1 rounded-md border border-amber-200/30 bg-[linear-gradient(135deg,rgba(245,190,90,0.18),rgba(100,75,28,0.12))] px-1.5 py-0.5 text-[10px] font-bold text-amber-100 shadow-[inset_0_1px_0_rgba(255,244,210,0.12),0_8px_18px_rgba(1,4,15,0.18)] sm:rounded-lg sm:px-3 sm:py-1 sm:text-sm">
+                    <Award size={12} className="sm:h-4 sm:w-4" />
                     <span>{item.totalScore}</span>
                 </div>
             </div>
 
-            <div className="space-y-4">
-                <div className="flex items-start gap-2 text-sm text-slate-400">
-                    <Calendar size={16} className="mt-1 shrink-0 text-slate-500" />
-                    <div className="flex flex-wrap gap-2">
+            <div className="relative space-y-2.5 md:space-y-4">
+                <div className="flex items-start gap-1.5 rounded-lg border border-white/[0.06] bg-slate-950/22 p-1.5 text-xs text-slate-400 sm:gap-2 sm:p-2 sm:text-sm">
+                    <Calendar size={14} className="mt-0.5 shrink-0 text-amber-200/60 sm:h-4 sm:w-4" />
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
                         {item.suitableDays.map((day: string, i: number) => (
-                            <span key={i} className="inline-block px-2 py-0.5 rounded bg-slate-800/50 border border-white/5 text-slate-300 text-xs text-center">
+                            <span key={i} className="inline-block rounded border border-white/[0.07] bg-white/[0.045] px-1.5 py-0.5 text-center text-[10px] leading-tight text-slate-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:px-2 sm:text-xs">
                                 {getDayLabel(day)}
                             </span>
                         ))}
                     </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/5">
-                    <p className="text-xs text-slate-500 mb-2 font-medium uppercase tracking-wider">พลังเลขคู่</p>
-                    <div className="flex flex-wrap gap-2">
+                <div className="border-t border-amber-100/[0.08] pt-2.5 md:pt-4">
+                    <p className="mb-1.5 text-[9px] font-medium uppercase tracking-wider text-amber-100/45 sm:mb-2 sm:text-xs">พลังเลขคู่</p>
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
                         {item.scoreBreakdown.map((score: string, i: number) => (
-                            <span key={i} className="px-2 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
+                            <span key={i} className="rounded-md border border-amber-200/18 bg-amber-300/[0.075] px-1.5 py-1 font-mono text-[10px] text-amber-100 shadow-[inset_0_1px_0_rgba(255,245,220,0.06)] sm:px-2 sm:text-xs">
                                 {score}
                             </span>
                         ))}
@@ -231,6 +239,7 @@ export default function PremiumSearchPage() {
     const [unlockedCounts, setUnlockedCounts] = useState<Record<string, number>>({});
     const [isLoading, setIsLoading] = useState(false);
     const [userCredits, setUserCredits] = useState<number | null>(null);
+    const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
     const dayOptions = useMemo(() => ([
         { value: 'All', label: t('pages.premiumSearch.filters.dayAll') },
@@ -264,7 +273,7 @@ export default function PremiumSearchPage() {
             if (selectedDay !== 'All' && leadingCharType !== 'Any') {
                 const dayKey = thaiDayToKey[selectedDay];
                 if (dayKey && thaksaConfig[dayKey]) {
-                    const firstChar = item.name.charAt(0);
+                    const firstChar = getFirstConsonant(item.name);
                     const config = thaksaConfig[dayKey];
 
                     if (leadingCharType === 'Dech') {
@@ -325,7 +334,7 @@ export default function PremiumSearchPage() {
             if (selectedDay !== 'All' && leadingCharType !== 'Any') {
                 const dayKey = thaiDayToKey[selectedDay];
                 if (dayKey && thaksaConfig[dayKey]) {
-                    const firstChar = item.name.charAt(0);
+                    const firstChar = getFirstConsonant(item.name);
                     const config = thaksaConfig[dayKey];
                     if (leadingCharType === 'Dech') matchesLeadingChar = config.dech.includes(firstChar);
                     else if (leadingCharType === 'Si') matchesLeadingChar = config.si.includes(firstChar);
@@ -343,6 +352,21 @@ export default function PremiumSearchPage() {
             setTargetScore('');
         }
     }, [uniqueScores, targetScore]);
+
+    const selectedDayLabel = dayOptions.find(day => day.value === selectedDay)?.label || selectedDay;
+    const activeFilterCount = [
+        selectedDay !== 'All',
+        selectedGender !== 'all',
+        Boolean(targetScore),
+        leadingCharType !== 'Any',
+    ].filter(Boolean).length;
+
+    const resetFilters = () => {
+        setSelectedDay('All');
+        setSelectedGender('all');
+        setTargetScore('');
+        setLeadingCharType('Any');
+    };
 
     useEffect(() => {
         const fetchCredits = async () => {
@@ -397,7 +421,7 @@ export default function PremiumSearchPage() {
             return;
         }
 
-        if (userCredits !== null && userCredits < 15) {
+        if (userCredits !== null && userCredits < amount) {
             const result = await Swal.fire({
                 title: t('pages.premiumSearch.alerts.creditsTitle'),
                 text: t('pages.premiumSearch.alerts.creditsText'),
@@ -420,7 +444,7 @@ export default function PremiumSearchPage() {
 
         const confirmResult = await Swal.fire({
             title: `ยืนยันการปลดล็อก?`,
-            text: `ใช้ 15 เครดิตเพื่อแสดง 20 รายชื่อ ในหมวดอักษร "${letter}"`,
+            text: `ใช้ ${amount} เครดิตเพื่อแสดง 20 รายชื่อ ในหมวดอักษร "${letter}"`,
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'ปลดล็อก',
@@ -437,10 +461,10 @@ export default function PremiumSearchPage() {
         setIsLoading(true);
 
         try {
-            const { error } = await supabase.rpc('deduct_credits', { amount: 15 });
+            const { error } = await supabase.rpc('deduct_credits', { amount });
             if (error) throw error;
 
-            setUserCredits(prev => (prev !== null ? prev - 15 : null));
+            setUserCredits(prev => (prev !== null ? prev - amount : null));
             window.dispatchEvent(new Event('force_credits_update'));
 
             await new Promise(resolve => setTimeout(resolve, 800)); // UX delay
@@ -506,56 +530,101 @@ export default function PremiumSearchPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#0f172a] text-slate-200 font-sans selection:bg-amber-500/30">
+        <div className="min-h-screen bg-[#050711] text-[#f8fafc] font-sans selection:bg-amber-500/30 relative">
+            <style dangerouslySetInnerHTML={{ __html: `
+              .scrollbar-none::-webkit-scrollbar {
+                display: none !important;
+              }
+              .scrollbar-none {
+                -ms-overflow-style: none !important;
+                scrollbar-width: none !important;
+              }
+            `}} />
 
-            <main className="w-full max-w-[1400px] mx-auto transition-all duration-300 min-h-screen px-3 sm:px-4 pt-16 md:pt-32 pb-32 md:pb-28 relative">
+            {/* Floating Credits Pill for Mobile */}
+            <div className="fixed bottom-4 right-3 sm:hidden z-[100] bg-slate-950/85 backdrop-blur-xl border border-amber-300/20 shadow-[0_0_20px_rgba(201,147,58,0.18)] rounded-full px-3 py-2 flex items-center gap-1.5 transition-all">
+                <Coins className="w-3.5 h-3.5 text-amber-300" />
+                <span className="text-[10px] text-slate-400 font-semibold tracking-wide">เครดิต:</span>
+                <span className="text-xs font-bold text-amber-200">{userCredits !== null ? userCredits : '—'}</span>
+            </div>
+
+            <main className="w-full max-w-[1400px] mx-auto transition-all duration-300 min-h-screen px-2.5 sm:px-4 pt-14 md:pt-32 pb-24 md:pb-28 relative">
                 <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
                     <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-amber-500/10 blur-[100px]" />
                     <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-blue-500/10 blur-[100px]" />
                 </div>
 
-                <div className="relative z-10 max-w-6xl mx-auto space-y-4 md:space-y-8">
+                <div className="relative z-10 max-w-6xl mx-auto space-y-3.5 sm:space-y-5 md:space-y-8">
                     {/* Header */}
-                    <header className="text-center space-y-2.5 md:space-y-3">
-                        <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs sm:text-sm font-medium">
-                            <Sparkles size={14} />
+                    <header className="text-center space-y-2.5 sm:space-y-4 xl:grid xl:grid-cols-[minmax(0,1.05fr)_minmax(380px,0.95fr)] xl:items-end xl:gap-8 xl:space-y-0 xl:text-left">
+                        <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-amber-400/10 border border-amber-300/20 text-amber-200 text-[10px] sm:text-sm font-medium shadow-[0_0_15px_rgba(201,147,58,0.12)]">
+                            <Sparkles size={12} className="sm:h-3.5 sm:w-3.5" />
                             <span>{t('pages.premiumSearch.headerBadge')}</span>
                         </div>
-                        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-emerald-300 drop-shadow-2xl tracking-tight leading-tight">
-                            {t('pages.premiumSearch.headerTitle')}
-                        </h1>
-                        <div className="max-w-[65ch] mx-auto space-y-2">
-                            <p className="text-slate-400 leading-relaxed text-sm md:text-base hidden md:block">
+                        <div className="xl:col-start-1 xl:row-start-2">
+                            <h1 className="text-xl sm:text-4xl md:text-5xl font-bold text-[#f8fafc] drop-shadow-2xl tracking-tight leading-tight">
+                                {t('pages.premiumSearch.headerTitle')}
+                            </h1>
+                        </div>
+                        <div className="max-w-[65ch] mx-auto space-y-2 sm:space-y-3 xl:col-start-1 xl:row-start-3 xl:mx-0">
+                            <p className="text-slate-400 leading-relaxed text-[11px] sm:text-sm md:text-base line-clamp-2 sm:line-clamp-none">
                                 {t('pages.premiumSearch.headerDesc').replace('{count}', allNames.length.toLocaleString())}
                             </p>
-                            <p className="text-emerald-300 font-medium text-sm md:text-lg hidden md:block">
+                            <p className="text-amber-100 font-medium text-[11px] sm:text-sm md:text-lg">
                                 {t('pages.premiumSearch.headerSub')}
                             </p>
 
-                            <div className="mt-2 md:mt-4 mx-auto w-fit bg-emerald-500/10 border border-emerald-500/30 rounded-xl px-3 py-2 md:px-6 md:py-3 shadow-lg shadow-emerald-900/20 backdrop-blur-md">
-                                <p className="text-emerald-400 font-medium text-xs md:text-base">
+                            <div className="mt-1.5 md:mt-4 mx-auto w-fit bg-slate-950/45 border border-amber-300/20 rounded-lg sm:rounded-xl px-2.5 sm:px-4 py-1.5 sm:py-2.5 md:px-6 md:py-3 shadow-lg shadow-amber-950/10 backdrop-blur-md">
+                                <p className="text-amber-100 font-medium text-[10px] sm:text-xs md:text-base">
                                     {t('pages.premiumSearch.headerHint')}{' '}
-                                    <Link href="/" className="underline decoration-emerald-500/50 hover:text-emerald-300 transition-colors">{t('sidebar.analyzeName')}</Link>
+                                    <Link href="/" className="underline decoration-amber-300/50 hover:text-amber-200 transition-colors">{t('sidebar.analyzeName')}</Link>
                                 </p>
                             </div>
-                            <p className="text-slate-500 text-xs md:text-sm pt-1 md:pt-4">
-                                พบทั้งหมด <span className="text-emerald-400 font-semibold">{filteredNames.length}</span> รายชื่อจากเงื่อนไขนี้
-                            </p>
-                            <div className="mt-4 text-center">
-                                <p className="text-sm text-slate-300 flex items-center justify-center gap-2">
-                                    <span className="text-xs text-slate-500">เครดิตคงเหลือ:</span>
-                                    <span className="text-lg md:text-xl font-bold text-emerald-400">{userCredits !== null ? userCredits : '—'}</span>
-                                </p>
-                            </div>
+                        </div>
+                        <div className="mx-auto grid max-w-3xl grid-cols-4 gap-1.5 sm:gap-2 pt-1 sm:pt-2 xl:col-start-2 xl:row-span-3 xl:row-start-1 xl:mx-0 xl:w-full xl:max-w-none xl:grid-cols-2 xl:gap-3 xl:pt-0">
+                                {[
+                                    { label: 'ชื่อคัดพิเศษ', value: allNames.length.toLocaleString(), icon: BadgeCheck },
+                                    { label: 'ตรงเงื่อนไข', value: filteredNames.length.toLocaleString(), icon: Search },
+                                    { label: 'หมวดอักษร', value: availableLetters.length.toLocaleString(), icon: Type },
+                                    { label: 'เครดิตคงเหลือ', value: userCredits !== null ? userCredits.toLocaleString() : '—', icon: Coins },
+                                ].map(({ label, value, icon: Icon }) => (
+                                    <div key={label} className="rounded-lg sm:rounded-xl xl:rounded-2xl border border-white/10 bg-white/[0.04] px-1.5 sm:px-3 xl:px-5 py-1.5 sm:py-3 xl:py-4 text-center xl:text-left">
+                                        <div className="mb-0.5 sm:mb-1 xl:mb-2 flex items-center justify-center xl:justify-start gap-1 xl:gap-2 text-[8px] sm:text-[10px] xl:text-xs font-semibold text-slate-500">
+                                            <Icon className="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 xl:h-4 xl:w-4 text-amber-300/80" />
+                                            <span className="hidden xs:inline">{label}</span>
+                                        </div>
+                                        <div className="text-xs sm:text-base xl:text-2xl font-bold text-slate-50 md:text-lg">{value}</div>
+                                    </div>
+                                ))}
                         </div>
                     </header>
 
                     {/* Filters Section */}
-                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-3xl p-3.5 sm:p-6 md:p-8 shadow-2xl md:mx-auto max-w-4xl relative overflow-visible">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3 md:gap-6 relative z-10">
+                    <div className="bg-[#0f172a]/80 backdrop-blur-xl border border-white/10 rounded-xl sm:rounded-2xl md:rounded-3xl p-2.5 sm:p-6 md:p-7 shadow-2xl md:mx-auto max-w-6xl relative overflow-visible">
+                        <div className="mb-3 sm:mb-5 flex items-center justify-between gap-2 border-b border-white/10 pb-2.5 sm:pb-4">
+                            <div>
+                                <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-bold text-slate-100">
+                                    <SlidersHorizontal className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-amber-300" />
+                                    ปรับเงื่อนไขค้นหา
+                                </div>
+                                <p className="mt-0.5 sm:mt-1 text-[10px] sm:text-xs text-slate-500">
+                                    {activeFilterCount > 0 ? `กำลังใช้ ${activeFilterCount} ตัวกรอง` : 'เริ่มจากวันเกิดก่อนเพื่อเปิดตัวเลือกอักษรนำ'}
+                                </p>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={resetFilters}
+                                disabled={isLoading || activeFilterCount === 0}
+                                className="inline-flex shrink-0 items-center justify-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl border border-white/10 bg-white/[0.04] px-2 sm:px-3 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold text-slate-300 transition-colors hover:border-amber-300/30 hover:text-amber-100 disabled:cursor-not-allowed disabled:opacity-40"
+                            >
+                                <RotateCcw className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                                ล้างตัวกรอง
+                            </button>
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-12 gap-2.5 sm:gap-4 md:gap-6 relative z-10">
                             
-                            <div className="md:col-span-4">
-                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 md:mb-2">{t('pages.premiumSearch.filters.dayLabel')}</label>
+                            <div className="md:col-span-3">
+                                <label className="block text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 md:mb-2">{t('pages.premiumSearch.filters.dayLabel')}</label>
                                 <div className="relative">
                                     <select
                                         value={selectedDay}
@@ -564,7 +633,7 @@ export default function PremiumSearchPage() {
                                             setSelectedDay(newVal);
                                             if (newVal === 'All') setLeadingCharType('Any');
                                         }}
-                                        className="block w-full px-3 md:px-4 py-2.5 md:py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-sm md:text-lg"
+                                        className="block w-full px-2.5 sm:px-4 py-2 sm:py-3 md:py-4 bg-slate-950/40 border border-white/10 rounded-lg sm:rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-amber-400/40 focus:border-amber-300/40 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-xs sm:text-sm md:text-lg"
                                         disabled={isLoading}
                                     >
                                         {dayOptions.map(day => (
@@ -573,24 +642,24 @@ export default function PremiumSearchPage() {
                                             </option>
                                         ))}
                                     </select>
-                                    <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-slate-400">
-                                        <ChevronDown className="h-4 w-4" />
+                                    <div className="absolute inset-y-0 right-0 pr-2.5 sm:pr-4 flex items-center pointer-events-none text-slate-400">
+                                        <ChevronDown className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="md:col-span-4">
-                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 md:mb-2">{t('pages.premiumSearch.filters.scoreLabel')}</label>
+                            <div className="md:col-span-3">
+                                <label className="block text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 md:mb-2">{t('pages.premiumSearch.filters.scoreLabel')}</label>
                                 <ScoreDropdown value={targetScore} onChange={setTargetScore} scores={uniqueScores} disabled={isLoading} />
                             </div>
 
-                            <div className="md:col-span-4">
-                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 md:mb-2">{t('pages.premiumSearch.filters.genderLabel')}</label>
+                            <div className="col-span-2 sm:col-span-2 md:col-span-3">
+                                <label className="block text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 md:mb-2">{t('pages.premiumSearch.filters.genderLabel')}</label>
                                 <div className="relative">
                                     <select
                                         value={selectedGender}
                                         onChange={(e) => setSelectedGender(e.target.value)}
-                                        className="block w-full px-3 md:px-4 py-2.5 md:py-4 bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-sm md:text-lg"
+                                        className="block w-full px-2.5 sm:px-4 py-2 sm:py-3 md:py-4 bg-slate-950/40 border border-white/10 rounded-lg sm:rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-amber-400/40 focus:border-amber-300/40 backdrop-blur-xl transition-all appearance-none cursor-pointer font-medium text-xs sm:text-sm md:text-lg"
                                         disabled={isLoading}
                                     >
                                         <option value="all" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderAll')}</option>
@@ -598,70 +667,56 @@ export default function PremiumSearchPage() {
                                         <option value="female" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderFemale')}</option>
                                         <option value="neutral" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderNeutral')}</option>
                                     </select>
-                                    <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-slate-400">
-                                        <ChevronDown className="h-4 w-4" />
+                                    <div className="absolute inset-y-0 right-0 pr-2.5 sm:pr-4 flex items-center pointer-events-none text-slate-400">
+                                        <ChevronDown className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="sm:col-span-2 md:col-span-12">
-                                <label className="block text-xs font-bold uppercase tracking-wider mb-2 md:mb-4 text-slate-400 transition-colors">
+                            <div className="col-span-2 md:col-span-3">
+                                <label className="block text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-1.5 sm:mb-2 md:mb-3 text-slate-400 transition-colors">
                                     {t('pages.premiumSearch.leading.label')}{' '}
-                                    {selectedDay === 'All' && (
-                                        <span className="text-amber-500/80 ml-2 normal-case font-normal">{t('pages.premiumSearch.leading.hint')}</span>
-                                    )}
+                                    <span className="text-slate-500 ml-2 normal-case font-normal">
+                                        {selectedDay === 'All' ? t('pages.premiumSearch.leading.hint') : `สำหรับวัน${selectedDayLabel}`}
+                                    </span>
                                 </label>
-                                <div className="grid grid-cols-1 sm:flex sm:flex-wrap sm:items-center gap-2.5 md:gap-6">
-                                    <label className="flex items-center gap-3 cursor-pointer group rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0">
-                                        <div className="relative flex items-center">
-                                            <input
-                                                type="radio"
-                                                name="leadingChar"
-                                                value="Dech"
-                                                checked={leadingCharType === 'Dech'}
-                                                onChange={() => setLeadingCharType('Dech')}
-                                                className="peer appearance-none w-5 h-5 md:w-6 md:h-6 border-2 border-slate-500 rounded-full bg-transparent checked:border-emerald-500 checked:bg-emerald-500/20 transition-all"
-                                            />
-                                            <div className="absolute inset-0 m-auto w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform"></div>
-                                        </div>
-                                        <span className={`text-sm md:text-lg font-medium transition-colors ${leadingCharType === 'Dech' ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>
-                                            {t('pages.premiumSearch.leading.dech')}
-                                        </span>
-                                    </label>
-
-                                    <label className="flex items-center gap-3 cursor-pointer group rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0">
-                                        <div className="relative flex items-center">
-                                            <input
-                                                type="radio"
-                                                name="leadingChar"
-                                                value="Si"
-                                                checked={leadingCharType === 'Si'}
-                                                onChange={() => setLeadingCharType('Si')}
-                                                className="peer appearance-none w-5 h-5 md:w-6 md:h-6 border-2 border-slate-500 rounded-full bg-transparent checked:border-emerald-500 checked:bg-emerald-500/20 transition-all"
-                                            />
-                                            <div className="absolute inset-0 m-auto w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform"></div>
-                                        </div>
-                                        <span className={`text-sm md:text-lg font-medium transition-colors ${leadingCharType === 'Si' ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>
-                                            {t('pages.premiumSearch.leading.si')}
-                                        </span>
-                                    </label>
-
-                                    <label className="flex items-center gap-3 cursor-pointer group rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0">
-                                        <div className="relative flex items-center">
-                                            <input
-                                                type="radio"
-                                                name="leadingChar"
-                                                value="Any"
-                                                checked={leadingCharType === 'Any'}
-                                                onChange={() => setLeadingCharType('Any')}
-                                                className="peer appearance-none w-5 h-5 md:w-6 md:h-6 border-2 border-blue-500 rounded-full bg-transparent checked:border-blue-500 checked:bg-blue-500/20 transition-all"
-                                            />
-                                            <div className="absolute inset-0 m-auto w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-blue-500 scale-0 peer-checked:scale-100 transition-transform"></div>
-                                        </div>
-                                        <span className={`text-sm md:text-lg font-medium transition-colors ${leadingCharType === 'Any' ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'}`}>
-                                            {t('pages.premiumSearch.leading.any')}
-                                        </span>
-                                    </label>
+                                <div className="bg-slate-950/40 p-1 rounded-xl sm:p-1.5 sm:rounded-2xl border border-white/10 flex w-full gap-1">
+                                    <button
+                                        type="button"
+                                        disabled={selectedDay === 'All' || isLoading}
+                                        onClick={() => setLeadingCharType('Dech')}
+                                        className={`flex-1 text-center py-1.5 sm:py-3.5 rounded-lg sm:rounded-xl text-[10px] sm:text-sm font-bold transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none ${
+                                            leadingCharType === 'Dech'
+                                            ? 'bg-amber-400/15 border border-amber-300/30 text-amber-100 shadow-md shadow-amber-950/40'
+                                            : 'text-slate-400 hover:text-slate-200 hover:bg-white/5 border border-transparent'
+                                        }`}
+                                    >
+                                        {t('pages.premiumSearch.leading.dech')}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        disabled={selectedDay === 'All' || isLoading}
+                                        onClick={() => setLeadingCharType('Si')}
+                                        className={`flex-1 text-center py-1.5 sm:py-3.5 rounded-lg sm:rounded-xl text-[10px] sm:text-sm font-bold transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none ${
+                                            leadingCharType === 'Si'
+                                            ? 'bg-amber-400/15 border border-amber-300/30 text-amber-100 shadow-md shadow-amber-950/40'
+                                            : 'text-slate-400 hover:text-slate-200 hover:bg-white/5 border border-transparent'
+                                        }`}
+                                    >
+                                        {t('pages.premiumSearch.leading.si')}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        disabled={isLoading}
+                                        onClick={() => setLeadingCharType('Any')}
+                                        className={`flex-1 text-center py-1.5 sm:py-3.5 rounded-lg sm:rounded-xl text-[10px] sm:text-sm font-bold transition-all duration-300 ${
+                                            leadingCharType === 'Any'
+                                            ? 'bg-slate-800/80 border border-white/10 text-[#f8fafc] shadow-md shadow-slate-950/50'
+                                            : 'text-slate-400 hover:text-slate-200 hover:bg-white/5 border border-transparent'
+                                        }`}
+                                    >
+                                        {t('pages.premiumSearch.leading.any')}
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -669,40 +724,66 @@ export default function PremiumSearchPage() {
 
                     {/* Results Alphabet Tabs */}
                     {availableLetters.length > 0 ? (
-                        <div id="results-section" className="space-y-6 animate-fade-in-up">
+                        <div id="results-section" className="space-y-3 sm:space-y-6 xl:grid xl:grid-cols-[230px_minmax(0,1fr)] xl:items-start xl:gap-6 xl:space-y-0 animate-fade-in-up">
                             
-                            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 overflow-x-auto custom-scrollbar">
-                                <div className="flex gap-2 w-max pb-2">
-                                    {availableLetters.map(letter => {
-                                        const count = groupedByLetter.get(letter)?.length || 0;
-                                        const isSelected = selectedLetter === letter;
-                                        return (
-                                            <button
-                                                key={letter}
-                                                onClick={() => setSelectedLetter(letter)}
-                                                className={`flex flex-col items-center justify-center min-w-[3.5rem] py-2 px-3 rounded-xl transition-all ${
-                                                    isSelected 
-                                                    ? 'bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/20' 
-                                                    : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white'
-                                                }`}
-                                            >
-                                                <span className="text-lg font-bold">{letter}</span>
-                                                <span className={`text-[10px] font-semibold mt-1 px-2 rounded-full ${isSelected ? 'bg-white/20 text-white' : 'bg-white/10 text-slate-400'}`}>
-                                                    {count}
-                                                </span>
-                                            </button>
-                                        );
-                                    })}
+                            <div className="relative xl:sticky xl:top-28">
+                                {/* Left/Right fading gradients indicating scrollability on mobile */}
+                                <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#050711] to-transparent pointer-events-none z-10 xl:hidden" />
+                                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#050711] to-transparent pointer-events-none z-10 xl:hidden" />
+
+                                <div className="bg-white/[0.04] border border-white/10 rounded-xl sm:rounded-2xl p-2 sm:p-3 xl:p-4 overflow-x-auto xl:overflow-visible scrollbar-none">
+                                    <div className="hidden xl:mb-3 xl:block">
+                                        <p className="text-sm font-bold text-slate-100">เลือกหมวดอักษร</p>
+                                        <p className="mt-1 text-xs text-slate-500">{availableLetters.length} หมวดที่ตรงเงื่อนไข</p>
+                                    </div>
+                                    <div className="flex gap-1.5 sm:gap-2.5 xl:grid xl:grid-cols-3 xl:gap-2 w-max xl:w-full pb-0.5 sm:pb-1 xl:pb-0">
+                                        {availableLetters.map(letter => {
+                                            const count = groupedByLetter.get(letter)?.length || 0;
+                                            const isSelected = selectedLetter === letter;
+                                            return (
+                                                <button
+                                                    key={letter}
+                                                    onClick={(e) => {
+                                                        setSelectedLetter(letter);
+                                                        e.currentTarget.scrollIntoView({
+                                                            behavior: 'smooth',
+                                                            block: 'nearest',
+                                                            inline: 'center'
+                                                        });
+                                                    }}
+                                                    className={`flex flex-col items-center justify-center min-w-[2.5rem] sm:min-w-[3.5rem] xl:min-w-0 py-1.5 sm:py-2.5 xl:py-2 px-2 sm:px-3.5 xl:px-2 rounded-lg sm:rounded-xl transition-all duration-200 transform active:scale-95 ${
+                                                        isSelected 
+                                                        ? 'bg-amber-500 text-slate-950 shadow-lg shadow-amber-950/30 border border-amber-200/40' 
+                                                        : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-slate-200 border border-transparent'
+                                                    }`}
+                                                >
+                                                    <span className="text-sm sm:text-lg xl:text-base font-bold">{letter}</span>
+                                                    <span className={`text-[8px] sm:text-[10px] font-bold mt-0.5 sm:mt-1 px-1.5 sm:px-2 py-0.5 rounded-full transition-colors ${isSelected ? 'bg-slate-950/15 text-slate-950' : 'bg-white/10 text-slate-400'}`}>
+                                                        {count}
+                                                    </span>
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
                             </div>
 
                             {selectedLetter && (
-                                <div className="space-y-6">
-                                    <div className="flex items-center justify-between px-2 md:px-4">
-                                        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                                            <Type className="text-emerald-400" />
-                                            หมวดอักษร {selectedLetter} <span className="text-slate-400 text-sm font-normal">({groupedByLetter.get(selectedLetter)?.length || 0} ชื่อ)</span>
-                                        </h2>
+                                <div className="space-y-3 sm:space-y-6 xl:min-w-0">
+                                    <div className="flex items-center justify-between gap-2 rounded-xl sm:rounded-2xl border border-white/10 bg-slate-950/30 px-3 sm:px-4 xl:px-5 py-2.5 sm:py-4 xl:py-4 md:flex-row md:items-center md:justify-between">
+                                        <div>
+                                            <h2 className="text-base sm:text-xl xl:text-2xl font-bold text-white flex items-center gap-1.5 sm:gap-2">
+                                                <Type className="h-4 w-4 sm:h-5 sm:w-5 text-amber-300" />
+                                                หมวดอักษร {selectedLetter}
+                                            </h2>
+                                            <p className="mt-0.5 sm:mt-1 text-[10px] sm:text-sm xl:text-base text-slate-400">
+                                                พบ {groupedByLetter.get(selectedLetter)?.length || 0} ชื่อในหมวดนี้, ปลดล็อกครั้งละ 20 ชื่อ
+                                            </p>
+                                        </div>
+                                        <div className="inline-flex w-fit shrink-0 items-center gap-1 sm:gap-2 rounded-full border border-amber-300/20 bg-amber-400/10 px-2 sm:px-3 py-1 sm:py-1.5 text-[9px] sm:text-xs font-semibold text-amber-100">
+                                            <Coins className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                                            15 เครดิต
+                                        </div>
                                     </div>
                                     
                                     {(() => {
@@ -715,49 +796,85 @@ export default function PremiumSearchPage() {
                                         
                                         return (
                                             <>
-                                                {/* Unlock Banner if not unlocked */}
+                                                {/* Unlock Banner if not unlocked - Styled as a glowing golden portal */}
                                                 {!isFullyUnlocked && (
-                                                    <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/30 rounded-2xl p-6 text-center shadow-lg shadow-amber-900/20 backdrop-blur-md relative overflow-hidden">
-                                                        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay"></div>
-                                                        <Lock className="w-10 h-10 text-amber-400 mx-auto mb-3" />
-                                                        <h3 className="text-xl font-bold text-amber-300 mb-2">ปลดล็อกหมวดอักษร &quot;{selectedLetter}&quot;</h3>
-                                                        <p className="text-slate-300 text-sm md:text-base mb-6 max-w-lg mx-auto">
-                                                            ดูรายชื่อมงคลในหมวดนี้ชัดๆ สูงสุด 20 ชื่อต่อครั้ง (ชื่ออื่นๆ ถูกเบลอไว้)
+                                                    <div className="bg-gradient-to-b from-[#181912]/90 to-[#0b0c10]/95 border border-amber-500/30 rounded-xl sm:rounded-3xl p-3 sm:p-10 xl:p-8 text-center shadow-[0_0_50px_rgba(245,158,11,0.12)] backdrop-blur-xl relative overflow-hidden flex flex-col items-center justify-center max-w-2xl xl:max-w-4xl mx-auto my-2 sm:my-4">
+                                                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.10),transparent_24%),radial-gradient(circle_at_70%_80%,rgba(245,158,11,0.10),transparent_28%)] opacity-70"></div>
+                                                        <div className="relative mb-2.5 sm:mb-5">
+                                                            <div className="absolute inset-0 bg-amber-500/20 rounded-full blur-xl scale-150 animate-pulse" />
+                                                            <div className="w-10 h-10 sm:w-16 sm:h-16 rounded-full bg-slate-950/60 border border-amber-500/30 flex items-center justify-center relative">
+                                                                <Lock className="w-4 h-4 sm:w-6 sm:h-6 text-amber-400" />
+                                                            </div>
+                                                        </div>
+                                                        <h3 className="text-sm sm:text-2xl font-bold text-amber-300 mb-1 sm:mb-2.5">
+                                                            ปลดล็อกหมวดอักษร &quot;{selectedLetter}&quot;
+                                                        </h3>
+                                                        <p className="text-slate-400 text-[10px] sm:text-sm md:text-base mb-3 sm:mb-6 max-w-md mx-auto leading-relaxed">
+                                                            คัดเฉพาะรายชื่อเกรด A+ เสริมมงคลทวีคูณสูงสุด 20 รายชื่อต่อครั้ง (รายชื่ออื่นในกลุ่มนี้จะถูกสุ่มเปิดทีละส่วนเพื่อความสิริมงคล)
                                                         </p>
+                                                        <div className="mb-3 sm:mb-6 grid w-full max-w-md grid-cols-3 gap-1.5 sm:gap-2 text-center">
+                                                            {[
+                                                                ['คะแนน', 'A+'],
+                                                                ['แสดงผล', '20 ชื่อ'],
+                                                                ['ค่าใช้จ่าย', '15 เครดิต'],
+                                                            ].map(([label, value]) => (
+                                                                <div key={label} className="rounded-lg sm:rounded-xl border border-white/10 bg-white/[0.04] px-1.5 sm:px-2 py-1.5 sm:py-2">
+                                                                    <div className="text-[8px] sm:text-[10px] text-slate-500">{label}</div>
+                                                                    <div className="mt-0.5 text-[11px] sm:text-sm font-bold text-amber-100">{value}</div>
+                                                                </div>
+                                                            ))}
+                                                        </div>
                                                         <button
                                                             onClick={handleUnlockFirstBatch}
                                                             disabled={isLoading}
-                                                            className="relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-900 font-bold rounded-xl shadow-lg transition-all hover:-translate-y-0.5 disabled:opacity-70"
+                                                            className="relative w-full sm:w-auto inline-flex items-center justify-center gap-1.5 sm:gap-2.5 px-4 sm:px-8 py-2 sm:py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-extrabold rounded-lg sm:rounded-xl shadow-lg shadow-amber-950/30 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-70 text-xs sm:text-base"
                                                         >
-                                                            {isLoading ? <span className="animate-spin">⏳</span> : <Lock size={18} />}
-                                                            ปลดล็อกเพื่อดูชื่อ (15 เครดิต)
+                                                            {isLoading ? <span className="animate-spin">⏳</span> : <Lock size={16} />}
+                                                            ปลดล็อกรายชื่อมงคล (15 เครดิต)
                                                         </button>
                                                     </div>
                                                 )}
 
-                                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
+                                                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4 md:gap-5 xl:gap-4 relative">
                                                     {visibleNames.map((item, index) => (
                                                         <NameCard key={item.name + index} item={item} isUnlocked={isFullyUnlocked} />
                                                     ))}
                                                 </div>
 
+                                                {!isFullyUnlocked && (
+                                                    <div className="sticky bottom-3 z-20 mx-auto flex w-full max-w-md flex-col items-center gap-2 rounded-2xl border border-amber-300/25 bg-slate-950/90 p-2.5 shadow-[0_18px_48px_rgba(2,6,18,0.55),0_0_24px_rgba(245,158,11,0.12)] backdrop-blur-xl sm:static sm:mt-2 sm:max-w-lg xl:max-w-none sm:flex-row sm:justify-between sm:p-3 xl:p-4">
+                                                        <div className="hidden text-left sm:block">
+                                                            <p className="text-sm font-bold text-amber-100">พร้อมดูชื่อจริงในหมวด {selectedLetter}</p>
+                                                            <p className="text-xs text-slate-400">ปลดล็อก 20 รายชื่อ ใช้ 15 เครดิต</p>
+                                                        </div>
+                                                        <button
+                                                            onClick={handleUnlockFirstBatch}
+                                                            disabled={isLoading}
+                                                            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 px-4 py-2.5 text-xs font-extrabold text-slate-950 shadow-lg shadow-amber-950/30 transition-all duration-200 hover:from-amber-400 hover:to-amber-500 active:scale-[0.99] disabled:opacity-70 sm:w-auto sm:px-5 sm:text-sm"
+                                                        >
+                                                            {isLoading ? <span className="animate-spin">⏳</span> : <Lock size={15} />}
+                                                            ปลดล็อกรายชื่อ 15 เครดิต
+                                                        </button>
+                                                    </div>
+                                                )}
+
                                                 {/* Load More Button */}
                                                 {isFullyUnlocked && hasMore && (
-                                                    <div className="flex flex-col items-center gap-3 pt-4 pb-4">
-                                                        <p className="text-slate-400 text-sm">
+                                                    <div className="flex flex-col items-center gap-2 sm:gap-3 pt-3 sm:pt-4 pb-3 sm:pb-4">
+                                                        <p className="text-slate-400 text-xs sm:text-sm">
                                                             แสดงแล้ว <span className="text-white font-semibold">{visibleNames.length}</span> ชื่อ
                                                             {' · '}
-                                                            ยังมีชื่อที่เหลืออีก <span className="text-emerald-400 font-semibold">{namesForLetter.length - visibleNames.length}</span> ชื่อ
+                                                            ยังมีชื่อที่เหลืออีก <span className="text-amber-200 font-semibold">{namesForLetter.length - visibleNames.length}</span> ชื่อ
                                                         </p>
                                                         <button
                                                             onClick={handleLoadMore}
                                                             disabled={isLoading}
-                                                            className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/40 text-slate-200 hover:text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                                            className="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-amber-300/40 text-slate-200 hover:text-white font-semibold rounded-lg sm:rounded-xl text-xs sm:text-base transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                                                         >
                                                             {isLoading ? (
                                                                 <span className="animate-spin text-base">⏳</span>
                                                             ) : (
-                                                                <Lock size={16} className="text-emerald-400" />
+                                                                <Lock size={16} className="text-amber-300" />
                                                             )}
                                                             <span>ดูเพิ่มอีก 20 ชื่อ (15 เครดิต)</span>
                                                         </button>
@@ -767,7 +884,7 @@ export default function PremiumSearchPage() {
                                                 {/* End of list */}
                                                 {isFullyUnlocked && !hasMore && (
                                                     <div className="text-center py-6 border-t border-white/5 mt-8">
-                                                        <p className="text-slate-500 text-sm">✓ แสดงครบทุกชื่อในหมวด &quot;{selectedLetter}&quot; แล้ว ({namesForLetter.length} ชื่อ)</p>
+                                                        <p className="text-slate-400 text-sm"><CheckCircle2 className="mr-1 inline h-4 w-4 text-emerald-300" /> แสดงครบทุกชื่อในหมวด &quot;{selectedLetter}&quot; แล้ว ({namesForLetter.length} ชื่อ)</p>
                                                     </div>
                                                 )}
                                             </>
@@ -777,12 +894,20 @@ export default function PremiumSearchPage() {
                             )}
                         </div>
                     ) : (
-                        <div className="bg-white/5 border border-white/10 rounded-3xl p-12 text-center animate-fade-in-up mt-8">
+                        <div className="bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-12 text-center animate-fade-in-up mt-8">
                             <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
                                 <Search size={32} className="text-slate-500" />
                             </div>
                             <h3 className="text-xl font-bold text-white mb-2">{t('pages.premiumSearch.results.emptyTitle')}</h3>
                             <p className="text-slate-400">{t('pages.premiumSearch.results.emptyDesc')}</p>
+                            <button
+                                type="button"
+                                onClick={resetFilters}
+                                className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl border border-amber-300/25 bg-amber-400/10 px-4 py-2.5 text-sm font-semibold text-amber-100 transition-colors hover:bg-amber-400/15"
+                            >
+                                <RotateCcw className="h-4 w-4" />
+                                ล้างตัวกรองแล้วเริ่มใหม่
+                            </button>
                         </div>
                     )}
 
@@ -832,50 +957,85 @@ export default function PremiumSearchPage() {
                         </div>
 
                         {/* Section B: ตารางเปรียบเทียบ Free vs Pro */}
-                        <div className="max-w-4xl mx-auto">
-                            <h2 className="text-3xl font-bold text-center text-white mb-8">
+                        <div className="max-w-4xl mx-auto space-y-6">
+                            <h2 className="text-2xl md:text-3xl font-bold text-center text-white">
                                 เปรียบเทียบ <span className="text-slate-400">ค้นหาทั่วไป</span> vs <span className="text-emerald-400">เปลี่ยนชื่อมงคล Pro</span>
                             </h2>
 
-                            <div className="overflow-x-auto">
+                            {/* Mobile View: Beautiful comparison card stack */}
+                            <div className="block md:hidden space-y-4">
+                                {[
+                                    { feature: 'คัดกรองอักษรกาลกิณี', free: true, pro: true },
+                                    { feature: 'เลือกอักษรนำ (วรรคเดช/ศรี)', free: false, pro: true },
+                                    { feature: 'เกรดของผลรวมเลขศาสตร์', free: 'คละเกรด', pro: 'เกรด A+ เท่านั้น', highlightPro: true },
+                                    { feature: 'จำนวนชื่อในฐานข้อมูล', free: '5,000+', pro: `${allNames.length.toLocaleString()} (คัดพิเศษ)`, highlightPro: true },
+                                    { feature: 'กรองตามเพศ', free: false, pro: true },
+                                    { feature: 'คุณภาพความหมาย', free: 'ปานกลาง', pro: 'คัดสรรพิเศษ', highlightPro: true },
+                                ].map((row, i) => (
+                                    <div key={i} className="bg-[#0f172a]/60 border border-white/5 rounded-2xl p-4.5 space-y-3.5 shadow-lg">
+                                        <h4 className="text-sm font-bold text-[#f8fafc]">{row.feature}</h4>
+                                        <div className="grid grid-cols-2 gap-3 text-center">
+                                            <div className="bg-white/5 rounded-xl p-3 border border-white/5 flex flex-col justify-center min-h-[64px]">
+                                                <span className="block text-[9px] text-slate-500 uppercase tracking-widest mb-1.5 font-medium">ทั่วไป</span>
+                                                {typeof row.free === 'boolean' ? (
+                                                    row.free ? <CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto" /> : <XCircle className="w-5 h-5 text-slate-600 mx-auto" />
+                                                ) : (
+                                                    <span className="text-xs text-slate-400 font-semibold leading-tight">{row.free}</span>
+                                                )}
+                                            </div>
+                                            <div className={`rounded-xl p-3 border flex flex-col justify-center min-h-[64px] ${row.highlightPro ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-white/5 border-white/5'}`}>
+                                                <span className="block text-[9px] text-emerald-400 uppercase tracking-widest mb-1.5 font-extrabold">Pro</span>
+                                                {typeof row.pro === 'boolean' ? (
+                                                    row.pro ? <CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto" /> : <XCircle className="w-5 h-5 text-red-400 mx-auto" />
+                                                ) : (
+                                                    <span className="text-xs text-emerald-300 font-extrabold leading-tight">{row.pro}</span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Desktop View: Interactive Table */}
+                            <div className="hidden md:block overflow-x-auto bg-slate-950/20 rounded-3xl border border-white/10 shadow-2xl">
                                 <table className="w-full border-collapse">
                                     <thead>
-                                        <tr className="border-b border-white/10">
-                                            <th className="text-left py-4 px-4 text-slate-400 font-medium">คุณสมบัติ</th>
-                                            <th className="text-center py-4 px-4 text-slate-400 font-medium">ค้นหาทั่วไป</th>
-                                            <th className="text-center py-4 px-4 text-emerald-400 font-medium">เปลี่ยนชื่อมงคล Pro</th>
+                                        <tr className="border-b border-white/10 bg-slate-900/40">
+                                            <th className="text-left py-5 px-6 text-slate-400 font-bold uppercase tracking-wider text-sm">คุณสมบัติ</th>
+                                            <th className="text-center py-5 px-6 text-slate-400 font-bold uppercase tracking-wider text-sm">ค้นหาทั่วไป</th>
+                                            <th className="text-center py-5 px-6 text-emerald-400 font-extrabold uppercase tracking-wider text-sm">เปลี่ยนชื่อมงคล Pro</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                                            <td className="py-4 px-4 text-slate-300">คัดกรองอักษรกาลกิณี</td>
-                                            <td className="text-center py-4 px-4"><CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto" /></td>
-                                            <td className="text-center py-4 px-4"><CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto" /></td>
-                                        </tr>
-                                        <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                                            <td className="py-4 px-4 text-slate-300">เลือกอักษรนำ (วรรคเดช/ศรี)</td>
-                                            <td className="text-center py-4 px-4"><XCircle className="w-5 h-5 text-red-400 mx-auto" /></td>
-                                            <td className="text-center py-4 px-4"><CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto" /></td>
-                                        </tr>
-                                        <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                                            <td className="py-4 px-4 text-slate-300">เกรดของผลรวมเลขศาสตร์</td>
-                                            <td className="text-center py-4 px-4 text-slate-400">คละเกรด</td>
-                                            <td className="text-center py-4 px-4 text-emerald-400 font-semibold">เกรด A+ เท่านั้น</td>
-                                        </tr>
-                                        <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                                            <td className="py-4 px-4 text-slate-300">จำนวนชื่อในฐานข้อมูล</td>
-                                            <td className="text-center py-4 px-4 text-slate-400">5,000+</td>
-                                            <td className="text-center py-4 px-4 text-emerald-400 font-semibold">{allNames.length.toLocaleString()} (คัดพิเศษ)</td>
-                                        </tr>
-                                        <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                                            <td className="py-4 px-4 text-slate-300">กรองตามเพศ</td>
-                                            <td className="text-center py-4 px-4"><XCircle className="w-5 h-5 text-red-400 mx-auto" /></td>
-                                            <td className="text-center py-4 px-4"><CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto" /></td>
+                                    <tbody className="divide-y divide-white/5">
+                                        <tr className="hover:bg-white/5 transition-colors">
+                                            <td className="py-4.5 px-6 text-slate-300 font-medium">คัดกรองอักษรกาลกิณี</td>
+                                            <td className="text-center py-4.5 px-6"><CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto" /></td>
+                                            <td className="text-center py-4.5 px-6"><CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto" /></td>
                                         </tr>
                                         <tr className="hover:bg-white/5 transition-colors">
-                                            <td className="py-4 px-4 text-slate-300">คุณภาพความหมาย</td>
-                                            <td className="text-center py-4 px-4 text-slate-400">ปานกลาง</td>
-                                            <td className="text-center py-4 px-4 text-emerald-400 font-semibold">คัดสรรพิเศษ</td>
+                                            <td className="py-4.5 px-6 text-slate-300 font-medium">เลือกอักษรนำ (วรรคเดช/ศรี)</td>
+                                            <td className="text-center py-4.5 px-6"><XCircle className="w-5 h-5 text-slate-600 mx-auto" /></td>
+                                            <td className="text-center py-4.5 px-6"><CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto" /></td>
+                                        </tr>
+                                        <tr className="hover:bg-white/5 transition-colors">
+                                            <td className="py-4.5 px-6 text-slate-300 font-medium">เกรดของผลรวมเลขศาสตร์</td>
+                                            <td className="text-center py-4.5 px-6 text-slate-400">คละเกรด</td>
+                                            <td className="text-center py-4.5 px-6 text-emerald-400 font-extrabold">เกรด A+ เท่านั้น</td>
+                                        </tr>
+                                        <tr className="hover:bg-white/5 transition-colors">
+                                            <td className="py-4.5 px-6 text-slate-300 font-medium">จำนวนชื่อในฐานข้อมูล</td>
+                                            <td className="text-center py-4.5 px-6 text-slate-400">5,000+</td>
+                                            <td className="text-center py-4.5 px-6 text-emerald-400 font-extrabold">{allNames.length.toLocaleString()} (คัดพิเศษ)</td>
+                                        </tr>
+                                        <tr className="hover:bg-white/5 transition-colors">
+                                            <td className="py-4.5 px-6 text-slate-300 font-medium">กรองตามเพศ</td>
+                                            <td className="text-center py-4.5 px-6"><XCircle className="w-5 h-5 text-slate-600 mx-auto" /></td>
+                                            <td className="text-center py-4.5 px-6"><CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto" /></td>
+                                        </tr>
+                                        <tr className="hover:bg-white/5 transition-colors">
+                                            <td className="py-4.5 px-6 text-slate-300 font-medium">คุณภาพความหมาย</td>
+                                            <td className="text-center py-4.5 px-6 text-slate-400">ปานกลาง</td>
+                                            <td className="text-center py-4.5 px-6 text-emerald-400 font-extrabold">คัดสรรพิเศษ</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -935,40 +1095,55 @@ export default function PremiumSearchPage() {
                             </div>
                         </div>
 
-                        {/* FAQ Section */}
-                        <div className="max-w-3xl mx-auto">
-                            <h2 className="text-3xl font-bold text-center text-white mb-8 flex items-center justify-center gap-3">
-                                <HelpCircle className="w-8 h-8 text-emerald-400" />
+                        {/* FAQ Section - Rendered as a Dynamic Smooth Sliding Accordion */}
+                        <div className="max-w-3xl mx-auto space-y-6">
+                            <h2 className="text-2xl md:text-3xl font-bold text-center text-[#f8fafc] flex items-center justify-center gap-3">
+                                <HelpCircle className="w-7 h-7 sm:w-8 sm:h-8 text-emerald-400 animate-pulse" />
                                 คำถามที่พบบ่อย
                             </h2>
 
                             <div className="space-y-4">
-                                <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                                    <h3 className="text-lg font-bold text-emerald-400 mb-2">
-                                        Q: เปลี่ยนชื่อมงคล Pro ต่างจากค้นหาทั่วไปอย่างไร?
-                                    </h3>
-                                    <p className="text-slate-300 leading-relaxed">
-                                        A: ระบบเปลี่ยนชื่อมงคล Pro ใช้ Premium Database ที่ผ่านการคัดกรอง 3 ชั้น: 1) คัดตามหลักทักษา ไม่มีอักษรกาลกิณี 2) คัดเฉพาะผลรวมเลขศาสตร์ระดับ A+ 3) ความหมายดี ไพเราะ ทันสมัย และสามารถเลือกอักษรนำวรรคเดช/ศรี ได้
-                                    </p>
-                                </div>
-
-                                <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                                    <h3 className="text-lg font-bold text-emerald-400 mb-2">
-                                        Q: วรรคเดชและวรรคศรีคืออะไร?
-                                    </h3>
-                                    <p className="text-slate-300 leading-relaxed">
-                                        A: <strong className="text-amber-400">วรรคเดช</strong> คืออักษรนำที่ส่งเสริมเรื่องอำนาจบารมี การเลื่อนขั้นเลื่อนตำแหน่ง เหมาะกับผู้ต้องการความก้าวหน้าในหน้าที่การงาน ส่วน <strong className="text-pink-400">วรรคศรี</strong> คืออักษรนำที่ส่งเสริมเรื่องโชคลาภ เสน่ห์ความรัก เหมาะกับผู้ต้องการดึงดูดความโชคดีและเสน่ห์
-                                    </p>
-                                </div>
-
-                                <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                                    <h3 className="text-lg font-bold text-emerald-400 mb-2">
-                                        Q: เปลี่ยนชื่อมงคล Pro ใช้กี่เครดิต?
-                                    </h3>
-                                    <p className="text-slate-300 leading-relaxed">
-                                        A: การปลดล็อกชื่อใช้ <strong className="text-white">15 เครดิต</strong>ต่อการปลดล็อก 1 ครั้ง (สูงสุด 20 รายชื่อ) ในแต่ละหมวดอักษร
-                                    </p>
-                                </div>
+                                {[
+                                    {
+                                        q: 'เปลี่ยนชื่อมงคล Pro ต่างจากค้นหาทั่วไปอย่างไร?',
+                                        a: 'ระบบเปลี่ยนชื่อมงคล Pro ใช้ Premium Database ที่ผ่านการคัดกรอง 3 ชั้น: 1) คัดตามหลักทักษา ไม่มีอักษรกาลกิณี 2) คัดเฉพาะผลรวมเลขศาสตร์ระดับ A+ 3) ความหมายดี ไพเราะ ทันสมัย และสามารถเลือกอักษรนำวรรคเดช/ศรี ได้'
+                                    },
+                                    {
+                                        q: 'วรรคเดชและวรรคศรีคืออะไร?',
+                                        a: 'วรรคเดช คืออักษรนำที่ส่งเสริมเรื่องอำนาจบารมี การเลื่อนขั้นเลื่อนตำแหน่ง เหมาะกับผู้ต้องการความก้าวหน้าในหน้าที่การงาน ส่วน วรรคศรี คืออักษรนำที่ส่งเสริมเรื่องโชคลาภ เสน่ห์ความรัก เหมาะกับผู้ต้องการดึงดูดความโชคดีและเสน่ห์'
+                                    },
+                                    {
+                                        q: 'เปลี่ยนชื่อมงคล Pro ใช้กี่เครดิต?',
+                                        a: 'การปลดล็อกชื่อใช้ 15 เครดิตต่อการปลดล็อก 1 ครั้ง (สูงสุด 20 รายชื่อ) ในแต่ละหมวดอักษรที่คุณประสงค์จะเปิดใช้งาน'
+                                    }
+                                ].map((faq, index) => {
+                                    const isOpen = openFaqIndex === index;
+                                    return (
+                                        <div key={index} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden transition-all duration-300 shadow-lg">
+                                            <button
+                                                type="button"
+                                                onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                                                className="w-full px-5 py-4 sm:px-6 sm:py-5 text-left flex items-center justify-between gap-4 font-bold text-slate-200 hover:text-white hover:bg-white/[0.02] transition-colors focus:outline-none"
+                                            >
+                                                <span className="text-sm sm:text-base md:text-lg flex items-start gap-2.5">
+                                                    <span className="text-emerald-400 shrink-0">Q:</span>
+                                                    <span className="leading-snug">{faq.q}</span>
+                                                </span>
+                                                <ChevronDown className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-emerald-400' : ''}`} />
+                                            </button>
+                                            <div
+                                                className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                                                    isOpen ? 'max-h-[500px] border-t border-white/5 bg-[#0a0f1d]/40' : 'max-h-0'
+                                                }`}
+                                            >
+                                                <div className="p-5 sm:p-6 text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed flex items-start gap-2.5">
+                                                    <span className="text-amber-400 font-extrabold shrink-0">A:</span>
+                                                    <span>{faq.a}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
 

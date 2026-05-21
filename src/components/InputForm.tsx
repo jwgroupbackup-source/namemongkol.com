@@ -96,11 +96,14 @@ export const InputForm: React.FC<InputFormProps> = ({
                                 </>
                             ) : (
                                 <>
-                                    <Sparkles className="w-5 h-5" /> วิเคราะห์ดวงชะตา
+                                    <Sparkles className="w-5 h-5" /> วิเคราะห์ชื่อฟรี
                                 </>
                             )}
                         </span>
                     </button>
+                    <p className="text-center text-[11px] leading-relaxed text-slate-400 sm:text-xs">
+                        เห็นผลพื้นฐานได้ทันที สมัครฟรีเมื่อต้องการบันทึกผลและปลดล็อกคำทำนายเชิงลึก
+                    </p>
                 </div>
             </div>
         </div>

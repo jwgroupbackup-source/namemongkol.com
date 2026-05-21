@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/navigation';
 import { ChevronRight } from 'lucide-react';
 import { supabase } from '@/utils/supabase';
 import { saveAnalysisResult } from '@/services/analysisService';
@@ -154,8 +153,6 @@ function DeferredSection({
 }
 
 export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps) {
-    const router = useRouter();
-
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [day, setDay] = useState('sunday');
@@ -198,26 +195,7 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
     const performAnalysis = useCallback(async (inputName: string, inputSurname: string, inputDay: string) => {
         if (!inputName.trim()) return;
 
-        // Check Login
         const { data: { user } } = await supabase.auth.getUser();
-        if (!user) {
-            const Swal = (await import('sweetalert2')).default;
-            const result = await Swal.fire({
-                title: 'กรุณาเข้าสู่ระบบ',
-                text: 'ท่านต้องเข้าสู่ระบบก่อนทำการวิเคราะห์ชื่อ',
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonText: 'เข้าสู่ระบบ',
-                cancelButtonText: 'ยกเลิก',
-                confirmButtonColor: '#f59e0b',
-                background: '#1e293b',
-                color: '#fff'
-            });
-            if (result.isConfirmed) {
-                router.push('/login');
-            }
-            return;
-        }
 
         const requestId = ++analysisRequestIdRef.current;
         setLoading(true);
@@ -273,7 +251,9 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
             });
         });
 
-        // Auto-save to Supabase
+        if (!user) return;
+
+        // Auto-save only for signed-in users. Guests see the preview first, then can sign up to save/unlock.
         void saveAnalysisResult({
                 name: inputName,
                 surname: inputSurname,
@@ -284,7 +264,7 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
             }).catch((error) => {
                 console.error('Failed to auto-save:', error);
             });
-    }, [router]);
+    }, []);
 
     // Handle URL params on first mount from client-side only (to preserve SSG)
     useEffect(() => {
@@ -411,6 +391,8 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
                             totalScore={result.totalScore}
                         />
 
+                        <SaveResultCTA />
+
                         {/* Upsell: วิเคราะห์หลายชื่อ */}
                         <BulkAnalysisUpsell currentName={result.name} />
 
@@ -444,8 +426,6 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
                         <div className="mt-4">
                             <ShareButton result={result} day={day} />
                         </div>
-
-                        <SaveResultCTA />
                     </div>
                 )}
             </main>

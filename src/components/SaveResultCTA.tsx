@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Save, Gift, ArrowRight } from 'lucide-react';
+import { ArrowRight, Gift, Save } from 'lucide-react';
 import { supabase } from '@/utils/supabase';
 
 export const SaveResultCTA = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(true); // Default hidden
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
 
     useEffect(() => {
         supabase.auth.getUser().then(({ data: { user } }) => {
@@ -17,28 +17,28 @@ export const SaveResultCTA = () => {
     if (isLoggedIn) return null;
 
     return (
-        <div className="mt-6 animate-fade-in">
-            <div className="bg-gradient-to-r from-amber-500/5 to-purple-500/5 border border-amber-500/20 rounded-2xl p-5 sm:p-6">
-                <div className="flex flex-col sm:flex-row items-center gap-4">
-                    <div className="flex items-center gap-3 flex-1">
-                        <div className="p-2.5 bg-amber-500/15 rounded-xl shrink-0">
-                            <Save className="w-6 h-6 text-amber-400" />
+        <div className="mt-5 animate-fade-in">
+            <div className="rounded-2xl border border-amber-400/25 bg-gradient-to-r from-amber-500/10 via-slate-900/70 to-purple-500/10 p-4 shadow-[0_18px_45px_rgba(0,0,0,0.28)] sm:p-5">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+                    <div className="flex flex-1 items-start gap-3">
+                        <div className="shrink-0 rounded-xl bg-amber-400/15 p-2.5 ring-1 ring-amber-300/20">
+                            <Save className="h-5 w-5 text-amber-300" />
                         </div>
                         <div>
-                            <h4 className="text-white font-bold text-sm sm:text-base">บันทึกผลวิเคราะห์นี้ไว้</h4>
-                            <p className="text-slate-400 text-xs mt-0.5">
-                                สมัครฟรี → บันทึกผลได้ไม่จำกัด + ปลดล็อกเชิงลึก
+                            <h4 className="text-sm font-bold text-white sm:text-base">บันทึกผลนี้และปลดล็อกคำทำนายเชิงลึก</h4>
+                            <p className="mt-1 text-xs leading-relaxed text-slate-300 sm:text-sm">
+                                สมัครฟรีเพื่อเก็บประวัติผลวิเคราะห์ เปรียบเทียบชื่อ และรับ 30 เครดิตสำหรับฟีเจอร์พรีเมียม
                             </p>
                         </div>
                     </div>
                     <Link
                         href="/login?redirect=/"
                         data-track="result.save_cta_click"
-                        className="flex items-center gap-2 px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm rounded-xl shadow-lg shadow-amber-500/20 transition-all hover:-translate-y-0.5 active:scale-[0.98] whitespace-nowrap"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 px-4 py-2.5 text-sm font-bold text-slate-950 shadow-lg shadow-amber-500/20 transition hover:-translate-y-0.5 hover:bg-amber-300 active:scale-[0.98] sm:whitespace-nowrap"
                     >
-                        <Gift className="w-4 h-4" />
+                        <Gift className="h-4 w-4" />
                         สมัครรับ 30 เครดิตฟรี
-                        <ArrowRight className="w-4 h-4" />
+                        <ArrowRight className="h-4 w-4" />
                     </Link>
                 </div>
             </div>
