@@ -785,20 +785,23 @@ export default function PremiumAnalysisPage() {
     );
 
     return (
-        <div className="min-h-screen bg-[#050b14] text-slate-200 font-sans selection:bg-amber-500/30">
+        <div className="min-h-screen bg-[oklch(13%_0.035_260)] text-slate-200 font-sans selection:bg-amber-500/30 relative overflow-hidden">
 
             <main className="w-full max-w-[1400px] min-h-screen relative overflow-hidden pb-32 md:pb-20 px-3 sm:px-4">
                 {/* Background Decor - Fixed Position */}
-                <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
-                    <div className="absolute top-[-20%] left-[20%] w-[1000px] h-[1000px] rounded-full bg-blue-900/10 blur-[130px] opacity-70 animate-pulse" style={{ animationDuration: '8s' }} />
-                    <div className="absolute bottom-[-10%] right-[-10%] w-[800px] h-[800px] rounded-full bg-amber-600/5 blur-[100px] opacity-60" />
-                    <div className="absolute top-[30%] left-[-10%] w-[600px] h-[600px] rounded-full bg-purple-900/10 blur-[120px]" />
+                <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+                    <div
+                        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-85"
+                        style={{ backgroundImage: "url('/Theme/theme-search.png')" }}
+                    ></div>
+                    <div className="absolute inset-0 bg-[oklch(13%_0.035_260)]/30"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-[oklch(13%_0.035_260)]/20 via-[oklch(13%_0.035_260)]/32 to-[oklch(8%_0.025_260)]/82"></div>
                 </div>
 
                 <div className="relative z-10 max-w-7xl px-0 sm:px-6 lg:px-8 space-y-6 md:space-y-8">
 
                     {/* Header Section */}
-                    <header className="text-center space-y-4 md:space-y-6 pt-16 md:pt-32 pb-5 md:pb-8">
+                    <header className="text-center space-y-4 md:space-y-6 pt-24 sm:pt-28 md:pt-32 pb-5 md:pb-8">
                         <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/5 border border-amber-500/20 text-amber-400/90 text-[11px] md:text-xs font-bold tracking-wide md:tracking-wider uppercase shadow-lg shadow-amber-900/10 backdrop-blur-sm mb-1 md:mb-4">
                             <Crown size={14} />
                             <span>Professional Naming Analysis</span>

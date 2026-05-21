@@ -530,7 +530,7 @@ export default function PremiumSearchPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#050711] text-[#f8fafc] font-sans selection:bg-amber-500/30 relative">
+        <div className="min-h-screen bg-[oklch(13%_0.035_260)] text-[#f8fafc] font-sans selection:bg-amber-500/30 relative overflow-hidden">
             <style dangerouslySetInnerHTML={{ __html: `
               .scrollbar-none::-webkit-scrollbar {
                 display: none !important;
@@ -541,6 +541,15 @@ export default function PremiumSearchPage() {
               }
             `}} />
 
+            <div className="fixed inset-0 overflow-hidden pointer-events-none">
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-85"
+                    style={{ backgroundImage: "url('/Theme/theme-search.png')" }}
+                ></div>
+                <div className="absolute inset-0 bg-[oklch(13%_0.035_260)]/30"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-[oklch(13%_0.035_260)]/20 via-[oklch(13%_0.035_260)]/32 to-[oklch(8%_0.025_260)]/82"></div>
+            </div>
+
             {/* Floating Credits Pill for Mobile */}
             <div className="fixed bottom-4 right-3 sm:hidden z-[100] bg-slate-950/85 backdrop-blur-xl border border-amber-300/20 shadow-[0_0_20px_rgba(201,147,58,0.18)] rounded-full px-3 py-2 flex items-center gap-1.5 transition-all">
                 <Coins className="w-3.5 h-3.5 text-amber-300" />
@@ -548,7 +557,7 @@ export default function PremiumSearchPage() {
                 <span className="text-xs font-bold text-amber-200">{userCredits !== null ? userCredits : '—'}</span>
             </div>
 
-            <main className="w-full max-w-[1400px] mx-auto transition-all duration-300 min-h-screen px-2.5 sm:px-4 pt-14 md:pt-32 pb-24 md:pb-28 relative">
+            <main className="w-full max-w-[1400px] mx-auto transition-all duration-300 min-h-screen px-2.5 sm:px-4 pt-24 sm:pt-28 md:pt-32 pb-24 md:pb-28 relative">
                 <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
                     <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-amber-500/10 blur-[100px]" />
                     <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-blue-500/10 blur-[100px]" />
@@ -557,10 +566,6 @@ export default function PremiumSearchPage() {
                 <div className="relative z-10 max-w-6xl mx-auto space-y-3.5 sm:space-y-5 md:space-y-8">
                     {/* Header */}
                     <header className="text-center space-y-2.5 sm:space-y-4 xl:grid xl:grid-cols-[minmax(0,1.05fr)_minmax(380px,0.95fr)] xl:items-end xl:gap-8 xl:space-y-0 xl:text-left">
-                        <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-amber-400/10 border border-amber-300/20 text-amber-200 text-[10px] sm:text-sm font-medium shadow-[0_0_15px_rgba(201,147,58,0.12)]">
-                            <Sparkles size={12} className="sm:h-3.5 sm:w-3.5" />
-                            <span>{t('pages.premiumSearch.headerBadge')}</span>
-                        </div>
                         <div className="xl:col-start-1 xl:row-start-2">
                             <h1 className="text-xl sm:text-4xl md:text-5xl font-bold text-[#f8fafc] drop-shadow-2xl tracking-tight leading-tight">
                                 {t('pages.premiumSearch.headerTitle')}
@@ -920,7 +925,7 @@ export default function PremiumSearchPage() {
                                 ทำไมต้อง <span className="text-emerald-400">&quot;เปลี่ยนชื่อมงคล Pro&quot;</span>?
                             </h2>
                             <p className="text-lg text-slate-300 leading-relaxed mb-8 text-center">
-                                ระบบเปลี่ยนชื่อมงคล Pro ของ NameMongkol แตกต่างจากการตั้งชื่อทั่วไป เพราะเราใช้ <strong className="text-emerald-400">Premium Database</strong> ที่ผ่านการคัดกรองมาแล้วถึง 3 ชั้น
+                                ระบบเปลี่ยนชื่อมงคล Pro ของ NameMongkol แตกต่างจากการตั้งชื่อทั่วไป เพราะเราใช้ <strong className="text-emerald-400">ฐานข้อมูลชื่อคัดกรอง</strong> ที่ผ่านการคัดกรองมาแล้วถึง 3 ชั้น
                             </p>
 
                             <div className="grid md:grid-cols-3 gap-6">
@@ -1106,7 +1111,7 @@ export default function PremiumSearchPage() {
                                 {[
                                     {
                                         q: 'เปลี่ยนชื่อมงคล Pro ต่างจากค้นหาทั่วไปอย่างไร?',
-                                        a: 'ระบบเปลี่ยนชื่อมงคล Pro ใช้ Premium Database ที่ผ่านการคัดกรอง 3 ชั้น: 1) คัดตามหลักทักษา ไม่มีอักษรกาลกิณี 2) คัดเฉพาะผลรวมเลขศาสตร์ระดับ A+ 3) ความหมายดี ไพเราะ ทันสมัย และสามารถเลือกอักษรนำวรรคเดช/ศรี ได้'
+                                        a: 'ระบบเปลี่ยนชื่อมงคล Pro ใช้ ฐานข้อมูลชื่อคัดกรอง ที่ผ่านการคัดกรอง 3 ชั้น: 1) คัดตามหลักทักษา ไม่มีอักษรกาลกิณี 2) คัดเฉพาะผลรวมเลขศาสตร์ระดับ A+ 3) ความหมายดี ไพเราะ ทันสมัย และสามารถเลือกอักษรนำวรรคเดช/ศรี ได้'
                                     },
                                     {
                                         q: 'วรรคเดชและวรรคศรีคืออะไร?',

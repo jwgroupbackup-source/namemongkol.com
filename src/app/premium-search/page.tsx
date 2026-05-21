@@ -100,7 +100,7 @@ const faqJsonLd = {
             'name': 'เปลี่ยนชื่อมงคล Pro ต่างจากค้นหาทั่วไปอย่างไร?',
             'acceptedAnswer': {
                 '@type': 'Answer',
-                'text': 'ระบบเปลี่ยนชื่อมงคล Pro ใช้ Premium Database ที่ผ่านการคัดกรอง 3 ชั้น: 1) คัดตามหลักทักษา ไม่มีอักษรกาลกิณี 2) คัดเฉพาะผลรวมเลขศาสตร์ระดับ A+ 3) ความหมายดี ไพเราะ ทันสมัย และสามารถเลือกอักษรนำวรรคเดช/ศรี ได้'
+                'text': 'ระบบเปลี่ยนชื่อมงคล Pro ใช้ ฐานข้อมูลชื่อคัดกรอง ที่ผ่านการคัดกรอง 3 ชั้น: 1) คัดตามหลักทักษา ไม่มีอักษรกาลกิณี 2) คัดเฉพาะผลรวมเลขศาสตร์ระดับ A+ 3) ความหมายดี ไพเราะ ทันสมัย และสามารถเลือกอักษรนำวรรคเดช/ศรี ได้'
             }
         },
         {
@@ -136,7 +136,10 @@ export default function PremiumSearchPage() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
             />
             <ClientPage />
-            <section className="bg-[#0f172a] px-4 pb-20 text-slate-200">
+            <section
+                className="relative px-4 pb-20 text-slate-200 bg-[oklch(13%_0.035_260)] bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: "linear-gradient(to bottom, rgba(15, 23, 42, 0.82), rgba(5, 7, 17, 0.9)), url('/Theme/theme-search.png')" }}
+            >
                 <div className="mx-auto max-w-5xl border-t border-white/10 pt-12">
                     <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-emerald-300">
                         Premium Name Selection

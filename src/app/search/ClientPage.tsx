@@ -551,11 +551,17 @@ export default function SearchPage() {
 
 
     return (
-        <div className="min-h-screen bg-[#0f172a] text-slate-100 font-sans selection:bg-amber-500 selection:text-white relative overflow-hidden">
+        <div
+            className="min-h-screen bg-[oklch(13%_0.035_260)] text-slate-100 font-sans selection:bg-amber-500 selection:text-white relative overflow-hidden"
+        >
             {/* Background Decor */}
-            <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px]"></div>
-                <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-amber-600/10 rounded-full blur-[120px]"></div>
+            <div className="fixed inset-0 overflow-hidden pointer-events-none">
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-85"
+                    style={{ backgroundImage: "url('/Theme/theme-search.png')" }}
+                ></div>
+                <div className="absolute inset-0 bg-[oklch(13%_0.035_260)]/30"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-[oklch(13%_0.035_260)]/20 via-[oklch(13%_0.035_260)]/32 to-[oklch(8%_0.025_260)]/82"></div>
             </div>
 
 

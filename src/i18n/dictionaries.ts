@@ -40,7 +40,7 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
                 reset: '分析其他號碼',
             },
             premiumSearch: {
-                headerBadge: 'Premium Database',
+                headerBadge: 'ฐานข้อมูลชื่อคัดกรอง',
                 headerTitle: '吉祥姓名 Pro 搜尋',
                 headerDesc: '存取 {count} 筆精選吉祥姓名資料庫。',
                 headerSub: '可選擇所有吉祥開頭字母，已移除禁忌字。',
@@ -296,7 +296,7 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
                     q4: 'เลือกชื่อจากที่นี่แล้วต้องทำอย่างไรต่อ?',
                     a4: 'เมื่อได้ชื่อที่ถูกใจแล้ว แนะนำให้นำไปวิเคราะห์ชื่อ-นามสกุลอีกครั้ง เพื่อดูผลรวมร่วมกับนามสกุลของคุณว่าได้เกรด A+ หรือไม่',
                     q5: 'ค้นหาชื่อมงคลฟรีต่างจากเปลี่ยนชื่อมงคล Pro อย่างไร?',
-                    a5: 'ค้นหาชื่อมงคลฟรีให้บริการฟรีจากฐานข้อมูล 5,000+ ชื่อ ส่วนเปลี่ยนชื่อมงคล Pro ใช้ Premium Database ที่ผ่านการคัดกรอง 3 ชั้น สามารถเลือกอักษรนำวรรคเดช/ศรี และผลรวมเลขศาสตร์เกรด A+ เท่านั้น',
+                    a5: 'ค้นหาชื่อมงคลฟรีให้บริการฟรีจากฐานข้อมูล 5,000+ ชื่อ ส่วนเปลี่ยนชื่อมงคล Pro ใช้ ฐานข้อมูลชื่อคัดกรอง ที่ผ่านการคัดกรอง 3 ชั้น สามารถเลือกอักษรนำวรรคเดช/ศรี และผลรวมเลขศาสตร์เกรด A+ เท่านั้น',
                 },
                 benefitsTitle: 'ทำไมต้องใช้ NameMongkol ค้นหาชื่อมงคล?',
                 benefits: {
@@ -361,7 +361,7 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
                 reset: 'วิเคราะห์เบอร์อื่น',
             },
             premiumSearch: {
-                headerBadge: 'Premium Database',
+                headerBadge: 'ฐานข้อมูลชื่อคัดกรอง',
                 headerTitle: 'เปลี่ยนชื่อมงคล Pro',
                 headerDesc: 'คัดชื่อเสริมดวงจากฐานข้อมูลรายชื่อมงคลกว่า {count} รายชื่อ เหมาะสำหรับผู้ที่ต้องการเปลี่ยนชื่อใหม่อย่างจริงจัง',
                 headerSub: 'เลือกใช้อักษรทุกวรรค ยกเว้นวรรคกาลกิณี นำหน้าชื่อ',
@@ -636,7 +636,7 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
                     q4: 'What should I do after choosing a name?',
                     a4: 'Once you find a name you like, we recommend analyzing it with your surname to ensure the total score achieves an A+ grade.',
                     q5: 'What is the difference between Free and Pro search?',
-                    a5: 'Free search uses a database of 5,000+ names. Pro search uses a Premium Database with 3-layer filtering, allowing you to select leading letters for power/glory and guarantees A+ numerology scores.',
+                    a5: 'Free search uses a database of 5,000+ names. Pro search uses a ฐานข้อมูลชื่อคัดกรอง with 3-layer filtering, allowing you to select leading letters for power/glory and guarantees A+ numerology scores.',
                 },
                 benefitsTitle: 'Why use NameMongkol to search names?',
                 benefits: {
@@ -701,7 +701,7 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
                 reset: 'Analyze another number',
             },
             premiumSearch: {
-                headerBadge: 'Premium Database',
+                headerBadge: 'ฐานข้อมูลชื่อคัดกรอง',
                 headerTitle: 'Premium name search',
                 headerDesc: 'Access {count} curated auspicious names—ideal for serious renaming or baby naming.',
                 headerSub: 'Use any auspicious leading consonant—Kalinik letters removed.',
