@@ -182,6 +182,44 @@ export const metadata: Metadata = {
 
 export default async function ArticlesPage() {
     const articles = await getArticles();
+    const topicClusters = [
+        {
+            title: 'เริ่มต้นตั้งชื่อลูก',
+            description: 'เหมาะสำหรับพ่อแม่ที่ต้องการชื่อจริง ความหมายดี และไม่ชนอักษรกาลกิณี',
+            links: [
+                { href: '/articles/naming-baby-year-of-horse-2569', label: 'ตั้งชื่อลูกปีมะเมีย 2569' },
+                { href: '/articles/100-auspicious-boy-names-2569', label: '100 ชื่อมงคลลูกชาย' },
+                { href: '/articles/100-auspicious-women-names-2026', label: '100 ชื่อมงคลลูกสาว' },
+            ],
+        },
+        {
+            title: 'เข้าใจศาสตร์ชื่อมงคล',
+            description: 'อ่านพื้นฐานเลขศาสตร์ ทักษา อายตนะ และพลังเงาก่อนเลือกชื่อจริง',
+            links: [
+                { href: '/articles/4-pillars-of-naming', label: '4 ศาสตร์การตั้งชื่อมงคล' },
+                { href: '/articles/numerology-0-9-power-guide', label: 'เลขศาสตร์ 0-9' },
+                { href: '/articles/shadow-power-ayatana-6-meaning', label: 'พลังเงาและอายตนะ 6' },
+            ],
+        },
+        {
+            title: 'เช็กข้อห้ามก่อนใช้ชื่อ',
+            description: 'ลดความเสี่ยงจากอักษรกาลกิณี คู่เลขเสีย และจังหวะที่ไม่เหมาะกับวันเกิด',
+            links: [
+                { href: '/articles/forbidden-letters-kalakini', label: 'อักษรกาลกิณีที่ควรเลี่ยง' },
+                { href: '/articles/check-kalakini-letters-7-days', label: 'เช็กกาลกิณี 7 วันเกิด' },
+                { href: '/articles/micro-analysis-lucky-number-pairs', label: 'คู่เลขมงคลและคู่เลขเสีย' },
+            ],
+        },
+        {
+            title: 'ต่อยอดเสริมดวงรายวัน',
+            description: 'รวมบทความสำหรับเบอร์มือถือ สีมงคล และวอลเปเปอร์เสริมเป้าหมายชีวิต',
+            links: [
+                { href: '/articles/auspicious-phone-number-guide-2026', label: 'คู่มือเบอร์มงคล 2026' },
+                { href: '/articles/auspicious-colors-2569-guide', label: 'สีมงคลตามวันเกิด 2569' },
+                { href: '/articles/caishen-wallpaper-free-download', label: 'วอลเปเปอร์ไฉ่ซิงเอี้ย' },
+            ],
+        },
+    ];
 
     // Organization Schema (EEAT signal – author/publisher identity)
     const organizationJsonLd = {
@@ -373,9 +411,9 @@ export default async function ArticlesPage() {
                     <div className="absolute top-[10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
                 </div>
 
-                <main className="w-full max-w-[1400px] px-4 pb-8 relative z-10 pt-28 md:pt-32">
+                <main className="w-full max-w-[1400px] px-3 sm:px-4 pb-8 relative z-10 pt-24 md:pt-32">
                     {/* Breadcrumb */}
-                    <nav className="max-w-4xl mx-auto mb-6 text-sm text-slate-400" aria-label="Breadcrumb">
+                    <nav className="hidden sm:block max-w-4xl mx-auto mb-6 text-sm text-slate-400" aria-label="Breadcrumb">
                         <ol className="flex items-center gap-2">
                             <li><Link href="/" className="hover:text-white transition-colors">หน้าหลัก</Link></li>
                             <li className="text-slate-600">/</li>
@@ -384,52 +422,52 @@ export default async function ArticlesPage() {
                     </nav>
 
                     {/* Header */}
-                    <div className="max-w-4xl mx-auto mb-12">
-                        <Link href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white mb-6 transition-colors">
+                    <div className="max-w-4xl mx-auto mb-8 sm:mb-12">
+                        <Link href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white mb-4 sm:mb-6 transition-colors text-sm sm:text-base">
                             <ArrowLeft size={16} />
                             กลับหน้าหลัก
                         </Link>
 
-                        <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400">
+                        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400">
                             บทความชื่อมงคล
                         </h1>
-                        <p className="text-slate-300 text-lg mb-4">
+                        <p className="text-slate-300 text-sm sm:text-lg mb-4 leading-relaxed">
                             รวมบทความศาสตร์มงคล เคล็ดลับการตั้งชื่อ และเกร็ดความรู้เพื่อชีวิตที่ดีกว่า
                         </p>
 
                         {/* SEO Rich Content Introduction – speakable target for AI assistants */}
-                        <div className="articles-intro bg-slate-800/40 border border-slate-700/50 rounded-xl p-6 mb-8">
-                            <h2 className="text-xl font-bold text-amber-400 mb-3 flex items-center gap-2">
+                        <div className="articles-intro bg-slate-800/40 border border-slate-700/50 rounded-xl p-4 sm:p-6 mb-5 sm:mb-8">
+                            <h2 className="text-base sm:text-xl font-bold text-amber-400 mb-2 sm:mb-3 flex items-center gap-2">
                                 <BookOpen size={20} />
                                 คลังความรู้การตั้งชื่อครบวงจร
                             </h2>
-                            <p className="text-slate-300 leading-relaxed mb-4">
+                            <p className="text-slate-300 text-xs sm:text-base leading-relaxed mb-3 sm:mb-4 line-clamp-3 sm:line-clamp-none">
                                 ยินดีต้อนรับสู่คลังบทความ <strong className="text-white">NameMongkol</strong> แหล่งรวมความรู้ด้านศาสตร์การตั้งชื่อที่ครบถ้วนและอัปเดตต่อเนื่อง
                                 ไม่ว่าคุณกำลังมองหา <strong className="text-amber-300">ชื่อมงคลสำหรับลูกน้อย</strong> ต้องการเรียนรู้หลัก <strong className="text-amber-300">เลขศาสตร์</strong> และ <strong className="text-amber-300">ทักษาปกรณ์</strong>
                                 หรือกำลังพิจารณา <strong className="text-amber-300">เปลี่ยนชื่อเสริมดวง</strong> เรามีบทความครอบคลุมทุกหัวข้อ
                             </p>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-                                <div className="bg-slate-900/50 p-3 rounded-lg text-center">
-                                    <div className="text-2xl font-bold text-purple-400">{articles.length}+</div>
-                                    <div className="text-slate-400">บทความ</div>
+                            <div className="grid grid-cols-4 gap-2 sm:gap-3 text-[10px] sm:text-sm">
+                                <div className="bg-slate-900/50 p-2 sm:p-3 rounded-lg text-center">
+                                    <div className="text-base sm:text-2xl font-bold text-purple-400">{articles.length}+</div>
+                                    <div className="text-slate-400 truncate">บทความ</div>
                                 </div>
-                                <div className="bg-slate-900/50 p-3 rounded-lg text-center">
-                                    <div className="text-2xl font-bold text-amber-400">500+</div>
-                                    <div className="text-slate-400">ตัวอย่างชื่อ</div>
+                                <div className="bg-slate-900/50 p-2 sm:p-3 rounded-lg text-center">
+                                    <div className="text-base sm:text-2xl font-bold text-amber-400">500+</div>
+                                    <div className="text-slate-400 truncate">ตัวอย่างชื่อ</div>
                                 </div>
-                                <div className="bg-slate-900/50 p-3 rounded-lg text-center">
-                                    <div className="text-2xl font-bold text-emerald-400">7</div>
-                                    <div className="text-slate-400">หมวดหมู่</div>
+                                <div className="bg-slate-900/50 p-2 sm:p-3 rounded-lg text-center">
+                                    <div className="text-base sm:text-2xl font-bold text-emerald-400">7</div>
+                                    <div className="text-slate-400 truncate">หมวดหมู่</div>
                                 </div>
-                                <div className="bg-slate-900/50 p-3 rounded-lg text-center">
-                                    <div className="text-2xl font-bold text-blue-400">ต่อเนื่อง</div>
-                                    <div className="text-slate-400">อัปเดตล่าสุด</div>
+                                <div className="bg-slate-900/50 p-2 sm:p-3 rounded-lg text-center">
+                                    <div className="text-base sm:text-2xl font-bold text-blue-400 truncate">ต่อเนื่อง</div>
+                                    <div className="text-slate-400 truncate">อัปเดตล่าสุด</div>
                                 </div>
                             </div>
                         </div>
 
                         {/* Search Bar */}
-                        <form role="search" aria-label="ค้นหาบทความชื่อมงคล" action="/search" method="GET" className="mt-8 relative max-w-lg">
+                        <form role="search" aria-label="ค้นหาบทความชื่อมงคล" action="/search" method="GET" className="mt-5 sm:mt-8 relative max-w-lg">
                             <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400">
                                 <Search size={20} />
                             </div>
@@ -438,7 +476,7 @@ export default async function ArticlesPage() {
                                 name="q"
                                 placeholder="ค้นหาบทความ... เช่น ชื่อลูกชาย, เลขศาสตร์, ทักษา"
                                 aria-label="ค้นหาบทความ"
-                                className="w-full bg-slate-800/50 border border-slate-700 rounded-xl py-3 pl-12 pr-4 text-slate-200 placeholder:text-slate-500 focus:ring-2 focus:ring-amber-500/50 focus:border-transparent outline-none transition-all"
+                                className="w-full bg-slate-800/50 border border-slate-700 rounded-xl py-2.5 sm:py-3 pl-12 pr-4 text-sm sm:text-base text-slate-200 placeholder:text-slate-500 focus:ring-2 focus:ring-amber-500/50 focus:border-transparent outline-none transition-all"
                             />
                             <button type="submit" className="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400 hover:text-white transition-colors">
                                 <Search size={16} />
@@ -447,19 +485,52 @@ export default async function ArticlesPage() {
                     </div>
 
                     {/* Grid — 1 col mobile / 2 col tablet / 4 col desktop */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-[1400px] mx-auto">
+                    <section className="mx-auto mb-8 sm:mb-12 max-w-[1400px]" aria-labelledby="topic-clusters-heading">
+                        <div className="mb-4 sm:mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                            <div>
+                                <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-amber-300/80">Topic clusters</p>
+                                <h2 id="topic-clusters-heading" className="mt-1.5 sm:mt-2 text-lg sm:text-2xl font-bold text-white">
+                                    เลือกอ่านตามเป้าหมาย เพื่อไปถึงคำตอบเร็วขึ้น
+                                </h2>
+                            </div>
+                            <p className="hidden sm:block max-w-xl text-sm leading-relaxed text-slate-400">
+                                เราจัดกลุ่มบทความตาม search intent หลักของผู้ใช้ Google เพื่อให้ค้นเจอหัวข้อที่เกี่ยวข้องและต่อยอดไปยังบทความเชิงลึกได้ง่ายขึ้น
+                            </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-4">
+                            {topicClusters.map((cluster) => (
+                                <div key={cluster.title} className="rounded-xl sm:rounded-2xl border border-white/10 bg-slate-900/55 p-3 sm:p-5 shadow-[0_18px_50px_rgba(0,0,0,0.22)]">
+                                    <h3 className="text-sm sm:text-base font-bold text-white leading-snug">{cluster.title}</h3>
+                                    <p className="mt-1.5 hidden sm:block min-h-[60px] text-xs leading-relaxed text-slate-400">{cluster.description}</p>
+                                    <div className="mt-3 sm:mt-4 space-y-1.5 sm:space-y-2">
+                                        {cluster.links.map((link, linkIndex) => (
+                                            <Link
+                                                key={link.href}
+                                                href={link.href}
+                                                className={`${linkIndex > 1 ? 'hidden sm:block' : 'block'} rounded-lg border border-white/5 bg-white/[0.03] px-2.5 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-sm leading-snug text-slate-200 transition hover:border-amber-300/30 hover:bg-amber-300/10 hover:text-amber-100`}
+                                            >
+                                                {link.label}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 max-w-[1400px] mx-auto">
                         {articles.map((article, index) => (
                             <Link
                                 key={article.slug}
                                 href={`/articles/${article.slug}`}
-                                className="group bg-slate-900/40 backdrop-blur-sm border border-white/5 rounded-2xl overflow-hidden hover:border-amber-500/25 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-900/15"
+                                className="group bg-slate-900/40 backdrop-blur-sm border border-white/5 rounded-xl sm:rounded-2xl overflow-hidden hover:border-amber-500/25 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-900/15"
                             >
                                 <article
                                     className="flex flex-col h-full"
                                     itemScope
                                     itemType="https://schema.org/Article"
                                 >
-                                    <div className="aspect-video w-full bg-slate-800 relative overflow-hidden">
+                                    <div className="aspect-[4/3] sm:aspect-video w-full bg-slate-800 relative overflow-hidden">
                                         <ArticleImage
                                             src={article.coverImage as string}
                                             alt={(article as any).coverImageAlt || `บทความ: ${article.title} - เคล็ดลับตั้งชื่อมงคล`}
@@ -467,33 +538,34 @@ export default async function ArticlesPage() {
                                             className="group-hover:scale-105"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent opacity-60" />
-                                        <div className="absolute top-3 right-3 px-2.5 py-0.5 bg-black/60 backdrop-blur-md rounded-full text-[10px] text-white font-medium border border-white/10 z-10">
+                                        <div className="absolute top-2 sm:top-3 right-2 sm:right-3 max-w-[calc(100%-1rem)] truncate px-2 sm:px-2.5 py-0.5 bg-black/60 backdrop-blur-md rounded-full text-[9px] sm:text-[10px] text-white font-medium border border-white/10 z-10">
                                             {article.category}
                                         </div>
                                     </div>
 
-                                    <div className="p-4 flex flex-col flex-grow relative bg-[#0f172a] group-hover:bg-[#131c33] transition-colors">
-                                        <div className="flex items-center gap-2 text-[11px] text-slate-500 mb-2.5">
-                                            <Calendar size={11} />
+                                    <div className="p-2.5 sm:p-4 flex flex-col flex-grow relative bg-[#0f172a] group-hover:bg-[#131c33] transition-colors">
+                                        <div className="flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[11px] text-slate-500 mb-1.5 sm:mb-2.5">
+                                            <Calendar size={10} className="shrink-0" />
                                             <time
                                                 dateTime={new Date(parseThaiDate(article.date)).toISOString()}
                                                 itemProp="datePublished"
+                                                className="truncate"
                                             >
                                                 {new Date(parseThaiDate(article.date)).toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' })}
                                             </time>
                                         </div>
 
-                                        <h2 className="text-sm font-bold text-slate-100 mb-2 leading-snug group-hover:text-purple-400 transition-colors line-clamp-2" itemProp="headline">
+                                        <h2 className="text-[12px] sm:text-sm font-bold text-slate-100 mb-0 sm:mb-2 leading-snug group-hover:text-purple-400 transition-colors line-clamp-3 sm:line-clamp-2" itemProp="headline">
                                             {article.title}
                                         </h2>
 
-                                        <p className="text-slate-400 text-xs leading-relaxed mb-4 line-clamp-2" itemProp="description">
+                                        <p className="hidden sm:block text-slate-400 text-xs leading-relaxed mb-4 line-clamp-2" itemProp="description">
                                             {article.excerpt}
                                         </p>
                                         <meta itemProp="url" content={`${baseUrl}/articles/${article.slug}`} />
                                         <meta itemProp="author" content={article.author || 'NameMongkol'} />
 
-                                        <div className="mt-auto pt-3 border-t border-white/5 flex justify-between items-center">
+                                        <div className="hidden sm:flex mt-auto pt-3 border-t border-white/5 justify-between items-center">
                                             <span className="text-purple-400 text-xs font-medium group-hover:underline decoration-purple-500/30 underline-offset-4">อ่านเพิ่มเติม →</span>
                                             <span className="text-slate-600 text-[10px]" itemProp="author">{article.author}</span>
                                         </div>

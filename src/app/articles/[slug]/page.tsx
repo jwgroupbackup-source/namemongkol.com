@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Script from 'next/script';
 import { notFound, redirect } from 'next/navigation';
-import { ArrowLeft, Calendar, User, Tag, RefreshCw, BookOpen, Award, ExternalLink, Star } from 'lucide-react';
+import { ArrowLeft, Calendar, User, Tag, RefreshCw, BookOpen, Award, ExternalLink, Star, CheckCircle2, Compass, Link2 } from 'lucide-react';
 import { Metadata } from 'next';
 import { ArticleImage } from '@/components/ArticleImage';
 import dynamic from 'next/dynamic';
@@ -186,6 +186,144 @@ const getArticle = async (slug: string): Promise<Article | null> => {
 
     return mapped;
 };
+
+function getArticleTakeaways(article: Article) {
+    const tocTakeaways = article.toc
+        ?.filter((item) => item.level === 2)
+        .slice(0, 3)
+        .map((item) => item.title.replace(/^\d+[\).\s-]*/, '').trim())
+        .filter(Boolean);
+
+    if (tocTakeaways && tocTakeaways.length >= 3) {
+        return tocTakeaways;
+    }
+
+    return [
+        `เข้าใจหลักคิดของ${article.category || 'ศาสตร์ชื่อมงคล'}ในมุมที่นำไปใช้ได้จริง`,
+        'รู้จุดที่ควรตรวจสอบก่อนเลือกชื่อ เบอร์ หรือพลังเสริมดวง',
+        'ต่อยอดด้วยเครื่องมือวิเคราะห์ของ NameMongkol ได้ทันที',
+    ];
+}
+
+function getArticleIntentLinks(article: Article) {
+    const searchText = `${article.title} ${article.excerpt} ${article.category} ${(article.keywords || []).join(' ')}`.toLowerCase();
+    const links = [
+        {
+            href: '/name-check',
+            title: 'วิเคราะห์ชื่อฟรี',
+            description: 'ตรวจผลรวมชื่อ ทักษา อายตนะ และอักษรกาลกิณีจากชื่อจริงของคุณ',
+        },
+    ];
+
+    if (searchText.includes('เบอร์') || searchText.includes('phone')) {
+        links.push({
+            href: '/phone-analysis',
+            title: 'วิเคราะห์เบอร์มงคล',
+            description: 'ตรวจคู่เลขและพลังเบอร์มือถือแบบ 6 ด้าน',
+        });
+    }
+
+    if (searchText.includes('ลูก') || searchText.includes('ชื่อผู้ชาย') || searchText.includes('ชื่อผู้หญิง') || searchText.includes('baby')) {
+        links.push({
+            href: '/premium-search',
+            title: 'ค้นหาชื่อมงคล Premium',
+            description: 'เลือกชื่อจากฐานข้อมูลพร้อมเกรด คะแนน และความหมาย',
+        });
+        links.push({
+            href: '/name-generator',
+            title: 'สร้างชื่อมงคลด้วย AI',
+            description: 'ให้ระบบช่วยเสนอชื่อที่เข้ากับวันเกิดและเป้าหมายของครอบครัว',
+        });
+    }
+
+    if (searchText.includes('วอลเปเปอร์') || searchText.includes('สีมงคล') || searchText.includes('ไฉ่ซิงเอี้ย')) {
+        links.push({
+            href: '/wallpapers',
+            title: 'วอลเปเปอร์มงคล',
+            description: 'เลือกภาพเสริมดวงตามเป้าหมาย การเงิน ความรัก และการงาน',
+        });
+    }
+
+    links.push({
+        href: '/articles',
+        title: 'อ่านคลังบทความชื่อมงคล',
+        description: 'ต่อยอดความรู้เรื่องเลขศาสตร์ ทักษา และการตั้งชื่ออย่างเป็นระบบ',
+    });
+
+    return links.slice(0, 4);
+}
+
+function ArticleEnhancementBlock({ article }: { article: Article }) {
+    const takeaways = getArticleTakeaways(article);
+    const intentLinks = getArticleIntentLinks(article);
+    const visualSummaryImage = article.coverImage;
+
+    return (
+        <section
+            aria-labelledby="article-summary-heading"
+            className="not-prose mb-10 rounded-2xl border border-white/10 bg-slate-950/70 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.32)] sm:p-6"
+        >
+            <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
+                <div className="flex flex-col justify-between">
+                    <div>
+                        <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-xs font-semibold text-amber-200">
+                            <Compass className="h-3.5 w-3.5" />
+                            สรุปก่อนอ่าน
+                        </div>
+                        <h2 id="article-summary-heading" className="text-xl font-bold leading-snug text-white sm:text-2xl">
+                            บทความนี้ช่วยให้คุณตัดสินใจเรื่องชื่อมงคลได้แม่นขึ้น
+                        </h2>
+                        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
+                            เราสรุปประเด็นสำคัญของบทความนี้ไว้ให้ก่อน เพื่อให้ผู้อ่านจาก Google เห็นคำตอบเร็วขึ้น และเลือกอ่านหัวข้อที่ตรงกับความต้องการได้ทันที
+                        </p>
+                    </div>
+
+                    <ul className="mt-5 grid gap-3">
+                        {takeaways.map((item) => (
+                            <li key={item} className="flex gap-3 rounded-xl border border-white/5 bg-white/[0.03] p-3">
+                                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
+                                <span className="text-sm leading-relaxed text-slate-200">{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <figure className="overflow-hidden rounded-2xl border border-white/10 bg-[#090f1d]">
+                    <div className="relative aspect-[16/10] w-full">
+                        <ArticleImage
+                            src={visualSummaryImage}
+                            alt={`ภาพสรุปประเด็นบทความ ${article.title}`}
+                            objectFit="contain"
+                            className="scale-100"
+                        />
+                    </div>
+                    <figcaption className="border-t border-white/10 px-4 py-3 text-xs leading-relaxed text-slate-400">
+                        ภาพประกอบบทความ: {article.title}
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div className="mt-6 border-t border-white/10 pt-5">
+                <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-200">
+                    <Link2 className="h-4 w-4 text-amber-300" />
+                    อ่านแล้วต่อยอดได้ทันที
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                    {intentLinks.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className="group rounded-xl border border-white/10 bg-white/[0.03] p-4 transition hover:-translate-y-0.5 hover:border-amber-300/30 hover:bg-white/[0.06]"
+                        >
+                            <span className="text-sm font-bold text-white group-hover:text-amber-200">{link.title}</span>
+                            <span className="mt-1 block text-xs leading-relaxed text-slate-400">{link.description}</span>
+                        </Link>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug: rawSlug } = await params;
@@ -371,6 +509,9 @@ export default async function ArticlePage({ params }: Props) {
                         "headline": article.metaTitle || article.title,
                         "description": article.metaDescription || article.excerpt,
                         "image": article.coverImage?.startsWith('http') ? article.coverImage : `${baseUrl}${article.coverImage}`,
+                        "articleSection": article.category,
+                        "keywords": article.keywords?.join(', '),
+                        "wordCount": wordCount,
                         "datePublished": (() => { try { return new Date(article.date).toISOString(); } catch { return article.date; } })(),
                         "dateModified": (() => { try { return new Date(article.dateModified || article.date).toISOString(); } catch { return article.dateModified || article.date; } })(),
                         "author": [{
@@ -521,6 +662,8 @@ export default async function ArticlePage({ params }: Props) {
                             </ul>
                         </nav>
                     )}
+
+                    <ArticleEnhancementBlock article={article} />
 
                     {/* Content */}
                     <article className="prose prose-invert prose-lg max-w-none text-slate-300">
@@ -719,4 +862,3 @@ export default async function ArticlePage({ params }: Props) {
         </div>
     );
 }
-
