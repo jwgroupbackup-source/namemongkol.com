@@ -537,9 +537,6 @@ export default async function ArticlePage({ params }: Props) {
                             "@type": "WebPage",
                             "@id": canonicalUrl
                         },
-                        "keywords": article.keywords?.join(', ') || '',
-                        "articleSection": article.category || '',
-                        "wordCount": wordCount,
                         "inLanguage": "th",
                         ...(isPalmistryArticle && {
                             "about": {
