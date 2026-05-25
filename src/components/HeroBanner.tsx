@@ -22,11 +22,11 @@ export const HeroBanner = ({ headingLevel = 'h1' }: HeroBannerProps) => {
 
                 <div className="text-center z-10 relative">
                     <div className="mb-2.5 sm:mb-4 inline-flex max-w-full items-center gap-1.5 sm:gap-2 overflow-hidden rounded-full border border-amber-200/20 bg-black/25 px-3 sm:px-4 py-1.5 text-[10px] sm:text-xs font-medium uppercase tracking-[0.08em] sm:tracking-[0.15em] text-amber-50/90 backdrop-blur-md shadow-[0_0_18px_rgba(245,158,11,0.08)]">
-                        <span>🇹🇭 ชื่อไทย</span>
+                        <span>{t('home.hero.badgeThai')}</span>
                         <span className="text-amber-500/50">·</span>
-                        <span>🇬🇧 English</span>
+                        <span>{t('home.hero.badgeEnglish')}</span>
                         <span className="text-amber-500/50">✦</span>
-                        <span>วิเคราะห์พลังชื่อมงคล</span>
+                        <span>{t('home.hero.badgeSupport')}</span>
                     </div>
 
                     <HeadingTag className="cosmic-text-crisp text-[1.7rem] sm:text-4xl md:text-5xl font-bold leading-tight mb-2.5 sm:mb-4 tracking-tight">
@@ -53,7 +53,7 @@ export const HeroBanner = ({ headingLevel = 'h1' }: HeroBannerProps) => {
                     </div>
 
                     <p className="mt-3 sm:mt-5 text-xs sm:text-sm text-emerald-300/80 font-medium tracking-wide">
-                        ✨ เข้าสู่ระบบเพื่อเริ่มต้นวิเคราะห์ชื่อฟรี
+                        {t('home.hero.instantAccess')}
                     </p>
                 </div>
 

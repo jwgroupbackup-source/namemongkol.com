@@ -16,8 +16,8 @@ const steps = [
     {
         num: '②',
         icon: Cpu,
-        title: 'ระบบวิเคราะห์ 3 ศาสตร์',
-        desc: 'เลขศาสตร์ + ทักษาปกรณ์ + อายตนะ 6 คำนวณพร้อมกัน',
+        title: 'ระบบวิเคราะห์ 4 ศาสตร์',
+        desc: 'เลขศาสตร์ + ทักษาปกรณ์ + อายตนะ 6 + นิรันดร์ศาสตร์ คำนวณพร้อมกัน',
         color: 'text-emerald-400',
         bg: 'bg-emerald-500/10',
         border: 'border-emerald-500/20',
@@ -41,7 +41,7 @@ export const HowItWorksSection = () => {
                     วิเคราะห์ชื่อใน <span className="text-amber-400">3 ขั้นตอน</span>
                 </h2>
                 <p className="text-slate-400 max-w-xl mx-auto text-sm sm:text-base">
-                    ง่าย รวดเร็ว และใช้งานได้ฟรีเพียงสมัครสมาชิก
+                    เริ่มใช้ฟรีได้ทันที ไม่ต้องล็อกอิน และถ้าถูกใจค่อยสมัครเพื่อบันทึกผลหรือปลดล็อกเพิ่ม
                 </p>
             </div>
 

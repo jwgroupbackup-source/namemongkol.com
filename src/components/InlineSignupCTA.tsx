@@ -30,8 +30,8 @@ export const InlineSignupCTA = () => {
                         <Gift className="w-4 h-4 text-amber-400" />
                     </div>
                     <div>
-                        <span className="text-sm font-bold text-amber-200">สมัครฟรี รับ 30 เครดิต</span>
-                        <span className="block text-[10px] text-slate-400">ปลดล็อกคำทำนายเชิงลึก + บันทึกผลย้อนหลัง</span>
+                        <span className="text-sm font-bold text-amber-200">สมัครฟรีไว้บันทึกผล และรับ 30 เครดิต</span>
+                        <span className="block text-[10px] text-slate-400">วิเคราะห์ฟรีได้เลยตอนนี้, ส่วนสมาชิกใช้เก็บประวัติและปลดล็อกฟีเจอร์เพิ่ม</span>
                     </div>
                 </div>
                 <ArrowRight className="w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform" />

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Book, Star, Shield, TrendingUp } from 'lucide-react';
+import { Star, Shield, TrendingUp } from 'lucide-react';
 import { useLanguage } from './LanguageProvider';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,6 +11,61 @@ export const HomeSeoContent = () => {
 
     return (
         <section className="w-full max-w-4xl mx-auto mt-16 mb-12 px-4">
+            <div
+                id="home-seo-answer"
+                className="mb-10 rounded-2xl border border-amber-300/20 bg-amber-400/8 p-6 sm:p-8 backdrop-blur-sm"
+            >
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-200/80">
+                    Free Name Analysis
+                </p>
+                <h2 className="mt-3 text-2xl font-bold leading-snug text-white sm:text-3xl">
+                    วิเคราะห์ชื่อฟรี ไม่ต้องล็อกอิน ใช้ตรวจชื่อจริง นามสกุล และชื่อมงคลได้ทันที
+                </h2>
+                <p className="mt-4 text-sm leading-relaxed text-slate-300 sm:text-base">
+                    NameMongkol ช่วยวิเคราะห์ชื่อและนามสกุลด้วย 4 ศาสตร์หลัก ได้แก่ เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และนิรันดร์ศาสตร์ เหมาะสำหรับคนที่ต้องการเช็กชื่อปัจจุบันก่อนเปลี่ยนชื่อ หาชื่อมงคลสำหรับตั้งชื่อลูก หรือทดลองชื่อใหม่ก่อนใช้งานจริง
+                </p>
+                <div className="mt-5 grid gap-3 text-sm text-slate-300 sm:grid-cols-3">
+                    <div className="rounded-xl border border-white/5 bg-slate-950/35 p-4">
+                        <h3 className="font-semibold text-amber-200">ใช้ฟรีทันที</h3>
+                        <p className="mt-2 leading-relaxed">ไม่ต้องสมัครสมาชิกก่อนเริ่มวิเคราะห์ชื่อ</p>
+                    </div>
+                    <div className="rounded-xl border border-white/5 bg-slate-950/35 p-4">
+                        <h3 className="font-semibold text-amber-200">ตอบโจทย์หลายเจตนา</h3>
+                        <p className="mt-2 leading-relaxed">เช็กชื่อเดิม เปลี่ยนชื่อ และตั้งชื่อลูกในที่เดียว</p>
+                    </div>
+                    <div className="rounded-xl border border-white/5 bg-slate-950/35 p-4">
+                        <h3 className="font-semibold text-amber-200">มีทางไปต่อชัดเจน</h3>
+                        <p className="mt-2 leading-relaxed">ค้นหาชื่อมงคลหรือวิเคราะห์เชิงลึกได้หลังเห็นผลฟรี</p>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-10 grid gap-4 md:grid-cols-2">
+                <Link
+                    href="/name-check"
+                    className="rounded-2xl border border-amber-400/20 bg-amber-500/8 p-5 transition-colors hover:border-amber-300/35 hover:bg-amber-500/12"
+                >
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-200/75">Intent 01</p>
+                    <h2 className="mt-2 text-xl font-bold text-white">เช็กชื่อของตัวเองก่อนเปลี่ยนชื่อ</h2>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                        เหมาะสำหรับคนที่อยากรู้ว่าชื่อปัจจุบันส่งผลต่อการงาน การเงิน และภาพลักษณ์อย่างไร ก่อนตัดสินใจเปลี่ยนชื่อจริง
+                    </p>
+                    <p className="mt-4 text-sm font-medium text-amber-300">ไปวิเคราะห์ชื่อ-นามสกุลฟรี</p>
+                </Link>
+
+                <Link
+                    href="/search"
+                    className="rounded-2xl border border-sky-400/20 bg-sky-500/8 p-5 transition-colors hover:border-sky-300/35 hover:bg-sky-500/12"
+                >
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200/75">Intent 02</p>
+                    <h2 className="mt-2 text-xl font-bold text-white">หาชื่อมงคลให้ลูก หรือชื่อใหม่ของคุณ</h2>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                        เหมาะสำหรับพ่อแม่และคนที่กำลังหาชื่อใหม่ โดยเริ่มจากรายชื่อมงคล แล้วค่อยนำชื่อที่ชอบไปวิเคราะห์ร่วมกับนามสกุลอีกครั้ง
+                    </p>
+                    <p className="mt-4 text-sm font-medium text-sky-300">ไปค้นหาชื่อมงคลฟรี</p>
+                </Link>
+            </div>
+
             <div className="grid md:grid-cols-2 gap-8 mb-16">
                 <div className="bg-white/5 p-6 sm:p-8 rounded-2xl border border-white/5 backdrop-blur-sm">
                     <h2 className="text-xl sm:text-2xl font-bold text-amber-400 mb-4 flex items-center gap-2 tracking-tight">
@@ -105,7 +160,7 @@ export const HomeSeoContent = () => {
                         วิเคราะห์ชื่อ-นามสกุล ฟรี รู้ผลทันที
                     </p>
                     <p className="mt-2 text-sm text-slate-400 leading-relaxed">
-                        ใช้สำหรับเช็กชื่อปัจจุบันว่าผลรวมเลขศาสตร์ กาลกิณี และความสมพงศ์กับนามสกุลอยู่ในเกณฑ์ดีหรือไม่
+                        ใช้สำหรับเช็กชื่อปัจจุบันว่าผลรวมเลขศาสตร์ กาลกิณี ความสมพงศ์กับนามสกุล และภาพรวม 4 ศาสตร์อยู่ในเกณฑ์ดีหรือไม่
                     </p>
                     <p className="mt-3 text-sm text-sky-300 group-hover:text-sky-200">
                         ไปหน้า /name-check →
@@ -123,7 +178,7 @@ export const HomeSeoContent = () => {
                         ค้นหาชื่อมงคลฟรี 5,000+ ชื่อ
                     </p>
                     <p className="mt-2 text-sm text-slate-400 leading-relaxed">
-                        เหมาะสำหรับตั้งชื่อลูก/เปลี่ยนชื่อใหม่ แล้วค่อยนำชื่อที่ชอบไปวิเคราะห์ร่วมกับนามสกุล
+                        เหมาะสำหรับตั้งชื่อลูก เปลี่ยนชื่อใหม่ หรือหาไอเดียชื่อมงคลก่อน แล้วค่อยนำชื่อที่ชอบไปวิเคราะห์ร่วมกับนามสกุล
                     </p>
                     <p className="mt-3 text-sm text-amber-300 group-hover:text-amber-200">
                         ไปหน้า /search →
@@ -165,6 +220,16 @@ export const HomeSeoContent = () => {
                         ไปหน้า /premium-analysis →
                     </p>
                 </Link>
+            </div>
+
+            <div className="mt-10 rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm">
+                <div className="flex items-center gap-2 text-sm font-semibold text-emerald-300">
+                    <Shield className="h-4 w-4" />
+                    ใช้หน้าแรกเป็นจุดเริ่มต้น แล้วค่อยไปต่อในหน้าที่ตรงกับโจทย์ของคุณ
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-slate-300 sm:text-base">
+                    ถ้าคุณต้องการรู้ทันทีว่าชื่อปัจจุบันดีหรือไม่ ให้เริ่มจากหน้าวิเคราะห์ชื่อฟรี แต่ถ้ากำลังหาชื่อใหม่หรือตั้งชื่อลูก ควรเริ่มที่หน้าค้นหาชื่อมงคลก่อน แล้วค่อยกลับมาวิเคราะห์ร่วมกับนามสกุลเพื่อเช็กความเหมาะสมขั้นสุดท้าย
+                </p>
             </div>
         </section>
     );

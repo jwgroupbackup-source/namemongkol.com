@@ -30,6 +30,21 @@ export const InputForm: React.FC<InputFormProps> = ({
             <div className="relative rounded-[1.25rem] sm:rounded-[1.75rem] p-3.5 sm:p-8 overflow-hidden border border-amber-500/30 bg-gradient-to-b from-[#131e32]/95 to-[#0a0f18]/95 shadow-[0_8px_40px_rgba(215,177,106,0.15)] backdrop-blur-xl">
                 <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,rgba(215,177,106,0.15),transparent_60%)] pointer-events-none" />
                 <div className="relative z-10 space-y-3.5 sm:space-y-6">
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                        <div className="rounded-xl border border-emerald-400/15 bg-emerald-500/10 px-3 py-2 text-left">
+                            <p className="text-[10px] uppercase tracking-[0.18em] text-emerald-200/70">Free Start</p>
+                            <p className="mt-1 text-xs font-semibold text-emerald-100 sm:text-sm">ใช้ฟรีทันที</p>
+                        </div>
+                        <div className="rounded-xl border border-sky-400/15 bg-sky-500/10 px-3 py-2 text-left">
+                            <p className="text-[10px] uppercase tracking-[0.18em] text-sky-200/70">No Login</p>
+                            <p className="mt-1 text-xs font-semibold text-sky-100 sm:text-sm">ไม่ต้องล็อกอิน</p>
+                        </div>
+                        <div className="col-span-2 rounded-xl border border-amber-400/15 bg-amber-500/10 px-3 py-2 text-left sm:col-span-1">
+                            <p className="text-[10px] uppercase tracking-[0.18em] text-amber-200/70">Instant Result</p>
+                            <p className="mt-1 text-xs font-semibold text-amber-100 sm:text-sm">รู้ผลภายในไม่กี่วินาที</p>
+                        </div>
+                    </div>
+
                     <div>
                         <label htmlFor="birth-day" className="cosmic-label mb-1.5 sm:mb-2 ml-1 block text-xs sm:text-sm font-medium tracking-wide">วันเกิด</label>
                         <div className="relative">
@@ -96,14 +111,19 @@ export const InputForm: React.FC<InputFormProps> = ({
                                 </>
                             ) : (
                                 <>
-                                    <Sparkles className="w-5 h-5" /> วิเคราะห์ชื่อฟรี
+                                    <Sparkles className="w-5 h-5" /> เริ่มวิเคราะห์ชื่อฟรี
                                 </>
                             )}
                         </span>
                     </button>
-                    <p className="text-center text-[11px] leading-relaxed text-slate-400 sm:text-xs">
-                        เห็นผลพื้นฐานได้ทันที สมัครฟรีเมื่อต้องการบันทึกผลและปลดล็อกคำทำนายเชิงลึก
-                    </p>
+                    <div className="space-y-1 text-center">
+                        <p className="text-[11px] leading-relaxed text-slate-300 sm:text-xs">
+                            กรอกชื่อ, นามสกุล และวันเกิดเพื่อดูผลวิเคราะห์ครบทั้ง 4 ศาสตร์ได้ก่อน โดยไม่ต้องสมัครสมาชิก
+                        </p>
+                        <p className="text-[11px] leading-relaxed text-slate-400 sm:text-xs">
+                            สมัครฟรีเมื่อคุณต้องการบันทึกผลย้อนหลัง เปรียบเทียบหลายชื่อ และปลดล็อกคำทำนายเชิงลึก
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

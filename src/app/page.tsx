@@ -2,63 +2,144 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 
 import ClientHome from './ClientHome';
-import { calculateScore } from '@/utils/calculateScore';
-import { getPrediction } from '@/utils/getPrediction';
-import { siteUrl } from '@/lib/seo';
+import { ogImageUrl, siteUrl } from '@/lib/seo';
+
+const baseUrl = siteUrl.replace(/\/$/, '') || 'https://www.namemongkol.com';
+const pageTitle = 'วิเคราะห์ชื่อฟรี ไม่ต้องล็อกอิน | เช็กชื่อมงคลทันที | NameMongkol';
+const pageDescription = 'วิเคราะห์ชื่อและนามสกุลฟรี ไม่ต้องล็อกอิน เช็กเลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และนิรันดร์ศาสตร์ พร้อมค้นหาชื่อมงคลสำหรับเปลี่ยนชื่อหรือตั้งชื่อลูก';
+const homeOgImage = ogImageUrl({
+  variant: 'default',
+  title: 'วิเคราะห์ชื่อฟรี ไม่ต้องล็อกอิน',
+  subtitle: 'เช็กชื่อมงคล ตั้งชื่อลูก และดูผล 4 ศาสตร์ทันที',
+});
+
+const homeFaqs = [
+  {
+    question: 'วิเคราะห์ชื่อฟรีที่ NameMongkol ต้องล็อกอินไหม?',
+    answer: 'ไม่ต้องล็อกอิน ผู้ใช้สามารถกรอกชื่อ นามสกุล และวันเกิดเพื่อดูผลวิเคราะห์ชื่อเบื้องต้นได้ทันที ส่วนการสมัครสมาชิกเหมาะกับผู้ที่ต้องการบันทึกผลย้อนหลัง รับเครดิตฟรี หรือใช้งานฟีเจอร์พรีเมียมเพิ่มเติม',
+  },
+  {
+    question: 'การวิเคราะห์ชื่อมงคลคืออะไร?',
+    answer: 'การวิเคราะห์ชื่อมงคลคือการตรวจสอบชื่อและนามสกุลด้วยหลักเลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และนิรันดร์ศาสตร์ เพื่อดูผลรวมตัวเลข อักษรกาลกิณี ความสมพงศ์กับนามสกุล และภาพรวมพลังชื่อ',
+  },
+  {
+    question: 'ควรใช้หน้าแรกนี้เมื่อไร?',
+    answer: 'เหมาะสำหรับผู้ที่ต้องการเช็กชื่อปัจจุบันก่อนเปลี่ยนชื่อ ตรวจชื่อใหม่ก่อนใช้งานจริง หรือตรวจชื่อที่เตรียมตั้งให้ลูก โดยเริ่มจากผลฟรีก่อนแล้วค่อยต่อยอดไปยังการค้นหาชื่อมงคลหรือการวิเคราะห์เชิงลึก',
+  },
+  {
+    question: 'NameMongkol ใช้ศาสตร์อะไรในการวิเคราะห์ชื่อ?',
+    answer: 'ระบบใช้ 4 แกนหลัก ได้แก่ เลขศาสตร์สำหรับผลรวมตัวเลข ทักษาปกรณ์สำหรับวันเกิดและอักษรกาลกิณี อายตนะ 6 สำหรับภาพลักษณ์ทางสังคม และนิรันดร์ศาสตร์สำหรับความสมพงศ์ของชื่อกับนามสกุล',
+  },
+  {
+    question: 'ใช้ NameMongkol ตั้งชื่อลูกได้ไหม?',
+    answer: 'ใช้ได้ ผู้ปกครองสามารถค้นหาชื่อมงคล แล้วนำชื่อที่สนใจมาวิเคราะห์ร่วมกับนามสกุลและวันเกิด เพื่อช่วยคัดชื่อที่เสียงดี ความหมายดี และหลีกเลี่ยงอักษรที่ไม่เหมาะกับวันเกิด',
+  },
+  {
+    question: 'ผลวิเคราะห์ชื่อฟรีต่างจากฟีเจอร์พรีเมียมอย่างไร?',
+    answer: 'ผลฟรีช่วยดูภาพรวมชื่อ นามสกุล คะแนน และ 4 ศาสตร์หลัก ฟีเจอร์พรีเมียมเหมาะกับผู้ที่ต้องการคัดชื่อหลายตัวเลือก วิเคราะห์เชิงลึก หรือออกแบบชื่อใหม่แบบละเอียดกว่าเดิม',
+  },
+] as const;
+
+const howToSteps = [
+  {
+    name: 'กรอกชื่อและนามสกุล',
+    text: 'พิมพ์ชื่อจริงและนามสกุลที่ต้องการตรวจ ระบบรองรับชื่อภาษาไทยและชื่อภาษาอังกฤษ',
+  },
+  {
+    name: 'เลือกวันเกิด',
+    text: 'เลือกวันเกิดเพื่อให้ระบบตรวจทักษาปกรณ์ อักษรกาลกิณี และพลังที่สัมพันธ์กับวันเกิด',
+  },
+  {
+    name: 'กดวิเคราะห์ชื่อฟรี',
+    text: 'กดปุ่มวิเคราะห์เพื่อดูผลเลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 นิรันดร์ศาสตร์ คะแนน และคำอธิบายเบื้องต้นทันที',
+  },
+] as const;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const canonicalUrl = siteUrl.replace(/\/$/, '') || 'https://www.namemongkol.com';
-
   return {
-    title: 'NameMongkol | แพลตฟอร์มวิเคราะห์ชื่อ เบอร์ ลายมือ และออร่า',
-    description: 'ศูนย์รวมเครื่องมือ NameMongkol สำหรับวิเคราะห์ชื่อ เบอร์โทร ลายมือ ออร่า ค้นหาชื่อมงคล และวอลเปเปอร์เสริมดวงในเว็บเดียว',
-    keywords: 'NameMongkol, วิเคราะห์ชื่อ, วิเคราะห์เบอร์, วิเคราะห์ลายมือ, วิเคราะห์ออร่า, ค้นหาชื่อมงคล, วอลเปเปอร์มงคล, เลขศาสตร์, ทักษาปกรณ์, อายตนะ 6, นิรันดร์ศาสตร์',
-    alternates: { canonical: canonicalUrl },
+    title: pageTitle,
+    description: pageDescription,
+    keywords: [
+      'วิเคราะห์ชื่อฟรี',
+      'วิเคราะห์ชื่อไม่ต้องล็อกอิน',
+      'วิเคราะห์ชื่อ นามสกุล ฟรี',
+      'เช็กชื่อมงคล',
+      'ตั้งชื่อมงคล',
+      'ตั้งชื่อลูก',
+      'เปลี่ยนชื่อ',
+      'เลขศาสตร์ชื่อ',
+      'ทักษาปกรณ์',
+      'อักษรกาลกิณี',
+      'อายตนะ 6',
+      'นิรันดร์ศาสตร์',
+      'NameMongkol',
+    ],
+    alternates: { canonical: baseUrl },
     openGraph: {
-      title: 'NameMongkol | แพลตฟอร์มวิเคราะห์ชื่อ เบอร์ ลายมือ และออร่า',
-      description: 'รวมเครื่องมือวิเคราะห์ชื่อ ค้นหาชื่อมงคล วิเคราะห์เบอร์ ลายมือ ออร่า และวอลเปเปอร์เสริมดวงในเว็บเดียว',
+      title: pageTitle,
+      description: pageDescription,
       images: [{
-        url: `${siteUrl}/api/og?variant=default&title=NameMongkol%20-%20AI%20Naming%20Platform&subtitle=ตั้งชื่อมงคล%20วิเคราะห์ชื่อ%20เบอร์%20ลายมือ%20และออร่า`,
+        url: homeOgImage,
         width: 1200,
         height: 630,
-        alt: 'NameMongkol แพลตฟอร์มตั้งชื่อมงคลและวิเคราะห์ดวงด้วย AI',
+        alt: 'วิเคราะห์ชื่อฟรี ไม่ต้องล็อกอิน กับ NameMongkol',
         type: 'image/png',
       }],
-      url: canonicalUrl,
+      url: baseUrl,
       siteName: 'NameMongkol',
       locale: 'th_TH',
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'NameMongkol | แพลตฟอร์มวิเคราะห์ชื่อ เบอร์ ลายมือ และออร่า',
-      description: 'รวมเครื่องมือวิเคราะห์ชื่อ ค้นหาชื่อมงคล วิเคราะห์เบอร์ ลายมือ ออร่า และวอลเปเปอร์เสริมดวงในเว็บเดียว',
+      title: pageTitle,
+      description: pageDescription,
       images: [{
-        url: `${siteUrl}/api/og?variant=default`,
+        url: homeOgImage,
         width: 1200,
         height: 630,
-        alt: 'NameMongkol แพลตฟอร์มตั้งชื่อมงคลและวิเคราะห์ดวงด้วย AI',
+        alt: 'วิเคราะห์ชื่อฟรี ไม่ต้องล็อกอิน กับ NameMongkol',
       }],
     },
   };
 }
 
 export default async function Page() {
-
-  const baseUrl = siteUrl.replace(/\/$/, '');
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${baseUrl}/#organization`,
+        'name': 'NameMongkol',
+        'alternateName': 'เนมมงคล',
+        'url': baseUrl,
+        'logo': {
+          '@type': 'ImageObject',
+          'url': `${baseUrl}/icon-512.png`,
+          'width': 512,
+          'height': 512
+        },
+        'sameAs': [
+          'https://www.facebook.com/namemongkol',
+          'https://line.me/ti/p/@namemongkol'
+        ]
+      },
       {
         '@type': 'WebSite',
         '@id': `${baseUrl}/#website`,
         'url': baseUrl,
         'name': 'NameMongkol',
-        'description': 'ศูนย์รวมเครื่องมือ NameMongkol สำหรับวิเคราะห์ชื่อ เบอร์โทร ลายมือ ออร่า ค้นหาชื่อมงคล และวอลเปเปอร์เสริมดวง',
+        'alternateName': 'เนมมงคล',
+        'description': 'ศูนย์รวมเครื่องมือวิเคราะห์ชื่อฟรี ค้นหาชื่อมงคล ตั้งชื่อลูก เปลี่ยนชื่อ วิเคราะห์เบอร์โทร ลายมือ ออร่า และวอลเปเปอร์เสริมดวง',
         'inLanguage': 'th-TH',
+        'publisher': { '@id': `${baseUrl}/#organization` },
         'potentialAction': {
           '@type': 'SearchAction',
-          'target': `${baseUrl}/search?q={search_term_string}`,
+          'target': {
+            '@type': 'EntryPoint',
+            'urlTemplate': `${baseUrl}/search?q={search_term_string}`
+          },
           'query-input': 'required name=search_term_string'
         }
       },
@@ -66,24 +147,44 @@ export default async function Page() {
         '@type': 'WebPage',
         '@id': `${baseUrl}/#webpage`,
         'url': baseUrl,
-        'name': 'NameMongkol | แพลตฟอร์มวิเคราะห์ชื่อ เบอร์ ลายมือ และออร่า',
+        'name': pageTitle,
         'isPartOf': { '@id': `${baseUrl}/#website` },
-        'description': 'หน้าแรก NameMongkol รวมทางเข้าเครื่องมือวิเคราะห์ชื่อ ค้นหาชื่อมงคล วิเคราะห์เบอร์ ลายมือ ออร่า และวอลเปเปอร์มงคล',
+        'about': { '@id': `${baseUrl}/#name-analysis-app` },
+        'publisher': { '@id': `${baseUrl}/#organization` },
+        'description': pageDescription,
         'inLanguage': 'th-TH',
+        'isAccessibleForFree': true,
+        'dateModified': '2026-05-25',
         'primaryImageOfPage': {
           '@type': 'ImageObject',
-          'url': `${baseUrl}/api/og?variant=default&title=NameMongkol%20-%20วิเคราะห์ชื่อมงคล&subtitle=เช็คพลังเงา%20ผลรวมเลขศาสตร์%20และความหมายชื่อของคุณ`,
+          'url': homeOgImage,
           'width': 1200,
           'height': 630,
-          'caption': 'วิเคราะห์ชื่อมงคล ฟรี ด้วย AI ผสาน 4 ศาสตร์ เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 นิรันดร์ศาสตร์ - NameMongkol'
+          'caption': 'วิเคราะห์ชื่อฟรี ไม่ต้องล็อกอิน เช็กผล 4 ศาสตร์กับ NameMongkol'
+        },
+        'speakable': {
+          '@type': 'SpeakableSpecification',
+          'cssSelector': ['h1', '#home-seo-answer']
         }
       },
       {
         '@type': 'SoftwareApplication',
+        '@id': `${baseUrl}/#name-analysis-app`,
         'name': 'NameMongkol',
-        'description': 'เว็บแอปพลิเคชันรวมเครื่องมือวิเคราะห์ชื่อ ค้นหาชื่อมงคล วิเคราะห์เบอร์ ลายมือ ออร่า และวอลเปเปอร์มงคล',
+        'url': baseUrl,
+        'description': 'เว็บแอปวิเคราะห์ชื่อและนามสกุลฟรีที่เริ่มใช้งานได้ทันที ไม่ต้องล็อกอิน พร้อมเครื่องมือค้นหาชื่อมงคล เปลี่ยนชื่อ และตั้งชื่อลูก',
         'applicationCategory': 'LifestyleApplication',
+        'applicationSubCategory': 'Name analysis and auspicious naming',
         'operatingSystem': 'Web',
+        'browserRequirements': 'ใช้งานผ่านเว็บเบราว์เซอร์บนมือถือ แท็บเล็ต และเดสก์ท็อป',
+        'isAccessibleForFree': true,
+        'featureList': [
+          'วิเคราะห์ชื่อฟรีโดยไม่ต้องล็อกอิน',
+          'คำนวณเลขศาสตร์ชื่อและนามสกุล',
+          'ตรวจทักษาปกรณ์และอักษรกาลกิณีตามวันเกิด',
+          'วิเคราะห์อายตนะ 6 และนิรันดร์ศาสตร์',
+          'ค้นหาชื่อมงคลสำหรับเปลี่ยนชื่อและตั้งชื่อลูก'
+        ],
         'offers': {
           '@type': 'Offer',
           'price': '0',
@@ -92,106 +193,28 @@ export default async function Page() {
       },
       {
         '@type': 'HowTo',
-        'name': 'วิธีวิเคราะห์ชื่อมงคลออนไลน์ ฟรี',
-        'description': 'ขั้นตอนการวิเคราะห์ชื่อมงคลที่ NameMongkol — ง่ายเพียง 3 ขั้นตอน',
+        '@id': `${baseUrl}/#how-to-analyze-name`,
+        'name': 'วิธีวิเคราะห์ชื่อมงคลออนไลน์ฟรี ไม่ต้องล็อกอิน',
+        'description': 'ขั้นตอนวิเคราะห์ชื่อและนามสกุลฟรีกับ NameMongkol สำหรับเช็กชื่อปัจจุบัน เปลี่ยนชื่อ หรือตั้งชื่อลูก',
         'totalTime': 'PT1M',
-        'step': [
-          {
-            '@type': 'HowToStep',
-            'position': 1,
-            'name': 'กรอกชื่อ-นามสกุล',
-            'text': 'พิมพ์ชื่อและนามสกุลของคุณในช่องด้านบน ระบบรองรับทั้งชื่อภาษาไทยและภาษาอังกฤษ'
-          },
-          {
-            '@type': 'HowToStep',
-            'position': 2,
-            'name': 'เลือกวันเกิด',
-            'text': 'เลือกวันเกิดเพื่อตรวจสอบอักษรทักษาปกรณ์ กาลกิณี และอายตนะ 6 ที่ตรงกับดวงชะตาของคุณ'
-          },
-          {
-            '@type': 'HowToStep',
-            'position': 3,
-            'name': 'กดวิเคราะห์ รอผลทันที',
-            'text': 'กดปุ่มวิเคราะห์ ระบบ AI จะคำนวณผลรวมเลขศาสตร์ ตรวจสอบทักษาปกรณ์ อายตนะ 6 และนิรันดร์ศาสตร์ พร้อมแสดงผลครบ 4 ศาสตร์ทันที'
-          }
-        ]
+        'step': howToSteps.map((step, index) => ({
+          '@type': 'HowToStep',
+          'position': index + 1,
+          'name': step.name,
+          'text': step.text
+        }))
       },
       {
         '@type': 'FAQPage',
-        'mainEntity': [
-          {
-            '@type': 'Question',
-            'name': 'วิเคราะห์ชื่อมงคล คืออะไร ทำไมต้องเช็ค?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'การวิเคราะห์ชื่อมงคลคือการตรวจสอบว่าชื่อ-นามสกุลส่งผลอย่างไรต่อดวงชะตาเจ้าชื่อ โดยใช้หลักเลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และนิรันดร์ศาสตร์ ชื่อที่มงคลจะช่วยเสริมโชคลาภ การงาน และลดอุปสรรคในชีวิต NameMongkol ให้บริการวิเคราะห์ชื่อมงคลฟรีด้วยระบบ AI ที่ผสานศาสตร์โบราณ 4 แขนง'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'วิเคราะห์ชื่อมงคลที่ NameMongkol แม่นยำแค่ไหน?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'NameMongkol ใช้ระบบ AI ประมวลผลร่วมกับ 4 ศาสตร์หลัก ได้แก่ เลขศาสตร์, ทักษาปกรณ์, อายตนะ 6 และนิรันดร์ศาสตร์ ซึ่งเป็นตำราโหราศาสตร์ไทยโบราณที่ได้รับการยอมรับ ทำให้ผลลัพธ์มีความละเอียดและแม่นยำกว่าโปรแกรมทั่วไป'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'วิเคราะห์ชื่อมงคลฟรีที่ NameMongkol ต้องสมัครสมาชิกไหม?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'NameMongkol ให้บริการวิเคราะห์ชื่อมงคลฟรี เพียงสมัครสมาชิกก็สามารถใช้งานได้ไม่จำกัดจำนวนครั้ง คุณสามารถกรอกชื่อและวันเกิดเพื่อดูผลวิเคราะห์ครบทั้ง 4 ศาสตร์ได้ทันที สำหรับบริการเพิ่มเติม เช่น วิเคราะห์หลายชื่อพร้อมกัน (Bulk Analysis) หรือค้นหาชื่อมงคล Premium จะใช้ระบบเครดิต'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'ผลรวมตัวเลขที่ดีที่สุด ควรเป็นเลขอะไร?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'ผลรวมที่ดีขึ้นอยู่กับอาชีพและดวงชะตาของแต่ละบุคคล แต่โดยทั่วไป ผลรวมที่จัดว่าดีเยี่ยมในระดับสากล ได้แก่ 14, 15, 24, 36, 41, 42, 45, 50, 51, 54, 56, 59, 63, 65 ซึ่งส่งผลดีในด้านความสำเร็จและการเงิน'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'เปลี่ยนชื่อแล้ว ชีวิตจะดีขึ้นภายในกี่วัน?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'ตามหลักครูบาอาจารย์ เชื่อว่าเมื่อเปลี่ยนชื่อใหม่แล้ว จะเริ่มเห็นผลการเปลี่ยนแปลงภายใน 3-6 เดือน โดยพลังของชื่อใหม่จะค่อยๆ ส่งผลต่อความคิด การตัดสินใจ และดึงดูดสิ่งดีๆ เข้ามา ทั้งนี้ขึ้นอยู่กับการทำบุญและการปฏิบัติตนควบคู่กันไปด้วย'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'อักษรกาลกิณี คืออะไร? ทำไมต้องห้าม?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'อักษรกาลกิณี คือพยัญชนะที่เป็นอริกับดวงวันเกิด หากมีในชื่อจะเปรียบเสมือนมีอุปสรรคขัดขวาง ทำให้ชีวิตเหนื่อยยาก มีศัตรู หรือเกิดอุบัติเหตุได้ง่าย การตั้งชื่อมงคลจึงควรหลีกเลี่ยงอักษรกาลกิณีอย่างเด็ดขาด'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'ใช้ NameMongkol ตั้งชื่อลูกได้หรือไม่?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'ได้แน่นอน! ระบบของเราสามารถใช้วิเคราะห์เพื่อตั้งชื่อลูกแรกเกิดได้ โดยพิจารณาจากวันเกิด (ทักษา) เพื่อหาตัวอักษรที่เป็นมงคล (เดช, ศรี, มนตรี) และหลีกเลี่ยงกาลกิณี เพื่อวางรากฐานชีวิตที่ดีให้กับบุตรหลานของคุณ'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'พลังเงาในชื่อคืออะไร?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'พลังเงาคือพลังงานซ่อนเร้นในชื่อที่ส่งผลต่อบุคลิกภาพและโชคชะตา วิเคราะห์จากตัวอักษรและผลรวมเลขศาสตร์ ช่วยให้เข้าใจจุดแข็งจุดอ่อนของชื่อ'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'วิเคราะห์ชื่อ นามสกุล ฟรี ต้องทำอย่างไร?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'กรอกชื่อและนามสกุลในช่องด้านบน เลือกวันเกิด แล้วกดวิเคราะห์ NameMongkol จะคำนวณผลรวมเลขศาสตร์ของทั้งชื่อและนามสกุลพร้อมกัน วิเคราะห์ชื่อ นามสกุล ฟรี เพียงสมัครสมาชิก รู้ผลทันที ครบทั้ง 4 ศาสตร์'
-            }
+        '@id': `${baseUrl}/#faq`,
+        'mainEntity': homeFaqs.map((faq) => ({
+          '@type': 'Question',
+          'name': faq.question,
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': faq.answer
           }
-        ]
+        }))
       },
       {
         '@type': 'BreadcrumbList',

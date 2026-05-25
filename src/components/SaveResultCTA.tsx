@@ -25,9 +25,9 @@ export const SaveResultCTA = () => {
                             <Save className="h-5 w-5 text-amber-300" />
                         </div>
                         <div>
-                            <h4 className="text-sm font-bold text-white sm:text-base">บันทึกผลนี้และปลดล็อกคำทำนายเชิงลึก</h4>
+                            <h4 className="text-sm font-bold text-white sm:text-base">วิเคราะห์ฟรีเสร็จแล้ว, บันทึกผลนี้ไว้ต่อได้เลย</h4>
                             <p className="mt-1 text-xs leading-relaxed text-slate-300 sm:text-sm">
-                                สมัครฟรีเพื่อเก็บประวัติผลวิเคราะห์ เปรียบเทียบชื่อ และรับ 30 เครดิตสำหรับฟีเจอร์พรีเมียม
+                                สมัครฟรีเพื่อเก็บประวัติผลวิเคราะห์ เปรียบเทียบหลายชื่อเดิมกับชื่อใหม่ และรับ 30 เครดิตสำหรับปลดล็อกคำทำนายเชิงลึก
                             </p>
                         </div>
                     </div>

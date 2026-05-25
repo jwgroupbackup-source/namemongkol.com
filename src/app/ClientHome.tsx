@@ -447,9 +447,7 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
                     <DeferredSection minHeightClassName="min-h-[420px]" preloadDelayMs={1250} intrinsicSize="420px">
                         <ComparisonSection />
                     </DeferredSection>
-                    <DeferredSection minHeightClassName="min-h-[900px]" preloadDelayMs={1500} intrinsicSize="900px">
-                        <HomeSeoContent />
-                    </DeferredSection>
+                    <HomeSeoContent />
                     <DeferredSection minHeightClassName="min-h-[520px]" preloadDelayMs={1750} intrinsicSize="520px">
                         <BirthdayThaksaSection />
                     </DeferredSection>
@@ -459,9 +457,7 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
                     <DeferredSection minHeightClassName="min-h-[360px]" preloadDelayMs={2250} intrinsicSize="360px">
                         <TestimonialSection />
                     </DeferredSection>
-                    <DeferredSection minHeightClassName="min-h-[360px]" preloadDelayMs={2500} intrinsicSize="360px">
-                        <FAQSection />
-                    </DeferredSection>
+                    <FAQSection />
                     <DeferredSection minHeightClassName="min-h-[560px]" preloadDelayMs={2750} intrinsicSize="560px">
                         <ArticleSection
                             articles={homeSectionsData.articles}
