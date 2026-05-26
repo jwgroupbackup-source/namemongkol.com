@@ -6,10 +6,10 @@ export const UspSection = () => {
         <section className="w-full max-w-6xl mx-auto px-4 py-8 sm:py-16 relative z-10">
             <div className="text-center mb-10 sm:mb-16">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400 mb-6 tracking-tight drop-shadow-[0_0_15px_rgba(251,191,36,0.2)]">
-                    ทำไมต้องวิเคราะห์ชื่อกับ NameMongkol?
+                    จุดเด่นของการตั้งชื่อมงคล กับ NameMongkol
                 </h2>
                 <p className="text-slate-400 max-w-[65ch] mx-auto text-base sm:text-lg leading-relaxed">
-                    เริ่มเช็กชื่อของตัวเองหรือหาชื่อมงคลให้ลูกได้ฟรีทันที แล้วค่อยต่อยอดด้วยข้อมูลเชิงลึกที่แม่นยำกว่า จากการผสาน 4 ศาสตร์หลักไว้ใน flow เดียว
+                    เช็คชื่อตัวเองหรือตั้งชื่อลูกใหม่ได้อย่างแม่นยำและใช้งานฟรี ผสาน 4 ศาสตร์หลักของไทยไว้ในหน้าเดียว ช่วยให้คุณได้ชื่อมงคลที่ดีที่สุด
                 </p>
             </div>
 
@@ -20,10 +20,10 @@ export const UspSection = () => {
                         <Search size={24} className="sm:w-7 sm:h-7" />
                     </div>
                     <h3 className="text-lg sm:text-xl font-bold text-white mb-4 tracking-tight group-hover:text-amber-400 transition-colors">
-                        Micro-Analysis (คู่เลขมงคล)
+                        วิเคราะห์เจาะลึกคู่เลขมงคล
                     </h3>
                     <p className="text-slate-400 leading-relaxed text-sm sm:text-base">
-                        ไม่ใช่แค่ดูผลรวม แต่เราถอดรหัส <strong>&quot;ทุกคู่ตัวเลข&quot;</strong> ในชื่อและนามสกุล เพื่อค้นหาจุดดี จุดเสี่ยง และแนวทางปรับใช้ก่อนตัดสินใจเปลี่ยนชื่อจริง
+                        ไม่ใช่แค่ดูผลรวม แต่เราถอดรหัส <strong>&quot;ทุกคู่ตัวเลข&quot;</strong> ในชื่อ-นามสกุล เพื่อหาจุดเด่นและแนวทางแก้ไขก่อนตัดสินใจเปลี่ยนชื่อจริง
                     </p>
                 </div>
 
@@ -33,10 +33,10 @@ export const UspSection = () => {
                         <Layers size={24} className="sm:w-7 sm:h-7" />
                     </div>
                     <h3 className="text-lg sm:text-xl font-bold text-white mb-4 tracking-tight group-hover:text-amber-400 transition-colors">
-                        Multi-Dimensional Logic
+                        ผสาน 4 ศาสตร์สำคัญ
                     </h3>
                     <p className="text-slate-400 leading-relaxed text-sm sm:text-base">
-                        รวม <strong>เลขศาสตร์ + ทักษาปกรณ์ + อายตนะ 6 + นิรันดร์ศาสตร์</strong> เพื่อให้ทั้งคนเช็กชื่อเดิมและคนตั้งชื่อลูกเห็นภาพครบในหน้าจอเดียว
+                        วิเคราะห์ครบมิติด้วย <strong>เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และนิรันดร์ศาสตร์</strong> ดูง่าย ครบจบในหน้าจอเดียว
                     </p>
                 </div>
 
@@ -46,10 +46,10 @@ export const UspSection = () => {
                         <Activity size={24} className="sm:w-7 sm:h-7" />
                     </div>
                     <h3 className="text-lg sm:text-xl font-bold text-white mb-4 tracking-tight group-hover:text-amber-400 transition-colors">
-                        Visual Data & Shadow Power
+                        ถอดรหัสลึกถึงพลังเงา
                     </h3>
                     <p className="text-slate-400 leading-relaxed text-sm sm:text-base">
-                        เริ่มจากผลฟรีที่อ่านง่ายก่อน แล้วค่อยปลดล็อก <strong>&quot;พลังเงา&quot;</strong> และคำทำนายเชิงลึกเมื่อคุณต้องการบันทึกผลหรือเทียบหลายชื่อแบบจริงจัง
+                        เช็กชื่อฟรีเบื้องต้น พร้อมตัวเลือกปลดล็อกดู <strong>&quot;พลังเงา&quot;</strong> และคำทำนายพรีเมียม เพื่อกรองชื่อที่ดีที่สุดสำหรับคุณ
                     </p>
                 </div>
             </div>
