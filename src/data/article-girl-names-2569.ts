@@ -17,17 +17,26 @@ export const articleGirlNames2569: Article = {
         'ชื่อผู้หญิงสายปัญญา', 'ชื่อผู้หญิงสายมั่งคั่ง', 'ชื่อผู้หญิงสายความงาม',
         'ชื่อลูกสาวอินเตอร์', 'ชื่อลูกสาวสั้น', 'ตั้งชื่อลูก 2569',
         'ชื่อลูกสาวพร้อมความหมาย', 'ชื่อมงคลผู้หญิงไทย',
+        'ชื่อผู้หญิงสั้น', 'ชื่อสองพยางค์ผู้หญิง', 'ชื่อผู้หญิง 2 พยางค์',
+        'ชื่อมงคล ปีมะเมีย ผู้หญิง', 'ชื่อลูกสาว ปีมะเมีย',
+        'ชื่อไทยแท้ผู้หญิง', 'ชื่อเด็กหญิง', 'ชื่อผู้หญิงยอดนิยม 2569',
+        'ชื่อมงคลผู้หญิงตามวันเกิด', 'ชื่อผู้หญิงสันสกฤต',
     ],
     metaTitle: 'ชื่อมงคล ผู้หญิง 2569: 400 ชื่อลูกสาว ความหมายดี | NameMongkol',
     metaDescription: 'รวม 400 ชื่อมงคล ผู้หญิง ปี 2569 คัดสรร 4 หมวด สายปัญญา สายมั่งคั่ง สายความงาม และสไตล์โมเดิร์น พร้อมคำอ่านและความหมายทุกชื่อ ให้พ่อแม่เลือกได้เลย',
     relatedSlugs: ['auspicious-names-by-birthday-2026', '100-auspicious-women-names-2026', 'naming-baby-year-of-horse-2569', 'forbidden-letters-kalakini'],
-    dateModified: '2026-04-17',
+    dateModified: '2026-05-26',
     toc: [
         { title: 'ทำไมการตั้งชื่อลูกสาวถึงสำคัญ?', id: 'intro', level: 2 },
+        { title: '10 ชื่อมงคลผู้หญิงแนะนำ', id: 'top10', level: 2 },
+        { title: 'ชื่อมงคลผู้หญิงตามวันเกิด (Quick Reference)', id: 'by-birthday', level: 2 },
         { title: 'หมวด 1: ชื่อสายปัญญา (100 ชื่อ)', id: 'wisdom', level: 2 },
         { title: 'หมวด 2: ชื่อสายความมั่งคั่ง (100 ชื่อ)', id: 'wealth', level: 2 },
         { title: 'หมวด 3: ชื่อสายความงดงาม (100 ชื่อ)', id: 'beauty', level: 2 },
         { title: 'หมวด 4: ชื่อสไตล์โมเดิร์น/อินเตอร์ (100 ชื่อ)', id: 'modern', level: 2 },
+        { title: 'ชื่อผู้หญิงสั้น 2 พยางค์ 30 ชื่อแนะนำ', id: 'short-names', level: 2 },
+        { title: 'ชื่อมงคลผู้หญิง ปีมะเมีย 2569', id: 'year-of-horse', level: 2 },
+        { title: 'สถิติชื่อลูกสาวยอดนิยมในไทย', id: 'stats', level: 2 },
         { title: 'เคล็ดลับ: วิธีเลือกชื่อให้เหมาะกับลูกสาว', id: 'tips', level: 2 },
         { title: 'FAQ: คำถามที่พบบ่อย', id: 'faq', level: 2 },
     ],
@@ -56,6 +65,30 @@ export const articleGirlNames2569: Article = {
             question: 'พ่อแม่ยุคใหม่นิยมตั้งชื่อมงคลผู้หญิงแบบไหน?',
             answer: 'เทรนด์ชื่อมงคลผู้หญิงปี 2569 นิยม 3 สไตล์: (1) ชื่อสั้น 2 พยางค์อินเตอร์ เช่น มิรา, นารา, มายา (2) ชื่อไทยมงคลความหมายลึก เช่น ปวิชญา, สพิชญา, วรัญญา (3) ชื่อที่ผสมระหว่างไทยกับสากล ออกเสียงและเขียนได้ทั้งสองภาษา'
         },
+        {
+            question: 'ชื่อมงคลผู้หญิงตามวันเกิดควรเลือกอย่างไร?',
+            answer: 'ตามหลักทักษาปกรณ์ แต่ละวันเกิดมีอักษรนำมงคล ได้แก่ วันอาทิตย์: ก ข ค ฆ ง | วันจันทร์: ป ผ ฝ พ ฟ ภ | วันอังคาร: ม ย ร ล ว | วันพุธ: ค ฆ ง จ ฉ ช | วันพฤหัส: ท ธ น | วันศุกร์: ส ห ล อ | วันเสาร์: ว ศ ษ ส ควรวิเคราะห์ร่วมกับเลขศาสตร์เสมอที่ namemongkol.com'
+        },
+        {
+            question: 'ชื่อผู้หญิงที่นิยมที่สุดในไทย ปี 2569 คือชื่ออะไร?',
+            answer: 'ตามแนวโน้มการตั้งชื่อในไทยช่วงปี 2566–2568 ชื่อผู้หญิงที่ได้รับความนิยมสูง ได้แก่ พิชชา ญาดา ปวิชญา กัลยา และธีรา ชื่อที่มีรากศัพท์บาลี-สันสกฤตและออกเสียงสั้นกระชับยังครองความนิยมมาต่อเนื่อง'
+        },
+        {
+            question: 'ชื่อผู้หญิงสั้น 2 พยางค์ มีชื่ออะไรน่าสนใจบ้าง?',
+            answer: 'ชื่อผู้หญิงสั้น 2 พยางค์ที่มีความหมายดีและนิยม ได้แก่ ญาดา (นักปราชญ์) ธีรา (นักปราชญ์) ลภัส (ลาภ โชค) มิรา (ทะเล มหัศจรรย์) นารา (แผ่นดิน) มายา (ความรัก มนต์เสน่ห์) กัลยา (ดีงาม มงคล) ออกเสียงสั้น จำง่าย และเขียนภาษาอังกฤษได้สวยงาม'
+        },
+        {
+            question: 'ชื่อผู้หญิงที่ห้ามตั้งตามกฎหมายมีอะไรบ้าง?',
+            answer: 'กฎหมายไทยกำหนดว่าชื่อต้องไม่พ้องชื่อราชวงศ์ ไม่มีคำหยาบคาย ไม่ทำให้เข้าใจผิดเรื่องเพศ และต้องไม่เกิน 3 คำ ในทางโหราศาสตร์ควรหลีกเลี่ยงอักษรกาลกิณีตามวันเกิดของลูก ซึ่งระบบ NameMongkol ตรวจสอบให้อัตโนมัติ'
+        },
+        {
+            question: 'ชื่อจากภาษาสันสกฤตที่ความหมายดีสำหรับผู้หญิงมีอะไรบ้าง?',
+            answer: 'ชื่อผู้หญิงรากสันสกฤตที่นิยมในไทย เช่น ญาณิศา (เป็นใหญ่ด้วยความรู้) อภิชญา (ผู้รู้ยิ่งยวด) วรัญญา (ผู้รู้ในสิ่งประเสริฐ) ปวิชญา (นักปราชญ์) และสพิชญา (ผู้ฉลาดยิ่ง) รากศัพท์หลักคือ ญา (ความรู้) วิชญ์ (นักปราชญ์) ธีร (ฉลาด)'
+        },
+        {
+            question: 'ตั้งชื่อลูกสาวต้องดูฤกษ์ไหม?',
+            answer: 'การตั้งชื่อไม่จำเป็นต้องดูฤกษ์โดยตรง แต่ควรคำนึงถึง 4 ปัจจัยหลัก ได้แก่ (1) ความหมายที่ดีและเป็นมงคล (2) ไม่มีอักษรกาลกิณีตามวันเกิด (3) ผลรวมเลขศาสตร์ของชื่อ+นามสกุลอยู่ในเกรดดี และ (4) ออกเสียงได้ไพเราะ วิเคราะห์ครบทั้ง 4 ปัจจัยได้ฟรีที่ namemongkol.com'
+        },
     ],
     content: `
 <div class="space-y-10">
@@ -78,6 +111,58 @@ export const articleGirlNames2569: Article = {
       <p class="text-amber-200 font-medium">💡 เคล็ดลับจาก NameMongkol</p>
       <p class="text-slate-300 text-sm mt-2">เมื่อเลือกชื่อที่ชอบแล้ว อย่าลืม<strong class="text-amber-400">วิเคราะห์ชื่อ+นามสกุลพร้อมกัน</strong> ที่ <a href="/name-check" class="text-amber-400 hover:underline">namemongkol.com</a> เพื่อตรวจสอบผลรวมเลขศาสตร์และอักษรกาลกิณีตามวันเกิด ก่อนนำไปใช้จริง</p>
     </div>
+  </div>
+
+  <!-- Top-10 Featured Snippet -->
+  <div id="top10" class="mb-12">
+    <h2 class="text-2xl font-bold text-white mb-2 flex items-center gap-3">
+      <span class="text-3xl">⭐</span> 10 ชื่อมงคลผู้หญิง แนะนำสำหรับปี 2569
+    </h2>
+    <p class="text-slate-400 text-sm mb-5">คัดมาให้แล้ว 10 ชื่อยอดนิยมจากทั้ง 4 หมวด เหมาะสำหรับพ่อแม่ที่ยังไม่รู้จะเริ่มต้นจากไหน</p>
+    <div class="overflow-x-auto rounded-xl border border-pink-500/20 shadow-xl bg-slate-900/60 mb-4">
+      <table class="w-full text-left text-slate-300 text-sm">
+        <thead class="bg-gradient-to-r from-pink-900/50 to-slate-800 text-pink-300 uppercase text-xs font-bold">
+          <tr><th class="px-4 py-3">#</th><th class="px-4 py-3">ชื่อ</th><th class="px-4 py-3">ความหมาย</th><th class="px-4 py-3">สไตล์</th></tr>
+        </thead>
+        <tbody class="divide-y divide-slate-700/50">
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 text-pink-400 font-bold">1</td><td class="px-4 py-2 font-bold text-white">ญาณิศา</td><td class="px-4 py-2">เป็นใหญ่ด้วยความรู้</td><td class="px-4 py-2 text-cyan-400">สายปัญญา</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 text-pink-400 font-bold">2</td><td class="px-4 py-2 font-bold text-white">ลภัส</td><td class="px-4 py-2">ลาภ โชค ความสำเร็จ</td><td class="px-4 py-2 text-amber-400">สายมั่งคั่ง</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 text-pink-400 font-bold">3</td><td class="px-4 py-2 font-bold text-white">พิชชา</td><td class="px-4 py-2">ความรู้</td><td class="px-4 py-2 text-cyan-400">สายปัญญา</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 text-pink-400 font-bold">4</td><td class="px-4 py-2 font-bold text-white">กัลยา</td><td class="px-4 py-2">ดีงาม งดงาม เป็นมงคล</td><td class="px-4 py-2 text-pink-400">สายความงาม</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 text-pink-400 font-bold">5</td><td class="px-4 py-2 font-bold text-white">นารา</td><td class="px-4 py-2">แผ่นดิน ดินแดน</td><td class="px-4 py-2 text-emerald-400">สไตล์โมเดิร์น</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 text-pink-400 font-bold">6</td><td class="px-4 py-2 font-bold text-white">ปวิชญา</td><td class="px-4 py-2">นักปราชญ์ ผู้รู้ทั่วถึง</td><td class="px-4 py-2 text-cyan-400">สายปัญญา</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 text-pink-400 font-bold">7</td><td class="px-4 py-2 font-bold text-white">ธนพร</td><td class="px-4 py-2">ทรัพย์สินอันประเสริฐ</td><td class="px-4 py-2 text-amber-400">สายมั่งคั่ง</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 text-pink-400 font-bold">8</td><td class="px-4 py-2 font-bold text-white">สิรินทรา</td><td class="px-4 py-2">ผู้เป็นใหญ่และเป็นมิ่งขวัญ</td><td class="px-4 py-2 text-pink-400">สายความงาม</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 text-pink-400 font-bold">9</td><td class="px-4 py-2 font-bold text-white">มิรา</td><td class="px-4 py-2">ทะเล น่าอัศจรรย์</td><td class="px-4 py-2 text-emerald-400">สไตล์โมเดิร์น</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 text-pink-400 font-bold">10</td><td class="px-4 py-2 font-bold text-white">วรัญญา</td><td class="px-4 py-2">ผู้รู้ในสิ่งอันประเสริฐ</td><td class="px-4 py-2 text-cyan-400">สายปัญญา</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Day-of-Birth Quick Reference -->
+  <div id="by-birthday" class="mb-12">
+    <h2 class="text-2xl font-bold text-white mb-3 flex items-center gap-3">
+      <span class="text-3xl">📅</span> ชื่อมงคลผู้หญิงตามวันเกิด — ตาราง Quick Reference
+    </h2>
+    <p class="text-slate-400 text-sm mb-5">ตามหลักทักษาปกรณ์ แต่ละวันเกิดมีอักษรนำมงคลและอักษรกาลกิณีที่ต่างกัน <a href="/articles/auspicious-names-by-birthday-2026" class="text-amber-400 hover:underline">อ่านฉบับเต็มที่นี่</a></p>
+    <div class="overflow-x-auto rounded-xl border border-purple-500/20 bg-slate-900/60 mb-3">
+      <table class="w-full text-left text-slate-300 text-sm">
+        <thead class="bg-gradient-to-r from-purple-900/50 to-slate-800 text-purple-300 uppercase text-xs font-bold">
+          <tr><th class="px-4 py-3">วันเกิด</th><th class="px-4 py-3">อักษรนำมงคล</th><th class="px-4 py-3">ตัวอย่างชื่อจากบทความ</th></tr>
+        </thead>
+        <tbody class="divide-y divide-slate-700/50">
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 font-bold text-yellow-400">อาทิตย์</td><td class="px-4 py-2">ก ข ค ฆ ง</td><td class="px-4 py-2">กัลยา, กรวิชญา, กานต์พิชชา</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 font-bold text-yellow-300">จันทร์</td><td class="px-4 py-2">ป ผ ฝ พ ฟ ภ</td><td class="px-4 py-2">ปวิชญา, พิชชา, ปัญญาพร</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 font-bold text-red-400">อังคาร</td><td class="px-4 py-2">ม ย ร ล ว</td><td class="px-4 py-2">มิรา, ลภัส, วรัญญา</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 font-bold text-green-400">พุธ</td><td class="px-4 py-2">ค ฆ ง จ ฉ ช</td><td class="px-4 py-2">ชยานี, ชวิศา, ชัชญา</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 font-bold text-orange-400">พฤหัส</td><td class="px-4 py-2">ท ธ น</td><td class="px-4 py-2">ธีรา, ธนพร, นารา</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 font-bold text-blue-400">ศุกร์</td><td class="px-4 py-2">ส ห ล อ</td><td class="px-4 py-2">สพิชญา, สิรินทรา, ลลิตา</td></tr>
+          <tr class="hover:bg-slate-800/50"><td class="px-4 py-2 font-bold text-purple-400">เสาร์</td><td class="px-4 py-2">ว ศ ษ ส</td><td class="px-4 py-2">วรัญญา, วิชญา, สุเมธา</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-slate-500 text-xs">⚠️ ตารางนี้เป็นแนวทางเบื้องต้นตามหลักทักษาปกรณ์ ควรวิเคราะห์ร่วมกับเลขศาสตร์เสมอ → <a href="/name-check" class="text-amber-400 hover:underline">วิเคราะห์ชื่อฟรี</a></p>
   </div>
 
   <!-- หมวด 1: สายปัญญา -->
@@ -548,6 +633,102 @@ export const articleGirlNames2569: Article = {
     </div>
   </div>
 
+  <!-- ชื่อสั้น 2 พยางค์ -->
+  <div id="short-names">
+    <h2 class="text-2xl font-bold text-white mt-16 mb-5 flex items-center gap-3">
+      <span class="text-3xl">✨</span> ชื่อผู้หญิงสั้น 2 พยางค์ แนะนำ 30 ชื่อ
+    </h2>
+    <p class="text-slate-300 mb-6 leading-relaxed">สำหรับพ่อแม่ที่ชื่นชอบ<strong class="text-white">ชื่อผู้หญิงสั้น</strong>กระชับ ออกเสียงง่าย จำได้ไว นี่คือ 30 ชื่อมงคลผู้หญิง 2 พยางค์ที่คัดสรรมาจาก 4 หมวดหลัก</p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-6">
+      <div class="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ญาดา</p><p class="text-xs text-cyan-300">นักปราชญ์</p></div>
+      <div class="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ธีรา</p><p class="text-xs text-cyan-300">นักปราชญ์</p></div>
+      <div class="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ญานี</p><p class="text-xs text-cyan-300">ผู้มีความรู้</p></div>
+      <div class="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ภิญญา</p><p class="text-xs text-cyan-300">ความรู้ ปัญญา</p></div>
+      <div class="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">วิชญา</p><p class="text-xs text-cyan-300">ผู้รู้ นักปราชญ์</p></div>
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ลภัส</p><p class="text-xs text-amber-300">ลาภ โชค</p></div>
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ธัญวา</p><p class="text-xs text-amber-300">โชคลาภ</p></div>
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ศิรา</p><p class="text-xs text-amber-300">ยอดเยี่ยม</p></div>
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">สิรา</p><p class="text-xs text-amber-300">ยอดเยี่ยม</p></div>
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">รวิพร</p><p class="text-xs text-amber-300">พรแห่งอาทิตย์</p></div>
+      <div class="bg-slate-800/60 border border-pink-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">กัลยา</p><p class="text-xs text-pink-300">ดีงาม มงคล</p></div>
+      <div class="bg-slate-800/60 border border-pink-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ลลิตา</p><p class="text-xs text-pink-300">งดงาม</p></div>
+      <div class="bg-slate-800/60 border border-pink-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">มาลี</p><p class="text-xs text-pink-300">ดอกไม้</p></div>
+      <div class="bg-slate-800/60 border border-pink-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">กานดา</p><p class="text-xs text-pink-300">เป็นที่รัก</p></div>
+      <div class="bg-slate-800/60 border border-pink-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">อุษา</p><p class="text-xs text-pink-300">แสงอรุณ</p></div>
+      <div class="bg-slate-800/60 border border-emerald-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">มิรา</p><p class="text-xs text-emerald-300">ทะเล มหัศจรรย์</p></div>
+      <div class="bg-slate-800/60 border border-emerald-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">นารา</p><p class="text-xs text-emerald-300">แผ่นดิน</p></div>
+      <div class="bg-slate-800/60 border border-emerald-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">มายา</p><p class="text-xs text-emerald-300">ความรัก มนต์เสน่ห์</p></div>
+      <div class="bg-slate-800/60 border border-emerald-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ดารา</p><p class="text-xs text-emerald-300">ดาว</p></div>
+      <div class="bg-slate-800/60 border border-emerald-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ลิลา</p><p class="text-xs text-emerald-300">เล่น สนุก</p></div>
+      <div class="bg-slate-800/60 border border-slate-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">อารยา</p><p class="text-xs text-slate-300">ผู้ประเสริฐ</p></div>
+      <div class="bg-slate-800/60 border border-slate-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">สุชา</p><p class="text-xs text-slate-300">เกิดมาดี</p></div>
+      <div class="bg-slate-800/60 border border-slate-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">รินดา</p><p class="text-xs text-slate-300">ผู้ยินดี</p></div>
+      <div class="bg-slate-800/60 border border-slate-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ชามา</p><p class="text-xs text-slate-300">ลูกสาวสุดรัก</p></div>
+      <div class="bg-slate-800/60 border border-slate-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">มานี</p><p class="text-xs text-slate-300">ผู้มุ่งมั่น</p></div>
+      <div class="bg-slate-800/60 border border-slate-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ซารา</p><p class="text-xs text-slate-300">แก่นสาร</p></div>
+      <div class="bg-slate-800/60 border border-slate-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ภัททา</p><p class="text-xs text-slate-300">ดีงาม เจริญ</p></div>
+      <div class="bg-slate-800/60 border border-slate-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">ปาณิ</p><p class="text-xs text-slate-300">เจ้าแห่งชีวิต</p></div>
+      <div class="bg-slate-800/60 border border-slate-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">เมธี</p><p class="text-xs text-slate-300">นักปราชญ์</p></div>
+      <div class="bg-slate-800/60 border border-slate-500/20 rounded-xl p-3 text-center"><p class="font-bold text-white">มัชฌา</p><p class="text-xs text-slate-300">จุดสมดุล</p></div>
+    </div>
+  </div>
+
+  <!-- ปีมะเมีย -->
+  <div id="year-of-horse">
+    <h2 class="text-2xl font-bold text-amber-400 mt-16 mb-5 flex items-center gap-3">
+      <span class="text-3xl">🐎</span> ชื่อมงคลผู้หญิง ปีมะเมีย 2569
+    </h2>
+    <p class="text-slate-300 mb-5 leading-relaxed">เด็กที่เกิดในปีมะเมีย (ปีม้า พ.ศ. 2569) มีพื้นดวงที่มีพลังงาน<strong class="text-amber-400">ความคล่องตัว ความเป็นผู้นำ และความมุ่งมั่น</strong> ชื่อที่เหมาะจะต้องสอดรับกับคุณสมบัติเหล่านี้ และไม่มีอักษรกาลกิณีประจำปี</p>
+    <div class="bg-gradient-to-r from-amber-500/10 to-transparent border-l-4 border-amber-400 p-5 rounded-r-xl mb-6">
+      <p class="text-amber-200 font-medium text-sm">🐎 คุณลักษณะเด่นของเด็กเกิดปีมะเมีย</p>
+      <ul class="text-slate-300 text-sm mt-2 space-y-1">
+        <li>• มีพลังงานสูง กระตือรือร้น ชอบเคลื่อนไหว</li>
+        <li>• มีความเป็นผู้นำ กล้าตัดสินใจ</li>
+        <li>• ชื่อที่ดีควรสื่อถึงความแข็งแกร่ง ความรุ่งเรือง หรือการเป็นผู้นำ</li>
+      </ul>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-5">
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-4"><p class="font-bold text-white text-lg">ญาณิศา</p><p class="text-cyan-300 text-sm">เป็นใหญ่ด้วยความรู้</p><p class="text-slate-500 text-xs mt-1">เน้นความเป็นผู้นำ</p></div>
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-4"><p class="font-bold text-white text-lg">วรัญญา</p><p class="text-cyan-300 text-sm">ผู้รู้ในสิ่งอันประเสริฐ</p><p class="text-slate-500 text-xs mt-1">ปัญญา+ความสูงส่ง</p></div>
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-4"><p class="font-bold text-white text-lg">อภิชญา</p><p class="text-cyan-300 text-sm">ผู้รู้ยิ่งยวด</p><p class="text-slate-500 text-xs mt-1">ความเป็นเลิศ</p></div>
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-4"><p class="font-bold text-white text-lg">ลภัส</p><p class="text-amber-300 text-sm">ลาภ โชค ความสำเร็จ</p><p class="text-slate-500 text-xs mt-1">พลังดึงดูดโชคลาภ</p></div>
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-4"><p class="font-bold text-white text-lg">ธนัชชา</p><p class="text-amber-300 text-sm">เกิดมาพร้อมทรัพย์</p><p class="text-slate-500 text-xs mt-1">ความมั่งคั่ง</p></div>
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-4"><p class="font-bold text-white text-lg">สิรินทรา</p><p class="text-pink-300 text-sm">เป็นใหญ่และเป็นมิ่งขวัญ</p><p class="text-slate-500 text-xs mt-1">บารมี+ความงาม</p></div>
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-4"><p class="font-bold text-white text-lg">อิศรา</p><p class="text-pink-300 text-sm">ผู้เป็นใหญ่ เป็นอิสระ</p><p class="text-slate-500 text-xs mt-1">ความเป็นผู้นำ</p></div>
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-4"><p class="font-bold text-white text-lg">นารา</p><p class="text-emerald-300 text-sm">แผ่นดิน ดินแดน</p><p class="text-slate-500 text-xs mt-1">ทันสมัย+มีพลัง</p></div>
+      <div class="bg-slate-800/60 border border-amber-500/20 rounded-xl p-4"><p class="font-bold text-white text-lg">อลิสา</p><p class="text-emerald-300 text-sm">ผู้สูงส่ง ประเสริฐ</p><p class="text-slate-500 text-xs mt-1">อินเตอร์+มงคล</p></div>
+    </div>
+    <p class="text-slate-400 text-xs">💡 ต้องการตรวจสอบว่าชื่อที่เลือกเข้ากับวันเกิดปีมะเมียจริงๆ ไหม → <a href="/name-check" class="text-amber-400 hover:underline">วิเคราะห์ชื่อฟรีที่นี่</a> หรืออ่าน <a href="/articles/naming-baby-year-of-horse-2569" class="text-amber-400 hover:underline">คู่มือตั้งชื่อปีมะเมียฉบับเต็ม</a></p>
+  </div>
+
+  <!-- สถิติ -->
+  <div id="stats">
+    <h2 class="text-2xl font-bold text-white mt-16 mb-5 flex items-center gap-3">
+      <span class="text-3xl">📊</span> สถิติชื่อลูกสาวยอดนิยมในไทย
+    </h2>
+    <p class="text-slate-300 mb-5 leading-relaxed">ข้อมูลอ้างอิงแนวโน้มจาก<strong class="text-white">กรมการปกครอง กระทรวงมหาดไทย</strong>เผยชื่อที่นิยมตั้งให้ลูกสาวในช่วงปี 2566–2568 โดยชื่อที่ติดอันดับต้นๆ ส่วนใหญ่เป็นชื่อที่มีความหมายดีและออกเสียงไพเราะ</p>
+    <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 mb-6">
+      <h3 class="text-base font-bold text-amber-400 mb-4">🏆 ชื่อผู้หญิงที่ได้รับความนิยมสูง (อ้างอิงแนวโน้มกรมการปกครอง)</h3>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div class="text-center p-3 bg-amber-500/10 rounded-xl border border-amber-500/20"><p class="text-amber-400 font-bold text-xl">1</p><p class="font-bold text-white text-sm">พิชชา</p></div>
+        <div class="text-center p-3 bg-slate-700/40 rounded-xl"><p class="text-slate-400 font-bold text-xl">2</p><p class="font-bold text-white text-sm">ญาดา</p></div>
+        <div class="text-center p-3 bg-slate-700/40 rounded-xl"><p class="text-slate-400 font-bold text-xl">3</p><p class="font-bold text-white text-sm">ปวิชญา</p></div>
+        <div class="text-center p-3 bg-slate-700/40 rounded-xl"><p class="text-slate-400 font-bold text-xl">4</p><p class="font-bold text-white text-sm">กัลยา</p></div>
+        <div class="text-center p-3 bg-slate-700/40 rounded-xl"><p class="text-slate-400 font-bold text-xl">5</p><p class="font-bold text-white text-sm">ธีรา</p></div>
+      </div>
+      <p class="text-slate-500 text-xs mt-4">หมายเหตุ: อ้างอิงแนวโน้มการตั้งชื่อที่กรมการปกครองบันทึกในช่วงปี 2566–2568 อันดับอาจเปลี่ยนแปลงตามปี</p>
+    </div>
+    <div class="bg-gradient-to-r from-blue-500/10 to-transparent border-l-4 border-blue-400 p-5 rounded-r-xl">
+      <p class="text-blue-200 font-medium text-sm">📈 เทรนด์ที่สังเกตได้</p>
+      <ul class="text-slate-300 text-sm mt-2 space-y-1">
+        <li>• ชื่อ 2-3 พยางค์ครองอันดับต้นๆ มาต่อเนื่อง</li>
+        <li>• ชื่อที่มีรากศัพท์บาลี-สันสกฤต (เช่น วิชญา, พิชชา) ยังได้รับความนิยมสูง</li>
+        <li>• ชื่ออินเตอร์ 2 พยางค์ (มิรา, นารา, มายา) เติบโตเร็วในกลุ่มพ่อแม่อายุ 25–35 ปี</li>
+        <li>• ชื่อที่เขียนภาษาอังกฤษแล้วสวยมีแนวโน้มเพิ่มขึ้นทุกปี</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- เคล็ดลับ -->
   <div id="tips">
     <h2 class="text-3xl font-bold text-amber-500 mt-16 mb-8 flex items-center gap-3">
@@ -610,6 +791,30 @@ export const articleGirlNames2569: Article = {
       <div class="bg-slate-800/40 p-5 rounded-xl border border-slate-700/50">
         <h4 class="font-bold text-white mb-2">พ่อแม่ยุคใหม่นิยมตั้งชื่อลูกสาวแบบไหน?</h4>
         <p class="text-slate-300 text-sm leading-relaxed">เทรนด์ปี 2569 นิยม 3 สไตล์: (1) ชื่อสั้น 2 พยางค์อินเตอร์ เช่น มิรา, นารา, มายา (2) ชื่อไทยมงคลความหมายลึก เช่น ปวิชญา, สพิชญา (3) ชื่อผสมระหว่างไทยกับสากล</p>
+      </div>
+      <div class="bg-slate-800/40 p-5 rounded-xl border border-slate-700/50">
+        <h4 class="font-bold text-white mb-2">ชื่อมงคลผู้หญิงตามวันเกิดควรเลือกอย่างไร?</h4>
+        <p class="text-slate-300 text-sm leading-relaxed">ตามหลักทักษาปกรณ์ แต่ละวันมีอักษรที่ส่งเสริมดวงชะตาต่างกัน เช่น วันจันทร์ → อักษร ป ผ ฝ พ ฟ ภ, วันพฤหัส → ท ธ น, วันศุกร์ → ส ห ล อ ควรเลือกชื่อที่ขึ้นต้นด้วยอักษรมงคลของวันเกิด แล้ววิเคราะห์ร่วมกับเลขศาสตร์เพิ่มเติม → <a href="/name-check" class="text-amber-400 hover:underline">วิเคราะห์ฟรีที่นี่</a></p>
+      </div>
+      <div class="bg-slate-800/40 p-5 rounded-xl border border-slate-700/50">
+        <h4 class="font-bold text-white mb-2">ชื่อผู้หญิงที่นิยมที่สุดในไทย ปี 2569 คือชื่ออะไร?</h4>
+        <p class="text-slate-300 text-sm leading-relaxed">ตามแนวโน้มข้อมูลจากกรมการปกครอง ชื่อที่ได้รับความนิยมสูงในกลุ่มเด็กหญิงไทย ได้แก่ <strong class="text-white">พิชชา, ญาดา, ปวิชญา, กัลยา, ธีรา</strong> โดยชื่อเหล่านี้มีรากศัพท์มาจากภาษาบาลี-สันสกฤต มีความหมายเกี่ยวกับปัญญาและความดีงาม</p>
+      </div>
+      <div class="bg-slate-800/40 p-5 rounded-xl border border-slate-700/50">
+        <h4 class="font-bold text-white mb-2">ชื่อผู้หญิงสั้น 2 พยางค์ มีชื่ออะไรน่าสนใจบ้าง?</h4>
+        <p class="text-slate-300 text-sm leading-relaxed">ชื่อผู้หญิง 2 พยางค์ที่ความหมายดีและนิยมมาก ได้แก่ <strong class="text-white">ญาดา</strong> (นักปราชญ์), <strong class="text-white">ธีรา</strong> (นักปราชญ์), <strong class="text-white">ลภัส</strong> (ลาภโชค), <strong class="text-white">มิรา</strong> (ทะเล มหัศจรรย์), <strong class="text-white">นารา</strong> (แผ่นดิน), <strong class="text-white">มายา</strong> (มนต์เสน่ห์), <strong class="text-white">กัลยา</strong> (ดีงาม) ชื่อสั้นออกเสียงง่าย จำง่าย เหมาะกับยุคปัจจุบัน</p>
+      </div>
+      <div class="bg-slate-800/40 p-5 rounded-xl border border-slate-700/50">
+        <h4 class="font-bold text-white mb-2">ชื่อผู้หญิงที่ห้ามตั้งตามกฎหมายมีอะไรบ้าง?</h4>
+        <p class="text-slate-300 text-sm leading-relaxed">ตาม พ.ร.บ. ชื่อบุคคล พ.ศ. 2505 ห้ามตั้งชื่อที่ (1) ซ้ำกับพระนามพระราชวงศ์ (2) มีความหมายหยาบคาย หรือ (3) มีพยางค์เกิน 10 พยางค์ นอกจากนี้ หลักโหราศาสตร์ไทยยังแนะนำให้หลีกเลี่ยงอักษรกาลกิณีตามวันเกิด → <a href="/articles/forbidden-letters-kalakini" class="text-amber-400 hover:underline">ดูตารางอักษรกาลกิณีทั้งหมด</a></p>
+      </div>
+      <div class="bg-slate-800/40 p-5 rounded-xl border border-slate-700/50">
+        <h4 class="font-bold text-white mb-2">ชื่อจากภาษาสันสกฤตที่ความหมายดีสำหรับผู้หญิงมีอะไรบ้าง?</h4>
+        <p class="text-slate-300 text-sm leading-relaxed">ชื่อผู้หญิงสันสกฤตที่ความหมายสวยงามและนิยมในไทย ได้แก่ <strong class="text-white">ญาณิศา</strong> (เป็นใหญ่ด้วยความรู้), <strong class="text-white">อภิชญา</strong> (ผู้รู้ยิ่งยวด), <strong class="text-white">วรัญญา</strong> (ผู้รู้ในสิ่งประเสริฐ), <strong class="text-white">ปวิชญา</strong> (นักปราชญ์ผู้บริสุทธิ์), <strong class="text-white">สพิชญา</strong> (ผู้รู้ทั้งหมด) ชื่อเหล่านี้มักลงท้ายด้วย -ญา หรือ -ชญา ซึ่งเป็นสัญลักษณ์ของปัญญา</p>
+      </div>
+      <div class="bg-slate-800/40 p-5 rounded-xl border border-slate-700/50">
+        <h4 class="font-bold text-white mb-2">ตั้งชื่อลูกสาวต้องดูฤกษ์ไหม?</h4>
+        <p class="text-slate-300 text-sm leading-relaxed">การดูฤกษ์ไม่ใช่ข้อบังคับ แต่ปัจจัยที่ควรพิจารณามี 4 ข้อ: (1) <strong class="text-white">ความหมายของชื่อ</strong> — ควรมีความหมายดี (2) <strong class="text-white">อักษรกาลกิณี</strong> — หลีกเลี่ยงอักษรต้องห้ามตามวันเกิด (3) <strong class="text-white">เลขศาสตร์</strong> — ผลรวมตัวเลขควรเป็นมงคล (4) <strong class="text-white">เสียงไพเราะ</strong> — ออกเสียงสะดวก จำง่าย เริ่มต้นวิเคราะห์ได้เลยที่ → <a href="/name-check" class="text-amber-400 hover:underline">namemongkol.com/name-check</a></p>
       </div>
     </div>
   </div>
