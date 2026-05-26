@@ -38,10 +38,10 @@ export const HowItWorksSection = () => {
         <section className="w-full max-w-5xl mx-auto px-4 py-12 sm:py-16 relative z-10">
             <div className="text-center mb-8 sm:mb-12">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">
-                    วิเคราะห์ชื่อใน <span className="text-amber-400">3 ขั้นตอน</span>
+                    วิธีเช็คชื่อมงคลกับ NameMongkol
                 </h2>
                 <p className="text-slate-400 max-w-xl mx-auto text-sm sm:text-base">
-                    เริ่มใช้ฟรีได้ทันที ไม่ต้องล็อกอิน และถ้าถูกใจค่อยสมัครเพื่อบันทึกผลหรือปลดล็อกเพิ่ม
+                    วิเคราะห์ชื่อจริงได้ง่ายๆ ภายใน 3 ขั้นตอน พร้อมรับผลทำนายเชิงลึก
                 </p>
             </div>
 
