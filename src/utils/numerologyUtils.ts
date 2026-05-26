@@ -1,5 +1,4 @@
-import { charValues, pairDefinitions } from '../data/numerology';
-import { getCharValue } from '../data/numerologyLookup';
+import { pairDefinitions, getCharValue } from '../data/numerology';
 
 export const calculateScore = (text: string): number => {
     if (!text) return 0;

@@ -37,6 +37,10 @@ export const charValues: Record<string, number> = {
     'ไ': 9, '์': 9, 'ฦ': 9, 'ฦๅ': 9,
 };
 
+export const getCharValue = (char: string): number | undefined => {
+    return charValues[char] ?? charValues[char.toUpperCase()];
+};
+
 export interface PairDefinition {
     level: number; // 1=Good (Green), 2=Bad (Red), 0=Neutral (Amber)
     desc: string;
