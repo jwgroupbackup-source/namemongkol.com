@@ -1,0 +1,230 @@
+﻿Diagnose log at 2026-05-26T03:34:23Z
+
+AppPath: C:\Program Files\Git\mingw64\bin\git-credential-manager.exe
+InstallDir: C:\Program Files\Git\mingw64\bin\
+Version: 2.6.1+786ab03440ddc82e807a97c0e540f5247e44cec6
+
+------------
+Diagnostic: Environment
+Skipped: False
+Success: True
+Exception: None
+Log:
+OSType: Windows
+OSVersion: 10.0 (build 26200)
+Reading environment variables... OK
+ Variables:
+MSYSTEM_CHOST=x86_64-w64-mingw32
+_=C:/Program Files/Git/mingw64/bin/git
+GIT_MERGE_AUTOEDIT=no
+PUBLIC=C:\Users\Public
+ALLUSERSPROFILE=C:\ProgramData
+LOGONSERVER=\\JW22-NB65
+INFOPATH=C:\Program Files\Git\mingw64\local\info;C:\Program Files\Git\mingw64\share\info;C:\Program Files\Git\usr\local\info;C:\Program Files\Git\usr\share\info;C:\Program Files\Git\usr\info;C:\Program Files\Git\share\info
+LOCALAPPDATA=C:\Users\ณวิธบุญยะรัตน์\AppData\Local
+ProgramData=C:\ProgramData
+PKG_CONFIG_PATH=C:\Program Files\Git\mingw64\lib\pkgconfig;C:\Program Files\Git\mingw64\share\pkgconfig
+TMPDIR=C:\Users\1137~1\AppData\Local\Temp
+ORIGINAL_PATH=C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\ณวิธบุญยะรัตน์\bin;C:\Users\ณวิธบุญยะรัตน์\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;C:\Users\ณวิธบุญยะรัตน์\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Python\Python313\Scripts;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Python\Python313;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Python\Launcher;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Microsoft\WindowsApps;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ณวิธบุญยะรัตน์\AppData\Roaming\npm;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Antigravity\bin;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Windsurf\bin;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\cursor\resources\app\bin
+ZES_ENABLE_SYSMAN=1
+PROCESSOR_REVISION=9a03
+ACLOCAL_PATH=C:\Program Files\Git\mingw64\share\aclocal;C:\Program Files\Git\usr\share\aclocal
+ProgramW6432=C:\Program Files
+MINGW_PREFIX=C:/Program Files/Git/mingw64
+SYSTEMROOT=C:\WINDOWS
+MANPATH=C:\Program Files\Git\mingw64\local\man;C:\Program Files\Git\mingw64\share\man;C:\Program Files\Git\usr\local\man;C:\Program Files\Git\usr\share\man;C:\Program Files\Git\usr\man;C:\Program Files\Git\share\man
+CONFIG_SITE=C:/Program Files/Git/etc/config.site
+VSCODE_GIT_ASKPASS_MAIN=c:\Users\ณวิธบุญยะรัตน์\AppData\Roaming\Code\User\globalStorage\vscode.git\askpass\493597c785d4c5cb\askpass-main.js
+SHELL=C:\Program Files\Git\usr\bin\bash.exe
+MSYSTEM=MINGW64
+OS=Windows_NT
+PROCESSOR_ARCHITECTURE=x86
+MINGW_PACKAGE_PREFIX=mingw-w64-x86_64
+SHLVL=1
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+DISPLAY=needs-to-be-defined
+ORIGINAL_TEMP=C:/Users/1137~1/AppData/Local/Temp
+CommonProgramW6432=C:\Program Files\Common Files
+ProgramFiles(x86)=C:\Program Files (x86)
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=
+COMSPEC=C:\WINDOWS\system32\cmd.exe
+MSYSTEM_CARCH=x86_64
+USERNAME=ณวิธบุญยะรัตน์
+GIT_ASKPASS=c:\Users\ณวิธบุญยะรัตน์\AppData\Roaming\Code\User\globalStorage\vscode.git\askpass\493597c785d4c5cb\askpass.sh
+EFC_6796_1592913036=1
+GIT_EDITOR=:
+MINGW_CHOST=x86_64-w64-mingw32
+TERM=xterm-256color
+LANG=en_US.UTF-8
+EFC_6796_1262719628=1
+PATH=C:/Program Files/Git/mingw64/libexec/git-core;C:\Users\ณวิธบุญยะรัตน์\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\ณวิธบุญยะรัตน์\bin;C:\Users\ณวิธบุญยะรัตน์\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;C:\Users\ณวิธบุญยะรัตน์\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Python\Python313\Scripts;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Python\Python313;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Python\Launcher;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Microsoft\WindowsApps;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ณวิธบุญยะรัตน์\AppData\Roaming\npm;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Antigravity\bin;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Windsurf\bin;C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+OneDrive=C:\Users\ณวิธบุญยะรัตน์\OneDrive\OneDrive - JW REALESTATE CO.,LTD
+PSModulePath=C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules;C:\Program Files\SharePoint Online Management Shell\
+OneDriveCommercial=C:\Users\ณวิธบุญยะรัตน์\OneDrive\OneDrive - JW REALESTATE CO.,LTD
+GIT_EXEC_PATH=C:/Program Files/Git/mingw64/libexec/git-core
+PWD=C:/Users/ณวิธบุญยะรัตน์/Desktop/Next.js/6.NAMEMONGKOL
+APPDATA=C:\Users\ณวิธบุญยะรัตน์\AppData\Roaming
+ORIGINAL_TMP=C:/Users/1137~1/AppData/Local/Temp
+FPS_BROWSER_APP_PROFILE_STRING=Internet Explorer
+COMPUTERNAME=JW22-NB65
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+FPS_BROWSER_USER_PROFILE_STRING=Default
+DriverData=C:\Windows\System32\Drivers\DriverData
+WINDIR=C:\WINDOWS
+PLINK_PROTOCOL=ssh
+PROCESSOR_LEVEL=6
+EXEPATH=C:\Program Files\Git\bin
+HOMEDRIVE=C:
+PKG_CONFIG_SYSTEM_INCLUDE_PATH=C:/Program Files/Git/mingw64/include
+PKG_CONFIG_SYSTEM_LIBRARY_PATH=C:/Program Files/Git/mingw64/lib
+PROGRAMFILES=C:\Program Files (x86)
+SSH_ASKPASS=C:/Program Files/Git/mingw64/bin/git-askpass.exe
+COPILOT_AGENT=1
+USERPROFILE=C:\Users\ณวิธบุญยะรัตน์
+GIT_TRACE2_PARENT_SID=9241430c-f9ec-4977-a605-9c6616d5a342
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 154 Stepping 3, GenuineIntel
+EFC_6796_2283032206=1
+EFC_6796_3789132940=1
+SESSIONNAME=Console
+TMP=C:\Users\1137~1\AppData\Local\Temp
+HISTCONTROL=ignorespace
+TERM_PROGRAM_VERSION=1.121.0
+HOSTNAME=JW22-NB65
+EFC_6796_2775293581=1
+TERM_PROGRAM=vscode
+USERDOMAIN=AzureAD
+NUMBER_OF_PROCESSORS=16
+PS1=\[]633;A\]\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]\n$ \[]633;B\]
+CHROME_CRASHPAD_PIPE_NAME=\\.\pipe\crashpad_6864_MPAOUNVMSTFOIMQT
+SYSTEMDRIVE=C:
+VSCODE_GIT_ASKPASS_NODE=C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Microsoft VS Code\Code.exe
+USERDOMAIN_ROAMINGPROFILE=AzureAD
+GIT_PAGER=cat
+COMMONPROGRAMFILES=C:\Program Files (x86)\Common Files
+VSCODE_GIT_IPC_HANDLE=\\.\pipe\vscode-git-dedfb4a8cc-sock
+VSCODE_PYTHON_AUTOACTIVATE_GUARD=1
+EFC_6796_4126798990=1
+HOMEPATH=\Users\ณวิธบุญยะรัตน์
+COLORTERM=truecolor
+HOME=C:\Users\ณวิธบุญยะรัตน์
+MSYSTEM_PREFIX=C:/Program Files/Git/mingw64
+PROCESSOR_ARCHITEW6432=AMD64
+TEMP=C:\Users\1137~1\AppData\Local\Temp
+
+
+------------
+Diagnostic: File system
+Skipped: False
+Success: True
+Exception: None
+Log:
+Temporary directory is 'C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Temp\'...
+Checking basic file I/O...
+Writing to temporary file 'C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Temp\944d4b9d96677a8962a2b83f'... OK
+Reading from temporary file 'C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Temp\944d4b9d96677a8962a2b83f'... OK
+Deleting temporary file 'C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Temp\944d4b9d96677a8962a2b83f'... OK
+Testing IFileSystem instance...
+UserHomePath: C:\Users\ณวิธบุญยะรัตน์
+UserDataDirectoryPath: C:\Users\ณวิธบุญยะรัตน์\.gcm
+GetCurrentDirectory(): C:\Users\ณวิธบุญยะรัตน์\Desktop\Next.js\6.NAMEMONGKOL
+
+------------
+Diagnostic: Networking
+Skipped: False
+Success: True
+Exception: None
+Log:
+Checking networking and HTTP stack...
+Creating HTTP client... OK
+IsNetworkAvailable: True
+Sending HEAD request to http://example.com...Sending HEAD request to https://example.com... OK
+ OK
+Acquiring free TCP port... OK
+Testing local HTTP loopback connections...
+Creating new HTTP listener for http://localhost:59331/... OK
+Waiting for loopback connection... OK
+Writing response... OK
+Waiting for response data... OK
+Loopback connection data OK
+
+------------
+Diagnostic: Git
+Skipped: False
+Success: True
+Exception: None
+Log:
+Getting Git version... OK
+Git version is '2.51.1.windows.1'
+Locating current repository...Git repository at 'C:/Users/ณวิธบุญยะรัตน์/Desktop/Next.js/6.NAMEMONGKOL/.git'
+ OK
+Listing all Git configuration... OK
+Git configuration:
+file:C:/Program Files/Git/etc/gitconfig	diff.astextplain.textconv=astextplain
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.required=true
+file:C:/Program Files/Git/etc/gitconfig	http.sslbackend=schannel
+file:C:/Program Files/Git/etc/gitconfig	core.autocrlf=true
+file:C:/Program Files/Git/etc/gitconfig	core.fscache=true
+file:C:/Program Files/Git/etc/gitconfig	core.symlinks=false
+file:C:/Program Files/Git/etc/gitconfig	pull.rebase=false
+file:C:/Program Files/Git/etc/gitconfig	credential.helper=manager
+file:C:/Program Files/Git/etc/gitconfig	credential.https://dev.azure.com.usehttppath=true
+file:C:/Program Files/Git/etc/gitconfig	init.defaultbranch=master
+file:"C:/Users/\340\270\223\340\270\247\340\270\264\340\270\230\340\270\232\340\270\270\340\270\215\340\270\242\340\270\260\340\270\243\340\270\261\340\270\225\340\270\231\340\271\214/.gitconfig"	filter.lfs.required=true
+file:"C:/Users/\340\270\223\340\270\247\340\270\264\340\270\230\340\270\232\340\270\270\340\270\215\340\270\242\340\270\260\340\270\243\340\270\261\340\270\225\340\270\231\340\271\214/.gitconfig"	filter.lfs.clean=git-lfs clean -- %f
+file:"C:/Users/\340\270\223\340\270\247\340\270\264\340\270\230\340\270\232\340\270\270\340\270\215\340\270\242\340\270\260\340\270\243\340\270\261\340\270\225\340\270\231\340\271\214/.gitconfig"	filter.lfs.smudge=git-lfs smudge -- %f
+file:"C:/Users/\340\270\223\340\270\247\340\270\264\340\270\230\340\270\232\340\270\270\340\270\215\340\270\242\340\270\260\340\270\243\340\270\261\340\270\225\340\270\231\340\271\214/.gitconfig"	filter.lfs.process=git-lfs filter-process
+file:"C:/Users/\340\270\223\340\270\247\340\270\264\340\270\230\340\270\232\340\270\270\340\270\215\340\270\242\340\270\260\340\270\243\340\270\261\340\270\225\340\270\231\340\271\214/.gitconfig"	user.name=nawit
+file:"C:/Users/\340\270\223\340\270\247\340\270\264\340\270\230\340\270\232\340\270\270\340\270\215\340\270\242\340\270\260\340\270\243\340\270\261\340\270\225\340\270\231\340\271\214/.gitconfig"	user.email=nawit6395@gmail.com
+file:"C:/Users/\340\270\223\340\270\247\340\270\264\340\270\230\340\270\232\340\270\270\340\270\215\340\270\242\340\270\260\340\270\243\340\270\261\340\270\225\340\270\231\340\271\214/.gitconfig"	core.editor="C:\Users\ณวิธบุญยะรัตน์\AppData\Local\Programs\Microsoft VS Code\bin\code" --wait
+file:"C:/Users/\340\270\223\340\270\247\340\270\264\340\270\230\340\270\232\340\270\270\340\270\215\340\270\242\340\270\260\340\270\243\340\270\261\340\270\225\340\270\231\340\271\214/.gitconfig"	credential.helper=manager
+file:.git/config	core.repositoryformatversion=0
+file:.git/config	core.filemode=false
+file:.git/config	core.bare=false
+file:.git/config	core.logallrefupdates=true
+file:.git/config	core.symlinks=false
+file:.git/config	core.ignorecase=true
+file:.git/config	branch.main.vscode-merge-base=origin/main
+file:.git/config	branch.main.remote=origin
+file:.git/config	branch.main.merge=refs/heads/main
+file:.git/config	remote.origin.url=https://github.com/jwgroupbackup-source/namemongkil.com.git
+file:.git/config	remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+
+
+------------
+Diagnostic: Credential storage
+Skipped: False
+Success: True
+Exception: None
+Log:
+ICredentialStore instance is of type: CredentialStore
+Writing test credential... OK
+Reading test credential... OK
+Deleting test credential... OK
+
+------------
+Diagnostic: Microsoft authentication (AAD/MSA)
+Skipped: False
+Success: True
+Exception: None
+Log:
+Broker is not enabled.
+Flow type is: Auto
+Gathering MSAL token cache data... OK
+CacheDirectory: C:\Users\ณวิธบุญยะรัตน์\AppData\Local\.IdentityService
+CacheFileName: msal.cache
+CacheFilePath: C:\Users\ณวิธบุญยะรัตน์\AppData\Local\.IdentityService\msal.cache
+Creating cache helper... OK
+Verifying MSAL token cache persistence... OK
+
+------------
+Diagnostic: GitHub API
+Skipped: False
+Success: True
+Exception: None
+Log:
+Using 'https://github.com/' as API target.
+Querying '/meta' endpoint... OK
+
