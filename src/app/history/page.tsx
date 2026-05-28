@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import ClientPage from './ClientPage';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
     title: 'ประวัติการใช้งาน | NameMongkol - ดูผลวิเคราะห์ย้อนหลัง',

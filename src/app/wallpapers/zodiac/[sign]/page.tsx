@@ -4,8 +4,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import ClientPage from '../../ClientPage';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 const ZODIAC_META: Record<string, { label: string; emoji: string; desc: string; keywords: string[] }> = {
     aries:       { label: 'ราศีเมษ',   emoji: '♈', desc: 'วอลเปเปอร์มงคลราศีเมษ ผสานพลังพระพิฆเนศกับสัญลักษณ์แกะทองคำ ราศีแห่งความเป็นผู้นำ กล้าตัดสินใจ และจุดเริ่มต้นใหม่ เลขมงคล 36, 639 เสริมดวงโชคลาภและความสำเร็จทุกครั้งที่ปลดล็อกหน้าจอ', keywords: ['วอลเปเปอร์ราศีเมษ', 'เสริมดวงราศีเมษ', 'วอลเปเปอร์มงคลราศีเมษ', 'พระพิฆเนศราศีเมษ', 'เลขมงคลราศีเมษ', 'วอลเปเปอร์เสริมความเป็นผู้นำ', 'แกะทองคำมงคล'] },

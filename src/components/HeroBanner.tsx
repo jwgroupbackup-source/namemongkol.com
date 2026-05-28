@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Target, Zap } from 'lucide-react';
 import { useLanguage } from './LanguageProvider';
 
@@ -50,6 +51,23 @@ export const HeroBanner = ({ headingLevel = 'h1' }: HeroBannerProps) => {
                             <span className="text-sm sm:text-base font-bold text-white">AI</span>
                             <span className="text-[10px] sm:text-xs uppercase tracking-wide text-amber-200/70">{t('home.hero.statSpeed')}</span>
                         </div>
+                    </div>
+
+                    <div className="mt-3 sm:mt-4 flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm">
+                        <Link
+                            href="/phone-analysis"
+                            data-track="home.hero.secondary.phone"
+                            className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1.5 text-cyan-200 hover:bg-cyan-400/15 transition-colors"
+                        >
+                            เช็กเบอร์มงคลฟรี
+                        </Link>
+                        <Link
+                            href="/aura-analysis"
+                            data-track="home.hero.secondary.aura"
+                            className="rounded-full border border-purple-400/20 bg-purple-400/10 px-3 py-1.5 text-purple-200 hover:bg-purple-400/15 transition-colors"
+                        >
+                            วิเคราะห์ออร่า AI
+                        </Link>
                     </div>
 
                     <p className="mt-3 sm:mt-5 text-xs sm:text-sm text-emerald-300/80 font-medium tracking-wide">

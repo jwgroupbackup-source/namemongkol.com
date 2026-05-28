@@ -4,7 +4,7 @@ import Script from 'next/script';
 import ClientHome from './ClientHome';
 import { ogImageUrl, siteUrl } from '@/lib/seo';
 
-const baseUrl = siteUrl.replace(/\/$/, '') || 'https://www.namemongkol.com';
+const baseUrl = siteUrl.replace(/\/$/, '');
 const pageTitle = 'วิเคราะห์ชื่อฟรี ไม่ต้องล็อกอิน | เช็กชื่อมงคลทันที | NameMongkol';
 const pageDescription = 'วิเคราะห์ชื่อและนามสกุลฟรี ไม่ต้องล็อกอิน เช็กเลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และนิรันดร์ศาสตร์ พร้อมค้นหาชื่อมงคลสำหรับเปลี่ยนชื่อหรือตั้งชื่อลูก';
 const homeOgImage = ogImageUrl({

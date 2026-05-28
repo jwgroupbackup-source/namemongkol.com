@@ -3,8 +3,7 @@ import Link from 'next/link';
 import Script from 'next/script';
 import { Suspense } from 'react';
 import ClientPage from '../ClientPage';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
     title: 'วอลเปเปอร์มงคลตามราศี เสริมดวงชะตา | NameMongkol',

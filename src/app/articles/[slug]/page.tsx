@@ -65,6 +65,7 @@ type DbArticleRow = {
 };
 
 import { supabase } from '@/utils/supabase';
+import { siteUrl } from '@/lib/seo';
 
 async function fetchPublishedArticlesDb(): Promise<Article[]> {
     const { data, error } = await supabase
@@ -342,7 +343,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         };
     }
 
-    const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com').replace(/\/$/, '');
+    const baseUrl = siteUrl;
     const rawImageUrl = article.coverImage;
 
     // Dynamic OG fallback — always available when image is missing or broken
@@ -414,7 +415,7 @@ export default async function ArticlePage({ params }: Props) {
     }
 
     // ── Canonical base URL (consistent across metadata & JSON-LD) ──
-    const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com').replace(/\/$/, '');
+    const baseUrl = siteUrl;
     const canonicalUrl = `${baseUrl}/articles/${slug}`;
 
     // ── Date formatting helpers ──

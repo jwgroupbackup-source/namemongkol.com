@@ -5,10 +5,8 @@ import Script from 'next/script';
 import { Metadata } from 'next';
 import { calculateScore } from '@/utils/calculateScore';
 import { getPrediction } from '@/utils/getPrediction';
-import { HeroBanner } from '@/components/HeroBanner'; // Reuse for consistency if appropriate, or simplified version
 import { Sparkles, ArrowRight, Star } from 'lucide-react';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 type Props = {
     params: Promise<{ name: string }>;
@@ -17,7 +15,7 @@ type Props = {
 function decodeName(name: string): string {
     try {
         return decodeURIComponent(name);
-    } catch (e) {
+    } catch {
         return name;
     }
 }

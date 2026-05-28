@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { createClient } from '@supabase/supabase-js'
 import { articles as localArticles } from '@/data/articles'
+import { siteUrl } from '@/lib/seo'
 
 export const revalidate = 3600
 
@@ -15,12 +16,7 @@ const popularNames = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    // IMPORTANT: Must use www. to match canonical URLs in page metadata
-    const rawBaseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'https://www.namemongkol.com';
-    // Ensure www. prefix for consistency with page canonical URLs
-    const baseUrl = rawBaseUrl.includes('namemongkol.com') && !rawBaseUrl.includes('www.')
-        ? rawBaseUrl.replace('://namemongkol.com', '://www.namemongkol.com')
-        : rawBaseUrl;
+    const baseUrl = siteUrl;
 
     // Initialize Supabase client (optional). Sitemap must not fail if env is missing.
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;

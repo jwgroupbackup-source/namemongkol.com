@@ -1,11 +1,8 @@
 import { MetadataRoute } from 'next'
+import { siteUrl } from '@/lib/seo'
 
 export default function robots(): MetadataRoute.Robots {
-    const rawBaseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'https://www.namemongkol.com';
-    // Ensure www. prefix for consistency with canonical URLs
-    const baseUrl = rawBaseUrl.includes('namemongkol.com') && !rawBaseUrl.includes('www.')
-        ? rawBaseUrl.replace('://namemongkol.com', '://www.namemongkol.com')
-        : rawBaseUrl;
+    const baseUrl = siteUrl;
 
     return {
         rules: [

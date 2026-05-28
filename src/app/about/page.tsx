@@ -34,13 +34,14 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+    const aboutUrl = `${siteUrl}/about`;
     const organizationSchema = {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "NameMongkol",
         "alternateName": "เนมมงคล",
-        "url": "https://www.namemongkol.com",
-        "logo": "https://www.namemongkol.com/logo.png",
+        "url": siteUrl,
+        "logo": `${siteUrl}/logo.png`,
         "description": "แพลตฟอร์มวิเคราะห์ชื่อมงคล เช็คเบอร์มงคล และวิเคราะห์ลายมืออันดับ 1 ของไทย ผสานศาสตร์โบราณเข้ากับ AI",
         "foundingDate": "2024",
         "sameAs": [
@@ -106,15 +107,15 @@ export default function AboutPage() {
     const webPageSchema = {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "@id": "https://www.namemongkol.com/about",
-        "url": "https://www.namemongkol.com/about",
+        "@id": aboutUrl,
+        "url": aboutUrl,
         "name": "เกี่ยวกับเรา | NameMongkol - ผู้เชี่ยวชาญวิเคราะห์ชื่อมงคล",
         "description": "NameMongkol แพลตฟอร์มวิเคราะห์ชื่อมงคลอันดับ 1 ของไทย ผสานศาสตร์โบราณ 4 แขนง เข้ากับเทคโนโลยี AI",
         "inLanguage": "th-TH",
         "isPartOf": {
             "@type": "WebSite",
             "name": "NameMongkol",
-            "url": "https://www.namemongkol.com"
+            "url": siteUrl
         },
         "about": {
             "@type": "Thing",
@@ -135,13 +136,13 @@ export default function AboutPage() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "หน้าแรก",
-                "item": "https://www.namemongkol.com"
+                "item": siteUrl
             },
             {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "เกี่ยวกับเรา",
-                "item": "https://www.namemongkol.com/about"
+                "item": aboutUrl
             }
         ]
     };

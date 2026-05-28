@@ -4,8 +4,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import ClientPage from '../../ClientPage';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 const DAY_META: Record<string, { label: string; desc: string; keywords: string[] }> = {
     sunday: {

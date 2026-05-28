@@ -8,13 +8,21 @@
  *   3. Consistent canonical URLs across sitemap, robots, and page metadata
  */
 
-const rawUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'https://www.namemongkol.com';
+const DEFAULT_SITE_URL = 'https://www.namemongkol.com';
 
-// Normalize: strip trailing slash, enforce www.
-const normalized = rawUrl.replace(/\/$/, '');
-export const siteUrl = normalized.includes('namemongkol.com') && !normalized.includes('www.')
-    ? normalized.replace('://namemongkol.com', '://www.namemongkol.com')
-    : normalized;
+/**
+ * Normalize a URL by stripping a trailing slash and enforcing www. on namemongkol.com.
+ */
+export function normalizeSiteUrl(rawUrl?: string): string {
+    const input = rawUrl || DEFAULT_SITE_URL;
+    const normalized = input.replace(/\/$/, '');
+    return normalized.includes('namemongkol.com') && !normalized.includes('www.')
+        ? normalized.replace('://namemongkol.com', '://www.namemongkol.com')
+        : normalized;
+}
+
+const rawUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || DEFAULT_SITE_URL;
+export const siteUrl = normalizeSiteUrl(rawUrl);
 
 /**
  * Build a canonical URL for a given path.

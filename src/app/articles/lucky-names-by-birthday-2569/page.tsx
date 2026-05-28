@@ -7,6 +7,7 @@ import { ArticleImage } from '@/components/ArticleImage';
 import dynamic from 'next/dynamic';
 import { articleNameByBirthday } from '@/data/article-name-by-birthday';
 import { articles as localArticles } from '@/data/articles';
+import { siteUrl } from '@/lib/seo';
 
 const ArticleShareButtons = dynamic(() => import('@/components/ArticleShareButtons').then(mod => mod.ArticleShareButtons), {
     loading: () => <div className="h-10 w-24 bg-slate-800/50 rounded-full animate-pulse" />,
@@ -20,7 +21,7 @@ const AuraVibeWidget = dynamic(() => import('@/components/AuraVibeWidget'), {
     loading: () => <div className="h-48 bg-slate-800/50 rounded-2xl animate-pulse my-10 max-w-xl mx-auto" />,
 });
 
-const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com').replace(/\/$/, '');
+const baseUrl = siteUrl;
 const article = articleNameByBirthday;
 
 export const metadata: Metadata = {
