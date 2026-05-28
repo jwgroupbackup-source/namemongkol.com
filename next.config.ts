@@ -60,13 +60,6 @@ const nextConfig: NextConfig = {
         destination: '/wallpapers/custom',
         permanent: true,
       },
-      // SEO: Consolidate /name-check → / to prevent keyword cannibalization
-      // Both pages shared identical <ClientHome /> content targeting "วิเคราะห์ชื่อ"
-      {
-        source: '/name-check',
-        destination: '/',
-        permanent: true,
-      },
     ];
   },
 };

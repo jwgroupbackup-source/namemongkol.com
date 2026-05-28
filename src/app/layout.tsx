@@ -10,6 +10,7 @@ import { createClient } from '@supabase/supabase-js';
 import CookieConsentWrapper from '@/components/CookieConsentWrapper';
 import { AnalyticsProvider } from '@/components/AnalyticsProvider';
 import Script from 'next/script';
+import { siteUrl } from '@/lib/seo';
 
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
@@ -32,8 +33,6 @@ const notoSansThai = Noto_Sans_Thai({
   weight: ["300", "400", "500", "600", "700"],
   display: 'swap',
 });
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'https://www.namemongkol.com';
 
 export const metadata: Metadata = {
   title: {

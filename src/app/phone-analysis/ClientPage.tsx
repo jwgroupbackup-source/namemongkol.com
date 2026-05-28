@@ -25,12 +25,12 @@ const PhoneHeader = () => {
                 <span className="text-xs md:text-sm font-semibold text-amber-100 tracking-wider uppercase">เช็คเบอร์มงคลฟรี</span>
             </div>
             
-            <div aria-hidden="true" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl">
                 {t('pages.phoneAnalysis.heroTitle')}{' '}
                 <span className="text-amber-400 drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">
                     {t('pages.phoneAnalysis.heroHighlight')}
                 </span>
-            </div>
+            </h1>
             
             <p className="text-sm sm:text-base text-slate-300 max-w-[65ch] mx-auto leading-relaxed">
                 {t('pages.phoneAnalysis.heroSubtitle')}

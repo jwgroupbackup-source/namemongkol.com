@@ -9,6 +9,7 @@ import { NameAnalysisDetailCard } from '@/components/NameAnalysisDetailCard';
 // import { toPng } from 'html-to-image';
 // import jsPDF from 'jspdf';
 import { supabase } from '@/utils/supabase';
+import { trackEvent } from '@/lib/analytics';
 
 // Define Result Interface to clear 'any' types if needed, but inferring is fine for now based on usage
 interface AnalysisResultItem {
@@ -72,12 +73,20 @@ export default function NameAnalysisPage() {
         return 100; // Power User (101-1000)
     };
 
+    const trackBulkEvent = (buttonKey: string, metadata: Record<string, unknown> = {}) => {
+        void trackEvent(buttonKey, { metadata });
+    };
+
     const handleAnalyzeClick = async () => {
         // -expect-error Temporary type mismatch with external/runtime data.
             const Swal = (await import('sweetalert2')).default;
         const count = countNames(inputText);
+        const cost = calculateCost(count);
+
+        trackBulkEvent('nameAnalysis.form.analyze_click', { count, cost });
 
         if (count === 0) {
+            trackBulkEvent('nameAnalysis.form.validation_empty');
             Swal.fire({
                 title: 'กรุณากรอกรายชื่อ',
                 text: 'โปรดใส่รายชื่อที่ต้องการวิเคราะห์อย่างน้อย 1 ชื่อ',
@@ -90,6 +99,7 @@ export default function NameAnalysisPage() {
         }
 
         if (count > 1000) {
+            trackBulkEvent('nameAnalysis.form.validation_limit_exceeded', { count });
             Swal.fire({
                 title: 'เกินขีดจำกัด',
                 text: 'รองรับสูงสุด 1,000 รายชื่อต่อครั้ง',
@@ -104,6 +114,7 @@ export default function NameAnalysisPage() {
         // Check Login
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) {
+            trackBulkEvent('nameAnalysis.auth.login_required_modal_shown', { count, cost });
             const result = await Swal.fire({
                 title: 'กรุณาเข้าสู่ระบบ',
                 text: 'ท่านต้องเข้าสู่ระบบก่อนเริ่มการวิเคราะห์',
@@ -116,17 +127,24 @@ export default function NameAnalysisPage() {
                 color: '#fff'
             });
             if (result.isConfirmed) {
-                router.push('/login');
+                trackBulkEvent('nameAnalysis.auth.login_required_confirm', { count, cost });
+                router.push('/login?redirect=/name-analysis');
+            } else {
+                trackBulkEvent('nameAnalysis.auth.login_required_cancel', { count, cost });
             }
             return;
         }
-
-        const cost = calculateCost(count);
 
         // Confirmation & Payment
         if (cost > 0) {
             // Check Balance
             if (userCredits !== null && userCredits < cost) {
+                trackBulkEvent('nameAnalysis.credit.insufficient_modal_shown', {
+                    count,
+                    cost,
+                    userCredits,
+                    deficit: cost - userCredits,
+                });
                 const result = await Swal.fire({
                     title: 'เครดิตไม่เพียงพอ',
                     text: `การวิเคราะห์นี้ต้องใช้ ${cost} เครดิต (ท่านมี ${userCredits})`,
@@ -138,11 +156,25 @@ export default function NameAnalysisPage() {
                     background: '#1e293b',
                     color: '#fff'
                 });
-                if (result.isConfirmed) router.push('/topup');
+                if (result.isConfirmed) {
+                    trackBulkEvent('nameAnalysis.credit.insufficient_topup_click', {
+                        count,
+                        cost,
+                        userCredits,
+                    });
+                    router.push('/topup');
+                } else {
+                    trackBulkEvent('nameAnalysis.credit.insufficient_cancel', {
+                        count,
+                        cost,
+                        userCredits,
+                    });
+                }
                 return;
             }
 
             // Confirm Deduct
+            trackBulkEvent('nameAnalysis.credit.confirm_modal_shown', { count, cost });
             const confirm = await Swal.fire({
                 title: 'ยืนยันการวิเคราะห์',
                 text: `วิเคราะห์ ${count} รายชื่อ ใช้ ${cost} เครดิต`,
@@ -155,13 +187,23 @@ export default function NameAnalysisPage() {
                 color: '#fff'
             });
 
-            if (!confirm.isConfirmed) return;
+            if (!confirm.isConfirmed) {
+                trackBulkEvent('nameAnalysis.credit.confirm_cancel', { count, cost });
+                return;
+            }
+
+            trackBulkEvent('nameAnalysis.credit.confirm_accept', { count, cost });
 
             // Process Deduction
             setIsAnalyzing(true);
             const { error } = await supabase.rpc('deduct_credits', { amount: cost });
             if (error) {
                 console.error(error);
+                trackBulkEvent('nameAnalysis.credit.deduct_failed', {
+                    count,
+                    cost,
+                    error: error.message,
+                });
                 Swal.fire('ข้อผิดพลาด', 'ไม่สามารถตัดเครดิตได้ กรุณาลองใหม่', 'error');
                 setIsAnalyzing(false);
                 return;
@@ -169,6 +211,7 @@ export default function NameAnalysisPage() {
             // Update local credits
             setUserCredits(prev => (prev !== null ? prev - cost : null));
             window.dispatchEvent(new Event('force_credits_update'));
+            trackBulkEvent('nameAnalysis.credit.deduct_success', { count, cost });
         }
 
         // Perform Analysis
@@ -193,6 +236,11 @@ export default function NameAnalysisPage() {
 
         setResults(mapped);
         setIsAnalyzing(false);
+        trackBulkEvent('nameAnalysis.results.rendered', {
+            count,
+            cost,
+            resultCount: mapped.length,
+        });
 
         if (cost > 0) {
             Swal.fire({
@@ -338,6 +386,18 @@ export default function NameAnalysisPage() {
                                 </div>
                             </div>
                         )}
+                    </div>
+
+                    <div className="rounded-2xl border border-amber-500/25 bg-amber-500/10 px-4 py-3 sm:px-5 sm:py-4">
+                        <p className="text-xs sm:text-sm text-amber-100 leading-relaxed">
+                            หน้านี้เป็นฟีเจอร์วิเคราะห์หลายชื่อแบบพรีเมียม: ต้องเข้าสู่ระบบก่อนใช้งาน และคิดค่าบริการตามจำนวนรายชื่อ (เริ่มต้น 5 เครดิต)
+                        </p>
+                        <div className="mt-2 text-[11px] sm:text-xs text-amber-200/90">
+                            หากต้องการเช็กชื่อเดี่ยวแบบไม่ล็อกอิน ใช้หน้า 
+                            <Link href="/name-check" className="underline hover:text-white transition-colors">
+                                วิเคราะห์ชื่อ-นามสกุลฟรี
+                            </Link>
+                        </div>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start">

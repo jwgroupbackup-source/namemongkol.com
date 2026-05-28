@@ -1,8 +1,7 @@
 import AboutSection from '@/components/AboutSection';
 import { Metadata } from 'next';
 import Script from 'next/script';
-
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com').replace(/\/$/, '');
+import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
     title: 'เกี่ยวกับเรา | NameMongkol วิเคราะห์ชื่อ เบอร์ ลายมือ ออร่า',
@@ -12,13 +11,13 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'เกี่ยวกับเรา | NameMongkol วิเคราะห์ชื่อ เบอร์ ลายมือ',
         description: 'NameMongkol แพลตฟอร์มวิเคราะห์ชื่อมงคลอันดับ 1 ของไทย ครบวงจรด้วยบริการวิเคราะห์ชื่อเจาะลึก เช็คเบอร์ วิเคราะห์ลายมือ AI ออร่า และวอลเปเปอร์มงคล',
-        url: 'https://www.namemongkol.com/about',
+        url: `${siteUrl}/about`,
         siteName: 'NameMongkol',
         locale: 'th_TH',
         type: 'website',
         images: [
             {
-                url: '/api/og?variant=about',
+                url: `${siteUrl}/api/og?variant=about`,
                 width: 1200,
                 height: 630,
                 alt: 'NameMongkol - วิเคราะห์ชื่อมงคล ตั้งชื่อลูก เปลี่ยนชื่อเสริมดวง',
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'เกี่ยวกับเรา | NameMongkol วิเคราะห์ชื่อ เบอร์ ลายมือ',
         description: 'NameMongkol แพลตฟอร์มวิเคราะห์ชื่อมงคลอันดับ 1 ของไทย พร้อมเช็คเบอร์มงคลฟรี วิเคราะห์ลายมือออนไลน์ ช่วยตั้งชื่อลูก เปลี่ยนชื่อเสริมดวง',
-        images: ['/api/og?variant=about'],
+        images: [`${siteUrl}/api/og?variant=about`],
     },
 
 };

@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Mail, Lock, ArrowRight, Facebook, Eye, EyeOff, Loader2, AlertCircle, Clock, CheckCircle } from 'lucide-react';
 import { supabase } from '@/utils/supabase';
+import { trackEvent } from '@/lib/analytics';
 
 // Rate limit error interface
 interface RateLimitError {
@@ -35,6 +36,17 @@ export default function LoginClientPage() {
         if (!candidate.startsWith('/') || candidate.startsWith('//')) return '/';
         return candidate;
     }, [searchParams]);
+
+    const isBulkRedirect = getSafeRedirectPath().startsWith('/name-analysis');
+
+    useEffect(() => {
+        if (!isBulkRedirect) return;
+        void trackEvent('login.page.from_bulk_analysis', {
+            metadata: {
+                redirect: getSafeRedirectPath(),
+            },
+        });
+    }, [getSafeRedirectPath, isBulkRedirect]);
 
     // Format retry time for display
     const formatRetryTime = useCallback((seconds: number): string => {
@@ -167,6 +179,11 @@ export default function LoginClientPage() {
                         <p className="text-slate-400 text-sm">
                             ยินดีต้อนรับกลับเข้าสู่ระบบ
                         </p>
+                        {isBulkRedirect && (
+                            <p className="mt-3 text-xs text-amber-300/90 bg-amber-500/10 border border-amber-500/20 rounded-lg px-3 py-2">
+                                เข้าสู่ระบบเพื่อใช้งานวิเคราะห์หลายชื่อแบบพรีเมียม (ใช้เครดิตตามจำนวนชื่อ)
+                            </p>
+                        )}
                     </div>
 
                     {/* Value Proposition */}

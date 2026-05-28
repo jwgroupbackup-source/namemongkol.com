@@ -53,9 +53,9 @@ const softwareAppSchema = {
     'operatingSystem': 'Web Browser',
     'offers': {
         '@type': 'Offer',
-        'price': '0',
+        'price': '5',
         'priceCurrency': 'THB',
-        'description': 'ใช้งานผ่านระบบเครดิต (เริ่มต้น 5 เครดิต สำหรับ 1-10 ชื่อ)',
+        'description': 'ใช้งานผ่านระบบเครดิต เริ่มต้น 5 เครดิตสำหรับการวิเคราะห์ 1-10 ชื่อ',
     },
     'featureList': [
         'วิเคราะห์ชื่อพร้อมกันสูงสุด 1,000 ชื่อ',

@@ -3,8 +3,7 @@ import Link from 'next/link';
 import Script from 'next/script';
 import { Book, Scale, AlertCircle, Copyright, ArrowLeft, ShieldCheck, Zap } from 'lucide-react';
 import { Metadata } from 'next';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
     title: 'ข้อตกลงและเงื่อนไข | NameMongkol',

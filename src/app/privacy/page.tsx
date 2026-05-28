@@ -1,10 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import Script from 'next/script';
-import { Shield, Lock, Eye, FileText, ArrowLeft, CheckCircle2, UserCheck, Cookie, Scale } from 'lucide-react';
+import { Shield, Lock, Eye, FileText, ArrowLeft, CheckCircle2, Cookie, Scale } from 'lucide-react';
 import { Metadata } from 'next';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
     title: 'นโยบายความเป็นส่วนตัว | NameMongkol - PDPA',

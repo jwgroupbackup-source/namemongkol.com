@@ -159,9 +159,9 @@ const SimpleGradeCard = ({ grade, phoneNumber }: { grade: string; phoneNumber: s
 
     return (
         <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 shadow-2xl border border-white/10 text-center">
-            <h1 className="text-5xl sm:text-6xl font-bold text-white tracking-tight font-mono mb-6 drop-shadow-md">
+            <h2 className="text-5xl sm:text-6xl font-bold text-white tracking-tight font-mono mb-6 drop-shadow-md">
                 {phoneNumber}
-            </h1>
+            </h2>
 
             <div className="flex flex-col items-center justify-center gap-2 mb-8">
                 <div className="relative">
@@ -243,9 +243,9 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
                     <div className="lg:col-span-5 space-y-4">
                         <div className="text-center lg:text-left">
                             <h2 className="text-amber-500 font-medium tracking-wide uppercase text-[10px] mb-1">ผลวิเคราะห์ทำนายเบอร์</h2>
-                            <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight font-mono mb-2 text-shadow-md">
+                            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight font-mono mb-2 text-shadow-md">
                                 {result.phoneNumber}
-                            </h1>
+                            </h2>
                             <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-700 to-transparent mb-3" />
                         </div>
 

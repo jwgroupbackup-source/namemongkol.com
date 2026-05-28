@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 import ClientPage from './ClientPage';
 import { createClient } from '@/utils/supabaseServer';
 import { Review, ReviewServiceType } from '@/types';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 
 // Service type mapping for SEO - ชื่อบริการและ URL
 const SERVICE_INFO: Record<ReviewServiceType, { name: string; url: string }> = {

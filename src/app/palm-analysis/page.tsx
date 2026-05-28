@@ -3,8 +3,7 @@ import { Metadata } from 'next';
 import PalmAnalysisClient from './PalmAnalysisClient';
 import { PalmSeoContent } from '@/components/PalmSeoContent';
 import PalmHeroBanner from '@/components/palm-analysis/PalmHeroBanner';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.namemongkol.com';
+import { siteUrl } from '@/lib/seo';
 const canonicalUrl = `${siteUrl.replace(/\/$/, '')}/palm-analysis`;
 
 export const metadata: Metadata = {
