@@ -5,7 +5,7 @@ export const articleMondayGirlNames2569: Article = {
     slug: 'monday-girl-names-2569-no-sara',
     title: '400 ชื่อมงคล คนเกิดวันจันทร์ ผู้หญิง 2569 ทันสมัย ไม่มีสระ',
     excerpt: 'รวม 400 ไอเดียตั้งชื่อมงคล คนเกิดวันจันทร์ ผู้หญิง อัปเดตปี 2569 คัดเน้นๆ ชื่อลูกสาวความหมายดี อินเตอร์ ทันสมัย ถูกหลักทักษา ไม่มีสระกาลกิณี 100%',
-    coverImage: '/images/articles/monday-girl-names-2569.webp',
+    coverImage: '/images/articles/400-ชื่อมงคล-เด็กหญิง-วันจันทร์-2569.webp',
     coverImageAlt: '400 ชื่อมงคล คนเกิดวันจันทร์ ผู้หญิง 2569 ทันสมัย ไม่มีสระกาลกิณี',
     date: '2026-04-22',
     author: 'อาจารย์ณัฐ (NameMongkol)',

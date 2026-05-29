@@ -11,6 +11,11 @@ import { articleThaksaGuide } from './article-thaksa-guide';
 import { articleNameByBirthday } from './article-name-by-birthday';
 import { articleWhatIsNameAnalysis } from './article-what-is-name-analysis';
 import { articleNumberPairs } from './article-number-pairs';
+import { articleBirthdayNames700 } from './article-birthday-names-700-2569';
+import { articleMondayGirlNoVowelMeaning2569 } from './article-monday-girl-no-vowel-meaning-2569';
+import { articleSundayBoyNamesAvoidKalakini2569 } from './article-sunday-boy-names-avoid-kalakini-2569';
+import { articleFreeNameAnalysisNumerologyGuide } from './article-free-name-analysis-numerology-guide';
+import { articleChangeNameChecklistNumerologyThaksaAyatana } from './article-change-name-checklist-numerology-thaksa-ayatana';
 
 export interface FaqItem {
     question: string;
@@ -39,10 +44,15 @@ export interface Article {
 
 export const articles: Article[] = [
     articleWhatIsNameAnalysis,
+    articleFreeNameAnalysisNumerologyGuide,
+    articleChangeNameChecklistNumerologyThaksaAyatana,
     articleNumberPairs,
+    articleBirthdayNames700,
     articleNicknameKalakini,
     articleBoyNames2569,
+    articleSundayBoyNamesAvoidKalakini2569,
     articleGirlNames2569,
+    articleMondayGirlNoVowelMeaning2569,
     articleMondayGirlNames2569,
     articleKidsNaming2569,
     articleLuckyNumbers2569,
@@ -9301,4 +9311,3 @@ export const articles: Article[] = [
     },
     articleMondayGirlNames2569
 ];
-
