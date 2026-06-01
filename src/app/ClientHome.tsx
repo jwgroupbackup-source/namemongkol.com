@@ -46,8 +46,6 @@ const TestimonialSection = dynamic(() => import('@/components/TestimonialSection
 const UspSection = dynamic(() => import('@/components/UspSection').then(mod => mod.UspSection));
 const ComparisonSection = dynamic(() => import('@/components/ComparisonSection').then(mod => mod.ComparisonSection));
 const BirthdayThaksaSection = dynamic(() => import('@/components/BirthdayThaksaSection').then(mod => mod.BirthdayThaksaSection));
-const TrustStrip = dynamic(() => import('@/components/TrustStrip').then(mod => mod.TrustStrip));
-const PrivacyStrip = dynamic(() => import('@/components/PrivacyStrip').then(mod => mod.PrivacyStrip));
 const HowItWorksSection = dynamic(() => import('@/components/HowItWorksSection').then(mod => mod.HowItWorksSection));
 const BulkAnalysisUpsell = dynamic(() => import('@/components/BulkAnalysisUpsell').then(mod => mod.BulkAnalysisUpsell));
 const BulkAnalysisBanner = dynamic(() => import('@/components/BulkAnalysisBanner').then(mod => mod.BulkAnalysisBanner));
@@ -404,11 +402,7 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
                                 onAnalyze={handleAnalyzeClick}
                                 loading={loading}
                             />
-                            <div className="mx-auto mt-3 w-full max-w-lg">
-                                <PrivacyStrip />
-                                <TrustStrip />
-                                <InlineSignupCTA />
-                            </div>
+                            <InlineSignupCTA />
                         </div>
                     </div>
                 ) : (
