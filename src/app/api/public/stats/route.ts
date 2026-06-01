@@ -3,13 +3,37 @@ import { createClient } from '@supabase/supabase-js';
 
 export const revalidate = 300; // Cache 5 minutes
 
-const getSupabase = () => createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
-);
+const fallbackStats = {
+    totalAnalyses: 0,
+    weeklyAnalyses: 0,
+    totalUsers: 0,
+    avgRating: 5.0,
+    reviewCount: 0,
+};
+
+const getSupabase = () => {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseKey) return null;
+
+    return createClient(supabaseUrl, supabaseKey);
+};
 
 export async function GET() {
     const supabase = getSupabase();
+
+    if (!supabase) {
+        return NextResponse.json(
+            { success: false, stats: fallbackStats },
+            {
+                headers: {
+                    'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+                },
+            },
+        );
+    }
+
     try {
         const weekAgoIso = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
 
@@ -46,7 +70,7 @@ export async function GET() {
         });
     } catch {
         return NextResponse.json(
-            { success: false, stats: { totalAnalyses: 0, weeklyAnalyses: 0, totalUsers: 0, avgRating: 5.0, reviewCount: 0 } },
+            { success: false, stats: fallbackStats },
             { status: 500 },
         );
     }
