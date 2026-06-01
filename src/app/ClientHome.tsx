@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import { ChevronRight } from 'lucide-react';
+import { CheckCircle2, ChevronRight, Layers3, ShieldCheck, Sparkles } from 'lucide-react';
 import { supabase } from '@/utils/supabase';
 import { saveAnalysisResult } from '@/services/analysisService';
 import { checkNirunName } from '@/app/actions/checkNirunName';
@@ -149,6 +149,51 @@ function DeferredSection({
         >
             {isVisible ? children : null}
         </div>
+    );
+}
+
+function HomeResultPreview() {
+    const previewItems = [
+        {
+            icon: CheckCircle2,
+            title: 'คะแนนชื่อและนามสกุล',
+            description: 'เห็นภาพรวมพลังชื่อ พร้อมเกรดและคำอธิบายที่อ่านง่าย',
+        },
+        {
+            icon: Layers3,
+            title: 'ถอดรหัส 4 ศาสตร์หลัก',
+            description: 'เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และนิรันดร์ศาสตร์ใน flow เดียว',
+        },
+        {
+            icon: ShieldCheck,
+            title: 'เริ่มฟรีก่อนสมัคร',
+            description: 'ลองวิเคราะห์ได้ทันที แล้วค่อยบันทึกหรือปลดล็อกผลเชิงลึกเมื่อพร้อม',
+        },
+    ];
+
+    return (
+        <section className="relative z-10 w-full px-4 pb-6 sm:px-6 lg:px-12 xl:px-16">
+            <div className="mx-auto grid w-full max-w-[1180px] gap-5 rounded-[1.75rem] border border-amber-100/10 bg-[#070a15]/42 p-4 shadow-[0_22px_70px_rgba(1,4,15,0.28)] backdrop-blur-md sm:p-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:p-8">
+                <div>
+                    <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-200/15 bg-amber-200/10 px-3 py-1 text-xs font-semibold text-amber-100">
+                        <Sparkles className="h-3.5 w-3.5" />
+                        หลังกรอกชื่อแล้วได้อะไร
+                    </p>
+                    <h2 className="text-2xl font-bold leading-tight text-white sm:text-3xl">
+                        ผลลัพธ์แรกต้องตอบได้ทันทีว่า ชื่อนี้ควรไปต่อไหม
+                    </h2>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-3">
+                    {previewItems.map((item) => (
+                        <article key={item.title} className="rounded-2xl border border-white/8 bg-white/[0.04] p-4">
+                            <item.icon className="mb-3 h-5 w-5 text-amber-200" />
+                            <h3 className="text-sm font-bold text-white">{item.title}</h3>
+                            <p className="mt-2 text-xs leading-6 text-slate-400">{item.description}</p>
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </section>
     );
 }
 
@@ -340,27 +385,31 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
 
     return (
         <div className="relative min-h-screen overflow-hidden font-sans text-slate-100 selection:bg-amber-500 selection:text-white">
-            <main className="relative z-10 w-full max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-12 xl:px-16 pt-14 md:pt-28 pb-24 md:pb-28 flex flex-col items-center min-h-[80vh]">
+            <main className="relative z-10 w-full max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-12 xl:px-16 pt-12 md:pt-24 pb-12 md:pb-20 flex flex-col items-center min-h-[78vh]">
 
                 {!result ? (
-                    <div className="w-full max-w-2xl flex flex-col items-center">
+                    <div className="grid w-full max-w-[1180px] items-start gap-5 lg:grid-cols-[minmax(0,1.06fr)_minmax(420px,0.94fr)] lg:gap-8 xl:gap-12">
                         {/* HeroBanner: no delay — renders immediately for LCP */}
-                        <div className="w-full">
+                        <div className="w-full lg:pt-8">
                             <HeroBanner headingLevel={heroHeadingLevel} />
                         </div>
-                        <InputForm
-                            name={name}
-                            surname={surname}
-                            day={day}
-                            onNameChange={setName}
-                            onSurnameChange={setSurname}
-                            onDayChange={setDay}
-                            onAnalyze={handleAnalyzeClick}
-                            loading={loading}
-                        />
-                        <PrivacyStrip />
-                        <TrustStrip />
-                        <InlineSignupCTA />
+                        <div className="w-full lg:sticky lg:top-24">
+                            <InputForm
+                                name={name}
+                                surname={surname}
+                                day={day}
+                                onNameChange={setName}
+                                onSurnameChange={setSurname}
+                                onDayChange={setDay}
+                                onAnalyze={handleAnalyzeClick}
+                                loading={loading}
+                            />
+                            <div className="mx-auto mt-3 w-full max-w-lg">
+                                <PrivacyStrip />
+                                <TrustStrip />
+                                <InlineSignupCTA />
+                            </div>
+                        </div>
                     </div>
                 ) : (
                     <div className="w-full max-w-5xl animate-fade-in flex flex-col gap-5 sm:gap-6 md:gap-8">
@@ -432,6 +481,7 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
 
             {!result && (
                 <>
+                    <HomeResultPreview />
                     <DeferredSection minHeightClassName="min-h-[640px]" preloadDelayMs={250} intrinsicSize="640px">
                         <WallpaperShowcase stats={homeSectionsData.wallpapers} />
                     </DeferredSection>
