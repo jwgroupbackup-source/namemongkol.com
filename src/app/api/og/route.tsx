@@ -262,7 +262,7 @@ export async function GET(req: Request) {
           display: 'flex',
           position: 'relative',
           alignItems: 'stretch',
-          justifyContent: 'stretch',
+          justifyContent: 'flex-start',
           backgroundImage: baseBackground,
           overflow: 'hidden',
           color: '#f8fafc',
