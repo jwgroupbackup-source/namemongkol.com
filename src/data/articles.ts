@@ -2456,7 +2456,10 @@ export const articles: Article[] = [
             { title: 'ความลับของคู่เลขมงคล', id: 'pairing-secret', level: 2 },
             { title: 'สรุปแนวทางการเลือกทีม', id: 'conclusion', level: 2 },
         ],
-        relatedSlugs: ['auspicious-names-by-birthday-2026', 'micro-analysis-lucky-number-pairs', '100-auspicious-boy-names-2569'],
+        metaTitle: 'ชื่อมงคล 2569 เกรด A+ 20 ชื่อพร้อมวิเคราะห์เลขศาสตร์ | NameMongkol',
+        metaDescription: 'รวม 20 ชื่อมงคลปี 2569 เกรด A+ พร้อมเหตุผลการคัดเลือก ผลรวมเลขศาสตร์ คู่เลข และแนวทางเลือกชื่อให้เหมาะกับวันเกิดและนามสกุล',
+        dateModified: '2026-06-02',
+        relatedSlugs: ['auspicious-names-by-birthday-2026', 'micro-analysis-lucky-number-pairs', '100-auspicious-boy-names-2569', 'what-is-name-analysis'],
         content: `
             <div class="space-y-8">
                 <div id="intro">

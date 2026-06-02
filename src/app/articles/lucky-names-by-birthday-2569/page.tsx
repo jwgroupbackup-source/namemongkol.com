@@ -60,6 +60,16 @@ export default function ArticleLuckyNamesByBirthday2569() {
     const plainText = article.content.replace(/<[^>]*>/g, '');
     const wordCount = plainText.split(/\s+/).filter(Boolean).length;
     const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 200));
+    const schemaKeywords = (article.keywords || []).slice(0, 8);
+    const articleEntityTopics = [
+        article.category,
+        ...schemaKeywords,
+    ].filter(Boolean);
+    const directAnswerItems = article.toc
+        ?.filter((item) => item.level === 2)
+        .slice(0, 3)
+        .map((item) => item.title)
+        .filter(Boolean) || [];
 
     // Breadcrumb JSON-LD
     const breadcrumbJsonLd = {
@@ -124,6 +134,31 @@ export default function ArticleLuckyNamesByBirthday2569() {
                         "keywords": article.keywords?.join(', ') || '',
                         "articleSection": article.category || '',
                         "wordCount": wordCount,
+                        "isAccessibleForFree": true,
+                        "about": articleEntityTopics.map((name) => ({
+                            "@type": "Thing",
+                            "name": name,
+                        })),
+                        "mentions": [
+                            {
+                                "@type": "SoftwareApplication",
+                                "name": "NameMongkol วิเคราะห์ชื่อฟรี",
+                                "url": `${baseUrl}/name-check`,
+                                "applicationCategory": "LifestyleApplication",
+                                "operatingSystem": "Web",
+                            },
+                            {
+                                "@type": "SoftwareApplication",
+                                "name": "NameMongkol ค้นหาชื่อมงคล Premium",
+                                "url": `${baseUrl}/premium-search`,
+                                "applicationCategory": "LifestyleApplication",
+                                "operatingSystem": "Web",
+                            },
+                        ],
+                        "speakable": {
+                            "@type": "SpeakableSpecification",
+                            "cssSelector": ["h1", ".article-direct-answer", "#faq-section"],
+                        },
                         "inLanguage": "th",
                     })
                 }}
@@ -203,6 +238,40 @@ export default function ArticleLuckyNamesByBirthday2569() {
                             className="group-hover:scale-100"
                         />
                     </div>
+
+                    <section
+                        aria-labelledby="article-summary-heading"
+                        className="article-direct-answer mb-10 rounded-2xl border border-white/10 bg-slate-950/70 p-5 shadow-[0_24px_70px_rgba(0,0,0,0.32)] sm:p-6"
+                    >
+                        <div className="mb-3 inline-flex items-center rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-xs font-semibold text-amber-200">
+                            สรุปก่อนอ่าน
+                        </div>
+                        <h2 id="article-summary-heading" className="text-xl font-bold leading-snug text-white sm:text-2xl">
+                            บทความนี้ช่วยคัดชื่อมงคลตามวันเกิดให้ใช้งานได้เร็วขึ้น
+                        </h2>
+                        <p className="mt-3 text-sm leading-relaxed text-slate-300 sm:text-base">
+                            ใช้หน้านี้เพื่อดูแนวทางเลือกชื่อมงคลตามวันเกิด แยกหัวข้อสำคัญให้สแกนง่าย แล้วต่อยอดไปตรวจชื่อจริงร่วมกับนามสกุลในเครื่องมือของ NameMongkol ได้ทันที
+                        </p>
+                        {directAnswerItems.length > 0 && (
+                            <ul className="mt-5 grid gap-3">
+                                {directAnswerItems.map((item) => (
+                                    <li key={item} className="rounded-xl border border-white/5 bg-white/[0.03] p-3 text-sm leading-relaxed text-slate-200">
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                            <Link href="/name-check" className="rounded-xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm font-bold text-white transition hover:border-amber-300/40 hover:bg-amber-300/15">
+                                วิเคราะห์ชื่อฟรี
+                                <span className="mt-1 block text-xs font-normal leading-relaxed text-slate-300">ตรวจชื่อจริงร่วมกับนามสกุลตาม 4 ศาสตร์</span>
+                            </Link>
+                            <Link href="/premium-search" className="rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm font-bold text-white transition hover:border-amber-300/30 hover:bg-white/[0.06]">
+                                ค้นหาชื่อมงคล Premium
+                                <span className="mt-1 block text-xs font-normal leading-relaxed text-slate-300">คัดชื่อพร้อมคะแนน ความหมาย และแนวทางเลือกใช้งาน</span>
+                            </Link>
+                        </div>
+                    </section>
 
                     {/* Table of Contents */}
                     {article.toc && article.toc.length > 0 && (

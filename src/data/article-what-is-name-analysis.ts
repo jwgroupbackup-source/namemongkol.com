@@ -11,6 +11,9 @@ export const articleWhatIsNameAnalysis = {
     keywords: ['วิเคราะห์ชื่อ', 'วิเคราะห์ชื่อคืออะไร', 'วิเคราะห์ชื่อมงคล', 'เลขศาสตร์', 'ทักษาปกรณ์', 'นิรันดร์ศาสตร์'],
     description: 'เรียนรู้ว่าวิเคราะห์ชื่อคืออะไร? ทำไมต้องเช็คทั้งชื่อและนามสกุล? อธิบายโดยละเอียดเกี่ยวกับ 4 ศาสตร์โบราณ ตำราเลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และนิรันดร์ศาสตร์',
     excerpt: 'คู่มือฉบับสมบูรณ์สำหรับผู้เริ่มต้นที่ต้องการเข้าใจการวิเคราะห์ชื่อตามศาสตร์โบราณไทย 4 แขนง',
+    metaTitle: 'วิเคราะห์ชื่อคืออะไร ทำไมต้องเช็กชื่อกับนามสกุล | NameMongkol',
+    metaDescription: 'อธิบายการวิเคราะห์ชื่อมงคลแบบเข้าใจง่าย ครอบคลุมเลขศาสตร์ ทักษา อายตนะ 6 และนิรันดร์ศาสตร์ พร้อมเหตุผลว่าทำไมต้องเช็กชื่อกับนามสกุลร่วมกัน',
+    relatedSlugs: ['free-name-analysis-numerology-guide', 'change-auspicious-name-checklist-numerology-thaksa-ayatana-surname', 'namemongkol-number-pairs', '4-pillars-of-naming', 'numerology-0-9-power-guide'],
     coverImage: '/images/articles/what-is-name-analysis.webp',
     coverImageAlt: 'วิเคราะห์ชื่อ คืออะไร - คู่มือ 4 ศาสตร์โบราณ',
     content: `

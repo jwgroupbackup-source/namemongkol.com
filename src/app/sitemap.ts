@@ -88,13 +88,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         if (!supabase) throw new Error('Supabase is not configured');
         const { data: articles } = await supabase
             .from('articles')
-            .select('slug, date')
+            .select('slug, date, date_modified')
             .eq('is_published', true);
 
         if (articles) {
             articleUrls = articles.map((article) => ({
                 url: `${baseUrl}/articles/${article.slug}`,
-                lastModified: article.date ? new Date(article.date) : new Date(),
+                lastModified: (article.date_modified || article.date) ? new Date(article.date_modified || article.date) : new Date(),
                 changeFrequency: 'weekly' as const,
                 priority: 0.8,
             }))
@@ -112,7 +112,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const localArticleUrls: MetadataRoute.Sitemap = localArticles.map((article) => ({
         url: `${baseUrl}/articles/${article.slug}`,
-        lastModified: article.date ? new Date(article.date) : new Date(),
+        lastModified: (article.dateModified || article.date) ? new Date(article.dateModified || article.date) : new Date(),
         changeFrequency: 'weekly' as const,
         priority: localArticlePriority[article.slug] ?? 0.9,
     }));

@@ -77,25 +77,30 @@ async function fetchPublishedArticlesDb(): Promise<Article[]> {
 
     const rows = data as DbArticleRow[];
 
-    return rows.map((item) => ({
+    return rows.map((item) => {
+        const localMatch = localArticles.find((article) => article.slug === item.slug)
+            || localArticles.find((article) => article.title === item.title);
+
+        return ({
         id: item.id,
         slug: item.slug,
         title: item.title,
         excerpt: item.excerpt,
-        content: item.content,
-        coverImage: item.cover_image,
-        coverImageAlt: item.cover_image_alt ?? undefined,
+        content: item.content || localMatch?.content || '',
+        coverImage: item.cover_image || localMatch?.coverImage || '',
+        coverImageAlt: item.cover_image_alt ?? localMatch?.coverImageAlt,
         date: item.date,
         author: item.author,
         category: item.category,
         keywords: item.keywords,
-        metaTitle: item.meta_title ?? undefined,
-        metaDescription: item.meta_description ?? undefined,
-        relatedSlugs: item.related_slugs ?? [],
-        toc: item.toc ?? [],
-        faqItems: item.faq_items ?? [],
-        dateModified: item.date_modified ?? item.date,
-    }));
+        metaTitle: item.meta_title || localMatch?.metaTitle,
+        metaDescription: item.meta_description || localMatch?.metaDescription,
+        relatedSlugs: item.related_slugs?.length ? item.related_slugs : (localMatch?.relatedSlugs ?? []),
+        toc: item.toc?.length ? item.toc : (localMatch?.toc ?? []),
+        faqItems: item.faq_items?.length ? item.faq_items : (localMatch?.faqItems ?? []),
+        dateModified: item.date_modified || localMatch?.dateModified || item.date,
+        });
+    });
 }
 
 // Cache DB queries for 1 hour (matches ISR revalidate)
@@ -149,20 +154,20 @@ const getArticle = async (slug: string): Promise<Article | null> => {
         slug: data.slug,
         title: data.title,
         excerpt: data.excerpt,
-        content: data.content,
-        coverImage: data.cover_image, // Map here
-        coverImageAlt: data.cover_image_alt,
+        content: data.content || localMatch?.content || '',
+        coverImage: data.cover_image || localMatch?.coverImage || '', // Map here
+        coverImageAlt: data.cover_image_alt || localMatch?.coverImageAlt,
         date: data.date,
         author: data.author,
         category: data.category,
         keywords: data.keywords,
-        metaTitle: data.meta_title, // Map here
-        metaDescription: data.meta_description, // Map here
+        metaTitle: data.meta_title || localMatch?.metaTitle, // Map here
+        metaDescription: data.meta_description || localMatch?.metaDescription, // Map here
         // DB columns for these are nullable; fallback to empty
-        relatedSlugs: data.related_slugs ?? [],
-        toc: data.toc ?? [],
-        faqItems: data.faq_items ?? [],
-        dateModified: data.date_modified ?? data.date,
+        relatedSlugs: data.related_slugs?.length ? data.related_slugs : (localMatch?.relatedSlugs ?? []),
+        toc: data.toc?.length ? data.toc : (localMatch?.toc ?? []),
+        faqItems: data.faq_items?.length ? data.faq_items : (localMatch?.faqItems ?? []),
+        dateModified: data.date_modified || localMatch?.dateModified || data.date,
     };
 
     // ── Palmistry-specific SEO enrichment (single-slug gating) ──
@@ -187,6 +192,47 @@ const getArticle = async (slug: string): Promise<Article | null> => {
 
     return mapped;
 };
+
+function stripHtml(value: string) {
+    return value
+        .replace(/<[^>]*>/g, '')
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&amp;/g, '&')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function enhanceArticleContent(content: string, toc?: Article['toc']) {
+    if (toc && toc.length > 0) {
+        return { content, toc };
+    }
+
+    let index = 0;
+    const generatedToc: NonNullable<Article['toc']> = [];
+    const enhancedContent = content.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, level, attrs, inner) => {
+        const title = stripHtml(inner);
+        if (!title) return match;
+
+        const existingId = String(attrs).match(/\sid=["']([^"']+)["']/i)?.[1];
+        const id = existingId || `article-section-${++index}`;
+
+        generatedToc.push({
+            title,
+            id,
+            level: Number(level),
+        });
+
+        if (existingId) return match;
+        return `<h${level}${attrs} id="${id}">${inner}</h${level}>`;
+    });
+
+    return {
+        content: enhancedContent,
+        toc: generatedToc.slice(0, 12),
+    };
+}
 
 function getArticleTakeaways(article: Article) {
     const tocTakeaways = article.toc
@@ -254,6 +300,42 @@ function getArticleIntentLinks(article: Article) {
     return links.slice(0, 4);
 }
 
+function getFallbackFaqItems(article: Article) {
+    const searchText = `${article.title} ${article.excerpt} ${article.category} ${(article.keywords || []).join(' ')}`.toLowerCase();
+
+    if (searchText.includes('เบอร์') || searchText.includes('phone')) {
+        return [
+            {
+                question: `บทความ "${article.title}" เหมาะกับใคร?`,
+                answer: 'เหมาะกับผู้ที่ต้องการเข้าใจหลักการเลือกและวิเคราะห์เบอร์มงคลก่อนตัดสินใจใช้เบอร์จริง โดยควรดูทั้งคู่เลข ผลรวม และความเหมาะกับวันเกิดหรือเป้าหมายชีวิต',
+            },
+            {
+                question: 'ควรเช็กเบอร์มงคลด้วยเครื่องมือก่อนเปลี่ยนเบอร์ไหม?',
+                answer: 'ควรเช็กก่อนเสมอ เพราะการดูเฉพาะเลขสวยหรือผลรวมอย่างเดียวอาจไม่เห็นคู่เลขที่เป็นจุดเสี่ยง เครื่องมือวิเคราะห์เบอร์จะช่วยสรุปภาพรวมและจุดที่ควรระวังได้เร็วขึ้น',
+            },
+            {
+                question: 'อ่านบทความแล้วควรทำอะไรต่อ?',
+                answer: 'นำหลักในบทความไปตรวจเบอร์ที่ใช้อยู่หรือเบอร์ที่กำลังจะเลือก จากนั้นเปรียบเทียบผลวิเคราะห์กับเป้าหมายด้านงาน เงิน ความรัก และสุขภาพก่อนตัดสินใจ',
+            },
+        ];
+    }
+
+    return [
+        {
+            question: `บทความ "${article.title}" สรุปประเด็นสำคัญเรื่องอะไร?`,
+            answer: `บทความนี้ช่วยอธิบายแนวคิดหลักของ${article.category || 'การตั้งชื่อมงคล'} พร้อมจุดที่ควรตรวจสอบก่อนเลือกชื่อหรือใช้ชื่อนั้นจริง เพื่อให้ผู้อ่านตัดสินใจได้เป็นระบบมากขึ้น`,
+        },
+        {
+            question: 'ควรวิเคราะห์ชื่อกับนามสกุลพร้อมกันหรือไม่?',
+            answer: 'ควรวิเคราะห์ชื่อและนามสกุลร่วมกัน เพราะพลังเลขศาสตร์ ทักษา อายตนะ และความสมพงศ์ของชื่อจะอ่านได้แม่นขึ้นเมื่อดูชื่อเต็ม ไม่ใช่ดูชื่อจริงแยกออกจากนามสกุลเพียงอย่างเดียว',
+        },
+        {
+            question: 'อ่านบทความแล้วควรเริ่มเช็กชื่อจากจุดไหน?',
+            answer: 'เริ่มจากตรวจผลรวมเลขศาสตร์ อักษรกาลกิณีตามวันเกิด ความหมายของชื่อ และความเข้ากันกับนามสกุล จากนั้นใช้เครื่องมือวิเคราะห์ชื่อเพื่อดูภาพรวมทั้ง 4 ศาสตร์อีกครั้ง',
+        },
+    ];
+}
+
 function ArticleEnhancementBlock({ article }: { article: Article }) {
     const takeaways = getArticleTakeaways(article);
     const intentLinks = getArticleIntentLinks(article);
@@ -262,7 +344,7 @@ function ArticleEnhancementBlock({ article }: { article: Article }) {
     return (
         <section
             aria-labelledby="article-summary-heading"
-            className="not-prose mb-10 rounded-2xl border border-white/10 bg-slate-950/70 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.32)] sm:p-6"
+            className="article-direct-answer not-prose mb-10 rounded-2xl border border-white/10 bg-slate-950/70 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.32)] sm:p-6"
         >
             <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
                 <div className="flex flex-col justify-between">
@@ -427,9 +509,13 @@ export default async function ArticlePage({ params }: Props) {
     };
     const hasBeenModified = article.dateModified && article.dateModified !== article.date;
     const isPalmistryArticle = slug === PALMISTRY_SLUG;
+    const enhancedArticleContent = enhanceArticleContent(article.content, article.toc);
+    const effectiveToc = enhancedArticleContent.toc;
+    const effectiveFaqItems = article.faqItems && article.faqItems.length > 0 ? article.faqItems : getFallbackFaqItems(article);
+    const articleWithEffectiveEnhancements = { ...article, toc: effectiveToc, faqItems: effectiveFaqItems };
 
     // ── Reading time estimate ──
-    const plainText = article.content.replace(/<[^>]*>/g, '');
+    const plainText = enhancedArticleContent.content.replace(/<[^>]*>/g, '');
     const wordCount = plainText.split(/\s+/).filter(Boolean).length;
     const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 200)); // ~200 words/min for Thai
 
@@ -450,6 +536,11 @@ export default async function ArticlePage({ params }: Props) {
         );
         relatedArticles = [...relatedArticles, ...categoryMatches].slice(0, 3);
     }
+    const schemaKeywords = (article.keywords || []).slice(0, 8);
+    const articleEntityTopics = [
+        article.category,
+        ...schemaKeywords,
+    ].filter(Boolean);
 
     // ── Breadcrumb Schema (uses consistent baseUrl) ──
     const breadcrumbJsonLd = {
@@ -478,10 +569,10 @@ export default async function ArticlePage({ params }: Props) {
     };
 
     // ── FAQPage JSON-LD (only when faqItems exist) ──
-    const faqJsonLd = article.faqItems && article.faqItems.length > 0 ? {
+    const faqJsonLd = effectiveFaqItems.length > 0 ? {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
-        'mainEntity': article.faqItems.map(item => ({
+        'mainEntity': effectiveFaqItems.map(item => ({
             '@type': 'Question',
             'name': item.question,
             'acceptedAnswer': {
@@ -513,6 +604,31 @@ export default async function ArticlePage({ params }: Props) {
                         "articleSection": article.category,
                         "keywords": article.keywords?.join(', '),
                         "wordCount": wordCount,
+                        "isAccessibleForFree": true,
+                        "about": articleEntityTopics.map((name) => ({
+                            "@type": "Thing",
+                            "name": name,
+                        })),
+                        "mentions": [
+                            {
+                                "@type": "SoftwareApplication",
+                                "name": "NameMongkol วิเคราะห์ชื่อฟรี",
+                                "url": `${baseUrl}/name-check`,
+                                "applicationCategory": "LifestyleApplication",
+                                "operatingSystem": "Web",
+                            },
+                            {
+                                "@type": "SoftwareApplication",
+                                "name": "NameMongkol วิเคราะห์ชื่อหลายชื่อ",
+                                "url": `${baseUrl}/name-analysis`,
+                                "applicationCategory": "LifestyleApplication",
+                                "operatingSystem": "Web",
+                            },
+                        ],
+                        "speakable": {
+                            "@type": "SpeakableSpecification",
+                            "cssSelector": ["h1", ".article-direct-answer", "#faq-section"],
+                        },
                         "datePublished": (() => { try { return new Date(article.date).toISOString(); } catch { return article.date; } })(),
                         "dateModified": (() => { try { return new Date(article.dateModified || article.date).toISOString(); } catch { return article.dateModified || article.date; } })(),
                         "author": [{
@@ -632,16 +748,16 @@ export default async function ArticlePage({ params }: Props) {
                     </div>
 
                     {/* Table of Contents — enhanced with numbered sections for long articles */}
-                    {article.toc && article.toc.length > 0 && (
+                    {effectiveToc && effectiveToc.length > 0 && (
                         <nav className="bg-white/5 backdrop-blur-md rounded-2xl p-6 mb-10 border border-white/5" aria-label="สารบัญบทความ">
                             <h2 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
                                 <span className="text-xl opacity-80">📖</span> สารบัญ
-                                <span className="text-xs font-normal text-slate-500 ml-auto">{article.toc.filter(t => t.level === 2).length} หัวข้อหลัก</span>
+                                <span className="text-xs font-normal text-slate-500 ml-auto">{effectiveToc.filter(t => t.level === 2).length} หัวข้อหลัก</span>
                             </h2>
                             <ul className="space-y-2">
                                 {(() => {
                                     let h2Counter = 0;
-                                    return article.toc.map((item) => {
+                                    return effectiveToc.map((item) => {
                                         if (item.level === 2) h2Counter++;
                                         return (
                                             <li key={item.id} style={{ paddingLeft: (item.level - 2) * 16 }}>
@@ -661,7 +777,7 @@ export default async function ArticlePage({ params }: Props) {
                         </nav>
                     )}
 
-                    <ArticleEnhancementBlock article={article} />
+                    <ArticleEnhancementBlock article={articleWithEffectiveEnhancements} />
 
                     {/* Content */}
                     <article className="prose prose-invert prose-lg max-w-none text-slate-300">
@@ -670,11 +786,11 @@ export default async function ArticlePage({ params }: Props) {
                         </p>
                         <div dangerouslySetInnerHTML={{
                             __html: article.coverImage
-                                ? article.content.replace(
+                                ? enhancedArticleContent.content.replace(
                                     /<img\b[^>]*?>/gi,
                                     `<div class="w-full aspect-video bg-slate-900 rounded-2xl my-8 overflow-hidden relative border border-white/5 shadow-2xl shadow-purple-900/10 not-prose flex items-center justify-center"><img src="${article.coverImage}" alt="${(article.coverImageAlt ?? `ภาพหน้าปกบทความ ${article.title}`).replace(/"/g, '&quot;')}" class="object-contain w-full h-full" /></div>`
                                 )
-                                : article.content
+                                : enhancedArticleContent.content
                         }} />
                     </article>
 
@@ -682,13 +798,13 @@ export default async function ArticlePage({ params }: Props) {
                     <AuraVibeWidget />
 
                     {/* FAQ Section — renders when article has faqItems */}
-                    {article.faqItems && article.faqItems.length > 0 && (
+                    {effectiveFaqItems.length > 0 && (
                         <section id="faq-section" className="mt-14 scroll-mt-24">
                             <h2 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
                                 <span className="text-3xl opacity-80">❓</span> คำถามที่พบบ่อย (FAQ)
                             </h2>
                             <div className="space-y-4">
-                                {article.faqItems.map((item, index) => (
+                                {effectiveFaqItems.map((item, index) => (
                                     <details
                                         key={index}
                                         className="group bg-white/5 border border-white/5 rounded-2xl overflow-hidden hover:border-white/10 transition-all"

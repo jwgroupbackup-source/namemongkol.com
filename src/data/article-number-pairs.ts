@@ -14,7 +14,9 @@ export const articleNumberPairs = {
     coverImage: '/images/articles/what-is-name-analysis.webp', // Using existing image as fallback
     coverImageAlt: 'ศาสตร์ร้อยเรียงคู่เลขในชื่อ',
     dateModified: '2026-05-12',
-    relatedSlugs: ['what-is-name-analysis', 'article-lucky-numbers-2569', 'article-thaksa-guide'],
+    metaTitle: 'คู่เลขในชื่อมงคล สำคัญกว่าผลรวมอย่างไร | NameMongkol',
+    metaDescription: 'เจาะลึกศาสตร์คู่เลขในชื่อมงคล วิธีอ่านคู่มิตร คู่ธาตุ คู่สมพล และคู่ศัตรู พร้อมแนวทางตรวจชื่อให้ครบทั้งผลรวมและพลังเลขภายในชื่อ',
+    relatedSlugs: ['what-is-name-analysis', 'lucky-numbers-2569-guide', 'thaksa-pakorn-naming-guide', 'micro-analysis-lucky-number-pairs'],
     toc: [
         { title: 'ศาสตร์พลังตัวเลขวิเคราะห์คู่เลขในชื่อ คืออะไร?', id: 's1', level: 2 },
         { title: 'ถอดรหัส "วิชาดาวคู่" พลังงานที่ซ่อนอยู่ในชื่อคุณ', id: 's2', level: 2 },

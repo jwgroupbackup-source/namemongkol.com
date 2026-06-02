@@ -48,6 +48,12 @@ const parseThaiDate = (dateStr: string) => {
     return 0; // Fallback
 };
 
+const getArticleModifiedDate = (article: { date: string; dateModified?: unknown; date_modified?: unknown }) => {
+    const camelDate = typeof article.dateModified === 'string' ? article.dateModified : '';
+    const snakeDate = typeof article.date_modified === 'string' ? article.date_modified : '';
+    return camelDate || snakeDate || article.date;
+};
+
 async function fetchArticlesFromDb() {
     try {
         const { data: articles } = await supabase
@@ -99,6 +105,9 @@ async function getArticles() {
             slug: migratedSlug,
             coverImage: finalImage,
             coverImageAlt: dbArticle.cover_image_alt || localMatch?.coverImageAlt || '',
+            metaTitle: dbArticle.meta_title || dbArticle.metaTitle || localMatch?.metaTitle,
+            metaDescription: dbArticle.meta_description || dbArticle.metaDescription || localMatch?.metaDescription,
+            dateModified: dbArticle.date_modified || dbArticle.dateModified || localMatch?.dateModified || dbArticle.date,
             // Keep cover_image for backward compatibility if needed, but we'll use coverImage primarily
             cover_image: finalImage
         };
@@ -267,7 +276,7 @@ export default async function ArticlesPage() {
         'isPartOf': { '@id': `${baseUrl}/#website` },
         'publisher': { '@id': `${baseUrl}/#organization` },
         'inLanguage': 'th-TH',
-        'dateModified': (() => { const dates = articles.map(a => { try { return new Date(a.date).getTime(); } catch { return 0; } }).filter(d => d > 0); return dates.length ? new Date(Math.max(...dates)).toISOString() : new Date().toISOString(); })(),
+        'dateModified': (() => { const dates = articles.map(a => { try { return new Date(getArticleModifiedDate(a)).getTime(); } catch { return 0; } }).filter(d => d > 0); return dates.length ? new Date(Math.max(...dates)).toISOString() : new Date().toISOString(); })(),
         // speakable: tells AI assistants which CSS selectors contain the most important content
         'speakable': {
             '@type': 'SpeakableSpecification',
@@ -294,7 +303,7 @@ export default async function ArticlesPage() {
                     'description': article.excerpt,
                     'url': `${baseUrl}/articles/${article.slug}`,
                     'datePublished': article.date,
-                    'dateModified': article.date,
+                    'dateModified': getArticleModifiedDate(article),
                     'inLanguage': 'th-TH',
                     ...(article.coverImage && {
                         'image': {
