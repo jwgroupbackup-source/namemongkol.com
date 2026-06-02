@@ -1,30 +1,43 @@
-import React from 'react';
 import Link from 'next/link';
 import Script from 'next/script';
-import { Shield, Lock, Eye, FileText, ArrowLeft, CheckCircle2, Cookie, Scale } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Cookie, Database, FileText, Lock, Scale, Shield } from 'lucide-react';
 import { Metadata } from 'next';
 import { siteUrl } from '@/lib/seo';
 
-export const metadata: Metadata = {
-    title: 'นโยบายความเป็นส่วนตัว | NameMongkol - PDPA',
-    description: 'นโยบายความเป็นส่วนตัว NameMongkol อธิบายการเก็บรวบรวม ใช้ และปกป้องข้อมูลส่วนบุคคล รวมถึงข้อมูลภาพลายมือ ข้อมูลออร่า และวอลเปเปอร์ สำหรับวิเคราะห์ด้วย AI ตามกฎหมาย PDPA',
-    keywords: ['นโยบายความเป็นส่วนตัว', 'PDPA', 'การคุ้มครองข้อมูล', 'NameMongkol', 'ข้อมูลส่วนบุคคล', 'วิเคราะห์ลายมือ', 'ภาพฝ่ามือ', 'AI Palm Analysis', 'เบอร์มงคล', 'สิทธิ์ผู้ใช้', 'คุกกี้', 'Cookies', 'วิเคราะห์ออร่า', 'วอลเปเปอร์มงคล'],
+const privacyUrl = `${siteUrl}/privacy`;
+const lastUpdated = '2 มิถุนายน 2569';
+const dateModified = '2026-06-02';
 
-    alternates: { canonical: `${siteUrl.replace(/\/$/, '')}/privacy` },
+export const metadata: Metadata = {
+    title: {
+        absolute: 'นโยบายความเป็นส่วนตัว | NameMongkol',
+    },
+    description: 'นโยบายความเป็นส่วนตัวของ NameMongkol อธิบายการเก็บ ใช้ ปกป้อง และลบข้อมูลผู้ใช้ ครอบคลุมชื่อ เบอร์ รูปภาพ AI Analytics Cookies และการชำระเงิน',
+    keywords: [
+        'นโยบายความเป็นส่วนตัว',
+        'PDPA',
+        'NameMongkol',
+        'ข้อมูลส่วนบุคคล',
+        'คุกกี้',
+        'วิเคราะห์ชื่อ',
+        'วิเคราะห์ลายมือ',
+        'AI',
+    ],
+    alternates: { canonical: privacyUrl },
     openGraph: {
         title: 'นโยบายความเป็นส่วนตัว | NameMongkol',
-        description: 'นโยบายความเป็นส่วนตัว NameMongkol อธิบายการเก็บรวบรวม ใช้ และปกป้องข้อมูลส่วนบุคคล รวมถึงข้อมูลภาพลายมือสำหรับวิเคราะห์ด้วย AI ตามกฎหมาย PDPA',
-        url: `${siteUrl}/privacy`,
+        description: 'ข้อมูลเกี่ยวกับการเก็บ ใช้ ปกป้อง และลบข้อมูลส่วนบุคคลเมื่อใช้งาน NameMongkol',
+        url: privacyUrl,
         siteName: 'NameMongkol',
         locale: 'th_TH',
         type: 'website',
-        images: [`${siteUrl}/api/og?variant=default&title=นโยบายความเป็นส่วนตัว&subtitle=PDPA%20Compliant&tag=Legal`],
+        images: [`${siteUrl}/api/og?variant=default&title=${encodeURIComponent('นโยบายความเป็นส่วนตัว')}&subtitle=PDPA&tag=Legal`],
     },
     twitter: {
         card: 'summary_large_image',
         title: 'นโยบายความเป็นส่วนตัว | NameMongkol',
-        description: 'นโยบายความเป็นส่วนตัว NameMongkol อธิบายการเก็บรวบรวม ใช้ และปกป้องข้อมูลส่วนบุคคล รวมถึงข้อมูลภาพลายมือสำหรับวิเคราะห์ด้วย AI ตามกฎหมาย PDPA',
-        images: [`${siteUrl}/api/og?variant=default&title=นโยบายความเป็นส่วนตัว`],
+        description: 'นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลผู้ใช้ของ NameMongkol',
+        images: [`${siteUrl}/api/og?variant=default&title=${encodeURIComponent('นโยบายความเป็นส่วนตัว')}`],
     },
     robots: {
         index: true,
@@ -32,14 +45,15 @@ export const metadata: Metadata = {
     },
 };
 
-// JSON-LD for Privacy Policy Page
 const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
+    '@id': privacyUrl,
     name: 'นโยบายความเป็นส่วนตัว NameMongkol',
-    description: 'นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคลของ NameMongkol ครอบคลุมบริการวิเคราะห์ชื่อมงคล เช็คเบอร์มงคล และวิเคราะห์ลายมือด้วย AI ตามกฎหมาย PDPA',
-    url: `${siteUrl}/privacy`,
+    description: 'นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคลของ NameMongkol',
+    url: privacyUrl,
     inLanguage: 'th-TH',
+    dateModified,
     isPartOf: {
         '@type': 'WebSite',
         name: 'NameMongkol',
@@ -47,8 +61,7 @@ const jsonLd = {
     },
     about: {
         '@type': 'Thing',
-        name: 'นโยบายความเป็นส่วนตัว',
-        description: 'การคุ้มครองข้อมูลส่วนบุคคลตามมาตรฐาน PDPA',
+        name: 'นโยบายความเป็นส่วนตัวและ PDPA',
     },
     breadcrumb: {
         '@type': 'BreadcrumbList',
@@ -56,24 +69,55 @@ const jsonLd = {
             {
                 '@type': 'ListItem',
                 position: 1,
-                name: 'หน้าหลัก',
+                name: 'หน้าแรก',
                 item: siteUrl,
             },
             {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'นโยบายความเป็นส่วนตัว',
-                item: `${siteUrl}/privacy`,
+                item: privacyUrl,
             },
         ],
     },
-    dateModified: '2026-01-09',
     publisher: {
         '@type': 'Organization',
         name: 'NameMongkol',
         url: siteUrl,
     },
 };
+
+const collectedData = [
+    {
+        title: 'ข้อมูลบัญชีและการเข้าสู่ระบบ',
+        items: ['อีเมล ชื่อโปรไฟล์ รูปโปรไฟล์ และข้อมูลจาก Google/LINE OAuth เมื่อผู้ใช้เลือกเข้าสู่ระบบ', 'สถานะสมาชิก เครดิต และประวัติการใช้บริการที่เกี่ยวข้องกับบัญชี'],
+    },
+    {
+        title: 'ข้อมูลสำหรับวิเคราะห์',
+        items: ['ชื่อ นามสกุล วันเกิด เพศ และข้อมูลที่ผู้ใช้กรอกในเครื่องมือวิเคราะห์ชื่อ', 'เบอร์โทรศัพท์หรือชุดตัวเลขที่ใช้วิเคราะห์เบอร์มงคล', 'ภาพฝ่ามือ ภาพออร่า หรือข้อมูลที่อัปโหลดเพื่อใช้กับบริการ AI เฉพาะรายการ'],
+    },
+    {
+        title: 'ข้อมูลธุรกรรมและการใช้งาน',
+        items: ['รายการเติมเครดิต สถานะการชำระเงิน เลขอ้างอิง และข้อมูลที่จำเป็นต่อการยืนยันธุรกรรม', 'รีวิว คะแนน ความคิดเห็น และข้อมูลการติดต่อที่ผู้ใช้ยินยอมส่งให้', 'ข้อมูล analytics เช่น หน้าเว็บที่เข้าชม ปุ่มที่คลิก referrer อุปกรณ์ เบราว์เซอร์ และเวลาการใช้งาน'],
+    },
+];
+
+const processors = [
+    'Supabase สำหรับฐานข้อมูล authentication storage และ session cookies',
+    'Vercel สำหรับ hosting, deployment, performance และ Vercel Analytics',
+    'Google Tag Manager สำหรับจัดการ tracking script ที่เปิดใช้งาน',
+    'Facebook Pixel และ TikTok Pixel เมื่อมีการตั้งค่า pixel ในระบบ production',
+    'Stripe และ PromptPay สำหรับการรับชำระเงินหรือยืนยันธุรกรรม',
+    'Google และ LINE สำหรับ OAuth login หรือการติดต่อผ่าน LINE Official Account',
+];
+
+const rights = [
+    'ขอเข้าถึงหรือขอสำเนาข้อมูลส่วนบุคคล',
+    'ขอแก้ไขข้อมูลที่ไม่ถูกต้องหรือไม่เป็นปัจจุบัน',
+    'ขอลบหรือระงับการใช้ข้อมูลในกรณีที่กฎหมายอนุญาต',
+    'คัดค้านหรือถอนความยินยอมต่อการประมวลผลบางประเภท',
+    'ขอทราบรายละเอียดการใช้ข้อมูลและผู้ให้บริการที่เกี่ยวข้อง',
+];
 
 export default function PrivacyPage() {
     return (
@@ -83,71 +127,53 @@ export default function PrivacyPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <div className="min-h-screen bg-[#0f172a] text-slate-200 relative overflow-hidden">
-                {/* Background Decoration */}
-                <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-amber-900/20 to-transparent pointer-events-none" />
-                <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/2" />
+            <div className="min-h-screen bg-slate-950 text-slate-200 relative overflow-hidden">
+                <div className="absolute inset-x-0 top-0 h-80 bg-[radial-gradient(circle_at_top_left,rgba(245,158,11,0.18),transparent_35%),radial-gradient(circle_at_top_right,rgba(14,165,233,0.12),transparent_32%)] pointer-events-none" />
 
-                <div className="relative w-full max-w-[1400px] px-4 pt-6 md:pt-32 pb-28 md:pb-20">
-                    {/* Navigation */}
-                    <Link
-                        href="/"
-                        className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-8 group"
-                    >
-                        <div className="p-2 rounded-full bg-white/5 group-hover:bg-white/10 transition-colors">
+                <div className="relative mx-auto w-full max-w-5xl px-4 pt-24 md:pt-32 pb-28 md:pb-20">
+                    <Link href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-10 group">
+                        <span className="p-2 rounded-full bg-white/5 group-hover:bg-white/10 transition-colors">
                             <ArrowLeft size={16} />
-                        </div>
-                        <span className="text-sm font-medium">กลับสู่หน้าหลัก</span>
+                        </span>
+                        <span className="text-sm font-medium">กลับสู่หน้าแรก</span>
                     </Link>
 
-                    {/* Header */}
-                    <div className="text-center space-y-6 mb-16 relative">
-                        <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-tr from-amber-500 to-amber-600 shadow-2xl shadow-amber-500/20 mb-2 transform rotate-3 hover:rotate-6 transition-transform duration-500">
-                            <Shield className="w-10 h-10 text-white" />
+                    <header className="text-center space-y-6 mb-12">
+                        <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-amber-400 text-slate-950 shadow-2xl shadow-amber-500/20">
+                            <Shield className="w-10 h-10" />
                         </div>
-                        <div>
-                            <h1 className="text-3xl md:text-5xl font-bold text-white mb-3 tracking-tight">
-                                นโยบายความเป็นส่วนตัว
-                            </h1>
-                            <div className="flex items-center justify-center gap-2 text-slate-400 text-sm md:text-base">
-                                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                                <p>มีผลบังคับใช้และการปรับปรุงล่าสุด: 9 มกราคม 2569</p>
-                            </div>
+                        <div className="space-y-3">
+                            <h1 className="text-3xl md:text-5xl font-bold text-white tracking-tight">นโยบายความเป็นส่วนตัว</h1>
+                            <p className="text-slate-400">ปรับปรุงล่าสุด: {lastUpdated}</p>
                         </div>
-                    </div>
+                    </header>
 
-                    {/* Main Content */}
-                    <div className="grid gap-6 md:gap-8">
-                        {/* Introduction Card */}
-                        <div className="bg-slate-900/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/10 shadow-xl">
-                            <p className="text-slate-300 leading-relaxed text-lg">
-                                เราให้ความสำคัญกับความเป็นส่วนตัวของคุณอย่างสูงสุด นโยบายนี้อธิบายอย่างโปร่งใสเกี่ยวกับการเก็บรวบรวม ใช้ และปกป้องข้อมูลของคุณเมื่อใช้งาน <span className="text-amber-400 font-semibold">NameMongkol.com</span>
+                    <div className="space-y-6">
+                        <section className="rounded-2xl border border-white/10 bg-slate-900/80 p-6 md:p-8">
+                            <p className="text-lg leading-relaxed text-slate-300">
+                                NameMongkol ให้ความสำคัญกับความเป็นส่วนตัวของผู้ใช้ นโยบายนี้อธิบายว่าเราเก็บ ใช้ จัดเก็บ
+                                แบ่งปัน และลบข้อมูลอย่างไรเมื่อคุณใช้งานบริการวิเคราะห์ชื่อ เบอร์ ลายมือ ออร่า วอลเปเปอร์
+                                บทความ รีวิว บัญชีผู้ใช้ เครดิต และการชำระเงินบนเว็บไซต์
                             </p>
-                        </div>
+                        </section>
 
-                        {/* Section 1 */}
-                        <section className="bg-[#1e293b]/50 p-6 md:p-8 rounded-3xl border border-white/5 hover:border-amber-500/20 transition-all duration-300 group">
-                            <div className="flex items-start gap-4 md:gap-6">
-                                <div className="shrink-0 p-3 rounded-2xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-500/20 transition-colors">
-                                    <Eye size={24} />
-                                </div>
-                                <div className="space-y-4">
-                                    <h2 className="text-xl md:text-2xl font-bold text-white group-hover:text-blue-200 transition-colors">
-                                        1. ข้อมูลที่เราเก็บรวบรวม
-                                    </h2>
-                                    <div className="space-y-3">
-                                        {[
-                                            { title: 'ข้อมูลบัญชีผู้ใช้', desc: 'เมื่อท่านลงชื่อเข้าใช้ด้วย Google เราได้รับข้อมูลพื้นฐาน เช่น ชื่อ, อีเมล และรูปภาพโปรไฟล์' },
-                                            { title: 'ข้อมูลการวิเคราะห์ทั่วไปและจำนวนมาก (Bulk)', desc: 'รายชื่อ, นามสกุล, วันเกิด และเบอร์โทรศัพท์ที่ท่านระบุ รวมถึงข้อมูลที่นำเข้าสำหรับการวิเคราะห์จำนวนมาก จะถูกประมวลผลอย่างปลอดภัยและไม่ถูกเผยแพร่' },
-                                            { title: 'ข้อมูลรีวิวและการให้คะแนน (User Reviews)', desc: 'ข้อความรีวิว คะแนนความพึงพอใจ และชื่อโปรไฟล์ที่ท่านยินยอมส่งให้เราเพื่อแบ่งปันประสบการณ์' },
-                                            { title: 'ข้อมูลธุรกรรม', desc: 'ประวัติการเติมเครดิตและการใช้เครดิต (ไม่เก็บข้อมูลบัตรเครดิต)' },
-                                            { title: 'ข้อมูลภาพลายมือ', desc: 'ภาพฝ่ามือที่ท่านอัปโหลดเพื่อวิเคราะห์ลายมือด้วย AI จะถูกส่งไปประมวลผลและไม่ถูกจัดเก็บถาวรในระบบ' },
-                                            { title: 'ข้อมูลออร่าและพลังงาน', desc: 'ผลวิเคราะห์ออร่า สีออร่า และคะแนนพลังงานที่คำนวณจากชื่อและวันเกิดของท่าน' },
-                                            { title: 'ข้อมูลการดาวน์โหลด', desc: 'ประวัติการดาวน์โหลดวอลเปเปอร์มงคล เก็บเพื่อจัดส่งคอนเทนต์ตามสิทธิ์ที่ท่านซื้อ' }
-                                        ].map((item, idx) => (
-                                            <div key={idx} className="flex items-start gap-3 text-slate-300">
-                                                <CheckCircle2 size={18} className="shrink-0 mt-0.5 text-blue-500/50" />
-                                                <span><strong className="text-slate-200">{item.title}:</strong> {item.desc}</span>
+                        <section className="rounded-2xl border border-white/10 bg-slate-900/70 p-6 md:p-8">
+                            <div className="flex items-start gap-4">
+                                <Database className="shrink-0 text-blue-300" size={28} />
+                                <div>
+                                    <h2 className="text-2xl font-bold text-white">1. ข้อมูลที่เราเก็บรวบรวม</h2>
+                                    <div className="mt-5 grid gap-4">
+                                        {collectedData.map((group) => (
+                                            <div key={group.title} className="rounded-xl border border-white/10 bg-black/20 p-4">
+                                                <h3 className="font-semibold text-blue-200">{group.title}</h3>
+                                                <ul className="mt-3 space-y-2 text-slate-300">
+                                                    {group.items.map((item) => (
+                                                        <li key={item} className="flex gap-2">
+                                                            <CheckCircle2 className="mt-0.5 shrink-0 text-blue-400" size={17} />
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
                                             </div>
                                         ))}
                                     </div>
@@ -155,31 +181,46 @@ export default function PrivacyPage() {
                             </div>
                         </section>
 
-                        {/* Section 2 */}
-                        <section className="bg-[#1e293b]/50 p-6 md:p-8 rounded-3xl border border-white/5 hover:border-amber-500/20 transition-all duration-300 group">
-                            <div className="flex items-start gap-4 md:gap-6">
-                                <div className="shrink-0 p-3 rounded-2xl bg-amber-500/10 text-amber-400 group-hover:bg-amber-500/20 transition-colors">
-                                    <FileText size={24} />
-                                </div>
+                        <section className="rounded-2xl border border-white/10 bg-slate-900/70 p-6 md:p-8">
+                            <div className="flex items-start gap-4">
+                                <FileText className="shrink-0 text-amber-300" size={28} />
                                 <div className="space-y-4">
-                                    <h2 className="text-xl md:text-2xl font-bold text-white group-hover:text-amber-200 transition-colors">
-                                        2. การใช้ข้อมูลของท่าน
-                                    </h2>
-                                    <p className="text-slate-300">เรานำข้อมูลไปใช้เพื่อพัฒนาประสบการณ์ที่ดีที่สุดสำหรับคุณ:</p>
-                                    <ul className="grid md:grid-cols-2 gap-3">
+                                    <h2 className="text-2xl font-bold text-white">2. เราใช้ข้อมูลเพื่ออะไร</h2>
+                                    <ul className="space-y-2 text-slate-300">
                                         {[
-                                            'ให้บริการวิเคราะห์ชื่อแบบปกติ แบบเจาะลึก และแบบจำนวนมาก',
-                                            'วิเคราะห์เบอร์โทรศัพท์มงคลตามหลักเลขศาสตร์',
-                                            'วิเคราะห์ลายมือด้วย AI จากภาพฝ่ามือ',
-                                            'วิเคราะห์ออร่าและพลังงานจากชื่อและวันเกิด',
-                                            'จัดส่งวอลเปเปอร์มงคลตามสิทธิ์ที่ซื้อ',
-                                            'จัดการสิทธิ์ Premium และการดาวน์โหลด',
-                                            'นำข้อมูลรีวิวหรือความเห็นของท่านมาแสดงผลบนเว็บไซต์ (เฉพาะที่ท่านอนุญาต)',
-                                            'พัฒนาฟีเจอร์ใหม่ๆ ให้ตรงใจคุณ'
-                                        ].map((item, idx) => (
-                                            <li key={idx} className="flex items-center gap-2 text-slate-300 bg-black/20 px-4 py-2 rounded-lg">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                                                {item}
+                                            'ประมวลผลและแสดงผลการวิเคราะห์ตามบริการที่ผู้ใช้เลือก',
+                                            'สร้างประสบการณ์การใช้งานบัญชี เครดิต ประวัติ และบริการแบบสมาชิก',
+                                            'ยืนยันการชำระเงิน ป้องกันธุรกรรมซ้ำ และดูแลความปลอดภัยของระบบ',
+                                            'ปรับปรุงคุณภาพเนื้อหา บทความ เครื่องมือ และประสบการณ์ผู้ใช้',
+                                            'ติดต่อกลับเมื่อผู้ใช้ร้องขอความช่วยเหลือหรือใช้สิทธิตามกฎหมาย',
+                                        ].map((item) => (
+                                            <li key={item} className="flex gap-2">
+                                                <CheckCircle2 className="mt-0.5 shrink-0 text-amber-300" size={17} />
+                                                <span>{item}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <p className="text-sm leading-relaxed text-slate-400">
+                                        ผลการวิเคราะห์ด้านชื่อ เบอร์ ลายมือ หรือออร่าเป็นข้อมูลประกอบการตัดสินใจ ไม่ใช่คำรับรองผลลัพธ์ทางกฎหมาย การแพทย์ การเงิน หรือชะตาชีวิตแบบตายตัว
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className="rounded-2xl border border-white/10 bg-slate-900/70 p-6 md:p-8">
+                            <div className="flex items-start gap-4">
+                                <Lock className="shrink-0 text-emerald-300" size={28} />
+                                <div>
+                                    <h2 className="text-2xl font-bold text-white">3. ผู้ให้บริการและการแบ่งปันข้อมูล</h2>
+                                    <p className="mt-3 text-slate-300 leading-relaxed">
+                                        เราไม่ขายข้อมูลส่วนบุคคลของผู้ใช้ แต่จำเป็นต้องใช้ผู้ให้บริการบางรายเพื่อให้เว็บไซต์ทำงานได้ครบถ้วน
+                                        โดยจำกัดการเข้าถึงตามหน้าที่ของแต่ละบริการ
+                                    </p>
+                                    <ul className="mt-5 grid gap-2 text-slate-300">
+                                        {processors.map((item) => (
+                                            <li key={item} className="flex gap-2 rounded-lg bg-black/20 px-4 py-3">
+                                                <CheckCircle2 className="mt-0.5 shrink-0 text-emerald-300" size={17} />
+                                                <span>{item}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -187,110 +228,67 @@ export default function PrivacyPage() {
                             </div>
                         </section>
 
-                        {/* Section 3 */}
-                        <section className="bg-[#1e293b]/50 p-6 md:p-8 rounded-3xl border border-white/5 hover:border-amber-500/20 transition-all duration-300 group">
-                            <div className="flex items-start gap-4 md:gap-6">
-                                <div className="shrink-0 p-3 rounded-2xl bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500/20 transition-colors">
-                                    <Lock size={24} />
-                                </div>
-                                <div className="space-y-4">
-                                    <h2 className="text-xl md:text-2xl font-bold text-white group-hover:text-emerald-200 transition-colors">
-                                        3. ความปลอดภัยและการแชร์ข้อมูล
-                                    </h2>
-                                    <div className="space-y-4 text-slate-300">
-                                        <div className="bg-black/20 p-4 rounded-xl border border-white/5">
-                                            <h3 className="font-semibold text-emerald-400 mb-1">มาตรฐานความปลอดภัยระดับสากล</h3>
-                                            <p className="text-sm">ข้อมูลของท่านถูกจัดเก็บและเข้ารหัสอย่างปลอดภัยบน Cloud Server ชั้นนำ (Supabase)</p>
-                                        </div>
-                                        <p>
-                                            เราสัญญาว่าจะ <span className="text-red-400 font-semibold underline decoration-red-400/30">ไม่จำหน่ายหรือเผยแพร่</span> ข้อมูลส่วนตัวของท่านให้แก่บุคคลที่สาม ท่านอาจได้รับข่าวสารที่เกี่ยวข้องกับบริการของเราโดยตรงเท่านั้น
-                                        </p>
-                                    </div>
-                                </div>
+                        <section className="grid gap-6 md:grid-cols-2">
+                            <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-6">
+                                <Cookie className="mb-4 text-cyan-300" size={28} />
+                                <h2 className="text-xl font-bold text-white">4. Cookies และ Analytics</h2>
+                                <p className="mt-3 text-slate-300 leading-relaxed">
+                                    เราใช้คุกกี้ที่จำเป็นสำหรับ session การเข้าสู่ระบบ การตั้งค่าภาษา และความปลอดภัย
+                                    รวมถึง analytics/pixel ที่เปิดใช้งานใน production เพื่อวัดการใช้งานและปรับปรุงเว็บไซต์
+                                    ผู้ใช้สามารถจัดการคุกกี้บางประเภทได้จากเบราว์เซอร์หรือแบนเนอร์คุกกี้ของเว็บไซต์
+                                </p>
+                            </div>
+                            <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-6">
+                                <Lock className="mb-4 text-purple-300" size={28} />
+                                <h2 className="text-xl font-bold text-white">5. การเก็บรักษาและการลบข้อมูล</h2>
+                                <p className="mt-3 text-slate-300 leading-relaxed">
+                                    เราเก็บข้อมูลเท่าที่จำเป็นต่อการให้บริการ ความปลอดภัย การทำบัญชี และการปฏิบัติตามกฎหมาย
+                                    ข้อมูลภาพหรือผลวิเคราะห์ที่เกี่ยวกับบริการ AI จะถูกใช้เพื่อประมวลผลบริการนั้นเป็นหลัก
+                                    หากต้องการลบข้อมูลหรือบัญชี สามารถติดต่อทีมงานผ่าน LINE Official Account
+                                </p>
                             </div>
                         </section>
 
-                        {/* Section 4: PDPA Rights */}
-                        <section className="bg-[#1e293b]/50 p-6 md:p-8 rounded-3xl border border-white/5 hover:border-amber-500/20 transition-all duration-300 group">
-                            <div className="flex items-start gap-4 md:gap-6">
-                                <div className="shrink-0 p-3 rounded-2xl bg-purple-500/10 text-purple-400 group-hover:bg-purple-500/20 transition-colors">
-                                    <Scale size={24} />
-                                </div>
-                                <div className="space-y-4">
-                                    <h2 className="text-xl md:text-2xl font-bold text-white group-hover:text-purple-200 transition-colors">
-                                        4. สิทธิ์ของท่านตาม PDPA
-                                    </h2>
-                                    <p className="text-slate-300">ท่านมีสิทธิ์ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ดังนี้:</p>
-                                    <div className="grid md:grid-cols-2 gap-3">
-                                        {[
-                                            { title: 'สิทธิ์เข้าถึง', desc: 'ขอสำเนาข้อมูลส่วนบุคคลที่เราเก็บรวบรวม' },
-                                            { title: 'สิทธิ์แก้ไข', desc: 'แก้ไขข้อมูลที่ไม่ถูกต้องหรือไม่เป็นปัจจุบัน' },
-                                            { title: 'สิทธิ์ลบ', desc: 'ขอลบข้อมูลส่วนบุคคลทั้งหมดออกจากระบบ' },
-                                            { title: 'สิทธิ์คัดค้าน', desc: 'คัดค้านการประมวลผลข้อมูลในบางกรณี' },
-                                            { title: 'สิทธิ์ถอนความยินยอม', desc: 'เพิกถอนความยินยอมได้ทุกเมื่อ' },
-                                            { title: 'สิทธิ์โอนย้ายข้อมูล', desc: 'ขอรับข้อมูลในรูปแบบที่อ่านได้ด้วยเครื่อง' },
-                                        ].map((item, idx) => (
-                                            <div key={idx} className="flex items-start gap-3 text-slate-300 bg-black/20 px-4 py-3 rounded-lg">
-                                                <CheckCircle2 size={18} className="shrink-0 mt-0.5 text-purple-500/50" />
-                                                <span><strong className="text-slate-200">{item.title}:</strong> {item.desc}</span>
+                        <section className="rounded-2xl border border-white/10 bg-slate-900/70 p-6 md:p-8">
+                            <div className="flex items-start gap-4">
+                                <Scale className="shrink-0 text-violet-300" size={28} />
+                                <div>
+                                    <h2 className="text-2xl font-bold text-white">6. สิทธิของผู้ใช้ตาม PDPA</h2>
+                                    <p className="mt-3 text-slate-300">ผู้ใช้สามารถติดต่อเราเพื่อใช้สิทธิดังต่อไปนี้ตามเงื่อนไขที่กฎหมายกำหนด</p>
+                                    <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                                        {rights.map((item) => (
+                                            <div key={item} className="flex gap-2 rounded-lg bg-black/20 px-4 py-3 text-slate-300">
+                                                <CheckCircle2 className="mt-0.5 shrink-0 text-violet-300" size={17} />
+                                                <span>{item}</span>
                                             </div>
                                         ))}
                                     </div>
-                                    <p className="text-sm text-slate-400 mt-2">
-                                        หากต้องการใช้สิทธิ์ใดๆ สามารถติดต่อเราผ่าน LINE OA และเราจะดำเนินการให้ภายใน 30 วัน
-                                    </p>
                                 </div>
                             </div>
                         </section>
 
-                        {/* Section 5: Cookies */}
-                        <section className="bg-[#1e293b]/50 p-6 md:p-8 rounded-3xl border border-white/5 hover:border-amber-500/20 transition-all duration-300 group">
-                            <div className="flex items-start gap-4 md:gap-6">
-                                <div className="shrink-0 p-3 rounded-2xl bg-cyan-500/10 text-cyan-400 group-hover:bg-cyan-500/20 transition-colors">
-                                    <Cookie size={24} />
-                                </div>
-                                <div className="space-y-4">
-                                    <h2 className="text-xl md:text-2xl font-bold text-white group-hover:text-cyan-200 transition-colors">
-                                        5. คุกกี้และการวิเคราะห์ข้อมูล
-                                    </h2>
-                                    <div className="space-y-3 text-slate-300">
-                                        <div className="bg-black/20 p-4 rounded-xl border border-white/5">
-                                            <h3 className="font-semibold text-cyan-400 mb-1">คุกกี้ที่จำเป็น (Essential Cookies)</h3>
-                                            <p className="text-sm">ใช้เพื่อรักษาสถานะการล็อกอิน การตั้งค่าภาษา และการทำงานพื้นฐานของเว็บไซต์</p>
-                                        </div>
-                                        <div className="bg-black/20 p-4 rounded-xl border border-white/5">
-                                            <h3 className="font-semibold text-cyan-400 mb-1">คุกกี้วิเคราะห์และการทดสอบ (Analytics & A/B Testing)</h3>
-                                            <p className="text-sm">เราใช้เครื่องมือวิเคราะห์และบันทึกพฤติกรรมการคลิกเพื่อทำการทดสอบประสบการณ์ผู้ใช้ (A/B Testing) เพื่อพัฒนาประสิทธิภาพเว็บไซต์ โดยไม่เก็บข้อมูลที่ระบุตัวตนได้</p>
-                                        </div>
-                                    </div>
-                                    <p className="text-sm text-slate-400">
-                                        เราจะไม่ใช้คุกกี้เพื่อการโฆษณาหรือติดตามข้ามแพลตฟอร์มโดยเด็ดขาด
-                                    </p>
-                                </div>
-                            </div>
-                        </section>
-
-                        {/* Section 6: Account Deletion */}
-                        <section className="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-[#1e293b] to-[#0f172a] border border-white/10 text-center space-y-4">
-                            <h2 className="text-xl font-bold text-white">ต้องการลบบัญชีผู้ใช้?</h2>
-                            <p className="text-slate-400 text-sm md:text-base max-w-2xl mx-auto">
-                                หากท่านเปลี่ยนใจและต้องการลบข้อมูลทั้งหมด ท่านสามารถติดต่อทีมงานของเราได้ตลอดเวลา เราพร้อมดำเนินการให้ทันทีตามคำร้องขอ
+                        <section className="rounded-2xl border border-amber-300/30 bg-gradient-to-r from-slate-900 to-amber-950/30 p-6 md:p-8 text-center">
+                            <h2 className="text-2xl font-bold text-white">ติดต่อเรื่องข้อมูลส่วนบุคคล</h2>
+                            <p className="mx-auto mt-3 max-w-2xl text-slate-300 leading-relaxed">
+                                หากต้องการขอเข้าถึง แก้ไข ลบข้อมูล ถอนความยินยอม หรือแจ้งข้อกังวลเกี่ยวกับความเป็นส่วนตัว
+                                โปรดติดต่อทีมงานผ่าน LINE Official Account เราจะพิจารณาคำขอตามกฎหมายและตอบกลับโดยเร็วที่สุด
                             </p>
-                            <Link
-                                href="https://lin.ee/8N4ab3b"
-                                target="_blank"
-                                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-medium transition-all border border-white/10 hover:border-white/20"
-                            >
-                                ติดต่อเราผ่าน LINE OA
-                            </Link>
+                            <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                                <Link
+                                    href="https://lin.ee/8N4ab3b"
+                                    target="_blank"
+                                    className="inline-flex items-center justify-center rounded-full bg-amber-400 px-6 py-3 font-bold text-slate-950 hover:bg-amber-300 transition-colors"
+                                >
+                                    ติดต่อผ่าน LINE OA
+                                </Link>
+                                <Link
+                                    href="/terms"
+                                    className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 font-semibold text-white hover:bg-white/10 transition-colors"
+                                >
+                                    อ่านเงื่อนไขการใช้งาน
+                                </Link>
+                            </div>
                         </section>
-                    </div>
-
-                    {/* Footer */}
-                    <div className="mt-16 text-center border-t border-white/5 pt-8">
-                        <p className="text-slate-500 text-sm">
-                            © 2024–2026 NameMongkol.com - ศาสตร์แห่งตัวเลขเพื่อชีวิตที่ดีกว่า
-                        </p>
                     </div>
                 </div>
             </div>

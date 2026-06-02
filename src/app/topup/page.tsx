@@ -6,24 +6,25 @@ import { createClient } from '@/utils/supabaseServer';
 import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
-    title: 'เติมเครดิต (Top Up) - แพ็กเกจสุดคุ้ม | NameMongkol',
-    description: 'เติมเครดิตเพื่อใช้งานบริการวิเคราะห์ชื่อมงคลขั้นสูงและดาวน์โหลดวอลเปเปอร์พรีเมียม สะดวกรวดเร็วผ่าน QR Code พร้อมเพย์ เริ่มต้นเพียง 29 บาท',
-    keywords: ['เติมเครดิต', 'Top Up', 'ซื้อเครดิต', 'NameMongkol', 'พร้อมเพย์', 'QR Code', 'แพ็กเกจ'],
-
+    title: {
+        absolute: 'เติมเครดิต | NameMongkol',
+    },
+    description: 'เติมเครดิตเพื่อใช้งานบริการวิเคราะห์ชื่อเชิงลึก วอลเปเปอร์มงคล และบริการพรีเมียมของ NameMongkol ผ่านช่องทางชำระเงินที่ระบบรองรับ',
+    keywords: ['เติมเครดิต', 'ซื้อเครดิต', 'NameMongkol', 'PromptPay', 'วิเคราะห์ชื่อพรีเมียม'],
     openGraph: {
-        title: 'เติมเครดิต (Top Up) | NameMongkol',
-        description: 'เติมเครดิตง่ายๆ ผ่าน QR Code พร้อมเพย์ ใช้งานได้ทันที เริ่มต้นเพียง 29 บาท',
+        title: 'เติมเครดิต | NameMongkol',
+        description: 'เติมเครดิตเพื่อใช้งานบริการพรีเมียมของ NameMongkol',
         url: `${siteUrl}/topup`,
         siteName: 'NameMongkol',
         locale: 'th_TH',
         type: 'website',
-        images: [`${siteUrl}/api/og?variant=default&title=เติมเครดิต%20Top%20Up&subtitle=สแกน%20QR%20พร้อมเพย์%20รับเครดิตทันที&tag=Top-up`],
+        images: [`${siteUrl}/api/og?variant=default&title=${encodeURIComponent('เติมเครดิต')}&subtitle=${encodeURIComponent('ใช้งานบริการพรีเมียม')}&tag=Top-up`],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'เติมเครดิต (Top Up) | NameMongkol',
-        description: 'เติมเครดิตง่ายๆ ผ่าน QR Code พร้อมเพย์ ใช้งานได้ทันที',
-        images: [`${siteUrl}/api/og?variant=default&title=เติมเครดิต%20Top%20Up&subtitle=สแกน%20QR%20พร้อมเพย์%20รับเครดิตทันที&tag=Top-up`],
+        title: 'เติมเครดิต | NameMongkol',
+        description: 'เติมเครดิตเพื่อใช้งานบริการพรีเมียมของ NameMongkol',
+        images: [`${siteUrl}/api/og?variant=default&title=${encodeURIComponent('เติมเครดิต')}`],
     },
     alternates: {
         canonical: `${siteUrl}/topup`,
@@ -34,12 +35,11 @@ export const metadata: Metadata = {
     },
 };
 
-// JSON-LD for Top Up Page
 const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'เติมเครดิต NameMongkol',
-    description: 'เติมเครดิตเพื่อใช้งานบริการวิเคราะห์ชื่อมงคลขั้นสูง',
+    description: 'เติมเครดิตเพื่อใช้งานบริการพรีเมียมของ NameMongkol',
     url: `${siteUrl}/topup`,
     isPartOf: {
         '@type': 'WebSite',
@@ -52,7 +52,7 @@ const jsonLd = {
             {
                 '@type': 'ListItem',
                 position: 1,
-                name: 'หน้าหลัก',
+                name: 'หน้าแรก',
                 item: siteUrl,
             },
             {
@@ -77,7 +77,6 @@ export default async function TopUpPage() {
         return acc;
     }, {});
 
-    // Default to 'stripe' if not set
     const gateway = settingsMap['payment_gateway'] || 'stripe';
     const promptpayNumber =
         settingsMap['promptpay_number'] ||

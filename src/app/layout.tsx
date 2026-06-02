@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_Thai } from "next/font/google";
 import { GoogleTagManager } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/next';
+import { unstable_cache } from 'next/cache';
+import Script from 'next/script';
+import { createClient } from '@supabase/supabase-js';
 import "./globals.css";
 import { LayoutWrapper } from "@/components/LayoutWrapper";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { FloatingContactFAB } from "@/components/FloatingContactFAB";
-import { createClient } from '@supabase/supabase-js';
 import CookieConsentWrapper from '@/components/CookieConsentWrapper';
 import { AnalyticsProvider } from '@/components/AnalyticsProvider';
-import Script from 'next/script';
-import { siteUrl } from '@/lib/seo';
-
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { siteUrl } from '@/lib/seo';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,11 +36,23 @@ const notoSansThai = Noto_Sans_Thai({
 
 export const metadata: Metadata = {
   title: {
-    default: "NameMongkol | วิเคราะห์ชื่อ ตั้งชื่อมงคล ทำนายชื่อ-นามสกุล แม่นยำที่สุด",
-    template: "%s | NameMongkol"
+    default: "NameMongkol | วิเคราะห์ชื่อ ตั้งชื่อมงคล และตรวจพลังชื่อ",
+    template: "%s | NameMongkol",
   },
-  description: "NameMongkol (เนมมงคล) บริการวิเคราะห์ชื่อ ตั้งชื่อมงคล ตั้งชื่อลูก ดูผลรวมชื่อ-นามสกุล พลังเงา และความหมายตามหลักเลขศาสตร์และทักษาปกรณ์ ฟรี! เช็คชื่อของคุณวันนี้เพื่อความเป็นสิริมงคล",
-  keywords: ["NameMongkol", "วิเคราะห์ชื่อ", "ชื่อมงคล", "ตั้งชื่อมงคล", "ตั้งชื่อลูก", "เบอร์มงคล", "ดูดวงชื่อ", "เลขศาสตร์", "เปลี่ยนชื่อ", "ความหมายเลขศาสตร์", "ทักษาปกรณ์", "ตั้งชื่อมงคลวันเกิด"],
+  description: "NameMongkol ให้บริการวิเคราะห์ชื่อ นามสกุล เบอร์โทร ลายมือ ออร่า และวอลเปเปอร์มงคล ด้วยหลักเลขศาสตร์ ทักษา อายตนะ 6 และ AI",
+  keywords: [
+    "NameMongkol",
+    "วิเคราะห์ชื่อ",
+    "ชื่อมงคล",
+    "ตั้งชื่อมงคล",
+    "ตั้งชื่อลูก",
+    "เบอร์มงคล",
+    "เลขศาสตร์",
+    "ทักษาปกรณ์",
+    "อายตนะ 6",
+    "วิเคราะห์ลายมือ",
+    "วิเคราะห์ออร่า",
+  ],
   metadataBase: new URL(siteUrl),
   icons: {
     icon: [
@@ -60,22 +72,22 @@ export const metadata: Metadata = {
     locale: 'th_TH',
     url: siteUrl,
     siteName: 'NameMongkol',
-    title: 'NameMongkol - วิเคราะห์ชื่อ ตั้งชื่อมงคล อันดับ 1',
-    description: 'วิเคราะห์ชื่อ นามสกุล ตั้งชื่อมงคล ตั้งชื่อลูก ฟรี! ด้วยศาสตร์คำนวณที่แม่นยำที่สุด',
+    title: 'NameMongkol - วิเคราะห์ชื่อ ตั้งชื่อมงคล และตรวจพลังชื่อ',
+    description: 'วิเคราะห์ชื่อ นามสกุล เบอร์โทร ลายมือ ออร่า และวอลเปเปอร์มงคล ด้วยหลักเลขศาสตร์ ทักษา อายตนะ 6 และ AI',
     images: [
       {
         url: `${siteUrl}/api/og?variant=default`,
         width: 1200,
         height: 630,
-        alt: 'NameMongkol - วิเคราะห์ชื่อ ตั้งชื่อมงคล',
+        alt: 'NameMongkol - วิเคราะห์ชื่อและตั้งชื่อมงคล',
         type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NameMongkol - วิเคราะห์ชื่อ ตั้งชื่อมงคล',
-    description: 'วิเคราะห์ชื่อ นามสกุล ดูผลรวม พลังเงา และความหมายมงคล ฟรี',
+    title: 'NameMongkol - วิเคราะห์ชื่อและตั้งชื่อมงคล',
+    description: 'ตรวจชื่อ นามสกุล เบอร์ ลายมือ ออร่า และพลังมงคล พร้อมคำแนะนำที่อ่านง่าย',
     images: [`${siteUrl}/api/og?variant=default`],
     creator: '@namemongkol',
   },
@@ -104,45 +116,43 @@ const jsonLd = {
     {
       '@type': 'WebSite',
       '@id': `${siteUrl}/#website`,
-      'url': siteUrl,
-      'name': 'NameMongkol',
-      'alternateName': 'เนมมงคล',
-      'description': 'บริการวิเคราะห์ชื่อมงคลและตั้งชื่อใหม่ตามหลักเลขศาสตร์',
-      'inLanguage': 'th-TH',
-      'publisher': {
-        '@id': `${siteUrl}/#organization`
+      url: siteUrl,
+      name: 'NameMongkol',
+      alternateName: 'เนมมงคล',
+      description: 'แพลตฟอร์มวิเคราะห์ชื่อมงคล เบอร์โทร ลายมือ ออร่า วอลเปเปอร์ และบทความความรู้ด้านชื่อมงคล',
+      inLanguage: 'th-TH',
+      publisher: {
+        '@id': `${siteUrl}/#organization`,
       },
-      'potentialAction': {
+      potentialAction: {
         '@type': 'SearchAction',
-        'target': {
+        target: {
           '@type': 'EntryPoint',
-          'urlTemplate': `${siteUrl}/?name={search_term_string}`
+          urlTemplate: `${siteUrl}/search?q={search_term_string}`,
         },
-        'query-input': 'required name=search_term_string'
-      }
+        'query-input': 'required name=search_term_string',
+      },
     },
     {
       '@type': 'Organization',
       '@id': `${siteUrl}/#organization`,
-      'name': 'NameMongkol',
-      'alternateName': 'เนมมงคล',
-      'url': siteUrl,
-      'logo': {
+      name: 'NameMongkol',
+      alternateName: 'เนมมงคล',
+      url: siteUrl,
+      logo: {
         '@type': 'ImageObject',
-        'url': `${siteUrl}/icon-512.png`,
-        'width': 512,
-        'height': 512
+        url: `${siteUrl}/icon-512.png`,
+        width: 512,
+        height: 512,
       },
-      'image': `${siteUrl}/icon-512.png`,
-      'sameAs': [
+      image: `${siteUrl}/icon-512.png`,
+      sameAs: [
         'https://www.facebook.com/namemongkol',
-        'https://line.me/ti/p/@namemongkol'
-      ]
-    }
-  ]
-}
-
-import { unstable_cache } from 'next/cache';
+        'https://line.me/ti/p/@namemongkol',
+      ],
+    },
+  ],
+};
 
 const getSettings = unstable_cache(
   async () => {
@@ -156,15 +166,14 @@ const getSettings = unstable_cache(
         .select('key, value')
         .in('key', ['gtm_id', 'tiktok_pixel_id', 'facebook_pixel_id']);
 
-      // Default values
       const settings = {
         gtmId: 'GTM-WCW8R5BK',
         tiktokPixelId: '',
-        facebookPixelId: ''
+        facebookPixelId: '',
       };
 
       if (data) {
-        data.forEach(item => {
+        data.forEach((item) => {
           if (item.key === 'gtm_id') settings.gtmId = item.value || settings.gtmId;
           if (item.key === 'tiktok_pixel_id') settings.tiktokPixelId = item.value || '';
           if (item.key === 'facebook_pixel_id') settings.facebookPixelId = item.value || '';
@@ -209,7 +218,6 @@ export default async function RootLayout({
             {isProduction ? <GoogleTagManager gtmId={gtmId} /> : null}
             <CookieConsentWrapper />
 
-            {/* Facebook Pixel */}
             {isProduction && facebookPixelId && (
               <Script id="facebook-pixel" strategy="lazyOnload">
                 {`
@@ -227,12 +235,15 @@ export default async function RootLayout({
               </Script>
             )}
 
-            {/* TikTok Pixel */}
             {isProduction && tiktokPixelId && (
               <Script id="tiktok-pixel" strategy="lazyOnload">
                 {`
                   !function (w, d, t) {
-                  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq.methods[i=0];i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);return ttq},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
+                  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};
+                  for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+                  ttq.instance=function(t){for(var e=ttq.methods[i=0];i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);return ttq};
+                  ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};
+                  var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
                   ttq.load('${tiktokPixelId}');
                   ttq.page();
                   }(window, document, 'ttq');
