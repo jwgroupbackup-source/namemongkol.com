@@ -187,6 +187,8 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
                 a8: 'พลังเงาคือพลังงานซ่อนเร้นในชื่อที่ส่งผลต่อบุคลิกภาพและโชคชะตา วิเคราะห์จากตัวอักษรและผลรวมเลขศาสตร์ ช่วยให้เข้าใจจุดแข็งจุดอ่อนของชื่อ',
                 q9: 'วิเคราะห์ชื่อ นามสกุล ฟรี ต้องทำอย่างไร?',
                 a9: 'กรอกชื่อและนามสกุลในช่องด้านบน เลือกวันเกิด แล้วกดวิเคราะห์ได้เลย NameMongkol จะคำนวณผลรวมเลขศาสตร์ของทั้งชื่อและนามสกุลพร้อมกันและแสดงผลครบทั้ง 4 ศาสตร์ทันที โดยไม่ต้องล็อกอินก่อนใช้งาน',
+                q10: 'NameMongkol วิเคราะห์ละเอียดต่างจากการดูผลรวมเลขอย่างไร?',
+                a10: 'จุดเด่นของ NameMongkol คือการวิเคราะห์ชื่อแบบละเอียด โดยถอดตัวอักษรแต่ละตัวเป็นค่าเลขศาสตร์ แล้วจับเลขที่อยู่ติดกันเป็นคู่ เช่น 14, 24, 65 เพื่ออ่านพลังส่งเสริม จุดที่ควรระวัง และความหมายเชิงลึกของชื่อ ไม่ใช่ดูเฉพาะผลรวมตัวเลขเท่านั้น',
             },
             testimonials: {
                 badge: 'เสียงจากผู้ใช้จริง',
@@ -528,6 +530,8 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
                 a8: 'Shadow power is the hidden energy affecting personality and destiny, calculated from letters and numerology sums. It helps reveal hidden strengths and weaknesses.',
                 q9: 'How do I analyze my name and surname for free?',
                 a9: 'Enter your name and surname above, select your birth day, and click analyze. NameMongkol calculates both together for free, instantly, without registration.',
+                q10: 'How is NameMongkol\'s detailed analysis different from just checking the numerology sum?',
+                a10: 'The highlight of NameMongkol is its detailed analysis by decoding each letter into a numerology value and pairing adjacent numbers (e.g., 14, 24, 65) to read supportive energy, points of caution, and deep meanings of the name, rather than just looking at the total sum.',
             },
             testimonials: {
                 badge: 'Real voices',
@@ -869,6 +873,8 @@ const dictionaries: Record<SupportedLanguage, TranslationDict> = {
                 a8: '隱藏力量是影響個性與命運的潛在能量，由字母與數字總分計算得出，能幫助您了解潛在的優缺點。',
                 q9: '如何免費分析姓名與姓氏？',
                 a9: '在上方輸入姓名與姓氏，選擇生日後點擊分析。NameMongkol 會立即為您進行免費綜合計算，無需註冊。',
+                q10: 'NameMongkol 的詳細分析與僅查看數字總分有何不同？',
+                a10: 'NameMongkol 的亮點在於其詳細分析，透過將每個字母解碼為命理數值並將相鄰數字配對（例如 14、24、65）來解讀名字的輔助能量、注意事項和深層含義，而不僅僅是看總分。',
             },
             testimonials: {
                 badge: '真實回饋',

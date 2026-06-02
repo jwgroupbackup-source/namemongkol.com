@@ -137,48 +137,50 @@ export default function PremiumSearchPage() {
             />
             <ClientPage />
             <section
-                className="relative px-4 pb-20 text-slate-200 bg-[oklch(13%_0.035_260)] bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: "linear-gradient(to bottom, rgba(15, 23, 42, 0.82), rgba(5, 7, 17, 0.9)), url('/Theme/theme-search.png')" }}
+                className="relative px-4 pb-24 pt-16 bg-[#050711] overflow-hidden"
             >
-                <div className="mx-auto max-w-5xl border-t border-white/10 pt-12">
-                    <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-emerald-300">
-                        Premium Name Selection
-                    </p>
-                    <h2 className="text-2xl font-bold text-white sm:text-3xl">
-                        เปลี่ยนชื่อมงคล Pro เหมาะกับกรณีไหน
-                    </h2>
-                    <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
-                        หน้านี้เหมาะกับคนที่ตัดสินใจจริงจังเรื่องเปลี่ยนชื่อและต้องการคัดชื่อจากฐานข้อมูลพรีเมียม
-                        โดยใช้เงื่อนไขวันเกิด อักษรกาลกิณี วรรคเดช วรรคศรี และผลรวมเลขศาสตร์ร่วมกัน
-                        ถ้าคุณยังไม่แน่ใจว่าชื่อปัจจุบันดีหรือไม่ ควรเริ่มจากการวิเคราะห์ชื่อฟรีก่อน
-                    </p>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
+                <div className="mx-auto max-w-5xl relative z-10">
+                    <div className="text-center md:text-left mb-12">
+                        <p className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-amber-500">
+                            Premium Name Selection
+                        </p>
+                        <h2 className="text-3xl font-black text-white sm:text-4xl">
+                            เปลี่ยนชื่อมงคล <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">Pro</span> เหมาะกับกรณีไหน?
+                        </h2>
+                        <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-400 sm:text-base mx-auto md:mx-0">
+                            หน้านี้เหมาะกับคนที่ตัดสินใจจริงจังเรื่องเปลี่ยนชื่อและต้องการคัดชื่อจากฐานข้อมูลพรีเมียม
+                            โดยใช้เงื่อนไขวันเกิด อักษรกาลกิณี วรรคเดช วรรคศรี และผลรวมเลขศาสตร์ร่วมกัน
+                            ถ้าคุณยังไม่แน่ใจว่าชื่อปัจจุบันดีหรือไม่ ควรเริ่มจากการวิเคราะห์ชื่อฟรีก่อน
+                        </p>
+                    </div>
 
-                    <div className="mt-8 grid gap-4 md:grid-cols-3">
-                        <div className="rounded-2xl border border-slate-400/15 bg-white/5 p-5">
-                            <h3 className="font-semibold text-white">เริ่มจากเช็กชื่อเดิม</h3>
-                            <p className="mt-2 text-sm leading-6 text-slate-300">
+                    <div className="grid gap-6 md:grid-cols-3">
+                        <div className="group rounded-3xl border border-white/5 bg-[#0a0f1d] p-8 shadow-2xl transition-all hover:-translate-y-1 hover:border-cyan-500/30">
+                            <h3 className="text-lg font-black text-white group-hover:text-cyan-400 transition-colors">1. เริ่มจากเช็กชื่อเดิม</h3>
+                            <p className="mt-3 text-sm leading-relaxed text-slate-400">
                                 วิเคราะห์ชื่อและนามสกุลปัจจุบัน เพื่อดูว่าปัญหาอยู่ที่ผลรวม คู่เลข หรืออักษรกาลกิณี
                             </p>
-                            <Link href="/name-check" className="mt-4 inline-block text-sm font-semibold text-cyan-300 hover:text-cyan-200">
-                                ไปวิเคราะห์ชื่อฟรี
+                            <Link href="/name-check" className="mt-6 inline-flex items-center text-sm font-bold text-cyan-400 hover:text-cyan-300">
+                                ไปวิเคราะห์ชื่อฟรี →
                             </Link>
                         </div>
-                        <div className="rounded-2xl border border-amber-400/15 bg-amber-400/5 p-5">
-                            <h3 className="font-semibold text-amber-200">หาไอเดียชื่อทั่วไป</h3>
-                            <p className="mt-2 text-sm leading-6 text-slate-300">
+                        <div className="group rounded-3xl border border-white/5 bg-[#0a0f1d] p-8 shadow-2xl transition-all hover:-translate-y-1 hover:border-amber-500/30">
+                            <h3 className="text-lg font-black text-white group-hover:text-amber-400 transition-colors">2. หาไอเดียชื่อทั่วไป</h3>
+                            <p className="mt-3 text-sm leading-relaxed text-slate-400">
                                 ถ้ายังอยู่ในขั้นสำรวจชื่อจำนวนมาก ให้เริ่มจากฐานข้อมูลชื่อมงคลฟรีหรือเครื่องมือสร้างชื่อด้วย AI
                             </p>
-                            <Link href="/search" className="mt-4 inline-block text-sm font-semibold text-amber-300 hover:text-amber-200">
-                                ค้นหาชื่อมงคลฟรี
+                            <Link href="/search" className="mt-6 inline-flex items-center text-sm font-bold text-amber-400 hover:text-amber-300">
+                                ค้นหาชื่อมงคลฟรี →
                             </Link>
                         </div>
-                        <div className="rounded-2xl border border-emerald-400/15 bg-emerald-400/5 p-5">
-                            <h3 className="font-semibold text-emerald-200">คัดชื่อสำหรับเปลี่ยนจริง</h3>
-                            <p className="mt-2 text-sm leading-6 text-slate-300">
+                        <div className="group rounded-3xl border border-emerald-500/20 bg-gradient-to-br from-[#0a0f1d] to-emerald-950/20 p-8 shadow-[0_0_30px_rgba(16,185,129,0.1)] transition-all hover:-translate-y-1 hover:border-emerald-500/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.2)]">
+                            <h3 className="text-lg font-black text-emerald-400">3. คัดชื่อสำหรับเปลี่ยนจริง</h3>
+                            <p className="mt-3 text-sm leading-relaxed text-slate-300">
                                 ใช้ Pro เมื่อต้องการชื่อที่คัดตามวันเกิดและอักษรนำ พร้อมลดโอกาสเจอชื่อที่ขัดกับหลักทักษา
                             </p>
-                            <Link href="/premium-analysis" className="mt-4 inline-block text-sm font-semibold text-emerald-300 hover:text-emerald-200">
-                                วิเคราะห์ชื่อขั้นสูงต่อ
+                            <Link href="/premium-analysis" className="mt-6 inline-flex items-center text-sm font-bold text-emerald-400 hover:text-emerald-300">
+                                วิเคราะห์ชื่อขั้นสูงต่อ →
                             </Link>
                         </div>
                     </div>

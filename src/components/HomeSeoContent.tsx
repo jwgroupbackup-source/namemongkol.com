@@ -19,23 +19,23 @@ export const HomeSeoContent = () => {
                     Free Name Analysis
                 </p>
                 <h2 className="mt-3 text-2xl font-bold leading-snug text-white sm:text-3xl">
-                    วิเคราะห์ชื่อฟรี ไม่ต้องล็อกอิน ใช้ตรวจชื่อจริง นามสกุล และชื่อมงคลได้ทันที
+                    วิเคราะห์ชื่อฟรีแบบละเอียด ถอดอักษรเป็นเลขศาสตร์และเช็กคู่เลขในชื่อ
                 </h2>
                 <p className="mt-4 text-sm leading-relaxed text-slate-300 sm:text-base">
-                    NameMongkol ช่วยวิเคราะห์ชื่อและนามสกุลด้วย 4 ศาสตร์หลัก ได้แก่ เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และนิรันดร์ศาสตร์ เหมาะสำหรับคนที่ต้องการเช็กชื่อปัจจุบันก่อนเปลี่ยนชื่อ หาชื่อมงคลสำหรับตั้งชื่อลูก หรือทดลองชื่อใหม่ก่อนใช้งานจริง
+                    NameMongkol ช่วยวิเคราะห์ชื่อและนามสกุลด้วย 4 ศาสตร์หลัก ได้แก่ เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และนิรันดร์ศาสตร์ จุดเด่นคือการถอดตัวอักษรแต่ละตัวเป็นค่าเลขศาสตร์ แล้วจับเลขที่อยู่ติดกันเป็นคู่ เช่น 14, 24, 65 เพื่ออ่านพลังส่งเสริม จุดที่ควรระวัง และความหมายเชิงลึกของชื่อ ไม่ใช่ดูเฉพาะผลรวมตัวเลขเท่านั้น
                 </p>
                 <div className="mt-5 grid gap-3 text-sm text-slate-300 sm:grid-cols-3">
                     <div className="rounded-xl border border-white/5 bg-slate-950/35 p-4">
-                        <h3 className="font-semibold text-amber-200">ใช้ฟรีทันที</h3>
-                        <p className="mt-2 leading-relaxed">ไม่ต้องสมัครสมาชิกก่อนเริ่มวิเคราะห์ชื่อ</p>
+                        <h3 className="font-semibold text-amber-200">1. ถอดอักษรเป็นเลข</h3>
+                        <p className="mt-2 leading-relaxed">แปลงตัวอักษรในชื่อและนามสกุลเป็นค่าเลขศาสตร์ทีละตัว</p>
                     </div>
                     <div className="rounded-xl border border-white/5 bg-slate-950/35 p-4">
-                        <h3 className="font-semibold text-amber-200">ตอบโจทย์หลายเจตนา</h3>
-                        <p className="mt-2 leading-relaxed">เช็กชื่อเดิม เปลี่ยนชื่อ และตั้งชื่อลูกในที่เดียว</p>
+                        <h3 className="font-semibold text-amber-200">2. รวมเลขศาสตร์</h3>
+                        <p className="mt-2 leading-relaxed">ดูผลรวมชื่อ นามสกุล และคะแนนภาพรวมตามหลัก 4 ศาสตร์</p>
                     </div>
                     <div className="rounded-xl border border-white/5 bg-slate-950/35 p-4">
-                        <h3 className="font-semibold text-amber-200">มีทางไปต่อชัดเจน</h3>
-                        <p className="mt-2 leading-relaxed">ค้นหาชื่อมงคลหรือวิเคราะห์เชิงลึกได้หลังเห็นผลฟรี</p>
+                        <h3 className="font-semibold text-amber-200">3. จับคู่เลขรายตัว</h3>
+                        <p className="mt-2 leading-relaxed">อ่านพลังและความหมายของคู่เลขที่เรียงต่อกันในชื่อ</p>
                     </div>
                 </div>
             </div>

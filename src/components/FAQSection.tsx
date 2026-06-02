@@ -58,6 +58,10 @@ export const FAQSection = () => {
                         question={t('sections.faq.q9')}
                         answer={t('sections.faq.a9')}
                     />
+                    <FAQItem
+                        question={t('sections.faq.q10')}
+                        answer={t('sections.faq.a10')}
+                    />
                 </div>
             </div>
 
