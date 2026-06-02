@@ -4,13 +4,14 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Home, Smartphone, Hand, Sparkles, Search, Crown, ImageIcon } from 'lucide-react';
+import { Home, Smartphone, Hand, Sparkles, Search, Crown, ImageIcon, BookOpen } from 'lucide-react';
 
 export const MobileSecondaryNav = () => {
     const pathname = usePathname();
 
     const navItems = [
         { name: 'วิเคราะห์ชื่อ', icon: Home, iconImage: '/icon/วิเคราะห์ชื่อ.png', path: '/' },
+        { name: 'บทความ', icon: BookOpen, path: '/articles' },
         { name: 'ค้นหาชื่อมงคล', icon: Search, iconImage: '/icon/ค้นหาชื่อมงคล.png', path: '/search' },
         { name: 'คัดสรรชื่อมงคล', icon: Sparkles, iconImage: '/icon/คัดสรรชื่อมงคล.png', path: '/premium-search' },
         { name: 'ออกแบบชื่อมงคล', icon: Crown, iconImage: '/icon/ออกแบบชื่อมงคล.png', path: '/premium-analysis' },
@@ -25,7 +26,9 @@ export const MobileSecondaryNav = () => {
             <div className="fixed top-[68px] z-40 w-full border-b border-white/8 bg-[#0f172a]/92 shadow-[0_4px_16px_rgba(0,0,0,0.22)] backdrop-blur-xl max-[400px]:top-[64px] lg:hidden">
                 <div className="flex items-center gap-1.5 overflow-x-auto px-2 py-1 custom-scrollbar no-scrollbar">
                     {navItems.map((item) => {
-                        const isActive = pathname === item.path;
+                        const isActive = item.path === '/articles'
+                            ? pathname === '/articles' || pathname.startsWith('/articles/')
+                            : pathname === item.path;
                         const Icon = item.icon;
 
                         return (
