@@ -23,22 +23,22 @@ export default function PremiumHeader({ totalNames, filteredCount, availableLett
     ];
 
     return (
-        <header className="text-center space-y-4 xl:grid xl:grid-cols-[1.2fr_1fr] xl:items-end xl:gap-8 xl:space-y-0 xl:text-left relative z-10">
+        <header className="relative z-10 space-y-4 text-center xl:grid xl:grid-cols-[1.2fr_1fr] xl:items-end xl:gap-8 xl:space-y-0 xl:text-left">
             <div className="xl:col-start-1 xl:row-start-2">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-white to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] tracking-tight leading-tight">
+                <h1 className="text-[2rem] font-black leading-tight tracking-tight text-slate-100 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] sm:text-4xl md:text-5xl lg:text-6xl">
                     {t('pages.premiumSearch.headerTitle')}
                 </h1>
             </div>
             
-            <div className="max-w-[70ch] mx-auto space-y-4 xl:col-start-1 xl:row-start-3 xl:mx-0">
-                <p className="text-slate-400 leading-relaxed text-sm sm:text-base lg:text-lg">
+            <div className="mx-auto max-w-[70ch] space-y-3 xl:col-start-1 xl:row-start-3 xl:mx-0">
+                <p className="text-sm leading-relaxed text-slate-400 sm:text-base lg:text-lg">
                     {t('pages.premiumSearch.headerDesc').replace('{count}', totalNames.toLocaleString())}
                 </p>
-                <p className="text-amber-200/90 font-medium text-sm sm:text-base lg:text-lg tracking-wide">
+                <p className="text-sm font-medium tracking-wide text-amber-200/90 sm:text-base lg:text-lg">
                     {t('pages.premiumSearch.headerSub')}
                 </p>
 
-                <div className="mt-4 mx-auto w-fit bg-[#0f172a]/40 border border-amber-300/10 rounded-2xl px-4 py-3 md:px-6 md:py-4 shadow-xl shadow-amber-950/20 backdrop-blur-md">
+                <div className="mx-auto mt-3 w-fit rounded-xl border border-amber-300/10 bg-[#0f172a]/40 px-3 py-2 shadow-xl shadow-amber-950/20 backdrop-blur-md md:rounded-2xl md:px-6 md:py-4">
                     <p className="text-amber-100/80 font-medium text-xs sm:text-sm">
                         {t('pages.premiumSearch.headerHint')}{' '}
                         <Link href="/" className="font-bold text-amber-400 hover:text-amber-300 underline decoration-amber-400/30 hover:decoration-amber-400 transition-all">
@@ -50,7 +50,7 @@ export default function PremiumHeader({ totalNames, filteredCount, availableLett
 
             {/* Premium Floating Stats Cards */}
             <div className="mx-auto grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-2 gap-2 sm:gap-3 xl:col-start-2 xl:row-span-3 xl:row-start-1 xl:w-full">
-                {stats.map(({ label, value, icon: Icon }, i) => (
+                {stats.map(({ label, value, icon: Icon }) => (
                     <div 
                         key={label} 
                         className={`group relative overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-br from-slate-900/80 to-slate-950/80 p-2.5 sm:p-5 text-center xl:text-left shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-amber-900/20 hover:border-amber-400/20`}

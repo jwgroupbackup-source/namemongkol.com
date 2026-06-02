@@ -27,6 +27,10 @@
   --cosmic-gold: #d7b16a;
   --cosmic-gold-soft: rgba(215, 177, 106, 0.24);
   --cosmic-ivory: rgba(247, 229, 192, 0.82);
+  --mobile-header-height: 68px;
+  --mobile-secondary-nav-height: 32px;
+  --mobile-bottom-nav-height: 58px;
+  --mobile-floating-offset: calc(var(--mobile-bottom-nav-height) + env(safe-area-inset-bottom) + 1rem);
 }
 
 .dark {

@@ -16,23 +16,23 @@ const PhoneHeader = () => {
     const { t } = useLanguage();
 
     return (
-        <div className="relative z-10 text-center w-full max-w-3xl mx-auto mb-10 sm:mb-14 md:mb-16 animate-fade-in-up">
+        <div className="relative z-10 mx-auto mb-6 w-full max-w-3xl text-center animate-fade-in-up sm:mb-14 md:mb-16">
             {/* Decorative glowing orb behind the text for a premium feel */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] sm:w-[80%] h-[150%] bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 blur-[60px] md:blur-[80px] -z-10 rounded-full pointer-events-none" />
             
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-5 hover:border-amber-500/30 transition-all duration-300 shadow-[0_0_20px_rgba(245,158,11,0.1)]">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 shadow-[0_0_20px_rgba(245,158,11,0.1)] backdrop-blur-md transition-all duration-300 hover:border-amber-500/30 sm:mb-5 sm:px-5 sm:py-2">
                 <span className="text-amber-400 animate-pulse">✦</span>
                 <span className="text-xs md:text-sm font-semibold text-amber-100 tracking-wider uppercase">เช็คเบอร์มงคลฟรี</span>
             </div>
             
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl">
+            <h1 className="mb-3 text-[2rem] font-bold leading-tight tracking-tight text-white drop-shadow-2xl sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
                 {t('pages.phoneAnalysis.heroTitle')}{' '}
                 <span className="text-amber-400 drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">
                     {t('pages.phoneAnalysis.heroHighlight')}
                 </span>
             </h1>
             
-            <p className="text-sm sm:text-base text-slate-300 max-w-[65ch] mx-auto leading-relaxed">
+            <p className="mx-auto max-w-[65ch] text-sm leading-relaxed text-slate-300 sm:text-base">
                 {t('pages.phoneAnalysis.heroSubtitle')}
             </p>
         </div>
@@ -58,7 +58,7 @@ const ClientPageFallback = () => {
 
     return (
         <div className="min-h-screen bg-[#0f172a] text-slate-200 font-sans selection:bg-indigo-500/30">
-            <main className="w-full max-w-[1400px] transition-all duration-300 min-h-screen px-4 pt-20 md:pt-28 pb-10 relative flex flex-col items-center">
+            <main className="relative flex min-h-screen w-full max-w-[1400px] flex-col items-center px-4 pb-10 pt-7 transition-all duration-300 md:pt-28">
                 <PhoneSacredBackground />
 
                 <PhoneHeader />
@@ -343,7 +343,7 @@ function ClientPageContent() {
 
     return (
         <div className="min-h-screen bg-[#0f172a] text-slate-200 font-sans selection:bg-indigo-500/30">
-            <main className="w-full max-w-[1400px] transition-all duration-300 min-h-screen px-4 pt-20 md:pt-28 pb-36 md:pb-28 relative flex flex-col items-center">
+            <main className="relative flex min-h-screen w-full max-w-[1400px] flex-col items-center px-4 pb-44 pt-7 transition-all duration-300 md:pb-28 md:pt-28">
                 <PhoneSacredBackground />
 
                 {/* Header Section */}
@@ -351,7 +351,7 @@ function ClientPageContent() {
 
                 {/* Input Section */}
                 {!result && (
-                    <div className="w-full max-w-2xl relative z-10 animate-fade-in-up delay-100">
+                    <div className="relative z-10 w-full max-w-2xl animate-fade-in-up delay-100">
                         <div className="bg-white/5 border border-white/5 rounded-3xl p-2.5 sm:p-3 backdrop-blur-xl shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
                             <div className="flex flex-col sm:flex-row gap-2 relative z-10">
@@ -408,7 +408,7 @@ function ClientPageContent() {
                 )}
 
                 {!result && (
-                    <div className="md:hidden fixed inset-x-4 bottom-4 z-30">
+                    <div className="fixed inset-x-4 bottom-[7.75rem] z-30 md:hidden">
                         <div className="rounded-2xl border border-white/10 bg-slate-950/95 backdrop-blur-xl px-4 py-3 shadow-2xl shadow-black/30">
                             <div className="flex items-center gap-3">
                                 <div className="min-w-0 flex-1">

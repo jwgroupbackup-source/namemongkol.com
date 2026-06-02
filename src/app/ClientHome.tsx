@@ -383,10 +383,10 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
 
     return (
         <div className="relative min-h-screen overflow-hidden font-sans text-slate-100 selection:bg-amber-500 selection:text-white">
-            <main className="relative z-10 w-full max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-12 xl:px-16 pt-12 md:pt-24 pb-12 md:pb-20 flex flex-col items-center min-h-[78vh]">
+            <main className="relative z-10 mx-auto flex min-h-[78vh] w-full max-w-[1400px] flex-col items-center px-3 pb-28 pt-5 sm:px-6 sm:pt-10 md:pb-20 md:pt-24 lg:px-12 xl:px-16">
 
                 {!result ? (
-                    <div className="grid w-full max-w-[1180px] items-start gap-5 lg:grid-cols-[minmax(0,1.06fr)_minmax(420px,0.94fr)] lg:gap-8 xl:gap-12">
+                    <div className="grid w-full max-w-[1180px] items-start gap-4 lg:grid-cols-[minmax(0,1.06fr)_minmax(420px,0.94fr)] lg:gap-8 xl:gap-12">
                         {/* HeroBanner: no delay — renders immediately for LCP */}
                         <div className="w-full lg:pt-8">
                             <HeroBanner headingLevel={heroHeadingLevel} />

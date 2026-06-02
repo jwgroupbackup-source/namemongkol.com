@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Search, Crown, Sparkles, Image as ImageIcon, Home, BookOpen } from 'lucide-react';
+import { Search, Crown, Sparkles, Image as ImageIcon, Home } from 'lucide-react';
 
 export const BottomNav = () => {
     const pathname = usePathname();
@@ -46,7 +46,6 @@ export const BottomNav = () => {
 
     const navItems = [
         { name: 'หน้าหลัก', icon: Home, iconImage: '/icon/วิเคราะห์ชื่อ.png', path: '/' },
-        { name: 'บทความ', icon: BookOpen, iconImage: '', path: '/articles' },
         { name: 'ค้นหา', icon: Search, iconImage: '/icon/ค้นหาชื่อมงคล.png', path: '/search' },
         { name: 'ชื่อมงคล Pro', icon: Crown, iconImage: '/icon/คัดสรรชื่อมงคล.png', path: '/premium-search' },
         { name: 'Premium', icon: Sparkles, iconImage: '/icon/ออกแบบชื่อมงคล.png', path: '/premium-analysis' },
@@ -63,7 +62,7 @@ export const BottomNav = () => {
             {/* Subtle gradient top edge */}
             <div className="h-[1px] bg-gradient-to-r from-transparent via-[#c9933a]/30 to-transparent" />
 
-            <div className="bg-[#0c0e13]/95 backdrop-blur-xl grid grid-cols-6 h-[52px] px-2">
+            <div className="grid h-[58px] grid-cols-5 bg-[#0c0e13]/95 px-2 backdrop-blur-xl">
                 {navItems.map((item) => {
                     const isActive = pathname === item.path;
                     const Icon = item.icon;
@@ -72,7 +71,7 @@ export const BottomNav = () => {
                         <Link
                             key={item.path}
                             href={item.path}
-                            className="flex flex-col items-center justify-center gap-[3px] group relative"
+                            className="group relative flex flex-col items-center justify-center gap-1"
                         >
                             {/* Active glow behind the icon */}
                             {isActive && (
@@ -112,7 +111,7 @@ export const BottomNav = () => {
 
                             {/* Label */}
                             <span
-                                className={`text-[9px] font-semibold tracking-wide leading-none transition-all duration-300 ${isActive
+                                className={`max-w-full truncate text-[10px] font-semibold leading-none transition-all duration-300 ${isActive
                                         ? 'text-[#c9933a]'
                                         : 'text-white/80 group-hover:text-white'
                                     }`}

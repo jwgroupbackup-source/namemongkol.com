@@ -368,14 +368,14 @@ export default function ClientPage() {
             </div>
 
             {/* Floating Mobile Credits */}
-            <div className="fixed bottom-6 right-4 sm:hidden z-50 bg-slate-900/90 backdrop-blur-xl border border-amber-400/30 shadow-[0_8px_30px_rgba(245,158,11,0.25)] rounded-full px-4 py-2.5 flex items-center gap-2">
+            <div className="fixed bottom-[7.75rem] right-4 z-40 flex items-center gap-2 rounded-full border border-amber-400/30 bg-slate-900/90 px-4 py-2.5 shadow-[0_8px_30px_rgba(245,158,11,0.25)] backdrop-blur-xl sm:hidden">
                 <Coins className="w-4 h-4 text-amber-400" />
                 <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider">เครดิต:</span>
                 <span className="text-sm font-black text-amber-300">{userCredits !== null ? userCredits : '—'}</span>
             </div>
 
-            <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-24 relative z-10">
-                <div className="space-y-8 sm:space-y-12">
+            <main className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-36 pt-7 sm:px-6 sm:pt-32 md:pb-24">
+                <div className="space-y-5 sm:space-y-12">
                     <PremiumHeader 
                         totalNames={allNames.length} 
                         filteredCount={filteredNames.length} 
@@ -384,12 +384,12 @@ export default function ClientPage() {
                     />
 
                     {/* Ultra Premium Filter Panel */}
-                    <div className="relative group">
+                    <div className="group relative">
                         <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/10 via-amber-400/5 to-amber-500/10 rounded-[2rem] blur opacity-70 group-hover:opacity-100 transition duration-1000" />
-                        <div className="relative bg-[#0f172a]/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-5 sm:p-8 shadow-2xl overflow-hidden">
+                        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0f172a]/90 p-4 shadow-2xl backdrop-blur-2xl sm:rounded-3xl sm:p-8">
                             <div className="absolute top-0 right-0 w-64 h-64 bg-amber-400/5 rounded-full blur-[80px] pointer-events-none" />
                             
-                            <div className="flex items-center justify-between border-b border-white/5 pb-5 mb-6">
+                            <div className="mb-4 flex items-center justify-between border-b border-white/5 pb-4 sm:mb-6 sm:pb-5">
                                 <div>
                                     <h2 className="flex items-center gap-2.5 text-lg font-bold text-white">
                                         <SlidersHorizontal className="h-5 w-5 text-amber-400" />

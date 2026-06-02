@@ -542,22 +542,22 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
     };
 
     return (
-        <div className="w-full max-w-[1400px] px-3 sm:px-4 pt-16 md:pt-32 pb-28 min-h-screen bg-[#050b14] text-slate-200">
-            <div className="max-w-7xl mx-auto space-y-5 md:space-y-8">
+        <div className="min-h-screen w-full max-w-[1400px] bg-[#050b14] px-3 pb-36 pt-7 text-slate-200 sm:px-4 md:pb-28 md:pt-32">
+            <div className="mx-auto max-w-7xl space-y-4 md:space-y-8">
 
                 {/* Header */}
-                <div className="flex flex-col gap-3 md:gap-4">
+                <div className="flex flex-col gap-2.5 md:gap-4">
                     <div>
-                        <h1 className="text-[1.9rem] sm:text-3xl md:text-5xl font-bold text-amber-200 mb-1.5 md:mb-2 leading-tight">
+                        <h1 className="mb-1.5 text-[1.65rem] font-bold leading-tight text-amber-200 sm:text-3xl md:mb-2 md:text-5xl">
                             วอลเปเปอร์มงคล เสริมดวงชะตา บารมี และโชคลาภ
                         </h1>
-                        <p className="text-sm md:text-base text-slate-400 leading-relaxed max-w-[70ch]">
+                        <p className="max-w-[70ch] text-sm leading-relaxed text-slate-400 md:text-base">
                             ยกระดับพลังบวกให้กับชีวิตทุกครั้งที่เปิดหน้าจอมือถือ ด้วยพลังแห่งภาพมงคลและสีมงคลตามวันเกิด
                         </p>
                     </div>
 
                     {/* Main Tabs + Share */}
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 md:gap-3">
+                    <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center md:gap-3">
                         <div className="flex w-full sm:w-fit bg-slate-800 p-1 rounded-xl md:p-1.5 md:rounded-2xl border border-white/10">
                             <button
                                 onClick={() => navigateTab('collection')}
@@ -599,7 +599,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                             className="space-y-4 md:space-y-6 animate-fade-in-up"
                         >
                             {/* Category Selector */}
-                            <div className="sticky top-[58px] z-30 -mx-3 space-y-2.5 border-y border-white/5 bg-[#050b14]/92 px-3 py-2.5 backdrop-blur-xl md:static md:mx-0 md:space-y-4 md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
+                            <div className="sticky top-[100px] z-30 -mx-3 space-y-2 border-y border-white/5 bg-[#050b14]/92 px-3 py-2 backdrop-blur-xl md:static md:mx-0 md:space-y-4 md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
                                 <div className="grid grid-cols-2 gap-2 sm:flex">
                                     <button
                                         onClick={() => navigateCategory('day')}

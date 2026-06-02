@@ -107,7 +107,7 @@ export const InputForm: React.FC<InputFormProps> = ({
                         </p>
                     </div>
 
-                    <div className="mb-5 grid grid-cols-3 gap-2.5">
+                    <div className="mb-5 hidden grid-cols-3 gap-2.5 sm:grid">
                         {formTrustItems.map((item) => (
                             <div
                                 key={item.title}
@@ -121,7 +121,7 @@ export const InputForm: React.FC<InputFormProps> = ({
                     </div>
 
                     <div className="space-y-4">
-                        <div>
+                        <div className="hidden sm:block">
                             <label htmlFor="birth-day" className="mb-2 block text-xs font-bold text-[#1f2b43]">
                                 วันเกิด
                             </label>

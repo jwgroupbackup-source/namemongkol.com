@@ -565,28 +565,30 @@ export default function SearchPage() {
             </div>
 
 
-                        <div className="relative z-10 w-full max-w-[1400px] px-4 pt-24 md:pt-32 pb-20 md:pb-28">
+                        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 pb-36 pt-7 md:pb-28 md:pt-32">
                                 {/* Social Proof & Engagement Section */}
-                                <div className="flex flex-col items-center gap-3 mb-6 md:mb-8">
+                                <div className="mb-4 flex flex-col items-center gap-2 md:mb-8 md:gap-3">
                                     <div className="flex flex-wrap gap-2 md:gap-3 justify-center">
                                         <ReviewBadge rating={publicStats.avgRating} count={publicStats.reviewCount} />
                                         <UserStatsBadge users={publicStats.weeklyAnalyses} label="มีผู้ค้นหาสัปดาห์นี้แล้ว" />
                                     </div>
-                                    <PopularNames />
+                                    <div className="hidden sm:block">
+                                        <PopularNames />
+                                    </div>
                                 </div>
-                                <div className="text-center mb-8 md:mb-12">
-                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-300 text-xs md:text-sm mb-3 md:mb-4">
+                                <div className="mb-5 text-center md:mb-12">
+                                    <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-xs text-amber-300 md:mb-4 md:text-sm">
                                         <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4" />
                                         <span>{t('pages.search.badge')}</span>
                                     </div>
-                                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl">
+                                    <h1 className="mb-3 text-[2rem] font-bold leading-tight tracking-tight text-white drop-shadow-2xl sm:text-4xl md:mb-6 md:text-5xl lg:text-6xl">
                                         {t('pages.search.title')}
                                     </h1>
-                                    <p className="text-sm sm:text-base text-slate-300 max-w-[65ch] mx-auto mb-5 md:mb-6 px-2 leading-relaxed">
+                                    <p className="mx-auto mb-4 max-w-[65ch] px-2 text-sm leading-relaxed text-slate-300 sm:text-base md:mb-6">
                                         {t('pages.search.description')}
                                     </p>
                                     {/* Pro Tip / Guidance Block */}
-                                    <div className="max-w-2xl mx-auto bg-amber-900/20 border border-amber-500/20 rounded-xl p-4 text-left flex gap-4 items-start relative overflow-hidden group">
+                                    <div className="relative mx-auto hidden max-w-2xl items-start gap-4 overflow-hidden rounded-xl border border-amber-500/20 bg-amber-900/20 p-4 text-left sm:flex">
                                         <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
                                         <div className="p-2 bg-amber-500/10 rounded-lg text-amber-400 shrink-0 relative z-10">
                                             <Sparkles className="w-5 h-5" />

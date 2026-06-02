@@ -529,9 +529,9 @@ export default function PremiumAnalysisPage() {
     );
 
     const formContent = (
-        <div className="animate-fade-in-up max-w-6xl mx-auto relative overflow-visible px-0 sm:px-4 md:px-8">
+        <div className="relative mx-auto max-w-6xl overflow-visible px-0 animate-fade-in-up sm:px-4 md:px-8">
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 lg:gap-16 relative z-10">
+            <div className="relative z-10 grid grid-cols-1 gap-5 md:gap-10 lg:grid-cols-12 lg:gap-16">
 
                 {/* Left Column: Personal Inputs (User Data) */}
                 <div className="lg:col-span-5 space-y-5 md:space-y-8">
@@ -787,7 +787,7 @@ export default function PremiumAnalysisPage() {
     return (
         <div className="min-h-screen bg-[oklch(13%_0.035_260)] text-slate-200 font-sans selection:bg-amber-500/30 relative overflow-hidden">
 
-            <main className="w-full max-w-[1400px] min-h-screen relative overflow-hidden pb-32 md:pb-20 px-3 sm:px-4">
+            <main className="relative min-h-screen w-full max-w-[1400px] overflow-hidden px-3 pb-40 sm:px-4 md:pb-20">
                 {/* Background Decor - Fixed Position */}
                 <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
                     <div
@@ -801,14 +801,14 @@ export default function PremiumAnalysisPage() {
                 <div className="relative z-10 max-w-7xl px-0 sm:px-6 lg:px-8 space-y-6 md:space-y-8">
 
                     {/* Header Section */}
-                    <header className="text-center space-y-4 md:space-y-6 pt-24 sm:pt-28 md:pt-32 pb-5 md:pb-8">
+                    <header className="space-y-3 pb-4 pt-7 text-center md:space-y-6 md:pb-8 md:pt-32">
                         <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/5 border border-amber-500/20 text-amber-400/90 text-[11px] md:text-xs font-bold tracking-wide md:tracking-wider uppercase shadow-lg shadow-amber-900/10 backdrop-blur-sm mb-1 md:mb-4">
                             <Crown size={14} />
                             <span>Professional Naming Analysis</span>
                         </div>
 
                         <div className="space-y-2">
-                            <h1 className="text-[2rem] sm:text-4xl md:text-6xl font-black text-white md:text-transparent md:bg-clip-text md:bg-gradient-to-br md:from-white md:via-amber-100 md:to-amber-500 drop-shadow-sm tracking-tight leading-tight">
+                            <h1 className="text-[2rem] font-black leading-tight tracking-tight text-white drop-shadow-sm sm:text-4xl md:text-6xl">
                                 วิเคราะห์ชื่อมงคลขั้นสูง
                             </h1>
                             <div className="h-1 w-24 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto rounded-full opacity-50"></div>
@@ -822,7 +822,7 @@ export default function PremiumAnalysisPage() {
                     </header>
 
                     {/* Main Content Area */}
-                    <div className="pb-28">
+                    <div className="pb-16 md:pb-28">
                         {!hasAnalyzed ? formContent : resultsContent}
                     </div>
 
