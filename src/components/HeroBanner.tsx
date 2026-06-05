@@ -170,11 +170,11 @@ export const HeroBanner = ({ headingLevel = 'h1' }: HeroBannerProps) => {
             <div className="pointer-events-none absolute -left-2 top-16 hidden h-52 w-52 rounded-full border border-amber-200/10 lg:block" />
             <div className="pointer-events-none absolute left-24 top-40 hidden h-px w-56 rotate-[-16deg] bg-gradient-to-r from-transparent via-amber-200/20 to-transparent lg:block" />
 
-            <div className="relative overflow-hidden rounded-[1.25rem] border border-amber-200/10 bg-[#070a15]/35 px-4 py-4 shadow-[0_24px_80px_rgba(1,4,15,0.28)] backdrop-blur-sm sm:rounded-[1.75rem] sm:px-7 sm:py-8 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-0">
+            <div className="relative overflow-hidden rounded-[1.25rem] border border-amber-200/10 bg-[#070a15]/35 px-3 py-3 shadow-[0_24px_80px_rgba(1,4,15,0.28)] backdrop-blur-sm sm:rounded-[1.75rem] sm:px-7 sm:py-8 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-0">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_18%_0%,rgba(215,177,106,0.12),transparent_54%)] lg:hidden" />
 
                 <div className="relative z-10 text-left">
-                    <div className="mb-3 inline-flex max-w-full items-center gap-1.5 overflow-hidden rounded-full border border-amber-200/20 bg-black/25 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.08em] text-amber-50/90 shadow-[0_0_18px_rgba(245,158,11,0.08)] backdrop-blur-md sm:mb-4 sm:gap-2 sm:px-4 sm:text-xs sm:tracking-[0.14em]">
+                    <div className="mb-2 inline-flex max-w-full items-center gap-1.5 overflow-hidden rounded-full border border-amber-200/20 bg-black/25 px-2.5 py-1 text-[9px] font-medium uppercase tracking-[0.06em] text-amber-50/90 shadow-[0_0_18px_rgba(245,158,11,0.08)] backdrop-blur-md sm:mb-4 sm:gap-2 sm:px-4 sm:py-1.5 sm:text-xs sm:tracking-[0.14em]">
                         <span>{t('home.hero.badgeThai')}</span>
                         <span className="text-amber-500/50">•</span>
                         <span>{t('home.hero.badgeEnglish')}</span>
@@ -182,7 +182,7 @@ export const HeroBanner = ({ headingLevel = 'h1' }: HeroBannerProps) => {
                         <span>{t('home.hero.badgeSupport')}</span>
                     </div>
 
-                    <HeadingTag className="cosmic-text-crisp mb-3 text-[1.85rem] font-bold leading-[1.1] tracking-normal sm:mb-4 sm:text-5xl lg:text-[4.45rem]">
+                    <HeadingTag className="cosmic-text-crisp mb-2 text-[1.62rem] font-bold leading-[1.08] tracking-normal sm:mb-4 sm:text-5xl lg:text-[4.45rem]">
                         {t('home.hero.titlePrefix')}
                         <span className="text-amber-300 drop-shadow-[0_0_18px_rgba(245,158,11,0.28)]">
                             {t('home.hero.titleHighlight')}
@@ -195,11 +195,11 @@ export const HeroBanner = ({ headingLevel = 'h1' }: HeroBannerProps) => {
                         <span className="text-amber-100">{t('home.hero.titleSuffix')}</span>
                     </HeadingTag>
 
-                    <p className="cosmic-text-soft mb-4 max-w-[58ch] text-sm leading-6 sm:mb-5 sm:text-base sm:leading-8 lg:text-lg">
+                    <p className="cosmic-text-soft mb-3 max-w-[58ch] text-xs leading-5 sm:mb-5 sm:text-base sm:leading-8 lg:text-lg">
                         {t('home.hero.description')}
                     </p>
 
-                    <div className="mb-4 grid gap-2 text-xs text-slate-200 sm:mb-5 sm:grid-cols-3 sm:text-sm lg:max-w-xl">
+                    <div className="mb-3 grid grid-cols-2 gap-2 text-xs text-slate-200 sm:mb-5 sm:grid-cols-3 sm:text-sm lg:max-w-xl">
                         <div className="flex items-center gap-2 rounded-xl border border-emerald-300/15 bg-emerald-300/5 px-3 py-2">
                             <Target className="h-4 w-4 shrink-0 text-emerald-300" />
                             <span>
@@ -212,13 +212,13 @@ export const HeroBanner = ({ headingLevel = 'h1' }: HeroBannerProps) => {
                                 <strong className="text-white">{t('home.hero.statMethod')}</strong> {t('home.hero.statSpeed')}
                             </span>
                         </div>
-                        <div className="flex items-center gap-2 rounded-xl border border-sky-300/15 bg-sky-300/5 px-3 py-2">
+                        <div className="hidden items-center gap-2 rounded-xl border border-sky-300/15 bg-sky-300/5 px-3 py-2 sm:flex">
                             <Languages className="h-4 w-4 shrink-0 text-sky-200" />
                             <span>{t('home.hero.badgeSupport')}</span>
                         </div>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
+                    <div className="hidden flex-wrap items-center gap-2 text-xs sm:flex sm:text-sm">
                         <Link
                             href="/phone-analysis"
                             data-track="home.hero.secondary.phone"
@@ -235,7 +235,7 @@ export const HeroBanner = ({ headingLevel = 'h1' }: HeroBannerProps) => {
                         </Link>
                     </div>
 
-                    <p className="mt-4 flex items-center gap-2 text-xs font-medium tracking-wide text-emerald-200/90 sm:mt-5 sm:text-sm">
+                    <p className="mt-3 flex items-center gap-2 text-[11px] font-medium tracking-wide text-emerald-200/90 sm:mt-5 sm:text-sm">
                         <BadgeCheck className="h-4 w-4 text-emerald-300" />
                         <span>{t('home.hero.instantAccess')}</span>
                     </p>

@@ -1,4 +1,5 @@
-import { calculateScore, analyzePairs } from './numerologyUtils';
+import { calculateScore } from './calculateScore';
+import { analyzePairs } from './numerologyUtils';
 import { thaksaConfig, DayKey } from '../data/thaksa';
 import { predictGender, Gender } from './genderPrediction';
 

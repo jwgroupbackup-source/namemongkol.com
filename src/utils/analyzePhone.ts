@@ -16,19 +16,18 @@ export interface PhoneAnalysisResult {
     prediction: string;
 }
 
+interface PhonePairMeaningRow {
+    pair: string;
+    grade: PairDefinition['grade'];
+    title: string;
+    description: string;
+    tags: string[] | null;
+}
+
 let cachedDefinitions: Record<string, PairDefinition> | null = null;
 let lastFetchTime = 0;
 
-export const analyzePhone = async (phoneNumber: string): Promise<PhoneAnalysisResult | null> => {
-    // 1. Sanitize: remove dashes, spaces, non-digits
-    const cleanNumber = phoneNumber.replace(/\D/g, '');
-
-    // 2. Validate: Must be 10 digits
-    if (cleanNumber.length !== 10) return null;
-
-    // Fetch Definitions with Cache Strategy
-    let definitions = localDefinitions;
-    // Re-enabled remote fetch - OG Image issue resolved
+export const getPhonePairDefinitions = async (): Promise<Record<string, PairDefinition>> => {
     try {
         const now = Date.now();
         // Cache for 1 minute to allow distinct updates but improved performance
@@ -42,12 +41,12 @@ export const analyzePhone = async (phoneNumber: string): Promise<PhoneAnalysisRe
 
             if (!error && data && data.length > 0) {
                 const dbDefs: Record<string, PairDefinition> = {};
-                data.forEach((row: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
+                (data as PhonePairMeaningRow[]).forEach((row) => {
                     dbDefs[row.pair] = {
                         grade: row.grade,
                         title: row.title,
                         description: row.description,
-                        tags: row.tags
+                        tags: row.tags ?? []
                     };
                 });
                 cachedDefinitions = dbDefs;
@@ -57,11 +56,20 @@ export const analyzePhone = async (phoneNumber: string): Promise<PhoneAnalysisRe
 
         if (cachedDefinitions) {
             // Merge DB definitions over local ones
-            definitions = { ...localDefinitions, ...cachedDefinitions };
+            return { ...localDefinitions, ...cachedDefinitions };
         }
     } catch (err) {
         console.warn('Failed to fetch phone meanings from DB, using local fallback.', err);
     }
+
+    return localDefinitions;
+};
+
+export const analyzePhoneNumber = (
+    cleanNumber: string,
+    definitions: Record<string, PairDefinition> = localDefinitions
+): PhoneAnalysisResult | null => {
+    if (cleanNumber.length !== 10) return null;
 
     // 3. Extract pairs from the last 7 digits (indices 3 to 9)
     // Example: 081-234-5678 -> clean: 0812345678
@@ -180,4 +188,10 @@ export const analyzePhone = async (phoneNumber: string): Promise<PhoneAnalysisRe
     };
 };
 
+export const analyzePhone = async (phoneNumber: string): Promise<PhoneAnalysisResult | null> => {
+    const cleanNumber = phoneNumber.replace(/\D/g, '');
+    if (cleanNumber.length !== 10) return null;
 
+    const definitions = await getPhonePairDefinitions();
+    return analyzePhoneNumber(cleanNumber, definitions);
+};

@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "gsc:weekly": "node scripts/generate-gsc-weekly-report.js",
     "gsc:weekly:boy-names": "node scripts/generate-gsc-weekly-report.js --preset boy-names"
   },
@@ -51,6 +53,7 @@
     "eslint-config-next": "16.1.0",
     "sharp": "^0.34.5",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.8"
   }
 }

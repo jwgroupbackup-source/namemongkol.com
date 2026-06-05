@@ -239,7 +239,7 @@ export const PhoneAiAnalysisSection: React.FC<PhoneAiAnalysisSectionProps> = ({
                                             onProfessionChange(s);
                                             setShowSuggestions(false);
                                         }}
-                                        className="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs hover:bg-amber-500/10 hover:text-amber-300 hover:border-amber-500/30 border border-slate-700 transition-all"
+                                        className="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs hover:bg-slate-700 hover:text-white hover:border-amber-500/40 border border-slate-700 transition-all"
                                     >
                                         {s}
                                     </button>
@@ -254,10 +254,10 @@ export const PhoneAiAnalysisSection: React.FC<PhoneAiAnalysisSectionProps> = ({
                     onClick={onRequestAnalysis}
                     disabled={!profession.trim() || isLoading}
                     className={`
-                        w-full py-3.5 rounded-xl font-bold text-white shadow-lg transition-all transform flex items-center justify-center gap-2 text-sm relative z-10
+                        w-full py-3.5 rounded-xl font-bold shadow-lg transition-all transform flex items-center justify-center gap-2 text-sm relative z-10
                         ${profession.trim()
-                            ? 'bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 shadow-amber-500/20 hover:scale-[1.02] active:scale-95 cursor-pointer'
-                            : 'bg-slate-700 text-slate-400 cursor-not-allowed'}
+                            ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-[#1d1203] hover:from-amber-400 hover:to-orange-500 shadow-amber-500/20 hover:scale-[1.02] active:scale-95 cursor-pointer'
+                            : 'bg-slate-800/80 text-slate-500 cursor-not-allowed'}
                     `}
                 >
                     <Sparkles className="w-4 h-4" />

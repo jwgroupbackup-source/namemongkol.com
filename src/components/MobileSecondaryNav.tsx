@@ -21,6 +21,10 @@ export const MobileSecondaryNav = () => {
         { name: 'วอลเปเปอร์มงคล', icon: ImageIcon, iconImage: '/icon/วอลเปเปอร์มงคล.png', path: '/wallpapers' },
     ];
 
+    if (pathname === '/') {
+        return <div className="h-[68px] w-full max-[400px]:h-[64px] lg:hidden" />;
+    }
+
     return (
         <>
             <div className="fixed top-[68px] z-40 w-full border-b border-white/8 bg-[#0f172a]/92 shadow-[0_4px_16px_rgba(0,0,0,0.22)] backdrop-blur-xl max-[400px]:top-[64px] lg:hidden">

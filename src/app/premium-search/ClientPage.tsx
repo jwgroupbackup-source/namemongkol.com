@@ -3,13 +3,23 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronDown, Lock, Search, RotateCcw, SlidersHorizontal, Coins, CheckCircle2 } from 'lucide-react';
 import { premiumNamesRaw } from '@/data/premiumNamesRaw';
-import { parsePremiumNames, PremiumNameData } from '@/utils/premiumDataParser';
+import { parsePremiumNames } from '@/utils/premiumDataParser';
 import { supabase } from '@/utils/supabase';
 import { getPrediction } from '@/utils/getPrediction';
 import { useRouter } from 'next/navigation';
-import { thaksaConfig } from '@/data/thaksa';
-import { DayKey } from '@/types';
 import { useLanguage } from '@/components/LanguageProvider';
+import {
+    filterPremiumNames,
+    getAvailablePremiumLetters,
+    getUniquePremiumScores,
+    groupPremiumNamesByLetter,
+    type LeadingCharType,
+} from './premiumSearchUtils';
+import {
+    deductCredits,
+    getEffectiveUserCredits,
+    savePremiumUnlockHistoryIfEligible,
+} from '@/services/premiumSearchService';
 
 // Import New Sub-components
 import PremiumHeader from './components/PremiumHeader';
@@ -17,33 +27,14 @@ import PremiumNameCard from './components/PremiumNameCard';
 import PremiumAlphabetBar from './components/PremiumAlphabetBar';
 import PremiumSEOSection from './components/PremiumSEOSection';
 
-type LeadingCharType = 'Any' | 'Dech' | 'Si';
+interface ScoreDropdownProps {
+    value: string;
+    onChange: (value: string) => void;
+    scores: number[];
+    disabled: boolean;
+}
 
-const thaiDayToKey: Record<string, DayKey> = {
-    'อาทิตย์': 'sunday',
-    'จันทร์': 'monday',
-    'อังคาร': 'tuesday',
-    'พุธ(กลางวัน)': 'wednesday',
-    'พุธ(กลางคืน)': 'wednesday_night',
-    'พฤหัสบดี': 'thursday',
-    'ศุกร์': 'friday',
-    'เสาร์': 'saturday'
-};
-
-const THAI_LETTERS = [
-    'ก','ข','ฃ','ค','ฅ','ฆ','ง','จ','ฉ','ช','ซ','ฌ','ญ','ฎ','ฏ','ฐ','ฑ','ฒ','ณ',
-    'ด','ต','ถ','ท','ธ','น','บ','ป','ผ','ฝ','พ','ฟ','ภ','ม','ย','ร','ล','ว',
-    'ศ','ษ','ส','ห','ฬ','อ','ฮ',
-];
-
-const THAI_LEADING_VOWELS = new Set(['\u0E40', '\u0E41', '\u0E42', '\u0E43', '\u0E44']);
-
-const getFirstConsonant = (name: string): string => {
-    if (!name) return '';
-    return THAI_LEADING_VOWELS.has(name.charAt(0)) ? name.charAt(1) : name.charAt(0);
-};
-
-function ScoreDropdown({ value, onChange, scores, disabled }: any) {
+function ScoreDropdown({ value, onChange, scores, disabled }: ScoreDropdownProps) {
     const [open, setOpen] = useState(false);
     const rootRef = useRef<HTMLDivElement | null>(null);
     const { t } = useLanguage();
@@ -86,7 +77,7 @@ function ScoreDropdown({ value, onChange, scores, disabled }: any) {
                     <button
                         type="button"
                         onClick={() => { onChange(''); setOpen(false); }}
-                        className={`w-full px-4 py-3 text-left transition-colors border-b border-white/5 text-sm font-medium ${value === '' ? 'bg-amber-400/10 text-amber-300' : 'text-slate-300 hover:bg-white/5 hover:text-white'}`}
+                        className={`w-full px-4 py-3 text-left transition-colors border-b border-white/5 text-sm font-medium ${value === '' ? 'bg-amber-400/10 text-amber-200' : 'text-white/80 hover:bg-white/5 hover:text-white'}`}
                     >
                         {t('pages.premiumSearch.filters.scoreAny')}
                     </button>
@@ -151,42 +142,14 @@ export default function ClientPage() {
     const allNames = useMemo(() => parsePremiumNames(premiumNamesRaw), []);
 
     const filteredNames = useMemo(() => {
-        return allNames.filter(item => {
-            const matchesScore = !targetScore || item.totalScore.toString() === targetScore;
-            let matchesGender = true;
-            if (selectedGender !== 'all') {
-                if (selectedGender === 'male' && item.gender !== 'male' && item.gender !== 'neutral') matchesGender = false;
-                if (selectedGender === 'female' && item.gender !== 'female' && item.gender !== 'neutral') matchesGender = false;
-                if (selectedGender === 'neutral' && item.gender !== 'neutral') matchesGender = false;
-            }
-            const matchesDay = selectedDay === 'All' || item.suitableDays.includes(selectedDay);
-            let matchesLeadingChar = true;
-            if (selectedDay !== 'All' && leadingCharType !== 'Any') {
-                const dayKey = thaiDayToKey[selectedDay];
-                if (dayKey && thaksaConfig[dayKey]) {
-                    const firstChar = getFirstConsonant(item.name);
-                    const config = thaksaConfig[dayKey];
-                    if (leadingCharType === 'Dech') matchesLeadingChar = config.dech.includes(firstChar);
-                    else if (leadingCharType === 'Si') matchesLeadingChar = config.si.includes(firstChar);
-                }
-            }
-            return matchesScore && matchesGender && matchesDay && matchesLeadingChar;
-        });
+        return filterPremiumNames(allNames, { selectedDay, selectedGender, targetScore, leadingCharType });
     }, [allNames, selectedDay, selectedGender, targetScore, leadingCharType]);
 
     const groupedByLetter = useMemo(() => {
-        const group = new Map<string, PremiumNameData[]>();
-        filteredNames.forEach(item => {
-            const letter = getFirstConsonant(item.name);
-            if (!letter) return;
-            if (!group.has(letter)) group.set(letter, []);
-            group.get(letter)!.push(item);
-        });
-        group.forEach(names => names.sort((a, b) => a.name.localeCompare(b.name, 'th')));
-        return group;
+        return groupPremiumNamesByLetter(filteredNames);
     }, [filteredNames]);
 
-    const availableLetters = useMemo(() => THAI_LETTERS.filter(letter => groupedByLetter.has(letter)), [groupedByLetter]);
+    const availableLetters = useMemo(() => getAvailablePremiumLetters(groupedByLetter), [groupedByLetter]);
 
     useEffect(() => {
         if (!selectedLetter || !availableLetters.includes(selectedLetter)) {
@@ -195,28 +158,7 @@ export default function ClientPage() {
     }, [availableLetters, selectedLetter]);
 
     const uniqueScores = useMemo(() => {
-        const scores = new Set<number>();
-        allNames.forEach(item => {
-            let matchesGender = true;
-            if (selectedGender !== 'all') {
-                if (selectedGender === 'male' && item.gender !== 'male' && item.gender !== 'neutral') matchesGender = false;
-                if (selectedGender === 'female' && item.gender !== 'female' && item.gender !== 'neutral') matchesGender = false;
-                if (selectedGender === 'neutral' && item.gender !== 'neutral') matchesGender = false;
-            }
-            const matchesDay = selectedDay === 'All' || item.suitableDays.includes(selectedDay);
-            let matchesLeadingChar = true;
-            if (selectedDay !== 'All' && leadingCharType !== 'Any') {
-                const dayKey = thaiDayToKey[selectedDay];
-                if (dayKey && thaksaConfig[dayKey]) {
-                    const firstChar = getFirstConsonant(item.name);
-                    const config = thaksaConfig[dayKey];
-                    if (leadingCharType === 'Dech') matchesLeadingChar = config.dech.includes(firstChar);
-                    else if (leadingCharType === 'Si') matchesLeadingChar = config.si.includes(firstChar);
-                }
-            }
-            if (matchesGender && matchesDay && matchesLeadingChar) scores.add(item.totalScore);
-        });
-        return Array.from(scores).sort((a, b) => a - b);
+        return getUniquePremiumScores(allNames, { selectedDay, selectedGender, targetScore: '', leadingCharType });
     }, [allNames, selectedDay, selectedGender, leadingCharType]);
 
     useEffect(() => {
@@ -241,15 +183,8 @@ export default function ClientPage() {
         const fetchCredits = async () => {
             const { data: { user } } = await supabase.auth.getUser();
             if (user) {
-                const { data } = await supabase.from('user_profiles').select('credits, welcome_credits, welcome_credits_granted_at').eq('id', user.id).maybeSingle();
-                if (data) {
-                    let total = data.credits ?? 0;
-                    if (data.welcome_credits && data.welcome_credits > 0 && data.welcome_credits_granted_at) {
-                        const grantedAt = new Date(data.welcome_credits_granted_at).getTime();
-                        if (Date.now() < grantedAt + 30 * 24 * 60 * 60 * 1000) total += data.welcome_credits;
-                    }
-                    setUserCredits(total);
-                }
+                const total = await getEffectiveUserCredits(user.id);
+                if (total !== null) setUserCredits(total);
             }
         };
         fetchCredits();
@@ -317,32 +252,23 @@ export default function ClientPage() {
 
         setIsLoading(true);
         try {
-            const { error } = await supabase.rpc('deduct_credits', { amount });
-            if (error) throw error;
+            await deductCredits(amount);
 
             setUserCredits(prev => (prev !== null ? prev - amount : null));
             window.dispatchEvent(new Event('force_credits_update'));
             await new Promise(resolve => setTimeout(resolve, 800));
 
             setUnlockedCounts(prev => ({ ...prev, [letter]: (prev[letter] || 0) + 20 }));
-            
-            const { data: profile } = await supabase.from('user_profiles').select('tier').eq('id', user.id).maybeSingle();
-            const tier = (profile?.tier || 'free').toLowerCase();
-            if (tier === 'pro' || tier === 'vvip') {
-                await supabase.rpc('cleanup_analysis_history_by_tier');
-                const unlockedNames = groupedByLetter.get(letter)?.slice(0, (unlockedCounts[letter] || 0) + 20) || [];
-                await supabase.from('analysis_history').insert({
-                    user_id: user.id,
-                    type: 'gacha',
-                    input_data: { selectedDay, selectedScore: targetScore || 'All', leadingChar: leadingCharType, selectedLetter },
-                    result_data: unlockedNames.map(item => ({
-                        name: item.name,
-                        totalScore: item.totalScore,
-                        meaning: `เหมาะกับวัน: ${item.suitableDays.join(', ')}`,
-                        notes: item.scoreBreakdown
-                    }))
-                });
-            }
+
+            const unlockedNames = groupedByLetter.get(letter)?.slice(0, (unlockedCounts[letter] || 0) + 20) || [];
+            await savePremiumUnlockHistoryIfEligible({
+                userId: user.id,
+                selectedDay,
+                targetScore,
+                leadingCharType,
+                selectedLetter,
+                unlockedNames,
+            });
         } catch (err) {
             console.error('Search Error:', err);
             Swal.fire({
@@ -460,9 +386,9 @@ export default function ClientPage() {
                                         <span className="text-[9px] sm:text-[10px] text-amber-500/70 normal-case ml-1 shrink-0">{selectedDay !== 'All' ? `(${selectedDay})` : ''}</span>
                                     </label>
                                     <div className="bg-[#0a0f1d] p-1 sm:p-1.5 rounded-xl border border-white/10 flex gap-1 h-[38px] sm:h-[46px]">
-                                        {['Dech', 'Si', 'Any'].map((type) => {
+                                        {(['Dech', 'Si', 'Any'] as LeadingCharType[]).map((type) => {
                                             const isSelected = leadingCharType === type;
-                                            const labelMap: any = { Dech: 'เดช', Si: 'ศรี', Any: 'ทั้งหมด' };
+                                            const labelMap: Record<LeadingCharType, string> = { Dech: 'เดช', Si: 'ศรี', Any: 'ทั้งหมด' };
                                             return (
                                                 <button
                                                     key={type}

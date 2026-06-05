@@ -1,7 +1,8 @@
 import { thaksaConfig, DayKey } from '../data/thaksa';
-import { calculateScore } from './numerologyUtils'; // Ensure this calculates sum of chars
+import { calculateScore } from './calculateScore';
 import { premiumNamesRaw } from '../data/premiumNamesRaw';
 import { parsePremiumNames, PremiumNameData } from './premiumDataParser';
+import { AUSPICIOUS_SUMS } from './gradeResult';
 
 // Cache parsed names
 let cachedParsedNames: PremiumNameData[] | null = null;
@@ -150,13 +151,7 @@ export const analyzePremiumName = (
 
     // Define "Good" sums (This list should be extensive, using a small sample for now or imported)
     // Common auspicious numbers: 14, 15, 24, 36, 41, 42, 45, 50, 51, 54, 55, 56, 59, 63, 65...
-    const auspiciousSums = [
-        9, 14, 15, 19, 24, 36, 40, 41, 42, 44, 45, 46, 50, 51, 54, 55, 56, 59, 60, 63, 64, 65
-    ];
-    // Note: This needs to be robust. 
-    // Filter 2 says: "Get good total sum".
-
-    const isGoodSum = auspiciousSums.includes(totalScore);
+    const isGoodSum = AUSPICIOUS_SUMS.includes(totalScore);
 
     // Grading
     let grade: 'A+' | 'A' | 'B' | 'C' | 'F' = 'B';
@@ -229,10 +224,7 @@ export const generatePremiumNames = (
     const targetDayStr = dayNameMap[dayKey];
 
     // Good Total Sums (Name + Surname)
-    const auspiciousSums = new Set([
-        9, 14, 15, 19, 24, 36, 40, 41, 42, 44, 45, 46, 50, 51, 54, 55, 56, 59, 60, 63, 64, 65,
-        90, 91, 92, 95, 99, 100, 104, 105
-    ]);
+    const auspiciousSums = new Set(AUSPICIOUS_SUMS);
 
     const results: PremiumResult[] = [];
 

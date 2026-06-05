@@ -213,6 +213,16 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
     // Split pairs into Good/Neutral vs Bad
     const goodPairs = result.pairs.filter(p => p.level !== 2);
     const badPairs = result.pairs.filter(p => p.level === 2);
+    const hasBadPairs = badPairs.length > 0;
+    const isStrongGrade = result.grade.startsWith('A') || result.grade.startsWith('B');
+    const mobileVerdict = hasBadPairs
+        ? 'ควรระวังคู่เลขเสี่ยง'
+        : isStrongGrade
+            ? 'ใช้ต่อได้อย่างมั่นใจ'
+            : 'ใช้ได้ แต่ควรดูรายละเอียด';
+    const mobileRisk = hasBadPairs
+        ? `พบคู่เสี่ยง ${badPairs.length} คู่`
+        : 'ไม่พบคู่เสี่ยงเด่น';
 
     const handleShare = (platform: 'facebook' | 'line' | 'copy') => {
         const url = typeof window !== 'undefined' ? window.location.href : '';
@@ -232,6 +242,37 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
 
     return (
         <div className="w-full max-w-4xl animate-fade-in space-y-4 pb-8">
+
+            {/* Mobile Summary Card */}
+            <div className="rounded-3xl border border-white/10 bg-slate-950/70 p-4 shadow-2xl backdrop-blur-xl lg:hidden">
+                <div className="flex items-start gap-3">
+                    <div className={`flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-2xl border text-white shadow-xl ${hasBadPairs
+                        ? 'border-rose-400/30 bg-gradient-to-br from-rose-500 to-rose-800'
+                        : isStrongGrade
+                            ? 'border-emerald-400/30 bg-gradient-to-br from-emerald-500 to-emerald-800'
+                            : 'border-amber-400/30 bg-gradient-to-br from-amber-700 to-amber-950'
+                        }`}>
+                        <span className="text-3xl font-black leading-none">{result.grade}</span>
+                        <span className="text-[9px] font-bold uppercase opacity-80">Grade</span>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-300">สรุปผลเบอร์นี้</p>
+                        <h2 className="mt-1 text-lg font-bold leading-snug text-white">{mobileVerdict}</h2>
+                        <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-slate-300">{result.prediction}</p>
+                    </div>
+                </div>
+
+                <div className="mt-4 grid grid-cols-2 gap-2">
+                    <div className="rounded-2xl border border-white/5 bg-white/5 p-3">
+                        <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">ควรโฟกัส</p>
+                        <p className={`mt-1 text-sm font-bold ${hasBadPairs ? 'text-rose-300' : 'text-emerald-300'}`}>{mobileRisk}</p>
+                    </div>
+                    <div className="rounded-2xl border border-white/5 bg-white/5 p-3">
+                        <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">คู่เลขดี</p>
+                        <p className="mt-1 text-sm font-bold text-emerald-300">{goodPairs.length} คู่</p>
+                    </div>
+                </div>
+            </div>
 
             {/* Main Result Card */}
             <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-5 lg:p-8 border border-white/5 shadow-2xl relative overflow-hidden">
@@ -264,7 +305,7 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
                                     {/* Conversion CTA for Bad Numbers */}
                                     <a
                                         href="/search"
-                                        className="block w-full mt-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white text-center py-3 rounded-xl font-bold text-sm shadow-lg shadow-amber-900/20 transition-all hover:scale-[1.02] active:scale-95 animate-bounce-gentle"
+                                        className="block w-full mt-2 rounded-xl border border-amber-400/20 bg-amber-500/10 px-4 py-3 text-center text-sm font-bold text-amber-200 shadow-lg shadow-black/10 transition-all hover:-translate-y-0.5 hover:border-amber-300/40 hover:bg-amber-500/15 active:scale-95"
                                     >
                                         เปลี่ยนเบอร์ร้ายให้กลายเป็นดี คลิก!
                                     </a>

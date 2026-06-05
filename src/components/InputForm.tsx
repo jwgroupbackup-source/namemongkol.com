@@ -83,26 +83,26 @@ export const InputForm: React.FC<InputFormProps> = ({
 
     return (
         <div className="w-full animate-fade-in-up">
-            <div className="relative overflow-hidden rounded-[1.55rem] border border-[#f0c976]/70 bg-[linear-gradient(145deg,#fffaf1_0%,#fff6e8_52%,#fff0d6_100%)] p-4 text-[#18223a] shadow-[0_0_0_1px_rgba(255,244,218,0.84),0_24px_70px_rgba(218,146,22,0.24),0_0_42px_rgba(250,194,87,0.28)] sm:rounded-[1.9rem] sm:p-6 lg:p-7">
+            <div className="relative overflow-hidden rounded-[1.35rem] border border-[#f0c976]/70 bg-[linear-gradient(145deg,#fffaf1_0%,#fff6e8_52%,#fff0d6_100%)] p-3 text-[#18223a] shadow-[0_0_0_1px_rgba(255,244,218,0.84),0_24px_70px_rgba(218,146,22,0.24),0_0_42px_rgba(250,194,87,0.28)] sm:rounded-[1.9rem] sm:p-6 lg:p-7">
                 <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[#f7d894] to-transparent" />
                 <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[radial-gradient(circle,rgba(242,181,55,0.22),transparent_62%)] blur-2xl" />
                 <div className="pointer-events-none absolute -left-24 bottom-0 h-60 w-60 rounded-full bg-[radial-gradient(circle,rgba(245,203,122,0.18),transparent_64%)] blur-2xl" />
 
-                <div className="pointer-events-none absolute left-4 top-4 h-8 w-8 border-l border-t border-[#eac679]/70" />
-                <div className="pointer-events-none absolute right-4 top-4 h-8 w-8 border-r border-t border-[#eac679]/70" />
-                <div className="pointer-events-none absolute bottom-4 left-4 h-8 w-8 border-b border-l border-[#eac679]/60" />
-                <div className="pointer-events-none absolute bottom-4 right-4 h-8 w-8 border-b border-r border-[#eac679]/60" />
+                <div className="pointer-events-none absolute left-4 top-4 hidden h-8 w-8 border-l border-t border-[#eac679]/70 sm:block" />
+                <div className="pointer-events-none absolute right-4 top-4 hidden h-8 w-8 border-r border-t border-[#eac679]/70 sm:block" />
+                <div className="pointer-events-none absolute bottom-4 left-4 hidden h-8 w-8 border-b border-l border-[#eac679]/60 sm:block" />
+                <div className="pointer-events-none absolute bottom-4 right-4 hidden h-8 w-8 border-b border-r border-[#eac679]/60 sm:block" />
 
                 <div className="relative z-10">
-                    <div className="mb-5 text-center">
-                        <p className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full border border-[#f0c976]/70 bg-[#fff4d8]/80 px-4 py-2 text-[11px] font-semibold text-[#b87507] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
+                    <div className="mb-3 text-center sm:mb-5">
+                        <p className="mx-auto mb-3 hidden items-center gap-2 rounded-full border border-[#f0c976]/70 bg-[#fff4d8]/80 px-4 py-2 text-[11px] font-semibold text-[#b87507] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:inline-flex">
                             <Sparkles className="h-3.5 w-3.5" />
                             Free name analysis
                         </p>
-                        <h2 className="text-[2rem] font-bold leading-tight text-[#17243d] sm:text-4xl">
+                        <h2 className="text-2xl font-bold leading-tight text-[#17243d] sm:text-4xl">
                             เริ่มวิเคราะห์ชื่อฟรี
                         </h2>
-                        <p className="mt-2 text-sm leading-6 text-[#5d6676]">
+                        <p className="mt-2 hidden text-sm leading-6 text-[#5d6676] sm:block">
                             กรอกข้อมูลพื้นฐาน แล้วดูผลจาก 4 ศาสตร์หลักได้ทันที
                         </p>
                     </div>
@@ -120,7 +120,7 @@ export const InputForm: React.FC<InputFormProps> = ({
                         ))}
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                         <div className="hidden sm:block">
                             <label htmlFor="birth-day" className="mb-2 block text-xs font-bold text-[#1f2b43]">
                                 วันเกิด
@@ -143,7 +143,7 @@ export const InputForm: React.FC<InputFormProps> = ({
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+                        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-4">
                             <div>
                                 <label htmlFor="input-name" className="mb-2 block text-xs font-bold text-[#1f2b43]">
                                     ชื่อจริง
@@ -178,7 +178,7 @@ export const InputForm: React.FC<InputFormProps> = ({
                             </div>
                         </div>
 
-                        <div>
+                        <div className="hidden sm:block">
                             <p className="mb-2 text-xs font-bold text-[#1f2b43]">รองรับภาษา</p>
                             <div className="grid grid-cols-2 gap-3">
                                 <button
@@ -224,7 +224,7 @@ export const InputForm: React.FC<InputFormProps> = ({
                             </span>
                         </button>
 
-                        <div className="flex items-start justify-center gap-2 px-2 text-center text-[11px] leading-relaxed text-[#7b7368] sm:text-xs">
+                        <div className="flex items-start justify-center gap-2 px-1 text-center text-[10px] leading-relaxed text-[#7b7368] sm:px-2 sm:text-xs">
                             <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#798070]" />
                             <p>
                                 ใช้งานฟรีได้ทันที ไม่มีค่าใช้จ่าย ข้อมูลของคุณจะถูกเก็บเป็นความลับและปลอดภัย 100%
