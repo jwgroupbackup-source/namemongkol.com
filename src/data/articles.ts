@@ -14,12 +14,21 @@ import { articleNumberPairs } from './article-number-pairs';
 import { articleBirthdayNames700 } from './article-birthday-names-700-2569';
 import { articleMondayGirlNoVowelMeaning2569 } from './article-monday-girl-no-vowel-meaning-2569';
 import { articleSundayBoyNamesAvoidKalakini2569 } from './article-sunday-boy-names-avoid-kalakini-2569';
+import { articleWednesdayNightBoyNames2569 } from './article-wednesday-night-boy-names-2569';
 import { articleFreeNameAnalysisNumerologyGuide } from './article-free-name-analysis-numerology-guide';
 import { articleChangeNameChecklistNumerologyThaksaAyatana } from './article-change-name-checklist-numerology-thaksa-ayatana';
 
 export interface FaqItem {
     question: string;
     answer: string;
+}
+
+export interface ArticleImageMeta {
+    src: string;
+    alt: string;
+    title?: string;
+    caption?: string;
+    credit?: string;
 }
 
 export interface Article {
@@ -34,6 +43,7 @@ export interface Article {
     author: string;
     category: string;
     keywords: string[];
+    images?: ArticleImageMeta[];
     metaTitle?: string;
     metaDescription?: string;
     relatedSlugs?: string[]; // For manual internal linking
@@ -50,6 +60,7 @@ export const articles: Article[] = [
     articleBirthdayNames700,
     articleNicknameKalakini,
     articleBoyNames2569,
+    articleWednesdayNightBoyNames2569,
     articleSundayBoyNamesAvoidKalakini2569,
     articleGirlNames2569,
     articleMondayGirlNoVowelMeaning2569,
@@ -8117,7 +8128,7 @@ export const articles: Article[] = [
         slug: '131-grade-a-auspicious-digital-nicknames',
         title: 'แจกฟรี! 131 ชื่อเล่นมงคลเกรด A ยุคดิจิทัล ความหมายอินเตอร์ ผลรวมปัง คู่เลขสวย 100%',
         excerpt: 'รวม 131 ไอเดียชื่อเล่นมงคลสไตล์ Tech & Space ผลรวมดี คู่เลข🟢สวย 100% พร้อมวันเกิดที่แนะนำ คัดมาให้แล้วจาก namemongkol นำไปใช้ได้ฟรีเลย!',
-        coverImage: '/images/articles/131-grade-a-digital-nicknames-cover.svg',
+        coverImage: '/images/articles/131-grade-a-auspicious-digital-nicknames.webp',
         coverImageAlt: '131 ชื่อเล่นมงคลเกรด A ยุคดิจิทัล ชื่อเล่นเสริมดวง',
         date: '2026-03-20',
         author: 'ทีมงาน NameMongkol',

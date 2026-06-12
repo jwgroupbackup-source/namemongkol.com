@@ -89,39 +89,70 @@ const AvatarPortrait = ({ avatar, index }: { avatar: ProofAvatar; index: number 
     );
 };
 
-type PublicStatsResponse = {
+type LiveStatsResponse = {
     success?: boolean;
+    totals?: {
+        analyses?: number;
+        members?: number;
+    };
     stats?: {
         totalAnalyses?: number;
         totalUsers?: number;
     };
 };
 
+const STATS_POLL_MS = 30_000;
+
+const formatRealtimeCount = (value?: number) => {
+    if (typeof value !== 'number' || value <= 0) {
+        return null;
+    }
+
+    return value.toLocaleString('th-TH');
+};
+
 const HeroSocialProof = () => {
-    const [analysisCount, setAnalysisCount] = React.useState('10,000+');
-    const [memberCount, setMemberCount] = React.useState('184+');
+    const [analysisCount, setAnalysisCount] = React.useState('...');
+    const [memberCount, setMemberCount] = React.useState('...');
 
     React.useEffect(() => {
         let isMounted = true;
 
-        fetch('/api/public/stats')
-            .then((response) => response.json() as Promise<PublicStatsResponse>)
-            .then((data) => {
-                const totalAnalyses = data.stats?.totalAnalyses ?? 0;
-                const totalUsers = data.stats?.totalUsers ?? 0;
-                if (isMounted && totalAnalyses > 0) {
-                    setAnalysisCount(`${totalAnalyses.toLocaleString('th-TH')}+`);
+        const loadStats = async () => {
+            try {
+                const response = await fetch('/api/live-stats', { cache: 'no-store' });
+                if (!response.ok) {
+                    return;
                 }
-                if (isMounted && totalUsers > 0) {
-                    setMemberCount(`${totalUsers.toLocaleString('th-TH')}+`);
+
+                const data = await response.json() as LiveStatsResponse;
+                const totalAnalyses = data.totals?.analyses ?? data.stats?.totalAnalyses;
+                const totalUsers = data.totals?.members ?? data.stats?.totalUsers;
+                const nextAnalysisCount = formatRealtimeCount(totalAnalyses);
+                const nextMemberCount = formatRealtimeCount(totalUsers);
+
+                if (!isMounted) {
+                    return;
                 }
-            })
-            .catch(() => {
+
+                if (nextAnalysisCount) {
+                    setAnalysisCount(nextAnalysisCount);
+                }
+
+                if (nextMemberCount) {
+                    setMemberCount(nextMemberCount);
+                }
+            } catch {
                 // Keep the public proof readable even if stats are unavailable.
-            });
+            }
+        };
+
+        loadStats();
+        const interval = window.setInterval(loadStats, STATS_POLL_MS);
 
         return () => {
             isMounted = false;
+            window.clearInterval(interval);
         };
     }, []);
 
@@ -135,7 +166,7 @@ const HeroSocialProof = () => {
                         ))}
                     </div>
                     <p className="text-xs font-semibold leading-snug text-amber-50/90 sm:text-sm">
-                        สมาชิกมากกว่า <span className="text-amber-300">{memberCount}</span> คน เชื่อมั่นในผลลัพธ์
+                        สมาชิก <span className="text-amber-300">{memberCount}</span> คน เชื่อมั่นในผลลัพธ์
                     </p>
                 </div>
 

@@ -5,7 +5,7 @@ export const articleGirlNames2569: Article = {
     slug: 'girl-names-2569-auspicious-modern',
     title: 'รวม ชื่อมงคล ผู้หญิง 2569: ไอเดียตั้งชื่อลูกสาว คัดเน้นๆ ความหมายดี ไพเราะ ทันสมัย',
     excerpt: 'รวม 400 ชื่อมงคล ผู้หญิง ปี 2569 คัดสรรพิเศษ 4 หมวด: สายปัญญา สายมั่งคั่ง สายความงาม และสไตล์โมเดิร์นอินเตอร์ พร้อมคำอ่านและความหมายครบถ้วน',
-    coverImage: '/images/articles/girl-names-2569.webp',
+    coverImage: '/images/articles/girl-names-2569-50-auspicious.webp',
     coverImageAlt: 'ชื่อมงคล ผู้หญิง 2569 รวมไอเดียตั้งชื่อลูกสาว ความหมายดี ไพเราะ ทันสมัย',
     date: '2026-04-17',
     author: 'อาจารย์ณัฐ (NameMongkol)',

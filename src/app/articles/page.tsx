@@ -1,12 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import Script from 'next/script';
 import { unstable_cache } from 'next/cache';
 import { supabase } from '@/utils/supabase';
 import { Calendar, ArrowLeft, Search, BookOpen } from 'lucide-react';
 import { articles as localArticles } from '@/data/articles';
-import { shimmer, toBase64 } from '@/utils/imageUtils';
 import { ArticleImage } from '@/components/ArticleImage';
 import { siteUrl } from '@/lib/seo';
 
@@ -22,6 +20,20 @@ type ArticleRow = {
     author: string;
     category: string;
 } & Record<string, unknown>;
+
+function getArticleKeywords(article: ArticleRow | (typeof localArticles)[number]) {
+    const keywords = (article as { keywords?: unknown }).keywords;
+    return Array.isArray(keywords)
+        ? keywords.filter((keyword): keyword is string => typeof keyword === 'string')
+        : [];
+}
+
+function getArticleCoverAlt(article: ArticleRow | (typeof localArticles)[number]) {
+    const coverImageAlt = (article as { coverImageAlt?: unknown }).coverImageAlt;
+    return typeof coverImageAlt === 'string' && coverImageAlt.trim()
+        ? coverImageAlt
+        : `บทความ: ${article.title} - เคล็ดลับตั้งชื่อมงคล`;
+}
 
 // ISR: cache 1 hour, invalidate via revalidateTag('articles') when admin updates
 export const revalidate = 3600;
@@ -54,11 +66,22 @@ const getArticleModifiedDate = (article: { date: string; dateModified?: unknown;
     return camelDate || snakeDate || article.date;
 };
 
+function resolveArticleCoverImage(dbImage?: string | null, localImage?: string) {
+    const image = dbImage?.trim() || '';
+
+    if (!image) return localImage || '';
+
+    const isLegacyLocalArticlePath = image.startsWith('/images/article/') || image.startsWith('/images/article-');
+    if (isLegacyLocalArticlePath && localImage) return localImage;
+
+    return image;
+}
+
 async function fetchArticlesFromDb() {
     try {
         const { data: articles } = await supabase
             .from('articles')
-            .select('*')
+            .select('id, slug, title, excerpt, cover_image, cover_image_alt, date, author, category, meta_title, meta_description, date_modified')
             .eq('is_published', true);
         return (articles as ArticleRow[]) || [];
     } catch (e) {
@@ -82,6 +105,8 @@ const SLUG_REDIRECTS: Record<string, string> = {
     'ชื่อลูกชาย-2569-50-ชื่อมงคล': 'boy-names-2569-50-auspicious',
 };
 
+const LOCAL_PRIORITY_ARTICLE_SLUGS = new Set(['boy-names-wednesday-night-2569']);
+
 async function getArticles() {
     const dbArticles = await getCachedDbArticles();
 
@@ -90,12 +115,20 @@ async function getArticles() {
         // Try to find local match by slug first, then by title (for migrated slugs)
         const localMatch = localArticles.find(a => a.slug === dbArticle.slug)
             || localArticles.find(a => a.title === dbArticle.title);
+
+        if (localMatch && LOCAL_PRIORITY_ARTICLE_SLUGS.has(localMatch.slug)) {
+            return localMatch;
+        }
+
         const dbImage = dbArticle.cover_image || dbArticle.coverImage;
         const localImage = localMatch?.coverImage;
 
         // DB-first: always use image edited via admin when present,
         // fallback to local static image only if DB image is empty.
-        const finalImage = dbImage || localImage || '';
+        const finalImage = resolveArticleCoverImage(
+            typeof dbImage === 'string' ? dbImage : null,
+            localImage
+        );
 
         // If the DB slug is old (Thai) and we have a redirect, use the new English slug
         const migratedSlug = SLUG_REDIRECTS[dbArticle.slug as string] || (localMatch ? localMatch.slug : dbArticle.slug);
@@ -189,8 +222,34 @@ export const metadata: Metadata = {
     },
 };
 
-export default async function ArticlesPage() {
+type ArticlesPageProps = {
+    searchParams?: Promise<{
+        q?: string;
+        category?: string;
+    }>;
+};
+
+export default async function ArticlesPage({ searchParams }: ArticlesPageProps) {
     const articles = await getArticles();
+    const resolvedSearchParams = await searchParams;
+    const query = (resolvedSearchParams?.q || '').trim();
+    const activeCategory = (resolvedSearchParams?.category || '').trim();
+    const normalizedQuery = query.toLowerCase();
+    const categories = Array.from(new Set(articles.map((article) => article.category).filter(Boolean))).slice(0, 12);
+    const filteredArticles = articles.filter((article) => {
+        const matchesCategory = !activeCategory || article.category === activeCategory;
+        const searchableText = `${article.title} ${article.excerpt} ${article.category} ${getArticleKeywords(article).join(' ')}`.toLowerCase();
+        const matchesQuery = !normalizedQuery || searchableText.includes(normalizedQuery);
+        return matchesCategory && matchesQuery;
+    });
+    const visibleArticles = query || activeCategory ? filteredArticles : articles;
+    const getArticlesHref = (params: { q?: string; category?: string }) => {
+        const nextParams = new URLSearchParams();
+        if (params.q) nextParams.set('q', params.q);
+        if (params.category) nextParams.set('category', params.category);
+        const queryString = nextParams.toString();
+        return queryString ? `/articles?${queryString}` : '/articles';
+    };
     const topicClusters = [
         {
             title: 'เริ่มต้นตั้งชื่อลูก',
@@ -437,7 +496,7 @@ export default async function ArticlesPage() {
                             กลับหน้าหลัก
                         </Link>
 
-                        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400">
+                        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 text-white">
                             บทความชื่อมงคล
                         </h1>
                         <p className="text-slate-300 text-sm sm:text-lg mb-4 leading-relaxed">
@@ -476,21 +535,51 @@ export default async function ArticlesPage() {
                         </div>
 
                         {/* Search Bar */}
-                        <form role="search" aria-label="ค้นหาบทความชื่อมงคล" action="/search" method="GET" className="mt-5 sm:mt-8 relative max-w-lg">
+                        <form role="search" aria-label="ค้นหาบทความชื่อมงคล" action="/articles" method="GET" className="mt-5 sm:mt-8 relative max-w-lg">
                             <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400">
                                 <Search size={20} />
                             </div>
                             <input
                                 type="search"
                                 name="q"
+                                defaultValue={query}
                                 placeholder="ค้นหาบทความ... เช่น ชื่อลูกชาย, เลขศาสตร์, ทักษา"
                                 aria-label="ค้นหาบทความ"
                                 className="w-full bg-slate-800/50 border border-slate-700 rounded-xl py-2.5 sm:py-3 pl-12 pr-4 text-sm sm:text-base text-slate-200 placeholder:text-slate-500 focus:ring-2 focus:ring-amber-500/50 focus:border-transparent outline-none transition-all"
                             />
+                            {activeCategory && <input type="hidden" name="category" value={activeCategory} />}
                             <button type="submit" className="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400 hover:text-white transition-colors">
                                 <Search size={16} />
                             </button>
                         </form>
+
+                        <div className="mt-4 flex max-w-4xl flex-wrap items-center gap-2">
+                            <Link
+                                href={getArticlesHref({ q: query })}
+                                className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${!activeCategory ? 'border-amber-300/40 bg-amber-300/15 text-amber-100' : 'border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/20 hover:bg-white/[0.06]'}`}
+                            >
+                                ทั้งหมด
+                            </Link>
+                            {categories.map((category) => (
+                                <Link
+                                    key={category}
+                                    href={getArticlesHref({ q: query, category })}
+                                    className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${activeCategory === category ? 'border-amber-300/40 bg-amber-300/15 text-amber-100' : 'border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/20 hover:bg-white/[0.06]'}`}
+                                >
+                                    {category}
+                                </Link>
+                            ))}
+                            {(query || activeCategory) && (
+                                <Link href="/articles" className="rounded-full border border-white/10 bg-slate-950/60 px-3 py-1.5 text-xs font-medium text-slate-400 transition hover:border-white/20 hover:text-slate-200">
+                                    ล้างตัวกรอง
+                                </Link>
+                            )}
+                        </div>
+                        {(query || activeCategory) && (
+                            <p className="mt-3 text-sm text-slate-400">
+                                พบ {visibleArticles.length} บทความจากทั้งหมด {articles.length} บทความ
+                            </p>
+                        )}
                     </div>
 
                     {/* Grid — 1 col mobile / 2 col tablet / 4 col desktop */}
@@ -527,24 +616,26 @@ export default async function ArticlesPage() {
                         </div>
                     </section>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 max-w-[1400px] mx-auto">
-                        {articles.map((article, index) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 max-w-[1400px] mx-auto">
+                        {visibleArticles.map((article, index) => (
                             <Link
                                 key={article.slug}
                                 href={`/articles/${article.slug}`}
-                                className="group bg-slate-900/40 backdrop-blur-sm border border-white/5 rounded-xl sm:rounded-2xl overflow-hidden hover:border-amber-500/25 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-900/15"
+                                className="group bg-slate-900/45 backdrop-blur-sm border border-white/5 rounded-2xl overflow-hidden hover:border-amber-500/25 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-900/15"
                             >
                                 <article
                                     className="flex flex-col h-full"
                                     itemScope
                                     itemType="https://schema.org/Article"
                                 >
-                                    <div className="aspect-[4/3] sm:aspect-video w-full bg-slate-800 relative overflow-hidden">
+                                    <div className="aspect-[16/10] w-full bg-[#080d19] relative overflow-hidden p-2">
                                         <ArticleImage
                                             src={article.coverImage as string}
-                                            alt={(article as any).coverImageAlt || `บทความ: ${article.title} - เคล็ดลับตั้งชื่อมงคล`}
+                                            alt={getArticleCoverAlt(article)}
                                             priority={index < 4}
-                                            className="group-hover:scale-105"
+                                            objectFit="contain"
+                                            variant="card"
+                                            className="scale-100"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent opacity-60" />
                                         <div className="absolute top-2 sm:top-3 right-2 sm:right-3 max-w-[calc(100%-1rem)] truncate px-2 sm:px-2.5 py-0.5 bg-black/60 backdrop-blur-md rounded-full text-[9px] sm:text-[10px] text-white font-medium border border-white/10 z-10">
@@ -552,9 +643,9 @@ export default async function ArticlesPage() {
                                         </div>
                                     </div>
 
-                                    <div className="p-2.5 sm:p-4 flex flex-col flex-grow relative bg-[#0f172a] group-hover:bg-[#131c33] transition-colors">
-                                        <div className="flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[11px] text-slate-500 mb-1.5 sm:mb-2.5">
-                                            <Calendar size={10} className="shrink-0" />
+                                    <div className="p-4 flex flex-col flex-grow relative bg-[#0f172a] group-hover:bg-[#131c33] transition-colors">
+                                        <div className="flex items-center gap-2 text-[11px] text-slate-500 mb-2.5">
+                                            <Calendar size={12} className="shrink-0" />
                                             <time
                                                 dateTime={new Date(parseThaiDate(article.date)).toISOString()}
                                                 itemProp="datePublished"
@@ -564,18 +655,18 @@ export default async function ArticlesPage() {
                                             </time>
                                         </div>
 
-                                        <h2 className="text-[12px] sm:text-sm font-bold text-slate-100 mb-0 sm:mb-2 leading-snug group-hover:text-purple-400 transition-colors line-clamp-3 sm:line-clamp-2" itemProp="headline">
+                                        <h2 className="text-base sm:text-sm font-bold text-slate-100 mb-2 leading-snug group-hover:text-amber-200 transition-colors line-clamp-3 sm:line-clamp-2" itemProp="headline">
                                             {article.title}
                                         </h2>
 
-                                        <p className="hidden sm:block text-slate-400 text-xs leading-relaxed mb-4 line-clamp-2" itemProp="description">
+                                        <p className="text-slate-400 text-sm sm:text-xs leading-relaxed mb-4 line-clamp-2" itemProp="description">
                                             {article.excerpt}
                                         </p>
                                         <meta itemProp="url" content={`${baseUrl}/articles/${article.slug}`} />
                                         <meta itemProp="author" content={article.author || 'NameMongkol'} />
 
-                                        <div className="hidden sm:flex mt-auto pt-3 border-t border-white/5 justify-between items-center">
-                                            <span className="text-purple-400 text-xs font-medium group-hover:underline decoration-purple-500/30 underline-offset-4">อ่านเพิ่มเติม →</span>
+                                        <div className="flex mt-auto pt-3 border-t border-white/5 justify-between items-center">
+                                            <span className="text-amber-300 text-xs font-medium group-hover:underline decoration-amber-500/30 underline-offset-4">อ่านเพิ่มเติม →</span>
                                             <span className="text-slate-600 text-[10px]" itemProp="author">{article.author}</span>
                                         </div>
                                     </div>
@@ -584,9 +675,12 @@ export default async function ArticlesPage() {
                         ))}
                     </div>
 
-                    {articles.length === 0 && (
-                        <div className="text-center py-20 text-slate-500">
-                            <p>ยังไม่มีบทความในขณะนี้</p>
+                    {visibleArticles.length === 0 && (
+                        <div className="mx-auto max-w-xl rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-12 text-center text-slate-400">
+                            <p className="text-base text-slate-200">ยังไม่พบบทความที่ตรงกับตัวกรองนี้</p>
+                            <Link href="/articles" className="mt-4 inline-flex rounded-full border border-amber-300/30 bg-amber-300/10 px-4 py-2 text-sm font-medium text-amber-100 transition hover:bg-amber-300/15">
+                                ดูบทความทั้งหมด
+                            </Link>
                         </div>
                     )}
 

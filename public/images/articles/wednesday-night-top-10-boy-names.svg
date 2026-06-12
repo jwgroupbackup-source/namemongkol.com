@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="676" viewBox="0 0 1200 676" role="img" aria-labelledby="title desc">
+  <title id="title">10 ชื่อมงคลยอดนิยมสำหรับลูกชายวันพุธกลางคืน</title>
+  <desc id="desc">อินโฟกราฟิก 10 ชื่อมงคลยอดนิยมสำหรับลูกชายเกิดวันพุธกลางคืน</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#031124"/><stop offset="55%" stop-color="#0f2e5f"/><stop offset="100%" stop-color="#020617"/></linearGradient>
+    <linearGradient id="gold" x1="0" x2="1"><stop offset="0%" stop-color="#fff7cc"/><stop offset="50%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#a16207"/></linearGradient>
+  </defs>
+  <rect width="1200" height="676" fill="url(#bg)"/>
+  <circle cx="986" cy="106" r="72" fill="#fbbf24" opacity=".12"/>
+  <circle cx="170" cy="540" r="130" fill="#38bdf8" opacity=".08"/>
+  <text x="600" y="82" text-anchor="middle" font-family="Tahoma, sans-serif" font-size="44" font-weight="900" fill="#fff">Top 10 ชื่อลูกชายวันพุธกลางคืน</text>
+  <text x="600" y="124" text-anchor="middle" font-family="Tahoma, sans-serif" font-size="23" fill="#fde68a">คัดตัวอย่างชื่อที่ไม่มีอักษรกาลกิณี บ ป ผ ฝ พ ฟ ภ ม</text>
+  <g font-family="Tahoma, sans-serif" font-size="29" font-weight="800">
+    <g transform="translate(94 172)"><rect width="478" height="64" rx="20" fill="#0b1f3f" stroke="#fbbf24"/><circle cx="44" cy="32" r="22" fill="url(#gold)"/><text x="44" y="42" text-anchor="middle" fill="#07111f" font-size="22">1</text><text x="94" y="43" fill="#fff">กนต์ณัฐ</text></g>
+    <g transform="translate(628 172)"><rect width="478" height="64" rx="20" fill="#0b1f3f" stroke="#fbbf24"/><circle cx="44" cy="32" r="22" fill="url(#gold)"/><text x="44" y="42" text-anchor="middle" fill="#07111f" font-size="22">2</text><text x="94" y="43" fill="#fff">กนต์ธีร์</text></g>
+    <g transform="translate(94 250)"><rect width="478" height="64" rx="20" fill="#0b1f3f" stroke="#fbbf24"/><circle cx="44" cy="32" r="22" fill="url(#gold)"/><text x="44" y="42" text-anchor="middle" fill="#07111f" font-size="22">3</text><text x="94" y="43" fill="#fff">กนิน</text></g>
+    <g transform="translate(628 250)"><rect width="478" height="64" rx="20" fill="#0b1f3f" stroke="#fbbf24"/><circle cx="44" cy="32" r="22" fill="url(#gold)"/><text x="44" y="42" text-anchor="middle" fill="#07111f" font-size="22">4</text><text x="94" y="43" fill="#fff">กิตติ</text></g>
+    <g transform="translate(94 328)"><rect width="478" height="64" rx="20" fill="#0b1f3f" stroke="#fbbf24"/><circle cx="44" cy="32" r="22" fill="url(#gold)"/><text x="44" y="42" text-anchor="middle" fill="#07111f" font-size="22">5</text><text x="94" y="43" fill="#fff">กิตติธัช</text></g>
+    <g transform="translate(628 328)"><rect width="478" height="64" rx="20" fill="#0b1f3f" stroke="#fbbf24"/><circle cx="44" cy="32" r="22" fill="url(#gold)"/><text x="44" y="42" text-anchor="middle" fill="#07111f" font-size="22">6</text><text x="94" y="43" fill="#fff">กิตตินันท์</text></g>
+    <g transform="translate(94 406)"><rect width="478" height="64" rx="20" fill="#0b1f3f" stroke="#fbbf24"/><circle cx="44" cy="32" r="22" fill="url(#gold)"/><text x="44" y="42" text-anchor="middle" fill="#07111f" font-size="22">7</text><text x="94" y="43" fill="#fff">กิตติศักดิ์</text></g>
+    <g transform="translate(628 406)"><rect width="478" height="64" rx="20" fill="#0b1f3f" stroke="#fbbf24"/><circle cx="44" cy="32" r="22" fill="url(#gold)"/><text x="44" y="42" text-anchor="middle" fill="#07111f" font-size="22">8</text><text x="94" y="43" fill="#fff">เกียรติคุณ</text></g>
+    <g transform="translate(94 484)"><rect width="478" height="64" rx="20" fill="#0b1f3f" stroke="#fbbf24"/><circle cx="44" cy="32" r="22" fill="url(#gold)"/><text x="44" y="42" text-anchor="middle" fill="#07111f" font-size="22">9</text><text x="94" y="43" fill="#fff">คณิศร</text></g>
+    <g transform="translate(628 484)"><rect width="478" height="64" rx="20" fill="#0b1f3f" stroke="#fbbf24"/><circle cx="44" cy="32" r="22" fill="url(#gold)"/><text x="44" y="42" text-anchor="middle" fill="#07111f" font-size="22">10</text><text x="94" y="43" fill="#fff">ธนกฤต</text></g>
+  </g>
+  <text x="600" y="622" text-anchor="middle" font-family="Tahoma, sans-serif" font-size="22" fill="#cbd5e1">ควรนำชื่อที่ชอบไปตรวจร่วมกับนามสกุลจริงก่อนใช้</text>
+</svg>

@@ -10,14 +10,47 @@ interface PublicStats {
     reviewCount: number;
 }
 
+interface LiveStatsResponse {
+    success?: boolean;
+    totals?: {
+        analyses?: number;
+        members?: number;
+    };
+    stats?: Partial<PublicStats>;
+}
+
 export const TrustStrip = () => {
     const [stats, setStats] = useState<PublicStats | null>(null);
 
     useEffect(() => {
-        fetch('/api/public/stats')
-            .then(res => res.json())
-            .then(data => { if (data.success) setStats(data.stats); })
-            .catch(() => { /* silent */ });
+        let isMounted = true;
+
+        const loadStats = async () => {
+            try {
+                const res = await fetch('/api/live-stats', { cache: 'no-store' });
+                if (!res.ok) return;
+
+                const data = await res.json() as LiveStatsResponse;
+                if (!isMounted) return;
+
+                setStats({
+                    totalAnalyses: data.totals?.analyses ?? data.stats?.totalAnalyses ?? 0,
+                    totalUsers: data.totals?.members ?? data.stats?.totalUsers ?? 0,
+                    avgRating: data.stats?.avgRating ?? 5,
+                    reviewCount: data.stats?.reviewCount ?? 0,
+                });
+            } catch {
+                // Silent: this strip can disappear if realtime stats are unavailable.
+            }
+        };
+
+        loadStats();
+        const interval = window.setInterval(loadStats, 60_000);
+
+        return () => {
+            isMounted = false;
+            window.clearInterval(interval);
+        };
     }, []);
 
     if (!stats) return null;
@@ -25,13 +58,13 @@ export const TrustStrip = () => {
     const items = [
         {
             icon: BarChart3,
-            value: stats.totalAnalyses > 0 ? stats.totalAnalyses.toLocaleString() : '10,000+',
+            value: stats.totalAnalyses.toLocaleString('th-TH'),
             label: 'ครั้งที่วิเคราะห์แล้ว',
             color: 'text-amber-400',
         },
         {
             icon: Users,
-            value: stats.totalUsers > 0 ? `${stats.totalUsers.toLocaleString()}+` : '1,000+',
+            value: stats.totalUsers.toLocaleString('th-TH'),
             label: 'สมาชิก',
             color: 'text-emerald-400',
         },

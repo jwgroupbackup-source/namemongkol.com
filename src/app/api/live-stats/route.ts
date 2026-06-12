@@ -3,99 +3,159 @@ import { createClient } from '@supabase/supabase-js';
 
 export const dynamic = 'force-dynamic';
 
+const emptyCounts = {
+    analysis: 0,
+    wallpaper: 0,
+    phone: 0,
+    palm: 0,
+    premium: 0,
+    total: 0,
+};
+
+function noStoreHeaders() {
+    return {
+        'Cache-Control': 'no-store, no-cache, max-age=0, must-revalidate',
+    };
+}
+
 // Use service role to bypass RLS for public aggregate counts.
-// This route returns NO PII — only aggregate counts.
+// This route returns no PII, only aggregate counts.
 function getServiceClient() {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseKey) {
+        return null;
+    }
+
     return createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        supabaseUrl,
+        supabaseKey,
         { auth: { persistSession: false } },
     );
 }
 
 export async function GET() {
+    const now = new Date();
+
     try {
         const supabase = getServiceClient();
 
-        const now = new Date();
+        if (!supabase) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    onlineNow: 1,
+                    totals: { members: 0, analyses: 0 },
+                    stats: { totalUsers: 0, totalAnalyses: 0, avgRating: 5, reviewCount: 0 },
+                    counts: emptyCounts,
+                    ts: now.toISOString(),
+                },
+                { headers: noStoreHeaders() },
+            );
+        }
+
         const ago5m = new Date(now.getTime() - 5 * 60 * 1000).toISOString();
         const ago30m = new Date(now.getTime() - 30 * 60 * 1000).toISOString();
 
-        // 1. Online users — distinct session_ids in last 5 minutes
-        const { data: onlineSessions } = await supabase
-            .from('user_action_events')
-            .select('session_id')
-            .gte('created_at', ago5m);
+        const [onlineRes, eventsRes, analysisTotalRes, userTotalRes, reviewsRes] = await Promise.all([
+            supabase
+                .from('user_action_events')
+                .select('session_id')
+                .gte('created_at', ago5m),
+            supabase
+                .from('user_action_events')
+                .select('button_key')
+                .gte('created_at', ago30m),
+            supabase
+                .from('analysis_results')
+                .select('*', { count: 'exact', head: true }),
+            supabase
+                .from('user_profiles')
+                .select('*', { count: 'exact', head: true }),
+            supabase
+                .from('reviews')
+                .select('rating')
+                .eq('status', 'approved'),
+        ]);
 
-        const onlineNow = onlineSessions
-            ? new Set(onlineSessions.map((r: { session_id: string }) => r.session_id)).size
+        const onlineNow = onlineRes.data
+            ? new Set(onlineRes.data.map((row: { session_id: string | null }) => row.session_id).filter(Boolean)).size
             : 0;
 
-        // 2. Activity counts in last 30 minutes, bucketed by feature area
-        const { data: events30m } = await supabase
-            .from('user_action_events')
-            .select('button_key')
-            .gte('created_at', ago30m);
+        const counts = { ...emptyCounts };
 
-        const counts = {
-            analysis: 0,
-            wallpaper: 0,
-            phone: 0,
-            palm: 0,
-            premium: 0,
-            total: 0,
-        };
-
-        if (events30m) {
-            for (const row of events30m as { button_key: string }[]) {
-                const k = row.button_key ?? '';
+        if (eventsRes.data) {
+            for (const row of eventsRes.data as { button_key: string | null }[]) {
+                const key = row.button_key ?? '';
                 counts.total++;
+
                 if (
-                    k.startsWith('name_analysis') ||
-                    k.startsWith('home.') ||
-                    k.startsWith('search.') ||
-                    k.startsWith('meaning.')
+                    key.startsWith('name_analysis') ||
+                    key.startsWith('home.') ||
+                    key.startsWith('search.') ||
+                    key.startsWith('meaning.')
                 ) {
                     counts.analysis++;
-                } else if (k.startsWith('wallpapers')) {
+                } else if (key.startsWith('wallpapers')) {
                     counts.wallpaper++;
-                } else if (k.startsWith('phone_analysis') || k.startsWith('phone.')) {
+                } else if (key.startsWith('phone_analysis') || key.startsWith('phone.')) {
                     counts.phone++;
-                } else if (k.startsWith('palm_analysis') || k.startsWith('aura')) {
+                } else if (key.startsWith('palm_analysis') || key.startsWith('aura')) {
                     counts.palm++;
                 } else if (
-                    k.startsWith('premium') ||
-                    k.includes('unlock') ||
-                    k.includes('topup') ||
-                    k.includes('deduct')
+                    key.startsWith('premium') ||
+                    key.includes('unlock') ||
+                    key.includes('topup') ||
+                    key.includes('deduct')
                 ) {
                     counts.premium++;
                 }
             }
         }
 
+        const totalUsers = userTotalRes.count ?? 0;
+        const totalAnalyses = analysisTotalRes.count ?? 0;
+        const reviews = reviewsRes.data ?? [];
+        const avgRating = reviews.length > 0
+            ? reviews.reduce((sum, row: { rating: number | null }) => sum + (row.rating ?? 0), 0) / reviews.length
+            : 5;
+
         return NextResponse.json(
             {
-                onlineNow: Math.max(onlineNow, 1), // at minimum 1 (the current user)
+                success: true,
+                onlineNow: Math.max(onlineNow, 1),
+                totals: {
+                    members: totalUsers,
+                    analyses: totalAnalyses,
+                },
+                stats: {
+                    totalUsers,
+                    totalAnalyses,
+                    avgRating: Number(avgRating.toFixed(1)),
+                    reviewCount: reviews.length,
+                },
                 counts,
                 ts: now.toISOString(),
             },
-            {
-                headers: {
-                    'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30',
-                },
-            },
+            { headers: noStoreHeaders() },
         );
     } catch (err) {
         console.error('[live-stats]', err);
-        // Return safe fallback so the ticker still works even if DB is unavailable
+
         return NextResponse.json(
             {
+                success: false,
                 onlineNow: 1,
-                counts: { analysis: 0, wallpaper: 0, phone: 0, palm: 0, premium: 0, total: 0 },
-                ts: new Date().toISOString(),
+                totals: { members: 0, analyses: 0 },
+                stats: { totalUsers: 0, totalAnalyses: 0, avgRating: 5, reviewCount: 0 },
+                counts: emptyCounts,
+                ts: now.toISOString(),
             },
-            { status: 200 },
+            {
+                status: 200,
+                headers: noStoreHeaders(),
+            },
         );
     }
 }

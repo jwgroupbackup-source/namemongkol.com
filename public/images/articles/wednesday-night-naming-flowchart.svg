@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="676" viewBox="0 0 1200 676" role="img" aria-labelledby="title desc">
+  <title id="title">ขั้นตอนตรวจชื่อมงคลวันพุธกลางคืน</title>
+  <desc id="desc">Flowchart ขั้นตอนตรวจชื่อมงคล ตั้งแต่วันเกิด ตรวจทักษา ตรวจเลขศาสตร์ ตรวจนามสกุล สรุปคะแนน และชื่อมงคล</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#020617"/><stop offset="50%" stop-color="#082f49"/><stop offset="100%" stop-color="#111827"/></linearGradient>
+    <linearGradient id="gold" x1="0" x2="1"><stop offset="0%" stop-color="#fde68a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient>
+    <marker id="arrow" markerWidth="16" markerHeight="16" refX="8" refY="8" orient="auto"><path d="M2 2 L14 8 L2 14 Z" fill="#fbbf24"/></marker>
+  </defs>
+  <rect width="1200" height="676" fill="url(#bg)"/>
+  <text x="600" y="78" text-anchor="middle" font-family="Tahoma, sans-serif" font-size="44" font-weight="900" fill="#fff">Flowchart เลือกชื่อมงคล</text>
+  <text x="600" y="118" text-anchor="middle" font-family="Tahoma, sans-serif" font-size="23" fill="#fde68a">สำหรับลูกชายเกิดวันพุธกลางคืน</text>
+  <g stroke="#fbbf24" stroke-width="5" marker-end="url(#arrow)" opacity=".85">
+    <line x1="600" y1="196" x2="600" y2="236"/>
+    <line x1="600" y1="296" x2="600" y2="336"/>
+    <line x1="600" y1="396" x2="600" y2="436"/>
+    <line x1="600" y1="496" x2="600" y2="536"/>
+  </g>
+  <g font-family="Tahoma, sans-serif" text-anchor="middle">
+    <g transform="translate(390 150)"><rect width="420" height="64" rx="24" fill="#10284f" stroke="url(#gold)" stroke-width="3"/><text x="210" y="42" font-size="28" font-weight="800" fill="#fff">วันเกิด: พุธกลางคืน</text></g>
+    <g transform="translate(390 250)"><rect width="420" height="64" rx="24" fill="#10284f" stroke="url(#gold)" stroke-width="3"/><text x="210" y="42" font-size="28" font-weight="800" fill="#fff">ตรวจทักษา</text></g>
+    <g transform="translate(390 350)"><rect width="420" height="64" rx="24" fill="#10284f" stroke="url(#gold)" stroke-width="3"/><text x="210" y="42" font-size="28" font-weight="800" fill="#fff">ตรวจเลขศาสตร์</text></g>
+    <g transform="translate(390 450)"><rect width="420" height="64" rx="24" fill="#10284f" stroke="url(#gold)" stroke-width="3"/><text x="210" y="42" font-size="28" font-weight="800" fill="#fff">ตรวจนามสกุล</text></g>
+    <g transform="translate(390 550)"><rect width="420" height="76" rx="28" fill="#fbbf24" stroke="#fff7cc" stroke-width="3"/><text x="210" y="47" font-size="31" font-weight="900" fill="#08111f">สรุปคะแนน: ชื่อมงคล</text></g>
+  </g>
+  <g font-family="Tahoma, sans-serif" font-size="20" fill="#cbd5e1">
+    <text x="160" y="286">เลี่ยง บ ป ผ ฝ พ ฟ ภ ม</text>
+    <text x="160" y="386">ดูผลรวมและคู่เลข</text>
+    <text x="160" y="486">รวมชื่อ + นามสกุล</text>
+    <text x="984" y="286">ทักษาให้ถูกวันเกิด</text>
+    <text x="984" y="386">เทียบเลขมงคล</text>
+    <text x="984" y="486">ใช้จริงมั่นใจกว่า</text>
+  </g>
+</svg>

@@ -13,6 +13,11 @@ export default function robots(): MetadataRoute.Robots {
             },
             // Allow AI crawlers for GEO (Generative Engine Optimization)
             {
+                userAgent: 'OAI-SearchBot',
+                allow: '/',
+                disallow: ['/admin/', '/profile/', '/api/'],
+            },
+            {
                 userAgent: 'GPTBot',
                 allow: '/',
                 disallow: ['/admin/', '/profile/', '/api/'],
@@ -42,6 +47,9 @@ export default function robots(): MetadataRoute.Robots {
                 allow: '/',
             },
         ],
-        sitemap: `${baseUrl}/sitemap.xml`,
+        sitemap: [
+            `${baseUrl}/sitemap.xml`,
+            `${baseUrl}/image-sitemap.xml`,
+        ],
     }
 }

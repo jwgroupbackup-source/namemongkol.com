@@ -37,6 +37,8 @@ const SLUG_REDIRECTS: Record<string, string> = {
     'ชื่อลูกชาย-2569-50-ชื่อมงคล': 'boy-names-2569-50-auspicious',
 };
 
+const LOCAL_PRIORITY_ARTICLE_SLUGS = new Set(['boy-names-wednesday-night-2569']);
+
 // ISR: cache 1 hour, invalidate via revalidateTag('articles') when admin updates
 export const revalidate = 3600;
 
@@ -64,8 +66,22 @@ type DbArticleRow = {
     date_modified: string | null;
 };
 
+type DbArticleSummaryRow = Omit<DbArticleRow, 'content' | 'related_slugs' | 'toc' | 'faq_items'>;
+
 import { supabase } from '@/utils/supabase';
 import { siteUrl } from '@/lib/seo';
+import { absoluteSiteUrl, getArticleImages, toArticleImageObject } from '@/lib/articleImageMeta';
+
+function resolveArticleCoverImage(dbImage?: string | null, localImage?: string) {
+    const image = dbImage?.trim() || '';
+
+    if (!image) return localImage || '';
+
+    const isLegacyLocalArticlePath = image.startsWith('/images/article/') || image.startsWith('/images/article-');
+    if (isLegacyLocalArticlePath && localImage) return localImage;
+
+    return image;
+}
 
 async function fetchPublishedArticlesDb(): Promise<Article[]> {
     const { data, error } = await supabase
@@ -81,18 +97,23 @@ async function fetchPublishedArticlesDb(): Promise<Article[]> {
         const localMatch = localArticles.find((article) => article.slug === item.slug)
             || localArticles.find((article) => article.title === item.title);
 
+        if (localMatch && LOCAL_PRIORITY_ARTICLE_SLUGS.has(localMatch.slug)) {
+            return localMatch;
+        }
+
         return ({
         id: item.id,
         slug: item.slug,
         title: item.title,
         excerpt: item.excerpt,
         content: item.content || localMatch?.content || '',
-        coverImage: item.cover_image || localMatch?.coverImage || '',
+        coverImage: resolveArticleCoverImage(item.cover_image, localMatch?.coverImage),
         coverImageAlt: item.cover_image_alt ?? localMatch?.coverImageAlt,
         date: item.date,
         author: item.author,
         category: item.category,
         keywords: item.keywords,
+        images: localMatch?.images ?? [],
         metaTitle: item.meta_title || localMatch?.metaTitle,
         metaDescription: item.meta_description || localMatch?.metaDescription,
         relatedSlugs: item.related_slugs?.length ? item.related_slugs : (localMatch?.relatedSlugs ?? []),
@@ -103,15 +124,56 @@ async function fetchPublishedArticlesDb(): Promise<Article[]> {
     });
 }
 
-// Cache DB queries for 1 hour (matches ISR revalidate)
-const getPublishedArticlesDb = unstable_cache(
-    fetchPublishedArticlesDb,
-    ['articles-detail-list'],
+async function fetchPublishedArticleSummariesDb(): Promise<Article[]> {
+    const { data, error } = await supabase
+        .from('articles')
+        .select('id, slug, title, excerpt, cover_image, cover_image_alt, date, author, category, keywords, meta_title, meta_description, date_modified')
+        .eq('is_published', true);
+
+    if (error || !data) return [];
+
+    const rows = data as DbArticleSummaryRow[];
+
+    return rows.map((item) => {
+        const localMatch = localArticles.find((article) => article.slug === item.slug)
+            || localArticles.find((article) => article.title === item.title);
+
+        if (localMatch && LOCAL_PRIORITY_ARTICLE_SLUGS.has(localMatch.slug)) {
+            return localMatch;
+        }
+
+        return {
+            id: item.id,
+            slug: item.slug,
+            title: item.title,
+            excerpt: item.excerpt,
+            content: '',
+            coverImage: resolveArticleCoverImage(item.cover_image, localMatch?.coverImage),
+            coverImageAlt: item.cover_image_alt ?? localMatch?.coverImageAlt,
+            date: item.date,
+            author: item.author,
+            category: item.category,
+            keywords: item.keywords ?? [],
+            images: localMatch?.images ?? [],
+            metaTitle: item.meta_title || localMatch?.metaTitle,
+            metaDescription: item.meta_description || localMatch?.metaDescription,
+            relatedSlugs: [],
+            toc: [],
+            faqItems: [],
+            dateModified: item.date_modified || localMatch?.dateModified || item.date,
+        };
+    });
+}
+
+// Cache only lightweight article summaries for related cards.
+const getPublishedArticleSummariesDb = unstable_cache(
+    fetchPublishedArticleSummariesDb,
+    ['articles-detail-summary-list'],
     { revalidate: 3600, tags: ['articles'] }
 );
 
 async function getRelatedArticlePool(): Promise<Article[]> {
-    const dbArticles = await getPublishedArticlesDb();
+    const dbArticles = await getPublishedArticleSummariesDb();
     const existingSlugs = new Set(dbArticles.map((article) => article.slug));
     const existingTitles = new Set(dbArticles.map((article) => article.title));
     const localFallback = localArticles.filter((article) => !existingSlugs.has(article.slug) && !existingTitles.has(article.title));
@@ -137,6 +199,10 @@ export async function generateStaticParams() {
 const getArticle = async (slug: string): Promise<Article | null> => {
     const localMatch = localArticles.find(a => a.slug === slug);
 
+    if (localMatch && LOCAL_PRIORITY_ARTICLE_SLUGS.has(slug)) {
+        return localMatch;
+    }
+
     const { data, error } = await supabase
         .from('articles')
         .select('*')
@@ -155,12 +221,13 @@ const getArticle = async (slug: string): Promise<Article | null> => {
         title: data.title,
         excerpt: data.excerpt,
         content: data.content || localMatch?.content || '',
-        coverImage: data.cover_image || localMatch?.coverImage || '', // Map here
+        coverImage: resolveArticleCoverImage(data.cover_image, localMatch?.coverImage), // Map here
         coverImageAlt: data.cover_image_alt || localMatch?.coverImageAlt,
         date: data.date,
         author: data.author,
         category: data.category,
         keywords: data.keywords,
+        images: localMatch?.images ?? [],
         metaTitle: data.meta_title || localMatch?.metaTitle, // Map here
         metaDescription: data.meta_description || localMatch?.metaDescription, // Map here
         // DB columns for these are nullable; fallback to empty
@@ -232,6 +299,43 @@ function enhanceArticleContent(content: string, toc?: Article['toc']) {
         content: enhancedContent,
         toc: generatedToc.slice(0, 12),
     };
+}
+
+function getHtmlAttribute(attrs: string, name: string) {
+    const match = attrs.match(new RegExp(`\\s${name}=["']([^"']*)["']`, 'i'));
+    return match?.[1] ?? '';
+}
+
+function escapeHtmlAttribute(value: string) {
+    return value
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+function normalizeArticleContentHtml(content: string, article: Article, shouldWrapImages: boolean) {
+    const normalizedContent = content
+        .replace(/bg-clip-text\s+text-transparent\s+bg-gradient-to-r\s+from-[^\s"']+\s+to-[^\s"']+/g, 'text-amber-200')
+        .replace(/\bborder-l-4\b/g, 'border')
+        .replace(/\bborder-l-[^\s"']+/g, 'border-white/10')
+        .replace(/\brounded-r-xl\b/g, 'rounded-xl')
+        .replace(/\brounded-r-lg\b/g, 'rounded-lg');
+
+    if (!shouldWrapImages) {
+        return normalizedContent;
+    }
+
+    return normalizedContent.replace(/<img\b([^>]*)>/gi, (match, attrs) => {
+        const src = getHtmlAttribute(attrs, 'src');
+        if (!src) return match;
+
+        const alt = getHtmlAttribute(attrs, 'alt') || article.coverImageAlt || `ภาพประกอบบทความ ${article.title}`;
+        const safeSrc = escapeHtmlAttribute(src);
+        const safeAlt = escapeHtmlAttribute(alt);
+
+        return `<figure class="article-media not-prose my-8 overflow-hidden rounded-2xl border border-white/10 bg-[#080d19] p-2 shadow-[0_18px_60px_rgba(0,0,0,0.28)]"><a href="${safeSrc}" target="_blank" rel="noopener noreferrer" class="block"><img src="${safeSrc}" alt="${safeAlt}" loading="lazy" class="h-auto w-full rounded-xl object-contain" /></a><figcaption class="px-2 pb-1 pt-3 text-center text-xs text-slate-400">คลิกเพื่อดูภาพขนาดเต็ม</figcaption></figure>`;
+    });
 }
 
 function getArticleTakeaways(article: Article) {
@@ -377,6 +481,7 @@ function ArticleEnhancementBlock({ article }: { article: Article }) {
                             src={visualSummaryImage}
                             alt={`ภาพสรุปประเด็นบทความ ${article.title}`}
                             objectFit="contain"
+                            variant="detail"
                             className="scale-100"
                         />
                     </div>
@@ -417,7 +522,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         redirect(`/articles/${SLUG_REDIRECTS[slug]}`);
     }
 
-    const article = await getArticle(slug);
+    const article = (await getArticle(slug)) as Article | null;
 
     if (!article) {
         return {
@@ -442,8 +547,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                 // Local path — build absolute URL, percent-encoding non-ASCII chars
                 // (e.g. Thai filenames like ศุภจี.png → %E0%B8%A8%E0%B8%B8%E0%B8%A0%E0%B8%88%E0%B8%B5.png)
                 // encodeURI preserves slashes; Facebook/Line/Twitter crawlers handle encoded URLs correctly.
-                const cleanPath = rawImageUrl.startsWith('/') ? rawImageUrl : `/${rawImageUrl}`;
-                imageUrl = `${baseUrl}${encodeURI(cleanPath)}`;
+                imageUrl = absoluteSiteUrl(rawImageUrl, baseUrl);
             }
         } catch (e) {
             console.error('Error constructing OG image URL:', e);
@@ -490,7 +594,7 @@ export default async function ArticlePage({ params }: Props) {
         redirect(`/articles/${SLUG_REDIRECTS[slug]}`);
     }
 
-    const article = await getArticle(slug);
+    const article = (await getArticle(slug)) as Article;
 
     if (!article) {
         return notFound();
@@ -499,6 +603,15 @@ export default async function ArticlePage({ params }: Props) {
     // ── Canonical base URL (consistent across metadata & JSON-LD) ──
     const baseUrl = siteUrl;
     const canonicalUrl = `${baseUrl}/articles/${slug}`;
+    const articleSchemaId = `${canonicalUrl}#article`;
+    const webPageSchemaId = `${canonicalUrl}#webpage`;
+    const websiteSchemaId = `${baseUrl}/#website`;
+    const organizationSchemaId = `${baseUrl}/#organization`;
+    const articleImages = getArticleImages(article, baseUrl);
+    const articleImageObjects = articleImages.map((image, index) => toArticleImageObject(image, index === 0));
+    const primaryArticleImage = articleImages[0];
+    const datePublishedIso = (() => { try { return new Date(article.date).toISOString(); } catch { return article.date; } })();
+    const dateModifiedIso = (() => { try { return new Date(article.dateModified || article.date).toISOString(); } catch { return article.dateModified || article.date; } })();
 
     // ── Date formatting helpers ──
     const formatThaiDate = (dateStr: string) => {
@@ -509,10 +622,16 @@ export default async function ArticlePage({ params }: Props) {
     };
     const hasBeenModified = article.dateModified && article.dateModified !== article.date;
     const isPalmistryArticle = slug === PALMISTRY_SLUG;
+    const isWideMediaArticle = slug === 'boy-names-wednesday-night-2569';
     const enhancedArticleContent = enhanceArticleContent(article.content, article.toc);
     const effectiveToc = enhancedArticleContent.toc;
     const effectiveFaqItems = article.faqItems && article.faqItems.length > 0 ? article.faqItems : getFallbackFaqItems(article);
     const articleWithEffectiveEnhancements = { ...article, toc: effectiveToc, faqItems: effectiveFaqItems };
+    const articleContentHtml = normalizeArticleContentHtml(
+        enhancedArticleContent.content,
+        article,
+        !LOCAL_PRIORITY_ARTICLE_SLUGS.has(article.slug)
+    );
 
     // ── Reading time estimate ──
     const plainText = enhancedArticleContent.content.replace(/<[^>]*>/g, '');
@@ -535,6 +654,23 @@ export default async function ArticlePage({ params }: Props) {
             !relatedArticles.some(r => r.slug === a.slug)
         );
         relatedArticles = [...relatedArticles, ...categoryMatches].slice(0, 3);
+    }
+
+    if (relatedArticles.length < 3) {
+        const articleKeywords = new Set((article.keywords || []).map((keyword) => keyword.toLowerCase()));
+        const keywordMatches = relatedPool
+            .filter((candidate) =>
+                candidate.slug !== slug &&
+                !relatedArticles.some((related) => related.slug === candidate.slug) &&
+                (candidate.keywords || []).some((keyword) => articleKeywords.has(keyword.toLowerCase()))
+            )
+            .sort((a, b) => {
+                const aScore = (a.keywords || []).filter((keyword) => articleKeywords.has(keyword.toLowerCase())).length;
+                const bScore = (b.keywords || []).filter((keyword) => articleKeywords.has(keyword.toLowerCase())).length;
+                return bScore - aScore;
+            });
+
+        relatedArticles = [...relatedArticles, ...keywordMatches].slice(0, 3);
     }
     const schemaKeywords = (article.keywords || []).slice(0, 8);
     const articleEntityTopics = [
@@ -590,6 +726,45 @@ export default async function ArticlePage({ params }: Props) {
                 <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-amber-600/5 rounded-full blur-[120px]"></div>
             </div>
 
+            {/* WebPage Schema for AI and image search entity linking */}
+            <Script
+                id="article-webpage-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "WebPage",
+                        "@id": webPageSchemaId,
+                        "url": canonicalUrl,
+                        "name": article.metaTitle || article.title,
+                        "description": article.metaDescription || article.excerpt,
+                        "inLanguage": "th-TH",
+                        "isPartOf": {
+                            "@type": "WebSite",
+                            "@id": websiteSchemaId,
+                            "url": baseUrl,
+                            "name": "NameMongkol",
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "@id": organizationSchemaId,
+                            "name": "NameMongkol",
+                            "url": baseUrl,
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": `${baseUrl}/icon.png`,
+                            },
+                        },
+                        "primaryImageOfPage": primaryArticleImage ? toArticleImageObject(primaryArticleImage, true) : undefined,
+                        "mainEntity": {
+                            "@id": articleSchemaId,
+                        },
+                        "datePublished": datePublishedIso,
+                        "dateModified": dateModifiedIso,
+                    })
+                }}
+            />
+
             {/* Article Schema — consistent baseUrl */}
             <Script
                 id="article-schema"
@@ -598,9 +773,11 @@ export default async function ArticlePage({ params }: Props) {
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
                         "@type": "Article",
+                        "@id": articleSchemaId,
                         "headline": article.metaTitle || article.title,
                         "description": article.metaDescription || article.excerpt,
-                        "image": article.coverImage?.startsWith('http') ? article.coverImage : `${baseUrl}${article.coverImage}`,
+                        "image": articleImageObjects.length > 0 ? articleImageObjects : undefined,
+                        "thumbnailUrl": primaryArticleImage?.src,
                         "articleSection": article.category,
                         "keywords": article.keywords?.join(', '),
                         "wordCount": wordCount,
@@ -629,8 +806,8 @@ export default async function ArticlePage({ params }: Props) {
                             "@type": "SpeakableSpecification",
                             "cssSelector": ["h1", ".article-direct-answer", "#faq-section"],
                         },
-                        "datePublished": (() => { try { return new Date(article.date).toISOString(); } catch { return article.date; } })(),
-                        "dateModified": (() => { try { return new Date(article.dateModified || article.date).toISOString(); } catch { return article.dateModified || article.date; } })(),
+                        "datePublished": datePublishedIso,
+                        "dateModified": dateModifiedIso,
                         "author": [{
                             "@type": "Person",
                             "name": article.author,
@@ -644,7 +821,9 @@ export default async function ArticlePage({ params }: Props) {
                         }],
                         "publisher": {
                             "@type": "Organization",
+                            "@id": organizationSchemaId,
                             "name": "NameMongkol",
+                            "url": baseUrl,
                             "logo": {
                                 "@type": "ImageObject",
                                 "url": `${baseUrl}/icon.png`
@@ -652,7 +831,7 @@ export default async function ArticlePage({ params }: Props) {
                         },
                         "mainEntityOfPage": {
                             "@type": "WebPage",
-                            "@id": canonicalUrl
+                            "@id": webPageSchemaId
                         },
                         "inLanguage": "th",
                         ...(isPalmistryArticle && {
@@ -681,7 +860,7 @@ export default async function ArticlePage({ params }: Props) {
             )}
 
             <main className="w-full max-w-[1400px] px-4 pb-8 relative z-10 pt-28 md:pt-32">
-                <div className="max-w-3xl mx-auto">
+                <div className={isWideMediaArticle ? "mx-auto max-w-[1040px]" : "max-w-3xl mx-auto"}>
                     {/* Breadcrumb Navigation */}
                     <nav className="mb-6 text-sm text-slate-400" aria-label="Breadcrumb">
                         <ol className="flex items-center gap-2 flex-wrap">
@@ -731,7 +910,7 @@ export default async function ArticlePage({ params }: Props) {
                     </h1>
 
                     {/* Cover Image */}
-                    <div className="w-full aspect-video bg-slate-900 rounded-2xl mb-10 overflow-hidden relative border border-white/5 shadow-2xl shadow-purple-900/10 flex items-center justify-center">
+                    <div className={`${isWideMediaArticle ? "mx-auto max-w-[1040px] rounded-3xl border-white/10 bg-slate-950/70 p-2 shadow-2xl shadow-amber-950/20 md:p-3" : "rounded-2xl border-white/5 bg-slate-900 p-2 shadow-2xl shadow-purple-900/10"} w-full aspect-video mb-10 overflow-hidden relative border flex items-center justify-center`}>
                         {/* 
                            Note: Since we might not have real images yet, 
                            we'll use a placeholder logic if exact file doesn't exist, 
@@ -743,6 +922,7 @@ export default async function ArticlePage({ params }: Props) {
                             alt={article.coverImageAlt || `ภาพหน้าปกบทความ ${article.title}`}
                             priority
                             objectFit="contain"
+                            variant={isWideMediaArticle ? 'wide' : 'detail'}
                             className="group-hover:scale-100" // Disable zoom effect if not needed, or keep standard
                         />
                     </div>
@@ -780,17 +960,17 @@ export default async function ArticlePage({ params }: Props) {
                     <ArticleEnhancementBlock article={articleWithEffectiveEnhancements} />
 
                     {/* Content */}
-                    <article className="prose prose-invert prose-lg max-w-none text-slate-300">
-                        <p className="lead text-xl text-slate-200 font-light border-l-4 border-amber-500 pl-4 italic">
+                    <article className={`${isWideMediaArticle ? "prose-headings:max-w-3xl prose-headings:mx-auto prose-p:max-w-3xl prose-p:mx-auto prose-ul:max-w-3xl prose-ul:mx-auto prose-ol:max-w-3xl prose-ol:mx-auto prose-blockquote:max-w-3xl prose-blockquote:mx-auto" : ""} prose prose-invert prose-lg max-w-none text-slate-300`}>
+                        <p className="lead rounded-2xl border border-amber-400/20 bg-amber-400/10 p-4 text-xl font-light text-slate-100">
                             {article.excerpt}
                         </p>
                         <div dangerouslySetInnerHTML={{
-                            __html: article.coverImage
+                            __html: false
                                 ? enhancedArticleContent.content.replace(
                                     /<img\b[^>]*?>/gi,
                                     `<div class="w-full aspect-video bg-slate-900 rounded-2xl my-8 overflow-hidden relative border border-white/5 shadow-2xl shadow-purple-900/10 not-prose flex items-center justify-center"><img src="${article.coverImage}" alt="${(article.coverImageAlt ?? `ภาพหน้าปกบทความ ${article.title}`).replace(/"/g, '&quot;')}" class="object-contain w-full h-full" /></div>`
                                 )
-                                : enhancedArticleContent.content
+                                : articleContentHtml
                         }} />
                     </article>
 
@@ -881,7 +1061,7 @@ export default async function ArticlePage({ params }: Props) {
                     </section>
 
                     {/* Mandatory CTA — ตาม Checklist */}
-                    <div className="mt-12 bg-white/5 backdrop-blur-md border border-[#c9933a]/20 rounded-2xl p-8 md:p-10 text-center relative overflow-hidden">
+                    <div className="hidden">
                         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#c9933a]/10 via-transparent to-transparent pointer-events-none"></div>
                         <p className="text-2xl md:text-3xl font-bold text-white mb-4 relative z-10 tracking-tight">
                             อยากรู้ว่าชื่อของคุณดีแค่ไหน?
@@ -923,12 +1103,14 @@ export default async function ArticlePage({ params }: Props) {
                                         href={`/articles/${related.slug}`}
                                         className="group bg-white/5 border border-white/5 rounded-2xl overflow-hidden hover:border-white/10 hover:bg-white/10 transition-all hover:-translate-y-1"
                                     >
-                                        <div className="h-36 w-full bg-[#0a0f1d] relative overflow-hidden">
+                                        <div className="h-40 w-full bg-[#0a0f1d] relative overflow-hidden p-2">
                                             <ArticleImage
                                                 src={related.coverImage}
                                                 alt={related.coverImageAlt || `ภาพหน้าปกบทความ ${related.title}`}
                                                 priority={false}
-                                                className="group-hover:scale-105 transition-transform duration-500"
+                                                objectFit="contain"
+                                                variant="related"
+                                                className="scale-100"
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-[#050711]/90 via-transparent to-transparent" />
                                         </div>

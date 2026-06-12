@@ -11,6 +11,8 @@ interface ArticleImageProps {
     className?: string;
     objectFit?: 'cover' | 'contain';
     objectPosition?: string;
+    sizes?: string;
+    variant?: 'card' | 'related' | 'detail' | 'wide';
 }
 
 export const ArticleImage: React.FC<ArticleImageProps> = ({ 
@@ -20,10 +22,13 @@ export const ArticleImage: React.FC<ArticleImageProps> = ({
     className,
     objectFit = 'cover',
     objectPosition = 'center',
+    sizes,
+    variant = 'card',
 }) => {
-    const [error, setError] = useState(false);
+    const [failedSrc, setFailedSrc] = useState<string | null>(null);
+    const hasError = Boolean(src && failedSrc === src);
 
-    if (!src || error) {
+    if (!src || hasError) {
         return (
             <div 
                 className={`w-full h-full flex items-center justify-center bg-slate-800 text-slate-600 relative overflow-hidden transition-transform duration-500 ${className || 'group-hover:scale-105'}`}
@@ -40,6 +45,13 @@ export const ArticleImage: React.FC<ArticleImageProps> = ({
     const isExternal = src.startsWith('http');
 
     const objectFitClass = objectFit === 'contain' ? 'object-contain' : 'object-cover';
+    const resolvedSizes = sizes ?? {
+        card: '(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 25vw',
+        related: '(max-width: 768px) 92vw, 30vw',
+        detail: '(max-width: 768px) 92vw, 768px',
+        wide: '(max-width: 768px) 96vw, (max-width: 1200px) 92vw, 1040px',
+    }[variant];
+    const quality = variant === 'detail' || variant === 'wide' ? 85 : 75;
 
     return (
         <Image
@@ -50,11 +62,10 @@ export const ArticleImage: React.FC<ArticleImageProps> = ({
             loading={priority ? 'eager' : 'lazy'}
             className={`${objectFitClass} transition-transform duration-500 ${className || 'group-hover:scale-105'}`}
             style={{ objectPosition }}
-            sizes="(max-width: 640px) 95vw, (max-width: 1024px) 48vw, 320px"
-            onError={() => setError(true)}
+            sizes={resolvedSizes}
+            onError={() => setFailedSrc(src)}
             unoptimized={isExternal}
-            quality={75}
+            quality={quality}
         />
     );
 };
-

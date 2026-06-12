@@ -1,4 +1,4 @@
-import { Article, FaqItem } from './articles';
+import { Article } from './articles';
 
 export const articleKidsNaming2569: Article = {
     id: 'article-kids-naming-2569',
@@ -20,6 +20,7 @@ export const articleKidsNaming2569: Article = {
     metaTitle: 'คู่มือตั้งชื่อลูก 2569 — 4 ศาสตร์และ 50+ ตัวอย่างชื่อมงคล | NameMongkol',
     metaDescription: 'คู่มือตั้งชื่อลูกชาย ลูกสาว 2569 ครบ 4 ศาสตร์: เลขศาสตร์, ทักษา, อายตนะ 6, นิรันดร์ศาสตร์ มีตาราเช็กกาลกิณี 50+ ตัวอย่างชื่อมงคล เกรด A+ และเทคนิกการหลีกเลี่ยงอักษรร้าย',
     relatedSlugs: [
+        'boy-names-wednesday-night-2569',
         'boy-names-2569-50-auspicious',
         'girl-names-2569-50-auspicious',
         'thaksa-pakorn-naming-guide',

@@ -345,6 +345,7 @@ export const articleBirthdayNames700: Article = {
     relatedSlugs: [
         'baby-naming-guide-2569',
         'lucky-names-by-birthday-2569',
+        'boy-names-wednesday-night-2569',
         'boy-names-2569-50-auspicious',
         'girl-names-2569-50-auspicious',
         'monday-girl-names-2569-no-sara',
