@@ -1,46 +1,222 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-04T09:18:23Z",
+  "generatedAt": "2026-06-20T00:00:00+07:00",
   "title": "Design System: NameMongkol",
   "extensions": {
     "colorMeta": {
-      "primary": { "role": "primary", "displayName": "Mystic Amber", "canonical": "#c9933a", "tonalRamp": ["#fdf8ee", "#faeccc", "#f6dca3", "#f1c874", "#edb144", "#c9933a", "#a27129", "#7c521a"] },
-      "neutral-bg": { "role": "neutral", "displayName": "Obsidian Space", "canonical": "#050711", "tonalRamp": ["#e7e8eb", "#c1c3cc", "#9a9ead", "#767a8f", "#525770", "#33374d", "#1a1c29", "#050711"] }
-    }
+      "primary": {
+        "role": "primary",
+        "displayName": "Mystic Amber",
+        "canonical": "#c9933a",
+        "tonalRamp": ["#2b1e0b", "#533711", "#7a531d", "#a67828", "#c9933a", "#d7ad5e", "#e8c87e", "#fbf1d8"]
+      },
+      "lavender": {
+        "role": "secondary",
+        "displayName": "Ritual Lavender",
+        "canonical": "#9b8ec4",
+        "tonalRamp": ["#1f1a35", "#352d55", "#4d4278", "#6a5d9d", "#9b8ec4", "#b9b0d6", "#d8d2ea", "#eeebf8"]
+      },
+      "light-bg": {
+        "role": "neutral",
+        "displayName": "White Tech Premium Base",
+        "canonical": "#f8f8fc",
+        "tonalRamp": ["#1a1a3e", "#3c3c65", "#5a5a82", "#8e8eaa", "#ddddf0", "#eeeef6", "#f3f3f9", "#f8f8fc"]
+      },
+      "dark-card": {
+        "role": "neutral",
+        "displayName": "Terminal Surface",
+        "canonical": "#0f172a",
+        "tonalRamp": ["#020617", "#050711", "#0b1120", "#0f172a", "#1e293b", "#334155", "#64748b", "#cbd5e1"]
+      },
+      "text-primary": {
+        "role": "neutral",
+        "displayName": "Sacred Navy Text",
+        "canonical": "#1a1a3e",
+        "tonalRamp": ["#080814", "#11112c", "#1a1a3e", "#34345f", "#5a5a82", "#8e8eaa", "#c5c5d6", "#f8f8fc"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero titles and critical analysis moments."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles, SEO blocks, and page clusters."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card headings, compact article titles, and table groups."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Thai reading text, explanations, FAQ answers, and guidance."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Badges, filters, meta labels, and utility text."
+      }
+    },
+    "shadows": [
+      {
+        "name": "soft-public-shadow",
+        "value": "0 1px 2px rgba(15, 23, 42, 0.06)",
+        "purpose": "Resting light cards and low-emphasis panels."
+      },
+      {
+        "name": "terminal-lift",
+        "value": "0 8px 30px rgba(15, 23, 42, 0.14)",
+        "purpose": "Dark terminal cards and hoverable article/search cards."
+      },
+      {
+        "name": "amber-aura",
+        "value": "0 0 24px rgba(245, 158, 11, 0.22)",
+        "purpose": "Primary actions, active filter states, and conversion moments."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-lift",
+        "value": "transform 200ms ease-out, border-color 200ms ease-out, box-shadow 200ms ease-out",
+        "purpose": "Buttons, cards, chips, and interactive rows."
+      },
+      {
+        "name": "fade-in-up",
+        "value": "opacity 280ms ease-out, transform 280ms ease-out",
+        "purpose": "Soft entrance for premium panels and result modules."
+      }
+    ],
+    "breakpoints": [
+      { "name": "xs", "value": "400px" },
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "2xl", "value": "1536px" }
+    ]
   },
   "components": [
     {
-      "name": "Primary Button",
+      "name": "Primary Amber Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Tactile & Magical primary action button.",
-      "html": "<button class=\"ds-btn-primary\">วิเคราะห์ชื่อ</button>",
-      "css": ".ds-btn-primary { background: linear-gradient(135deg, #e67e22 0%, #f59e0b 50%, #e67e22 100%); color: #ffffff; padding: 12px 24px; border-radius: 12px; font-weight: 700; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 18px 36px rgba(180, 83, 9, 0.32), 0 0 24px rgba(245, 158, 11, 0.22); } .ds-btn-primary:hover { background: linear-gradient(135deg, #d97706 0%, #fbbf24 50%, #d97706 100%); box-shadow: 0 22px 42px rgba(180, 83, 9, 0.38), 0 0 32px rgba(245, 158, 11, 0.30); transform: translateY(-2px); }"
+      "description": "The main conversion action for analysis, signup, unlock, and premium flow starts.",
+      "html": "<button class=\"ds-btn-primary\">วิเคราะห์ชื่อมงคล</button>",
+      "css": ".ds-btn-primary { background: #c9933a; color: #f8fafc; padding: 12px 24px; border-radius: 12px; border: 1px solid rgba(201,147,58,0.45); font-family: var(--font-noto-thai), var(--font-geist-sans), sans-serif; font-weight: 800; cursor: pointer; box-shadow: 0 0 24px rgba(245,158,11,0.22); transition: transform 200ms ease-out, background 200ms ease-out, box-shadow 200ms ease-out; } .ds-btn-primary:hover { background: #d4a54e; transform: translateY(-2px); box-shadow: 0 0 32px rgba(245,158,11,0.30); } .ds-btn-primary:focus-visible { outline: 2px solid rgba(201,147,58,0.65); outline-offset: 3px; }"
+    },
+    {
+      "name": "Terminal Button",
+      "kind": "button",
+      "refersTo": "button-terminal",
+      "description": "Secondary action on light premium backgrounds when the CTA should still feel sacred and technical.",
+      "html": "<button class=\"ds-btn-terminal\">เปิดรายชื่อ Premium</button>",
+      "css": ".ds-btn-terminal { background: #0f172a; color: #f8fafc; padding: 12px 24px; border-radius: 12px; border: 1px solid #1e293b; font-family: var(--font-noto-thai), var(--font-geist-sans), sans-serif; font-weight: 800; cursor: pointer; box-shadow: 0 8px 30px rgba(15,23,42,0.14); transition: transform 200ms ease-out, border-color 200ms ease-out, background 200ms ease-out; } .ds-btn-terminal:hover { background: #1e293b; border-color: rgba(201,147,58,0.45); transform: translateY(-2px); } .ds-btn-terminal:focus-visible { outline: 2px solid rgba(201,147,58,0.65); outline-offset: 3px; }"
+    },
+    {
+      "name": "Light Content Card",
+      "kind": "card",
+      "refersTo": "card-light",
+      "description": "Calm reading container for FAQs, about content, and explanatory copy.",
+      "html": "<article class=\"ds-card-light\"><h3>หลักการตั้งชื่อมงคล</h3><p>ใช้เลขศาสตร์ ทักษาปกรณ์ และความหมายของชื่อร่วมกันเพื่อให้คำแนะนำที่อ่านง่ายและน่าเชื่อถือ</p></article>",
+      "css": ".ds-card-light { background: #ffffff; color: #1a1a3e; border: 1px solid #ddddf0; border-radius: 16px; padding: 24px; box-shadow: 0 1px 2px rgba(15,23,42,0.06); font-family: var(--font-noto-thai), var(--font-geist-sans), sans-serif; } .ds-card-light h3 { margin: 0 0 8px; color: #1a1a3e; font-size: 18px; line-height: 1.35; font-weight: 800; } .ds-card-light p { margin: 0; color: #5a5a82; font-size: 14px; line-height: 1.75; }"
+    },
+    {
+      "name": "Terminal Data Card",
+      "kind": "card",
+      "refersTo": "card-terminal",
+      "description": "Dark structured card for filters, result summaries, article CTAs, and premium data.",
+      "html": "<article class=\"ds-card-terminal\"><span>เกรด A+</span><h3>ชื่อมงคลที่แนะนำ</h3><p>ผ่านเงื่อนไขเลขศาสตร์และทักษาปกรณ์ พร้อมคำอธิบายที่อ่านชัดบนพื้นมืด</p></article>",
+      "css": ".ds-card-terminal { background: #0f172a; color: #f8fafc; border: 1px solid #1e293b; border-radius: 16px; padding: 24px; box-shadow: 0 8px 30px rgba(15,23,42,0.14); font-family: var(--font-noto-thai), var(--font-geist-sans), sans-serif; transition: transform 200ms ease-out, border-color 200ms ease-out, box-shadow 200ms ease-out; } .ds-card-terminal:hover { transform: translateY(-2px); border-color: rgba(201,147,58,0.35); } .ds-card-terminal span { display: inline-block; margin-bottom: 8px; color: #c9933a; font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; } .ds-card-terminal h3 { margin: 0 0 8px; color: #ffffff; font-size: 18px; line-height: 1.35; font-weight: 800; } .ds-card-terminal p { margin: 0; color: #cbd5e1; font-size: 14px; line-height: 1.75; }"
+    },
+    {
+      "name": "Terminal Search Input",
+      "kind": "input",
+      "refersTo": "input-terminal",
+      "description": "Search and filter input used on article/search surfaces with dark terminal styling.",
+      "html": "<label class=\"ds-search\"><span>ค้นหา</span><input placeholder=\"ค้นหาชื่อมงคล\" /></label>",
+      "css": ".ds-search { display: grid; gap: 8px; font-family: var(--font-noto-thai), var(--font-geist-sans), sans-serif; } .ds-search span { color: #5a5a82; font-size: 12px; font-weight: 700; } .ds-search input { background: #0f172a; color: #f8fafc; border: 1px solid #1e293b; border-radius: 12px; padding: 12px 16px; font-size: 16px; outline: none; box-shadow: 0 1px 2px rgba(15,23,42,0.06); } .ds-search input::placeholder { color: #64748b; } .ds-search input:focus { border-color: rgba(201,147,58,0.65); box-shadow: 0 0 0 1px rgba(201,147,58,0.35); }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip-filter",
+      "description": "Compact topic/category selector with clear selected and unselected states.",
+      "html": "<div class=\"ds-chip-row\"><button class=\"ds-chip ds-chip-active\">ทั้งหมด</button><button class=\"ds-chip\">ชื่อมงคล</button></div>",
+      "css": ".ds-chip-row { display: flex; gap: 8px; flex-wrap: wrap; font-family: var(--font-noto-thai), var(--font-geist-sans), sans-serif; } .ds-chip { background: #0f172a; color: #cbd5e1; border: 1px solid #1e293b; border-radius: 9999px; padding: 6px 12px; font-size: 12px; font-weight: 700; cursor: pointer; transition: color 200ms ease-out, border-color 200ms ease-out, background 200ms ease-out, box-shadow 200ms ease-out; } .ds-chip:hover { color: #c9933a; background: #1e293b; border-color: rgba(201,147,58,0.35); } .ds-chip-active { color: #c9933a; border-color: #c9933a; box-shadow: 0 0 8px rgba(251,191,36,0.25); }"
+    },
+    {
+      "name": "Soft Yellow Glow Background",
+      "kind": "custom",
+      "refersTo": "card-light",
+      "description": "The current public page atmosphere: warm white-lavender base with soft lavender and amber radial glows.",
+      "html": "<div class=\"ds-soft-bg\"><div class=\"ds-soft-bg-content\">NameMongkol</div></div>",
+      "css": ".ds-soft-bg { min-height: 180px; border-radius: 24px; background-color: #f8f8fc; background-image: radial-gradient(ellipse 80% 55% at 50% -5%, rgba(155,142,196,0.13) 0%, transparent 65%), radial-gradient(ellipse 55% 40% at 95% 100%, rgba(201,147,58,0.07) 0%, transparent 60%); border: 1px solid #ddddf0; padding: 32px; color: #1a1a3e; font-family: var(--font-noto-thai), var(--font-geist-sans), sans-serif; } .ds-soft-bg-content { background: rgba(255,255,255,0.72); border: 1px solid #eeeef6; border-radius: 16px; padding: 24px; font-weight: 800; }"
     }
   ],
   "narrative": {
     "northStar": "The Sacred Terminal",
-    "overview": "The Sacred Terminal blends the profound mysticism of numerology with the precision of modern technology. The aesthetic is heavily anchored in deep space minimalism, where interfaces recede and sacred information glows. We explicitly reject the chaotic, banner-heavy designs of old-school horoscope websites and the overly dry, sterile feel of generic SaaS tools.",
+    "overview": "The Sacred Terminal is a premium Thai numerology interface where mystical knowledge is presented with the clarity of a precise instrument. The system now blends a White Tech Premium public surface with deep terminal cards for results, filters, comparisons, and conversion moments. The background feels calm and auspicious; the cards carry the sacred data.",
     "keyCharacteristics": [
-      "Dark, immersive Obsidian Space background.",
-      "Mystical, glowing accents that guide the eye naturally.",
-      "Tactile, magical components that respond to user interaction.",
-      "Typographic clarity to build trust and authority."
+      "Light premium discovery pages using warm white-lavender surfaces and soft sacred geometry.",
+      "Dark terminal cards for important data, premium tools, filters, result tables, and CTA clusters.",
+      "Mystic Amber used sparingly for conversion, focus, and auspicious emphasis.",
+      "High readability for Thai text, including older users and long-form article readers.",
+      "Smooth, tactile state changes without noisy animation or decorative clutter."
     ],
     "rules": [
-      { "name": "The Focused Aura Rule", "body": "Glows and ambient light are reserved for state changes (hover/focus) or highly specific mystical elements (like the aura analysis). They should never overwhelm the foundational darkness.", "section": "colors" },
-      { "name": "The Legibility Rule", "body": "Never sacrifice readability for aesthetics. Ensure text contrasts highly against the dark background, keeping accessibility in mind.", "section": "typography" },
-      { "name": "The Ethereal Layer Rule", "body": "Structural elements float. Use border opacity (e.g., border-white/10) and background tints (bg-white/5) instead of solid fills to maintain the airy, magical feel.", "section": "elevation" }
+      {
+        "name": "The Two-Surface Rule",
+        "body": "Light pages carry discovery and reading; dark terminal cards carry decisions, search tools, rankings, premium actions, and structured data.",
+        "section": "colors"
+      },
+      {
+        "name": "The Amber Scarcity Rule",
+        "body": "Amber is a signal, not a theme wash. Use it for actions, active states, scores, and short emphasis, not as body text everywhere.",
+        "section": "colors"
+      },
+      {
+        "name": "The Contrast Contract",
+        "body": "Light cards use dark navy headings and slate body text. Dark cards use white headings, slate-300 body text, and slate-400 only for meta labels.",
+        "section": "colors"
+      },
+      {
+        "name": "The Thai Legibility Rule",
+        "body": "Thai body copy must stay relaxed and high-contrast. Do not shrink important explanatory text below 0.875rem on mobile.",
+        "section": "typography"
+      },
+      {
+        "name": "The Meta-Only Muted Rule",
+        "body": "Muted text is for dates, counts, labels, and helper copy only. Never use muted text for primary card descriptions.",
+        "section": "typography"
+      },
+      {
+        "name": "The Felt, Not Seen Rule",
+        "body": "Background glows and sacred geometry should be subconsciously felt. If the pattern competes with text, it is too strong.",
+        "section": "elevation"
+      },
+      {
+        "name": "The State Glow Rule",
+        "body": "Glow belongs to interaction, focus, active state, or premium conversion. Static decorative glow should be rare.",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "Do use bg-white/5 or bg-white/10 for subtle structural containers to maintain the Obsidian Space theme.",
-      "Do ensure high contrast for all reading text.",
-      "Do use the Mystic Amber color strategically for conversion-focused actions."
+      "Do use White Tech Premium background for public discovery and reading pages.",
+      "Do use Terminal Surface cards for important structured data, tools, filters, and premium CTAs.",
+      "Do keep headings on light cards in Sacred Navy Text and body copy in Oracle Slate Text.",
+      "Do keep headings on dark cards white or slate-100 and body copy slate-300.",
+      "Do reserve slate-400 and muted text for metadata, labels, disabled helper text, and decorative secondary information.",
+      "Do use Mystic Amber strategically for conversion-focused actions, selected filters, scores, and short emphasis.",
+      "Do preserve infographic readability with object-contain, adequate padding, and no cropping."
     ],
     "donts": [
-      "Don't use chaotic, highly saturated colors beyond the Mystic Amber accent.",
-      "Don't build interfaces that look like dry, clinical SaaS tools.",
-      "Don't clutter the screen with heavy, opaque structural borders."
+      "Don't create chaotic old horoscope layouts with loud colors, banner clutter, or crowded visual noise.",
+      "Don't build dry SaaS-looking screens that feel cold, generic, or overly technical.",
+      "Don't use whole-page purple gradients, decorative blobs, or heavy glassmorphism as the default atmosphere.",
+      "Don't put text-white on light cards or slate-700 body text on dark cards.",
+      "Don't use side-stripe borders or gradient text for meaningful content.",
+      "Don't use Amber as a paragraph color; it is an accent and action signal.",
+      "Don't sacrifice readability, especially for Thai body text, table rows, FAQs, or card descriptions."
     ]
   }
 }
