@@ -155,9 +155,9 @@ export const TopNav = () => {
         <div className="hidden lg:flex fixed top-4 right-6 z-50 items-center gap-6">
             <Link
                 href="/articles"
-                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm backdrop-blur-md border ${pathname === '/articles'
-                    ? 'bg-amber-500/10 text-amber-600 border-amber-500/30 dark:bg-amber-500/20 dark:text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
-                    : 'bg-slate-100/50 text-slate-600 border-slate-200 hover:bg-slate-200/50 hover:text-slate-900 hover:border-slate-300 dark:bg-white/5 dark:text-slate-300 dark:border-white/10 dark:hover:bg-white/10 dark:hover:text-white dark:hover:border-white/20'
+                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm border shadow-sm ${pathname === '/articles'
+                    ? 'border-amber-400 bg-[#0f172a] text-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.25)]'
+                    : 'border-[#1e293b] bg-[#0f172a] text-slate-300 hover:border-amber-500/30 hover:bg-[#1e293b] hover:text-amber-400'
                     }`}
             >
                 <BookOpen size={16} />
@@ -166,9 +166,9 @@ export const TopNav = () => {
 
             <Link
                 href="/about"
-                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm backdrop-blur-md border ${pathname === '/about'
-                    ? 'bg-amber-500/10 text-amber-600 border-amber-500/30 dark:bg-amber-500/20 dark:text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
-                    : 'bg-slate-100/50 text-slate-600 border-slate-200 hover:bg-slate-200/50 hover:text-slate-900 hover:border-slate-300 dark:bg-white/5 dark:text-slate-300 dark:border-white/10 dark:hover:bg-white/10 dark:hover:text-white dark:hover:border-white/20'
+                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm border shadow-sm ${pathname === '/about'
+                    ? 'border-amber-400 bg-[#0f172a] text-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.25)]'
+                    : 'border-[#1e293b] bg-[#0f172a] text-slate-300 hover:border-amber-500/30 hover:bg-[#1e293b] hover:text-amber-400'
                     }`}
             >
                 <Info size={16} />
@@ -179,14 +179,14 @@ export const TopNav = () => {
                 <div className="relative" ref={menuRef}>
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-full bg-slate-100/50 border border-slate-200 hover:bg-slate-200/50 hover:border-slate-300 dark:bg-white/5 dark:border-white/10 dark:hover:bg-white/10 dark:hover:border-white/20 transition-all duration-300 backdrop-blur-md group"
+                        className="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-full bg-[#0f172a] border border-[#1e293b] hover:bg-[#1e293b] hover:border-amber-500/30 transition-all duration-300 shadow-sm group"
                     >
                         <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-amber-600 flex items-center justify-center text-white shadow-lg shadow-amber-500/20 ring-2 ring-white/5 group-hover:scale-105 transition-transform">
                             <UserIcon size={16} />
                         </div>
                         <div className="flex flex-col items-start">
                             <div className="flex items-center gap-1 max-w-[120px]">
-                                <span className="text-xs font-bold text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white transition-colors max-w-[84px] truncate">
+                                <span className="text-xs font-bold text-slate-300 group-hover:text-amber-400 transition-colors max-w-[84px] truncate">
                                     {user.user_metadata?.name || user.email?.split('@')[0]}
                                 </span>
                                 <span className={`px-1.5 py-[1px] rounded-md text-[9px] font-black uppercase leading-none flex items-center gap-0.5 ${getTierBadgeStyles(memberTier)}`}>

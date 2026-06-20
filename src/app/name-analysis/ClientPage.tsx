@@ -352,12 +352,12 @@ export default function NameAnalysisPage() {
     const cost = calculateCost(currentCount);
 
     return (
-        <div className="min-h-screen bg-[#0f172a] text-slate-200 font-sans selection:bg-indigo-500/30">
+        <div className="min-h-screen bg-[#f8f8fc] text-[#5a5a82] font-sans selection:bg-indigo-500/30">
             <main className="w-full max-w-[1400px] transition-all duration-300 min-h-screen px-3 sm:px-4 pt-16 md:pt-32 pb-32 relative overflow-hidden">
                 {/* Background Decor */}
                 <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-                    <div className="absolute top-[10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px]" />
-                    <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-fuchsia-500/10 blur-[120px]" />
+                    <div className="absolute top-[10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-indigo-500/5 blur-[120px]" />
+                    <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-fuchsia-500/5 blur-[120px]" />
                 </div>
 
                 <div className="relative z-10 max-w-7xl space-y-5 sm:space-y-8 pt-3 sm:pt-8">
@@ -368,33 +368,33 @@ export default function NameAnalysisPage() {
                                 <ClipboardList className="w-6 h-6 sm:w-8 sm:h-8" />
                             </div>
                             <div>
-                                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-indigo-100 leading-tight">
+                                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#1a1a3e] leading-tight drop-shadow-sm">
                                     เช็คชื่อมงคล วิเคราะห์หลายชื่อพร้อมกัน
                                 </h1>
-                                <p className="text-indigo-300/80 font-medium text-xs sm:text-sm flex items-start sm:items-center gap-2 mt-2 leading-relaxed">
-                                    <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 sm:mt-0" /> จัดเกรด A+ ตรวจคู่เลข กาลกิณี สูงสุด 1,000 ชื่อ
+                                <p className="text-[#5a5a82] font-medium text-xs sm:text-sm flex items-start sm:items-center gap-2 mt-2 leading-relaxed">
+                                    <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 sm:mt-0 text-emerald-500" /> จัดเกรด A+ ตรวจคู่เลข กาลกิณี สูงสุด 1,000 ชื่อ
                                 </p>
                             </div>
                         </div>
                         {/* Credits Balance (Optional Display) */}
                         {userCredits !== null && (
-                            <div className="bg-white/5 border border-white/10 px-4 py-2 rounded-xl flex items-center justify-between gap-3">
-                                <span className="text-slate-400 text-sm">เครดิตคงเหลือ</span>
+                            <div className="bg-white border border-[#ddddf0] shadow-sm px-4 py-2 rounded-xl flex items-center justify-between gap-3">
+                                <span className="text-[#8e8eaa] text-sm font-semibold">เครดิตคงเหลือ</span>
                                 <div className="flex items-center gap-1.5">
-                                    <span className="text-amber-400 font-bold text-xl">{userCredits}</span>
+                                    <span className="text-amber-500 font-bold text-xl">{userCredits}</span>
                                     <Coins className="w-4 h-4 text-amber-500" />
                                 </div>
                             </div>
                         )}
                     </div>
 
-                    <div className="rounded-2xl border border-amber-500/25 bg-amber-500/10 px-4 py-3 sm:px-5 sm:py-4">
-                        <p className="text-xs sm:text-sm text-amber-100 leading-relaxed">
+                    <div className="rounded-2xl border border-amber-500/30 bg-amber-50 px-4 py-3 sm:px-5 sm:py-4 shadow-sm">
+                        <p className="text-xs sm:text-sm text-amber-900 leading-relaxed font-medium">
                             หน้านี้เป็นฟีเจอร์วิเคราะห์หลายชื่อแบบพรีเมียม: ต้องเข้าสู่ระบบก่อนใช้งาน และคิดค่าบริการตามจำนวนรายชื่อ (เริ่มต้น 5 เครดิต)
                         </p>
-                        <div className="mt-2 text-[11px] sm:text-xs text-amber-200/90">
+                        <div className="mt-2 text-[11px] sm:text-xs text-amber-800">
                             หากต้องการเช็กชื่อเดี่ยวแบบไม่ล็อกอิน ใช้หน้า 
-                            <Link href="/name-check" className="underline hover:text-white transition-colors">
+                            <Link href="/name-check" className="underline hover:text-amber-950 font-bold transition-colors ml-1">
                                 วิเคราะห์ชื่อ-นามสกุลฟรี
                             </Link>
                         </div>
@@ -405,8 +405,8 @@ export default function NameAnalysisPage() {
                         <div className="lg:col-span-4 space-y-4 sm:space-y-6 lg:sticky lg:top-8">
                             <div className="flex flex-col gap-3 sm:gap-4">
                                 <div className="flex justify-between items-center px-1">
-                                    <h3 className="font-bold text-slate-300 uppercase tracking-wider text-xs flex items-center gap-2">
-                                        <Hash className="w-4 h-4 text-indigo-400" />
+                                    <h3 className="font-bold text-[#1a1a3e] uppercase tracking-wider text-xs flex items-center gap-2">
+                                        <Hash className="w-4 h-4 text-indigo-500" />
                                         รายชื่อที่ต้องการวิเคราะห์
                                     </h3>
                                     <span className={`text-[10px] px-2 py-1 rounded-md font-bold border ${currentCount >= 1000
@@ -418,7 +418,7 @@ export default function NameAnalysisPage() {
                                 </div>
                                 <div>
                                     <textarea
-                                        className="w-full h-[220px] sm:h-[280px] p-4 sm:p-6 text-base sm:text-lg border border-white/5 rounded-2xl focus:ring-1 focus:ring-amber-500/40 focus:border-amber-500/40 outline-none transition-all resize-none bg-slate-900/30 text-slate-200 placeholder:text-slate-600 font-medium custom-scrollbar leading-loose shadow-inner"
+                                        className="w-full h-[220px] sm:h-[280px] p-4 sm:p-6 text-base sm:text-lg border border-[#ddddf0] rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 outline-none transition-all resize-none bg-white text-[#1a1a3e] placeholder:text-[#8e8eaa] font-medium custom-scrollbar leading-loose shadow-inner"
                                         placeholder="วางรายชื่อที่นี่...&#10;เช่น:&#10;ณวิธ&#10;กลิ่นหอม"
                                         value={inputText}
                                         onChange={(e) => setInputText(e.target.value)}
@@ -429,12 +429,12 @@ export default function NameAnalysisPage() {
                                 <div>
                                     <div className="flex flex-col gap-3 sm:gap-4">
                                         <div className="flex justify-between items-center text-sm px-1">
-                                            <span className="text-slate-400">รายการวิเคราะห์:</span>
-                                            <span className="font-bold text-white">{currentCount} รายชื่อ</span>
+                                            <span className="text-[#8e8eaa]">รายการวิเคราะห์:</span>
+                                            <span className="font-bold text-[#1a1a3e]">{currentCount} รายชื่อ</span>
                                         </div>
                                         <div className="flex justify-between items-center text-sm px-1">
-                                            <span className="text-slate-400">ค่าบริการ:</span>
-                                            <span className="font-bold text-amber-400">
+                                            <span className="text-[#8e8eaa]">ค่าบริการ:</span>
+                                            <span className="font-bold text-amber-500">
                                                 {cost} เครดิต
                                             </span>
                                         </div>
@@ -462,22 +462,22 @@ export default function NameAnalysisPage() {
 
                                 {/* Pricing Info */}
                                 <div>
-                                    <div className="bg-white/5 p-4 sm:p-5 rounded-2xl border border-white/5 space-y-3">
-                                        <p className="text-xs font-bold text-slate-300 uppercase flex items-center gap-2">
-                                            <Info className="w-4 h-4" /> อัตราค่าบริการ (Credit)
+                                    <div className="bg-white p-4 sm:p-5 rounded-2xl border border-[#ddddf0] shadow-sm space-y-3">
+                                        <p className="text-xs font-bold text-[#1a1a3e] uppercase flex items-center gap-2">
+                                            <Info className="w-4 h-4 text-indigo-500" /> อัตราค่าบริการ (Credit)
                                         </p>
-                                        <ul className="text-xs text-slate-400 space-y-2 ml-1">
-                                            <li className="flex justify-between">
+                                        <ul className="text-xs text-[#5a5a82] space-y-2 ml-1">
+                                            <li className="flex justify-between border-b border-[#ddddf0]/50 pb-2">
                                                 <span>1 - 10 ชื่อ</span>
-                                                <span className="text-amber-400 font-bold">5 Credit</span>
+                                                <span className="text-amber-500 font-bold">5 Credit</span>
                                             </li>
-                                            <li className="flex justify-between">
+                                            <li className="flex justify-between border-b border-[#ddddf0]/50 pb-2">
                                                 <span>11 - 100 ชื่อ</span>
-                                                <span className="text-amber-400 font-bold">30 Credit</span>
+                                                <span className="text-amber-500 font-bold">30 Credit</span>
                                             </li>
                                             <li className="flex justify-between">
                                                 <span>101 - 1,000 ชื่อ</span>
-                                                <span className="text-amber-400 font-bold">100 Credit</span>
+                                                <span className="text-amber-500 font-bold">100 Credit</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -487,15 +487,15 @@ export default function NameAnalysisPage() {
 
                         {/* Results Display */}
                         <div className="lg:col-span-8">
-                            <div ref={printRef} className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl min-h-[520px] sm:min-h-[720px] flex flex-col pt-0">
+                            <div ref={printRef} className="bg-white border border-[#ddddf0] rounded-2xl sm:rounded-3xl overflow-hidden shadow-md min-h-[520px] sm:min-h-[720px] flex flex-col pt-0">
                                 {/* Actions Toolbar */}
                                 {(results.length > 0) && (
-                                    <div className="p-3 sm:p-4 border-b border-white/[0.02] flex gap-2 sm:gap-3 justify-start sm:justify-end bg-white/[0.01] overflow-x-auto">
+                                    <div className="p-3 sm:p-4 border-b border-[#ddddf0] flex gap-2 sm:gap-3 justify-start sm:justify-end bg-[#f8f8fc] overflow-x-auto">
                                         <button
                                             onClick={() => setIsSorted(!isSorted)}
                                             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-xs font-bold border ${isSorted
-                                                ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
-                                                : 'bg-white/5 text-slate-300 hover:text-white border-white/10 hover:bg-white/10'
+                                                ? 'bg-amber-50 text-amber-600 border-amber-200'
+                                                : 'bg-white text-[#5a5a82] hover:text-[#1a1a3e] border-[#ddddf0] hover:bg-[#f3f3f9]'
                                                 }`}
                                         >
                                             <ArrowDownWideNarrow className="w-3 h-3" />
@@ -507,7 +507,7 @@ export default function NameAnalysisPage() {
                                         <button onClick={handleExportPDF} className="flex items-center gap-2 px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 rounded-lg transition-all text-xs font-bold border border-rose-500/20">
                                             <Printer className="w-3 h-3" /> PDF
                                         </button>
-                                        <button onClick={handleClear} className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 text-slate-400 hover:text-rose-400 rounded-lg transition-all text-xs font-bold border border-white/10">
+                                        <button onClick={handleClear} className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-rose-50 text-[#8e8eaa] hover:text-rose-500 rounded-lg transition-all text-xs font-bold border border-[#ddddf0] hover:border-rose-200">
                                             <Trash2 className="w-3 h-3" /> ล้าง
                                         </button>
                                     </div>
@@ -526,15 +526,15 @@ export default function NameAnalysisPage() {
                                     </div>
                                 </div>
 
-                                <div className="p-4 sm:p-6 border-b border-white/5 bg-white/[0.02] font-bold text-slate-200 flex justify-between items-center gap-3">
+                                <div className="p-4 sm:p-6 border-b border-[#ddddf0] bg-white font-bold text-[#1a1a3e] flex justify-between items-center gap-3">
                                     <span className="flex items-center gap-2 text-base sm:text-lg">ตารางวิเคราะห์ผลลัพธ์</span>
-                                    {isSorted && <span className="text-xs text-amber-400 bg-amber-500/10 px-2 py-1 rounded border border-amber-500/20">เรียงตามความมงคล</span>}
+                                    {isSorted && <span className="text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded border border-amber-200">เรียงตามความมงคล</span>}
                                 </div>
                                 <div className="flex-1 overflow-auto custom-scrollbar">
                                     {sortedResults.length > 0 ? (
                                         <table className="w-full text-left border-collapse min-w-[640px]">
-                                            <thead className="bg-indigo-950/40 sticky top-0 z-10 backdrop-blur-md">
-                                                <tr className="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-white/5">
+                                            <thead className="bg-[#f8f8fc] sticky top-0 z-10 backdrop-blur-md">
+                                                <tr className="text-[10px] font-bold text-[#8e8eaa] uppercase tracking-widest border-b border-[#ddddf0]">
                                                     <th className="px-6 py-4 w-16 text-center">#</th>
                                                     <th className="px-6 py-4 w-20 text-center">เกรด</th>
                                                     <th className="px-6 py-4">ชื่อ</th>
@@ -547,10 +547,10 @@ export default function NameAnalysisPage() {
                                                 {sortedResults.map((row) => (
                                                     <tr
                                                         key={row.id}
-                                                        className="hover:bg-white/[0.05] transition-colors group cursor-pointer"
+                                                        className="hover:bg-[#f3f3f9] transition-colors group cursor-pointer"
                                                         onClick={() => setSelectedResult(row)}
                                                     >
-                                                        <td className="px-6 py-6 text-slate-500 font-mono text-center text-sm group-hover:text-indigo-400 transition-colors">
+                                                        <td className="px-6 py-6 text-[#8e8eaa] font-mono text-center text-sm group-hover:text-indigo-600 transition-colors">
                                                             {row.id.toString().padStart(3, '0')}
                                                         </td>
                                                         <td className="px-6 py-6 text-center">
@@ -565,10 +565,10 @@ export default function NameAnalysisPage() {
                                                             </div>
                                                         </td>
                                                         <td className="px-6 py-6">
-                                                            <span className="text-xl font-bold text-slate-200 group-hover:text-white transition-colors">{row.name}</span>
+                                                            <span className="text-xl font-bold text-[#1a1a3e] group-hover:text-indigo-600 transition-colors">{row.name}</span>
                                                         </td>
                                                         <td className="px-6 py-6 text-center">
-                                                            <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-indigo-600 to-violet-600 text-white rounded-xl font-bold text-xl shadow-lg shadow-indigo-900/50 group-hover:scale-110 transition-transform border border-white/10">
+                                                            <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-indigo-600 to-violet-600 text-white rounded-xl font-bold text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-110 transition-transform border border-indigo-400">
                                                                 {row.sum}
                                                             </div>
                                                         </td>
@@ -576,12 +576,12 @@ export default function NameAnalysisPage() {
                                                             <div className="flex flex-wrap gap-1.5 max-w-[150px]">
                                                                 {row.goodDays.length > 0 ? (
                                                                     row.goodDays.map(day => (
-                                                                        <span key={day} className="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md text-[10px] font-bold uppercase">
+                                                                        <span key={day} className="px-2 py-0.5 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-md text-[10px] font-bold uppercase">
                                                                             {day}
                                                                         </span>
                                                                     ))
                                                                 ) : (
-                                                                    <span className="text-rose-400 text-[11px] font-medium flex items-center gap-1 opacity-70">
+                                                                    <span className="text-rose-500 text-[11px] font-medium flex items-center gap-1 opacity-70">
                                                                         <XCircle className="w-3 h-3" /> ไม่แนะนำ
                                                                     </span>
                                                                 )}
@@ -595,9 +595,9 @@ export default function NameAnalysisPage() {
                                                                             p.type === 'ORANGE' ? 'bg-orange-500/10 border-orange-500/20' :
                                                                                 'bg-rose-500/10 border-rose-500/20'
                                                                             }`}>
-                                                                            <span className={`text-sm font-bold leading-none mb-1 ${p.type === 'GREEN' ? 'text-emerald-400' :
-                                                                                p.type === 'ORANGE' ? 'text-orange-400' :
-                                                                                    'text-rose-400'
+                                                                            <span className={`text-sm font-bold leading-none mb-1 ${p.type === 'GREEN' ? 'text-emerald-600' :
+                                                                                p.type === 'ORANGE' ? 'text-orange-600' :
+                                                                                    'text-rose-600'
                                                                                 }`}>
                                                                                 {p.pair}
                                                                             </span>
@@ -615,13 +615,13 @@ export default function NameAnalysisPage() {
                                             </tbody>
                                         </table>
                                     ) : (
-                                        <div className="flex-1 flex flex-col items-center justify-center text-slate-500 gap-5 sm:gap-6 py-20 sm:py-32 px-4">
-                                            <div className="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center border border-white/5">
-                                                <Search className="w-8 h-8 opacity-30 text-white" />
+                                        <div className="flex-1 flex flex-col items-center justify-center text-[#5a5a82] gap-5 sm:gap-6 py-20 sm:py-32 px-4">
+                                            <div className="w-20 h-20 bg-white shadow-sm rounded-3xl flex items-center justify-center border border-[#ddddf0]">
+                                                <Search className="w-8 h-8 text-[#8e8eaa]" />
                                             </div>
                                             <div className="text-center space-y-2">
-                                                <p className="text-xl font-bold text-slate-400">ระบุรายชื่อเพื่อเริ่มต้น</p>
-                                                <p className="text-xs font-medium text-slate-600 uppercase tracking-widest">
+                                                <p className="text-xl font-bold text-[#1a1a3e]">ระบุรายชื่อเพื่อเริ่มต้น</p>
+                                                <p className="text-xs font-medium text-[#8e8eaa] uppercase tracking-widest">
                                                     {userCredits === null ? 'กรุณาเข้าสู่ระบบ' : 'กดปุ่มเพื่อเริ่มวิเคราะห์'}
                                                 </p>
                                             </div>
@@ -642,25 +642,25 @@ export default function NameAnalysisPage() {
 
                     {/* Legend / Key Summary */}
                     <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-white/5 border border-white/5 p-5 rounded-2xl flex items-center gap-4 hover:bg-white/10 transition-colors">
-                            <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center text-xl border border-emerald-500/20">🟢</div>
+                        <div className="bg-white border border-[#ddddf0] p-5 rounded-2xl flex items-center gap-4 hover:shadow-md transition-shadow">
+                            <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-xl border border-emerald-100">🟢</div>
                             <div>
-                                <p className="font-bold text-emerald-400 text-sm">คู่เลขมงคล (Good)</p>
-                                <p className="text-slate-500 text-xs mt-0.5">ส่งเสริมด้านโชคลาภ/บารมี</p>
+                                <p className="font-bold text-emerald-600 text-sm">คู่เลขมงคล (Good)</p>
+                                <p className="text-[#5a5a82] text-xs mt-0.5">ส่งเสริมด้านโชคลาภ/บารมี</p>
                             </div>
                         </div>
-                        <div className="bg-white/5 border border-white/5 p-5 rounded-2xl flex items-center gap-4 hover:bg-white/10 transition-colors">
-                            <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center text-xl border border-orange-500/20">🟠</div>
+                        <div className="bg-white border border-[#ddddf0] p-5 rounded-2xl flex items-center gap-4 hover:shadow-md transition-shadow">
+                            <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center text-xl border border-orange-100">🟠</div>
                             <div>
-                                <p className="font-bold text-orange-400 text-sm">ปานกลาง (Average)</p>
-                                <p className="text-slate-500 text-xs mt-0.5">เหนื่อยแต่สำเร็จ/ต้องอดทน</p>
+                                <p className="font-bold text-orange-600 text-sm">ปานกลาง (Average)</p>
+                                <p className="text-[#5a5a82] text-xs mt-0.5">เหนื่อยแต่สำเร็จ/ต้องอดทน</p>
                             </div>
                         </div>
-                        <div className="bg-white/5 border border-white/5 p-5 rounded-2xl flex items-center gap-4 hover:bg-white/10 transition-colors">
-                            <div className="w-12 h-12 bg-rose-500/20 rounded-xl flex items-center justify-center text-xl border border-rose-500/20">🔴</div>
+                        <div className="bg-white border border-[#ddddf0] p-5 rounded-2xl flex items-center gap-4 hover:shadow-md transition-shadow">
+                            <div className="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center text-xl border border-rose-100">🔴</div>
                             <div>
-                                <p className="font-bold text-rose-400 text-sm">ควรระวัง (Caution)</p>
-                                <p className="text-slate-500 text-xs mt-0.5">อาจมีอุปสรรค/ปัญหาสุขภาพ</p>
+                                <p className="font-bold text-rose-600 text-sm">ควรระวัง (Caution)</p>
+                                <p className="text-[#5a5a82] text-xs mt-0.5">อาจมีอุปสรรค/ปัญหาสุขภาพ</p>
                             </div>
                         </div>
                     </div>
@@ -669,46 +669,46 @@ export default function NameAnalysisPage() {
 
                     {/* Why Bulk Analysis */}
                     <section className="mt-24 mb-16 max-w-4xl mx-auto">
-                        <h2 className="text-3xl md:text-5xl font-black text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-purple-300 mb-6 tracking-tight leading-tight">
+                        <h2 className="text-3xl md:text-5xl font-black text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 mb-6 tracking-tight leading-tight">
                             ทำไมต้องใช้ Bulk Analysis วิเคราะห์ชื่อแบบกลุ่ม?
                         </h2>
-                        <p className="text-center text-lg md:text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-center text-lg md:text-xl text-[#5a5a82] mb-12 max-w-2xl mx-auto leading-relaxed">
                             เครื่องมือที่ช่วยให้คุณตรวจสอบและเปรียบเทียบชื่อหลายชื่อได้ในคลิกเดียว ประหยัดเวลา และตัดสินใจได้แม่นยำขึ้น
                         </p>
                         <div className="grid md:grid-cols-4 gap-6">
-                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 text-center hover:border-amber-500/25 transition-all group">
-                                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                    <Zap className="w-7 h-7 text-indigo-400" />
+                            <article className="bg-white border border-[#ddddf0] rounded-2xl p-6 text-center hover:shadow-md hover:border-amber-200 transition-all group shadow-sm">
+                                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-indigo-50 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <Zap className="w-7 h-7 text-indigo-500" />
                                 </div>
-                                <h3 className="font-bold text-lg text-slate-200 mb-3">รวดเร็วทันใจ</h3>
-                                <p className="text-slate-400 text-sm leading-relaxed">
+                                <h3 className="font-bold text-lg text-[#1a1a3e] mb-3">รวดเร็วทันใจ</h3>
+                                <p className="text-[#5a5a82] text-sm leading-relaxed">
                                     วิเคราะห์ได้สูงสุด 1,000 ชื่อพร้อมกันในไม่กี่วินาที ไม่ต้องพิมพ์ทีละชื่อ
                                 </p>
                             </article>
-                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 text-center hover:border-amber-500/25 transition-all group">
-                                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                    <ArrowDownWideNarrow className="w-7 h-7 text-emerald-400" />
+                            <article className="bg-white border border-[#ddddf0] rounded-2xl p-6 text-center hover:shadow-md hover:border-amber-200 transition-all group shadow-sm">
+                                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-emerald-50 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <ArrowDownWideNarrow className="w-7 h-7 text-emerald-500" />
                                 </div>
-                                <h3 className="font-bold text-lg text-slate-200 mb-3">จัดเกรดอัตโนมัติ</h3>
-                                <p className="text-slate-400 text-sm leading-relaxed">
+                                <h3 className="font-bold text-lg text-[#1a1a3e] mb-3">จัดเกรดอัตโนมัติ</h3>
+                                <p className="text-[#5a5a82] text-sm leading-relaxed">
                                     ระบบจัดเกรด A+, A, B, C อัตโนมัติ พร้อมเรียงลำดับจากดีที่สุด
                                 </p>
                             </article>
-                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 text-center hover:border-amber-500/25 transition-all group">
-                                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                    <FileSpreadsheet className="w-7 h-7 text-amber-400" />
+                            <article className="bg-white border border-[#ddddf0] rounded-2xl p-6 text-center hover:shadow-md hover:border-amber-200 transition-all group shadow-sm">
+                                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-amber-50 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <FileSpreadsheet className="w-7 h-7 text-amber-500" />
                                 </div>
-                                <h3 className="font-semibold text-slate-200 mb-2">Export CSV/PDF</h3>
-                                <p className="text-slate-400 text-sm">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-2">Export CSV/PDF</h3>
+                                <p className="text-[#5a5a82] text-sm">
                                     ดาวน์โหลดผลลัพธ์เป็น Excel หรือ PDF สำหรับพิมพ์หรือแชร์ได้ทันที
                                 </p>
                             </article>
-                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 text-center hover:border-amber-500/25 transition-all group">
-                                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-rose-500/20 to-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                    <Users className="w-7 h-7 text-rose-400" />
+                            <article className="bg-white border border-[#ddddf0] rounded-2xl p-6 text-center hover:shadow-md hover:border-amber-200 transition-all group shadow-sm">
+                                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-rose-50 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <Users className="w-7 h-7 text-rose-500" />
                                 </div>
-                                <h3 className="font-semibold text-slate-200 mb-2">เหมาะกับทุกคน</h3>
-                                <p className="text-slate-400 text-sm">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-2">เหมาะกับทุกคน</h3>
+                                <p className="text-[#5a5a82] text-sm">
                                     พ่อแม่ตั้งชื่อลูก, ผู้เปลี่ยนชื่อ, นักเลขศาสตร์, HR บริษัท
                                 </p>
                             </article>
@@ -722,54 +722,54 @@ export default function NameAnalysisPage() {
                         </h2>
                         <div className="grid md:grid-cols-3 gap-6">
                             {/* Entry Tier */}
-                            <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-emerald-500/30 transition-all">
+                            <div className="bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-emerald-300 hover:shadow-md transition-all">
                                 <div className="text-center mb-6">
-                                    <span className="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-full mb-3">ENTRY</span>
-                                    <h3 className="text-xl font-bold text-slate-200">1 - 10 ชื่อ</h3>
+                                    <span className="inline-block px-3 py-1 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full mb-3 border border-emerald-200">ENTRY</span>
+                                    <h3 className="text-xl font-bold text-[#1a1a3e]">1 - 10 ชื่อ</h3>
                                     <div className="mt-4">
-                                        <span className="text-4xl font-bold text-emerald-400">5</span>
-                                        <span className="text-slate-400 ml-1">เครดิต</span>
+                                        <span className="text-4xl font-bold text-emerald-500">5</span>
+                                        <span className="text-[#8e8eaa] ml-1">เครดิต</span>
                                     </div>
                                 </div>
-                                <ul className="space-y-2 text-sm text-slate-400">
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> เหมาะสำหรับทดลองใช้</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> ตั้งชื่อลูก 2-3 ตัวเลือก</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> ผลลัพธ์ครบทุกฟีเจอร์</li>
+                                <ul className="space-y-2 text-sm text-[#5a5a82]">
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> เหมาะสำหรับทดลองใช้</li>
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> ตั้งชื่อลูก 2-3 ตัวเลือก</li>
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> ผลลัพธ์ครบทุกฟีเจอร์</li>
                                 </ul>
                             </div>
                             {/* Standard Tier */}
-                            <div className="bg-gradient-to-b from-indigo-500/10 to-purple-500/10 border border-indigo-500/30 rounded-2xl p-6 relative scale-105 shadow-xl shadow-indigo-500/10">
+                            <div className="bg-indigo-50/50 border border-indigo-200 rounded-2xl p-6 relative scale-105 shadow-lg shadow-indigo-500/5">
                                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                                    <span className="px-4 py-1 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-xs font-bold rounded-full">แนะนำ</span>
+                                    <span className="px-4 py-1 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-xs font-bold rounded-full shadow-sm">แนะนำ</span>
                                 </div>
                                 <div className="text-center mb-6">
-                                    <span className="inline-block px-3 py-1 bg-indigo-500/10 text-indigo-400 text-xs font-bold rounded-full mb-3">STANDARD</span>
-                                    <h3 className="text-xl font-bold text-slate-200">11 - 100 ชื่อ</h3>
+                                    <span className="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold rounded-full mb-3 border border-indigo-200">STANDARD</span>
+                                    <h3 className="text-xl font-bold text-[#1a1a3e]">11 - 100 ชื่อ</h3>
                                     <div className="mt-4">
-                                        <span className="text-4xl font-bold text-indigo-400">30</span>
-                                        <span className="text-slate-400 ml-1">เครดิต</span>
+                                        <span className="text-4xl font-bold text-indigo-600">30</span>
+                                        <span className="text-[#8e8eaa] ml-1">เครดิต</span>
                                     </div>
                                 </div>
-                                <ul className="space-y-2 text-sm text-slate-400">
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-indigo-400" /> เหมาะสำหรับเปรียบเทียบ</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-indigo-400" /> มีหลายตัวเลือกให้เลือก</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-indigo-400" /> คุ้มค่าที่สุด!</li>
+                                <ul className="space-y-2 text-sm text-[#5a5a82]">
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-indigo-600" /> เหมาะสำหรับเปรียบเทียบ</li>
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-indigo-600" /> มีหลายตัวเลือกให้เลือก</li>
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-indigo-600" /> คุ้มค่าที่สุด!</li>
                                 </ul>
                             </div>
                             {/* Power User Tier */}
-                            <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-amber-500/30 transition-all">
+                            <div className="bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-amber-300 hover:shadow-md transition-all">
                                 <div className="text-center mb-6">
-                                    <span className="inline-block px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-bold rounded-full mb-3">POWER USER</span>
-                                    <h3 className="text-xl font-bold text-slate-200">101 - 1,000 ชื่อ</h3>
+                                    <span className="inline-block px-3 py-1 bg-amber-50 text-amber-600 text-xs font-bold rounded-full mb-3 border border-amber-200">POWER USER</span>
+                                    <h3 className="text-xl font-bold text-[#1a1a3e]">101 - 1,000 ชื่อ</h3>
                                     <div className="mt-4">
-                                        <span className="text-4xl font-bold text-amber-400">100</span>
-                                        <span className="text-slate-400 ml-1">เครดิต</span>
+                                        <span className="text-4xl font-bold text-amber-500">100</span>
+                                        <span className="text-[#8e8eaa] ml-1">เครดิต</span>
                                     </div>
                                 </div>
-                                <ul className="space-y-2 text-sm text-slate-400">
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-amber-400" /> สำหรับนักเลขศาสตร์</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-amber-400" /> HR วิเคราะห์พนักงาน</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-amber-400" /> ประมวลผลจำนวนมาก</li>
+                                <ul className="space-y-2 text-sm text-[#5a5a82]">
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-amber-500" /> สำหรับนักเลขศาสตร์</li>
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-amber-500" /> HR วิเคราะห์พนักงาน</li>
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-amber-500" /> ประมวลผลจำนวนมาก</li>
                                 </ul>
                             </div>
                         </div>
@@ -777,40 +777,40 @@ export default function NameAnalysisPage() {
 
                     {/* How to Use Steps */}
                     <section className="mt-16 mb-12 max-w-3xl mx-auto">
-                        <h2 className="text-2xl md:text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-300 mb-8">
+                        <h2 className="text-2xl md:text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-500 mb-8">
                             วิธีใช้งานใน 3 ขั้นตอน
                         </h2>
                         <div className="space-y-6">
-                            <div className="flex gap-5 items-start bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-cyan-500/30 transition-all">
+                            <div className="flex gap-5 items-start bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-cyan-300 hover:shadow-md transition-all">
                                 <div className="w-12 h-12 flex-shrink-0 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-cyan-500/20">
                                     1
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-200 mb-2">วางรายชื่อที่ต้องการวิเคราะห์</h3>
-                                    <p className="text-slate-400 text-sm">
-                                        พิมพ์หรือ Copy/Paste รายชื่อลงในช่อง โดยใส่ <strong className="text-cyan-400">1 ชื่อต่อ 1 บรรทัด</strong> รองรับสูงสุด 1,000 ชื่อต่อครั้ง
+                                    <h3 className="font-semibold text-[#1a1a3e] mb-2">วางรายชื่อที่ต้องการวิเคราะห์</h3>
+                                    <p className="text-[#5a5a82] text-sm">
+                                        พิมพ์หรือ Copy/Paste รายชื่อลงในช่อง โดยใส่ <strong className="text-cyan-600">1 ชื่อต่อ 1 บรรทัด</strong> รองรับสูงสุด 1,000 ชื่อต่อครั้ง
                                     </p>
                                 </div>
                             </div>
-                            <div className="flex gap-5 items-start bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-cyan-500/30 transition-all">
+                            <div className="flex gap-5 items-start bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-cyan-300 hover:shadow-md transition-all">
                                 <div className="w-12 h-12 flex-shrink-0 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-cyan-500/20">
                                     2
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-200 mb-2">กดปุ่ม &quot;เริ่มวิเคราะห์&quot;</h3>
-                                    <p className="text-slate-400 text-sm">
+                                    <h3 className="font-semibold text-[#1a1a3e] mb-2">กดปุ่ม &quot;เริ่มวิเคราะห์&quot;</h3>
+                                    <p className="text-[#5a5a82] text-sm">
                                         ระบบจะตัดเครดิตตามจำนวนชื่อ (5/30/100 เครดิต) และประมวลผลทันที ใช้เวลาไม่ถึง 5 วินาที
                                     </p>
                                 </div>
                             </div>
-                            <div className="flex gap-5 items-start bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-cyan-500/30 transition-all">
+                            <div className="flex gap-5 items-start bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-cyan-300 hover:shadow-md transition-all">
                                 <div className="w-12 h-12 flex-shrink-0 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-cyan-500/20">
                                     3
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-200 mb-2">ดูผลลัพธ์และ Export</h3>
-                                    <p className="text-slate-400 text-sm">
-                                        ดูเกรด, ผลรวม, คู่ตัวเลข และวันที่ใช้ได้ จัดเรียงตามเกรด และ Export เป็น <strong className="text-cyan-400">CSV</strong> หรือ <strong className="text-cyan-400">PDF</strong>
+                                    <h3 className="font-semibold text-[#1a1a3e] mb-2">ดูผลลัพธ์และ Export</h3>
+                                    <p className="text-[#5a5a82] text-sm">
+                                        ดูเกรด, ผลรวม, คู่ตัวเลข และวันที่ใช้ได้ จัดเรียงตามเกรด และ Export เป็น <strong className="text-cyan-600">CSV</strong> หรือ <strong className="text-cyan-600">PDF</strong>
                                     </p>
                                 </div>
                             </div>
@@ -823,35 +823,35 @@ export default function NameAnalysisPage() {
                             ใครควรใช้ Bulk Analysis?
                         </h2>
                         <div className="grid md:grid-cols-2 gap-6">
-                            <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-rose-500/30 transition-all">
-                                <h3 className="font-semibold text-slate-200 mb-3 flex items-center gap-2">
+                            <div className="bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-rose-300 hover:shadow-md transition-all">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-3 flex items-center gap-2">
                                     <span className="text-2xl">👶</span> พ่อแม่ที่กำลังตั้งชื่อลูก
                                 </h3>
-                                <p className="text-slate-400 text-sm">
+                                <p className="text-[#5a5a82] text-sm">
                                     มีรายชื่อที่ชอบหลายชื่อ? วางทั้งหมดแล้วให้ระบบจัดเกรดและเปรียบเทียบให้ เลือกชื่อที่ดีที่สุดได้ง่ายขึ้น
                                 </p>
                             </div>
-                            <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-rose-500/30 transition-all">
-                                <h3 className="font-semibold text-slate-200 mb-3 flex items-center gap-2">
+                            <div className="bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-rose-300 hover:shadow-md transition-all">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-3 flex items-center gap-2">
                                     <span className="text-2xl">✨</span> ผู้ที่ต้องการเปลี่ยนชื่อ
                                 </h3>
-                                <p className="text-slate-400 text-sm">
+                                <p className="text-[#5a5a82] text-sm">
                                     คิดชื่อใหม่ไว้หลายตัวเลือก? วิเคราะห์พร้อมกันแล้วเลือกชื่อที่มีเกรด A+ เพื่อเปลี่ยนแปลงชีวิตให้ดีขึ้น
                                 </p>
                             </div>
-                            <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-rose-500/30 transition-all">
-                                <h3 className="font-semibold text-slate-200 mb-3 flex items-center gap-2">
+                            <div className="bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-rose-300 hover:shadow-md transition-all">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-3 flex items-center gap-2">
                                     <span className="text-2xl">🔮</span> นักเลขศาสตร์และหมอดู
                                 </h3>
-                                <p className="text-slate-400 text-sm">
+                                <p className="text-[#5a5a82] text-sm">
                                     รับตั้งชื่อให้ลูกค้าหลายคน? ใช้ Bulk Analysis ประมวลผลรายชื่อจำนวนมากได้รวดเร็ว พร้อม Export รายงาน PDF
                                 </p>
                             </div>
-                            <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-rose-500/30 transition-all">
-                                <h3 className="font-semibold text-slate-200 mb-3 flex items-center gap-2">
+                            <div className="bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-rose-300 hover:shadow-md transition-all">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-3 flex items-center gap-2">
                                     <span className="text-2xl">🏢</span> HR และฝ่ายบุคคล
                                 </h3>
-                                <p className="text-slate-400 text-sm">
+                                <p className="text-[#5a5a82] text-sm">
                                     วิเคราะห์ชื่อพนักงานหรือทีมงาน เพื่อดูภาพรวมความเป็นมงคลและความเหมาะสมในการทำงานร่วมกัน
                                 </p>
                             </div>
@@ -865,56 +865,56 @@ export default function NameAnalysisPage() {
                             คำถามที่พบบ่อย (FAQ)
                         </h2>
                         <div className="space-y-4">
-                            <details className="group bg-white/[0.03] border border-white/10 rounded-xl p-5 cursor-pointer open:bg-white/[0.05] transition-colors">
-                                <summary className="font-semibold text-slate-200 list-none flex justify-between items-center">
+                            <details className="group bg-white border border-[#ddddf0] shadow-sm rounded-xl p-5 cursor-pointer open:bg-[#f8f8fc] transition-colors">
+                                <summary className="font-semibold text-[#1a1a3e] list-none flex justify-between items-center">
                                     Bulk Analysis วิเคราะห์ได้กี่ชื่อพร้อมกัน?
-                                    <span className="transition-transform group-open:rotate-180 text-violet-400">▼</span>
+                                    <span className="transition-transform group-open:rotate-180 text-violet-500">▼</span>
                                 </summary>
-                                <p className="mt-4 text-slate-400 text-sm pl-4 border-l-2 border-violet-500">
-                                    รองรับสูงสุด <strong className="text-violet-300">1,000 ชื่อต่อครั้ง</strong> โดยแบ่งเป็น 3 ระดับ: Entry (1-10 ชื่อ = 5 เครดิต), Standard (11-100 ชื่อ = 30 เครดิต), Power User (101-1,000 ชื่อ = 100 เครดิต)
+                                <p className="mt-4 text-[#5a5a82] text-sm pl-4 border-l-2 border-violet-500">
+                                    รองรับสูงสุด <strong className="text-violet-600">1,000 ชื่อต่อครั้ง</strong> โดยแบ่งเป็น 3 ระดับ: Entry (1-10 ชื่อ = 5 เครดิต), Standard (11-100 ชื่อ = 30 เครดิต), Power User (101-1,000 ชื่อ = 100 เครดิต)
                                 </p>
                             </details>
 
-                            <details className="group bg-white/[0.03] border border-white/10 rounded-xl p-5 cursor-pointer open:bg-white/[0.05] transition-colors">
-                                <summary className="font-semibold text-slate-200 list-none flex justify-between items-center">
+                            <details className="group bg-white border border-[#ddddf0] shadow-sm rounded-xl p-5 cursor-pointer open:bg-[#f8f8fc] transition-colors">
+                                <summary className="font-semibold text-[#1a1a3e] list-none flex justify-between items-center">
                                     เกรด A+ หมายความว่าอย่างไร?
-                                    <span className="transition-transform group-open:rotate-180 text-violet-400">▼</span>
+                                    <span className="transition-transform group-open:rotate-180 text-violet-500">▼</span>
                                 </summary>
-                                <p className="mt-4 text-slate-400 text-sm pl-4 border-l-2 border-violet-500">
-                                    เกรด A+ คือชื่อที่มี<strong className="text-violet-300">ผลรวมเลขศาสตร์เป็นมงคลสูงสุด</strong> มีคู่ตัวเลขที่ดี (🟢) และใช้ได้กับหลายวันเกิด ถือเป็นชื่อที่แนะนำอย่างยิ่ง
+                                <p className="mt-4 text-[#5a5a82] text-sm pl-4 border-l-2 border-violet-500">
+                                    เกรด A+ คือชื่อที่มี<strong className="text-violet-600">ผลรวมเลขศาสตร์เป็นมงคลสูงสุด</strong> มีคู่ตัวเลขที่ดี (🟢) และใช้ได้กับหลายวันเกิด ถือเป็นชื่อที่แนะนำอย่างยิ่ง
                                 </p>
                             </details>
 
-                            <details className="group bg-white/[0.03] border border-white/10 rounded-xl p-5 cursor-pointer open:bg-white/[0.05] transition-colors">
-                                <summary className="font-semibold text-slate-200 list-none flex justify-between items-center">
+                            <details className="group bg-white border border-[#ddddf0] shadow-sm rounded-xl p-5 cursor-pointer open:bg-[#f8f8fc] transition-colors">
+                                <summary className="font-semibold text-[#1a1a3e] list-none flex justify-between items-center">
                                     คู่ตัวเลข 🟢🟠🔴 หมายความว่าอย่างไร?
-                                    <span className="transition-transform group-open:rotate-180 text-violet-400">▼</span>
+                                    <span className="transition-transform group-open:rotate-180 text-violet-500">▼</span>
                                 </summary>
-                                <p className="mt-4 text-slate-400 text-sm pl-4 border-l-2 border-violet-500">
-                                    🟢 <strong className="text-emerald-400">สีเขียว</strong> = คู่ตัวเลขมงคล ส่งเสริมโชคลาภและบารมี<br />
-                                    🟠 <strong className="text-orange-400">สีส้ม</strong> = ปานกลาง ต้องอดทนแต่จะสำเร็จ<br />
-                                    🔴 <strong className="text-rose-400">สีแดง</strong> = ควรระวัง อาจมีอุปสรรคหรือปัญหาสุขภาพ
+                                <p className="mt-4 text-[#5a5a82] text-sm pl-4 border-l-2 border-violet-500">
+                                    🟢 <strong className="text-emerald-500">สีเขียว</strong> = คู่ตัวเลขมงคล ส่งเสริมโชคลาภและบารมี<br />
+                                    🟠 <strong className="text-orange-500">สีส้ม</strong> = ปานกลาง ต้องอดทนแต่จะสำเร็จ<br />
+                                    🔴 <strong className="text-rose-500">สีแดง</strong> = ควรระวัง อาจมีอุปสรรคหรือปัญหาสุขภาพ
                                 </p>
                             </details>
 
-                            <details className="group bg-white/[0.03] border border-white/10 rounded-xl p-5 cursor-pointer open:bg-white/[0.05] transition-colors">
-                                <summary className="font-semibold text-slate-200 list-none flex justify-between items-center">
+                            <details className="group bg-white border border-[#ddddf0] shadow-sm rounded-xl p-5 cursor-pointer open:bg-[#f8f8fc] transition-colors">
+                                <summary className="font-semibold text-[#1a1a3e] list-none flex justify-between items-center">
                                     สามารถ Export ผลลัพธ์ออกมาได้ไหม?
-                                    <span className="transition-transform group-open:rotate-180 text-violet-400">▼</span>
+                                    <span className="transition-transform group-open:rotate-180 text-violet-500">▼</span>
                                 </summary>
-                                <p className="mt-4 text-slate-400 text-sm pl-4 border-l-2 border-violet-500">
-                                    ได้! ระบบรองรับการ Export เป็น <strong className="text-violet-300">CSV</strong> สำหรับใช้ใน Excel/Google Sheets และ <strong className="text-violet-300">PDF</strong> สำหรับพิมพ์หรือแชร์
+                                <p className="mt-4 text-[#5a5a82] text-sm pl-4 border-l-2 border-violet-500">
+                                    ได้! ระบบรองรับการ Export เป็น <strong className="text-violet-600">CSV</strong> สำหรับใช้ใน Excel/Google Sheets และ <strong className="text-violet-600">PDF</strong> สำหรับพิมพ์หรือแชร์
                                 </p>
                             </details>
 
-                            <details className="group bg-white/[0.03] border border-white/10 rounded-xl p-5 cursor-pointer open:bg-white/[0.05] transition-colors">
-                                <summary className="font-semibold text-slate-200 list-none flex justify-between items-center">
+                            <details className="group bg-white border border-[#ddddf0] shadow-sm rounded-xl p-5 cursor-pointer open:bg-[#f8f8fc] transition-colors">
+                                <summary className="font-semibold text-[#1a1a3e] list-none flex justify-between items-center">
                                     ต่างจากวิเคราะห์ชื่อฟรีหน้าแรกอย่างไร?
-                                    <span className="transition-transform group-open:rotate-180 text-violet-400">▼</span>
+                                    <span className="transition-transform group-open:rotate-180 text-violet-500">▼</span>
                                 </summary>
-                                <p className="mt-4 text-slate-400 text-sm pl-4 border-l-2 border-violet-500">
-                                    <Link href="/name-check" className="text-violet-400 hover:underline">วิเคราะห์ชื่อฟรี</Link> ทีละ 1 ชื่อ+นามสกุล<br />
-                                    <strong className="text-violet-300">Bulk Analysis</strong> วิเคราะห์หลายชื่อพร้อมกัน (สูงสุด 1,000 ชื่อ) พร้อมจัดเกรดและเปรียบเทียบ
+                                <p className="mt-4 text-[#5a5a82] text-sm pl-4 border-l-2 border-violet-500">
+                                    <Link href="/name-check" className="text-violet-600 hover:underline">วิเคราะห์ชื่อฟรี</Link> ทีละ 1 ชื่อ+นามสกุล<br />
+                                    <strong className="text-violet-600">Bulk Analysis</strong> วิเคราะห์หลายชื่อพร้อมกัน (สูงสุด 1,000 ชื่อ) พร้อมจัดเกรดและเปรียบเทียบ
                                 </p>
                             </details>
                         </div>
@@ -922,41 +922,41 @@ export default function NameAnalysisPage() {
 
                     {/* Methodology Section — EEAT + AEO */}
                     <section className="mt-16 mb-12 max-w-4xl mx-auto">
-                        <h2 className="text-2xl md:text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 to-teal-300 mb-4">
+                        <h2 className="text-2xl md:text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400 mb-4">
                             หลักการคำนวณเลขศาสตร์ในชื่อ
                         </h2>
-                        <p className="text-center text-slate-400 mb-10 max-w-2xl mx-auto text-sm">
+                        <p className="text-center text-[#5a5a82] mb-10 max-w-2xl mx-auto text-sm">
                             NameMongkol ใช้ตำราเลขศาสตร์ไทยโบราณ แบ่งอักษรไทย 44 ตัวเป็น 9 กลุ่มค่า (1-9)
                             แล้วนำค่าแต่ละตัวอักษรมาวิเคราะห์ 3 มิติ เพื่อให้ได้ผลลัพธ์ที่ครบถ้วนและน่าเชื่อถือ
                         </p>
                         <div className="grid md:grid-cols-3 gap-6">
-                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-emerald-500/30 transition-all">
+                            <article className="bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-emerald-300 hover:shadow-md transition-all">
                                 <div className="text-3xl mb-3">🔢</div>
-                                <h3 className="font-semibold text-slate-200 mb-2">1. ผลรวมเลขศาสตร์</h3>
-                                <p className="text-slate-400 text-sm">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-2">1. ผลรวมเลขศาสตร์</h3>
+                                <p className="text-[#5a5a82] text-sm">
                                     รวมค่าตัวเลขของทุกอักษรในชื่อ แล้วเทียบกับ
-                                    <strong className="text-emerald-400"> ตัวเลขมงคล 27 ค่า</strong>
+                                    <strong className="text-emerald-600"> ตัวเลขมงคล 27 ค่า</strong>
                                     {' '}(เช่น 9, 14, 15, 24, 36, 45, 99)
                                     ชื่อที่ผลรวมตรงถือว่าเป็นมงคลตามตำรา
                                 </p>
                             </article>
-                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-emerald-500/30 transition-all">
+                            <article className="bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-emerald-300 hover:shadow-md transition-all">
                                 <div className="text-3xl mb-3">🔗</div>
-                                <h3 className="font-semibold text-slate-200 mb-2">2. คู่ตัวเลข (Pair Analysis)</h3>
-                                <p className="text-slate-400 text-sm">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-2">2. คู่ตัวเลข (Pair Analysis)</h3>
+                                <p className="text-[#5a5a82] text-sm">
                                     จับคู่ค่าอักษรที่อยู่ติดกันเป็นเลข 2 หลัก
-                                    เทียบกับ <strong className="text-emerald-400">48 คู่มงคล (🟢)</strong>,
+                                    เทียบกับ <strong className="text-emerald-600">48 คู่มงคล (🟢)</strong>,
                                     {' '}3 คู่กลาง (🟠) และคู่เตือน (🔴)
                                     — ชื่อเกรด A+ ต้องไม่มีคู่แดงเลย
                                 </p>
                             </article>
-                            <article className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-emerald-500/30 transition-all">
+                            <article className="bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-emerald-300 hover:shadow-md transition-all">
                                 <div className="text-3xl mb-3">📅</div>
-                                <h3 className="font-semibold text-slate-200 mb-2">3. กาลกิณี (วันเกิด)</h3>
-                                <p className="text-slate-400 text-sm">
-                                    ตรวจว่าชื่อมีอักษร <strong className="text-rose-400">กาลกิณี</strong> ของวันเกิดใดบ้าง
+                                <h3 className="font-semibold text-[#1a1a3e] mb-2">3. กาลกิณี (วันเกิด)</h3>
+                                <p className="text-[#5a5a82] text-sm">
+                                    ตรวจว่าชื่อมีอักษร <strong className="text-rose-500">กาลกิณี</strong> ของวันเกิดใดบ้าง
                                     เช่น คนเกิดวันอาทิตย์ ห้ามมี ศ ษ ส ฬ ฮ ห
-                                    — ระบบจะบอกว่าชื่อนี้ <strong className="text-emerald-400">ใช้ได้กับวันอะไร</strong>
+                                    — ระบบจะบอกว่าชื่อนี้ <strong className="text-emerald-600">ใช้ได้กับวันอะไร</strong>
                                 </p>
                             </article>
                         </div>
@@ -964,53 +964,53 @@ export default function NameAnalysisPage() {
 
                     {/* Comparison Section — Competitor Differentiation */}
                     <section className="mt-16 mb-12 max-w-4xl mx-auto">
-                        <h2 className="text-2xl md:text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-amber-300 to-yellow-300 mb-8">
+                        <h2 className="text-2xl md:text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-yellow-500 mb-8">
                             NameMongkol vs เว็บวิเคราะห์ชื่ออื่น
                         </h2>
-                        <div className="overflow-x-auto">
+                        <div className="overflow-x-auto bg-white rounded-2xl border border-[#ddddf0] shadow-sm">
                             <table className="w-full text-sm text-left border-collapse">
-                                <thead>
-                                    <tr className="text-xs font-bold text-slate-400 uppercase border-b border-white/10">
-                                        <th className="px-4 py-3">ฟีเจอร์</th>
-                                        <th className="px-4 py-3 text-center text-amber-400">NameMongkol</th>
-                                        <th className="px-4 py-3 text-center text-slate-500">เว็บทั่วไป</th>
+                                <thead className="bg-[#f8f8fc]">
+                                    <tr className="text-xs font-bold text-[#5a5a82] uppercase border-b border-[#ddddf0]">
+                                        <th className="px-6 py-4">ฟีเจอร์</th>
+                                        <th className="px-6 py-4 text-center text-amber-600">NameMongkol</th>
+                                        <th className="px-6 py-4 text-center text-[#8e8eaa]">เว็บทั่วไป</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-white/5">
-                                    <tr className="hover:bg-white/[0.03] transition-colors">
-                                        <td className="px-4 py-3 text-slate-300">วิเคราะห์หลายชื่อพร้อมกัน (สูงสุด 1,000)</td>
-                                        <td className="px-4 py-3 text-center text-emerald-400 font-bold">✅</td>
-                                        <td className="px-4 py-3 text-center text-rose-400">❌</td>
+                                <tbody className="divide-y divide-[#ddddf0]/50">
+                                    <tr className="hover:bg-[#f3f3f9] transition-colors">
+                                        <td className="px-6 py-4 text-[#1a1a3e]">วิเคราะห์หลายชื่อพร้อมกัน (สูงสุด 1,000)</td>
+                                        <td className="px-6 py-4 text-center text-emerald-500 font-bold">✅</td>
+                                        <td className="px-6 py-4 text-center text-rose-500">❌</td>
                                     </tr>
-                                    <tr className="hover:bg-white/[0.03] transition-colors">
-                                        <td className="px-4 py-3 text-slate-300">จัดเกรดอัตโนมัติ (A+/A/B/C)</td>
-                                        <td className="px-4 py-3 text-center text-emerald-400 font-bold">✅</td>
-                                        <td className="px-4 py-3 text-center text-rose-400">❌</td>
+                                    <tr className="hover:bg-[#f3f3f9] transition-colors">
+                                        <td className="px-6 py-4 text-[#1a1a3e]">จัดเกรดอัตโนมัติ (A+/A/B/C)</td>
+                                        <td className="px-6 py-4 text-center text-emerald-500 font-bold">✅</td>
+                                        <td className="px-6 py-4 text-center text-rose-500">❌</td>
                                     </tr>
-                                    <tr className="hover:bg-white/[0.03] transition-colors">
-                                        <td className="px-4 py-3 text-slate-300">วิเคราะห์คู่เลข 🟢🟠🔴</td>
-                                        <td className="px-4 py-3 text-center text-emerald-400 font-bold">✅</td>
-                                        <td className="px-4 py-3 text-center text-rose-400">❌</td>
+                                    <tr className="hover:bg-[#f3f3f9] transition-colors">
+                                        <td className="px-6 py-4 text-[#1a1a3e]">วิเคราะห์คู่เลข 🟢🟠🔴</td>
+                                        <td className="px-6 py-4 text-center text-emerald-500 font-bold">✅</td>
+                                        <td className="px-6 py-4 text-center text-rose-500">❌</td>
                                     </tr>
-                                    <tr className="hover:bg-white/[0.03] transition-colors">
-                                        <td className="px-4 py-3 text-slate-300">ตรวจกาลกิณี 7 วัน</td>
-                                        <td className="px-4 py-3 text-center text-emerald-400 font-bold">✅</td>
-                                        <td className="px-4 py-3 text-center text-slate-500">บางเว็บ</td>
+                                    <tr className="hover:bg-[#f3f3f9] transition-colors">
+                                        <td className="px-6 py-4 text-[#1a1a3e]">ตรวจกาลกิณี 7 วัน</td>
+                                        <td className="px-6 py-4 text-center text-emerald-500 font-bold">✅</td>
+                                        <td className="px-6 py-4 text-center text-[#5a5a82]">บางเว็บ</td>
                                     </tr>
-                                    <tr className="hover:bg-white/[0.03] transition-colors">
-                                        <td className="px-4 py-3 text-slate-300">Export CSV / PDF</td>
-                                        <td className="px-4 py-3 text-center text-emerald-400 font-bold">✅</td>
-                                        <td className="px-4 py-3 text-center text-rose-400">❌</td>
+                                    <tr className="hover:bg-[#f3f3f9] transition-colors">
+                                        <td className="px-6 py-4 text-[#1a1a3e]">Export CSV / PDF</td>
+                                        <td className="px-6 py-4 text-center text-emerald-500 font-bold">✅</td>
+                                        <td className="px-6 py-4 text-center text-rose-500">❌</td>
                                     </tr>
-                                    <tr className="hover:bg-white/[0.03] transition-colors">
-                                        <td className="px-4 py-3 text-slate-300">เรียงลำดับตามความมงคล</td>
-                                        <td className="px-4 py-3 text-center text-emerald-400 font-bold">✅</td>
-                                        <td className="px-4 py-3 text-center text-rose-400">❌</td>
+                                    <tr className="hover:bg-[#f3f3f9] transition-colors">
+                                        <td className="px-6 py-4 text-[#1a1a3e]">เรียงลำดับตามความมงคล</td>
+                                        <td className="px-6 py-4 text-center text-emerald-500 font-bold">✅</td>
+                                        <td className="px-6 py-4 text-center text-rose-500">❌</td>
                                     </tr>
-                                    <tr className="hover:bg-white/[0.03] transition-colors">
-                                        <td className="px-4 py-3 text-slate-300">วิเคราะห์เชิงลึก 4 ศาสตร์ (Premium)</td>
-                                        <td className="px-4 py-3 text-center text-emerald-400 font-bold">✅</td>
-                                        <td className="px-4 py-3 text-center text-rose-400">❌</td>
+                                    <tr className="hover:bg-[#f3f3f9] transition-colors">
+                                        <td className="px-6 py-4 text-[#1a1a3e]">วิเคราะห์เชิงลึก 4 ศาสตร์ (Premium)</td>
+                                        <td className="px-6 py-4 text-center text-emerald-500 font-bold">✅</td>
+                                        <td className="px-6 py-4 text-center text-rose-500">❌</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1019,71 +1019,71 @@ export default function NameAnalysisPage() {
 
                     {/* Auspicious Numbers Section — AEO Direct Answer */}
                     <section className="mt-16 mb-12 max-w-3xl mx-auto">
-                        <h2 className="text-2xl md:text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-fuchsia-300 mb-4">
+                        <h2 className="text-2xl md:text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-fuchsia-500 mb-4">
                             ผลรวมเลขศาสตร์ชื่อเท่าไหร่ถือว่ามงคล?
                         </h2>
-                        <p className="text-center text-slate-400 mb-8 max-w-2xl mx-auto text-sm">
+                        <p className="text-center text-[#5a5a82] mb-8 max-w-2xl mx-auto text-sm">
                             ตามตำราเลขศาสตร์ไทยโบราณ ผลรวมตัวเลขของชื่อที่ถือว่าเป็นมงคล มีทั้งหมด 27 ค่า ดังนี้
                         </p>
                         <div className="flex flex-wrap justify-center gap-2 mb-6">
                             {[9, 14, 15, 19, 24, 36, 40, 41, 42, 44, 45, 46, 50, 51, 54, 55, 56, 59, 60, 63, 64, 65, 90, 91, 92, 95, 99].map(num => (
-                                <span key={num} className="px-3 py-1.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg text-sm font-bold">
+                                <span key={num} className="px-3 py-1.5 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-lg text-sm font-bold shadow-sm">
                                     {num}
                                 </span>
                             ))}
                         </div>
-                        <p className="text-center text-slate-500 text-xs">
+                        <p className="text-center text-[#8e8eaa] text-xs">
                             ชื่อที่มีผลรวมตรงกับเลขมงคลด้านบน + ไม่มีคู่เลขแดง (🔴) = ได้เกรด A ขึ้นไป
                         </p>
                     </section>
 
                     {/* Internal Links */}
                     <section className="mt-16 mb-12 max-w-4xl mx-auto">
-                        <h2 className="text-2xl font-bold text-center text-slate-300 mb-8">
+                        <h2 className="text-2xl font-bold text-center text-[#1a1a3e] mb-8">
                             บริการอื่นๆ ที่เกี่ยวข้อง
                         </h2>
                         <div className="grid md:grid-cols-2 gap-6">
                             <Link
                                 href="/name-check"
-                                className="group block bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-amber-500/25 hover:bg-white/[0.05] transition-all"
+                                className="group block bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-amber-300 hover:shadow-md hover:bg-[#f8f8fc] transition-all"
                             >
-                                <h3 className="font-semibold text-slate-200 mb-2 group-hover:text-indigo-400 transition-colors">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-2 group-hover:text-indigo-600 transition-colors">
                                     🔮 วิเคราะห์ชื่อ-นามสกุล (ฟรี)
                                 </h3>
-                                <p className="text-slate-400 text-sm">
+                                <p className="text-[#5a5a82] text-sm">
                                     วิเคราะห์ชื่อ+นามสกุลทีละคู่ ดูคะแนนรวม เกรด และคำทำนายตามหลักเลขศาสตร์ ฟรีไม่จำกัด
                                 </p>
                             </Link>
                             <Link
                                 href="/search"
-                                className="group block bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-amber-500/25 hover:bg-white/[0.05] transition-all"
+                                className="group block bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-amber-300 hover:shadow-md hover:bg-[#f8f8fc] transition-all"
                             >
-                                <h3 className="font-semibold text-slate-200 mb-2 group-hover:text-indigo-400 transition-colors">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-2 group-hover:text-indigo-600 transition-colors">
                                     🔍 ค้นหาชื่อมงคล
                                 </h3>
-                                <p className="text-slate-400 text-sm">
+                                <p className="text-[#5a5a82] text-sm">
                                     ค้นหาชื่อมงคลกว่า 5,000 ชื่อ กรองตามวันเกิด เพศ และผลรวมตัวเลขที่ต้องการ
                                 </p>
                             </Link>
                             <Link
                                 href="/premium-analysis"
-                                className="group block bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-amber-500/30 hover:bg-white/[0.05] transition-all"
+                                className="group block bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-amber-400 hover:shadow-md hover:bg-[#f8f8fc] transition-all"
                             >
-                                <h3 className="font-semibold text-slate-200 mb-2 group-hover:text-amber-400 transition-colors">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-2 group-hover:text-amber-500 transition-colors">
                                     💎 วิเคราะห์ชื่อขั้นสูง (Premium)
                                 </h3>
-                                <p className="text-slate-400 text-sm">
+                                <p className="text-[#5a5a82] text-sm">
                                     วิเคราะห์เชิงลึกด้วย AI รวมถึงอายตนะ เงาอำนาจ และ Wallpaper มงคลสำหรับมือถือ
                                 </p>
                             </Link>
                             <Link
                                 href="/phone-analysis"
-                                className="group block bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-amber-500/25 hover:bg-white/[0.05] transition-all"
+                                className="group block bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-6 hover:border-amber-300 hover:shadow-md hover:bg-[#f8f8fc] transition-all"
                             >
-                                <h3 className="font-semibold text-slate-200 mb-2 group-hover:text-indigo-400 transition-colors">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-2 group-hover:text-indigo-600 transition-colors">
                                     📱 เช็คเบอร์มงคลกราฟพลังงาน 6 ด้าน
                                 </h3>
-                                <p className="text-slate-400 text-sm">
+                                <p className="text-[#5a5a82] text-sm">
                                     วิเคราะห์คู่เลข ผลรวม และเกรด A-F เพื่อเช็คว่าเบอร์นี้ส่งเสริมหรือควรเปลี่ยน
                                 </p>
                             </Link>

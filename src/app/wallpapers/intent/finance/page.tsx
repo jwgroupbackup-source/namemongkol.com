@@ -81,10 +81,10 @@ export default function FinanceWallpapersIntentPage() {
             <section className="w-full bg-[#050b14] text-slate-200 px-4 pb-14">
                 <div className="max-w-5xl mx-auto">
                     <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">วอลเปเปอร์เรียกทรัพย์ที่แนะนำ</h2>
-                    <p className="text-slate-400 leading-relaxed mb-5">
+                    <p className="text-slate-300 leading-relaxed mb-5">
                         เน้นคอลเลกชันที่เกี่ยวข้องกับการเงิน เช่น วันพุธกลางวัน, วันศุกร์ และชุดท้าวเวสสุวรรณ เพื่อช่วยย้ำเป้าหมายด้านรายรับและโชคลาภ
                     </p>
-                    <p className="text-slate-400 leading-relaxed mb-5">
+                    <p className="text-slate-300 leading-relaxed mb-5">
                         ถ้าต้องการภาพที่เน้นเป้าการเงินแบบเฉพาะตัวมากขึ้น ลอง{' '}
                         <Link
                             href="/wallpapers/custom"

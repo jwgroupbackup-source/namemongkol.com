@@ -36,7 +36,7 @@ export default function PremiumNameCard({ item, isUnlocked }: NameCardProps) {
     const firstConsonant = getFirstConsonant(item.name) || item.name.charAt(0);
     
     return (
-        <div className="group relative overflow-hidden rounded-2xl border border-slate-700/60 bg-gradient-to-br from-[#1e2538] to-[#121623] p-3.5 sm:p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-amber-400/50 hover:shadow-[0_20px_40px_rgba(245,158,11,0.15)]">
+        <div className="group relative overflow-hidden rounded-2xl border border-[#1e293b] bg-[#0f172a] p-3.5 sm:p-6 shadow-md transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-amber-500/30 hover:shadow-xl">
             {/* Inner Highlight for Premium Feel */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-50" />
             
@@ -50,7 +50,7 @@ export default function PremiumNameCard({ item, isUnlocked }: NameCardProps) {
 
             {/* Lock Overlay Blur */}
             {!isUnlocked && (
-                <div className="absolute inset-0 z-10 bg-[#121623]/50 backdrop-blur-[6px] transition-all" />
+                <div className="absolute inset-0 z-10 bg-[#0f172a]/50 backdrop-blur-[6px] transition-all" />
             )}
 
             <div className="relative z-20 flex flex-col gap-3 sm:gap-4">
@@ -69,7 +69,7 @@ export default function PremiumNameCard({ item, isUnlocked }: NameCardProps) {
 
                 <div className="space-y-2.5 sm:space-y-3">
                     {/* Suitable Days */}
-                    <div className="flex items-start gap-1.5 sm:gap-2 rounded-xl border border-white/10 bg-slate-900/50 p-2 sm:p-2.5">
+                    <div className="flex items-start gap-1.5 sm:gap-2 rounded-xl border border-[#1e293b] bg-slate-900/50 p-2 sm:p-2.5">
                         <Calendar size={14} className="mt-0.5 sm:w-4 sm:h-4 w-3.5 h-3.5 shrink-0 text-slate-400" />
                         <div className="flex flex-wrap gap-1 sm:gap-1.5">
                             {item.suitableDays.map((day: string, i: number) => (

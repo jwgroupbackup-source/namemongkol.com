@@ -18,7 +18,7 @@ export const AuraSeoContent = () => {
                     </span>{' '}
                     ซ่อนอยู่ในชื่อของคุณ
                 </h2>
-                <p className="text-slate-300/80 max-w-3xl mx-auto text-base md:text-lg leading-[1.95]">
+                <p className="text-slate-300 max-w-3xl mx-auto text-base md:text-lg leading-[1.95]">
                     ชื่อไม่ใช่แค่คำเรียก แต่คือ <strong>&quot;พลังงานสั่นสะเทือน&quot;</strong> ที่กำหนดออร่า
                     บุคลิกภาพ และเส้นทางชีวิตของคุณ ทุกครั้งที่มีคนเรียกชื่อคุณ พลังงานนั้นจะส่งผลต่อ
                     <strong className="text-purple-400"> ตัวตน ความสัมพันธ์ อาชีพ และความสำเร็จ</strong> ในทุกมิติ
@@ -32,13 +32,13 @@ export const AuraSeoContent = () => {
                         <Eye className="w-6 h-6 shrink-0" />
                         วิเคราะห์ออร่าจากชื่อคืออะไร?
                     </h3>
-                    <p className="text-slate-300/75 leading-[1.95] mb-4">
+                    <p className="text-slate-300 leading-[1.95] mb-4">
                         <strong>การวิเคราะห์ออร่าจากชื่อ</strong> คือกระบวนการถอดรหัสพลังงานที่ซ่อนอยู่ในทุกตัวอักษรของชื่อ
                         โดยใช้หลักการผสมผสานระหว่าง <strong>จิตวิทยา Archetype</strong> ของ Carl Jung,
                         {' '}<strong>ศาสตร์ตัวเลข (Numerology)</strong> และ{' '}
                         <strong>การวิเคราะห์สัทศาสตร์ (Phonetics)</strong>
                     </p>
-                    <p className="text-slate-300/75 leading-[1.95]">
+                    <p className="text-slate-300 leading-[1.95]">
                         ระบบ AI ของ NameMongkol จะวิเคราะห์ชื่อของคุณผ่านมิติต่าง ๆ เพื่อสะท้อน
                         <strong className="text-purple-300"> บุคลิกภาพ จุดแข็ง จุดอ่อน</strong> และ
                         <strong className="text-purple-300"> เส้นทางชีวิตที่เหมาะสม</strong> ที่สุดสำหรับคุณ
@@ -50,7 +50,7 @@ export const AuraSeoContent = () => {
                         <Brain className="w-6 h-6 shrink-0" />
                         AI วิเคราะห์อะไรบ้าง?
                     </h3>
-                    <p className="text-slate-300/75 leading-[1.95] mb-4">
+                    <p className="text-slate-300 leading-[1.95] mb-4">
                         ระบบ <strong>AI Personality &amp; Name Mirroring</strong> ของ NameMongkol
                         วิเคราะห์ชื่อคุณอย่างครบถ้วนใน <strong>7 มิติหลัก</strong>:
                     </p>
@@ -64,7 +64,7 @@ export const AuraSeoContent = () => {
                         ].map(({ bold, rest }) => (
                             <li key={bold} className="flex items-start gap-2">
                                 <span className="text-violet-400 shrink-0 mt-0.5">✦</span>
-                                <span className="text-slate-300/75">
+                                <span className="text-slate-300">
                                     <strong>{bold}</strong> — {rest}
                                 </span>
                             </li>
@@ -80,7 +80,7 @@ export const AuraSeoContent = () => {
                         🎭 Archetype 12 แบบ
                     </span>
                     <h2 className="text-3xl font-bold text-white mb-4">ชื่อของคุณเป็น Archetype แบบไหน?</h2>
-                    <p className="text-slate-300/80 max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-slate-300 max-w-2xl mx-auto leading-relaxed">
                         ตามทฤษฎี Archetype ของ <strong>Carl Jung</strong>{' '}
                         มนุษย์ทุกคนมีตัวตนหลัก 1 ใน 12 แบบ ชื่อของคุณจะบ่งบอกว่าคุณมีพลังงานแบบใดเป็นหลัก
                     </p>
@@ -109,7 +109,7 @@ export const AuraSeoContent = () => {
                                 <span className="text-2xl">{a.emoji}</span>
                                 <h3 className={`font-bold ${a.nameCls}`}>{a.name}</h3>
                             </div>
-                            <p className="text-sm text-slate-300/70 leading-relaxed">{a.desc}</p>
+                            <p className="text-sm text-slate-300 leading-relaxed">{a.desc}</p>
                         </div>
                     ))}
                 </div>
@@ -121,7 +121,7 @@ export const AuraSeoContent = () => {
                     <h2 className="text-3xl font-bold text-white mb-4">
                         วิเคราะห์ออร่าจากชื่อ ช่วยคุณได้อย่างไร?
                     </h2>
-                    <p className="text-slate-300/80 max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-slate-300 max-w-2xl mx-auto leading-relaxed">
                         ผลวิเคราะห์จะช่วยให้คุณเข้าใจตัวเองลึกซึ้งขึ้น และนำไปใช้ในชีวิตจริงได้ทันที
                     </p>
                 </div>
@@ -139,7 +139,7 @@ export const AuraSeoContent = () => {
                                 {b.icon}
                             </div>
                             <h3 className="font-bold text-lg text-white mb-2">{b.title}</h3>
-                            <p className="text-sm text-slate-300/70 leading-relaxed">{b.desc}</p>
+                            <p className="text-sm text-slate-300 leading-relaxed">{b.desc}</p>
                         </div>
                     ))}
                 </div>
@@ -164,7 +164,7 @@ export const AuraSeoContent = () => {
                                 {s.n}
                             </div>
                             <h3 className="font-bold text-white mb-2">{s.title}</h3>
-                            <p className="text-sm text-slate-300/70 leading-relaxed">{s.desc}</p>
+                            <p className="text-sm text-slate-300 leading-relaxed">{s.desc}</p>
                         </div>
                     ))}
                 </div>
@@ -210,7 +210,7 @@ export const AuraSeoContent = () => {
                                 <span className="text-3xl">{u.emoji}</span>
                             </div>
                             <h3 className={`text-xl font-bold mb-3 ${u.titleCls}`}>{u.title}</h3>
-                            <p className="text-sm text-slate-300/70 leading-relaxed">{u.desc}</p>
+                            <p className="text-sm text-slate-300 leading-relaxed">{u.desc}</p>
                         </div>
                     ))}
                 </div>
@@ -223,7 +223,7 @@ export const AuraSeoContent = () => {
                         🔬 หลักการวิเคราะห์
                     </span>
                     <h2 className="text-3xl font-bold text-white mb-4">AI ใช้หลักการอะไรในการวิเคราะห์?</h2>
-                    <p className="text-slate-300/80 max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-slate-300 max-w-2xl mx-auto leading-relaxed">
                         การวิเคราะห์ออร่าจากชื่อของ NameMongkol ไม่ใช่การสุ่ม แต่ใช้ทฤษฎีที่ได้รับการยอมรับ
                     </p>
                 </div>
@@ -239,7 +239,7 @@ export const AuraSeoContent = () => {
                                 <span className="text-2xl">{m.emoji}</span>
                             </div>
                             <h3 className="font-bold text-white mb-2">{m.title}</h3>
-                            <p className="text-sm text-slate-300/70 leading-relaxed">{m.desc}</p>
+                            <p className="text-sm text-slate-300 leading-relaxed">{m.desc}</p>
                         </div>
                     ))}
                 </div>
@@ -257,9 +257,9 @@ export const AuraSeoContent = () => {
                     <table className="w-full text-sm border-collapse">
                         <thead>
                             <tr className="border-b border-slate-700 bg-slate-800/40">
-                                <th className="text-left py-3 px-4 text-slate-400 font-semibold">ฟีเจอร์</th>
+                                <th className="text-left py-3 px-4 text-slate-300 font-semibold">ฟีเจอร์</th>
                                 <th className="text-center py-3 px-4 text-purple-400 font-bold">NameMongkol</th>
-                                <th className="text-center py-3 px-4 text-slate-400 font-semibold">เว็บทั่วไป</th>
+                                <th className="text-center py-3 px-4 text-slate-300 font-semibold">เว็บทั่วไป</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-800">
@@ -276,8 +276,8 @@ export const AuraSeoContent = () => {
                                 <tr key={String(feat)} className="hover:bg-slate-800/20 transition-colors">
                                     <td className="py-3 px-4 text-slate-300">{feat as string}</td>
                                     <td className="py-3 px-4 text-center text-emerald-400 font-bold">{nm ? '✅' : '❌'}</td>
-                                    <td className="py-3 px-4 text-center text-slate-500">
-                                        {typeof other === 'string' ? <span className="text-slate-400">{other}</span> : other ? '✅' : '❌'}
+                                    <td className="py-3 px-4 text-center text-slate-400">
+                                        {typeof other === 'string' ? <span className="text-slate-300">{other}</span> : other ? '✅' : '❌'}
                                     </td>
                                 </tr>
                             ))}
@@ -325,7 +325,7 @@ export const AuraSeoContent = () => {
                     ].map((faq) => (
                         <div key={faq.q} className="bg-slate-900/60 border border-white/5 backdrop-blur-sm p-5 md:p-6 rounded-2xl">
                             <h3 className="font-bold text-white text-base mb-2">{faq.q}</h3>
-                            <p className="text-sm text-slate-300/70 leading-relaxed">{faq.a}</p>
+                            <p className="text-sm text-slate-300 leading-relaxed">{faq.a}</p>
                         </div>
                     ))}
                 </div>
@@ -356,7 +356,7 @@ export const AuraSeoContent = () => {
 
             {/* ── Trust Indicators ── */}
             <div className="text-center pt-4 border-t border-white/5">
-                <div className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-slate-300/70">
+                <div className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-slate-300">
                     <div className="flex items-center gap-2">
                         <Award className="w-5 h-5 text-purple-400 shrink-0" />
                         <span>วิเคราะห์แล้วกว่า <strong className="text-white">50,000+</strong> ชื่อ</span>

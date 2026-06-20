@@ -448,7 +448,7 @@ function ArticleEnhancementBlock({ article }: { article: Article }) {
     return (
         <section
             aria-labelledby="article-summary-heading"
-            className="article-direct-answer not-prose mb-10 rounded-2xl border border-white/10 bg-slate-950/70 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.32)] sm:p-6"
+            className="article-direct-answer not-prose mb-10 rounded-2xl border border-[#1e293b] bg-[#0f172a] p-4 shadow-xl sm:p-6"
         >
             <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
                 <div className="flex flex-col justify-between">
@@ -467,9 +467,9 @@ function ArticleEnhancementBlock({ article }: { article: Article }) {
 
                     <ul className="mt-5 grid gap-3">
                         {takeaways.map((item) => (
-                            <li key={item} className="flex gap-3 rounded-xl border border-white/5 bg-white/[0.03] p-3">
-                                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
-                                <span className="text-sm leading-relaxed text-slate-200">{item}</span>
+                            <li key={item} className="flex gap-3 rounded-xl border border-[#1e293b] bg-white/[0.03] p-3">
+                                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
+                                <span className="text-sm leading-relaxed text-slate-300">{item}</span>
                             </li>
                         ))}
                     </ul>
@@ -501,10 +501,10 @@ function ArticleEnhancementBlock({ article }: { article: Article }) {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="group rounded-xl border border-white/10 bg-white/[0.03] p-4 transition hover:-translate-y-0.5 hover:border-amber-300/30 hover:bg-white/[0.06]"
+                            className="group rounded-xl border border-[#1e293b] bg-white/[0.03] p-4 transition hover:-translate-y-0.5 hover:border-amber-500/30 hover:bg-white/[0.06] shadow-sm"
                         >
-                            <span className="text-sm font-bold text-white group-hover:text-amber-200">{link.title}</span>
-                            <span className="mt-1 block text-xs leading-relaxed text-slate-400">{link.description}</span>
+                            <span className="text-sm font-bold text-white group-hover:text-amber-400">{link.title}</span>
+                            <span className="mt-1 block text-xs leading-relaxed text-slate-300">{link.description}</span>
                         </Link>
                     ))}
                 </div>
@@ -719,7 +719,7 @@ export default async function ArticlePage({ params }: Props) {
     } : null;
 
     return (
-        <div className="min-h-screen bg-[#050711] text-slate-100 font-sans selection:bg-amber-500 selection:text-[#050711] relative overflow-hidden pb-28">
+        <div className="min-h-screen bg-[#f8f8fc] text-[#5a5a82] font-sans selection:bg-amber-500 selection:text-[#050711] relative overflow-hidden pb-28">
             {/* Background Decor */}
             <div className="absolute top-0 left-0 w-full h-[600px] overflow-hidden pointer-events-none">
                 <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#c9933a]/5 rounded-full blur-[120px]"></div>
@@ -862,25 +862,25 @@ export default async function ArticlePage({ params }: Props) {
             <main className="w-full max-w-[1400px] px-4 pb-8 relative z-10 pt-28 md:pt-32">
                 <div className={isWideMediaArticle ? "mx-auto max-w-[1040px]" : "max-w-3xl mx-auto"}>
                     {/* Breadcrumb Navigation */}
-                    <nav className="mb-6 text-sm text-slate-400" aria-label="Breadcrumb">
+                    <nav className="mb-6 text-sm text-[#5a5a82]" aria-label="Breadcrumb">
                         <ol className="flex items-center gap-2 flex-wrap">
-                            <li><Link href="/" className="hover:text-white transition-colors">หน้าหลัก</Link></li>
-                            <li className="text-slate-600">/</li>
-                            <li><Link href="/articles" className="hover:text-white transition-colors">บทความ</Link></li>
-                            <li className="text-slate-600">/</li>
-                            <li className="text-purple-400 font-medium truncate max-w-[200px] md:max-w-none">{article.title}</li>
+                            <li><Link href="/" className="hover:text-[#1a1a3e] transition-colors">หน้าหลัก</Link></li>
+                            <li className="text-slate-500">/</li>
+                            <li><Link href="/articles" className="hover:text-[#1a1a3e] transition-colors">บทความ</Link></li>
+                            <li className="text-slate-500">/</li>
+                            <li className="text-amber-600 font-medium truncate max-w-[200px] md:max-w-none">{article.title}</li>
                         </ol>
                     </nav>
 
                     {/* Back Link */}
-                    <Link href="/articles" className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white mb-8 px-4 py-2 rounded-full bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group backdrop-blur-sm w-fit">
-                        <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform text-amber-500/70" />
+                    <Link href="/articles" className="inline-flex items-center gap-1.5 text-xs text-slate-200 hover:text-amber-400 mb-8 px-4 py-2 rounded-full bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/30 transition-all group shadow-sm w-fit">
+                        <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform text-amber-400" />
                         <span>บทความทั้งหมด</span>
                     </Link>
 
                     {/* Meta */}
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400 mb-6 font-medium">
-                        <span className="px-3 py-1 bg-white/5 text-amber-400 rounded-full border border-white/5 inline-flex items-center gap-1.5 shadow-[0_0_15px_rgba(201,147,58,0.1)]">
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-[#5a5a82] mb-6 font-medium">
+                        <span className="px-3 py-1 bg-[#0f172a] text-amber-400 rounded-full border border-[#1e293b] inline-flex items-center gap-1.5 shadow-sm">
                             <Tag size={12} />
                             {article.category}
                         </span>
@@ -889,7 +889,7 @@ export default async function ArticlePage({ params }: Props) {
                             <span>เผยแพร่: {formatThaiDate(article.date)}</span>
                         </div>
                         {hasBeenModified && (
-                            <div className="flex items-center gap-2 text-emerald-400/80">
+                            <div className="flex items-center gap-2 text-emerald-600">
                                 <RefreshCw size={12} />
                                 <span>อัปเดต: {formatThaiDate(article.dateModified!)}</span>
                             </div>
@@ -905,7 +905,7 @@ export default async function ArticlePage({ params }: Props) {
                     </div>
 
                     {/* Title */}
-                    <h1 className="text-3xl md:text-5xl font-bold mb-8 leading-tight text-white tracking-tight">
+                    <h1 className="text-3xl md:text-5xl font-bold mb-8 leading-tight text-[#1a1a3e] tracking-tight">
                         {article.title}
                     </h1>
 
@@ -929,10 +929,10 @@ export default async function ArticlePage({ params }: Props) {
 
                     {/* Table of Contents — enhanced with numbered sections for long articles */}
                     {effectiveToc && effectiveToc.length > 0 && (
-                        <nav className="bg-white/5 backdrop-blur-md rounded-2xl p-6 mb-10 border border-white/5" aria-label="สารบัญบทความ">
+                        <nav className="bg-[#0f172a] rounded-2xl p-6 mb-10 border border-[#1e293b] shadow-md" aria-label="สารบัญบทความ">
                             <h2 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
                                 <span className="text-xl opacity-80">📖</span> สารบัญ
-                                <span className="text-xs font-normal text-slate-500 ml-auto">{effectiveToc.filter(t => t.level === 2).length} หัวข้อหลัก</span>
+                                <span className="text-xs font-normal text-slate-400 ml-auto">{effectiveToc.filter(t => t.level === 2).length} หัวข้อหลัก</span>
                             </h2>
                             <ul className="space-y-2">
                                 {(() => {
@@ -960,8 +960,9 @@ export default async function ArticlePage({ params }: Props) {
                     <ArticleEnhancementBlock article={articleWithEffectiveEnhancements} />
 
                     {/* Content */}
-                    <article className={`${isWideMediaArticle ? "prose-headings:max-w-3xl prose-headings:mx-auto prose-p:max-w-3xl prose-p:mx-auto prose-ul:max-w-3xl prose-ul:mx-auto prose-ol:max-w-3xl prose-ol:mx-auto prose-blockquote:max-w-3xl prose-blockquote:mx-auto" : ""} prose prose-invert prose-lg max-w-none text-slate-300`}>
-                        <p className="lead rounded-2xl border border-amber-400/20 bg-amber-400/10 p-4 text-xl font-light text-slate-100">
+                    {/* Content */}
+                    <article className={`${isWideMediaArticle ? "prose-headings:max-w-3xl prose-headings:mx-auto prose-p:max-w-3xl prose-p:mx-auto prose-ul:max-w-3xl prose-ul:mx-auto prose-ol:max-w-3xl prose-ol:mx-auto prose-blockquote:max-w-3xl prose-blockquote:mx-auto" : ""} prose prose-lg max-w-none text-[#5a5a82] prose-headings:text-[#1a1a3e] prose-a:text-amber-600 prose-strong:text-[#1a1a3e] prose-blockquote:border-amber-400 prose-blockquote:bg-amber-50 prose-blockquote:not-italic prose-blockquote:py-1 prose-blockquote:text-[#1a1a3e]`}>
+                        <p className="lead rounded-2xl border border-amber-500/30 bg-amber-50 p-5 text-xl font-medium text-[#1a1a3e] shadow-sm leading-relaxed">
                             {article.excerpt}
                         </p>
                         <div dangerouslySetInnerHTML={{
@@ -980,24 +981,24 @@ export default async function ArticlePage({ params }: Props) {
                     {/* FAQ Section — renders when article has faqItems */}
                     {effectiveFaqItems.length > 0 && (
                         <section id="faq-section" className="mt-14 scroll-mt-24">
-                            <h2 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                            <h2 className="text-2xl font-bold text-[#1a1a3e] mb-8 flex items-center gap-3">
                                 <span className="text-3xl opacity-80">❓</span> คำถามที่พบบ่อย (FAQ)
                             </h2>
                             <div className="space-y-4">
                                 {effectiveFaqItems.map((item, index) => (
                                     <details
                                         key={index}
-                                        className="group bg-white/5 border border-white/5 rounded-2xl overflow-hidden hover:border-white/10 transition-all"
+                                        className="group bg-[#0f172a] border border-[#1e293b] rounded-2xl overflow-hidden hover:border-amber-500/30 transition-all shadow-sm"
                                         {...(index < 3 ? { open: true } : {})}
                                     >
                                         <summary className="flex items-start gap-3 p-6 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden">
-                                            <span className="w-6 h-6 text-amber-500 rounded text-xs flex items-center justify-center flex-shrink-0 font-bold mt-0.5 border border-amber-500/20">{index + 1}</span>
+                                            <span className="w-6 h-6 text-amber-400 rounded text-xs flex items-center justify-center flex-shrink-0 font-bold mt-0.5 border border-amber-500/20">{index + 1}</span>
                                             <span className="text-white font-medium leading-snug flex-1">{item.question}</span>
-                                            <span className="text-slate-500 group-open:rotate-180 transition-transform duration-200 flex-shrink-0 mt-0.5">
+                                            <span className="text-slate-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0 mt-0.5">
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                                             </span>
                                         </summary>
-                                        <div className="px-6 pb-6 pt-0 text-slate-300 text-sm leading-relaxed border-t border-white/5 mt-0 pt-4">
+                                        <div className="px-6 pb-6 pt-0 text-slate-300 text-sm leading-relaxed border-t border-[#1e293b] mt-0 pt-4">
                                             {item.answer}
                                         </div>
                                     </details>
@@ -1008,10 +1009,10 @@ export default async function ArticlePage({ params }: Props) {
 
                     {/* Tags */}
                     {article.keywords && article.keywords.length > 0 && (
-                        <div className="mt-10 pt-6 border-t border-white/10">
+                        <div className="mt-10 pt-6 border-t border-slate-200">
                             <div className="flex flex-wrap gap-2">
                                 {article.keywords.map((keyword: string) => (
-                                    <span key={keyword} className="bg-slate-800 text-slate-400 text-xs px-2 py-1 rounded hover:bg-slate-700 transition-colors cursor-default">
+                                    <span key={keyword} className="bg-[#0f172a] text-slate-300 border border-[#1e293b] text-xs px-3 py-1 rounded-full hover:border-amber-500/30 transition-all cursor-default shadow-sm">
                                         #{keyword}
                                     </span>
                                 ))}
@@ -1021,8 +1022,8 @@ export default async function ArticlePage({ params }: Props) {
 
                     {/* Palm Analysis CTA — palmistry article specific */}
                     {isPalmistryArticle && (
-                        <div className="mt-10 p-8 bg-white/5 border border-[#c9933a]/20 rounded-2xl text-center backdrop-blur-md relative overflow-hidden">
-                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#c9933a]/10 via-transparent to-transparent pointer-events-none"></div>
+                        <div className="mt-10 p-8 bg-[#0f172a] border border-[#1e293b] rounded-2xl text-center shadow-md relative overflow-hidden">
+                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
                             <h3 className="text-xl font-bold text-white mb-3 relative z-10">อยากลองวิเคราะห์ลายมือของคุณด้วย AI?</h3>
                             <p className="text-slate-300 text-sm mb-6 max-w-lg mx-auto relative z-10">ระบบ AI ของ NameMongkol อ่านเส้นชีวิต เส้นสมอง เส้นหัวใจ และเส้นวาสนา พร้อมให้คำแนะนำเชิงสร้างสรรค์</p>
                             <Link href="/palm-analysis" className="inline-block px-8 py-3.5 bg-[#c9933a] hover:bg-[#d4a54e] text-white font-bold rounded-xl transition-all shadow-[0_0_24px_rgba(245,158,11,0.22)] hover:shadow-[0_0_32px_rgba(245,158,11,0.30)] hover:-translate-y-0.5 relative z-10">วิเคราะห์ลายมือฟรีที่นี่</Link>
@@ -1032,29 +1033,29 @@ export default async function ArticlePage({ params }: Props) {
                     {/* Aura Vibe Widget removed — single instance at mid-article is sufficient */}
 
                     {/* Author Bio Card — EEAT signal */}
-                    <section className="mt-12 bg-white/5 backdrop-blur-md border border-white/5 rounded-2xl p-8 flex flex-col md:flex-row items-start gap-6">
+                    <section className="mt-12 bg-[#0f172a] border border-[#1e293b] rounded-2xl p-8 flex flex-col md:flex-row items-start gap-6 shadow-md">
                         <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">
                             👨‍🏫
                         </div>
                         <div className="flex-1">
                             <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
                                 {article.author}
-                                <Award size={16} className="text-[#c9933a]" />
+                                <Award size={16} className="text-amber-400" />
                             </h3>
-                            <p className="text-slate-400 text-sm leading-relaxed mb-5 max-w-2xl">
+                            <p className="text-slate-300 text-sm leading-relaxed mb-5 max-w-2xl">
                                 นักวิเคราะห์ชื่อมงคลและเลขศาสตร์ ผู้เชี่ยวชาญด้านทักษาปกรณ์ เลขศาสตร์ไทย และโหราศาสตร์
                                 ประสบการณ์วิเคราะห์ชื่อมากกว่า 150,000 ชื่อผ่านระบบ NameMongkol
                                 อ้างอิงตำราทักษาปกรณ์ฉบับราชบัณฑิต และหลักเลขศาสตร์สากล
                             </p>
                             <div className="flex flex-wrap gap-3">
                                 <Link href="/about" className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
-                                    <BookOpen size={12} className="text-[#c9933a]" /> เกี่ยวกับผู้เขียน
+                                    <BookOpen size={12} className="text-amber-400" /> เกี่ยวกับผู้เขียน
                                 </Link>
                                 <Link href="/name-check" className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
-                                    <ExternalLink size={12} className="text-[#c9933a]" /> วิเคราะห์ชื่อฟรี
+                                    <ExternalLink size={12} className="text-amber-400" /> วิเคราะห์ชื่อฟรี
                                 </Link>
                                 <Link href="/reviews" className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
-                                    <Star size={12} className="text-[#c9933a]" /> ดูรีวิวผู้ใช้งาน
+                                    <Star size={12} className="text-amber-400" /> ดูรีวิวผู้ใช้งาน
                                 </Link>
                             </div>
                         </div>
@@ -1063,10 +1064,10 @@ export default async function ArticlePage({ params }: Props) {
                     {/* Mandatory CTA — ตาม Checklist */}
                     <div className="hidden">
                         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#c9933a]/10 via-transparent to-transparent pointer-events-none"></div>
-                        <p className="text-2xl md:text-3xl font-bold text-white mb-4 relative z-10 tracking-tight">
+                        <p className="text-2xl md:text-3xl font-bold text-[#1a1a3e] mb-4 relative z-10 tracking-tight">
                             อยากรู้ว่าชื่อของคุณดีแค่ไหน?
                         </p>
-                        <p className="text-slate-300 mb-8 max-w-lg mx-auto relative z-10">
+                        <p className="text-[#5a5a82] mb-8 max-w-lg mx-auto relative z-10">
                             วิเคราะห์ครบ 4 ศาสตร์: เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6 และกาลกิณี
                         </p>
                         <Link
@@ -1078,21 +1079,21 @@ export default async function ArticlePage({ params }: Props) {
                     </div>
 
                     {/* CTA Section */}
-                    <div className="mt-8 pt-8 border-t border-white/10">
-                        <h3 className="text-xl font-bold text-white mb-4">บริการอื่นๆ ของเรา</h3>
+                    <div className="mt-8 pt-8 border-t border-slate-200">
+                        <h3 className="text-xl font-bold text-[#1a1a3e] mb-4">บริการอื่นๆ ของเรา</h3>
                         <ArticleCTA />
                     </div>
 
                     {/* Share */}
-                    <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between">
-                        <span className="text-slate-400 font-medium">แชร์บทความนี้</span>
+                    <div className="mt-6 pt-6 border-t border-slate-200 flex items-center justify-between">
+                        <span className="text-[#5a5a82] font-medium">แชร์บทความนี้</span>
                         <ArticleShareButtons title={article.title} slug={article.slug} />
                     </div>
 
                     {/* Related Articles Section */}
                     {relatedArticles.length > 0 && (
-                        <section className="mt-14 pt-10 border-t border-white/5">
-                            <h3 className="text-xl font-bold text-white mb-8 flex items-center gap-3">
+                        <section className="mt-14 pt-10 border-t border-slate-200">
+                            <h3 className="text-xl font-bold text-[#1a1a3e] mb-8 flex items-center gap-3">
                                 <span className="text-2xl opacity-80">📚</span>
                                 บทความที่เกี่ยวข้อง
                             </h3>
@@ -1101,7 +1102,7 @@ export default async function ArticlePage({ params }: Props) {
                                     <Link
                                         key={related.slug}
                                         href={`/articles/${related.slug}`}
-                                        className="group bg-white/5 border border-white/5 rounded-2xl overflow-hidden hover:border-white/10 hover:bg-white/10 transition-all hover:-translate-y-1"
+                                        className="group bg-[#0f172a] border border-[#1e293b] rounded-2xl overflow-hidden hover:border-amber-500/30 hover:-translate-y-1 hover:shadow-xl shadow-md transition-all flex flex-col"
                                     >
                                         <div className="h-40 w-full bg-[#0a0f1d] relative overflow-hidden p-2">
                                             <ArticleImage
@@ -1127,28 +1128,28 @@ export default async function ArticlePage({ params }: Props) {
                     )}
 
                     {/* SEO Bottom Content */}
-                    <section className="mt-14 pt-10 border-t border-white/5 bg-white/5 rounded-2xl p-8 backdrop-blur-sm">
-                        <h3 className="text-lg font-bold text-[#c9933a] mb-4">เกี่ยวกับ NameMongkol</h3>
-                        <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                            <strong className="text-slate-300 font-medium">NameMongkol</strong> คือเว็บไซต์วิเคราะห์ชื่อมงคลอันดับ 1 ของไทย
-                            ใช้ระบบ AI ผสานศาสตร์โบราณ ครอบคลุม <strong className="text-slate-300 font-medium">เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6</strong>
-                            และ <strong className="text-slate-300 font-medium">อักษรกาลกิณี</strong>
+                    <section className="mt-14 pt-8 border-t border-slate-200 bg-white rounded-2xl p-8 shadow-sm">
+                        <h3 className="text-lg font-bold text-[#1a1a3e] mb-4">เกี่ยวกับ NameMongkol</h3>
+                        <p className="text-[#5a5a82] text-sm leading-relaxed mb-6">
+                            <strong className="text-[#1a1a3e] font-medium">NameMongkol</strong> คือเว็บไซต์วิเคราะห์ชื่อมงคลอันดับ 1 ของไทย
+                            ใช้ระบบ AI ผสานศาสตร์โบราณ ครอบคลุม <strong className="text-[#1a1a3e] font-medium">เลขศาสตร์ ทักษาปกรณ์ อายตนะ 6</strong>
+                            และ <strong className="text-[#1a1a3e] font-medium">อักษรกาลกิณี</strong>
                             ให้บริการทั้งวิเคราะห์ชื่อฟรีและค้นหาชื่อมงคล Premium พร้อมวอลเปเปอร์มงคลเสริมดวง
                         </p>
                         <div className="flex flex-wrap gap-2">
-                            <Link href="/name-check" className="text-xs bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:border-white/20 transition-all">
+                            <Link href="/name-check" className="text-xs bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/30 px-4 py-2 rounded-full text-slate-200 hover:text-amber-400 transition-all shadow-sm">
                                 เช็คชื่อมงคลฟรี
                             </Link>
-                            <Link href="/premium-search" className="text-xs bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:border-white/20 transition-all">
+                            <Link href="/premium-search" className="text-xs bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/30 px-4 py-2 rounded-full text-slate-200 hover:text-amber-400 transition-all shadow-sm">
                                 ค้นหาชื่อมงคล Premium
                             </Link>
-                            <Link href="/phone-analysis" className="text-xs bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:border-white/20 transition-all">
+                            <Link href="/phone-analysis" className="text-xs bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/30 px-4 py-2 rounded-full text-slate-200 hover:text-amber-400 transition-all shadow-sm">
                                 วิเคราะห์เบอร์มงคล
                             </Link>
-                            <Link href="/wallpapers" className="text-xs bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:border-white/20 transition-all">
+                            <Link href="/wallpapers" className="text-xs bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/30 px-4 py-2 rounded-full text-slate-200 hover:text-amber-400 transition-all shadow-sm">
                                 วอลเปเปอร์มงคล
                             </Link>
-                            <Link href="/articles" className="text-xs bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:border-white/20 transition-all">
+                            <Link href="/articles" className="text-xs bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/30 px-4 py-2 rounded-full text-slate-200 hover:text-amber-400 transition-all shadow-sm">
                                 บทความทั้งหมด
                             </Link>
                         </div>

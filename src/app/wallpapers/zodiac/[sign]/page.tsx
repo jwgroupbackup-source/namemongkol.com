@@ -136,10 +136,10 @@ export default async function ZodiacWallpapersPage({ params }: Props) {
                     <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
                         {`วอลเปเปอร์มงคล${meta.label} เสริมดวงตามราศี`}
                     </h2>
-                    <p className="text-slate-400 leading-relaxed mb-6">
+                    <p className="text-slate-300 leading-relaxed mb-6">
                         {`สำหรับผู้ที่ต้องการวอลเปเปอร์มงคลตามราศีแบบเฉพาะเจาะจง หน้านี้รวบรวมดีไซน์ที่เชื่อมโยงกับพลังเด่นของ${meta.label} เพื่อใช้เสริมโฟกัสในเรื่องที่ต้องการผลักดัน`}
                     </p>
-                    <p className="text-slate-400 leading-relaxed mb-6">
+                    <p className="text-slate-300 leading-relaxed mb-6">
                         ถ้าต้องการปรับภาพให้เข้ากับเป้าหมายเฉพาะช่วงชีวิตของ{meta.label} เช่น {customCta.focusCopy} ลอง{' '}
                         <Link
                             href="/wallpapers/custom"

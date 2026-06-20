@@ -149,11 +149,11 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ result, day }) => {
                     className={`
                     relative z-10 w-full py-3 px-6 rounded-xl 
                     flex items-center justify-center gap-2 
-                    text-white font-medium shadow-lg shadow-amber-500/20 
+                    font-medium shadow-sm
                     transition-all duration-300
                     ${isOpen
-                            ? 'bg-amber-500'
-                            : 'bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300'
+                            ? 'bg-amber-500 text-white'
+                            : 'bg-white hover:bg-[#f8f8fc] border border-[#ddddf0] text-[#1a1a3e]'
                         }
                 `}
                 >

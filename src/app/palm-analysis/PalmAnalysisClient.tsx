@@ -292,15 +292,15 @@ export default function PalmAnalysisClient() {
       if (!user) {
         const authResult = await Swal.fire({
           title: '🔒 กรุณาเข้าสู่ระบบ',
-          html: '<p style="color:#94a3b8">คุณต้องเข้าสู่ระบบก่อนจึงจะใช้งานวิเคราะห์ลายมือได้</p>',
+          html: '<p style="color:#cbd5e1">คุณต้องเข้าสู่ระบบก่อนจึงจะใช้งานวิเคราะห์ลายมือได้</p>',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonText: 'เข้าสู่ระบบ',
           cancelButtonText: 'ยกเลิก',
-          background: '#1e293b',
-          color: '#fff',
-          confirmButtonColor: '#d97706',
-          customClass: { popup: 'rounded-2xl border border-amber-500/20' },
+          background: '#ffffff',
+          color: '#1a1a3e',
+          confirmButtonColor: '#f59e0b',
+          customClass: { popup: 'rounded-2xl border border-[#ddddf0] shadow-xl' },
         });
         if (authResult.isConfirmed) {
           router.push('/login?redirect=/palm-analysis');
@@ -315,15 +315,15 @@ export default function PalmAnalysisClient() {
       if (latestCredits.total < PALM_ANALYSIS_COST) {
         const topupResult = await Swal.fire({
           title: '💰 เครดิตไม่เพียงพอ',
-          html: `<p style="color:#94a3b8">การวิเคราะห์ลายมือใช้ <strong style="color:#fbbf24">${PALM_ANALYSIS_COST} เครดิต</strong></p><p style="color:#94a3b8;margin-top:4px">คุณมี <strong style="color:#ef4444">${latestCredits.total} เครดิต</strong></p>`,
+          html: `<p style="color:#cbd5e1">การวิเคราะห์ลายมือใช้ <strong style="color:#fbbf24">${PALM_ANALYSIS_COST} เครดิต</strong></p><p style="color:#cbd5e1;margin-top:4px">คุณมี <strong style="color:#ef4444">${latestCredits.total} เครดิต</strong></p>`,
           icon: 'error',
           showCancelButton: true,
           confirmButtonText: 'เติมเครดิต',
           cancelButtonText: 'ยกเลิก',
-          background: '#1e293b',
-          color: '#fff',
-          confirmButtonColor: '#d97706',
-          customClass: { popup: 'rounded-2xl border border-amber-500/20' },
+          background: '#ffffff',
+          color: '#1a1a3e',
+          confirmButtonColor: '#f59e0b',
+          customClass: { popup: 'rounded-2xl border border-[#ddddf0] shadow-xl' },
         });
         if (topupResult.isConfirmed) {
           router.push('/topup');
@@ -334,15 +334,15 @@ export default function PalmAnalysisClient() {
       // Step 3: Confirmation
       const confirmResult = await Swal.fire({
         title: '✨ ยืนยันการวิเคราะห์',
-        html: `<p style="color:#94a3b8">การวิเคราะห์ลายมือจะใช้ <strong style="color:#fbbf24">${PALM_ANALYSIS_COST} เครดิต</strong></p><p style="color:#94a3b8;margin-top:4px">คุณมี <strong style="color:#34d399">${latestCredits.total} เครดิต</strong> (คงเหลือ ${latestCredits.total - PALM_ANALYSIS_COST} เครดิต)</p>`,
+        html: `<p style="color:#cbd5e1">การวิเคราะห์ลายมือจะใช้ <strong style="color:#fbbf24">${PALM_ANALYSIS_COST} เครดิต</strong></p><p style="color:#cbd5e1;margin-top:4px">คุณมี <strong style="color:#34d399">${latestCredits.total} เครดิต</strong> (คงเหลือ ${latestCredits.total - PALM_ANALYSIS_COST} เครดิต)</p>`,
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: `ยืนยัน (ใช้ ${PALM_ANALYSIS_COST} เครดิต)`,
         cancelButtonText: 'ยกเลิก',
-        background: '#1e293b',
-        color: '#fff',
-        confirmButtonColor: '#d97706',
-        customClass: { popup: 'rounded-2xl border border-amber-500/20' },
+        background: '#ffffff',
+        color: '#1a1a3e',
+        confirmButtonColor: '#f59e0b',
+        customClass: { popup: 'rounded-2xl border border-[#ddddf0] shadow-xl' },
       });
       if (!confirmResult.isConfirmed) return;
 
@@ -353,9 +353,9 @@ export default function PalmAnalysisClient() {
           title: 'เกิดข้อผิดพลาด',
           text: 'ไม่สามารถหักเครดิตได้ กรุณาลองใหม่',
           icon: 'error',
-          background: '#1e293b',
-          color: '#fff',
-          customClass: { popup: 'rounded-2xl' },
+          background: '#ffffff',
+          color: '#1a1a3e',
+          customClass: { popup: 'rounded-2xl border border-[#ddddf0] shadow-xl' },
         });
         return;
       }
@@ -466,7 +466,7 @@ export default function PalmAnalysisClient() {
         />
         
         {error && (
-          <div className="mt-4 p-4 bg-red-900/40 border border-red-800 rounded-xl text-red-200 text-center text-sm backdrop-blur-sm" role="alert" aria-live="assertive">
+          <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-center text-sm shadow-sm" role="alert" aria-live="assertive">
             {error === 'QUOTA' ? (
               <div className="flex flex-col items-center gap-3">
                 <p>ระบบมีผู้ใช้งานจำนวนมากในขณะนี้ กรุณารอสักครู่แล้วลองใหม่</p>

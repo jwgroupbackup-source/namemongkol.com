@@ -6,14 +6,14 @@ export const PhoneFAQSection = () => {
         <section id="phone-faq" className="py-16 md:py-24 relative overflow-hidden">
             <div className="container mx-auto px-4 relative z-10 max-w-5xl">
                 <div className="text-center mb-12">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-slate-400 text-sm mb-4">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-[#ddddf0] text-[#5a5a82] text-sm mb-4">
                         <HelpCircle size={16} />
                         <span>คำถามที่พบบ่อย</span>
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                        ไขข้อสงสัยเรื่อง <span className="text-amber-400 drop-shadow-[0_0_15px_rgba(251,191,36,0.2)]">เบอร์มงคล</span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a3e] mb-4">
+                        ไขข้อสงสัยเรื่อง <span className="text-amber-500">เบอร์มงคล</span>
                     </h2>
-                    <p className="text-slate-400 max-w-2xl mx-auto">
+                    <p className="text-[#5a5a82] max-w-2xl mx-auto">
                         รวบรวมคำถามยอดฮิตเกี่ยวกับการวิเคราะห์เบอร์โทรศัพท์มงคล เพื่อช่วยให้คุณเข้าใจศาสตร์แห่งตัวเลขได้ดียิ่งขึ้น
                     </p>
                 </div>
@@ -67,20 +67,20 @@ export const PhoneFAQSection = () => {
             </div>
 
             {/* Background Gradients */}
-            <div className="absolute top-1/2 left-0 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2 pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl translate-y-1/2 translate-x-1/2 pointer-events-none" />
+            <div className="absolute top-1/2 left-0 w-64 h-64 bg-purple-50 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-50 rounded-full blur-3xl translate-y-1/2 translate-x-1/2 pointer-events-none" />
         </section>
     );
 };
 
 const FAQItem = ({ question, answer }: { question: string, answer: string }) => {
     return (
-        <details className="group bg-slate-900/40 backdrop-blur-sm border border-white/5 rounded-2xl overflow-hidden transition-all duration-300 hover:border-amber-500/30 open:bg-slate-800/60 open:border-slate-700">
-            <summary className="flex items-center justify-between p-5 cursor-pointer list-none text-slate-200 font-medium md:text-lg select-none">
+        <details className="group bg-white backdrop-blur-sm border border-[#ddddf0] rounded-2xl overflow-hidden transition-all duration-300 hover:border-amber-300 open:bg-slate-50 open:border-amber-300 shadow-sm">
+            <summary className="flex items-center justify-between p-5 cursor-pointer list-none text-[#1a1a3e] font-medium md:text-lg select-none">
                 {question}
-                <ChevronDown className="w-5 h-5 text-slate-500 transition-transform duration-300 group-open:rotate-180 group-open:text-amber-400 shrink-0 ml-4" />
+                <ChevronDown className="w-5 h-5 text-[#5a5a82] transition-transform duration-300 group-open:rotate-180 group-open:text-amber-600 shrink-0 ml-4" />
             </summary>
-            <div className="px-5 pb-5 text-slate-400 leading-relaxed animate-fade-in text-sm md:text-base border-t border-dashed border-white/5 pt-3 mt-1">
+            <div className="px-5 pb-5 text-[#5a5a82] leading-relaxed animate-fade-in text-sm md:text-base border-t border-dashed border-[#ddddf0] pt-3 mt-1">
                 {answer}
             </div>
         </details>

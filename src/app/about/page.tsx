@@ -135,7 +135,7 @@ const jsonLd = {
 
 export default function AboutPage() {
     return (
-        <main className="bg-slate-950 min-h-screen pb-28">
+        <main className="bg-[#f8f8fc] min-h-screen pb-28">
             <Script
                 id="about-json-ld"
                 type="application/ld+json"

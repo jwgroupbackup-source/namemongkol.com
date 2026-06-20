@@ -348,24 +348,22 @@ export default function PalmScanner({ onAnalyze, onReset, isAnalyzing, result }:
   }, [imageSrc]);
 
   return (
-    <section className="w-full max-w-2xl mx-auto bg-gradient-to-b from-[#0a3d2a]/95 via-[#0d4a33]/90 to-[#0a3528]/95 backdrop-blur-md border border-emerald-600/30 rounded-2xl p-3 sm:p-4 shadow-2xl shadow-emerald-900/30 relative overflow-visible sm:overflow-hidden" aria-label="เครื่องมือสแกนลายมือ">
-      <div className="absolute -top-24 -left-24 w-48 h-48 bg-emerald-500/8 rounded-full blur-[90px] pointer-events-none" />
-      <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-amber-500/8 rounded-full blur-[90px] pointer-events-none" />
+    <section className="w-full max-w-2xl mx-auto bg-white border border-[#ddddf0] rounded-2xl p-3 sm:p-4 shadow-sm relative overflow-visible sm:overflow-hidden" aria-label="เครื่องมือสแกนลายมือ">
 
       <header className="mb-2 sm:mb-3">
         <div className="flex items-center justify-between gap-2 mb-2">
-          <h2 className="text-base sm:text-lg font-bold text-amber-200 flex items-center gap-1.5">
-            <ScanLine className="w-4 h-4 text-amber-300" />
+          <h2 className="text-base sm:text-lg font-bold text-[#1a1a3e] flex items-center gap-1.5">
+            <ScanLine className="w-4 h-4 text-emerald-500" />
             Palm Scanner
           </h2>
-          <span className="text-[11px] text-amber-200/70 border border-amber-500/30 bg-amber-500/10 rounded-full px-2 py-0.5 shrink-0">Step {currentStep}/3</span>
+          <span className="text-[11px] text-[#5a5a82] border border-[#ddddf0] bg-slate-50 rounded-full px-2 py-0.5 shrink-0">Step {currentStep}/3</span>
         </div>
 
         <div className="grid grid-cols-3 gap-1 sm:gap-1.5">
           {[1, 2, 3].map((step) => {
             const active = currentStep >= step;
             return (
-              <div key={step} className={`rounded-md border px-1.5 py-1 text-center text-[11px] font-medium transition-colors ${active ? 'border-amber-500/40 bg-gradient-to-r from-amber-600/20 to-amber-500/10 text-amber-200' : 'border-emerald-700/40 bg-emerald-950/40 text-emerald-600'}`}>
+              <div key={step} className={`rounded-md border px-1.5 py-1 text-center text-[11px] font-medium transition-colors ${active ? 'border-amber-200 bg-amber-50 text-amber-700' : 'border-[#ddddf0] bg-slate-50 text-slate-600'}`}>
                 {step === 1 && 'เลือกภาพ'}
                 {step === 2 && 'ตรวจคุณภาพ'}
                 {step === 3 && 'วิเคราะห์'}
@@ -375,7 +373,7 @@ export default function PalmScanner({ onAnalyze, onReset, isAnalyzing, result }:
         </div>
       </header>
 
-      <div className="relative w-full min-h-[360px] sm:min-h-0 sm:aspect-[4/5] bg-[#061f16] rounded-xl overflow-hidden border border-emerald-700/30 flex flex-col items-center justify-center mb-2 sm:mb-3">
+      <div className="relative w-full min-h-[360px] sm:min-h-0 sm:aspect-[4/5] bg-slate-50 rounded-xl overflow-hidden border border-[#ddddf0] flex flex-col items-center justify-center mb-2 sm:mb-3">
         {isCameraOpen && (
           <div className="absolute inset-0 z-[1] pointer-events-none">
             {/* Palm outline removed as requested, leaving a clean camera feed */}
@@ -384,13 +382,13 @@ export default function PalmScanner({ onAnalyze, onReset, isAnalyzing, result }:
 
         {!imageSrc && !isCameraOpen && (
           <div className="flex flex-col items-center justify-center p-4 sm:p-4 text-center space-y-3 sm:space-y-2.5">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-800/70 to-emerald-900/40 border border-emerald-600/30 flex items-center justify-center shadow-lg shadow-black/20">
-              <Upload className="w-8 h-8 text-amber-300/90" />
+            <div className="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shadow-sm">
+              <Upload className="w-8 h-8 text-emerald-500" />
             </div>
-            <p className="text-emerald-50 text-base sm:text-sm font-semibold leading-snug max-w-xs">
+            <p className="text-[#1a1a3e] text-base sm:text-sm font-semibold leading-snug max-w-xs">
               อัปโหลดรูปภาพลายมือของคุณ หรือถ่ายรูปใหม่
             </p>
-            <ul className="grid grid-cols-1 gap-1.5 text-amber-200/75 text-[12px] sm:text-[11px] leading-relaxed text-left max-w-xs">
+            <ul className="grid grid-cols-1 gap-1.5 text-[#5a5a82] text-[12px] sm:text-[11px] leading-relaxed text-left max-w-xs">
               <li>• ฝ่ามือเต็มเฟรม ไม่ถูกตัดขอบ</li>
               <li>• ภาพไม่เบลอ และมีแสงเพียงพอ</li>
               <li>• มือหงายตรงกับกล้องให้มากที่สุด</li>
@@ -404,7 +402,7 @@ export default function PalmScanner({ onAnalyze, onReset, isAnalyzing, result }:
               </label>
               <button
                 onClick={startCamera}
-                className="bg-emerald-800/50 hover:bg-emerald-700/50 text-emerald-100 px-4 py-3 sm:px-3 sm:py-2 rounded-xl sm:rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-1.5 border border-emerald-600/30 w-full sm:w-auto active:scale-[0.98]"
+                className="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 px-4 py-3 sm:px-3 sm:py-2 rounded-xl sm:rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-1.5 border border-emerald-200 w-full sm:w-auto active:scale-[0.98]"
               >
                 <Camera className="w-4 h-4" />
                 ถ่ายรูป
@@ -414,10 +412,10 @@ export default function PalmScanner({ onAnalyze, onReset, isAnalyzing, result }:
 
             {cameraError && (
               <div className="w-full mt-2 space-y-2">
-                <p className="text-xs text-rose-300 leading-relaxed" role="alert">{cameraError}</p>
+                <p className="text-xs text-rose-500 leading-relaxed" role="alert">{cameraError}</p>
                 <button
                   onClick={() => captureInputRef.current?.click()}
-                  className="w-full bg-emerald-800/50 hover:bg-emerald-700/50 text-emerald-100 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-emerald-600/30"
+                  className="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-emerald-200"
                 >
                   ใช้แอปกล้องมือถือแทน
                 </button>
@@ -449,9 +447,8 @@ export default function PalmScanner({ onAnalyze, onReset, isAnalyzing, result }:
 
             {/* Bottom controls — capture button centered, cancel on right */}
             <div className="absolute bottom-0 left-0 right-0 z-10">
-              {/* Instruction hint — merged into bottom bar */}
               <div className="text-center mb-3 pointer-events-none">
-                <span className="text-amber-300/80 text-[11px] font-medium">
+                <span className="text-white drop-shadow-md text-[11px] font-medium bg-black/40 px-3 py-1.5 rounded-full">
                   🖐️ ถ่ายให้เห็นฝ่ามือชัดเจน • หงายมือขึ้น
                 </span>
               </div>
@@ -506,22 +503,22 @@ export default function PalmScanner({ onAnalyze, onReset, isAnalyzing, result }:
       {imageSrc && !isAnalyzing && !result && (
         <>
           {capturedQuality && (
-            <div className="mb-2 p-2.5 rounded-lg border border-emerald-700/40 bg-emerald-950/40 text-emerald-100 text-xs sm:text-sm" aria-live="polite">
+            <div className="mb-2 p-2.5 rounded-lg border border-emerald-200 bg-emerald-50 text-[#1a1a3e] text-xs sm:text-sm" aria-live="polite">
               <div className="flex items-center justify-between gap-2">
-                <span className="inline-flex items-center gap-1.5">
-                  {hasLowCaptureQuality ? <AlertTriangle className="w-3.5 h-3.5 text-amber-300" /> : <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" />}
+                <span className="inline-flex items-center gap-1.5 font-semibold">
+                  {hasLowCaptureQuality ? <AlertTriangle className="w-3.5 h-3.5 text-amber-500" /> : <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
                   คุณภาพภาพที่ใช้วิเคราะห์
                 </span>
-                <span className="font-semibold text-amber-200">{capturedQuality.overall}%</span>
+                <span className="font-bold text-[#1a1a3e]">{capturedQuality.overall}%</span>
               </div>
-              <p className={`mt-0.5 text-[11px] ${hasLowCaptureQuality ? 'text-amber-200' : 'text-emerald-300'}`}>{qualityHint(capturedQuality)}</p>
+              <p className={`mt-0.5 text-[11px] ${hasLowCaptureQuality ? 'text-amber-600' : 'text-emerald-600'}`}>{qualityHint(capturedQuality)}</p>
             </div>
           )}
 
           <div className="hidden sm:flex gap-2">
             <button
               onClick={reset}
-              className="flex-1 bg-emerald-800/40 hover:bg-emerald-700/40 text-emerald-100 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-1.5 border border-emerald-600/30"
+              className="flex-1 bg-white hover:bg-slate-50 text-emerald-700 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-1.5 border border-[#ddddf0] shadow-sm"
             >
               <RefreshCw className="w-4 h-4" />
               เปลี่ยนรูป
@@ -536,11 +533,11 @@ export default function PalmScanner({ onAnalyze, onReset, isAnalyzing, result }:
           </div>
 
           <div className="sm:hidden fixed inset-x-3 bottom-[70px] z-[70]" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
-            <div className="rounded-2xl border border-white/10 bg-slate-950/95 backdrop-blur-xl p-3 shadow-2xl shadow-black/40">
+            <div className="rounded-2xl border border-[#ddddf0] bg-white/95 backdrop-blur-xl p-3 shadow-lg">
               <div className="flex items-center gap-2">
                 <button
                   onClick={reset}
-                  className="shrink-0 bg-emerald-900/70 text-emerald-100 px-3 py-3 rounded-xl text-sm font-medium transition-colors flex items-center justify-center gap-1.5 border border-emerald-600/30 active:scale-95"
+                  className="shrink-0 bg-slate-50 text-emerald-700 px-3 py-3 rounded-xl text-sm font-medium transition-colors flex items-center justify-center gap-1.5 border border-[#ddddf0] active:scale-95 shadow-sm"
                 >
                   <RefreshCw className="w-4 h-4" />
                   เปลี่ยนรูป
@@ -560,13 +557,13 @@ export default function PalmScanner({ onAnalyze, onReset, isAnalyzing, result }:
 
       {isAnalyzing && (
         <div
-          className="w-full max-w-md mx-auto mb-2 rounded-xl border border-emerald-700/40 bg-emerald-950/50 backdrop-blur p-3 space-y-2.5"
+          className="w-full max-w-md mx-auto mb-2 rounded-xl border border-[#ddddf0] bg-white shadow-sm p-3 space-y-2.5"
           role="status"
           aria-live="polite"
           aria-label="กำลังประมวลผล"
         >
           <div
-            className="w-full h-2 rounded-full bg-emerald-900/60 overflow-hidden"
+            className="w-full h-2 rounded-full bg-slate-100 overflow-hidden"
             aria-hidden="true"
           >
             <div
@@ -574,8 +571,8 @@ export default function PalmScanner({ onAnalyze, onReset, isAnalyzing, result }:
               aria-hidden="true"
             />
           </div>
-          <p className="text-center text-emerald-100 text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 w-full">
-            <Sparkles className="w-4 h-4 flex-shrink-0 text-amber-300" aria-hidden="true" />
+          <p className="text-center text-[#5a5a82] text-xs sm:text-sm inline-flex items-center justify-center gap-1.5 w-full font-medium">
+            <Sparkles className="w-4 h-4 flex-shrink-0 text-amber-500" aria-hidden="true" />
             {processingStepMessages[processingStep]}
           </p>
         </div>
@@ -584,14 +581,14 @@ export default function PalmScanner({ onAnalyze, onReset, isAnalyzing, result }:
       {result && (
         <>
           {hasLowLineDetail && (
-            <div className="w-full mt-2 p-2.5 rounded-lg border border-amber-600/40 bg-amber-900/15 text-amber-200 text-xs sm:text-sm text-center">
+            <div className="w-full mt-2 p-2.5 rounded-lg border border-amber-200 bg-amber-50 text-amber-800 text-xs sm:text-sm text-center">
               ระบบพบว่ารายละเอียดเส้นลายมือยังไม่ชัดพอ แนะนำถ่ายใหม่ในที่แสงสว่างมากขึ้น ให้ฝ่ามือเต็มเฟรม และถือกล้องตรงกับฝ่ามือ
             </div>
           )}
 
           <button
             onClick={reset}
-            className="w-full bg-emerald-800/40 hover:bg-emerald-700/40 text-emerald-100 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-1.5 border border-emerald-600/30 mt-2"
+            className="w-full bg-white hover:bg-slate-50 text-emerald-700 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-1.5 border border-[#ddddf0] shadow-sm mt-2"
           >
             <RefreshCw className="w-4 h-4" />
             วิเคราะห์รูปใหม่

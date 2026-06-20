@@ -31,17 +31,17 @@ export const WallpaperShowcase = ({ stats = [] }: WallpaperShowcaseProps) => {
         <div className="w-full max-w-5xl mx-auto mt-4 md:mt-16 mb-8 px-4">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                 <div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-amber-400 flex items-center gap-3 drop-shadow-[0_0_15px_rgba(251,191,36,0.2)]">
-                        <Sparkles className="text-amber-400" />
+                    <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a3e] flex items-center gap-3">
+                        <Sparkles className="text-amber-500" />
                         วอลเปเปอร์มงคล
                     </h2>
-                    <p className="text-slate-400 mt-2 text-sm md:text-base">
+                    <p className="text-[#5a5a82] mt-2 text-sm md:text-base">
                         เสริมดวงชะตาให้ครบทุกด้าน ด้วยวอลเปเปอร์มงคลเฉพาะบุคคล ออกแบบตามหลักทักษาและเลขศาสตร์
                     </p>
                 </div>
                 <Link
                     href="/wallpapers"
-                    className="flex items-center gap-2 text-amber-400 font-medium hover:text-amber-300 transition-colors group shrink-0"
+                    className="flex items-center gap-2 text-amber-600 font-medium hover:text-amber-500 transition-colors group shrink-0"
                 >
                     ดูวอลเปเปอร์ทั้งหมด <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -49,7 +49,7 @@ export const WallpaperShowcase = ({ stats = [] }: WallpaperShowcaseProps) => {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                 {wallpapers.map((wp) => (
-                    <Link href="/wallpapers" key={wp.id} className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-amber-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(245,158,11,0.15)] hover:-translate-y-1">
+                    <Link href="/wallpapers" key={wp.id} className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-[#f8f8fc] border border-[#ddddf0] hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:-translate-y-1">
                         <Image
                             src={wp.image}
                             alt={`วอลเปเปอร์มงคล ${wp.name} ภาพเสริมดวงตามวันเกิด`}
@@ -77,16 +77,16 @@ export const WallpaperShowcase = ({ stats = [] }: WallpaperShowcaseProps) => {
                 ))}
             </div>
 
-            <div className="mt-8 p-6 rounded-3xl bg-gradient-to-r from-amber-500/10 to-orange-600/10 border border-amber-500/20 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            <div className="mt-8 p-6 rounded-3xl bg-amber-50 border border-amber-200 relative overflow-hidden shadow-sm">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-amber-200/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                 <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="text-center md:text-left">
-                        <h3 className="text-xl font-bold text-amber-200 mb-2">ยังไม่รู้วอลเปเปอร์ไหนเหมาะกับคุณ?</h3>
-                        <p className="text-slate-400 text-sm">วิเคราะห์ชื่อกับเราวันนี้ พร้อมรับคำแนะนำวอลเปเปอร์เสริมดวงที่ตรงกับชะตาของคุณที่สุด</p>
+                        <h3 className="text-xl font-bold text-amber-700 mb-2">ยังไม่รู้วอลเปเปอร์ไหนเหมาะกับคุณ?</h3>
+                        <p className="text-[#5a5a82] text-sm">วิเคราะห์ชื่อกับเราวันนี้ พร้อมรับคำแนะนำวอลเปเปอร์เสริมดวงที่ตรงกับชะตาของคุณที่สุด</p>
                     </div>
                     <Link
                         href="/wallpapers"
-                        className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-bold py-3 px-6 rounded-xl shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transition-all transform hover:scale-105"
+                        className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-3 px-6 rounded-xl shadow-md transition-all transform hover:scale-105"
                     >
                         ค้นหาวอลเปเปอร์ของคุณ
                     </Link>

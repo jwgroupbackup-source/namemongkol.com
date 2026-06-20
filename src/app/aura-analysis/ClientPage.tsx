@@ -163,7 +163,7 @@ export default function ClientPage() {
             if (!user) {
                 const authResult = await Swal.fire({
                     title: '🔒 กรุณาเข้าสู่ระบบ',
-                    html: '<p style="color:#94a3b8">คุณต้องเข้าสู่ระบบก่อนจึงจะวิเคราะห์ออร่าได้</p>',
+                    html: '<p style="color:#cbd5e1">คุณต้องเข้าสู่ระบบก่อนจึงจะวิเคราะห์ออร่าได้</p>',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'เข้าสู่ระบบ',
@@ -187,7 +187,7 @@ export default function ClientPage() {
             if (latestCredits.total < AURA_ANALYSIS_COST) {
                 const topupResult = await Swal.fire({
                     title: '💰 เครดิตไม่เพียงพอ',
-                    html: `<p style="color:#94a3b8">การวิเคราะห์ออร่าใช้ <strong style="color:#fbbf24">${AURA_ANALYSIS_COST} เครดิต</strong></p><p style="color:#94a3b8;margin-top:4px">คุณมี <strong style="color:#ef4444">${latestCredits.total} เครดิต</strong></p>`,
+                    html: `<p style="color:#cbd5e1">การวิเคราะห์ออร่าใช้ <strong style="color:#fbbf24">${AURA_ANALYSIS_COST} เครดิต</strong></p><p style="color:#cbd5e1;margin-top:4px">คุณมี <strong style="color:#ef4444">${latestCredits.total} เครดิต</strong></p>`,
                     icon: 'error',
                     showCancelButton: true,
                     confirmButtonText: 'เติมเครดิต',
@@ -207,7 +207,7 @@ export default function ClientPage() {
             // 3. Confirmation
             const confirmResult = await Swal.fire({
                 title: '✨ ยืนยันการวิเคราะห์ออร่าด้วย AI',
-                html: `<p style="color:#94a3b8">การวิเคราะห์จะใช้ <strong style="color:#fbbf24">${AURA_ANALYSIS_COST} เครดิต</strong></p><p style="color:#94a3b8;margin-top:4px">คุณมี <strong style="color:#34d399">${latestCredits.total} เครดิต</strong> (คงเหลือ ${latestCredits.total - AURA_ANALYSIS_COST} เครดิต)</p>`,
+                html: `<p style="color:#cbd5e1">การวิเคราะห์จะใช้ <strong style="color:#fbbf24">${AURA_ANALYSIS_COST} เครดิต</strong></p><p style="color:#cbd5e1;margin-top:4px">คุณมี <strong style="color:#34d399">${latestCredits.total} เครดิต</strong> (คงเหลือ ${latestCredits.total - AURA_ANALYSIS_COST} เครดิต)</p>`,
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: `ยืนยัน (ใช้ ${AURA_ANALYSIS_COST} เครดิต)`,
@@ -803,7 +803,7 @@ export default function ClientPage() {
                                                             <p className="text-sm font-semibold text-amber-200 tracking-tight">
                                                                 {idx === 0 ? 'ออร่าหลัก' : 'ออร่ารอง'}: {aura.color}
                                                             </p>
-                                                            <p className="text-xs text-slate-400 mt-1 leading-relaxed">{aura.meaning}</p>
+                                                            <p className="text-xs text-slate-300 mt-1 leading-relaxed">{aura.meaning}</p>
                                                         </div>
                                                     </div>
                                                 ))}

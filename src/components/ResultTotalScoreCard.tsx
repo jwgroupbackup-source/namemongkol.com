@@ -10,7 +10,7 @@ export const ResultTotalScoreCard: React.FC<ResultTotalScoreCardProps> = ({ resu
     const displayGrade = result.prediction.color.includes('emerald') ? 'A+' : result.grade;
 
     return (
-        <div className="glass-card rounded-2xl p-4 sm:p-5 text-center relative overflow-hidden flex flex-col">
+        <div className="bg-white border border-[#ddddf0] shadow-sm rounded-2xl p-4 sm:p-5 text-center relative overflow-hidden flex flex-col">
             <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${result.prediction.bgGradient}`}></div>
 
             {/* Badges Row */}
@@ -19,7 +19,7 @@ export const ResultTotalScoreCard: React.FC<ResultTotalScoreCardProps> = ({ resu
                 <div className="flex-1 flex justify-start">
                     {result.isNirun && (
                         <div className="animate-bounce-slow">
-                            <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-gradient-to-r from-amber-200 to-yellow-400 shadow-lg shadow-amber-500/20 border border-white/40">
+                            <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-gradient-to-r from-amber-100 to-amber-200 shadow-sm border border-amber-300">
                                 <Sparkles className="w-3 h-3 text-amber-900" />
                                 <span className="text-[10px] font-extrabold text-amber-900 tracking-wide">นิรันดร์ศาสตร์</span>
                             </div>
@@ -41,21 +41,21 @@ export const ResultTotalScoreCard: React.FC<ResultTotalScoreCardProps> = ({ resu
                 </div>
             </div>
 
-            <h3 className="text-xs sm:text-sm text-slate-400 mb-1 uppercase tracking-wide">ผลรวมชื่อ-สกุล</h3>
+            <h3 className="text-xs sm:text-sm text-[#5a5a82] mb-1 uppercase tracking-wide">ผลรวมชื่อ-สกุล</h3>
             <div className={`text-3xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${result.prediction.bgGradient} mb-2`}>
                 {result.totalScore}
             </div>
             <div className="flex justify-center gap-1 mb-2">
                 {[...Array(5)].map((_, i) => (
-                    <Star key={i} className={`w-3.5 h-3.5 ${i < result.prediction.stars ? result.prediction.color.replace('text-', 'text-') + ' fill-current' : 'text-slate-700'}`} />
+                    <Star key={i} className={`w-3.5 h-3.5 ${i < result.prediction.stars ? result.prediction.color.replace('text-', 'text-') + ' fill-current' : 'text-slate-200'}`} />
                 ))}
             </div>
 
-            <div className="text-slate-300 text-xs leading-relaxed px-2 mb-2 flex-grow line-clamp-2 sm:line-clamp-none">
+            <div className="text-[#5a5a82] text-xs leading-relaxed px-2 mb-2 flex-grow line-clamp-2 sm:line-clamp-none">
                 &quot;{result.prediction.desc}&quot;
             </div>
             <div className="flex flex-col items-center gap-2 mt-auto">
-                <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium bg-slate-800 ${result.prediction.color}`}>
+                <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium border border-[#ddddf0] bg-[#f8f8fc] ${result.prediction.color}`}>
                     {result.prediction.level}
                 </span>
 
@@ -66,7 +66,7 @@ export const ResultTotalScoreCard: React.FC<ResultTotalScoreCardProps> = ({ resu
                     result.prediction.color.includes('amber')) && (
                         <Link
                             href="/premium-analysis"
-                            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white rounded-xl shadow-lg shadow-amber-900/20 transition-all hover:-translate-y-0.5 hover:shadow-amber-500/30"
+                            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white rounded-xl shadow-sm transition-all hover:-translate-y-0.5"
                         >
                                 <Sparkles className="w-3.5 h-3.5" />
                                 <span className="font-bold text-xs">ดูชื่อใหม่</span>

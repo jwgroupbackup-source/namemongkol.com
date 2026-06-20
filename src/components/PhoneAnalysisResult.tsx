@@ -57,10 +57,10 @@ const StatBar = ({ label, score, icon: Icon }: { label: string, score: { pos: nu
                             <div
                                 key={`l-${i}`}
                                 className={`
-                                    h-2.5 flex-1 rounded-[1px] skew-x-[-12deg] border border-white/5 transition-all duration-500
+                                    h-2.5 flex-1 rounded-[1px] skew-x-[-12deg] border border-white transition-all duration-500
                                     ${i < negFilled
                                         ? 'bg-gradient-to-r from-rose-600 to-rose-500 shadow-[0_0_4px_rgba(225,29,72,0.6)]'
-                                        : 'bg-slate-700/30'}
+                                        : 'bg-[#ddddf0]'}
                                 `}
                             />
                         ))}
@@ -83,10 +83,10 @@ const StatBar = ({ label, score, icon: Icon }: { label: string, score: { pos: nu
                             <div
                                 key={`r-${i}`}
                                 className={`
-                                    h-2.5 flex-1 rounded-[1px] skew-x-[-12deg] border border-white/5 transition-all duration-500
+                                    h-2.5 flex-1 rounded-[1px] skew-x-[-12deg] border border-white transition-all duration-500
                                     ${i < posFilled
                                         ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 shadow-[0_0_4px_rgba(16,185,129,0.6)]'
-                                        : 'bg-slate-700/30'}
+                                        : 'bg-[#ddddf0]'}
                                 `}
                             />
                         ))}
@@ -117,7 +117,7 @@ const PairBox = ({ type, pairs }: { type: 'good' | 'bad', pairs: IPhoneAnalysisR
     // const pairBg unused
 
     return (
-        <div className={`relative border rounded-2xl rounded-tl-none pt-6 p-4 ${containerBorder} bg-white/5 backdrop-blur-sm`}>
+        <div className={`relative border rounded-2xl rounded-tl-none pt-6 p-4 ${containerBorder} bg-[#f8f8fc] backdrop-blur-sm`}>
             {/* Folder Tab */}
             <div className={`absolute -top-[1px] -left-[1px] px-4 py-1.5 rounded-t-lg rounded-br-lg text-white text-[10px] font-bold uppercase tracking-wider shadow-md ${titleBg}`}>
                 {title}
@@ -158,8 +158,8 @@ const SimpleGradeCard = ({ grade, phoneNumber }: { grade: string; phoneNumber: s
     };
 
     return (
-        <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 shadow-2xl border border-white/10 text-center">
-            <h2 className="text-5xl sm:text-6xl font-bold text-white tracking-tight font-mono mb-6 drop-shadow-md">
+        <div className="bg-white rounded-3xl p-6 shadow-sm border border-[#ddddf0] text-center">
+            <h2 className="text-5xl sm:text-6xl font-bold text-amber-600 tracking-tight font-mono mb-6">
                 {phoneNumber}
             </h2>
 
@@ -178,12 +178,12 @@ const SimpleGradeCard = ({ grade, phoneNumber }: { grade: string; phoneNumber: s
                 </h2>
             </div>
 
-            <div className="space-y-1.5 text-sm font-medium text-slate-400 max-w-xs mx-auto">
-                <div className={`${grade === 'A' ? 'text-emerald-400 font-bold scale-105' : ''}`}>เบอร์เกรด A = เบอร์ดีมากๆ</div>
-                <div className={`${grade === 'B' ? 'text-emerald-400 font-bold scale-105' : ''}`}>เบอร์เกรด B = เบอร์ดี</div>
-                <div className={`${grade === 'C' ? 'text-amber-400 font-bold scale-105' : ''}`}>เบอร์เกรด C = เบอร์ทั่วไป</div>
-                <div className={`${grade === 'D' ? 'text-orange-400 font-bold scale-105' : ''}`}>เบอร์เกรด D = เบอร์ค่อนข้างเหนื่อย</div>
-                <div className={`${grade === 'F' ? 'text-rose-400 font-bold scale-105' : ''}`}>เบอร์เกรด F = เบอร์เหนื่อยเปล่า</div>
+            <div className="space-y-1.5 text-sm font-medium text-[#5a5a82] max-w-xs mx-auto">
+                <div className={`${grade === 'A' ? 'text-emerald-600 font-bold scale-105' : ''}`}>เบอร์เกรด A = เบอร์ดีมากๆ</div>
+                <div className={`${grade === 'B' ? 'text-emerald-600 font-bold scale-105' : ''}`}>เบอร์เกรด B = เบอร์ดี</div>
+                <div className={`${grade === 'C' ? 'text-amber-600 font-bold scale-105' : ''}`}>เบอร์เกรด C = เบอร์ทั่วไป</div>
+                <div className={`${grade === 'D' ? 'text-orange-600 font-bold scale-105' : ''}`}>เบอร์เกรด D = เบอร์ค่อนข้างเหนื่อย</div>
+                <div className={`${grade === 'F' ? 'text-rose-600 font-bold scale-105' : ''}`}>เบอร์เกรด F = เบอร์เหนื่อยเปล่า</div>
             </div>
         </div>
     );
@@ -244,7 +244,7 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
         <div className="w-full max-w-4xl animate-fade-in space-y-4 pb-8">
 
             {/* Mobile Summary Card */}
-            <div className="rounded-3xl border border-white/10 bg-slate-950/70 p-4 shadow-2xl backdrop-blur-xl lg:hidden">
+            <div className="rounded-3xl border border-[#ddddf0] bg-white p-4 shadow-sm lg:hidden">
                 <div className="flex items-start gap-3">
                     <div className={`flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-2xl border text-white shadow-xl ${hasBadPairs
                         ? 'border-rose-400/30 bg-gradient-to-br from-rose-500 to-rose-800'
@@ -256,26 +256,26 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
                         <span className="text-[9px] font-bold uppercase opacity-80">Grade</span>
                     </div>
                     <div className="min-w-0 flex-1">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-300">สรุปผลเบอร์นี้</p>
-                        <h2 className="mt-1 text-lg font-bold leading-snug text-white">{mobileVerdict}</h2>
-                        <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-slate-300">{result.prediction}</p>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-600">สรุปผลเบอร์นี้</p>
+                        <h2 className="mt-1 text-lg font-bold leading-snug text-amber-600">{mobileVerdict}</h2>
+                        <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-[#5a5a82]">{result.prediction}</p>
                     </div>
                 </div>
 
                 <div className="mt-4 grid grid-cols-2 gap-2">
-                    <div className="rounded-2xl border border-white/5 bg-white/5 p-3">
-                        <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">ควรโฟกัส</p>
-                        <p className={`mt-1 text-sm font-bold ${hasBadPairs ? 'text-rose-300' : 'text-emerald-300'}`}>{mobileRisk}</p>
+                    <div className="rounded-2xl border border-[#ddddf0] bg-slate-50 p-3">
+                        <p className="text-[10px] font-semibold uppercase tracking-wide text-[#5a5a82]">ควรโฟกัส</p>
+                        <p className={`mt-1 text-sm font-bold ${hasBadPairs ? 'text-rose-600' : 'text-emerald-600'}`}>{mobileRisk}</p>
                     </div>
-                    <div className="rounded-2xl border border-white/5 bg-white/5 p-3">
-                        <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">คู่เลขดี</p>
-                        <p className="mt-1 text-sm font-bold text-emerald-300">{goodPairs.length} คู่</p>
+                    <div className="rounded-2xl border border-[#ddddf0] bg-slate-50 p-3">
+                        <p className="text-[10px] font-semibold uppercase tracking-wide text-[#5a5a82]">คู่เลขดี</p>
+                        <p className="mt-1 text-sm font-bold text-emerald-600">{goodPairs.length} คู่</p>
                     </div>
                 </div>
             </div>
 
             {/* Main Result Card */}
-            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-5 lg:p-8 border border-white/5 shadow-2xl relative overflow-hidden">
+            <div className="bg-white rounded-3xl p-5 lg:p-8 border border-[#ddddf0] shadow-sm relative overflow-hidden">
                 {/* Background Decor */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-[60px] pointer-events-none" />
 
@@ -283,11 +283,11 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
                     {/* Left Column: Number & Analysis Boxes */}
                     <div className="lg:col-span-5 space-y-4">
                         <div className="text-center lg:text-left">
-                            <h2 className="text-amber-500 font-medium tracking-wide uppercase text-[10px] mb-1">ผลวิเคราะห์ทำนายเบอร์</h2>
-                            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight font-mono mb-2 text-shadow-md">
+                            <h2 className="text-amber-600 font-bold tracking-wide uppercase text-[10px] mb-1">ผลวิเคราะห์ทำนายเบอร์</h2>
+                            <h2 className="text-3xl sm:text-4xl font-bold text-amber-600 tracking-tight font-mono mb-2">
                                 {result.phoneNumber}
                             </h2>
-                            <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-700 to-transparent mb-3" />
+                            <div className="h-px w-full bg-gradient-to-r from-transparent via-[#ddddf0] to-transparent mb-3" />
                         </div>
 
                         {/* Split Good/Bad Boxes */}
@@ -297,7 +297,7 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
                             {badPairs.length > 0 && (
                                 <div className="space-y-2 animate-pulse-gentle">
                                     <PairBox type="bad" pairs={badPairs} />
-                                    <div className="flex items-center justify-center gap-2 text-rose-400 bg-rose-500/10 p-1.5 rounded-md border border-rose-500/20 shadow-inner shadow-rose-900/20 text-xs">
+                                    <div className="flex items-center justify-center gap-2 text-rose-600 bg-rose-50 p-1.5 rounded-md border border-rose-200 text-xs shadow-sm">
                                         <Skull size={14} />
                                         <span className="font-semibold">เบอร์ส่งผลเสีย แนะนำให้เปลี่ยน</span>
                                     </div>
@@ -305,7 +305,7 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
                                     {/* Conversion CTA for Bad Numbers */}
                                     <a
                                         href="/search"
-                                        className="block w-full mt-2 rounded-xl border border-amber-400/20 bg-amber-500/10 px-4 py-3 text-center text-sm font-bold text-amber-200 shadow-lg shadow-black/10 transition-all hover:-translate-y-0.5 hover:border-amber-300/40 hover:bg-amber-500/15 active:scale-95"
+                                        className="block w-full mt-2 rounded-xl border border-amber-400/20 bg-amber-500/10 px-4 py-3 text-center text-sm font-bold text-amber-600 shadow-lg shadow-black/10 transition-all hover:-translate-y-0.5 hover:border-amber-300/40 hover:bg-amber-500/15 active:scale-95"
                                     >
                                         เปลี่ยนเบอร์ร้ายให้กลายเป็นดี คลิก!
                                     </a>
@@ -317,10 +317,10 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
                     {/* Right Column: Stats Center-Out */}
                     <div className="lg:col-span-7 flex flex-col justify-center gap-4 pl-0 lg:pl-6 relative">
                         {/* Divider for Desktop */}
-                        <div className="absolute left-0 top-4 bottom-4 w-px bg-gradient-to-b from-transparent via-slate-700 to-transparent hidden lg:block" />
+                        <div className="absolute left-0 top-4 bottom-4 w-px bg-gradient-to-b from-transparent via-[#ddddf0] to-transparent hidden lg:block" />
 
                         {/* Enhanced Desktop Grade Badge */}
-                        <div className="hidden lg:flex items-center gap-5 bg-white/5 p-5 rounded-3xl border border-white/5 mb-2 self-center w-full max-w-md relative group overflow-hidden backdrop-blur-sm">
+                        <div className="hidden lg:flex items-center gap-5 bg-slate-50 p-5 rounded-3xl border border-[#ddddf0] mb-2 self-center w-full max-w-md relative group overflow-hidden shadow-sm">
                             <div className={`absolute inset-0 opacity-10 blur-xl transition-opacity group-hover:opacity-20
                                 ${result.grade.startsWith('A') ? 'bg-emerald-500' :
                                     result.grade.startsWith('B') ? 'bg-blue-500' : 'bg-amber-500'}
@@ -336,14 +336,14 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
                                 <span className="text-[9px] font-bold uppercase opacity-80 mt-0.5">Grade</span>
                             </div>
                             <div className="relative z-10">
-                                <p className="text-slate-400 text-[10px] uppercase tracking-widest font-bold mb-1">ผลทำนายเกรดเบอร์มงคล</p>
-                                <p className="text-white font-semibold text-sm leading-relaxed">{result.prediction}</p>
+                                <p className="text-[#5a5a82] text-[10px] uppercase tracking-widest font-bold mb-1">ผลทำนายเกรดเบอร์มงคล</p>
+                                <p className="text-[#1a1a3e] font-semibold text-sm leading-relaxed">{result.prediction}</p>
                             </div>
                         </div>
 
                         <div className="md:col-span-1">
                             <div className="flex items-center justify-between mb-3 px-2">
-                                <h3 className="text-base font-bold text-slate-300">กราฟสรุปคะแนน</h3>
+                                <h3 className="text-base font-bold text-amber-600">กราฟสรุปคะแนน</h3>
                                 <div className="flex items-center gap-3 text-[9px] text-slate-500 font-medium">
                                     <div className="flex items-center gap-1.5">
                                         <div className="w-1.5 h-1.5 rounded-full bg-rose-500"></div>
@@ -370,19 +370,19 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
 
             {/* Detailed Pairs Breakdown List */}
             <div className="space-y-3">
-                <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2 px-2">
+                <h3 className="text-lg font-bold text-amber-600 mb-2 flex items-center gap-2 px-2">
                     <div className="w-1 h-5 bg-amber-500 rounded-full"></div>
-                    <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">ความหมายคู่เลขของคุณ</span>
+                    <span>ความหมายคู่เลขของคุณ</span>
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {result.pairs.map((pair, idx) => (
                         <div key={idx} className={`
-                            relative overflow-hidden group rounded-2xl border bg-white/5 backdrop-blur-sm transition-all hover:-translate-y-0.5 duration-200
+                            relative overflow-hidden group rounded-2xl border bg-white shadow-sm transition-all hover:-translate-y-0.5 duration-200
                             ${pair.level === 1
-                                ? 'border-emerald-500/20 hover:border-emerald-500/40 shadow-emerald-900/5'
+                                ? 'border-emerald-100 hover:border-emerald-300'
                                 : pair.level === 2
-                                    ? 'border-rose-500/20 hover:border-rose-500/40 shadow-rose-900/5'
-                                    : 'border-amber-500/20 hover:border-amber-500/40 shadow-amber-900/5'}
+                                    ? 'border-rose-100 hover:border-rose-300'
+                                    : 'border-amber-100 hover:border-amber-300'}
                         `}>
                             {/* Background Glow */}
                             <div className={`
@@ -393,20 +393,20 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
                             <div className="flex h-full">
                                 {/* Header Section (Number) */}
                                 <div className={`
-                                    w-24 shrink-0 flex flex-col items-center justify-center gap-1 border-r border-white/5 p-3
-                                    ${pair.level === 1 ? 'bg-emerald-500/5' : pair.level === 2 ? 'bg-rose-500/5' : 'bg-amber-500/5'}
+                                    w-24 shrink-0 flex flex-col items-center justify-center gap-1 border-r border-[#ddddf0] p-3
+                                    ${pair.level === 1 ? 'bg-emerald-50' : pair.level === 2 ? 'bg-rose-50' : 'bg-amber-50'}
                                 `}>
                                     <div className={`
-                                        text-3xl font-black drop-shadow-sm
-                                        ${pair.level === 1 ? 'text-emerald-400' : pair.level === 2 ? 'text-rose-400' : 'text-amber-400'}
+                                        text-3xl font-black
+                                        ${pair.level === 1 ? 'text-emerald-600' : pair.level === 2 ? 'text-rose-600' : 'text-amber-600'}
                                     `}>
                                         {pair.pair}
                                     </div>
                                     <div className={`
                                         px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-wide border mt-1
-                                        ${pair.level === 1 ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-300' :
-                                            pair.level === 2 ? 'bg-rose-500/10 border-rose-500/20 text-rose-300' :
-                                                'bg-amber-500/10 border-amber-500/20 text-amber-300'}
+                                        ${pair.level === 1 ? 'bg-emerald-100 border-emerald-200 text-emerald-700' :
+                                            pair.level === 2 ? 'bg-rose-100 border-rose-200 text-rose-700' :
+                                                'bg-amber-100 border-amber-200 text-amber-700'}
                                     `}>
                                         {pair.level === 1 ? 'มงคล' : pair.level === 2 ? 'ระวัง' : 'ทั่วไป'}
                                     </div>
@@ -414,27 +414,27 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
 
                                 {/* Content Section */}
                                 <div className="p-4 flex-1 relative z-10 flex flex-col justify-center">
-                                    <h4 className={`text-sm font-bold mb-1.5 ${pair.level === 1 ? 'text-emerald-300' : pair.level === 2 ? 'text-rose-300' : 'text-amber-300'
+                                    <h4 className={`text-sm font-bold mb-1.5 ${pair.level === 1 ? 'text-emerald-700' : pair.level === 2 ? 'text-rose-700' : 'text-amber-700'
                                         }`}>
                                         {pair.title}
                                     </h4>
-                                    <div className="text-slate-300 text-xs leading-5 font-normal mb-3 whitespace-pre-line">
+                                    <div className="text-[#5a5a82] text-xs leading-5 font-normal mb-3 whitespace-pre-line">
                                         {pair.description.split(/(⚠️ ระวัง:|✅ จุดเด่น:)/g).map((part, partIdx, arr) => {
                                             if (part === '⚠️ ระวัง:' || part === '✅ จุดเด่น:') return null;
 
                                             const prevPart = arr[partIdx - 1];
                                             if (prevPart === '⚠️ ระวัง:') {
                                                 return (
-                                                    <div key={partIdx} className="mt-2 p-2 rounded-lg bg-rose-950/30 border border-rose-500/20 text-rose-200 text-[11px] shadow-sm">
-                                                        <span className="font-bold text-rose-400 block mb-1">⚠️ ระวัง:</span>
+                                                    <div key={partIdx} className="mt-2 p-2 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-[11px] shadow-sm">
+                                                        <span className="font-bold text-rose-600 block mb-1">⚠️ ระวัง:</span>
                                                         {part.trim()}
                                                     </div>
                                                 );
                                             }
                                             if (prevPart === '✅ จุดเด่น:') {
                                                 return (
-                                                    <div key={partIdx} className="mt-2 p-2 rounded-lg bg-emerald-950/30 border border-emerald-500/20 text-emerald-200 text-[11px] shadow-sm">
-                                                        <span className="font-bold text-emerald-400 block mb-1">✅ จุดเด่น:</span>
+                                                    <div key={partIdx} className="mt-2 p-2 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] shadow-sm">
+                                                        <span className="font-bold text-emerald-600 block mb-1">✅ จุดเด่น:</span>
                                                         {part.trim()}
                                                     </div>
                                                 );
@@ -447,7 +447,7 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
                                     </div>
                                     <div className="flex flex-wrap gap-1.5 mt-auto">
                                         {pair.tags?.slice(0, 3).map((tag, t) => (
-                                            <span key={t} className="text-[10px] px-2 py-0.5 rounded bg-black/20 border border-white/5 text-slate-500 transition-colors group-hover:border-white/10 group-hover:text-slate-400">
+                                            <span key={t} className="text-[10px] px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-600 transition-colors group-hover:border-slate-300">
                                                 {tag}
                                             </span>
                                         ))}
@@ -474,31 +474,32 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
             {/* Share Section with Hero Banner */}
             <div className="pt-8 space-y-4">
                 <div className="flex items-center gap-2 px-2 mb-2">
-                    <Share2 className="w-5 h-5 text-amber-400" />
-                    <h3 className="text-lg font-bold text-white">แชร์ผลวิเคราะห์ของคุณ</h3>
+                    <Share2 className="w-5 h-5 text-amber-500" />
+                    <h3 className="text-lg font-bold text-[#1a1a3e]">แชร์ผลวิเคราะห์ของคุณ</h3>
                 </div>
 
                 <SimpleGradeCard grade={result.grade} phoneNumber={result.phoneNumber} />
 
-                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/5 flex flex-col md:flex-row gap-4 items-center shadow-lg">
+                <div className="bg-white rounded-2xl p-5 border border-[#ddddf0] flex flex-col md:flex-row gap-4 items-center shadow-sm">
                     {/* URL Input */}
-                    <div className="flex-1 w-full bg-slate-900/50 rounded-xl border border-white/10 flex items-center pl-4 pr-1 py-1.5 relative group">
+                    <div className="flex-1 w-full bg-slate-50 rounded-xl border border-slate-200 flex items-center pl-4 pr-1 py-1.5 relative group">
                         <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                            <LinkIcon size={14} className="text-slate-500" />
+                            <LinkIcon size={14} className="text-[#5a5a82]" />
                         </div>
                         <input
                             type="text"
                             readOnly
                             value={typeof window !== 'undefined' ? window.location.href : ''}
-                            className="bg-transparent text-slate-400 text-sm w-full pl-6 pr-2 py-2.5 outline-none font-mono"
+                            className="bg-transparent text-[#1a1a3e] text-sm w-full pl-6 pr-2 py-2.5 outline-none font-mono"
                         />
+
                         <button
                             onClick={() => handleShare('copy')}
                             className={`
-                                flex items-center gap-2 px-4 py-2 rounded-md font-bold text-xs transition-all
+                                flex items-center gap-2 px-4 py-2 rounded-md font-bold text-xs transition-all ml-2
                                 ${isCopied
                                     ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
-                                    : 'bg-slate-700 text-white hover:bg-slate-600'}
+                                    : 'bg-[#1a1a3e] text-amber-500 border border-[#1a1a3e] hover:bg-amber-50'}
                             `}
                         >
                             {isCopied ? <Check size={14} /> : <Copy size={14} />}
@@ -533,7 +534,7 @@ export const PhoneAnalysisResult: React.FC<PhoneAnalysisResultProps> = ({
                         if (onReset) onReset();
                         else window.location.href = '/phone-analysis';
                     }}
-                    className="flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-medium text-sm transition-all border border-slate-700 hover:border-slate-500"
+                    className="flex items-center gap-2 px-6 py-3 bg-white hover:bg-slate-50 text-[#1a1a3e] rounded-xl font-medium text-sm transition-all border border-[#ddddf0]"
                 >
                     <Search size={16} />
                     ค้นหาเบอร์อื่น

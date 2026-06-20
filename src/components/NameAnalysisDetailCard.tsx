@@ -59,7 +59,7 @@ export const NameAnalysisDetailCard: React.FC<NameAnalysisDetailCardProps> = ({ 
     };
 
     return (
-        <div className="w-full max-w-3xl mx-auto space-y-4 font-sans text-slate-900">
+        <div className="w-full max-w-3xl mx-auto space-y-4 font-sans text-[#1a1a3e]">
             {/* Summary Table */}
             <div className="overflow-hidden rounded-xl border border-teal-800">
                 <div className="grid grid-cols-5 bg-teal-800 text-white text-center font-bold text-sm sm:text-base">
@@ -91,7 +91,7 @@ export const NameAnalysisDetailCard: React.FC<NameAnalysisDetailCardProps> = ({ 
                 <div className="px-4 py-2 border-b border-slate-200 font-bold text-lg">
                     ชื่อ <span className="text-amber-600">{firstName}</span> อายตนะ 6 คือ เลข {firstNameAyatana}
                 </div>
-                <div className="p-4 bg-white text-sm sm:text-base text-slate-700 space-y-3">
+                <div className="p-4 bg-white text-sm sm:text-base text-[#5a5a82] space-y-3">
                     <div>
                         <span className="font-bold">เลขดายตนะ 6 ได้แก่ หมายเลข {firstNameAyatana} : </span>
                         {firstNameAyatanaPred.desc}
@@ -112,7 +112,7 @@ export const NameAnalysisDetailCard: React.FC<NameAnalysisDetailCardProps> = ({ 
                 <div className="px-4 py-2 border-b border-slate-200 font-bold text-lg">
                     นามสกุล <span className="text-amber-600">{lastName}</span> อายตนะ 6 คือ เลข {lastNameAyatana}
                 </div>
-                <div className="p-4 bg-white text-sm sm:text-base text-slate-700 space-y-3">
+                <div className="p-4 bg-white text-sm sm:text-base text-[#5a5a82] space-y-3">
                     <div>
                         <span className="font-bold">เลขดายตนะ 6 ได้แก่ หมายเลข {lastNameAyatana} : </span>
                         {lastNameAyatanaPred.desc}
@@ -130,7 +130,7 @@ export const NameAnalysisDetailCard: React.FC<NameAnalysisDetailCardProps> = ({ 
                 <div className="bg-teal-700 text-amber-300 font-bold px-4 py-2 text-lg">
                     ผลรวม {firstName} {lastName}
                 </div>
-                <div className="p-4 bg-white text-sm sm:text-base text-slate-700">
+                <div className="p-4 bg-white text-sm sm:text-base text-[#5a5a82]">
                     <div className="mb-2">
                         <span className={`font-bold text-xl ${getLevelColor(totalPred.level)}`}>หมายเลข {totalScore} {totalPred.title}</span>
                     </div>

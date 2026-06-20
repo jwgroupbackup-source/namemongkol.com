@@ -542,28 +542,28 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
     };
 
     return (
-        <div className="min-h-screen w-full max-w-[1400px] bg-[#050b14] px-3 pb-36 pt-7 text-slate-200 sm:px-4 md:pb-28 md:pt-32">
+        <div className="min-h-screen w-full max-w-[1400px] mx-auto bg-[#f8f8fc] px-3 pb-36 pt-7 text-slate-800 sm:px-4 md:pb-28 md:pt-32">
             <div className="mx-auto max-w-7xl space-y-4 md:space-y-8">
 
                 {/* Header */}
                 <div className="flex flex-col gap-2.5 md:gap-4">
                     <div>
-                        <h1 className="mb-1.5 text-[1.65rem] font-bold leading-tight text-amber-200 sm:text-3xl md:mb-2 md:text-5xl">
+                        <h1 className="mb-1.5 text-[1.65rem] font-bold leading-tight text-[#1a1a3e] sm:text-3xl md:mb-2 md:text-5xl">
                             วอลเปเปอร์มงคล เสริมดวงชะตา บารมี และโชคลาภ
                         </h1>
-                        <p className="max-w-[70ch] text-sm leading-relaxed text-slate-400 md:text-base">
+                        <p className="max-w-[70ch] text-sm leading-relaxed text-[#5a5a82] md:text-base">
                             ยกระดับพลังบวกให้กับชีวิตทุกครั้งที่เปิดหน้าจอมือถือ ด้วยพลังแห่งภาพมงคลและสีมงคลตามวันเกิด
                         </p>
                     </div>
 
                     {/* Main Tabs + Share */}
                     <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center md:gap-3">
-                        <div className="flex w-full sm:w-fit bg-slate-800 p-1 rounded-xl md:p-1.5 md:rounded-2xl border border-white/10">
+                        <div className="flex w-full sm:w-fit bg-[#0f172a] p-1 rounded-xl md:p-1.5 md:rounded-2xl border border-[#1e293b] shadow-md">
                             <button
                                 onClick={() => navigateTab('collection')}
                                 className={`flex-1 sm:flex-none px-2.5 sm:px-6 py-2.5 sm:py-3 rounded-lg md:rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex items-center justify-center gap-1.5 sm:gap-2 ${activeTab === 'collection'
                                     ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
-                                    : 'text-slate-400 hover:text-white hover:bg-slate-700'
+                                    : 'text-slate-300 hover:text-amber-400 hover:bg-[#1e293b]'
                                     }`}
                             >
                                 <ImageIcon className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
@@ -573,7 +573,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                 onClick={() => navigateTab('custom')}
                                 className={`flex-1 sm:flex-none px-2.5 sm:px-6 py-2.5 sm:py-3 rounded-lg md:rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex items-center justify-center gap-1.5 sm:gap-2 ${activeTab === 'custom'
                                     ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/20'
-                                    : 'text-slate-400 hover:text-white hover:bg-slate-700'
+                                    : 'text-slate-300 hover:text-amber-400 hover:bg-[#1e293b]'
                                     }`}
                             >
                                 <Palette className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
@@ -584,7 +584,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                         {/* Share / Copy Link */}
                         <button
                             onClick={handleCopyLink}
-                            className="flex min-h-10 items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-800 border border-white/10 text-slate-300 hover:bg-slate-700 hover:text-white transition-all w-full sm:w-auto"
+                            className="flex min-h-10 items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium bg-[#0f172a] border border-[#1e293b] text-slate-300 hover:bg-[#1e293b] hover:text-amber-400 hover:border-amber-500/30 transition-all w-full sm:w-auto shadow-sm"
                         >
                             {showCopied ? <Check size={16} className="text-emerald-400" /> : <Share2 size={16} />}
                             {showCopied ? 'คัดลอกแล้ว!' : 'แชร์ลิงก์หมวดนี้'}
@@ -599,14 +599,14 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                             className="space-y-4 md:space-y-6 animate-fade-in-up"
                         >
                             {/* Category Selector */}
-                            <div className="sticky top-[100px] z-30 -mx-3 space-y-2 border-y border-white/5 bg-[#050b14]/92 px-3 py-2 backdrop-blur-xl md:static md:mx-0 md:space-y-4 md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
+                            <div className="sticky top-[100px] z-30 -mx-3 space-y-2 border-y border-slate-200 bg-[#f8f8fc]/92 px-3 py-2 backdrop-blur-xl md:static md:mx-0 md:space-y-4 md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
                                 <div className="grid grid-cols-2 gap-2 sm:flex">
                                     <button
                                         onClick={() => navigateCategory('day')}
-                                        className={`flex min-h-11 items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                                        className={`flex min-h-11 items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-sm ${
                                             selectedCategory === 'day'
-                                                ? 'bg-amber-500/15 text-amber-300 border border-amber-500/40'
-                                                : 'bg-slate-800 text-slate-400 border border-white/10 hover:text-white hover:bg-slate-700'
+                                                ? 'bg-[#0f172a] text-amber-400 border border-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.25)]'
+                                                : 'bg-[#0f172a] text-slate-300 border border-[#1e293b] hover:text-amber-400 hover:bg-[#1e293b] hover:border-amber-500/30'
                                         }`}
                                     >
                                         <Sun size={16} />
@@ -614,10 +614,10 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                     </button>
                                     <button
                                         onClick={() => navigateCategory('zodiac')}
-                                        className={`flex min-h-11 items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                                        className={`flex min-h-11 items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-sm ${
                                             selectedCategory === 'zodiac'
-                                                ? 'bg-purple-500/15 text-purple-300 border border-purple-500/40'
-                                                : 'bg-slate-800 text-slate-400 border border-white/10 hover:text-white hover:bg-slate-700'
+                                                ? 'bg-[#0f172a] text-purple-400 border border-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.25)]'
+                                                : 'bg-[#0f172a] text-slate-300 border border-[#1e293b] hover:text-amber-400 hover:bg-[#1e293b] hover:border-amber-500/30'
                                         }`}
                                     >
                                         <Star size={16} />
@@ -628,16 +628,16 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                 {/* Day Filter - show when 'day' category is selected */}
                                 {selectedCategory === 'day' && (
                                     <div className="relative">
-                                        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-5 rounded-l-xl bg-gradient-to-r from-[#050b14] to-transparent md:hidden" />
-                                        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 rounded-r-xl bg-gradient-to-l from-[#050b14] to-transparent md:hidden" />
-                                        <div className="flex w-full max-w-full overflow-x-auto no-scrollbar rounded-xl border border-white/10 bg-slate-800/80 p-1.5 pr-4">
+                                        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-5 rounded-l-xl bg-gradient-to-r from-[#f8f8fc] to-transparent md:hidden" />
+                                        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 rounded-r-xl bg-gradient-to-l from-[#f8f8fc] to-transparent md:hidden" />
+                                        <div className="flex w-full max-w-full overflow-x-auto no-scrollbar rounded-xl border border-[#1e293b] bg-[#0f172a] p-1.5 pr-4 shadow-sm">
                                             {DAYS.map((d) => (
                                                 <button
                                                     key={d.value}
                                                     onClick={() => navigateDay(d.value)}
                                                     className={`flex min-h-10 items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${selectedDay === d.value
                                                         ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
-                                                        : 'text-slate-400 hover:text-white hover:bg-slate-700'
+                                                        : 'text-slate-300 hover:text-amber-400 hover:bg-[#1e293b]'
                                                         }`}
                                                 >
                                                     <span className={`w-2 h-2 rounded-full flex-shrink-0 ${DAY_COLORS[d.value] ?? 'bg-slate-500'}`} />
@@ -651,16 +651,16 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                 {/* Zodiac Filter - show when 'zodiac' category is selected */}
                                 {selectedCategory === 'zodiac' && (
                                     <div className="relative">
-                                        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-5 rounded-l-xl bg-gradient-to-r from-[#050b14] to-transparent md:hidden" />
-                                        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 rounded-r-xl bg-gradient-to-l from-[#050b14] to-transparent md:hidden" />
-                                        <div className="flex w-full max-w-full overflow-x-auto no-scrollbar rounded-xl border border-white/10 bg-slate-800/80 p-1.5 pr-4">
+                                        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-5 rounded-l-xl bg-gradient-to-r from-[#f8f8fc] to-transparent md:hidden" />
+                                        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 rounded-r-xl bg-gradient-to-l from-[#f8f8fc] to-transparent md:hidden" />
+                                        <div className="flex w-full max-w-full overflow-x-auto no-scrollbar rounded-xl border border-[#1e293b] bg-[#0f172a] p-1.5 pr-4 shadow-sm">
                                             {ZODIAC_SIGNS.map((z) => (
                                                 <button
                                                     key={z.value}
                                                     onClick={() => navigateZodiac(z.value)}
                                                     className={`flex min-h-10 items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${selectedZodiac === z.value
                                                         ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/20'
-                                                        : 'text-slate-400 hover:text-white hover:bg-slate-700'
+                                                        : 'text-slate-300 hover:text-amber-400 hover:bg-[#1e293b]'
                                                         }`}
                                                 >
                                                     <span className="text-base">{z.emoji}</span>
@@ -683,7 +683,7 @@ function WallpapersContent({ initialCategory: propCategory, initialDay: propDay,
                                     return (
                                     <div
                                         key={wp.id}
-                                        className={`group relative rounded-2xl overflow-hidden bg-slate-800 border border-white/10 hover:border-amber-500/50 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-xl cursor-pointer will-change-transform ${isFeatured ? 'col-span-2 aspect-[4/5] md:aspect-[9/16] lg:row-span-2 lg:min-h-[420px] lg:aspect-auto' : 'aspect-[9/16]'}`}
+                                        className={`group relative rounded-2xl overflow-hidden bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/50 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 shadow-xl hover:shadow-[0_10px_40px_-10px_rgba(251,191,36,0.3)] cursor-pointer will-change-transform ${isFeatured ? 'col-span-2 aspect-[4/5] md:aspect-[9/16] lg:row-span-2 lg:min-h-[420px] lg:aspect-auto' : 'aspect-[9/16]'}`}
                                         onClick={() => {
                                             setSelectedWallpaper(wp);
                                             trackIdle('wallpapers.card.open_detail', {

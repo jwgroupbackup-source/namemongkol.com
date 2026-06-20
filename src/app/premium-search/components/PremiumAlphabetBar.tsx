@@ -16,13 +16,13 @@ export default function PremiumAlphabetBar({ availableLetters, selectedLetter, s
     return (
         <div className="relative xl:sticky xl:top-28 z-20 animate-fade-in-up">
             {/* Mobile Scroll Indicators */}
-            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0a0f1d] to-transparent pointer-events-none z-10 xl:hidden" />
-            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0a0f1d] to-transparent pointer-events-none z-10 xl:hidden" />
+            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#f8f8fc] to-transparent pointer-events-none z-10 xl:hidden" />
+            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#f8f8fc] to-transparent pointer-events-none z-10 xl:hidden" />
 
-            <div className="bg-[#0f172a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-2 sm:p-3 xl:p-5 shadow-2xl overflow-x-auto xl:overflow-visible scrollbar-none">
+            <div className="bg-[#0f172a] border border-[#1e293b] rounded-2xl p-2 sm:p-3 xl:p-5 shadow-md overflow-x-auto xl:overflow-visible scrollbar-none">
                 <div className="hidden xl:mb-4 xl:block">
                     <p className="text-sm font-bold text-slate-200">เลือกหมวดอักษร</p>
-                    <p className="mt-1 text-xs text-slate-500">{availableLetters.length} หมวดที่ตรงเงื่อนไข</p>
+                    <p className="mt-1 text-xs text-slate-400">{availableLetters.length} หมวดที่ตรงเงื่อนไข</p>
                 </div>
                 
                 <div className="grid grid-rows-3 grid-flow-col gap-1.5 sm:gap-2 xl:grid-rows-none xl:grid-flow-row xl:grid-cols-3 w-max xl:w-full">

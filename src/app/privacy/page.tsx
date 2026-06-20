@@ -200,7 +200,7 @@ export default function PrivacyPage() {
                                             </li>
                                         ))}
                                     </ul>
-                                    <p className="text-sm leading-relaxed text-slate-400">
+                                    <p className="text-sm leading-relaxed text-slate-300">
                                         ผลการวิเคราะห์ด้านชื่อ เบอร์ ลายมือ หรือออร่าเป็นข้อมูลประกอบการตัดสินใจ ไม่ใช่คำรับรองผลลัพธ์ทางกฎหมาย การแพทย์ การเงิน หรือชะตาชีวิตแบบตายตัว
                                     </p>
                                 </div>

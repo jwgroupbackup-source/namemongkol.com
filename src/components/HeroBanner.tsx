@@ -2,12 +2,43 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, BadgeCheck, BarChart3, Languages, Star, Target, Zap } from 'lucide-react';
+import { ArrowRight, BadgeCheck, BarChart3, Languages, Star, Target, Zap, Sparkle } from 'lucide-react';
 import { useLanguage } from './LanguageProvider';
 
 type HeroBannerProps = {
     headingLevel?: 'h1' | 'h2';
 };
+
+const ThaiFlagIcon = ({ className }: { className?: string }) => (
+    <svg viewBox="0 0 36 36" className={className} xmlns="http://www.w3.org/2000/svg">
+        <clipPath id="circleClipTH">
+            <circle cx="18" cy="18" r="18" />
+        </clipPath>
+        <g clipPath="url(#circleClipTH)">
+            <rect width="36" height="36" fill="#f4f5f8" />
+            <rect width="36" height="6" fill="#ed1c24" />
+            <rect y="30" width="36" height="6" fill="#ed1c24" />
+            <rect y="12" width="36" height="12" fill="#241d4f" />
+        </g>
+        <circle cx="18" cy="18" r="17.5" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="1" />
+    </svg>
+);
+
+const UKFlagIcon = ({ className }: { className?: string }) => (
+    <svg viewBox="0 0 36 36" className={className} xmlns="http://www.w3.org/2000/svg">
+        <clipPath id="circleClipUK">
+            <circle cx="18" cy="18" r="18" />
+        </clipPath>
+        <g clipPath="url(#circleClipUK)">
+            <rect width="36" height="36" fill="#012169" />
+            <path d="M0,0 L36,36 M36,0 L0,36" stroke="#fff" strokeWidth="4" />
+            <path d="M0,0 L36,36 M36,0 L0,36" stroke="#C8102E" strokeWidth="2" />
+            <path d="M18,0 L18,36 M0,18 L36,18" stroke="#fff" strokeWidth="8" />
+            <path d="M18,0 L18,36 M0,18 L36,18" stroke="#C8102E" strokeWidth="4" />
+        </g>
+        <circle cx="18" cy="18" r="17.5" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="1" />
+    </svg>
+);
 
 type ProofAvatar = {
     bg: string;
@@ -28,7 +59,7 @@ const AvatarPortrait = ({ avatar, index }: { avatar: ProofAvatar; index: number 
     const clipId = `hero-avatar-clip-${index}`;
 
     return (
-        <span className="relative h-7 w-7 overflow-hidden rounded-full border border-amber-100/75 bg-slate-950 shadow-[0_0_0_1px_rgba(8,12,24,0.95),0_5px_14px_rgba(0,0,0,0.38)]">
+        <span className="relative h-8 w-8 overflow-hidden rounded-full border border-amber-100/75 bg-slate-950 shadow-[0_0_0_1px_rgba(8,12,24,0.95),0_5px_14px_rgba(0,0,0,0.38)]">
             <svg viewBox="0 0 40 40" className="h-full w-full" aria-hidden="true">
                 <defs>
                     <clipPath id={clipId}>
@@ -98,6 +129,8 @@ type LiveStatsResponse = {
     stats?: {
         totalAnalyses?: number;
         totalUsers?: number;
+        avgRating?: number;
+        reviewCount?: number;
     };
 };
 
@@ -114,6 +147,8 @@ const formatRealtimeCount = (value?: number) => {
 const HeroSocialProof = () => {
     const [analysisCount, setAnalysisCount] = React.useState('...');
     const [memberCount, setMemberCount] = React.useState('...');
+    const [reviewCount, setReviewCount] = React.useState<number | null>(null);
+    const [avgRating, setAvgRating] = React.useState<number>(5);
 
     React.useEffect(() => {
         let isMounted = true;
@@ -142,6 +177,14 @@ const HeroSocialProof = () => {
                 if (nextMemberCount) {
                     setMemberCount(nextMemberCount);
                 }
+
+                if (typeof data.stats?.reviewCount === 'number' && data.stats.reviewCount > 0) {
+                    setReviewCount(data.stats.reviewCount);
+                }
+
+                if (typeof data.stats?.avgRating === 'number' && data.stats.avgRating > 0) {
+                    setAvgRating(data.stats.avgRating);
+                }
             } catch {
                 // Keep the public proof readable even if stats are unavailable.
             }
@@ -156,36 +199,64 @@ const HeroSocialProof = () => {
         };
     }, []);
 
+    // Derive star display from avgRating (rounded to nearest 0.5)
+    const starCount = Math.round(avgRating * 2) / 2;
+    const fullStars = Math.floor(starCount);
+    const hasHalf = starCount % 1 !== 0;
+    const ratingLabel = avgRating === Math.floor(avgRating)
+        ? `${avgRating}/5`
+        : `${avgRating.toFixed(1)}/5`;
+
     return (
-        <div className="mt-4 hidden flex-col gap-3 rounded-2xl border border-amber-200/15 bg-black/30 px-4 py-3 shadow-[0_14px_34px_rgba(0,0,0,0.24),inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-md sm:flex sm:flex-row sm:items-center sm:justify-between lg:max-w-xl">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
-                <div className="flex items-center gap-3">
-                    <div className="flex -space-x-2.5">
-                        {proofAvatars.map((avatar, index) => (
-                            <AvatarPortrait key={`${avatar.style}-${avatar.shirt}`} avatar={avatar} index={index} />
-                        ))}
-                    </div>
-                    <p className="text-xs font-semibold leading-snug text-amber-50/90 sm:text-sm">
-                        สมาชิก <span className="text-amber-300">{memberCount}</span> คน เชื่อมั่นในผลลัพธ์
+        <div className="mt-3 flex flex-col gap-2.5 rounded-2xl border border-amber-200/40 bg-gradient-to-r from-[#fffdf8] to-white px-4 py-3 shadow-sm sm:mt-4 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-4 sm:py-3 lg:max-w-xl">
+            {/* Row 1: Avatars + member count */}
+            <div className="flex items-center gap-3">
+                <div className="flex -space-x-2 shrink-0">
+                    {proofAvatars.map((avatar, index) => (
+                        <AvatarPortrait key={`${avatar.style}-${avatar.shirt}`} avatar={avatar} index={index} />
+                    ))}
+                </div>
+                <div className="flex flex-col">
+                    <p className="text-xs font-semibold leading-snug text-[#3a3a5c] sm:text-sm">
+                        สมาชิก <span className="font-bold text-amber-600">{memberCount}</span> คน
+                    </p>
+                    <p className="text-xs font-semibold leading-snug text-[#5a5a82] sm:text-sm">
+                        เชื่อมั่นในผลลัพธ์
                     </p>
                 </div>
-
-                <span className="hidden h-4 w-px bg-amber-100/15 sm:block" />
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-50/85 sm:text-sm">
-                    <BarChart3 className="h-3.5 w-3.5 text-amber-300" />
-                    <span className="text-amber-300">{analysisCount}</span>
-                    ครั้งที่วิเคราะห์แล้ว
-                </span>
             </div>
 
-            <div className="flex items-center gap-2 whitespace-nowrap text-xs text-amber-100/90">
-                <span className="font-bold text-amber-200">(5/5)</span>
-                <span className="flex items-center gap-0.5 text-amber-300" aria-label="5 จาก 5 ดาว">
-                    {Array.from({ length: 5 }).map((_, index) => (
-                        <Star key={index} className="h-3.5 w-3.5 fill-current" />
-                    ))}
+            {/* Row 2: Analysis count + Rating */}
+            <div className="flex items-center gap-2.5 sm:gap-3">
+                <span className="hidden h-4 w-px bg-[#ddddf0] sm:block" />
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#5a5a82] sm:text-sm">
+                    <BarChart3 className="h-3.5 w-3.5 text-amber-500" />
+                    <span className="font-bold text-amber-500">{analysisCount}</span>
+                    ครั้งที่วิเคราะห์แล้ว
                 </span>
-                <span className="text-amber-50/60">จาก 13 รีวิว</span>
+
+                <span className="h-3.5 w-px bg-[#ddddf0] sm:h-4" />
+
+                <span className="inline-flex items-center gap-1.5 text-xs text-[#5a5a82] sm:text-sm">
+                    <span className="font-bold text-amber-500">({ratingLabel})</span>
+                    <span
+                        className="flex items-center gap-0.5 text-amber-400"
+                        aria-label={`${ratingLabel} จาก ${reviewCount ?? '—'} รีวิว`}
+                    >
+                        {Array.from({ length: 5 }).map((_, index) => (
+                            <Star
+                                key={index}
+                                className={`h-4 w-4 sm:h-4 sm:w-4 ${
+                                    index < fullStars
+                                        ? 'fill-current'
+                                        : index === fullStars && hasHalf
+                                            ? 'fill-current opacity-50'
+                                            : 'fill-none stroke-current'
+                                }`}
+                            />
+                        ))}
+                    </span>
+                </span>
             </div>
         </div>
     );
@@ -201,50 +272,74 @@ export const HeroBanner = ({ headingLevel = 'h1' }: HeroBannerProps) => {
             <div className="pointer-events-none absolute -left-2 top-16 hidden h-52 w-52 rounded-full border border-amber-200/10 lg:block" />
             <div className="pointer-events-none absolute left-24 top-40 hidden h-px w-56 rotate-[-16deg] bg-gradient-to-r from-transparent via-amber-200/20 to-transparent lg:block" />
 
-            <div className="relative overflow-hidden rounded-[1.25rem] border border-amber-200/10 bg-[#070a15]/35 px-3 py-3 shadow-[0_24px_80px_rgba(1,4,15,0.28)] backdrop-blur-sm sm:rounded-[1.75rem] sm:px-7 sm:py-8 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-0">
+            <div className="relative overflow-hidden rounded-[1.25rem] border border-[#ddddf0] bg-white px-3 py-3 shadow-sm sm:rounded-[1.75rem] sm:px-7 sm:py-8 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-0">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_18%_0%,rgba(215,177,106,0.12),transparent_54%)] lg:hidden" />
 
                 <div className="relative z-10 text-left">
-                    <div className="mb-2 inline-flex max-w-full items-center gap-1.5 overflow-hidden rounded-full border border-amber-200/20 bg-black/25 px-2.5 py-1 text-[9px] font-medium uppercase tracking-[0.06em] text-amber-50/90 shadow-[0_0_18px_rgba(245,158,11,0.08)] backdrop-blur-md sm:mb-4 sm:gap-2 sm:px-4 sm:py-1.5 sm:text-xs sm:tracking-[0.14em]">
-                        <span>{t('home.hero.badgeThai')}</span>
-                        <span className="text-amber-500/50">•</span>
-                        <span>{t('home.hero.badgeEnglish')}</span>
-                        <span className="text-amber-500/50">✦</span>
-                        <span>{t('home.hero.badgeSupport')}</span>
+                    <div className="mb-4 inline-flex max-w-full items-center gap-1 overflow-x-auto rounded-full border border-[#ddddf0] bg-[#f8f8fc] p-1 shadow-sm no-scrollbar sm:gap-2 sm:p-1.5">
+                        {/* Thai Active Badge */}
+                        <div className="flex shrink-0 items-center gap-1.5 rounded-full border border-amber-400 bg-amber-50/80 px-2 py-1 shadow-sm sm:px-3 sm:py-1.5">
+                            <ThaiFlagIcon className="h-3.5 w-3.5 shrink-0 sm:h-4.5 sm:w-4.5" />
+                            <span className="text-[10px] font-bold text-amber-500 sm:text-xs">ไทย</span>
+                            <span className="text-[8px] font-bold tracking-wider text-[#8e8eaa] sm:text-[10px]">TH</span>
+                        </div>
+                        
+                        {/* English Inactive Badge */}
+                        <div className="flex shrink-0 items-center gap-1.5 px-1.5 py-1 sm:px-2 sm:py-1.5">
+                            <UKFlagIcon className="h-3.5 w-3.5 shrink-0 opacity-90 sm:h-4.5 sm:w-4.5" />
+                            <span className="text-[10px] font-bold text-[#1a1a3e] sm:text-xs">ENGLISH</span>
+                            <span className="text-[8px] font-bold tracking-wider text-[#8e8eaa] sm:text-[10px]">GB</span>
+                        </div>
+
+                        {/* Separator */}
+                        <span className="mx-0.5 h-3.5 w-px shrink-0 bg-[#ddddf0] sm:h-4" />
+
+                        {/* Support Feature */}
+                        <div className="flex shrink-0 items-center gap-1.5 px-1.5 py-1 sm:px-2 sm:py-1.5">
+                            <Sparkle className="h-3.5 w-3.5 text-amber-500 sm:h-4 sm:w-4" />
+                            <span className="text-[10px] font-semibold text-[#1a1a3e] sm:text-xs">{t('home.hero.badgeSupport')}</span>
+                        </div>
                     </div>
 
-                    <HeadingTag className="cosmic-text-crisp mb-2 text-[1.62rem] font-bold leading-[1.08] tracking-normal sm:mb-4 sm:text-5xl lg:text-[4.45rem]">
+                    <HeadingTag className="mb-2 break-keep text-[1.62rem] font-bold leading-[1.08] tracking-normal text-[#1a1a3e] sm:mb-4 sm:text-5xl lg:text-[4.45rem]">
                         {t('home.hero.titlePrefix')}
-                        <span className="text-amber-300 drop-shadow-[0_0_18px_rgba(245,158,11,0.28)]">
+                        <span className="text-amber-500">
                             {t('home.hero.titleHighlight')}
                         </span>
                         {t('home.hero.titleFree') ? (
-                            <span className="text-amber-300"> {t('home.hero.titleFree')}</span>
+                            <span className="text-amber-500"> {t('home.hero.titleFree')}</span>
                         ) : (
-                            <span className="text-amber-300">:</span>
+                            <span className="text-amber-500">:</span>
                         )}{' '}
-                        <span className="text-amber-100">{t('home.hero.titleSuffix')}</span>
+                        <span className="text-[#1a1a3e]">
+                            {t('home.hero.titleSuffix').split(' ').map((word, i, arr) => (
+                                <React.Fragment key={i}>
+                                    {word === 'เช็กชื่อ' ? <span className="whitespace-nowrap">{word}</span> : word}
+                                    {i < arr.length - 1 && ' '}
+                                </React.Fragment>
+                            ))}
+                        </span>
                     </HeadingTag>
 
-                    <p className="cosmic-text-soft mb-3 max-w-[58ch] text-xs leading-5 sm:mb-5 sm:text-base sm:leading-8 lg:text-lg">
+                    <p className="mb-3 max-w-[58ch] text-xs leading-5 text-[#5a5a82] sm:mb-5 sm:text-base sm:leading-8 lg:text-lg">
                         {t('home.hero.description')}
                     </p>
 
-                    <div className="mb-3 grid grid-cols-2 gap-2 text-xs text-slate-200 sm:mb-5 sm:grid-cols-3 sm:text-sm lg:max-w-xl">
-                        <div className="flex items-center gap-2 rounded-xl border border-emerald-300/15 bg-emerald-300/5 px-3 py-2">
-                            <Target className="h-4 w-4 shrink-0 text-emerald-300" />
+                    <div className="mb-3 grid grid-cols-2 gap-2 text-xs text-[#5a5a82] sm:mb-5 sm:grid-cols-3 sm:text-sm lg:max-w-xl">
+                        <div className="flex items-center gap-2 rounded-xl border border-[#ddddf0] bg-white px-3 py-2 shadow-sm">
+                            <Target className="h-4 w-4 shrink-0 text-emerald-500" />
                             <span>
-                                <strong className="text-white">99%</strong> {t('home.hero.statAccuracy')}
+                                <strong className="text-[#1a1a3e]">99%</strong> {t('home.hero.statAccuracy')}
                             </span>
                         </div>
-                        <div className="flex items-center gap-2 rounded-xl border border-amber-300/15 bg-amber-300/5 px-3 py-2">
-                            <Zap className="h-4 w-4 shrink-0 text-amber-300" />
+                        <div className="flex items-center gap-2 rounded-xl border border-[#ddddf0] bg-white px-3 py-2 shadow-sm">
+                            <Zap className="h-4 w-4 shrink-0 text-amber-500" />
                             <span>
-                                <strong className="text-white">{t('home.hero.statMethod')}</strong> {t('home.hero.statSpeed')}
+                                <strong className="text-[#1a1a3e]">{t('home.hero.statMethod')}</strong> {t('home.hero.statSpeed')}
                             </span>
                         </div>
-                        <div className="hidden items-center gap-2 rounded-xl border border-sky-300/15 bg-sky-300/5 px-3 py-2 sm:flex">
-                            <Languages className="h-4 w-4 shrink-0 text-sky-200" />
+                        <div className="hidden items-center gap-2 rounded-xl border border-[#ddddf0] bg-white px-3 py-2 shadow-sm sm:flex">
+                            <Languages className="h-4 w-4 shrink-0 text-sky-500" />
                             <span>{t('home.hero.badgeSupport')}</span>
                         </div>
                     </div>
@@ -253,21 +348,21 @@ export const HeroBanner = ({ headingLevel = 'h1' }: HeroBannerProps) => {
                         <Link
                             href="/phone-analysis"
                             data-track="home.hero.secondary.phone"
-                            className="inline-flex items-center gap-1.5 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1.5 text-cyan-100 transition-colors hover:bg-cyan-300/15"
+                            className="inline-flex items-center gap-1.5 rounded-full border border-[#ddddf0] bg-white px-3 py-1.5 text-[#5a5a82] shadow-sm transition-colors hover:bg-[#f8f8fc]"
                         >
                             เช็กเบอร์มงคลฟรี <ArrowRight className="h-3.5 w-3.5" />
                         </Link>
                         <Link
                             href="/aura-analysis"
                             data-track="home.hero.secondary.aura"
-                            className="inline-flex items-center gap-1.5 rounded-full border border-purple-300/20 bg-purple-300/10 px-3 py-1.5 text-purple-100 transition-colors hover:bg-purple-300/15"
+                            className="inline-flex items-center gap-1.5 rounded-full border border-[#ddddf0] bg-white px-3 py-1.5 text-[#5a5a82] shadow-sm transition-colors hover:bg-[#f8f8fc]"
                         >
                             อ่านพลังออร่า <ArrowRight className="h-3.5 w-3.5" />
                         </Link>
                     </div>
 
-                    <p className="mt-3 flex items-center gap-2 text-[11px] font-medium tracking-wide text-emerald-200/90 sm:mt-5 sm:text-sm">
-                        <BadgeCheck className="h-4 w-4 text-emerald-300" />
+                    <p className="mt-3 flex items-center gap-2 text-[11px] font-medium tracking-wide text-emerald-600 sm:mt-5 sm:text-sm">
+                        <BadgeCheck className="h-4 w-4 text-emerald-500" />
                         <span>{t('home.hero.instantAccess')}</span>
                     </p>
 

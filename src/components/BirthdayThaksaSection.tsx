@@ -88,14 +88,14 @@ export const BirthdayThaksaSection = () => {
         <section className="w-full max-w-5xl mx-auto mt-16 mb-12 px-4">
             {/* Header */}
             <div className="text-center mb-12">
-                <span className="px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-sm font-semibold border border-amber-500/20 mb-4 inline-block">
+                <span className="px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-sm font-semibold border border-amber-200 mb-4 inline-block">
                     <BookOpen className="w-4 h-4 inline-block mr-1 -mt-0.5" />
                     คัมภีร์ทักษาปกรณ์
                 </span>
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold text-amber-600 mb-4">
                     รวมตารางอักษรมงคลตามวันเกิด
                 </h2>
-                <p className="text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                <p className="text-[#5a5a82] max-w-3xl mx-auto leading-relaxed">
                     การเลือก &quot;ชื่อมงคล&quot; ไม่ใช่เพียงแค่ความไพเราะ แต่คือการวางรากฐานดวงชะตาด้วยพลังของตัวอักษรที่สอดคล้องกับวันเกิด
                     เราได้รวบรวมตารางอักษรมงคล (ทักษา) ครบทั้ง 8 วัน (รวมพุธกลางวัน/กลางคืน) เพื่อให้คุณใช้เป็นแนวทางในการเลือกชื่อที่ช่วยส่งเสริมด้านทรัพย์ สุขภาพ และบารมี พร้อมหลีกเลี่ยงอักษรกาลกิณีอย่างแม่นยำ
                 </p>
@@ -110,55 +110,60 @@ export const BirthdayThaksaSection = () => {
                     return (
                         <article
                             key={day.dayKey}
-                            className="bg-slate-900/40 rounded-2xl border border-white/5 backdrop-blur-sm overflow-hidden hover:border-amber-500/20 transition-colors"
+                            className="bg-white rounded-2xl border border-[#ddddf0] shadow-sm overflow-hidden hover:border-amber-300 hover:shadow-md transition-all"
                         >
                             {/* Day Image */}
-                            <div className="w-full flex justify-center bg-gradient-to-b from-slate-900/40 to-transparent pt-6 sm:pt-8 pb-2 px-4">
+                            <div className="w-full flex justify-center bg-gradient-to-b from-slate-50 to-white pt-6 sm:pt-8 pb-2 px-4">
                                 <Image
                                     src={day.image}
                                     alt={day.alt}
                                     width={600}
                                     height={600}
-                                    className="w-full max-w-[280px] md:max-w-[340px] h-auto object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)] hover:scale-[1.03] transition-transform duration-500"
+                                    className="w-full max-w-[280px] md:max-w-[340px] h-auto object-contain drop-shadow-md hover:scale-[1.03] transition-transform duration-500"
                                     loading="lazy"
                                 />
                             </div>
 
                             <div className="p-5 md:p-6">
                                 {/* Day Title */}
-                                <h3 className="text-xl font-bold text-white mb-2">
+                                <h3 className="text-xl font-bold text-amber-600 mb-2">
                                     <span className="mr-2">{day.emoji}</span>
                                     {day.title}
                                 </h3>
-                                <p className="text-slate-300 text-sm leading-relaxed mb-4">
+                                <p className="text-[#5a5a82] text-sm leading-relaxed mb-4">
                                     {day.description}
                                 </p>
 
                                 {/* Thaksa Table */}
-                                <div className="overflow-hidden rounded-xl border border-white/10 bg-slate-800/30">
+                                <div className="overflow-hidden rounded-xl border border-[#ddddf0] bg-[#f8f8fc]">
                                     <table className="w-full text-left border-collapse text-sm">
                                         <thead>
-                                            <tr className="bg-white/5 text-slate-300">
-                                                <th className="p-3 font-bold border-b border-white/10 w-2/5">ภูมิ (ความหมาย)</th>
-                                                <th className="p-3 font-bold border-b border-white/10">อักษรประจำภูมิ</th>
+                                            <tr className="bg-white text-[#1a1a3e]">
+                                                <th className="p-3 font-bold border-b border-[#ddddf0] w-2/5">ภูมิ (ความหมาย)</th>
+                                                <th className="p-3 font-bold border-b border-[#ddddf0]">อักษรประจำภูมิ</th>
                                             </tr>
                                         </thead>
-                                        <tbody className="divide-y divide-white/5">
+                                        <tbody className="divide-y divide-[#ddddf0]">
                                             {THAKSA_ROWS.map((row) => {
                                                 const letters = config[row.key];
                                                 if (!letters || typeof letters === 'string') return null;
 
+                                                // Update row colors for light mode
+                                                const rowColor = row.key === 'kali' ? 'text-red-500' :
+                                                    row.key === 'dech' ? 'text-amber-500' :
+                                                        row.key === 'si' ? 'text-emerald-500' : 'text-[#1a1a3e]';
+
                                                 return (
                                                     <tr
                                                         key={row.key}
-                                                        className={`transition-colors hover:bg-white/5 ${row.key === 'kali' ? 'bg-red-500/5' : ''}`}
+                                                        className={`transition-colors hover:bg-amber-50 ${row.key === 'kali' ? 'bg-red-50' : ''}`}
                                                     >
                                                         <td className="p-3">
-                                                            <span className={`font-bold ${row.color}`}>{row.label}</span>
-                                                            <span className="text-xs text-slate-400 ml-1">({row.meaning})</span>
+                                                            <span className={`font-bold ${rowColor}`}>{row.label}</span>
+                                                            <span className="text-xs text-[#5a5a82] ml-1">({row.meaning})</span>
                                                         </td>
                                                         <td className="p-3">
-                                                            <span className="text-slate-200 tracking-wider">
+                                                            <span className="text-[#1a1a3e] font-medium tracking-wider">
                                                                 {letters === VOWELS ? 'อ และ สระทั้งหมด' : (letters as string[]).join(' ')}
                                                             </span>
                                                         </td>
@@ -175,12 +180,12 @@ export const BirthdayThaksaSection = () => {
             </div>
 
             {/* Closing CTA */}
-            <div className="mt-12 bg-gradient-to-r from-amber-500/10 to-emerald-500/10 rounded-2xl border border-white/10 p-6 md:p-8 text-center">
-                <h3 className="text-2xl font-bold text-white mb-3">
+            <div className="mt-12 bg-gradient-to-r from-amber-50 to-emerald-50 rounded-2xl border border-[#ddddf0] p-6 md:p-8 text-center shadow-sm">
+                <h3 className="text-2xl font-bold text-amber-600 mb-3">
                     ทำไมต้องตรวจสอบอักษรมงคลที่ namemongkol.com?
                 </h3>
-                <p className="text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                    เราวิเคราะห์ชื่อโดยใช้หลัก <strong className="text-amber-400">ทักษาปกรณ์</strong> ร่วมกับ <strong className="text-emerald-400">เลขศาสตร์</strong> เพื่อหาความสมดุลที่ดีที่สุดสำหรับคุณ เพราะชื่อคือเข็มทิศของชีวิต ให้เราช่วยคุณหาทิศทางที่สว่างไสวที่สุด
+                <p className="text-[#5a5a82] max-w-2xl mx-auto leading-relaxed">
+                    เราวิเคราะห์ชื่อโดยใช้หลัก <strong className="text-amber-500">ทักษาปกรณ์</strong> ร่วมกับ <strong className="text-emerald-500">เลขศาสตร์</strong> เพื่อหาความสมดุลที่ดีที่สุดสำหรับคุณ เพราะชื่อคือเข็มทิศของชีวิต ให้เราช่วยคุณหาทิศทางที่สว่างไสวที่สุด
                 </p>
             </div>
         </section>

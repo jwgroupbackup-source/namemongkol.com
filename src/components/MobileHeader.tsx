@@ -16,7 +16,7 @@ export const MobileHeader = ({ onMenuClick, user }: MobileHeaderProps) => {
     const { t } = useLanguage();
 
     return (
-        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 h-[68px] max-[400px]:h-[64px] bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/10 flex items-center px-4 max-[400px]:px-3 justify-between transition-all duration-300">
+        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 h-[68px] max-[400px]:h-[64px] backdrop-blur-xl flex items-center px-4 max-[400px]:px-3 justify-between transition-all duration-300" style={{ background: 'rgba(255,255,255,0.96)', borderBottom: '1px solid #ddddf0', boxShadow: '0 2px 16px rgba(26,26,62,0.06)' }}>
             {/* Left: Menu Button */}
             <div className="flex items-center gap-3 relative z-20">
                 <button
@@ -35,8 +35,8 @@ export const MobileHeader = ({ onMenuClick, user }: MobileHeaderProps) => {
                         <Sparkles size={16} className="text-white drop-shadow-md" />
                     </div>
                     <div className="hidden min-[500px]:flex items-baseline tracking-tight">
-                        <span className="text-base font-bold text-slate-800 dark:text-white font-sans mr-[1px]">Name</span>
-                        <span className="text-base font-bold text-amber-500 dark:text-amber-400 font-sans">Mongkol</span>
+                        <span className="text-base font-bold text-slate-800 font-sans mr-[1px]">Name</span>
+                        <span className="text-base font-bold text-amber-500 font-sans">Mongkol</span>
                     </div>
                 </Link>
             </div>
@@ -66,7 +66,7 @@ export const MobileHeader = ({ onMenuClick, user }: MobileHeaderProps) => {
                 ) : (
                     <button
                         onClick={onMenuClick}
-                        className="w-9 h-9 max-[400px]:w-8 max-[400px]:h-8 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-amber-500 hover:bg-slate-200 dark:hover:bg-white/10 transition-all"
+                        className="w-9 h-9 max-[400px]:w-8 max-[400px]:h-8 rounded-xl bg-slate-50 border border-[#ddddf0] flex items-center justify-center text-amber-500 hover:bg-[#eeebf8] hover:border-[#9b8ec4]/40 transition-all"
                         aria-label={t('nav.menu', 'Open user menu')}
                     >
                         <UserIcon size={17} />

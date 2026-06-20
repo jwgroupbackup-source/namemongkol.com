@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function PalmHeroBanner() {
   return (
-    <section className="relative mb-2 max-h-[118px] overflow-hidden rounded-2xl border border-amber-500/20 shadow-xl shadow-black/20 sm:mb-6 sm:max-h-none sm:rounded-3xl">
+    <section className="relative mb-2 max-h-[118px] overflow-hidden rounded-2xl border border-[#ddddf0] bg-white shadow-sm sm:mb-6 sm:max-h-none sm:rounded-3xl">
       {/* SEO: H1 ซ่อนไว้ให้ search engine อ่านได้ — ข้อความแสดงอยู่ในภาพแบนเนอร์แล้ว */}
       <h1 className="sr-only">วิเคราะห์ลายมือออนไลน์ แบบมืออาชีพด้วย AI</h1>
 

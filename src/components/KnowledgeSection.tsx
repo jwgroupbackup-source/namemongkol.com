@@ -40,21 +40,21 @@ export const KnowledgeSection: React.FC = () => {
     };
 
     return (
-        <section id="knowledge-section" className="py-16 px-4 md:px-8 bg-slate-900/50 relative overflow-hidden">
+        <section id="knowledge-section" className="py-16 px-4 md:px-8 bg-white relative overflow-hidden">
             {/* Ambient Background */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-50 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-emerald-50 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="max-w-6xl mx-auto relative z-10">
                 <div className="text-center mb-12">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-amber-500 text-sm font-medium mb-4">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-600 text-sm font-medium mb-4 shadow-sm">
                         <Book size={16} />
                         <span>{t('sections.knowledge.badge')}</span>
                     </div>
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+                    <h2 className="text-3xl md:text-5xl font-bold text-[#1a1a3e] mb-6">
                         {t('sections.knowledge.title')}
                     </h2>
-                    <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+                    <p className="text-[#5a5a82] max-w-2xl mx-auto text-lg">
                         {t('sections.knowledge.description')}
                     </p>
                 </div>
@@ -64,8 +64,8 @@ export const KnowledgeSection: React.FC = () => {
                     <button
                         onClick={() => setActiveTab('numerology')}
                         className={`flex items-center justify-center gap-2 p-4 rounded-xl transition-all border ${activeTab === 'numerology'
-                            ? 'bg-amber-500/20 border-amber-500/50 text-amber-400 shadow-lg shadow-amber-900/20'
-                            : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                            ? 'bg-amber-50 border-amber-400 text-amber-600 shadow-sm'
+                            : 'bg-white border-[#ddddf0] text-[#5a5a82] hover:bg-[#f8f8fc] hover:text-[#1a1a3e]'
                             }`}
                     >
                         <Calculator size={20} />
@@ -74,8 +74,8 @@ export const KnowledgeSection: React.FC = () => {
                     <button
                         onClick={() => setActiveTab('thaksa')}
                         className={`flex items-center justify-center gap-2 p-4 rounded-xl transition-all border ${activeTab === 'thaksa'
-                            ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-400 shadow-lg shadow-emerald-900/20'
-                            : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                            ? 'bg-emerald-50 border-emerald-400 text-emerald-600 shadow-sm'
+                            : 'bg-white border-[#ddddf0] text-[#5a5a82] hover:bg-[#f8f8fc] hover:text-[#1a1a3e]'
                             }`}
                     >
                         <Calendar size={20} />
@@ -84,8 +84,8 @@ export const KnowledgeSection: React.FC = () => {
                     <button
                         onClick={() => setActiveTab('ayatana')}
                         className={`flex items-center justify-center gap-2 p-4 rounded-xl transition-all border ${activeTab === 'ayatana'
-                            ? 'bg-rose-500/20 border-rose-500/50 text-rose-400 shadow-lg shadow-rose-900/20'
-                            : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                            ? 'bg-rose-50 border-rose-400 text-rose-600 shadow-sm'
+                            : 'bg-white border-[#ddddf0] text-[#5a5a82] hover:bg-[#f8f8fc] hover:text-[#1a1a3e]'
                             }`}
                     >
                         <Heart size={20} />
@@ -94,8 +94,8 @@ export const KnowledgeSection: React.FC = () => {
                     <button
                         onClick={() => setActiveTab('nirun')}
                         className={`flex items-center justify-center gap-2 p-4 rounded-xl transition-all border ${activeTab === 'nirun'
-                            ? 'bg-blue-500/20 border-blue-500/50 text-blue-400 shadow-lg shadow-blue-900/20'
-                            : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                            ? 'bg-blue-50 border-blue-400 text-blue-600 shadow-sm'
+                            : 'bg-white border-[#ddddf0] text-[#5a5a82] hover:bg-[#f8f8fc] hover:text-[#1a1a3e]'
                             }`}
                     >
                         <InfinityIcon size={20} />
@@ -104,32 +104,32 @@ export const KnowledgeSection: React.FC = () => {
                 </div>
 
                 {/* Content Area */}
-                <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl min-h-[400px]">
+                <div className="bg-white backdrop-blur-xl border border-[#ddddf0] rounded-3xl p-6 md:p-10 shadow-sm min-h-[400px]">
 
                     {/* Numerology Content */}
                     {activeTab === 'numerology' && (
                         <div className="animate-fade-in space-y-8">
                             <div className="flex items-start gap-6">
-                                <div className="hidden md:flex shrink-0 w-16 h-16 rounded-2xl bg-amber-500/10 items-center justify-center">
+                                <div className="hidden md:flex shrink-0 w-16 h-16 rounded-2xl bg-amber-50 items-center justify-center">
                                     <Calculator className="w-8 h-8 text-amber-500" />
                                 </div>
                                 <div className="space-y-4">
-                                    <h3 className="text-2xl font-bold text-white">เลขศาสตร์ (Numerology) คืออะไร?</h3>
-                                    <p className="text-slate-300 leading-relaxed text-lg">
+                                    <h3 className="text-2xl font-bold text-[#1a1a3e]">เลขศาสตร์ (Numerology) คืออะไร?</h3>
+                                    <p className="text-[#5a5a82] leading-relaxed text-lg">
                                         เลขศาสตร์เป็นวิธีตีความชื่อด้วยตัวเลขตามตำรา โดยนำตัวอักษร สระ และวรรณยุกต์มาแปลงค่าเป็นตัวเลข แล้วบวกรวมเพื่ออ่านความหมายของ <strong>&quot;ผลรวม&quot;</strong> และใช้ประกอบการพิจารณาในการตั้งชื่อ
                                     </p>
                                 </div>
                             </div>
 
-                            <div className="bg-slate-800/50 rounded-2xl p-6 md:p-8 border border-white/5">
-                                <h4 className="text-xl font-bold text-amber-400 mb-6 flex items-center gap-2">
+                            <div className="bg-[#f8f8fc] rounded-2xl p-6 md:p-8 border border-[#ddddf0]">
+                                <h4 className="text-xl font-bold text-amber-600 mb-6 flex items-center gap-2">
                                     <Table size={20} /> ตารางเทียบค่าตัวเลขอักษรไทย-อังกฤษ
                                 </h4>
 
                                 <button
                                     type="button"
                                     onClick={() => setEnlargedImageSrc('/images/thai-numerology-decoding-chart.webp')}
-                                    className="block w-full cursor-zoom-in rounded-xl overflow-hidden shadow-lg border border-white/10"
+                                    className="block w-full cursor-zoom-in rounded-xl overflow-hidden shadow-sm border border-[#ddddf0]"
                                     aria-label="คลิกเพื่อดูตารางถอดรหัสเลขศาสตร์แบบขยาย"
                                 >
                                     <Image
@@ -143,9 +143,9 @@ export const KnowledgeSection: React.FC = () => {
                                 </button>
                             </div>
 
-                            <div className="bg-gradient-to-r from-amber-900/20 to-transparent p-6 rounded-2xl border-l-4 border-amber-500">
-                                <h4 className="font-bold text-amber-400 mb-2">ตัวอย่างการคำนวณ</h4>
-                                <p className="text-slate-300">
+                            <div className="bg-gradient-to-r from-amber-50 to-transparent p-6 rounded-2xl border-l-4 border-amber-400">
+                                <h4 className="font-bold text-amber-600 mb-2">ตัวอย่างการคำนวณ</h4>
+                                <p className="text-[#5a5a82]">
                                     ชื่อ <strong>&quot;กมล&quot;</strong> <br />
                                     ก (1) + ม (5) + ล (6) = 1 + 5 + 6 = <strong>12</strong> (เป็นเลขคู่ศัตรู แนะนำให้เปลี่ยน)<br />
                                     ชื่อ <strong>&quot;รวย&quot;</strong> <br />
@@ -159,12 +159,12 @@ export const KnowledgeSection: React.FC = () => {
                     {activeTab === 'thaksa' && (
                         <div className="animate-fade-in space-y-8">
                             <div className="flex items-start gap-6">
-                                <div className="hidden md:flex shrink-0 w-16 h-16 rounded-2xl bg-emerald-500/10 items-center justify-center">
+                                <div className="hidden md:flex shrink-0 w-16 h-16 rounded-2xl bg-emerald-50 items-center justify-center">
                                     <Calendar className="w-8 h-8 text-emerald-500" />
                                 </div>
                                 <div className="space-y-4">
-                                    <h3 className="text-2xl font-bold text-white">ตารางทักษาปกรณ์ (Thaksa)</h3>
-                                    <p className="text-slate-300 leading-relaxed text-lg">
+                                    <h3 className="text-2xl font-bold text-[#1a1a3e]">ตารางทักษาปกรณ์ (Thaksa)</h3>
+                                    <p className="text-[#5a5a82] leading-relaxed text-lg">
                                         เลือก <strong>&quot;วันเกิด&quot;</strong> ของคุณด้านล่าง เพื่อดูตารางทักษาประจำวันเกิด <br />
                                         ระบบจะคำนวณหาอักษรที่เป็นมงคล (บริวาร-มนตรี) และอักษรต้องห้าม (กาลกิณี)
                                     </p>
@@ -172,14 +172,14 @@ export const KnowledgeSection: React.FC = () => {
                             </div>
 
                             {/* Day Selector */}
-                            <div className="flex flex-wrap gap-2 justify-center bg-slate-800/50 p-4 rounded-2xl border border-white/5">
+                            <div className="flex flex-wrap gap-2 justify-center bg-[#f8f8fc] p-4 rounded-2xl border border-[#ddddf0]">
                                 {(Object.keys(dayLabels) as DayKey[]).map((day) => (
                                     <button
                                         key={day}
                                         onClick={() => setSelectedThaksaDay(day)}
                                         className={`px-4 py-2 rounded-lg text-sm transition-all ${selectedThaksaDay === day
-                                            ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-900/40 font-bold scale-105'
-                                            : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white'
+                                            ? 'bg-emerald-500 text-white shadow-md font-bold scale-105'
+                                            : 'bg-white text-[#5a5a82] border border-[#ddddf0] hover:bg-[#ddddf0] hover:text-[#1a1a3e]'
                                             }`}
                                     >
                                         {dayLabels[day]}
@@ -188,32 +188,32 @@ export const KnowledgeSection: React.FC = () => {
                             </div>
 
                             {/* Dynamic Table */}
-                            <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-800/30">
+                            <div className="overflow-hidden rounded-2xl border border-[#ddddf0] bg-white">
                                 <table className="w-full text-left border-collapse">
                                     <thead>
-                                        <tr className="bg-white/5 text-slate-300 text-sm">
-                                            <th className="p-4 font-bold border-b border-white/10 w-1/3">ภูมิ (ความหมาย)</th>
-                                            <th className="p-4 font-bold border-b border-white/10">อักษรประจำภูมิ</th>
+                                        <tr className="bg-[#f8f8fc] text-[#5a5a82] text-sm">
+                                            <th className="p-4 font-bold border-b border-[#ddddf0] w-1/3">ภูมิ (ความหมาย)</th>
+                                            <th className="p-4 font-bold border-b border-[#ddddf0]">อักษรประจำภูมิ</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-white/5">
+                                    <tbody className="divide-y divide-[#ddddf0]">
                                         {[
-                                            { key: 'borivan', label: 'บริวาร', text: 'บุตร, สามี, ภรรยา, ผู้ใต้บังคับบัญชา', color: 'text-white' },
-                                            { key: 'ayu', label: 'อายุ', text: 'สุขภาพ, ความเป็นอยู่', color: 'text-white' },
-                                            { key: 'dech', label: 'เดช', text: 'อำนาจ, วาสนา, เกียรติยศ', color: 'text-amber-400' },
-                                            { key: 'si', label: 'ศรี', text: 'โชคลาภ, เงินทอง, เสน่ห์', color: 'text-emerald-400' },
-                                            { key: 'mula', label: 'มูละ', text: 'ทรัพย์สิน, มรดก', color: 'text-white' },
-                                            { key: 'ussaha', label: 'อุตสาหะ', text: 'ความขยัน, การทำงาน', color: 'text-white' },
-                                            { key: 'montri', label: 'มนตรี', text: 'ผู้ใหญ่, ผู้ให้การอุปถัมภ์', color: 'text-white' },
-                                            { key: 'kali', label: 'กาลกิณี', text: 'อุปสรรค, ความโชคร้าย (ต้องห้าม!)', color: 'text-red-400 bg-red-500/10' },
+                                            { key: 'borivan', label: 'บริวาร', text: 'บุตร, สามี, ภรรยา, ผู้ใต้บังคับบัญชา', color: 'text-[#1a1a3e]' },
+                                            { key: 'ayu', label: 'อายุ', text: 'สุขภาพ, ความเป็นอยู่', color: 'text-[#1a1a3e]' },
+                                            { key: 'dech', label: 'เดช', text: 'อำนาจ, วาสนา, เกียรติยศ', color: 'text-amber-600' },
+                                            { key: 'si', label: 'ศรี', text: 'โชคลาภ, เงินทอง, เสน่ห์', color: 'text-emerald-600' },
+                                            { key: 'mula', label: 'มูละ', text: 'ทรัพย์สิน, มรดก', color: 'text-[#1a1a3e]' },
+                                            { key: 'ussaha', label: 'อุตสาหะ', text: 'ความขยัน, การทำงาน', color: 'text-[#1a1a3e]' },
+                                            { key: 'montri', label: 'มนตรี', text: 'ผู้ใหญ่, ผู้ให้การอุปถัมภ์', color: 'text-[#1a1a3e]' },
+                                            { key: 'kali', label: 'กาลกิณี', text: 'อุปสรรค, ความโชคร้าย (ต้องห้าม!)', color: 'text-red-600 bg-red-50' },
                                         ].map((row) => (
-                                            <tr key={row.key} className={`transition-colors hover:bg-white/5 ${row.key === 'kali' ? 'bg-red-500/5' : ''}`}>
+                                            <tr key={row.key} className={`transition-colors hover:bg-[#f8f8fc] ${row.key === 'kali' ? 'bg-red-50' : ''}`}>
                                                 <td className="p-4">
                                                     <div className={`font-bold text-lg ${row.color}`}>{row.label}</div>
-                                                    <div className="text-xs text-slate-400">{row.text}</div>
+                                                    <div className="text-xs text-[#5a5a82]">{row.text}</div>
                                                 </td>
                                                 <td className="p-4">
-                                                    <div className="text-lg font-prompt tracking-wider text-slate-200">
+                                                    <div className="text-lg font-prompt tracking-wider text-[#1a1a3e]">
                                                         {(thaksaConfig[selectedThaksaDay][row.key as keyof typeof thaksaConfig[typeof selectedThaksaDay]] as string[]).join('  ')}
                                                     </div>
                                                 </td>
@@ -229,38 +229,38 @@ export const KnowledgeSection: React.FC = () => {
                     {activeTab === 'ayatana' && (
                         <div className="animate-fade-in space-y-8">
                             <div className="flex items-start gap-6">
-                                <div className="hidden md:flex shrink-0 w-16 h-16 rounded-2xl bg-rose-500/10 items-center justify-center">
+                                <div className="hidden md:flex shrink-0 w-16 h-16 rounded-2xl bg-rose-50 items-center justify-center">
                                     <Heart className="w-8 h-8 text-rose-500" />
                                 </div>
                                 <div className="space-y-4">
-                                    <h3 className="text-2xl font-bold text-white">อายตนะ 6 (Ayatana 6) คืออะไร?</h3>
-                                    <p className="text-slate-300 leading-relaxed text-lg">
+                                    <h3 className="text-2xl font-bold text-[#1a1a3e]">อายตนะ 6 (Ayatana 6) คืออะไร?</h3>
+                                    <p className="text-[#5a5a82] leading-relaxed text-lg">
                                         ศาสตร์ที่วัด <strong>&quot;ภาพลักษณ์และการยอมรับทางสังคม&quot;</strong> สะท้อนถึงบุคลิกภายนอกที่ผู้อื่นมองเห็น ค่าอายตนะคำนวณจากผลรวมของชื่อ (Name Score) แล้วนำมาเทียบกับตารางบุคคล 9 ประเภท เพื่อดูว่าผู้คนจะรู้สึกอย่างไรต่อเจ้าของชื่อนี้
                                     </p>
                                 </div>
                             </div>
 
-                            <div className="bg-gradient-to-r from-rose-900/20 to-transparent p-6 rounded-2xl border-l-4 border-rose-500">
-                                <h4 className="font-bold text-rose-400 mb-2">ตัวอย่างการคำนวณ</h4>
-                                <div className="text-slate-300 space-y-2">
+                            <div className="bg-gradient-to-r from-rose-50 to-transparent p-6 rounded-2xl border-l-4 border-rose-400">
+                                <h4 className="font-bold text-rose-600 mb-2">ตัวอย่างการคำนวณ</h4>
+                                <div className="text-[#5a5a82] space-y-2">
                                     <p>
                                         สมมติชื่อ <strong>&quot;สมชาย&quot;</strong> มีค่าเลขศาสตร์ผลรวม = <strong>24</strong> (พลังแห่งมหามงคล)
                                     </p>
                                     <div className="flex items-center gap-2 text-sm md:text-base">
-                                        <span className="px-2 py-1 bg-white/10 rounded">2</span>
+                                        <span className="px-2 py-1 bg-[#ddddf0] rounded">2</span>
                                         <span>+</span>
-                                        <span className="px-2 py-1 bg-white/10 rounded">4</span>
+                                        <span className="px-2 py-1 bg-[#ddddf0] rounded">4</span>
                                         <span>=</span>
-                                        <strong className="text-rose-400 text-lg">6</strong>
+                                        <strong className="text-rose-600 text-lg">6</strong>
                                     </div>
-                                    <p className="text-sm text-slate-400 mt-2">
+                                    <p className="text-sm text-[#8e8eaa] mt-2">
                                         *นำผลลัพธ์เลข 6 ไปเทียบความหมายในตาราง (เปรียบดังราชินี)
                                     </p>
                                 </div>
                             </div>
 
-                            <div className="bg-slate-800/50 p-6 rounded-2xl border border-white/5">
-                                <h4 className="text-rose-400 font-bold mb-4">ความหมายตัวเลข 1-9</h4>
+                            <div className="bg-[#f8f8fc] p-6 rounded-2xl border border-[#ddddf0]">
+                                <h4 className="text-rose-600 font-bold mb-4">ความหมายตัวเลข 1-9</h4>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                     {[
                                         { num: 1, title: 'อายตนะ 1 (เปรียบดังพ่อ)', desc: 'เป็นผู้นำ มีอำนาจ ผู้คนยำเกรง' },
@@ -270,9 +270,9 @@ export const KnowledgeSection: React.FC = () => {
                                         { num: 9, title: 'อายตนะ 9 (เปรียบดังพระราชา)', desc: 'ยิ่งใหญ่ แคล้วคลาด มีสิ่งศักดิ์สิทธิ์คุ้มครอง' },
                                         { num: '3, 4, 5, 7', title: 'ตัวเลขที่ควรเลี่ยง', desc: 'มักเหนื่อยยาก ต้องต่อสู้ดิ้นรน ไร้คนอุ้มชู', isBad: true },
                                     ].map((item, idx) => (
-                                        <div key={idx} className={`p-4 rounded-xl border ${item.isBad ? 'bg-red-500/5 border-red-500/20' : 'bg-white/5 border-white/5'}`}>
-                                            <div className={`text-lg font-bold mb-1 ${item.isBad ? 'text-red-400' : 'text-white'}`}>{item.title}</div>
-                                            <div className="text-sm text-slate-400">{item.desc}</div>
+                                        <div key={idx} className={`p-4 rounded-xl border ${item.isBad ? 'bg-red-50 border-red-200' : 'bg-white border-[#ddddf0]'}`}>
+                                            <div className={`text-lg font-bold mb-1 ${item.isBad ? 'text-red-600' : 'text-[#1a1a3e]'}`}>{item.title}</div>
+                                            <div className="text-sm text-[#5a5a82]">{item.desc}</div>
                                         </div>
                                     ))}
                                 </div>
@@ -284,12 +284,12 @@ export const KnowledgeSection: React.FC = () => {
                     {activeTab === 'nirun' && (
                         <div className="animate-fade-in space-y-8">
                             <div className="flex items-start gap-6">
-                                <div className="hidden md:flex shrink-0 w-16 h-16 rounded-2xl bg-blue-500/10 items-center justify-center">
+                                <div className="hidden md:flex shrink-0 w-16 h-16 rounded-2xl bg-blue-50 items-center justify-center">
                                     <InfinityIcon className="w-8 h-8 text-blue-500" />
                                 </div>
                                 <div className="space-y-4">
-                                    <h3 className="text-2xl font-bold text-white">นิรันดร์ศาสตร์ (Nirun Sastra) คืออะไร?</h3>
-                                    <p className="text-slate-300 leading-relaxed text-lg">
+                                    <h3 className="text-2xl font-bold text-[#1a1a3e]">นิรันดร์ศาสตร์ (Nirun Sastra) คืออะไร?</h3>
+                                    <p className="text-[#5a5a82] leading-relaxed text-lg">
                                         นี่คือ <strong>&quot;หัวใจสำคัญ&quot;</strong> ที่ขาดไม่ได้ นิรันดร์ศาสตร์คือการคำนวณหาความสมดุลระหว่างชื่อต้นและนามสกุล ไม่ใช่แค่ชื่อดี หรือนามสกุลดี แต่ทั้งสองต้อง <strong>&quot;เกื้อหนุนกัน&quot;</strong> เพื่อสร้างความมงคลที่ยั่งยืน
                                     </p>
                                 </div>
@@ -297,45 +297,45 @@ export const KnowledgeSection: React.FC = () => {
 
                             <div className="grid md:grid-cols-2 gap-8 items-center">
                                 <div className="space-y-6">
-                                    <div className="bg-slate-800/50 p-6 rounded-2xl border border-white/5">
-                                        <h4 className="text-blue-400 font-bold mb-4">หลักการคำนวณความสมดุล</h4>
+                                    <div className="bg-[#f8f8fc] p-6 rounded-2xl border border-[#ddddf0]">
+                                        <h4 className="text-blue-600 font-bold mb-4">หลักการคำนวณความสมดุล</h4>
                                         <ul className="space-y-4">
                                             <li className="flex gap-3">
-                                                <div className="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs font-bold shrink-0">1</div>
-                                                <p className="text-sm text-slate-300">นำ <strong>ผลรวมชื่อ</strong> มาคำนวณหากำลังดาว</p>
+                                                <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold shrink-0">1</div>
+                                                <p className="text-sm text-[#5a5a82]">นำ <strong>ผลรวมชื่อ</strong> มาคำนวณหากำลังดาว</p>
                                             </li>
                                             <li className="flex gap-3">
-                                                <div className="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs font-bold shrink-0">2</div>
-                                                <p className="text-sm text-slate-300">นำ <strong>ผลรวมนามสกุล</strong> มาคำนวณหากำลังดาว</p>
+                                                <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold shrink-0">2</div>
+                                                <p className="text-sm text-[#5a5a82]">นำ <strong>ผลรวมนามสกุล</strong> มาคำนวณหากำลังดาว</p>
                                             </li>
                                             <li className="flex gap-3">
-                                                <div className="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs font-bold shrink-0">3</div>
-                                                <p className="text-sm text-slate-300">นำกำลังดาวทั้งสองมาเปรียบเทียบความสัมพันธ์ (เป็นมิตร, ศัตรู, หรือกลางๆ)</p>
+                                                <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold shrink-0">3</div>
+                                                <p className="text-sm text-[#5a5a82]">นำกำลังดาวทั้งสองมาเปรียบเทียบความสัมพันธ์ (เป็นมิตร, ศัตรู, หรือกลางๆ)</p>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div className="p-4 bg-blue-900/10 rounded-xl border border-blue-500/10 italic text-slate-400 text-sm">
+                                    <div className="p-4 bg-blue-50 rounded-xl border border-blue-100 italic text-[#5a5a82] text-sm">
                                         &quot;ต่อให้ชื่อดี 100% แต่ถ้านามสกุลเป็นศัตรูกัน ชีวิตจะขึ้นๆ ลงๆ ไม่สุดสักทาง นิรันดร์ศาสตร์จึงเข้ามาแก้จุดบอดนี้&quot;
                                     </div>
                                 </div>
 
                                 <div className="relative">
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 rounded-full blur-3xl"></div>
-                                    <div className="relative glass-card p-6 rounded-3xl border border-white/10 text-center space-y-4">
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-50 to-purple-50 rounded-full blur-3xl"></div>
+                                    <div className="relative bg-white p-6 rounded-3xl border border-[#ddddf0] text-center space-y-4 shadow-sm">
                                         <div className="flex justify-center items-center gap-4">
                                             <div className="text-center">
-                                                <div className="text-sm text-slate-400 mb-1">ชื่อ</div>
-                                                <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center text-2xl font-bold text-white border border-slate-700">63</div>
+                                                <div className="text-sm text-[#5a5a82] mb-1">ชื่อ</div>
+                                                <div className="w-16 h-16 rounded-2xl bg-[#f8f8fc] flex items-center justify-center text-2xl font-bold text-[#1a1a3e] border border-[#ddddf0]">63</div>
                                             </div>
                                             <InfinityIcon className="text-blue-500 animate-pulse" size={24} />
                                             <div className="text-center">
-                                                <div className="text-sm text-slate-400 mb-1">สกุล</div>
-                                                <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center text-2xl font-bold text-white border border-slate-700">42</div>
+                                                <div className="text-sm text-[#5a5a82] mb-1">สกุล</div>
+                                                <div className="w-16 h-16 rounded-2xl bg-[#f8f8fc] flex items-center justify-center text-2xl font-bold text-[#1a1a3e] border border-[#ddddf0]">42</div>
                                             </div>
                                         </div>
-                                        <div className="pt-4 border-t border-white/5">
-                                            <div className="text-emerald-400 font-bold text-lg mb-1">สมพงศ์กัน (Excellent)</div>
-                                            <p className="text-xs text-slate-400">
+                                        <div className="pt-4 border-t border-[#ddddf0]">
+                                            <div className="text-emerald-600 font-bold text-lg mb-1">สมพงศ์กัน (Excellent)</div>
+                                            <p className="text-xs text-[#5a5a82]">
                                                 ผลรวมเป็นคู่มิตรที่เกื้อหนุนกัน<br />ส่งเสริมความก้าวหน้าอย่างยั่งยืน
                                             </p>
                                         </div>

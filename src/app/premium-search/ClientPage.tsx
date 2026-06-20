@@ -66,18 +66,18 @@ function ScoreDropdown({ value, onChange, scores, disabled }: ScoreDropdownProps
                 type="button"
                 disabled={disabled}
                 onClick={() => setOpen(v => !v)}
-                className={`flex w-full items-center justify-between px-3 py-2.5 sm:px-4 sm:py-3 bg-[#0a0f1d] border border-white/10 rounded-xl text-slate-200 focus:outline-none focus:ring-1 focus:ring-amber-400/50 focus:border-amber-400/50 transition-all font-medium text-xs sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed ${open ? 'rounded-b-none border-b-transparent shadow-lg' : ''}`}
+                className={`flex w-full items-center justify-between px-3 py-2.5 sm:px-4 sm:py-3 bg-[#0a0f1d] border border-[#1e293b] rounded-xl text-slate-200 focus:outline-none focus:ring-1 focus:ring-amber-400/50 focus:border-amber-400/50 transition-all font-medium text-xs sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed ${open ? 'rounded-b-none border-b-transparent shadow-lg' : ''}`}
             >
                 <span>{selectedLabel}</span>
                 <ChevronDown className={`h-3.5 w-3.5 sm:h-4 sm:w-4 text-slate-400 transition-transform duration-300 ${open ? 'rotate-180 text-amber-400' : ''}`} />
             </button>
 
             {open && (
-                <div className="absolute left-0 right-0 top-full mt-0 z-50 max-h-80 overflow-y-auto bg-[#0f172a] border border-white/10 border-t-0 rounded-b-xl shadow-2xl custom-scrollbar animate-fade-in-up">
+                <div className="absolute left-0 right-0 top-full mt-0 z-50 max-h-80 overflow-y-auto bg-[#0f172a] border border-[#1e293b] border-t-0 rounded-b-xl shadow-2xl custom-scrollbar animate-fade-in-up">
                     <button
                         type="button"
                         onClick={() => { onChange(''); setOpen(false); }}
-                        className={`w-full px-4 py-3 text-left transition-colors border-b border-white/5 text-sm font-medium ${value === '' ? 'bg-amber-400/10 text-amber-200' : 'text-white/80 hover:bg-white/5 hover:text-white'}`}
+                        className={`w-full px-4 py-3 text-left transition-colors border-b border-[#1e293b] text-sm font-medium ${value === '' ? 'bg-amber-400/10 text-amber-200' : 'text-slate-300 hover:bg-white/5 hover:text-white'}`}
                     >
                         {t('pages.premiumSearch.filters.scoreAny')}
                     </button>
@@ -88,7 +88,7 @@ function ScoreDropdown({ value, onChange, scores, disabled }: ScoreDropdownProps
                                 key={score}
                                 type="button"
                                 onClick={() => { onChange(score.toString()); setOpen(false); }}
-                                className={`w-full px-4 py-3 text-left transition-colors border-b border-white/5 last:border-0 flex items-center justify-between group/item ${value === score.toString() ? 'bg-amber-400/10' : 'hover:bg-white/5'}`}
+                                className={`w-full px-4 py-3 text-left transition-colors border-b border-[#1e293b] last:border-0 flex items-center justify-between group/item ${value === score.toString() ? 'bg-amber-400/10' : 'hover:bg-white/5'}`}
                             >
                                 <div className="flex flex-col flex-1 min-w-0 pr-4">
                                     <div className="flex items-center gap-2 mb-1">
@@ -285,10 +285,10 @@ export default function ClientPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#050711] text-slate-100 font-sans relative overflow-hidden">
+        <div className="min-h-screen bg-[#f8f8fc] text-[#5a5a82] font-sans relative overflow-hidden">
             {/* Background Effects */}
             <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(15,23,42,0.8),transparent_80%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.8),transparent_80%)]" />
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px]" />
                 <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[150px]" />
             </div>
@@ -310,21 +310,24 @@ export default function ClientPage() {
                     />
 
                     {/* Ultra Premium Filter Panel */}
-                    <div className="group relative">
+                    <div className="group relative z-30">
                         <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/10 via-amber-400/5 to-amber-500/10 rounded-[2rem] blur opacity-70 group-hover:opacity-100 transition duration-1000" />
-                        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0f172a]/90 p-4 shadow-2xl backdrop-blur-2xl sm:rounded-3xl sm:p-8">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-400/5 rounded-full blur-[80px] pointer-events-none" />
+                        <div className="relative rounded-2xl border border-[#1e293b] bg-[#0f172a] shadow-md sm:rounded-3xl">
+                            <div className="absolute inset-0 overflow-hidden rounded-2xl sm:rounded-3xl pointer-events-none">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-amber-400/5 rounded-full blur-[80px]" />
+                            </div>
                             
-                            <div className="mb-4 flex items-center justify-between border-b border-white/5 pb-4 sm:mb-6 sm:pb-5">
-                                <div>
-                                    <h2 className="flex items-center gap-2.5 text-lg font-bold text-white">
-                                        <SlidersHorizontal className="h-5 w-5 text-amber-400" />
-                                        ปรับเงื่อนไขค้นหา
-                                    </h2>
-                                    <p className="mt-1.5 text-xs text-slate-500 font-medium">
-                                        {activeFilterCount > 0 ? `กำลังใช้ ${activeFilterCount} ตัวกรอง` : 'เริ่มจากวันเกิดก่อนเพื่อเปิดตัวเลือกอักษรนำ'}
-                                    </p>
-                                </div>
+                            <div className="relative z-10 p-4 sm:p-8">
+                                <div className="mb-4 flex items-center justify-between border-b border-[#1e293b] pb-4 sm:mb-6 sm:pb-5">
+                                    <div>
+                                        <h2 className="flex items-center gap-2.5 text-lg font-bold text-white">
+                                            <SlidersHorizontal className="h-5 w-5 text-amber-400" />
+                                            ปรับเงื่อนไขค้นหา
+                                        </h2>
+                                        <p className="mt-1.5 text-xs text-slate-400 font-medium">
+                                            {activeFilterCount > 0 ? `กำลังใช้ ${activeFilterCount} ตัวกรอง` : 'เริ่มจากวันเกิดก่อนเพื่อเปิดตัวเลือกอักษรนำ'}
+                                        </p>
+                                    </div>
                                 <button
                                     type="button"
                                     onClick={resetFilters}
@@ -347,9 +350,9 @@ export default function ClientPage() {
                                                 setSelectedDay(e.target.value);
                                                 if (e.target.value === 'All') setLeadingCharType('Any');
                                             }}
-                                            className="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-[#0a0f1d] border border-white/10 rounded-xl text-slate-200 focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/50 transition-all appearance-none font-medium text-xs sm:text-sm"
+                                            className="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-[#0a0f1d] border border-[#1e293b] rounded-xl text-slate-200 focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/50 transition-all appearance-none font-medium text-xs sm:text-sm"
                                         >
-                                            {dayOptions.map(day => <option key={day.value} value={day.value} className="bg-slate-900">{day.label}</option>)}
+                                            {dayOptions.map(day => <option key={day.value} value={day.value} className="bg-[#0f172a]">{day.label}</option>)}
                                         </select>
                                         <ChevronDown className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 h-3.5 w-3.5 sm:h-4 sm:w-4 text-slate-400 pointer-events-none" />
                                     </div>
@@ -368,12 +371,12 @@ export default function ClientPage() {
                                         <select
                                             value={selectedGender}
                                             onChange={(e) => setSelectedGender(e.target.value)}
-                                            className="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-[#0a0f1d] border border-white/10 rounded-xl text-slate-200 focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/50 transition-all appearance-none font-medium text-xs sm:text-sm"
+                                            className="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-[#0a0f1d] border border-[#1e293b] rounded-xl text-slate-200 focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/50 transition-all appearance-none font-medium text-xs sm:text-sm"
                                         >
-                                            <option value="all" className="bg-slate-900">{t('pages.premiumSearch.filters.genderAll')}</option>
-                                            <option value="male" className="bg-slate-900">{t('pages.premiumSearch.filters.genderMale')}</option>
-                                            <option value="female" className="bg-slate-900">{t('pages.premiumSearch.filters.genderFemale')}</option>
-                                            <option value="neutral" className="bg-slate-900">{t('pages.premiumSearch.filters.genderNeutral')}</option>
+                                            <option value="all" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderAll')}</option>
+                                            <option value="male" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderMale')}</option>
+                                            <option value="female" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderFemale')}</option>
+                                            <option value="neutral" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderNeutral')}</option>
                                         </select>
                                         <ChevronDown className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 h-3.5 w-3.5 sm:h-4 sm:w-4 text-slate-400 pointer-events-none" />
                                     </div>
@@ -385,7 +388,7 @@ export default function ClientPage() {
                                         <span className="truncate">{t('pages.premiumSearch.leading.label')}</span>
                                         <span className="text-[9px] sm:text-[10px] text-amber-500/70 normal-case ml-1 shrink-0">{selectedDay !== 'All' ? `(${selectedDay})` : ''}</span>
                                     </label>
-                                    <div className="bg-[#0a0f1d] p-1 sm:p-1.5 rounded-xl border border-white/10 flex gap-1 h-[38px] sm:h-[46px]">
+                                    <div className="bg-[#0a0f1d] p-1 sm:p-1.5 rounded-xl border border-[#1e293b] flex gap-1 h-[38px] sm:h-[46px]">
                                         {(['Dech', 'Si', 'Any'] as LeadingCharType[]).map((type) => {
                                             const isSelected = leadingCharType === type;
                                             const labelMap: Record<LeadingCharType, string> = { Dech: 'เดช', Si: 'ศรี', Any: 'ทั้งหมด' };
@@ -395,10 +398,10 @@ export default function ClientPage() {
                                                     type="button"
                                                     disabled={selectedDay === 'All' || isLoading}
                                                     onClick={() => setLeadingCharType(type as LeadingCharType)}
-                                                    className={`flex-1 flex items-center justify-center rounded-lg text-[10px] sm:text-xs font-bold transition-all disabled:opacity-30 ${
+                                                    className={`flex-1 flex items-center justify-center rounded-lg text-[10px] sm:text-xs font-bold transition-all disabled:cursor-not-allowed ${
                                                         isSelected 
-                                                            ? 'bg-amber-400/15 border border-amber-400/30 text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.15)]' 
-                                                            : 'text-slate-400 hover:text-slate-200 hover:bg-white/5 border border-transparent'
+                                                            ? 'bg-amber-500/20 border border-amber-400/50 text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.25)] disabled:bg-amber-500/10 disabled:border-amber-500/30 disabled:text-amber-600 disabled:shadow-none' 
+                                                            : 'text-slate-400 hover:text-slate-200 hover:bg-white/5 border border-transparent disabled:text-slate-600 disabled:hover:bg-transparent'
                                                     }`}
                                                 >
                                                     {labelMap[type]}
@@ -410,6 +413,7 @@ export default function ClientPage() {
                             </div>
                         </div>
                     </div>
+                </div>
 
                     {availableLetters.length > 0 ? (
                         <div className="xl:grid xl:grid-cols-[250px_minmax(0,1fr)] 2xl:grid-cols-[280px_minmax(0,1fr)] xl:items-start xl:gap-8 space-y-6 xl:space-y-0">
@@ -433,7 +437,7 @@ export default function ClientPage() {
                                     return (
                                         <>
                                             {!isFullyUnlocked && (
-                                                <div className="relative mb-6 overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-b from-[#11141E] to-[#0A0D14] p-6 sm:p-12 text-center shadow-[0_0_50px_rgba(245,158,11,0.1)] backdrop-blur-2xl">
+                                                <div className="relative mb-6 overflow-hidden rounded-3xl border border-amber-500/30 bg-[#0f172a] p-6 sm:p-12 text-center shadow-md backdrop-blur-2xl">
                                                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(245,158,11,0.15),transparent_50%)]" />
                                                     <div className="relative z-10 flex flex-col items-center">
                                                         <div className="relative mb-4 sm:mb-6">
@@ -445,7 +449,7 @@ export default function ClientPage() {
                                                         <h3 className="text-xl sm:text-3xl font-black text-white mb-2 sm:mb-3 tracking-tight">
                                                             ปลดล็อกหมวดอักษร <span className="text-amber-400 text-3xl sm:text-4xl">&quot;{selectedLetter}&quot;</span>
                                                         </h3>
-                                                        <p className="text-slate-400 text-[11px] sm:text-base mb-5 sm:mb-8 max-w-lg mx-auto leading-relaxed">
+                                                        <p className="text-slate-300 text-[11px] sm:text-base mb-5 sm:mb-8 max-w-lg mx-auto leading-relaxed">
                                                             คัดเฉพาะรายชื่อเกรด A+ เสริมมงคลทวีคูณสูงสุด 20 รายชื่อต่อครั้ง (รายชื่ออื่นจะถูกสุ่มเปิดเพื่อความสิริมงคล)
                                                         </p>
                                                         <button
@@ -472,21 +476,21 @@ export default function ClientPage() {
                                                     <button
                                                         onClick={() => performUnlock(selectedLetter, 15)}
                                                         disabled={isLoading}
-                                                        className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 hover:border-amber-400/40 text-white font-bold rounded-2xl transition-all hover:bg-white/10 disabled:opacity-50 shadow-lg"
+                                                        className="inline-flex items-center gap-2 px-8 py-4 bg-[#0f172a] border border-[#1e293b] hover:border-amber-400/40 text-white font-bold rounded-2xl transition-all disabled:opacity-50 shadow-md hover:shadow-xl"
                                                     >
                                                         {isLoading ? <span className="animate-spin">⏳</span> : <Lock size={18} className="text-amber-400" />}
                                                         ดูเพิ่มอีก 20 ชื่อ (15 เครดิต)
                                                     </button>
-                                                    <p className="mt-4 text-xs text-slate-500 font-medium">
-                                                        แสดงแล้ว <span className="text-white">{visibleNames.length}</span> จากทั้งหมด <span className="text-amber-400">{namesForLetter.length}</span> ชื่อ
+                                                    <p className="mt-4 text-xs text-[#5a5a82] font-medium">
+                                                        แสดงแล้ว <span className="text-[#1a1a3e] font-bold">{visibleNames.length}</span> จากทั้งหมด <span className="text-amber-600 font-bold">{namesForLetter.length}</span> ชื่อ
                                                     </p>
                                                 </div>
                                             )}
 
                                             {isFullyUnlocked && !hasMore && (
-                                                <div className="mt-12 text-center py-6 border-t border-white/5">
-                                                    <p className="text-slate-400 text-sm flex items-center justify-center gap-2">
-                                                        <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+                                                <div className="mt-12 text-center py-6 border-t border-slate-200">
+                                                    <p className="text-[#5a5a82] text-sm flex items-center justify-center gap-2 font-medium">
+                                                        <CheckCircle2 className="h-5 w-5 text-emerald-600" />
                                                         แสดงครบทุกชื่อในหมวด &quot;{selectedLetter}&quot; แล้ว ({namesForLetter.length} ชื่อ)
                                                     </p>
                                                 </div>
@@ -497,12 +501,12 @@ export default function ClientPage() {
                             </div>
                         </div>
                     ) : (
-                        <div className="bg-white/5 border border-white/10 rounded-3xl p-12 text-center mt-12 backdrop-blur-sm">
-                            <div className="w-24 h-24 bg-black/40 rounded-3xl flex items-center justify-center mx-auto mb-6 border border-white/5 shadow-inner">
-                                <Search size={40} className="text-slate-600" />
+                        <div className="bg-[#0f172a] border border-[#1e293b] rounded-3xl p-12 text-center mt-12 shadow-md">
+                            <div className="w-24 h-24 bg-slate-900/50 rounded-3xl flex items-center justify-center mx-auto mb-6 border border-[#1e293b] shadow-inner">
+                                <Search size={40} className="text-slate-500" />
                             </div>
                             <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">{t('pages.premiumSearch.results.emptyTitle')}</h3>
-                            <p className="text-slate-400 mb-8">{t('pages.premiumSearch.results.emptyDesc')}</p>
+                            <p className="text-slate-300 mb-8">{t('pages.premiumSearch.results.emptyDesc')}</p>
                             <button
                                 onClick={resetFilters}
                                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-500/10 border border-amber-500/20 px-6 py-3 font-bold text-amber-400 transition-colors hover:bg-amber-500/20"

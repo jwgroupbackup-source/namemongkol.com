@@ -20,19 +20,19 @@ const PhoneHeader = () => {
             {/* Decorative glowing orb behind the text for a premium feel */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] sm:w-[80%] h-[150%] bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 blur-[60px] md:blur-[80px] -z-10 rounded-full pointer-events-none" />
             
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 shadow-[0_0_20px_rgba(245,158,11,0.1)] backdrop-blur-md transition-all duration-300 hover:border-amber-500/30 sm:mb-5 sm:px-5 sm:py-2">
-                <span className="text-amber-400 animate-pulse">✦</span>
-                <span className="text-xs md:text-sm font-semibold text-amber-100 tracking-wider uppercase">เช็คเบอร์มงคลฟรี</span>
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-4 py-1.5 shadow-[0_0_20px_rgba(245,158,11,0.1)] transition-all duration-300 hover:border-amber-300 sm:mb-5 sm:px-5 sm:py-2">
+                <span className="text-amber-500 animate-pulse">✦</span>
+                <span className="text-xs md:text-sm font-semibold text-amber-700 tracking-wider uppercase">เช็คเบอร์มงคลฟรี</span>
             </div>
             
-            <h1 className="mb-3 text-[2rem] font-bold leading-tight tracking-tight text-white drop-shadow-2xl sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
+            <h1 className="mb-3 text-[2rem] font-bold leading-tight tracking-tight text-amber-600 sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
                 {t('pages.phoneAnalysis.heroTitle')}{' '}
-                <span className="text-amber-400 drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">
+                <span className="text-amber-500">
                     {t('pages.phoneAnalysis.heroHighlight')}
                 </span>
             </h1>
             
-            <p className="mx-auto max-w-[65ch] text-sm leading-relaxed text-slate-300 sm:text-base">
+            <p className="mx-auto max-w-[65ch] text-sm leading-relaxed text-[#5a5a82] sm:text-base">
                 {t('pages.phoneAnalysis.heroSubtitle')}
             </p>
         </div>
@@ -43,11 +43,11 @@ const SocialProof = () => {
     const { t } = useLanguage();
 
     return (
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs sm:text-sm text-slate-200/90" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.60)' }}>
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs sm:text-sm text-[#5a5a82]">
             <span className="flex items-center gap-1.5">
-                <span className="text-amber-400">★</span> 4.9/5 {t('pages.phoneAnalysis.socialRating')}
+                <span className="text-amber-500">★</span> 4.9/5 {t('pages.phoneAnalysis.socialRating')}
             </span>
-            <span className="w-1 h-1 rounded-full bg-slate-500/50" />
+            <span className="w-1 h-1 rounded-full bg-slate-300" />
             <span>{t('pages.phoneAnalysis.socialAnalyzed')}</span>
         </div>
     );
@@ -57,7 +57,7 @@ const ClientPageFallback = () => {
     const { t } = useLanguage();
 
     return (
-        <div className="min-h-screen bg-[#0f172a] text-slate-200 font-sans selection:bg-[#f8c24b] selection:text-[#1d1203]">
+        <div className="min-h-screen bg-[#f8f8fc] text-[#5a5a82] font-sans selection:bg-[#f8c24b] selection:text-[#1d1203]">
             <main className="relative flex min-h-screen w-full max-w-[1400px] flex-col items-center px-4 pb-10 pt-7 transition-all duration-300 md:pt-28">
                 <PhoneSacredBackground />
 
@@ -65,8 +65,8 @@ const ClientPageFallback = () => {
 
                 {/* Input Section - Static/Disabled for fallback */}
                 <div className="w-full max-w-2xl relative z-10 animate-fade-in-up delay-100">
-                    <div className="bg-white/5 border border-white/5 rounded-3xl p-2 sm:p-3 backdrop-blur-xl shadow-2xl relative overflow-hidden">
-                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
+                    <div className="bg-white border border-[#ddddf0] rounded-3xl p-2 sm:p-3 shadow-sm relative overflow-hidden">
+                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/5 via-transparent to-transparent pointer-events-none"></div>
                         <div className="flex flex-col sm:flex-row gap-2 relative z-10">
                             <input
                                 type="text"
@@ -76,7 +76,7 @@ const ClientPageFallback = () => {
                             />
                             <button
                                 disabled
-                                className="phone-analysis-button-disabled px-8 py-4 rounded-2xl font-bold cursor-not-allowed flex items-center justify-center gap-2 min-w-[160px]"
+                                className="bg-slate-100 text-slate-400 border border-slate-200 px-8 py-4 rounded-2xl font-bold cursor-not-allowed flex items-center justify-center gap-2 min-w-[160px]"
                             >
                                 <Search size={20} />
                                 <span>กรอกให้ครบ 10 หลัก</span>
@@ -84,7 +84,7 @@ const ClientPageFallback = () => {
                         </div>
                     </div>
 
-                    <p className="text-center mt-3 text-xs text-amber-300/85" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}>
+                    <p className="text-center mt-3 text-xs text-[#5a5a82]">
                         กรอก 10 หลักเพื่อเข้าสู่ระบบและวิเคราะห์ฟรี
                     </p>
 
@@ -162,15 +162,15 @@ function ClientPageContent() {
             const Swal = (await import('sweetalert2')).default;
             const authResult = await Swal.fire({
                 title: '🔒 กรุณาเข้าสู่ระบบ',
-                html: '<p style="color:#94a3b8">คุณต้องเข้าสู่ระบบก่อนจึงจะทำนายเบอร์ได้</p>',
+                html: '<p style="color:#5a5a82">คุณต้องเข้าสู่ระบบก่อนจึงจะทำนายเบอร์ได้</p>',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'เข้าสู่ระบบ',
                 cancelButtonText: 'ยกเลิก',
-                background: '#1e293b',
-                color: '#fff',
+                background: '#ffffff',
+                color: '#1a1a3e',
                 confirmButtonColor: '#d97706',
-                customClass: { popup: 'rounded-2xl border border-amber-500/20' },
+                customClass: { popup: 'rounded-2xl border border-[#ddddf0] shadow-sm' },
             });
 
             if (authResult.isConfirmed) {
@@ -203,15 +203,15 @@ function ClientPageContent() {
         if (!user) {
             const authResult = await Swal.fire({
                 title: '🔒 กรุณาเข้าสู่ระบบ',
-                html: '<p style="color:#94a3b8">คุณต้องเข้าสู่ระบบก่อนใช้งาน AI วิเคราะห์เชิงลึก</p>',
+                html: '<p style="color:#5a5a82">คุณต้องเข้าสู่ระบบก่อนใช้งาน AI วิเคราะห์เชิงลึก</p>',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'เข้าสู่ระบบ',
                 cancelButtonText: 'ยกเลิก',
-                background: '#1e293b',
-                color: '#fff',
+                background: '#ffffff',
+                color: '#1a1a3e',
                 confirmButtonColor: '#d97706',
-                customClass: { popup: 'rounded-2xl border border-amber-500/20' },
+                customClass: { popup: 'rounded-2xl border border-[#ddddf0] shadow-sm' },
             });
             if (authResult.isConfirmed) router.push('/login');
             return;
@@ -222,15 +222,15 @@ function ClientPageContent() {
         if (latestCredits.total < PHONE_AI_COST) {
             const topupResult = await Swal.fire({
                 title: '💳 เครดิตไม่เพียงพอ',
-                html: `<p style="color:#94a3b8">ต้องใช้ <strong style="color:#fbbf24">${PHONE_AI_COST} เครดิต</strong> คุณมี <strong style="color:#ef4444">${latestCredits.total} เครดิต</strong></p>`,
+                html: `<p style="color:#5a5a82">ต้องใช้ <strong style="color:#d97706">${PHONE_AI_COST} เครดิต</strong> คุณมี <strong style="color:#ef4444">${latestCredits.total} เครดิต</strong></p>`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'เติมเครดิต',
                 cancelButtonText: 'ยกเลิก',
-                background: '#1e293b',
-                color: '#fff',
+                background: '#ffffff',
+                color: '#1a1a3e',
                 confirmButtonColor: '#d97706',
-                customClass: { popup: 'rounded-2xl border border-amber-500/20' },
+                customClass: { popup: 'rounded-2xl border border-[#ddddf0] shadow-sm' },
             });
             if (topupResult.isConfirmed) router.push('/topup');
             return;
@@ -239,15 +239,15 @@ function ClientPageContent() {
         // Step 3: Confirmation
         const confirmResult = await Swal.fire({
             title: '✨ ยืนยันการวิเคราะห์ AI',
-            html: `<p style="color:#94a3b8">วิเคราะห์เชิงลึกตามอาชีพ "<strong style="color:#fbbf24">${aiProfession.trim()}</strong>" จะใช้ <strong style="color:#fbbf24">${PHONE_AI_COST} เครดิต</strong></p><p style="color:#94a3b8;margin-top:4px">คุณมี <strong style="color:#34d399">${latestCredits.total} เครดิต</strong> (คงเหลือ ${latestCredits.total - PHONE_AI_COST} เครดิต)</p>`,
+            html: `<p style="color:#5a5a82">วิเคราะห์เชิงลึกตามอาชีพ "<strong style="color:#d97706">${aiProfession.trim()}</strong>" จะใช้ <strong style="color:#d97706">${PHONE_AI_COST} เครดิต</strong></p><p style="color:#5a5a82;margin-top:4px">คุณมี <strong style="color:#10b981">${latestCredits.total} เครดิต</strong> (คงเหลือ ${latestCredits.total - PHONE_AI_COST} เครดิต)</p>`,
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: `ยืนยัน (ใช้ ${PHONE_AI_COST} เครดิต)`,
             cancelButtonText: 'ยกเลิก',
-            background: '#1e293b',
-            color: '#fff',
+            background: '#ffffff',
+            color: '#1a1a3e',
             confirmButtonColor: '#d97706',
-            customClass: { popup: 'rounded-2xl border border-amber-500/20' },
+            customClass: { popup: 'rounded-2xl border border-[#ddddf0] shadow-sm' },
         });
         if (!confirmResult.isConfirmed) return;
 
@@ -323,9 +323,9 @@ function ClientPageContent() {
                 title: 'เกิดข้อผิดพลาด',
                 text: errorMessage,
                 icon: 'error',
-                background: '#1e293b',
-                color: '#fff',
-                customClass: { popup: 'rounded-2xl' },
+                background: '#ffffff',
+                color: '#1a1a3e',
+                customClass: { popup: 'rounded-2xl border border-[#ddddf0] shadow-sm' },
             });
         } finally {
             setAiLoading(false);
@@ -340,7 +340,7 @@ function ClientPageContent() {
     };
 
     return (
-        <div className="min-h-screen bg-[#0f172a] text-slate-200 font-sans selection:bg-[#f8c24b] selection:text-[#1d1203]">
+        <div className="min-h-screen bg-[#f8f8fc] text-[#5a5a82] font-sans selection:bg-[#f8c24b] selection:text-[#1d1203]">
             <main className="relative flex min-h-screen w-full max-w-[1400px] flex-col items-center px-4 pb-44 pt-7 transition-all duration-300 md:pb-28 md:pt-28">
                 <PhoneSacredBackground />
 
@@ -350,8 +350,8 @@ function ClientPageContent() {
                 {/* Input Section */}
                 {!result && (
                     <div className="relative z-10 w-full max-w-2xl animate-fade-in-up delay-100">
-                        <div className="bg-white/5 border border-white/5 rounded-3xl p-2.5 sm:p-3 backdrop-blur-xl shadow-2xl relative overflow-hidden">
-                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
+                        <div className="bg-white border border-[#ddddf0] rounded-3xl p-2.5 sm:p-3 shadow-sm relative overflow-hidden">
+                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/5 via-transparent to-transparent pointer-events-none"></div>
                             <div className="flex flex-col sm:flex-row gap-2 relative z-10">
                                 <input
                                     type="text"
@@ -362,7 +362,7 @@ function ClientPageContent() {
                                     }}
                                     onKeyDown={handleKeyDown}
                                     placeholder={t('pages.phoneAnalysis.placeholder')}
-                                    className="phone-analysis-input flex-1 px-5 py-4 rounded-2xl outline-none transition-all text-lg font-medium text-center sm:text-left tracking-wider"
+                                    className="phone-analysis-input bg-slate-50 border border-slate-200 flex-1 px-5 py-4 rounded-2xl outline-none transition-all text-lg font-medium text-center sm:text-left tracking-wider text-[#1a1a3e]"
                                 />
                                 <button
                                     onClick={handleAnalyze}
@@ -371,8 +371,8 @@ function ClientPageContent() {
                                     className={`
                                         px-6 sm:px-8 py-4 rounded-2xl font-bold text-white transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 min-w-full sm:min-w-[160px]
                                         ${phoneNumber.length === 10
-                                            ? 'bg-amber-500 hover:bg-amber-400 shadow-[0_0_24px_rgba(245,158,11,0.22)] hover:shadow-[0_0_32px_rgba(245,158,11,0.30)] border border-amber-400/20 cursor-pointer'
-                                            : 'bg-slate-800/50 text-slate-500 border border-white/5 cursor-not-allowed'}
+                                            ? 'bg-amber-500 hover:bg-amber-400 shadow-md text-white'
+                                            : 'bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed'}
                                     `}
                                 >
                                     {loading ? <Loader2 className="animate-spin" /> : <Search size={20} />}
@@ -387,7 +387,7 @@ function ClientPageContent() {
 
                         {/* Helper text + counter */}
                         <div className="flex items-center justify-between mt-3 px-3 gap-3">
-                            <p className="text-xs text-amber-300/85" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}>
+                            <p className="text-xs text-[#5a5a82]">
                                 {phoneNumber.length === 10 ? 'พร้อมเข้าสู่ระบบเพื่อวิเคราะห์ฟรี' : 'กรอก 10 หลัก ไม่ต้องใส่ขีด'}
                             </p>
                             <span className={`text-xs font-mono tabular-nums transition-colors ${phoneNumber.length === 10 ? 'text-emerald-400' : 'text-slate-500'}`}>
@@ -430,7 +430,7 @@ function ClientPageContent() {
                             onClick={() => {
                                 window.location.href = '/phone-analysis';
                             }}
-                            className="text-slate-400 hover:text-white transition-colors underline underline-offset-4"
+                            className="text-[#5a5a82] hover:text-[#1a1a3e] transition-colors underline underline-offset-4"
                         >
                             {t('pages.phoneAnalysis.reset')}
                         </button>

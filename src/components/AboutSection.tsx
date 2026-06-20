@@ -90,29 +90,29 @@ const trustLinks = [
 
 export default function AboutSection() {
     return (
-        <section className="relative w-full min-h-screen bg-slate-950 text-white overflow-hidden pt-24 md:pt-36 pb-20 font-sans">
-            <div className="absolute inset-x-0 top-0 h-96 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.18),transparent_35%),radial-gradient(circle_at_top_right,rgba(245,158,11,0.15),transparent_32%)] pointer-events-none" />
+        <section className="relative w-full min-h-screen bg-[#f8f8fc] text-[#5a5a82] overflow-hidden pt-24 md:pt-36 pb-20 font-sans">
+            <div className="absolute inset-x-0 top-0 h-96 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.05),transparent_35%),radial-gradient(circle_at_top_right,rgba(245,158,11,0.05),transparent_32%)] pointer-events-none" />
 
             <div className="relative z-10 mx-auto w-full max-w-7xl px-4 space-y-16 md:space-y-24">
-                <Link href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors group">
+                <Link href="/" className="inline-flex items-center gap-2 text-[#5a5a82] hover:text-[#1a1a3e] transition-colors group">
                     <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                     <span>กลับหน้าแรก</span>
                 </Link>
 
                 <header className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
                     <div className="space-y-7">
-                        <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-sm font-medium text-emerald-300">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-[#ddddf0] bg-white px-3 py-1 text-sm font-medium text-[#1a1a3e] shadow-sm">
                             <span className="h-2 w-2 rounded-full bg-emerald-400" />
                             The Science of Naming
                         </div>
                         <div className="space-y-5">
-                            <h1 className="text-4xl font-bold tracking-tight leading-tight md:text-6xl">
+                            <h1 className="text-4xl font-bold tracking-tight leading-tight md:text-6xl text-amber-600">
                                 เกี่ยวกับ NameMongkol
-                                <span className="block text-2xl md:text-4xl text-slate-300 mt-4">
+                                <span className="block text-2xl md:text-4xl text-amber-500 mt-4">
                                     วิเคราะห์ชื่อมงคลด้วยหลักศาสตร์ไทยและ AI
                                 </span>
                             </h1>
-                            <p className="max-w-3xl text-lg md:text-xl leading-relaxed text-slate-300">
+                            <p className="max-w-3xl text-lg md:text-xl leading-relaxed text-[#5a5a82]">
                                 NameMongkol คือแพลตฟอร์มสำหรับตรวจชื่อ ตั้งชื่อ วิเคราะห์เบอร์ ลายมือ ออร่า และพลังมงคล
                                 โดยออกแบบให้ผลลัพธ์อ่านง่าย โปร่งใส และมีลิงก์ให้ตรวจสอบต่อได้ทั้งบทความ รีวิว นโยบายความเป็นส่วนตัว และเงื่อนไขการใช้งาน
                             </p>
@@ -120,14 +120,14 @@ export default function AboutSection() {
                         <div className="flex flex-col gap-3 sm:flex-row">
                             <Link
                                 href="/name-check"
-                                className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 px-6 py-3 font-bold text-slate-950 hover:bg-amber-300 transition-colors"
+                                className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-500 px-6 py-3 font-bold text-white hover:bg-amber-400 hover:-translate-y-0.5 transition-all shadow-md"
                             >
                                 วิเคราะห์ชื่อฟรี
                                 <ArrowRight size={18} />
                             </Link>
                             <Link
                                 href="/articles"
-                                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3 font-semibold text-white hover:bg-white/10 transition-colors"
+                                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#ddddf0] bg-white px-6 py-3 font-semibold text-[#1a1a3e] hover:border-amber-300 hover:text-amber-600 transition-all shadow-sm"
                             >
                                 อ่านบทความ
                                 <BookOpen size={18} />
@@ -135,16 +135,16 @@ export default function AboutSection() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+                    <div className="grid grid-cols-2 gap-4 rounded-3xl border border-[#ddddf0] bg-white p-5 shadow-sm">
                         {[
                             ['6+', 'บริการหลัก'],
                             ['4', 'หลักวิเคราะห์ชื่อ'],
                             ['24/7', 'ใช้งานออนไลน์'],
                             ['PDPA', 'ให้ความสำคัญกับข้อมูล'],
                         ].map(([value, label]) => (
-                            <div key={label} className="rounded-2xl border border-white/10 bg-slate-900/70 p-5 text-center">
-                                <div className="text-3xl font-bold text-amber-300">{value}</div>
-                                <div className="mt-2 text-sm text-slate-400">{label}</div>
+                            <div key={label} className="rounded-2xl border border-[#ddddf0] bg-slate-50 p-5 text-center transition-colors hover:border-amber-200">
+                                <div className="text-3xl font-bold text-amber-500">{value}</div>
+                                <div className="mt-2 text-sm text-[#5a5a82] font-medium">{label}</div>
                             </div>
                         ))}
                     </div>
@@ -152,8 +152,8 @@ export default function AboutSection() {
 
                 <section className="grid gap-5 md:grid-cols-3">
                     <div className="md:col-span-1 space-y-3">
-                        <h2 className="text-2xl md:text-3xl font-bold">เราช่วยอะไรได้บ้าง</h2>
-                        <p className="text-slate-400 leading-relaxed">
+                        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a3e]">เราช่วยอะไรได้บ้าง</h2>
+                        <p className="text-[#5a5a82] leading-relaxed">
                             บริการถูกแยกตาม intent ของผู้ใช้ เพื่อให้เลือกเครื่องมือได้ตรงเป้าหมายและค้นต่อจากบทความได้ง่าย
                         </p>
                     </div>
@@ -164,12 +164,12 @@ export default function AboutSection() {
                                 <Link
                                     href={service.href}
                                     key={service.title}
-                                    className="group rounded-2xl border border-white/10 bg-slate-900/70 p-5 transition-colors hover:border-amber-300/40 hover:bg-slate-900"
+                                    className="group rounded-2xl border border-[#ddddf0] bg-white p-5 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg shadow-sm"
                                 >
-                                    <Icon className="mb-4 text-amber-300" size={28} />
-                                    <h3 className="font-bold text-lg text-white">{service.title}</h3>
-                                    <p className="mt-2 text-sm leading-relaxed text-slate-400">{service.description}</p>
-                                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-amber-300">
+                                    <Icon className="mb-4 text-amber-500 group-hover:scale-110 transition-transform" size={28} />
+                                    <h3 className="font-bold text-lg text-[#1a1a3e]">{service.title}</h3>
+                                    <p className="mt-2 text-sm leading-relaxed text-[#5a5a82]">{service.description}</p>
+                                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-amber-600">
                                         ไปที่เครื่องมือ <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
                                     </span>
                                 </Link>
@@ -178,22 +178,26 @@ export default function AboutSection() {
                     </div>
                 </section>
 
-                <section className="rounded-3xl border border-white/10 bg-slate-900/70 p-6 md:p-10">
-                    <div className="max-w-3xl space-y-4">
-                        <h2 className="text-2xl md:text-3xl font-bold">หลักการวิเคราะห์ที่เราใช้</h2>
-                        <p className="text-slate-400 leading-relaxed">
+                <section className="rounded-3xl border border-[#ddddf0] bg-white p-6 md:p-10 shadow-sm relative overflow-hidden">
+                    {/* Background decorations */}
+                    <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-50 rounded-full blur-3xl" />
+                    <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-amber-50 rounded-full blur-3xl" />
+                    
+                    <div className="max-w-3xl space-y-4 relative z-10">
+                        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a3e]">หลักการวิเคราะห์ที่เราใช้</h2>
+                        <p className="text-[#5a5a82] leading-relaxed">
                             ผลลัพธ์บนเว็บไซต์เป็นข้อมูลประกอบการตัดสินใจ ไม่ใช่คำยืนยันชะตาชีวิตแบบตายตัว
                             เราจึงแสดงคะแนน เหตุผล และข้อควรพิจารณาให้ผู้ใช้ประเมินต่อได้ด้วยตัวเอง
                         </p>
                     </div>
-                    <div className="mt-8 grid gap-4 md:grid-cols-4">
+                    <div className="mt-8 grid gap-4 md:grid-cols-4 relative z-10">
                         {principles.map((item) => {
                             const Icon = item.icon;
                             return (
-                                <div key={item.title} className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                                    <Icon className="mb-4 text-emerald-300" size={26} />
-                                    <h3 className="font-bold text-white">{item.title}</h3>
-                                    <p className="mt-2 text-sm leading-relaxed text-slate-400">{item.description}</p>
+                                <div key={item.title} className="rounded-2xl border border-[#ddddf0] bg-slate-50 p-5 shadow-sm transition-transform hover:-translate-y-1 duration-300 hover:border-emerald-200">
+                                    <Icon className="mb-4 text-emerald-500" size={26} />
+                                    <h3 className="font-bold text-[#1a1a3e]">{item.title}</h3>
+                                    <p className="mt-2 text-sm leading-relaxed text-[#5a5a82]">{item.description}</p>
                                 </div>
                             );
                         })}
@@ -201,20 +205,36 @@ export default function AboutSection() {
                 </section>
 
                 <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-                    <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 md:p-8">
-                        <Users className="mb-5 text-blue-300" size={32} />
-                        <h2 className="text-2xl font-bold">เหมาะกับใคร</h2>
-                        <ul className="mt-5 space-y-3 text-slate-300">
-                            <li>ผู้ปกครองที่ต้องการไอเดียตั้งชื่อลูกพร้อมเหตุผลประกอบ</li>
-                            <li>ผู้ที่อยากตรวจชื่อหรือนามสกุลก่อนเปลี่ยนชื่อ</li>
-                            <li>เจ้าของธุรกิจ ทีมขาย หรือผู้ใช้ที่ต้องเปรียบเทียบชื่อ/เบอร์หลายรายการ</li>
-                            <li>ผู้ที่ต้องการอ่านบทความประกอบก่อนเลือกใช้เครื่องมือ</li>
+                    <div className="rounded-3xl border border-[#ddddf0] bg-white p-6 md:p-8 shadow-sm hover:border-blue-200 transition-colors">
+                        <div className="w-14 h-14 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center mb-5 border border-blue-100">
+                            <Users size={28} />
+                        </div>
+                        <h2 className="text-2xl font-bold text-[#1a1a3e]">เหมาะกับใคร</h2>
+                        <ul className="mt-5 space-y-3 text-[#5a5a82]">
+                            <li className="flex items-start gap-2">
+                                <span className="text-blue-400 mt-1">•</span>
+                                ผู้ปกครองที่ต้องการไอเดียตั้งชื่อลูกพร้อมเหตุผลประกอบ
+                            </li>
+                            <li className="flex items-start gap-2">
+                                <span className="text-blue-400 mt-1">•</span>
+                                ผู้ที่อยากตรวจชื่อหรือนามสกุลก่อนเปลี่ยนชื่อ
+                            </li>
+                            <li className="flex items-start gap-2">
+                                <span className="text-blue-400 mt-1">•</span>
+                                เจ้าของธุรกิจ ทีมขาย หรือผู้ใช้ที่ต้องเปรียบเทียบชื่อ/เบอร์หลายรายการ
+                            </li>
+                            <li className="flex items-start gap-2">
+                                <span className="text-blue-400 mt-1">•</span>
+                                ผู้ที่ต้องการอ่านบทความประกอบก่อนเลือกใช้เครื่องมือ
+                            </li>
                         </ul>
                     </div>
-                    <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 md:p-8">
-                        <Lock className="mb-5 text-emerald-300" size={32} />
-                        <h2 className="text-2xl font-bold">ความโปร่งใสและความเป็นส่วนตัว</h2>
-                        <p className="mt-4 text-slate-300 leading-relaxed">
+                    <div className="rounded-3xl border border-[#ddddf0] bg-white p-6 md:p-8 shadow-sm hover:border-emerald-200 transition-colors">
+                        <div className="w-14 h-14 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center mb-5 border border-emerald-100">
+                            <Lock size={28} />
+                        </div>
+                        <h2 className="text-2xl font-bold text-[#1a1a3e]">ความโปร่งใสและความเป็นส่วนตัว</h2>
+                        <p className="mt-4 text-[#5a5a82] leading-relaxed">
                             ข้อมูลที่ผู้ใช้กรอก เช่น ชื่อ วันเกิด เบอร์โทร หรือภาพที่อัปโหลด ถูกใช้เพื่อประมวลผลบริการที่เลือก
                             และอธิบายไว้ในนโยบายความเป็นส่วนตัวอย่างชัดเจน เราแยกหน้ากฎหมายและหน้ารีวิวไว้ให้ตรวจสอบได้ง่าย
                         </p>
@@ -225,9 +245,9 @@ export default function AboutSection() {
                                     <Link
                                         href={link.href}
                                         key={link.href}
-                                        className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-slate-950/50 px-4 py-3 text-sm font-semibold text-slate-200 hover:bg-white/10 transition-colors"
+                                        className="inline-flex items-center gap-2 rounded-xl border border-[#ddddf0] bg-slate-50 px-4 py-3 text-sm font-semibold text-[#5a5a82] hover:text-amber-600 hover:border-amber-200 hover:bg-amber-50 transition-colors shadow-sm"
                                     >
-                                        <Icon size={17} className="text-amber-300" />
+                                        <Icon size={17} className="text-amber-500" />
                                         {link.label}
                                     </Link>
                                 );
@@ -236,15 +256,17 @@ export default function AboutSection() {
                     </div>
                 </section>
 
-                <section className="rounded-3xl border border-amber-300/30 bg-gradient-to-r from-slate-900 via-slate-900 to-amber-950/30 p-8 md:p-12 text-center">
-                    <h2 className="text-3xl md:text-5xl font-bold">เริ่มจากชื่อของคุณได้เลย</h2>
-                    <p className="mx-auto mt-4 max-w-2xl text-slate-300 leading-relaxed">
+                <section className="rounded-3xl border border-[#ddddf0] bg-white p-8 md:p-12 text-center shadow-md relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none" />
+                    
+                    <h2 className="text-3xl md:text-5xl font-bold text-[#1a1a3e] relative z-10">เริ่มจากชื่อของคุณได้เลย</h2>
+                    <p className="mx-auto mt-4 max-w-2xl text-[#5a5a82] leading-relaxed relative z-10">
                         ลองตรวจชื่อฟรีก่อน แล้วค่อยต่อยอดไปยังบทความ วิเคราะห์เชิงลึก หรือบริการที่เหมาะกับเป้าหมายของคุณ
                     </p>
-                    <div className="mt-8">
+                    <div className="mt-8 relative z-10">
                         <Link
                             href="/name-check"
-                            className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-8 py-4 font-bold text-slate-950 hover:bg-amber-300 transition-colors"
+                            className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-4 font-bold text-white hover:bg-amber-400 hover:-translate-y-0.5 transition-all shadow-lg shadow-amber-500/20"
                         >
                             วิเคราะห์ชื่อมงคลฟรี
                             <ArrowRight size={18} />

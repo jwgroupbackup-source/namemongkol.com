@@ -224,7 +224,7 @@ export const PremiumBlurOverlay: React.FC<PremiumBlurOverlayProps> = ({
                 </div>
 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/60 to-slate-900/95 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-white/95 pointer-events-none" />
 
                 {/* Lock Overlay */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:p-6">
@@ -245,7 +245,7 @@ export const PremiumBlurOverlay: React.FC<PremiumBlurOverlayProps> = ({
                     </div>
 
                     {/* Feature Name */}
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2 text-center">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#1a1a3e] mb-2 text-center">
                         🔮 {featureName}
                     </h3>
 
@@ -254,9 +254,9 @@ export const PremiumBlurOverlay: React.FC<PremiumBlurOverlayProps> = ({
                         {benefits.map((benefit, index) => (
                             <div 
                                 key={index}
-                                className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-xs text-slate-200"
+                                className="flex items-center gap-1.5 px-3 py-1.5 bg-white/60 backdrop-blur-sm border border-[#ddddf0] rounded-full text-xs text-[#5a5a82] shadow-sm"
                             >
-                                <benefit.icon className="w-3 h-3 text-amber-400" />
+                                <benefit.icon className="w-3 h-3 text-amber-500" />
                                 <span>{benefit.text}</span>
                             </div>
                         ))}
@@ -291,8 +291,8 @@ export const PremiumBlurOverlay: React.FC<PremiumBlurOverlayProps> = ({
 
                     {/* Login Prompt (if not logged in) */}
                     {!isLoading && !user && (
-                        <p className="text-slate-400 text-xs sm:text-sm mt-3 text-center">
-                            <Link href="/login" className="text-amber-400 hover:text-amber-300 underline underline-offset-2">
+                        <p className="text-[#5a5a82] text-xs sm:text-sm mt-3 text-center">
+                            <Link href="/login" className="text-amber-600 hover:text-amber-500 font-medium underline underline-offset-2">
                                 เข้าสู่ระบบ
                             </Link>
                             {' '}เพื่อปลดล็อกและรับโบนัสฟรี 50 Coins!
@@ -301,24 +301,24 @@ export const PremiumBlurOverlay: React.FC<PremiumBlurOverlayProps> = ({
 
                     {/* Credit Balance (if logged in) */}
                     {user && (
-                        <p className="text-slate-400 text-xs sm:text-sm mt-3 text-center flex flex-wrap items-center justify-center gap-2">
+                        <p className="text-[#5a5a82] text-xs sm:text-sm mt-3 text-center flex flex-wrap items-center justify-center gap-2">
                             {typeof credits === 'number' && (
-                                <span className="text-slate-300">เครดิตคงเหลือ: <span className="text-amber-400 font-bold">{credits}</span></span>
+                                <span className="text-[#1a1a3e]">เครดิตคงเหลือ: <span className="text-amber-600 font-bold">{credits}</span></span>
                             )}
-                            <Link href="/topup" className="text-amber-400 hover:text-amber-300 flex items-center gap-1">
+                            <Link href="/topup" className="text-amber-600 hover:text-amber-500 font-medium flex items-center gap-1">
                                 เติมเครดิต <ChevronRight className="w-3 h-3" />
                             </Link>
                         </p>
                     )}
 
                     {/* FOMO Text */}
-                    <div className="mt-4 flex items-center gap-2 text-xs text-slate-400">
+                    <div className="mt-4 flex items-center gap-2 text-xs text-[#5a5a82]">
                         <div className="flex -space-x-2">
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-[10px] text-white border-2 border-slate-900">A</div>
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-[10px] text-white border-2 border-slate-900">ก</div>
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-[10px] text-white border-2 border-slate-900">ค</div>
+                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-[10px] text-white border-2 border-white">A</div>
+                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-[10px] text-white border-2 border-white">ก</div>
+                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-[10px] text-white border-2 border-white">ค</div>
                         </div>
-                        <span>มีผู้ปลดล็อกแล้ว <span className="text-amber-400 font-bold">2,847</span> คนในสัปดาห์นี้</span>
+                        <span>มีผู้ปลดล็อกแล้ว <span className="text-amber-600 font-bold">2,847</span> คนในสัปดาห์นี้</span>
                     </div>
                 </div>
             </div>

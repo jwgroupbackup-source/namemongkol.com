@@ -23,18 +23,18 @@ export const InlineSignupCTA = () => {
             <Link
                 href="/login"
                 data-track="home.inline_cta.signup"
-                className="flex items-center justify-between gap-3 w-full px-5 py-3 bg-gradient-to-r from-amber-500/10 to-amber-600/5 border border-amber-500/20 rounded-xl hover:border-amber-500/40 transition-all group"
+                className="flex items-center justify-between gap-3 w-full px-5 py-3 bg-amber-50 border border-amber-200 rounded-xl hover:border-amber-300 transition-all group shadow-sm"
             >
                 <div className="flex items-center gap-3">
-                    <div className="p-1.5 bg-amber-500/20 rounded-lg">
-                        <Gift className="w-4 h-4 text-amber-400" />
+                    <div className="p-1.5 bg-amber-100 rounded-lg border border-amber-200">
+                        <Gift className="w-4 h-4 text-amber-600" />
                     </div>
                     <div>
-                        <span className="text-sm font-bold text-amber-200">สมัครฟรีไว้บันทึกผล และรับ 30 เครดิต</span>
-                        <span className="block text-[10px] text-slate-400">วิเคราะห์ฟรีได้เลยตอนนี้, ส่วนสมาชิกใช้เก็บประวัติและปลดล็อกฟีเจอร์เพิ่ม</span>
+                        <span className="text-sm font-bold text-amber-700">สมัครฟรีไว้บันทึกผล และรับ 30 เครดิต</span>
+                        <span className="block text-[10px] text-[#5a5a82]">วิเคราะห์ฟรีได้เลยตอนนี้, ส่วนสมาชิกใช้เก็บประวัติและปลดล็อกฟีเจอร์เพิ่ม</span>
                     </div>
                 </div>
-                <ArrowRight className="w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-amber-600 group-hover:translate-x-1 transition-transform" />
             </Link>
         </div>
     );

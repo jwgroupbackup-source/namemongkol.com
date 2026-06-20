@@ -17,6 +17,7 @@ import { generatePremiumNames, PremiumResult, FocusTopic, getAstrologicalDay } f
 import { formatThaiBirthDate, ThaiDateResult } from '@/utils/thaiDateUtils';
 import { calculateEffectiveCredits } from '@/utils/credits';
 import { SearchableSelect } from '@/components/SearchableSelect';
+import { SoftYellowGlowBackground } from '@/components/ui/background-components';
 
 const CertificateGenerator = dynamic(
     () => import('@/components/CertificateGenerator').then((m) => m.CertificateGenerator),
@@ -238,7 +239,7 @@ export default function PremiumAnalysisPage() {
         if (latestCredits < PREMIUM_ANALYSIS_COST) {
             const topup = await Swal.fire({
                 title: 'เครดิตไม่เพียงพอ',
-                html: `<p style="color:#94a3b8">การวิเคราะห์ต้องใช้ <strong style="color:#fbbf24">${PREMIUM_ANALYSIS_COST} เครดิต</strong></p><p style="color:#94a3b8;margin-top:4px">คุณมี <strong style="color:#ef4444">${latestCredits} เครดิต</strong></p>`,
+                html: `<p style="color:#cbd5e1">การวิเคราะห์ต้องใช้ <strong style="color:#fbbf24">${PREMIUM_ANALYSIS_COST} เครดิต</strong></p><p style="color:#cbd5e1;margin-top:4px">คุณมี <strong style="color:#ef4444">${latestCredits} เครดิต</strong></p>`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'ไปเติมเครดิต',
@@ -256,7 +257,7 @@ export default function PremiumAnalysisPage() {
 
         const confirmation = await Swal.fire({
             title: 'ยืนยันการวิเคราะห์ชื่อมงคล',
-            html: `<p style="color:#94a3b8">การวิเคราะห์จะใช้ <strong style="color:#fbbf24">${PREMIUM_ANALYSIS_COST} เครดิต</strong></p><p style="color:#94a3b8;margin-top:4px">คุณมี <strong style="color:#34d399">${latestCredits} เครดิต</strong> (คงเหลือ ${latestCredits - PREMIUM_ANALYSIS_COST} เครดิต)</p>`,
+            html: `<p style="color:#cbd5e1">การวิเคราะห์จะใช้ <strong style="color:#fbbf24">${PREMIUM_ANALYSIS_COST} เครดิต</strong></p><p style="color:#cbd5e1;margin-top:4px">คุณมี <strong style="color:#34d399">${latestCredits} เครดิต</strong> (คงเหลือ ${latestCredits - PREMIUM_ANALYSIS_COST} เครดิต)</p>`,
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: `ยืนยัน (ใช้ ${PREMIUM_ANALYSIS_COST} เครดิต)`,
@@ -386,7 +387,7 @@ export default function PremiumAnalysisPage() {
                     <p className="text-xl text-slate-200">
                         คุณเกิดวัน <span className="text-amber-400 font-bold">{dateDetails.dayOfWeek}</span> ครับ
                     </p>
-                    <div className="text-sm text-slate-400 space-y-2 bg-black/20 p-4 rounded-xl border border-white/5 inline-block w-full max-w-2xl">
+                    <div className="text-sm text-slate-300 space-y-2 bg-black/20 p-4 rounded-xl border border-white/5 inline-block w-full max-w-2xl">
                         <p>สำหรับรายละเอียดเพิ่มเติมของวันที่ {dateDetails.fullSolarDateWithType} มีดังนี้ครับ:</p>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-left md:text-center">
                             <div className="bg-white/5 p-3 rounded-lg border border-white/5">
@@ -413,7 +414,7 @@ export default function PremiumAnalysisPage() {
                 <p className="text-slate-200">
                     ชื่อมงคลสำหรับนามสกุล <span className="text-white font-bold underline decoration-amber-500/50 underline-offset-4 px-1">&quot;{surname}&quot;</span>
                 </p>
-                <p className="text-slate-400 text-sm max-w-2xl mx-auto">
+                <p className="text-slate-300 text-sm max-w-2xl mx-auto">
                     รายชื่อเหล่านี้ถูกคัดสรรจากศาสตร์ทักษาปกรณ์และเลขศาสตร์ชั้นสูง โดยคำนวณจากวันเดือนปีเกิดและเวลาเกิดของท่านโดยเฉพาะ
                 </p>
                 <div className="flex items-center justify-center gap-2 mt-2">
@@ -459,7 +460,7 @@ export default function PremiumAnalysisPage() {
                                 <h3 className={`text-3xl font-bold mb-2 transition-colors ${isPremium ? 'text-white' : 'text-slate-200 group-hover:text-white'}`}>
                                     {result.name}
                                 </h3>
-                                <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+                                <p className="text-slate-300 text-sm mb-6 leading-relaxed">
                                     {result.meaning}
                                 </p>
 
@@ -492,7 +493,7 @@ export default function PremiumAnalysisPage() {
                         </div>
                     );
                 }) : (
-                    <div className="col-span-full py-20 text-center text-slate-400 bg-white/5 rounded-3xl border border-white/10 border-dashed">
+                    <div className="col-span-full py-20 text-center text-slate-300 bg-white/5 rounded-3xl border border-white/10 border-dashed">
                         <AlertCircle size={48} className="mx-auto mb-4 opacity-30" />
                         <p className="text-xl font-bold text-slate-300">ไม่พบรายชื่อที่ตรงกับเงื่อนไข</p>
                         <p className="mt-2 text-sm text-slate-500">กรุณาลองเปลี่ยนค่าพลัง (Focus) หรือตรวจสอบข้อมูลอีกครั้ง</p>
@@ -553,7 +554,7 @@ export default function PremiumAnalysisPage() {
                                 value={surname}
                                 onChange={(e) => setSurname(e.target.value)}
                                 placeholder="กรอกนามสกุลของท่าน"
-                                className="w-full bg-white/5 border border-white/5 rounded-xl md:rounded-2xl pl-11 md:pl-12 pr-4 md:pr-5 py-3 md:py-4 text-base md:text-lg focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all placeholder:text-slate-500 text-white shadow-inner"
+                                className="w-full rounded-xl border border-slate-700/80 bg-slate-900/90 pl-11 pr-4 py-3 text-base text-white shadow-inner transition-all placeholder:text-slate-500 focus:border-amber-500/50 focus:outline-none focus:ring-1 focus:ring-amber-500/50 md:rounded-2xl md:pl-12 md:pr-5 md:py-4 md:text-lg"
                             />
                         </div>
                     </div>
@@ -624,7 +625,7 @@ export default function PremiumAnalysisPage() {
                                             setIsUnknownTime(e.target.checked);
                                             if (e.target.checked) setBirthTime('');
                                         }}
-                                        className="rounded border-white/20 bg-white/5 text-amber-500 focus:ring-amber-500/50"
+                                        className="rounded border-slate-600 bg-slate-900 text-amber-500 focus:ring-amber-500/50"
                                     />
                                     <label htmlFor="unknownTime" className="text-xs text-slate-300 cursor-pointer hover:text-amber-400 transition-colors">ไม่ทราบเวลา</label>
                                 </div>
@@ -772,7 +773,7 @@ export default function PremiumAnalysisPage() {
                         {!isLoading && <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-20 pointer-events-none"></div>}
                     </button>
 
-                    <p className="text-slate-400 text-xs md:text-sm flex items-center gap-1.5 md:gap-2 opacity-80 hover:opacity-100 transition-opacity font-medium">
+                    <p className="text-slate-300 text-xs md:text-sm flex items-center gap-1.5 md:gap-2 opacity-80 hover:opacity-100 transition-opacity font-medium">
                         <Lock size={14} className="text-amber-500 w-3.5 h-3.5 md:w-4 md:h-4" />
                         ปลอดภัยสูงสุด • ข้อมูลของท่านจะถูกเก็บเป็นความลับ
                         {userTier === 'vvip' && userCredits !== null && (
@@ -785,20 +786,10 @@ export default function PremiumAnalysisPage() {
     );
 
     return (
-        <div className="min-h-screen bg-[oklch(13%_0.035_260)] text-slate-200 font-sans selection:bg-amber-500/30 relative overflow-hidden">
+        <SoftYellowGlowBackground className="font-sans overflow-x-hidden selection:bg-amber-500/30">
 
-            <main className="relative min-h-screen w-full max-w-[1400px] overflow-hidden px-3 pb-40 sm:px-4 md:pb-20">
-                {/* Background Decor - Fixed Position */}
-                <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-                    <div
-                        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-85"
-                        style={{ backgroundImage: "url('/Theme/theme-search.png')" }}
-                    ></div>
-                    <div className="absolute inset-0 bg-[oklch(13%_0.035_260)]/30"></div>
-                    <div className="absolute inset-0 bg-gradient-to-b from-[oklch(13%_0.035_260)]/20 via-[oklch(13%_0.035_260)]/32 to-[oklch(8%_0.025_260)]/82"></div>
-                </div>
-
-                <div className="relative z-10 max-w-7xl px-0 sm:px-6 lg:px-8 space-y-6 md:space-y-8">
+            <main className="relative min-h-screen w-full px-3 pb-40 text-slate-900 sm:px-4 md:pb-20">
+                <div className="relative z-10 mx-auto max-w-7xl px-0 sm:px-6 lg:px-8 space-y-6 md:space-y-8">
 
                     {/* Header Section */}
                     <header className="space-y-3 pb-4 pt-7 text-center md:space-y-6 md:pb-8 md:pt-32">
@@ -808,27 +799,27 @@ export default function PremiumAnalysisPage() {
                         </div>
 
                         <div className="space-y-2">
-                            <h1 className="text-[2rem] font-black leading-tight tracking-tight text-white drop-shadow-sm sm:text-4xl md:text-6xl">
+                            <h1 className="text-[2rem] font-black leading-tight tracking-tight text-slate-950 sm:text-4xl md:text-6xl">
                                 วิเคราะห์ชื่อมงคลขั้นสูง
                             </h1>
                             <div className="h-1 w-24 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto rounded-full opacity-50"></div>
                         </div>
 
-                        <p className="text-slate-300 text-lg md:text-2xl max-w-3xl mx-auto font-light leading-loose">
-                            เจาะลึกชะตาชีวิตด้วย <strong className="text-amber-200 font-bold">ทักษาปกรณ์</strong> และ <strong className="text-amber-200 font-bold">เลขศาสตร์ชั้นสูง</strong>
+                        <p className="text-slate-700 text-lg md:text-2xl max-w-3xl mx-auto font-light leading-loose">
+                            เจาะลึกชะตาชีวิตด้วย <strong className="text-amber-700 font-bold">ทักษาปกรณ์</strong> และ <strong className="text-amber-700 font-bold">เลขศาสตร์ชั้นสูง</strong>
                             <br className="hidden md:block" />
-                            พร้อมคำนวณ <strong className="text-amber-200 font-bold">ลัคนาราศี</strong> จาก <strong className="text-amber-200 font-bold">เวลาตกฟาก</strong> เพื่อค้นหาชื่อที่ส่งเสริมดวงชะตาของท่านอย่างแท้จริง
+                            พร้อมคำนวณ <strong className="text-amber-700 font-bold">ลัคนาราศี</strong> จาก <strong className="text-amber-700 font-bold">เวลาตกฟาก</strong> เพื่อค้นหาชื่อที่ส่งเสริมดวงชะตาของท่านอย่างแท้จริง
                         </p>
                     </header>
 
                     {/* Main Content Area */}
-                    <div className="pb-16 md:pb-28">
+                    <div className="rounded-[2rem] border border-slate-800 bg-slate-950/90 px-4 py-6 text-slate-200 shadow-2xl shadow-slate-950/20 sm:px-6 md:px-8 md:py-10">
                         {!hasAnalyzed ? formContent : resultsContent}
                     </div>
 
                     {/* ==================== SEO CONTENT SECTION (Below the Fold) ==================== */}
                     {!hasAnalyzed && (
-                        <section className="mt-8 pt-16 border-t border-white/10 space-y-16 pb-20">
+                        <section className="mt-8 space-y-16 rounded-[2rem] border border-slate-800 bg-slate-950/90 p-5 pb-20 pt-10 text-slate-200 shadow-2xl shadow-slate-950/15 sm:p-8 md:p-12">
 
                             {/* Section A: ความแตกต่างของการ "วิเคราะห์ขั้นสูง" */}
                             <div className="max-w-3xl mx-auto">
@@ -847,21 +838,21 @@ export default function PremiumAnalysisPage() {
                                                 <Clock className="w-5 h-5 text-amber-400" />
                                             </div>
                                             <h3 className="font-bold text-white mb-2">เวลาตกฟาก</h3>
-                                            <p className="text-sm text-slate-400">คำนวณลัคนาราศีจริง ไม่ใช่แค่ราศีตามวันเกิด</p>
+                                            <p className="text-sm text-slate-300">คำนวณลัคนาราศีจริง ไม่ใช่แค่ราศีตามวันเกิด</p>
                                         </div>
                                         <div className="bg-white/5 rounded-2xl p-5 border border-white/5">
                                             <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center mb-3">
                                                 <Target className="w-5 h-5 text-amber-400" />
                                             </div>
                                             <h3 className="font-bold text-white mb-2">เจาะลึกเฉพาะด้าน</h3>
-                                            <p className="text-sm text-slate-400">เลือก Focus ได้ว่าต้องการเสริมดวงด้านไหน</p>
+                                            <p className="text-sm text-slate-300">เลือก Focus ได้ว่าต้องการเสริมดวงด้านไหน</p>
                                         </div>
                                         <div className="bg-white/5 rounded-2xl p-5 border border-white/5">
                                             <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center mb-3">
                                                 <TrendingUp className="w-5 h-5 text-amber-400" />
                                             </div>
                                             <h3 className="font-bold text-white mb-2">Personalization</h3>
-                                            <p className="text-sm text-slate-400">ผลลัพธ์เฉพาะบุคคล ไม่ใช่สูตรสำเร็จรูป</p>
+                                            <p className="text-sm text-slate-300">ผลลัพธ์เฉพาะบุคคล ไม่ใช่สูตรสำเร็จรูป</p>
                                         </div>
                                     </div>
                                 </div>
@@ -883,7 +874,7 @@ export default function PremiumAnalysisPage() {
                                             </div>
                                             <h3 className="font-bold text-white">💰 การเงิน</h3>
                                         </div>
-                                        <p className="text-sm text-slate-400 leading-relaxed">
+                                        <p className="text-sm text-slate-300 leading-relaxed">
                                             วิเคราะห์หาเลขที่ดึงดูดทรัพย์และสภาพคล่อง ตัดตัวเลขที่ทำให้เก็บเงินไม่อยู่
                                         </p>
                                     </div>
@@ -895,7 +886,7 @@ export default function PremiumAnalysisPage() {
                                             </div>
                                             <h3 className="font-bold text-white">💼 การงาน</h3>
                                         </div>
-                                        <p className="text-sm text-slate-400 leading-relaxed">
+                                        <p className="text-sm text-slate-300 leading-relaxed">
                                             เน้นเลขกลุ่มอำนาจบารมี (วรรคเดช) เพื่อการเลื่อนขั้นและเป็นเจ้าคนนายคน
                                         </p>
                                     </div>
@@ -907,7 +898,7 @@ export default function PremiumAnalysisPage() {
                                             </div>
                                             <h3 className="font-bold text-white">❤️ ความรัก</h3>
                                         </div>
-                                        <p className="text-sm text-slate-400 leading-relaxed">
+                                        <p className="text-sm text-slate-300 leading-relaxed">
                                             ตรวจสอบเลขเสน่ห์และคู่ครอง แก้ดวงอาภัพรักจากชื่อเดิม
                                         </p>
                                     </div>
@@ -919,7 +910,7 @@ export default function PremiumAnalysisPage() {
                                             </div>
                                             <h3 className="font-bold text-white">🏥 สุขภาพ</h3>
                                         </div>
-                                        <p className="text-sm text-slate-400 leading-relaxed">
+                                        <p className="text-sm text-slate-300 leading-relaxed">
                                             หาเลขที่ส่งเสริมความแข็งแรง หลีกเลี่ยงเลขที่ทำให้อ่อนไหวด้านสุขภาพ
                                         </p>
                                     </div>
@@ -931,7 +922,7 @@ export default function PremiumAnalysisPage() {
                                             </div>
                                             <h3 className="font-bold text-white">🤝 อุปถัมภ์</h3>
                                         </div>
-                                        <p className="text-sm text-slate-400 leading-relaxed">
+                                        <p className="text-sm text-slate-300 leading-relaxed">
                                             เสริมดวงผู้ใหญ่เมตตา มีคนคอยช่วยเหลือ ได้รับการสนับสนุน
                                         </p>
                                     </div>
@@ -941,15 +932,15 @@ export default function PremiumAnalysisPage() {
                             {/* Section C: ตารางเปรียบเทียบ Free vs Premium */}
                             <div className="max-w-4xl mx-auto">
                                 <h2 className="text-3xl font-bold text-center text-white mb-8">
-                                    เปรียบเทียบ <span className="text-slate-400">วิเคราะห์เบื้องต้น</span> vs <span className="text-amber-400">วิเคราะห์ชื่อมงคลขั้นสูง</span>
+                                    เปรียบเทียบ <span className="text-slate-300">วิเคราะห์เบื้องต้น</span> vs <span className="text-amber-400">วิเคราะห์ชื่อมงคลขั้นสูง</span>
                                 </h2>
 
                                 <div className="overflow-x-auto">
                                     <table className="w-full border-collapse">
                                         <thead>
                                             <tr className="border-b border-white/10">
-                                                <th className="text-left py-4 px-4 text-slate-400 font-medium">หัวข้อการวิเคราะห์</th>
-                                                <th className="text-center py-4 px-4 text-slate-400 font-medium">วิเคราะห์เบื้องต้น</th>
+                                                <th className="text-left py-4 px-4 text-slate-300 font-medium">หัวข้อการวิเคราะห์</th>
+                                                <th className="text-center py-4 px-4 text-slate-300 font-medium">วิเคราะห์เบื้องต้น</th>
                                                 <th className="text-center py-4 px-4 text-amber-400 font-medium">วิเคราะห์ขั้นสูง</th>
                                             </tr>
                                         </thead>
@@ -1082,7 +1073,7 @@ export default function PremiumAnalysisPage() {
                                 <h3 className="text-2xl font-bold text-white mb-4">
                                     พร้อมค้นหาชื่อมงคลที่ใช่สำหรับคุณ?
                                 </h3>
-                                <p className="text-slate-400 mb-6">
+                                <p className="text-slate-300 mb-6">
                                     เริ่มต้นวิเคราะห์ชื่อมงคลขั้นสูงด้วยศาสตร์ทักษาปกรณ์และเลขศาสตร์ชั้นสูง
                                 </p>
                                 <button
@@ -1100,6 +1091,6 @@ export default function PremiumAnalysisPage() {
 
                 </div>
             </main>
-        </div>
+        </SoftYellowGlowBackground>
     );
 }

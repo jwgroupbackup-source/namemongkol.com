@@ -171,22 +171,29 @@ function HomeResultPreview() {
 
     return (
         <section className="relative z-10 w-full px-4 pb-6 sm:px-6 lg:px-12 xl:px-16">
-            <div className="mx-auto grid w-full max-w-[1180px] gap-5 rounded-[1.75rem] border border-amber-100/10 bg-[#070a15]/42 p-4 shadow-[0_22px_70px_rgba(1,4,15,0.28)] backdrop-blur-md sm:p-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:p-8">
+            <div className="mx-auto grid w-full max-w-[1180px] gap-4 rounded-[1.75rem] border border-amber-200/50 bg-gradient-to-br from-[#fffdf8] to-white p-3 shadow-sm sm:p-5 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:p-8">
                 <div>
-                    <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-200/15 bg-amber-200/10 px-3 py-1 text-xs font-semibold text-amber-100">
+                    <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800 shadow-sm">
                         <Sparkles className="h-3.5 w-3.5" />
                         หลังกรอกชื่อแล้วได้อะไร
                     </p>
-                    <h2 className="text-2xl font-bold leading-tight text-white sm:text-3xl">
+                    <h2 className="text-2xl font-bold leading-tight text-[#1a1a3e] sm:text-3xl">
                         ผลลัพธ์แรกต้องตอบได้ทันทีว่า ชื่อนี้ควรไปต่อไหม
                     </h2>
                 </div>
-                <div className="grid gap-3 sm:grid-cols-3">
+                <div className="grid gap-2 sm:grid-cols-3">
                     {previewItems.map((item) => (
-                        <article key={item.title} className="rounded-2xl border border-white/8 bg-white/[0.04] p-4">
-                            <item.icon className="mb-3 h-5 w-5 text-amber-200" />
-                            <h3 className="text-sm font-bold text-white">{item.title}</h3>
-                            <p className="mt-2 text-xs leading-6 text-slate-400">{item.description}</p>
+                        <article
+                            key={item.title}
+                            className="flex gap-3 rounded-2xl border border-amber-200/60 bg-gradient-to-br from-amber-50/70 to-[#fdf8ef] px-2.5 py-2.5 shadow-[0_1px_2px_rgba(15,23,42,0.05)] sm:block sm:p-4"
+                        >
+                            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-amber-200 bg-amber-50 text-amber-700 sm:mb-3">
+                                <item.icon className="h-4.5 w-4.5" />
+                            </span>
+                            <div className="min-w-0">
+                                <h3 className="text-[13px] font-bold leading-5 text-[#1a1a3e] sm:text-sm">{item.title}</h3>
+                                <p className="mt-1 text-[11px] leading-5 text-[#4f5778] sm:mt-2 sm:text-xs sm:leading-6">{item.description}</p>
+                            </div>
                         </article>
                     ))}
                 </div>
@@ -382,7 +389,7 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
     const { t } = useLanguage();
 
     return (
-        <div className="relative min-h-screen overflow-hidden font-sans text-slate-100 selection:bg-[#f8c24b] selection:text-[#1d1203]">
+        <div className="relative min-h-screen overflow-hidden font-sans bg-[#f8f8fc] text-[#5a5a82] selection:bg-[#f8c24b] selection:text-[#1d1203]">
             <main className="relative z-10 mx-auto flex min-h-[78vh] w-full max-w-[1400px] flex-col items-center px-3 pb-24 pt-2 sm:px-6 sm:pt-10 md:pb-20 md:pt-24 lg:px-12 xl:px-16">
 
                 {!result ? (
@@ -410,7 +417,7 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
                         <div className="flex justify-start">
                             <button
                                 onClick={resetForm}
-                                className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-white/5"
+                                className="flex items-center gap-2 text-[#5a5a82] hover:text-[#1a1a3e] transition-colors text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#ddddf0]/50"
                             >
                                 <ChevronRight className="w-4 h-4 rotate-180" /> {t('home.backHome')}
                             </button>
@@ -512,7 +519,7 @@ export default function ClientHome({ heroHeadingLevel = 'h1' }: ClientHomeProps)
             )}
 
             {/* Footer */}
-            <footer className="relative z-10 w-full px-4 py-6 text-center text-sm text-amber-100/45">
+            <footer className="relative z-10 w-full px-4 py-6 text-center text-sm text-[#5a5a82]/60">
                 <p>{t('home.footer')}</p>
             </footer>
 

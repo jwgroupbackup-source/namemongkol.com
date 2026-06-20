@@ -46,8 +46,8 @@ export const PhoneSacredBackground = () => {
     return (
         <div className="pointer-events-none fixed inset-0 overflow-hidden z-0" aria-hidden="true">
 
-            {/* ── Base dark tone ─────────────────────────────────────────────── */}
-            <div className="absolute inset-0 bg-[#030b10]" />
+            {/* ── Base light tone ─────────────────────────────────────────────── */}
+            <div className="absolute inset-0 bg-[#f8f8fc]" />
 
             {/* ── Generated raster asset layer (enable once image is ready) ── */}
             {SHOW_ASSET && (
@@ -65,10 +65,10 @@ export const PhoneSacredBackground = () => {
                         style={{ objectPosition: '54% 50%' }}
                     />
                     {/* Sidebar negative-space fade: keeps left side readable */}
-                    <div className="absolute inset-y-0 left-0 w-[46%] bg-[linear-gradient(90deg,rgba(3,9,14,0.88),rgba(3,9,14,0.52)_64%,transparent)]" />
+                    <div className="absolute inset-y-0 left-0 w-[46%] bg-[linear-gradient(90deg,rgba(248,248,252,0.95),rgba(248,248,252,0.6)_64%,transparent)]" />
                     {/* Top/bottom vignette */}
-                    <div className="absolute inset-x-0 top-0 h-36 bg-[linear-gradient(180deg,rgba(2,7,12,0.72),transparent)]" />
-                    <div className="absolute inset-x-0 bottom-0 h-44 bg-[linear-gradient(0deg,rgba(2,7,12,0.82),transparent)]" />
+                    <div className="absolute inset-x-0 top-0 h-36 bg-[linear-gradient(180deg,rgba(248,248,252,0.9),transparent)]" />
+                    <div className="absolute inset-x-0 bottom-0 h-44 bg-[linear-gradient(0deg,rgba(248,248,252,0.95),transparent)]" />
                 </>
             )}
 
@@ -80,10 +80,10 @@ export const PhoneSacredBackground = () => {
                     <div className="phone-sacred-noise absolute inset-0 opacity-55" />
 
                     {/* Edge gradients */}
-                    <div className="absolute inset-y-0 left-0 w-[48%] bg-[linear-gradient(90deg,rgba(4,11,16,0.64),rgba(4,11,16,0.30)_62%,transparent)]" />
-                    <div className="absolute inset-x-0 top-0 h-44 bg-[linear-gradient(180deg,rgba(2,7,12,0.82),rgba(2,7,12,0.34)_54%,transparent)]" />
-                    <div className="absolute inset-x-0 bottom-0 h-48 bg-[linear-gradient(0deg,rgba(3,9,15,0.82),transparent)]" />
-                    <div className="absolute left-1/2 top-[10%] h-[24rem] w-[44rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(3,11,18,0.62)_0%,rgba(3,11,18,0.34)_42%,transparent_78%)] blur-3xl" />
+                    <div className="absolute inset-y-0 left-0 w-[48%] bg-[linear-gradient(90deg,rgba(248,248,252,0.9),rgba(248,248,252,0.5)_62%,transparent)]" />
+                    <div className="absolute inset-x-0 top-0 h-44 bg-[linear-gradient(180deg,rgba(248,248,252,0.9),rgba(248,248,252,0.5)_54%,transparent)]" />
+                    <div className="absolute inset-x-0 bottom-0 h-48 bg-[linear-gradient(0deg,rgba(248,248,252,0.95),transparent)]" />
+                    <div className="absolute left-1/2 top-[10%] h-[24rem] w-[44rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.8)_0%,rgba(255,255,255,0.4)_42%,transparent_78%)] blur-3xl" />
 
                     {/* Central blue-gold vortex */}
                     <div className="phone-vortex absolute left-1/2 top-[38%] h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[34rem] sm:w-[34rem] lg:h-[40rem] lg:w-[40rem]">
@@ -179,8 +179,8 @@ export const PhoneSacredBackground = () => {
                     ))}
 
                     {/* Vignette overlays */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,transparent_0%,rgba(3,9,15,0.18)_28%,rgba(3,9,15,0.48)_58%,rgba(2,7,12,0.78)_100%)]" />
-                    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,8,12,0.62)_0%,rgba(2,8,12,0.28)_28%,rgba(2,8,12,0.06)_50%,rgba(2,8,12,0.28)_72%,rgba(2,8,12,0.62)_100%)]" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,transparent_0%,rgba(248,248,252,0.2)_28%,rgba(248,248,252,0.6)_58%,rgba(248,248,252,0.9)_100%)]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(248,248,252,0.8)_0%,rgba(248,248,252,0.4)_28%,rgba(248,248,252,0.1)_50%,rgba(248,248,252,0.4)_72%,rgba(248,248,252,0.8)_100%)]" />
                 </>
             )}
         </div>

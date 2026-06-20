@@ -59,10 +59,10 @@ export const BottomNav = () => {
             }`}
             style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
         >
-            {/* Subtle gradient top edge */}
-            <div className="h-[1px] bg-gradient-to-r from-transparent via-[#c9933a]/30 to-transparent" />
+            {/* Subtle gold gradient top edge */}
+            <div className="h-[1px] bg-gradient-to-r from-transparent via-[#c9933a]/25 to-transparent" />
 
-            <div className="grid h-[58px] grid-cols-5 bg-[#0c0e13]/95 px-2 backdrop-blur-xl">
+            <div className="grid h-[58px] grid-cols-5 bg-white/96 px-2 backdrop-blur-xl" style={{ boxShadow: '0 -4px 20px rgba(26,26,62,0.06)' }}>
                 {navItems.map((item) => {
                     const isActive = pathname === item.path;
                     const Icon = item.icon;
@@ -82,8 +82,8 @@ export const BottomNav = () => {
                             <div
                                 className={`relative flex items-center justify-center w-[32px] h-[28px] rounded-lg transition-all duration-300 ease-out
                                     ${isActive
-                                        ? 'bg-gradient-to-b from-[#1f2233] to-[#171a26] border border-[#c9933a] shadow-[0_0_6px_rgba(201,147,58,0.35),inset_0_1px_0_rgba(255,255,255,0.05)]'
-                                        : 'bg-[#16181f] border border-white/40 group-hover:border-white group-hover:bg-[#1a1d26]'
+                                        ? 'bg-gradient-to-b from-amber-50 to-white border border-[#c9933a]/50 shadow-[0_2px_8px_rgba(201,147,58,0.20)]'
+                                        : 'bg-white border border-[#ddddf0] group-hover:border-[#9b8ec4]/40 group-hover:bg-[#eeebf8]'
                                     }`}
                             >
                                 {item.iconImage ? (
@@ -93,8 +93,8 @@ export const BottomNav = () => {
                                         width={20}
                                         height={20}
                                         className={`h-5 w-5 object-contain transition-all duration-300 ${isActive
-                                            ? 'drop-shadow-[0_0_3px_rgba(201,147,58,0.55)]'
-                                            : 'opacity-90 group-hover:opacity-100 group-active:scale-90'
+                                            ? 'drop-shadow-[0_0_3px_rgba(201,147,58,0.40)]'
+                                            : 'opacity-80 group-hover:opacity-100 group-active:scale-90'
                                             }`}
                                     />
                                 ) : (
@@ -102,8 +102,8 @@ export const BottomNav = () => {
                                         size={16}
                                         strokeWidth={isActive ? 2.3 : 1.7}
                                         className={`transition-all duration-300 ${isActive
-                                                ? 'text-[#c9933a] drop-shadow-[0_0_3px_rgba(201,147,58,0.55)]'
-                                                : 'text-white/80 group-hover:text-white group-active:scale-90'
+                                                ? 'text-[#c9933a]'
+                                                : 'text-[#8e8eaa] group-hover:text-[#5a5a82] group-active:scale-90'
                                             }`}
                                     />
                                 )}
@@ -113,7 +113,7 @@ export const BottomNav = () => {
                             <span
                                 className={`max-w-full truncate text-[10px] font-semibold leading-none transition-all duration-300 ${isActive
                                         ? 'text-[#c9933a]'
-                                        : 'text-white/80 group-hover:text-white'
+                                        : 'text-[#8e8eaa] group-hover:text-[#5a5a82]'
                                     }`}
                             >
                                 {item.name}

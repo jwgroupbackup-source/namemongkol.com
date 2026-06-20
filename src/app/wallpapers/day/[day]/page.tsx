@@ -147,10 +147,10 @@ export default async function DayWallpapersPage({ params }: Props) {
                     <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
                         {`วอลเปเปอร์มงคล${meta.label} ฟรี เหมาะกับใคร`}
                     </h2>
-                    <p className="text-slate-400 leading-relaxed mb-6">
+                    <p className="text-slate-300 leading-relaxed mb-6">
                         {`คอลเลกชันวอลเปเปอร์มงคล${meta.label}ชุดนี้ออกแบบให้สอดคล้องกับสีมงคลประจำวันและสัญลักษณ์เสริมดวงเด่นของวันเกิด ช่วยย้ำเป้าหมายด้านการเงิน การงาน และความรักเมื่อใช้งานเป็นหน้าจอประจำวัน`}
                     </p>
-                    <p className="text-slate-400 leading-relaxed mb-6">
+                    <p className="text-slate-300 leading-relaxed mb-6">
                         ต้องการโทนภาพที่เฉพาะกับเป้าหมายของคุณมากขึ้น?{' '}
                         <Link
                             href="/wallpapers/custom"

@@ -34,17 +34,17 @@ export const ArticleSection: React.FC<ArticleSectionProps> = ({
         return (
             <section className="py-16 px-4 md:px-8 relative overflow-hidden" aria-busy="true" aria-live="polite">
                 <div className="max-w-6xl mx-auto relative z-10">
-                    <div className="h-6 w-56 rounded bg-slate-700/40 animate-pulse mb-3" />
-                    <div className="h-4 w-80 max-w-full rounded bg-slate-700/30 animate-pulse mb-10" />
+                    <div className="h-6 w-56 rounded bg-[#ddddf0] animate-pulse mb-3" />
+                    <div className="h-4 w-80 max-w-full rounded bg-[#ddddf0] animate-pulse mb-10" />
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {Array.from({ length: 3 }).map((_, idx) => (
-                            <div key={idx} className="rounded-2xl overflow-hidden border border-white/5 bg-slate-900/30">
-                                <div className="h-48 w-full bg-slate-700/40 animate-pulse" />
+                            <div key={idx} className="rounded-2xl overflow-hidden border border-[#ddddf0] bg-white">
+                                <div className="h-48 w-full bg-[#f8f8fc] animate-pulse" />
                                 <div className="p-5 space-y-3">
-                                    <div className="h-3 w-28 rounded bg-slate-700/40 animate-pulse" />
-                                    <div className="h-5 w-5/6 rounded bg-slate-700/40 animate-pulse" />
-                                    <div className="h-4 w-full rounded bg-slate-700/30 animate-pulse" />
-                                    <div className="h-4 w-2/3 rounded bg-slate-700/30 animate-pulse" />
+                                    <div className="h-3 w-28 rounded bg-[#ddddf0] animate-pulse" />
+                                    <div className="h-5 w-5/6 rounded bg-[#ddddf0] animate-pulse" />
+                                    <div className="h-4 w-full rounded bg-[#f8f8fc] animate-pulse" />
+                                    <div className="h-4 w-2/3 rounded bg-[#f8f8fc] animate-pulse" />
                                 </div>
                             </div>
                         ))}
@@ -62,28 +62,28 @@ export const ArticleSection: React.FC<ArticleSectionProps> = ({
         <section className="py-16 px-4 md:px-8 relative overflow-hidden">
             {/* Background elements similar to KnowledgeSection */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-7xl mx-auto pointer-events-none">
-                <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-[100px]" />
-                <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[100px]" />
+                <div className="absolute top-0 right-0 w-96 h-96 bg-purple-50 rounded-full blur-[100px]" />
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-50 rounded-full blur-[100px]" />
             </div>
 
             <div className="max-w-6xl mx-auto relative z-10">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
                     <div className="text-left">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700/50 text-purple-400 text-sm font-medium mb-3">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#ddddf0] text-purple-600 shadow-sm text-sm font-medium mb-3">
                             <BookOpen size={16} />
                             <span>{t('sections.articles.badge')}</span>
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                        <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a3e] mb-2">
                             {t('sections.articles.title')}
                         </h2>
-                        <p className="text-slate-400 max-w-xl">
+                        <p className="text-[#5a5a82] max-w-xl">
                             {t('sections.articles.description')}
                         </p>
                     </div>
 
                     <Link
                         href="/articles"
-                        className="group flex items-center gap-2 text-slate-300 hover:text-white transition-colors px-4 py-2 rounded-lg hover:bg-white/5 border border-transparent hover:border-white/10 shrink-0"
+                        className="group flex items-center gap-2 text-[#5a5a82] hover:text-[#1a1a3e] transition-colors px-4 py-2 rounded-lg hover:bg-white border border-transparent hover:border-[#ddddf0] hover:shadow-sm shrink-0"
                     >
                         <span>{t('sections.articles.viewAll')}</span>
                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -95,21 +95,21 @@ export const ArticleSection: React.FC<ArticleSectionProps> = ({
                         <Link
                             key={article.id}
                             href={`/articles/${article.slug}`}
-                            className="group relative flex flex-col h-full bg-slate-900/40 backdrop-blur-sm border border-white/5 rounded-2xl overflow-hidden hover:border-amber-500/25 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-900/15"
+                            className="group relative flex flex-col h-full bg-white backdrop-blur-sm border border-[#ddddf0] rounded-2xl overflow-hidden hover:border-purple-400 transition-all hover:-translate-y-1 shadow-sm hover:shadow-[0_8px_30px_rgba(168,85,247,0.1)]"
                         >
-                            <div className="h-48 w-full bg-slate-800 relative overflow-hidden">
+                            <div className="h-48 w-full bg-[#f8f8fc] relative overflow-hidden">
                                 <ArticleImage
                                     src={article.cover_image || article.coverImage}
                                     alt={`ภาพหน้าปกบทความ ${article.title}`}
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-60" />
-                                <div className="absolute bottom-3 left-3 px-2 py-1 bg-black/60 backdrop-blur-md rounded text-[10px] text-white font-medium uppercase tracking-wider border border-white/10">
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
+                                <div className="absolute bottom-3 left-3 px-2 py-1 bg-white/90 backdrop-blur-md rounded text-[10px] text-purple-600 font-medium uppercase tracking-wider border border-[#ddddf0]">
                                     {article.category}
                                 </div>
                             </div>
 
                             <div className="p-5 flex flex-col flex-grow">
-                                <div className="flex items-center gap-3 text-xs text-slate-400 mb-3">
+                                <div className="flex items-center gap-3 text-xs text-[#8e8eaa] mb-3">
                                     <div className="flex items-center gap-1">
                                         <Calendar size={12} />
                                         <span>{new Date(article.date).toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
@@ -120,15 +120,15 @@ export const ArticleSection: React.FC<ArticleSectionProps> = ({
                                     </div>
                                 </div>
 
-                                <h3 className="text-lg font-bold text-slate-100 mb-2 leading-tight group-hover:text-purple-400 transition-colors line-clamp-2">
+                                <h3 className="text-lg font-bold text-[#1a1a3e] mb-2 leading-tight group-hover:text-purple-600 transition-colors line-clamp-2">
                                     {article.title}
                                 </h3>
 
-                                <p className="text-sm text-slate-300 line-clamp-2 mb-4 flex-grow">
+                                <p className="text-sm text-[#5a5a82] line-clamp-2 mb-4 flex-grow">
                                     {article.excerpt}
                                 </p>
 
-                                <div className="flex items-center text-sm font-medium text-purple-400 gap-1 group/link">
+                                <div className="flex items-center text-sm font-medium text-purple-600 gap-1 group/link">
                                     {t('sections.articles.readMore')}
                                     <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
                                 </div>

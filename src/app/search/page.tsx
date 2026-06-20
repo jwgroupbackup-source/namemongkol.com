@@ -153,8 +153,8 @@ export default function SearchPage() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
             <ClientPage />
-            <section id="search-next-step" className="w-full bg-[#0f172a] px-4 pb-20 pt-10 text-slate-200">
-                <div className="mx-auto max-w-4xl border-t border-white/10 pt-8">
+            <section id="search-next-step" className="w-full bg-[#f8f8fc] px-4 pb-20 pt-10 text-slate-900">
+                <div className="mx-auto max-w-4xl rounded-2xl border border-slate-800 bg-slate-950/90 p-6 text-slate-200 shadow-2xl shadow-slate-950/15 sm:p-8">
                     <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-300/80">Next Step</p>
                     <h2 className="mt-3 text-2xl font-bold text-white">ฐานชื่อคือจุดเริ่มต้น ก่อนตรวจคู่เลขแบบละเอียด</h2>
                     <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">

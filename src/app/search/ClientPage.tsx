@@ -16,6 +16,7 @@ import { analyzeNameSuitability } from '@/utils/thaksaUtils';
 import { analyzeName } from '@/utils/nameAnalysis';
 import { thaksaConfig, DayKey } from '@/data/thaksa';
 import { useLanguage } from '@/components/LanguageProvider';
+import { SoftYellowGlowBackground } from '@/components/ui/background-components';
 
 const getDayBadgeProps = (d: string) => {
     if (d.includes('อาทิตย์')) return { label: 'อา.', className: 'bg-rose-500/15 text-rose-300 border border-rose-500/20' };
@@ -551,21 +552,8 @@ export default function SearchPage() {
 
 
     return (
-        <div
-            className="min-h-screen bg-[oklch(13%_0.035_260)] text-slate-100 font-sans selection:bg-amber-500 selection:text-white relative overflow-hidden"
-        >
-            {/* Background Decor */}
-            <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-85"
-                    style={{ backgroundImage: "url('/Theme/theme-search.png')" }}
-                ></div>
-                <div className="absolute inset-0 bg-[oklch(13%_0.035_260)]/30"></div>
-                <div className="absolute inset-0 bg-gradient-to-b from-[oklch(13%_0.035_260)]/20 via-[oklch(13%_0.035_260)]/32 to-[oklch(8%_0.025_260)]/82"></div>
-            </div>
-
-
-                        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 pb-36 pt-7 md:pb-28 md:pt-32">
+        <SoftYellowGlowBackground className="font-sans overflow-x-hidden selection:bg-amber-500 selection:text-white">
+                        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 pb-36 pt-7 text-slate-900 md:pb-28 md:pt-32">
                                 {/* Social Proof & Engagement Section */}
                                 <div className="mb-4 flex flex-col items-center gap-2 md:mb-8 md:gap-3">
                                     <div className="flex flex-wrap gap-2 md:gap-3 justify-center">
@@ -577,26 +565,26 @@ export default function SearchPage() {
                                     </div>
                                 </div>
                                 <div className="mb-5 text-center md:mb-12">
-                                    <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-xs text-amber-300 md:mb-4 md:text-sm">
+                                    <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-100/70 px-3 py-1 text-xs text-amber-800 md:mb-4 md:text-sm">
                                         <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4" />
                                         <span>{t('pages.search.badge')}</span>
                                     </div>
-                                    <h1 className="mb-3 text-[2rem] font-bold leading-tight tracking-tight text-white drop-shadow-2xl sm:text-4xl md:mb-6 md:text-5xl lg:text-6xl">
+                                    <h1 className="mb-3 text-[2rem] font-bold leading-tight tracking-tight text-slate-950 sm:text-4xl md:mb-6 md:text-5xl lg:text-6xl">
                                         {t('pages.search.title')}
                                     </h1>
-                                    <p className="mx-auto mb-4 max-w-[65ch] px-2 text-sm leading-relaxed text-slate-300 sm:text-base md:mb-6">
+                                    <p className="mx-auto mb-4 max-w-[65ch] px-2 text-sm leading-relaxed text-slate-700 sm:text-base md:mb-6">
                                         {t('pages.search.description')}
                                     </p>
                                     {/* Pro Tip / Guidance Block */}
-                                    <div className="relative mx-auto hidden max-w-2xl items-start gap-4 overflow-hidden rounded-xl border border-amber-500/20 bg-amber-900/20 p-4 text-left sm:flex">
-                                        <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                                        <div className="p-2 bg-amber-500/10 rounded-lg text-amber-400 shrink-0 relative z-10">
+                                    <div className="relative mx-auto hidden max-w-2xl items-start gap-4 overflow-hidden rounded-xl border border-amber-200 bg-white/80 p-4 text-left shadow-sm shadow-slate-950/5 sm:flex">
+                                        <div className="absolute inset-0 bg-gradient-to-r from-amber-100/70 to-transparent opacity-70 transition-opacity"></div>
+                                        <div className="p-2 bg-amber-100 rounded-lg text-amber-700 shrink-0 relative z-10">
                                             <Sparkles className="w-5 h-5" />
                                         </div>
                                         <div className="relative z-10">
-                                            <h3 className="text-amber-200 font-semibold mb-1 text-sm">💡 {t('pages.search.tipTitle')}</h3>
-                                            <p className="text-slate-400 text-sm leading-relaxed">
-                                                {t('pages.search.tipBody')} <Link href="/" className="text-amber-400 hover:underline decoration-amber-400/30 underline-offset-4">{t('pages.search.links.l1Title')}</Link>
+                                            <h3 className="text-amber-800 font-semibold mb-1 text-sm">💡 {t('pages.search.tipTitle')}</h3>
+                                            <p className="text-slate-700 text-sm leading-relaxed">
+                                                {t('pages.search.tipBody')} <Link href="/" className="text-amber-700 hover:underline decoration-amber-400/30 underline-offset-4">{t('pages.search.links.l1Title')}</Link>
                                             </p>
                                         </div>
                                     </div>
@@ -616,7 +604,7 @@ export default function SearchPage() {
                             <select
                                 value={selectedDay}
                                 onChange={handleDayChange}
-                                className="block w-full pl-11 pr-4 py-2.5 md:py-3 text-sm md:text-base bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent backdrop-blur-xl transition-all appearance-none cursor-pointer"
+                                className="block w-full pl-11 pr-4 py-2.5 md:py-3 text-sm md:text-base bg-slate-950/90 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent shadow-lg shadow-slate-950/10 transition-all appearance-none cursor-pointer"
                             >
                                 <option value="all" className="bg-slate-900 text-slate-200">{t('pages.search.filters.dayAny')}</option>
                                 {Object.keys(thaksaConfig).map((key) => (
@@ -641,7 +629,7 @@ export default function SearchPage() {
                                     setSelectedGender(e.target.value as any);
                                     setVisibleCount(10);
                                 }}
-                                className="block w-full pl-12 pr-4 py-2.5 md:py-3 text-sm md:text-base bg-white/5 border border-white/10 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent backdrop-blur-xl transition-all appearance-none cursor-pointer"
+                                className="block w-full pl-12 pr-4 py-2.5 md:py-3 text-sm md:text-base bg-slate-950/90 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent shadow-lg shadow-slate-950/10 transition-all appearance-none cursor-pointer"
                             >
                                 <option value="all" className="bg-slate-900 text-slate-200">{t('pages.search.filters.genderAll')}</option>
                                 <option value="male" className="bg-slate-900 text-slate-200">{t('pages.search.filters.genderMale')}</option>
@@ -656,13 +644,13 @@ export default function SearchPage() {
 
                     {/* Letter Filter (ก-ฮ) */}
                     <div className="space-y-2 mt-2">
-                        <div className="flex items-center gap-2 text-xs md:text-sm text-slate-400">
+                        <div className="flex items-center gap-2 text-xs md:text-sm text-slate-600">
                             <Type className="w-3.5 h-3.5 md:w-4 md:h-4" />
                             <span>กรองตามตัวอักษรแรก</span>
                             {selectedLetter !== 'all' && (
                                 <button
                                     onClick={() => handleLetterChange('all')}
-                                    className="ml-auto text-xs text-amber-400 hover:text-amber-300 transition-colors"
+                                    className="ml-auto text-xs text-amber-700 hover:text-amber-800 transition-colors"
                                 >
                                     ล้างตัวกรอง
                                 </button>
@@ -674,7 +662,7 @@ export default function SearchPage() {
                                 className={`px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all ${
                                     selectedLetter === 'all'
                                         ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-lg shadow-amber-500/20'
-                                        : 'bg-white/5 text-slate-400 border border-white/10 hover:text-white hover:border-white/20'
+                                        : 'bg-white/80 text-slate-700 border border-slate-200 hover:text-slate-950 hover:border-amber-400/40 hover:bg-amber-50'
                                 }`}
                             >
                                 ทั้งหมด
@@ -686,7 +674,7 @@ export default function SearchPage() {
                                     className={`w-7 h-7 md:w-9 md:h-9 rounded-lg text-xs md:text-sm font-medium transition-all flex items-center justify-center ${
                                         selectedLetter === letter
                                             ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-lg shadow-amber-500/20 scale-110'
-                                            : 'bg-white/5 text-slate-400 border border-white/10 hover:text-white hover:border-white/20 hover:bg-white/10'
+                                            : 'bg-white/80 text-slate-700 border border-slate-200 hover:text-slate-950 hover:border-amber-400/40 hover:bg-amber-50'
                                     }`}
                                 >
                                     {letter}
@@ -699,21 +687,21 @@ export default function SearchPage() {
                 {/* Grade Legend + CTA Banner */}
                 <div className="mb-6 space-y-3">
                     {/* Grade legend strip */}
-                    <div className="flex flex-wrap items-center gap-2 md:gap-4 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs md:text-sm">
+                    <div className="flex flex-wrap items-center gap-2 md:gap-4 px-4 py-3 rounded-xl border border-slate-200 bg-white/80 text-xs shadow-sm shadow-slate-950/5 md:text-sm">
                         <span className="text-slate-500 font-medium shrink-0">ระดับเกรด:</span>
                         <span className="flex items-center gap-1.5">
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-md font-bold border bg-amber-500/20 text-amber-300 border-amber-500/30 text-[11px]">A+</span>
-                            <span className="text-slate-400">เลขศาสตร์ดีเลิศ ทุกคู่มงคล</span>
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-md font-bold border bg-amber-100 text-amber-800 border-amber-300 text-[11px]">A+</span>
+                            <span className="text-slate-700">เลขศาสตร์ดีเลิศ ทุกคู่มงคล</span>
                         </span>
                         <span className="text-slate-700 hidden md:inline">·</span>
                         <span className="flex items-center gap-1.5">
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-md font-bold border bg-emerald-500/20 text-emerald-300 border-emerald-500/30 text-[11px]">A</span>
-                            <span className="text-slate-400">เลขศาสตร์ดี ส่วนใหญ่มงคล</span>
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-md font-bold border bg-emerald-100 text-emerald-800 border-emerald-300 text-[11px]">A</span>
+                            <span className="text-slate-700">เลขศาสตร์ดี ส่วนใหญ่มงคล</span>
                         </span>
                         <span className="text-slate-700 hidden md:inline">·</span>
                         <span className="flex items-center gap-1.5">
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-md font-semibold border bg-slate-500/15 text-slate-400 border-slate-500/20 text-[11px]">B</span>
-                            <span className="text-slate-400">ผ่านทักษา เลขศาสตร์ยังไม่เต็มระดับ</span>
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-md font-semibold border bg-slate-100 text-slate-700 border-slate-300 text-[11px]">B</span>
+                            <span className="text-slate-700">ผ่านทักษา เลขศาสตร์ยังไม่เต็มระดับ</span>
                         </span>
                     </div>
 
@@ -726,7 +714,7 @@ export default function SearchPage() {
 
                         return isMostlyB ? (
                             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-500/30">
-                                <p className="text-amber-300 text-sm font-medium text-center sm:text-left">
+                                <p className="text-amber-800 text-sm font-medium text-center sm:text-left">
                                     ✨ มีชื่อเกรด A+ อีก <strong>{aplusCount}</strong> ชื่อที่ตรงเงื่อนไข ดูเฉพาะเกรด A+ และ A ได้ใน Premium Search
                                 </p>
                                 <Link
@@ -737,8 +725,8 @@ export default function SearchPage() {
                                 </Link>
                             </div>
                         ) : (
-                            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10">
-                                <p className="text-slate-400 text-sm text-center sm:text-left">
+                            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white/80 px-4 py-3 shadow-sm shadow-slate-950/5">
+                                <p className="text-slate-700 text-sm text-center sm:text-left">
                                     🔒 ผลลัพธ์นี้รวมเกรด A+, A และ B &nbsp;|&nbsp; ดูเฉพาะเกรด A+ และ A ได้ใน Premium Search
                                 </p>
                                 <Link
@@ -753,7 +741,7 @@ export default function SearchPage() {
                 </div>
 
                 {/* Results Table */}
-                <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl mb-8 shadow-2xl shadow-black/20">
+                <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/90 mb-8 shadow-2xl shadow-slate-950/20">
                     <table className="w-full text-left">
                         <thead>
                             <tr className="bg-white/5 border-b border-white/10 text-amber-300 backdrop-blur-md">
@@ -841,56 +829,56 @@ export default function SearchPage() {
 
                 {/* FAQ Section */}
                 <div id="search-faq" className="mt-16 mb-12 max-w-3xl mx-auto">
-                    <h2 className="text-2xl font-bold text-center text-amber-400 mb-8">
+                    <h2 className="text-2xl font-bold text-center text-amber-700 mb-8">
                         {t('pages.search.faqTitle')}
                     </h2>
                     <div className="space-y-4">
-                        <details className="group bg-white/[0.03] border border-white/10 rounded-xl p-4 cursor-pointer open:bg-white/[0.05] transition-colors">
+                        <details className="group rounded-xl border border-slate-800 bg-slate-950/85 p-4 shadow-lg shadow-slate-950/10 cursor-pointer open:bg-slate-900 transition-colors">
                             <summary className="font-semibold text-slate-200 list-none flex justify-between items-center">
                                 {t('pages.search.faq.q1')}
                                 <span className="transition-transform group-open:rotate-180">▼</span>
                             </summary>
-                            <p className="mt-3 text-slate-400 text-sm pl-4 border-l-2 border-amber-500">
+                            <p className="mt-3 text-slate-300 text-sm pl-4 border-l-2 border-amber-500">
                                 {t('pages.search.faq.a1')}
                             </p>
                         </details>
 
-                        <details className="group bg-white/[0.03] border border-white/10 rounded-xl p-4 cursor-pointer open:bg-white/[0.05] transition-colors">
+                        <details className="group rounded-xl border border-slate-800 bg-slate-950/85 p-4 shadow-lg shadow-slate-950/10 cursor-pointer open:bg-slate-900 transition-colors">
                             <summary className="font-semibold text-slate-200 list-none flex justify-between items-center">
                                 {t('pages.search.faq.q2')}
                                 <span className="transition-transform group-open:rotate-180">▼</span>
                             </summary>
-                            <p className="mt-3 text-slate-400 text-sm pl-4 border-l-2 border-amber-500">
+                            <p className="mt-3 text-slate-300 text-sm pl-4 border-l-2 border-amber-500">
                                 {t('pages.search.faq.a2')}
                             </p>
                         </details>
 
-                        <details className="group bg-white/[0.03] border border-white/10 rounded-xl p-4 cursor-pointer open:bg-white/[0.05] transition-colors">
+                        <details className="group rounded-xl border border-slate-800 bg-slate-950/85 p-4 shadow-lg shadow-slate-950/10 cursor-pointer open:bg-slate-900 transition-colors">
                             <summary className="font-semibold text-slate-200 list-none flex justify-between items-center">
                                 {t('pages.search.faq.q3')}
                                 <span className="transition-transform group-open:rotate-180">▼</span>
                             </summary>
-                            <p className="mt-3 text-slate-400 text-sm pl-4 border-l-2 border-amber-500">
+                            <p className="mt-3 text-slate-300 text-sm pl-4 border-l-2 border-amber-500">
                                 {t('pages.search.faq.a3')}
                             </p>
                         </details>
 
-                        <details className="group bg-white/[0.03] border border-white/10 rounded-xl p-4 cursor-pointer open:bg-white/[0.05] transition-colors">
+                        <details className="group rounded-xl border border-slate-800 bg-slate-950/85 p-4 shadow-lg shadow-slate-950/10 cursor-pointer open:bg-slate-900 transition-colors">
                             <summary className="font-semibold text-slate-200 list-none flex justify-between items-center">
                                 {t('pages.search.faq.q4')}
                                 <span className="transition-transform group-open:rotate-180">▼</span>
                             </summary>
-                            <p className="mt-3 text-slate-400 text-sm pl-4 border-l-2 border-amber-500">
+                            <p className="mt-3 text-slate-300 text-sm pl-4 border-l-2 border-amber-500">
                                 {t('pages.search.faq.a4')}
                             </p>
                         </details>
 
-                        <details className="group bg-white/[0.03] border border-white/10 rounded-xl p-4 cursor-pointer open:bg-white/[0.05] transition-colors">
+                        <details className="group rounded-xl border border-slate-800 bg-slate-950/85 p-4 shadow-lg shadow-slate-950/10 cursor-pointer open:bg-slate-900 transition-colors">
                             <summary className="font-semibold text-slate-200 list-none flex justify-between items-center">
                                 {t('pages.search.faq.q5')}
                                 <span className="transition-transform group-open:rotate-180">▼</span>
                             </summary>
-                            <p className="mt-3 text-slate-400 text-sm pl-4 border-l-2 border-amber-500">
+                            <p className="mt-3 text-slate-300 text-sm pl-4 border-l-2 border-amber-500">
                                 {t('pages.search.faq.a5')}
                             </p>
                         </details>
@@ -901,34 +889,34 @@ export default function SearchPage() {
 
                 {/* Why NameMongkol */}
                 <section className="mt-16 mb-12 max-w-4xl mx-auto">
-                    <h2 className="text-2xl font-bold text-center text-amber-400 mb-6">
+                    <h2 className="text-2xl font-bold text-center text-amber-700 mb-6">
                         {t('pages.search.benefitsTitle')}
                     </h2>
                     <div className="grid md:grid-cols-3 gap-6">
-                        <article className="bg-white/[0.03] border border-white/10 rounded-xl p-6 text-center hover:border-amber-500/30 transition-colors">
+                        <article className="rounded-xl border border-slate-800 bg-slate-950/85 p-6 text-center shadow-lg shadow-slate-950/10 transition-colors hover:border-amber-500/30">
                             <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-amber-500/20 to-purple-500/20 flex items-center justify-center">
                                 <Sparkles className="w-6 h-6 text-amber-400" />
                             </div>
                             <h3 className="font-semibold text-slate-200 mb-2">{t('pages.search.benefits.b1Title')}</h3>
-                            <p className="text-slate-400 text-sm">
+                            <p className="text-slate-300 text-sm">
                                 {t('pages.search.benefits.b1Desc')}
                             </p>
                         </article>
-                        <article className="bg-white/[0.03] border border-white/10 rounded-xl p-6 text-center hover:border-amber-500/30 transition-colors">
+                        <article className="rounded-xl border border-slate-800 bg-slate-950/85 p-6 text-center shadow-lg shadow-slate-950/10 transition-colors hover:border-amber-500/30">
                             <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 flex items-center justify-center">
                                 <CheckCircle className="w-6 h-6 text-emerald-400" />
                             </div>
                             <h3 className="font-semibold text-slate-200 mb-2">{t('pages.search.benefits.b2Title')}</h3>
-                            <p className="text-slate-400 text-sm">
+                            <p className="text-slate-300 text-sm">
                                 {t('pages.search.benefits.b2Desc')}
                             </p>
                         </article>
-                        <article className="bg-white/[0.03] border border-white/10 rounded-xl p-6 text-center hover:border-amber-500/30 transition-colors">
+                        <article className="rounded-xl border border-slate-800 bg-slate-950/85 p-6 text-center shadow-lg shadow-slate-950/10 transition-colors hover:border-amber-500/30">
                             <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center">
                                 <Filter className="w-6 h-6 text-blue-400" />
                             </div>
                             <h3 className="font-semibold text-slate-200 mb-2">{t('pages.search.benefits.b3Title')}</h3>
-                            <p className="text-slate-400 text-sm">
+                            <p className="text-slate-300 text-sm">
                                 {t('pages.search.benefits.b3Desc')}
                             </p>
                         </article>
@@ -937,10 +925,10 @@ export default function SearchPage() {
 
                 {/* Free vs Pro Comparison Table */}
                 <section className="mt-16 mb-12 max-w-4xl mx-auto">
-                    <h2 className="text-2xl font-bold text-center text-amber-400 mb-6">
+                    <h2 className="text-2xl font-bold text-center text-amber-700 mb-6">
                         {t('pages.search.compareTitle')}
                     </h2>
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-950/90 shadow-2xl shadow-slate-950/15">
                         <table className="w-full text-sm" aria-label="feature comparison">
                             <thead>
                                 <tr className="bg-white/[0.05] border-b border-white/10">
@@ -951,42 +939,42 @@ export default function SearchPage() {
                             </thead>
                             <tbody className="divide-y divide-white/5">
                                 <tr className="hover:bg-white/[0.02] transition-colors">
-                                    <td className="px-4 py-3 text-slate-400">{t('pages.search.compare.row1')}</td>
+                                    <td className="px-4 py-3 text-slate-300">{t('pages.search.compare.row1')}</td>
                                     <td className="px-4 py-3 text-center text-slate-300">5,000+</td>
                                     <td className="px-4 py-3 text-center text-emerald-400 font-medium">5,000+</td>
                                 </tr>
                                 <tr className="hover:bg-white/[0.02] transition-colors">
-                                    <td className="px-4 py-3 text-slate-400">{t('pages.search.compare.row2')}</td>
+                                    <td className="px-4 py-3 text-slate-300">{t('pages.search.compare.row2')}</td>
                                     <td className="px-4 py-3 text-center text-emerald-400">✓</td>
                                     <td className="px-4 py-3 text-center text-emerald-400">✓</td>
                                 </tr>
                                 <tr className="hover:bg-white/[0.02] transition-colors">
-                                    <td className="px-4 py-3 text-slate-400">{t('pages.search.compare.row3')}</td>
+                                    <td className="px-4 py-3 text-slate-300">{t('pages.search.compare.row3')}</td>
                                     <td className="px-4 py-3 text-center text-emerald-400">✓</td>
                                     <td className="px-4 py-3 text-center text-emerald-400">✓</td>
                                 </tr>
                                 <tr className="hover:bg-white/[0.02] transition-colors">
-                                    <td className="px-4 py-3 text-slate-400">{t('pages.search.compare.row4')}</td>
+                                    <td className="px-4 py-3 text-slate-300">{t('pages.search.compare.row4')}</td>
                                     <td className="px-4 py-3 text-center text-emerald-400">✓</td>
                                     <td className="px-4 py-3 text-center text-emerald-400">✓</td>
                                 </tr>
                                 <tr className="hover:bg-white/[0.02] transition-colors">
-                                    <td className="px-4 py-3 text-slate-400">{t('pages.search.compare.row5')}</td>
+                                    <td className="px-4 py-3 text-slate-300">{t('pages.search.compare.row5')}</td>
                                     <td className="px-4 py-3 text-center text-rose-400">✗</td>
                                     <td className="px-4 py-3 text-center text-emerald-400 font-medium">✓ จับคู่อัตโนมัติ</td>
                                 </tr>
                                 <tr className="hover:bg-white/[0.02] transition-colors">
-                                    <td className="px-4 py-3 text-slate-400">{t('pages.search.compare.row6')}</td>
+                                    <td className="px-4 py-3 text-slate-300">{t('pages.search.compare.row6')}</td>
                                     <td className="px-4 py-3 text-center text-rose-400">✗</td>
                                     <td className="px-4 py-3 text-center text-emerald-400">✓</td>
                                 </tr>
                                 <tr className="hover:bg-white/[0.02] transition-colors">
-                                    <td className="px-4 py-3 text-slate-400">{t('pages.search.compare.row7')}</td>
+                                    <td className="px-4 py-3 text-slate-300">{t('pages.search.compare.row7')}</td>
                                     <td className="px-4 py-3 text-center text-rose-400">✗</td>
                                     <td className="px-4 py-3 text-center text-emerald-400">✓</td>
                                 </tr>
                                 <tr className="hover:bg-white/[0.02] transition-colors">
-                                    <td className="px-4 py-3 text-slate-400">{t('pages.search.compare.row8')}</td>
+                                    <td className="px-4 py-3 text-slate-300">{t('pages.search.compare.row8')}</td>
                                     <td className="px-4 py-3 text-center text-emerald-400 font-bold">{t('pages.search.compare.freePrice')}</td>
                                     <td className="px-4 py-3 text-center text-amber-400 font-medium">{t('pages.search.compare.proPrice')}</td>
                                 </tr>
@@ -1006,7 +994,7 @@ export default function SearchPage() {
 
                 {/* How to Use Steps */}
                 <section className="mt-16 mb-12 max-w-3xl mx-auto">
-                    <h2 className="text-2xl font-bold text-center text-amber-400 mb-8">
+                    <h2 className="text-2xl font-bold text-center text-amber-700 mb-8">
                         {t('pages.search.stepsTitle')}
                     </h2>
                     <div className="space-y-6">
@@ -1015,8 +1003,8 @@ export default function SearchPage() {
                                 1
                             </div>
                             <div>
-                                <h3 className="font-semibold text-slate-200 mb-1">{t('pages.search.steps.s1Title')}</h3>
-                                <p className="text-slate-400 text-sm">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-1">{t('pages.search.steps.s1Title')}</h3>
+                                <p className="text-[#5a5a82] text-sm">
                                     {t('pages.search.steps.s1Desc')}
                                 </p>
                             </div>
@@ -1026,8 +1014,8 @@ export default function SearchPage() {
                                 2
                             </div>
                             <div>
-                                <h3 className="font-semibold text-slate-200 mb-1">{t('pages.search.steps.s2Title')}</h3>
-                                <p className="text-slate-400 text-sm">
+                                <h3 className="font-semibold text-[#1a1a3e] mb-1">{t('pages.search.steps.s2Title')}</h3>
+                                <p className="text-[#5a5a82] text-sm">
                                     {t('pages.search.steps.s2Desc')}
                                 </p>
                             </div>
@@ -1037,9 +1025,9 @@ export default function SearchPage() {
                                 3
                             </div>
                             <div>
-                                <h3 className="font-semibold text-slate-200 mb-1">{t('pages.search.steps.s3Title')}</h3>
-                                <p className="text-slate-400 text-sm">
-                                    {t('pages.search.steps.s3Desc')} <Link href="/" className="text-amber-400 hover:underline">{t('pages.search.links.l1Title')}</Link>
+                                <h3 className="font-semibold text-[#1a1a3e] mb-1">{t('pages.search.steps.s3Title')}</h3>
+                                <p className="text-[#5a5a82] text-sm">
+                                    {t('pages.search.steps.s3Desc')} <Link href="/" className="text-amber-700 hover:text-amber-800 hover:underline">{t('pages.search.links.l1Title')}</Link>
                                 </p>
                             </div>
                         </div>
@@ -1048,51 +1036,51 @@ export default function SearchPage() {
 
                 {/* Internal Links */}
                 <section className="mt-16 mb-12 max-w-4xl mx-auto">
-                    <h2 className="text-2xl font-bold text-center text-amber-400 mb-6">
+                    <h2 className="text-2xl font-bold text-center text-amber-700 mb-6">
                         {t('pages.search.linksTitle')}
                     </h2>
                     <div className="grid md:grid-cols-2 gap-6">
                         <Link
                             href="/"
-                            className="group block bg-white/[0.03] border border-white/10 rounded-xl p-6 hover:border-amber-500/30 hover:bg-white/[0.05] transition-all"
+                            className="group block rounded-xl border border-slate-800 bg-slate-950/85 p-6 shadow-lg shadow-slate-950/10 transition-all hover:border-amber-500/30 hover:bg-slate-900"
                         >
                             <h3 className="font-semibold text-slate-200 mb-2 group-hover:text-amber-400 transition-colors">
                                 🔮 {t('pages.search.links.l1Title')}
                             </h3>
-                            <p className="text-slate-400 text-sm">
+                            <p className="text-slate-300 text-sm">
                                 {t('pages.search.links.l1Desc')}
                             </p>
                         </Link>
                         <Link
                             href="/premium-search"
-                            className="group block bg-white/[0.03] border border-white/10 rounded-xl p-6 hover:border-amber-500/30 hover:bg-white/[0.05] transition-all"
+                            className="group block rounded-xl border border-slate-800 bg-slate-950/85 p-6 shadow-lg shadow-slate-950/10 transition-all hover:border-amber-500/30 hover:bg-slate-900"
                         >
                             <h3 className="font-semibold text-slate-200 mb-2 group-hover:text-amber-400 transition-colors">
                                 ⭐ {t('pages.search.links.l2Title')}
                             </h3>
-                            <p className="text-slate-400 text-sm">
+                            <p className="text-slate-300 text-sm">
                                 {t('pages.search.links.l2Desc')}
                             </p>
                         </Link>
                         <Link
                             href="/premium-analysis"
-                            className="group block bg-white/[0.03] border border-white/10 rounded-xl p-6 hover:border-amber-500/30 hover:bg-white/[0.05] transition-all"
+                            className="group block rounded-xl border border-slate-800 bg-slate-950/85 p-6 shadow-lg shadow-slate-950/10 transition-all hover:border-amber-500/30 hover:bg-slate-900"
                         >
                             <h3 className="font-semibold text-slate-200 mb-2 group-hover:text-amber-400 transition-colors">
                                 💎 {t('pages.search.links.l3Title')}
                             </h3>
-                            <p className="text-slate-400 text-sm">
+                            <p className="text-slate-300 text-sm">
                                 {t('pages.search.links.l3Desc')}
                             </p>
                         </Link>
                         <Link
                             href="/phone-analysis"
-                            className="group block bg-white/[0.03] border border-white/10 rounded-xl p-6 hover:border-amber-500/30 hover:bg-white/[0.05] transition-all"
+                            className="group block rounded-xl border border-slate-800 bg-slate-950/85 p-6 shadow-lg shadow-slate-950/10 transition-all hover:border-amber-500/30 hover:bg-slate-900"
                         >
                             <h3 className="font-semibold text-slate-200 mb-2 group-hover:text-amber-400 transition-colors">
                                 📱 {t('pages.search.links.l4Title')}
                             </h3>
-                            <p className="text-slate-400 text-sm">
+                            <p className="text-slate-300 text-sm">
                                 {t('pages.search.links.l4Desc')}
                             </p>
                         </Link>
@@ -1103,6 +1091,6 @@ export default function SearchPage() {
 
 
             </div>
-        </div>
+        </SoftYellowGlowBackground>
     );
 }

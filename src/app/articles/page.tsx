@@ -6,6 +6,7 @@ import { supabase } from '@/utils/supabase';
 import { Calendar, ArrowLeft, Search, BookOpen } from 'lucide-react';
 import { articles as localArticles } from '@/data/articles';
 import { ArticleImage } from '@/components/ArticleImage';
+import { SoftYellowGlowBackground } from '@/components/ui/background-components';
 import { siteUrl } from '@/lib/seo';
 
 type ArticleRow = {
@@ -472,71 +473,67 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
             />
-            <div className="min-h-screen bg-[#0f172a] text-slate-100 font-sans selection:bg-purple-500 selection:text-white relative overflow-hidden pb-28">
-                {/* Background Decor */}
-                <div className="absolute top-0 left-0 w-full h-[500px] overflow-hidden pointer-events-none">
-                    <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px]"></div>
-                    <div className="absolute top-[10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
-                </div>
-
-                <main className="w-full max-w-[1400px] px-3 sm:px-4 pb-8 relative z-10 pt-24 md:pt-32">
+            <SoftYellowGlowBackground className="font-sans overflow-x-hidden pb-28">
+                <main className="w-full max-w-[1400px] mx-auto px-3 sm:px-4 pb-8 relative z-10 pt-24 md:pt-32">
                     {/* Breadcrumb */}
-                    <nav className="hidden sm:block max-w-4xl mx-auto mb-6 text-sm text-slate-400" aria-label="Breadcrumb">
+                    <nav className="hidden sm:block max-w-4xl mx-auto mb-6 text-sm" style={{ color: '#8e8eaa' }} aria-label="Breadcrumb">
                         <ol className="flex items-center gap-2">
-                            <li><Link href="/" className="hover:text-white transition-colors">หน้าหลัก</Link></li>
-                            <li className="text-slate-600">/</li>
-                            <li className="text-purple-400 font-medium">บทความชื่อมงคล</li>
+                            <li><Link href="/" className="hover:text-[#1a1a3e] transition-colors">หน้าหลัก</Link></li>
+                            <li style={{ color: '#ddddf0' }}>/</li>
+                            <li className="font-medium" style={{ color: '#c9933a' }}>บทความชื่อมงคล</li>
                         </ol>
                     </nav>
 
                     {/* Header */}
                     <div className="max-w-4xl mx-auto mb-8 sm:mb-12">
-                        <Link href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white mb-4 sm:mb-6 transition-colors text-sm sm:text-base">
+                        <Link href="/" className="inline-flex items-center gap-2 mb-4 sm:mb-6 transition-colors text-sm sm:text-base" style={{ color: '#8e8eaa' }}>
                             <ArrowLeft size={16} />
                             กลับหน้าหลัก
                         </Link>
 
-                        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 text-white">
+                        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4" style={{ color: '#1a1a3e' }}>
                             บทความชื่อมงคล
                         </h1>
-                        <p className="text-slate-300 text-sm sm:text-lg mb-4 leading-relaxed">
+                        <p className="text-sm sm:text-lg mb-4 leading-relaxed" style={{ color: '#5a5a82' }}>
                             รวมบทความศาสตร์มงคล เคล็ดลับการตั้งชื่อ และเกร็ดความรู้เพื่อชีวิตที่ดีกว่า
                         </p>
 
                         {/* SEO Rich Content Introduction – speakable target for AI assistants */}
-                        <div className="articles-intro bg-slate-800/40 border border-slate-700/50 rounded-xl p-4 sm:p-6 mb-5 sm:mb-8">
-                            <h2 className="text-base sm:text-xl font-bold text-amber-400 mb-2 sm:mb-3 flex items-center gap-2">
+                        <div className="articles-intro rounded-xl p-4 sm:p-6 mb-5 sm:mb-8 shadow-xl" style={{ background: '#0f172a', border: '1px solid #1e293b' }}>
+                            <h2 className="text-base sm:text-xl font-bold mb-2 sm:mb-3 flex items-center gap-2" style={{ color: '#fcd34d' }}>
                                 <BookOpen size={20} />
                                 คลังความรู้การตั้งชื่อครบวงจร
                             </h2>
-                            <p className="text-slate-300 text-xs sm:text-base leading-relaxed mb-3 sm:mb-4 line-clamp-3 sm:line-clamp-none">
-                                ยินดีต้อนรับสู่คลังบทความ <strong className="text-white">NameMongkol</strong> แหล่งรวมความรู้ด้านศาสตร์การตั้งชื่อที่ครบถ้วนและอัปเดตต่อเนื่อง
-                                ไม่ว่าคุณกำลังมองหา <strong className="text-amber-300">ชื่อมงคลสำหรับลูกน้อย</strong> ต้องการเรียนรู้หลัก <strong className="text-amber-300">เลขศาสตร์</strong> และ <strong className="text-amber-300">ทักษาปกรณ์</strong>
-                                หรือกำลังพิจารณา <strong className="text-amber-300">เปลี่ยนชื่อเสริมดวง</strong> เรามีบทความครอบคลุมทุกหัวข้อ
+                            <p className="text-xs sm:text-base leading-relaxed mb-4 sm:mb-6" style={{ color: '#cbd5e1' }}>
+                                ยินดีต้อนรับสู่คลังบทความ <strong className="font-bold text-white">NameMongkol</strong> แหล่งรวมความรู้ด้านศาสตร์การตั้งชื่อที่ครบถ้วนและอัปเดตต่อเนื่อง ไม่ว่าคุณกำลังมองหา <strong style={{ color: '#fcd34d' }}>ชื่อมงคลสำหรับลูกน้อย</strong> ต้องการเรียนรู้หลัก <strong style={{ color: '#fcd34d' }}>เลขศาสตร์</strong> และ <strong style={{ color: '#fcd34d' }}>ทักษาปกรณ์</strong> หรือกำลังพิจารณา <strong style={{ color: '#fcd34d' }}>เปลี่ยนชื่อเสริมดวง</strong> เรามีบทความครอบคลุมทุกหัวข้อ
                             </p>
-                            <div className="grid grid-cols-4 gap-2 sm:gap-3 text-[10px] sm:text-sm">
-                                <div className="bg-slate-900/50 p-2 sm:p-3 rounded-lg text-center">
-                                    <div className="text-base sm:text-2xl font-bold text-purple-400">{articles.length}+</div>
-                                    <div className="text-slate-400 truncate">บทความ</div>
+                            <div className="grid grid-cols-4 gap-2 sm:gap-4 text-[10px] sm:text-sm">
+                                <div className="rounded-xl p-3 sm:p-4 text-center bg-[#1e293b] relative overflow-hidden group">
+                                    <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-400 to-purple-500 opacity-90 group-hover:opacity-100 transition-opacity"></div>
+                                    <div className="text-base sm:text-2xl font-bold mb-1 text-purple-300">{articles.length}+</div>
+                                    <div className="truncate text-xs font-medium text-slate-300">บทความ</div>
                                 </div>
-                                <div className="bg-slate-900/50 p-2 sm:p-3 rounded-lg text-center">
-                                    <div className="text-base sm:text-2xl font-bold text-amber-400">500+</div>
-                                    <div className="text-slate-400 truncate">ตัวอย่างชื่อ</div>
+                                <div className="rounded-xl p-3 sm:p-4 text-center bg-[#1e293b] relative overflow-hidden group">
+                                    <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-300 to-amber-500 opacity-90 group-hover:opacity-100 transition-opacity"></div>
+                                    <div className="text-base sm:text-2xl font-bold mb-1 text-amber-300">500+</div>
+                                    <div className="truncate text-xs font-medium text-slate-300">ตัวอย่างชื่อ</div>
                                 </div>
-                                <div className="bg-slate-900/50 p-2 sm:p-3 rounded-lg text-center">
-                                    <div className="text-base sm:text-2xl font-bold text-emerald-400">7</div>
-                                    <div className="text-slate-400 truncate">หมวดหมู่</div>
+                                <div className="rounded-xl p-3 sm:p-4 text-center bg-[#1e293b] relative overflow-hidden group">
+                                    <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-300 to-emerald-500 opacity-90 group-hover:opacity-100 transition-opacity"></div>
+                                    <div className="text-base sm:text-2xl font-bold mb-1 text-emerald-300">7</div>
+                                    <div className="truncate text-xs font-medium text-slate-300">หมวดหมู่</div>
                                 </div>
-                                <div className="bg-slate-900/50 p-2 sm:p-3 rounded-lg text-center">
-                                    <div className="text-base sm:text-2xl font-bold text-blue-400 truncate">ต่อเนื่อง</div>
-                                    <div className="text-slate-400 truncate">อัปเดตล่าสุด</div>
+                                <div className="rounded-xl p-3 sm:p-4 text-center bg-[#1e293b] relative overflow-hidden group">
+                                    <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-300 to-blue-500 opacity-90 group-hover:opacity-100 transition-opacity"></div>
+                                    <div className="text-base sm:text-2xl font-bold mb-1 truncate text-blue-300">ต่อเนื่อง</div>
+                                    <div className="truncate text-xs font-medium text-slate-300">อัปเดตล่าสุด</div>
                                 </div>
                             </div>
                         </div>
 
                         {/* Search Bar */}
-                        <form role="search" aria-label="ค้นหาบทความชื่อมงคล" action="/articles" method="GET" className="mt-5 sm:mt-8 relative max-w-lg">
-                            <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400">
+                        <form role="search" aria-label="ค้นหาบทความชื่อมงคล" action="/articles" method="GET" className="mt-5 sm:mt-8 relative max-w-lg group">
+                            <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400 group-focus-within:text-amber-400 transition-colors">
                                 <Search size={20} />
                             </div>
                             <input
@@ -545,10 +542,10 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                                 defaultValue={query}
                                 placeholder="ค้นหาบทความ... เช่น ชื่อลูกชาย, เลขศาสตร์, ทักษา"
                                 aria-label="ค้นหาบทความ"
-                                className="w-full bg-slate-800/50 border border-slate-700 rounded-xl py-2.5 sm:py-3 pl-12 pr-4 text-sm sm:text-base text-slate-200 placeholder:text-slate-500 focus:ring-2 focus:ring-amber-500/50 focus:border-transparent outline-none transition-all"
+                                className="w-full rounded-xl py-2.5 sm:py-3 pl-12 pr-4 text-sm sm:text-base bg-[#0f172a] border border-[#1e293b] text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all shadow-md"
                             />
                             {activeCategory && <input type="hidden" name="category" value={activeCategory} />}
-                            <button type="submit" className="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400 hover:text-white transition-colors">
+                            <button type="submit" className="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400 hover:text-amber-400 transition-colors">
                                 <Search size={16} />
                             </button>
                         </form>
@@ -556,7 +553,11 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                         <div className="mt-4 flex max-w-4xl flex-wrap items-center gap-2">
                             <Link
                                 href={getArticlesHref({ q: query })}
-                                className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${!activeCategory ? 'border-amber-300/40 bg-amber-300/15 text-amber-100' : 'border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/20 hover:bg-white/[0.06]'}`}
+                                className={`rounded-full border px-3 py-1.5 text-xs font-medium transition shadow-sm ${
+                                    !activeCategory
+                                        ? 'border-amber-400 bg-[#0f172a] text-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.25)]'
+                                        : 'border-[#1e293b] bg-[#0f172a] text-slate-300 hover:border-amber-500/30 hover:bg-[#1e293b] hover:text-amber-400'
+                                }`}
                             >
                                 ทั้งหมด
                             </Link>
@@ -564,19 +565,23 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                                 <Link
                                     key={category}
                                     href={getArticlesHref({ q: query, category })}
-                                    className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${activeCategory === category ? 'border-amber-300/40 bg-amber-300/15 text-amber-100' : 'border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/20 hover:bg-white/[0.06]'}`}
+                                    className={`rounded-full border px-3 py-1.5 text-xs font-medium transition shadow-sm ${
+                                        activeCategory === category
+                                            ? 'border-amber-400 bg-[#0f172a] text-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.25)]'
+                                            : 'border-[#1e293b] bg-[#0f172a] text-slate-300 hover:border-amber-500/30 hover:bg-[#1e293b] hover:text-amber-400'
+                                    }`}
                                 >
                                     {category}
                                 </Link>
                             ))}
                             {(query || activeCategory) && (
-                                <Link href="/articles" className="rounded-full border border-white/10 bg-slate-950/60 px-3 py-1.5 text-xs font-medium text-slate-400 transition hover:border-white/20 hover:text-slate-200">
+                                <Link href="/articles" className="rounded-full border border-[#1e293b] bg-[#0f172a] px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-red-500/30 hover:bg-[#1e293b] hover:text-red-400 shadow-sm">
                                     ล้างตัวกรอง
                                 </Link>
                             )}
                         </div>
                         {(query || activeCategory) && (
-                            <p className="mt-3 text-sm text-slate-400">
+                            <p className="mt-3 text-sm text-slate-600">
                                 พบ {visibleArticles.length} บทความจากทั้งหมด {articles.length} บทความ
                             </p>
                         )}
@@ -586,26 +591,23 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                     <section className="mx-auto mb-8 sm:mb-12 max-w-[1400px]" aria-labelledby="topic-clusters-heading">
                         <div className="mb-4 sm:mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                             <div>
-                                <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-amber-300/80">Topic clusters</p>
-                                <h2 id="topic-clusters-heading" className="mt-1.5 sm:mt-2 text-lg sm:text-2xl font-bold text-white">
+                                <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: '#c9933a' }}>Topic clusters</p>
+                                <h2 id="topic-clusters-heading" className="mt-1.5 sm:mt-2 text-lg sm:text-2xl font-bold" style={{ color: '#1a1a3e' }}>
                                     เลือกอ่านตามเป้าหมาย เพื่อไปถึงคำตอบเร็วขึ้น
                                 </h2>
                             </div>
-                            <p className="hidden sm:block max-w-xl text-sm leading-relaxed text-slate-400">
-                                เราจัดกลุ่มบทความตาม search intent หลักของผู้ใช้ Google เพื่อให้ค้นเจอหัวข้อที่เกี่ยวข้องและต่อยอดไปยังบทความเชิงลึกได้ง่ายขึ้น
-                            </p>
                         </div>
                         <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-4">
                             {topicClusters.map((cluster) => (
-                                <div key={cluster.title} className="rounded-xl sm:rounded-2xl border border-white/10 bg-slate-900/55 p-3 sm:p-5 shadow-[0_18px_50px_rgba(0,0,0,0.22)]">
-                                    <h3 className="text-sm sm:text-base font-bold text-white leading-snug">{cluster.title}</h3>
-                                    <p className="mt-1.5 hidden sm:block min-h-[60px] text-xs leading-relaxed text-slate-400">{cluster.description}</p>
-                                    <div className="mt-3 sm:mt-4 space-y-1.5 sm:space-y-2">
+                                <div key={cluster.title} className="rounded-xl sm:rounded-2xl p-4 sm:p-5 shadow-lg flex flex-col h-full bg-[#0f172a] border border-[#1e293b] group hover:border-amber-500/30 transition-colors duration-300">
+                                    <h3 className="text-sm sm:text-base font-bold leading-snug text-slate-100 group-hover:text-amber-400 transition-colors duration-300">{cluster.title}</h3>
+                                    <p className="mt-1.5 hidden sm:block min-h-[60px] text-xs leading-relaxed text-slate-300">{cluster.description}</p>
+                                    <div className="mt-auto pt-3 sm:pt-4 space-y-2 flex-col">
                                         {cluster.links.map((link, linkIndex) => (
                                             <Link
                                                 key={link.href}
                                                 href={link.href}
-                                                className={`${linkIndex > 1 ? 'hidden sm:block' : 'block'} rounded-lg border border-white/5 bg-white/[0.03] px-2.5 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-sm leading-snug text-slate-200 transition hover:border-amber-300/30 hover:bg-amber-300/10 hover:text-amber-100`}
+                                                className={`${linkIndex > 1 ? 'hidden sm:block' : 'block'} rounded-lg px-2.5 sm:px-3 py-2 text-[11px] sm:text-sm leading-snug transition border bg-[#1e293b] border-slate-700/50 text-slate-300 hover:bg-slate-800 hover:border-amber-500/40 hover:text-amber-400 shadow-sm`}
                                             >
                                                 {link.label}
                                             </Link>
@@ -621,53 +623,71 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                             <Link
                                 key={article.slug}
                                 href={`/articles/${article.slug}`}
-                                className="group bg-slate-900/45 backdrop-blur-sm border border-white/5 rounded-2xl overflow-hidden hover:border-amber-500/25 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-900/15"
+                                className="group rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 bg-[#0f172a] border border-[#1e293b] shadow-lg hover:border-amber-500/30 hover:shadow-[0_8px_30px_rgba(245,158,11,0.12)]"
                             >
                                 <article
                                     className="flex flex-col h-full"
                                     itemScope
                                     itemType="https://schema.org/Article"
                                 >
-                                    <div className="aspect-[16/10] w-full bg-[#080d19] relative overflow-hidden p-2">
-                                        <ArticleImage
-                                            src={article.coverImage as string}
-                                            alt={getArticleCoverAlt(article)}
-                                            priority={index < 4}
-                                            objectFit="contain"
-                                            variant="card"
-                                            className="scale-100"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent opacity-60" />
-                                        <div className="absolute top-2 sm:top-3 right-2 sm:right-3 max-w-[calc(100%-1rem)] truncate px-2 sm:px-2.5 py-0.5 bg-black/60 backdrop-blur-md rounded-full text-[9px] sm:text-[10px] text-white font-medium border border-white/10 z-10">
+                                    {/* Cover image */}
+                                    <div className="aspect-[16/10] w-full relative overflow-hidden bg-[#0c0e13]">
+                                        {/* Hover amber shimmer at top edge */}
+                                        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-amber-400/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" />
+                                        <div className="absolute inset-0 p-2">
+                                            <ArticleImage
+                                                src={article.coverImage as string}
+                                                alt={getArticleCoverAlt(article)}
+                                                priority={index < 4}
+                                                objectFit="contain"
+                                                variant="card"
+                                                className="scale-100"
+                                            />
+                                        </div>
+                                        {/* Category badge */}
+                                        <div className="absolute top-2.5 right-2.5 max-w-[calc(100%-1rem)] truncate px-2.5 py-1 rounded-full text-[9px] sm:text-[10px] font-semibold z-10 tracking-wide bg-black/60 backdrop-blur-md border border-white/10 text-white shadow-lg">
                                             {article.category}
                                         </div>
                                     </div>
 
-                                    <div className="p-4 flex flex-col flex-grow relative bg-[#0f172a] group-hover:bg-[#131c33] transition-colors">
-                                        <div className="flex items-center gap-2 text-[11px] text-slate-500 mb-2.5">
-                                            <Calendar size={12} className="shrink-0" />
+                                    {/* Card body */}
+                                    <div className="p-4 flex flex-col flex-grow relative bg-[#0f172a]">
+                                        {/* Date row */}
+                                        <div className="flex items-center gap-1.5 mb-3 text-slate-400">
+                                            <Calendar size={11} className="shrink-0" />
                                             <time
                                                 dateTime={new Date(parseThaiDate(article.date)).toISOString()}
                                                 itemProp="datePublished"
-                                                className="truncate"
+                                                className="text-[11px] truncate"
                                             >
                                                 {new Date(parseThaiDate(article.date)).toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' })}
                                             </time>
                                         </div>
 
-                                        <h2 className="text-base sm:text-sm font-bold text-slate-100 mb-2 leading-snug group-hover:text-amber-200 transition-colors line-clamp-3 sm:line-clamp-2" itemProp="headline">
-                                            {article.title}
+                                        {/* Title */}
+                                        <h2
+                                            className="text-sm font-bold mb-2 leading-snug line-clamp-3 sm:line-clamp-2 transition-colors duration-200 text-slate-100"
+                                            itemProp="headline"
+                                        >
+                                            <span className="group-hover:text-amber-400 transition-colors duration-200">{article.title}</span>
                                         </h2>
 
-                                        <p className="text-slate-400 text-sm sm:text-xs leading-relaxed mb-4 line-clamp-2" itemProp="description">
+                                        {/* Excerpt */}
+                                        <p
+                                            className="text-xs leading-relaxed mb-4 line-clamp-2 text-slate-300"
+                                            itemProp="description"
+                                        >
                                             {article.excerpt}
                                         </p>
                                         <meta itemProp="url" content={`${baseUrl}/articles/${article.slug}`} />
                                         <meta itemProp="author" content={article.author || 'NameMongkol'} />
 
-                                        <div className="flex mt-auto pt-3 border-t border-white/5 justify-between items-center">
-                                            <span className="text-amber-300 text-xs font-medium group-hover:underline decoration-amber-500/30 underline-offset-4">อ่านเพิ่มเติม →</span>
-                                            <span className="text-slate-600 text-[10px]" itemProp="author">{article.author}</span>
+                                        {/* Footer row */}
+                                        <div className="flex mt-auto pt-3 items-center justify-between border-t border-slate-700/50">
+                                            <span className="text-xs font-semibold tracking-wide transition-colors duration-200 text-amber-400 group-hover:text-amber-300">
+                                                อ่านเพิ่มเติม →
+                                            </span>
+                                            <span className="text-[10px] text-slate-500" itemProp="author">{article.author}</span>
                                         </div>
                                     </div>
                                 </article>
@@ -676,127 +696,127 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                     </div>
 
                     {visibleArticles.length === 0 && (
-                        <div className="mx-auto max-w-xl rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-12 text-center text-slate-400">
-                            <p className="text-base text-slate-200">ยังไม่พบบทความที่ตรงกับตัวกรองนี้</p>
-                            <Link href="/articles" className="mt-4 inline-flex rounded-full border border-amber-300/30 bg-amber-300/10 px-4 py-2 text-sm font-medium text-amber-100 transition hover:bg-amber-300/15">
+                        <div className="mx-auto max-w-xl rounded-2xl px-6 py-12 text-center border" style={{ background: '#ffffff', borderColor: '#ddddf0', color: '#8e8eaa' }}>
+                            <p className="text-base" style={{ color: '#1a1a3e' }}>ยังไม่พบบทความที่ตรงกับตัวกรองนี้</p>
+                            <Link href="/articles" className="mt-4 inline-flex rounded-full border px-4 py-2 text-sm font-medium transition" style={{ borderColor: 'rgba(201,147,58,0.35)', background: 'rgba(201,147,58,0.08)', color: '#c9933a' }}>
                                 ดูบทความทั้งหมด
                             </Link>
                         </div>
                     )}
 
                     {/* SEO Content Section - FAQ (speakable target for AI assistants) */}
-                    <section className="faq-section max-w-4xl mx-auto mt-16 border-t border-slate-700/50 pt-12" aria-labelledby="faq-heading">
-                        <h2 id="faq-heading" className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                    <section className="faq-section max-w-4xl mx-auto mt-16 pt-12" style={{ borderTop: '1px solid #ddddf0' }} aria-labelledby="faq-heading">
+                        <h2 id="faq-heading" className="text-2xl font-bold mb-8 flex items-center gap-3" style={{ color: '#1a1a3e' }}>
                             <span className="text-3xl">❓</span>
                             คำถามที่พบบ่อยเกี่ยวกับการตั้งชื่อมงคล
                         </h2>
 
                         <div className="space-y-4">
-                            <details className="bg-slate-800/40 border border-slate-700/50 rounded-xl overflow-hidden group">
-                                <summary className="p-5 cursor-pointer font-medium text-white hover:bg-slate-700/30 transition-colors flex items-center justify-between">
+                            <details className="rounded-xl overflow-hidden group border" style={{ background: '#ffffff', borderColor: '#ddddf0' }}>
+                                <summary className="p-5 cursor-pointer font-medium hover:bg-[#f8f8fc] transition-colors flex items-center justify-between" style={{ color: '#1a1a3e' }}>
                                     <span>ตั้งชื่อลูกควรใช้หลักอะไรบ้าง?</span>
-                                    <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+                                    <span style={{ color: '#9b8ec4' }} className="group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
-                                <div className="p-5 pt-0 text-slate-300 leading-relaxed">
+                                <div className="p-5 pt-0 leading-relaxed" style={{ color: '#5a5a82' }}>
                                     <p>การตั้งชื่อลูกควรใช้หลักสำคัญ 4 ประการ:</p>
                                     <ul className="mt-3 space-y-2 text-sm">
-                                        <li className="flex items-start gap-2"><span className="text-amber-400">1.</span> <strong>เลขศาสตร์:</strong> คำนวณผลรวมชื่อให้ตกเลขมงคล เช่น 14, 15, 24, 32, 36, 41, 45, 59</li>
-                                        <li className="flex items-start gap-2"><span className="text-amber-400">2.</span> <strong>ทักษาปกรณ์:</strong> เลือกอักษรนำหน้าชื่อที่ตรงกับหลักทักษาดี เช่น บริวาร ศรี เดช อายุ</li>
-                                        <li className="flex items-start gap-2"><span className="text-amber-400">3.</span> <strong>อายตนะ 6:</strong> ดูความสมดุลของพลังชีวิต 6 ด้าน ได้แก่ สุขภาพ การเงิน ความรัก หน้าที่การงาน สติปัญญา และบารมี</li>
-                                        <li className="flex items-start gap-2"><span className="text-amber-400">4.</span> <strong>หลีกเลี่ยงกาลกิณี:</strong> ไม่ใช้อักษรกาลกิณีประจำวันเกิดของลูก</li>
+                                        <li className="flex items-start gap-2"><span style={{ color: '#c9933a' }}>1.</span> <strong style={{ color: '#1a1a3e' }}>เลขศาสตร์:</strong> คำนวณผลรวมชื่อให้ตกเลขมงคล เช่น 14, 15, 24, 32, 36, 41, 45, 59</li>
+                                        <li className="flex items-start gap-2"><span style={{ color: '#c9933a' }}>2.</span> <strong style={{ color: '#1a1a3e' }}>ทักษาปกรณ์:</strong> เลือกอักษรนำหน้าชื่อที่ตรงกับหลักทักษาดี เช่น บริวาร ศรี เดช อายุ</li>
+                                        <li className="flex items-start gap-2"><span style={{ color: '#c9933a' }}>3.</span> <strong style={{ color: '#1a1a3e' }}>อายตนะ 6:</strong> ดูความสมดุลของพลังชีวิต 6 ด้าน ได้แก่ สุขภาพ การเงิน ความรัก หน้าที่การงาน สติปัญญา และบารมี</li>
+                                        <li className="flex items-start gap-2"><span style={{ color: '#c9933a' }}>4.</span> <strong style={{ color: '#1a1a3e' }}>หลีกเลี่ยงกาลกิณี:</strong> ไม่ใช้อักษรกาลกิณีประจำวันเกิดของลูก</li>
                                     </ul>
                                 </div>
                             </details>
 
-                            <details className="bg-slate-800/40 border border-slate-700/50 rounded-xl overflow-hidden group">
-                                <summary className="p-5 cursor-pointer font-medium text-white hover:bg-slate-700/30 transition-colors flex items-center justify-between">
+                            <details className="rounded-xl overflow-hidden group border" style={{ background: '#ffffff', borderColor: '#ddddf0' }}>
+                                <summary className="p-5 cursor-pointer font-medium hover:bg-[#f8f8fc] transition-colors flex items-center justify-between" style={{ color: '#1a1a3e' }}>
                                     <span>เลขศาสตร์ชื่อคืออะไร? คำนวณอย่างไร?</span>
-                                    <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+                                    <span style={{ color: '#9b8ec4' }} className="group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
-                                <div className="p-5 pt-0 text-slate-300 leading-relaxed">
-                                    <p><strong>เลขศาสตร์ชื่อ</strong> คือการคำนวณค่าตัวเลขจากพยัญชนะและสระในชื่อ โดยแต่ละตัวอักษรมีค่าตัวเลขกำหนดไว้ เช่น ก=1, ข=2, ค=3 ฯลฯ</p>
+                                <div className="p-5 pt-0 leading-relaxed" style={{ color: '#5a5a82' }}>
+                                    <p><strong style={{ color: '#1a1a3e' }}>เลขศาสตร์ชื่อ</strong> คือการคำนวณค่าตัวเลขจากพยัญชนะและสระในชื่อ โดยแต่ละตัวอักษรมีค่าตัวเลขกำหนดไว้ เช่น ก=1, ข=2, ค=3 ฯลฯ</p>
                                     <p className="mt-3">นำค่าทุกตัวมารวมกัน หากได้เลข 2 หลัก ให้รวมหลักกันจนเหลือหลักเดียว หรือดูทั้งผลรวมสุดท้ายและผลรวมก่อนหน้า</p>
-                                    <div className="mt-4 bg-slate-900/50 p-4 rounded-lg">
-                                        <p className="text-sm text-amber-400 font-medium mb-2">ตัวอย่าง: ชื่อ &quot;มงคล&quot;</p>
-                                        <p className="text-sm">ม(5) + ง(4) + ค(3) + ล(8) = <span className="text-emerald-400 font-bold">20</span> → 2+0 = <span className="text-emerald-400 font-bold">2</span></p>
+                                    <div className="mt-4 p-4 rounded-lg border" style={{ background: '#f8f8fc', borderColor: '#ddddf0' }}>
+                                        <p className="text-sm font-medium mb-2" style={{ color: '#c9933a' }}>ตัวอย่าง: ชื่อ &quot;มงคล&quot;</p>
+                                        <p className="text-sm" style={{ color: '#5a5a82' }}>ม(5) + ง(4) + ค(3) + ล(8) = <span style={{ color: '#4caf80' }} className="font-bold">20</span> → 2+0 = <span style={{ color: '#4caf80' }} className="font-bold">2</span></p>
                                     </div>
                                 </div>
                             </details>
 
-                            <details className="bg-slate-800/40 border border-slate-700/50 rounded-xl overflow-hidden group">
-                                <summary className="p-5 cursor-pointer font-medium text-white hover:bg-slate-700/30 transition-colors flex items-center justify-between">
+                            <details className="rounded-xl overflow-hidden group border" style={{ background: '#ffffff', borderColor: '#ddddf0' }}>
+                                <summary className="p-5 cursor-pointer font-medium hover:bg-[#f8f8fc] transition-colors flex items-center justify-between" style={{ color: '#1a1a3e' }}>
                                     <span>อักษรกาลกิณีคืออะไร? ของแต่ละวันมีอะไรบ้าง?</span>
-                                    <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+                                    <span style={{ color: '#9b8ec4' }} className="group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
-                                <div className="p-5 pt-0 text-slate-300 leading-relaxed">
-                                    <p><strong>อักษรกาลกิณี</strong> คือตัวอักษรที่ไม่ควรมีในชื่อตามวันเกิด เพราะจะนำพาความโชคร้าย อุปสรรค หรือโรคภัยมาให้</p>
+                                <div className="p-5 pt-0 leading-relaxed" style={{ color: '#5a5a82' }}>
+                                    <p><strong style={{ color: '#1a1a3e' }}>อักษรกาลกิณี</strong> คือตัวอักษรที่ไม่ควรมีในชื่อตามวันเกิด เพราะจะนำพาความโชคร้าย อุปสรรค หรือโรคภัยมาให้</p>
                                     <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-                                        <div className="bg-red-500/10 border border-red-500/20 p-3 rounded-lg">
-                                            <span className="text-red-400 font-bold">วันอาทิตย์:</span> ศ ษ ส ห ฬ ฮ
+                                        <div className="border p-3 rounded-lg" style={{ background: '#fef2f2', borderColor: '#fecaca' }}>
+                                            <span className="font-bold" style={{ color: '#dc2626' }}>วันอาทิตย์:</span> ศ ษ ส ห ฬ ฮ
                                         </div>
-                                        <div className="bg-orange-500/10 border border-orange-500/20 p-3 rounded-lg">
-                                            <span className="text-orange-400 font-bold">วันจันทร์:</span> อ + สระทั้งหมด
+                                        <div className="border p-3 rounded-lg" style={{ background: '#fff7ed', borderColor: '#fed7aa' }}>
+                                            <span className="font-bold" style={{ color: '#ea580c' }}>วันจันทร์:</span> อ + สระทั้งหมด
                                         </div>
-                                        <div className="bg-pink-500/10 border border-pink-500/20 p-3 rounded-lg">
-                                            <span className="text-pink-400 font-bold">วันอังคาร:</span> ก ข ค ฆ ง
+                                        <div className="border p-3 rounded-lg" style={{ background: '#fdf2f8', borderColor: '#fbcfe8' }}>
+                                            <span className="font-bold" style={{ color: '#db2777' }}>วันอังคาร:</span> ก ข ค ฆ ง
                                         </div>
-                                        <div className="bg-green-500/10 border border-green-500/20 p-3 rounded-lg">
-                                            <span className="text-green-400 font-bold">วันพุธ (กลางวัน):</span> จ ฉ ช ซ ฌ ญ
+                                        <div className="border p-3 rounded-lg" style={{ background: '#f0fdf4', borderColor: '#bbf7d0' }}>
+                                            <span className="font-bold" style={{ color: '#16a34a' }}>วันพุธ (กลางวัน):</span> จ ฉ ช ซ ฌ ญ
                                         </div>
-                                        <div className="bg-teal-500/10 border border-teal-500/20 p-3 rounded-lg">
-                                            <span className="text-teal-400 font-bold">วันพุธ (กลางคืน/ราหู):</span> บ ป ผ ฝ พ ฟ ภ ม
+                                        <div className="border p-3 rounded-lg" style={{ background: '#f0fdfa', borderColor: '#99f6e4' }}>
+                                            <span className="font-bold" style={{ color: '#0d9488' }}>วันพุธ (กลางคืน/ราหู):</span> บ ป ผ ฝ พ ฟ ภ ม
                                         </div>
-                                        <div className="bg-yellow-500/10 border border-yellow-500/20 p-3 rounded-lg">
-                                            <span className="text-yellow-400 font-bold">วันพฤหัสบดี:</span> ด ต ถ ท ธ น
+                                        <div className="border p-3 rounded-lg" style={{ background: '#fefce8', borderColor: '#fef08a' }}>
+                                            <span className="font-bold" style={{ color: '#ca8a04' }}>วันพฤหัสบดี:</span> ด ต ถ ท ธ น
                                         </div>
-                                        <div className="bg-blue-500/10 border border-blue-500/20 p-3 rounded-lg">
-                                            <span className="text-blue-400 font-bold">วันศุกร์:</span> ย ร ล ว
+                                        <div className="border p-3 rounded-lg" style={{ background: '#eff6ff', borderColor: '#bfdbfe' }}>
+                                            <span className="font-bold" style={{ color: '#2563eb' }}>วันศุกร์:</span> ย ร ล ว
                                         </div>
-                                        <div className="bg-purple-500/10 border border-purple-500/20 p-3 rounded-lg">
-                                            <span className="text-purple-400 font-bold">วันเสาร์:</span> ฎ ฏ ฐ ฑ ฒ ณ
+                                        <div className="border p-3 rounded-lg" style={{ background: '#faf5ff', borderColor: '#e9d5ff' }}>
+                                            <span className="font-bold" style={{ color: '#9333ea' }}>วันเสาร์:</span> ฎ ฏ ฐ ฑ ฒ ณ
                                         </div>
                                     </div>
                                 </div>
                             </details>
 
-                            <details className="bg-slate-800/40 border border-slate-700/50 rounded-xl overflow-hidden group">
-                                <summary className="p-5 cursor-pointer font-medium text-white hover:bg-slate-700/30 transition-colors flex items-center justify-between">
+                            <details className="rounded-xl overflow-hidden group border" style={{ background: '#ffffff', borderColor: '#ddddf0' }}>
+                                <summary className="p-5 cursor-pointer font-medium hover:bg-[#f8f8fc] transition-colors flex items-center justify-between" style={{ color: '#1a1a3e' }}>
                                     <span>ทักษาปกรณ์ มีหลักอะไรบ้าง?</span>
-                                    <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+                                    <span style={{ color: '#9b8ec4' }} className="group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
-                                <div className="p-5 pt-0 text-slate-300 leading-relaxed">
-                                    <p><strong>ทักษาปกรณ์</strong> เป็นตำราโบราณที่แบ่งอักษรไทยออกเป็น 8 หมวด ตามวันเกิด:</p>
+                                <div className="p-5 pt-0 leading-relaxed" style={{ color: '#5a5a82' }}>
+                                    <p><strong style={{ color: '#1a1a3e' }}>ทักษาปกรณ์</strong> เป็นตำราโบราณที่แบ่งอักษรไทยออกเป็น 8 หมวด ตามวันเกิด:</p>
                                     <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-                                        <div className="bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-lg text-center">
-                                            <span className="text-emerald-400 font-bold block mb-1">🤝 บริวาร</span>
+                                        <div className="border p-3 rounded-lg text-center" style={{ background: '#f0fdf4', borderColor: '#bbf7d0' }}>
+                                            <span className="font-bold block mb-1" style={{ color: '#16a34a' }}>🤝 บริวาร</span>
                                             ลูกหลาน คู่ครอง
                                         </div>
-                                        <div className="bg-pink-500/10 border border-pink-500/20 p-3 rounded-lg text-center">
-                                            <span className="text-pink-400 font-bold block mb-1">🌸 ศรี</span>
+                                        <div className="border p-3 rounded-lg text-center" style={{ background: '#fdf2f8', borderColor: '#fbcfe8' }}>
+                                            <span className="font-bold block mb-1" style={{ color: '#db2777' }}>🌸 ศรี</span>
                                             โชคลาภ สำเร็จ
                                         </div>
-                                        <div className="bg-purple-500/10 border border-purple-500/20 p-3 rounded-lg text-center">
-                                            <span className="text-purple-400 font-bold block mb-1">👑 เดช</span>
+                                        <div className="border p-3 rounded-lg text-center" style={{ background: '#faf5ff', borderColor: '#e9d5ff' }}>
+                                            <span className="font-bold block mb-1" style={{ color: '#9333ea' }}>👑 เดช</span>
                                             อำนาจ เกียรติยศ
                                         </div>
-                                        <div className="bg-teal-500/10 border border-teal-500/20 p-3 rounded-lg text-center">
-                                            <span className="text-teal-400 font-bold block mb-1">💚 อายุ</span>
+                                        <div className="border p-3 rounded-lg text-center" style={{ background: '#f0fdfa', borderColor: '#99f6e4' }}>
+                                            <span className="font-bold block mb-1" style={{ color: '#0d9488' }}>💚 อายุ</span>
                                             สุขภาพ อายุยืน
                                         </div>
-                                        <div className="bg-blue-500/10 border border-blue-500/20 p-3 rounded-lg text-center">
-                                            <span className="text-blue-400 font-bold block mb-1">🏛️ มนตรี</span>
+                                        <div className="border p-3 rounded-lg text-center" style={{ background: '#eff6ff', borderColor: '#bfdbfe' }}>
+                                            <span className="font-bold block mb-1" style={{ color: '#2563eb' }}>🏛️ มนตรี</span>
                                             ผู้ใหญ่อุปถัมภ์
                                         </div>
-                                        <div className="bg-red-500/10 border border-red-500/20 p-3 rounded-lg text-center">
-                                            <span className="text-red-400 font-bold block mb-1">⛔ กาลกิณี</span>
+                                        <div className="border p-3 rounded-lg text-center" style={{ background: '#fef2f2', borderColor: '#fecaca' }}>
+                                            <span className="font-bold block mb-1" style={{ color: '#dc2626' }}>⛔ กาลกิณี</span>
                                             อักษรต้องห้าม
                                         </div>
-                                        <div className="bg-amber-500/10 border border-amber-500/20 p-3 rounded-lg text-center">
-                                            <span className="text-amber-400 font-bold block mb-1">💪 อุตสาหะ</span>
+                                        <div className="border p-3 rounded-lg text-center" style={{ background: '#fffbeb', borderColor: '#fde68a' }}>
+                                            <span className="font-bold block mb-1" style={{ color: '#d97706' }}>💪 อุตสาหะ</span>
                                             ความขยัน มานะ
                                         </div>
-                                        <div className="bg-yellow-500/10 border border-yellow-500/20 p-3 rounded-lg text-center">
-                                            <span className="text-yellow-400 font-bold block mb-1">💰 มูละ</span>
+                                        <div className="border p-3 rounded-lg text-center" style={{ background: '#fefce8', borderColor: '#fef08a' }}>
+                                            <span className="font-bold block mb-1" style={{ color: '#ca8a04' }}>💰 มูละ</span>
                                             ทรัพย์สิน มรดก
                                         </div>
                                     </div>
@@ -804,13 +824,13 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                                 </div>
                             </details>
 
-                            <details className="bg-slate-800/40 border border-slate-700/50 rounded-xl overflow-hidden group">
-                                <summary className="p-5 cursor-pointer font-medium text-white hover:bg-slate-700/30 transition-colors flex items-center justify-between">
+                            <details className="rounded-xl overflow-hidden group border" style={{ background: '#ffffff', borderColor: '#ddddf0' }}>
+                                <summary className="p-5 cursor-pointer font-medium hover:bg-[#f8f8fc] transition-colors flex items-center justify-between" style={{ color: '#1a1a3e' }}>
                                     <span>เปลี่ยนชื่อแก้ดวงได้จริงไหม?</span>
-                                    <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+                                    <span style={{ color: '#9b8ec4' }} className="group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
-                                <div className="p-5 pt-0 text-slate-300 leading-relaxed">
-                                    <p>ตามความเชื่อทางโหราศาสตร์และเลขศาสตร์ <strong>ชื่อมีพลังที่ส่งผลต่อชีวิต</strong> เพราะถูกเรียกใช้ทุกวัน สร้างคลื่นพลังงานส่งผลต่อจิตใต้สำนึก</p>
+                                <div className="p-5 pt-0 leading-relaxed" style={{ color: '#5a5a82' }}>
+                                    <p>ตามความเชื่อทางโหราศาสตร์และเลขศาสตร์ <strong style={{ color: '#1a1a3e' }}>ชื่อมีพลังที่ส่งผลต่อชีวิต</strong> เพราะถูกเรียกใช้ทุกวัน สร้างคลื่นพลังงานส่งผลต่อจิตใต้สำนึก</p>
                                     <p className="mt-3">การเปลี่ยนชื่อจึงเปรียบเหมือนการ &quot;ปรับคลื่นพลังชีวิตใหม่&quot; แต่ต้องเลือกชื่อใหม่ที่ถูกหลักทุกด้าน:</p>
                                     <ul className="mt-3 space-y-1 text-sm">
                                         <li>✓ ผลรวมเลขศาสตร์เป็นมงคล</li>
@@ -821,28 +841,28 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                                 </div>
                             </details>
 
-                            <details className="bg-slate-800/40 border border-slate-700/50 rounded-xl overflow-hidden group">
-                                <summary className="p-5 cursor-pointer font-medium text-white hover:bg-slate-700/30 transition-colors flex items-center justify-between">
+                            <details className="rounded-xl overflow-hidden group border" style={{ background: '#ffffff', borderColor: '#ddddf0' }}>
+                                <summary className="p-5 cursor-pointer font-medium hover:bg-[#f8f8fc] transition-colors flex items-center justify-between" style={{ color: '#1a1a3e' }}>
                                     <span>NameMongkol วิเคราะห์ชื่อด้วยหลักอะไรบ้าง?</span>
-                                    <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+                                    <span style={{ color: '#9b8ec4' }} className="group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
-                                <div className="p-5 pt-0 text-slate-300 leading-relaxed">
-                                    <p>ระบบ AI ของ <strong>NameMongkol</strong> วิเคราะห์ชื่อครบ 4 ศาสตร์หลัก:</p>
+                                <div className="p-5 pt-0 leading-relaxed" style={{ color: '#5a5a82' }}>
+                                    <p>ระบบ AI ของ <strong style={{ color: '#1a1a3e' }}>NameMongkol</strong> วิเคราะห์ชื่อครบ 4 ศาสตร์หลัก:</p>
                                     <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-                                        <div className="bg-purple-500/10 border border-purple-500/20 p-3 rounded-lg">
-                                            <span className="text-purple-400 font-bold block mb-1">📊 เลขศาสตร์</span>
+                                        <div className="border p-3 rounded-lg" style={{ background: '#faf5ff', borderColor: '#e9d5ff' }}>
+                                            <span className="font-bold block mb-1" style={{ color: '#9333ea' }}>📊 เลขศาสตร์</span>
                                             คำนวณผลรวมและตีความเลข
                                         </div>
-                                        <div className="bg-amber-500/10 border border-amber-500/20 p-3 rounded-lg">
-                                            <span className="text-amber-400 font-bold block mb-1">📜 ทักษาปกรณ์</span>
+                                        <div className="border p-3 rounded-lg" style={{ background: '#fffbeb', borderColor: '#fde68a' }}>
+                                            <span className="font-bold block mb-1" style={{ color: '#d97706' }}>📜 ทักษาปกรณ์</span>
                                             วิเคราะห์หลักอักษรตามวันเกิด
                                         </div>
-                                        <div className="bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-lg">
-                                            <span className="text-emerald-400 font-bold block mb-1">⚡ อายตนะ 6</span>
+                                        <div className="border p-3 rounded-lg" style={{ background: '#f0fdf4', borderColor: '#bbf7d0' }}>
+                                            <span className="font-bold block mb-1" style={{ color: '#16a34a' }}>⚡ อายตนะ 6</span>
                                             ดูความสมดุล 6 ด้านของชีวิต
                                         </div>
-                                        <div className="bg-blue-500/10 border border-blue-500/20 p-3 rounded-lg">
-                                            <span className="text-blue-400 font-bold block mb-1">🤖 AI Analysis</span>
+                                        <div className="border p-3 rounded-lg" style={{ background: '#eff6ff', borderColor: '#bfdbfe' }}>
+                                            <span className="font-bold block mb-1" style={{ color: '#2563eb' }}>🤖 AI Analysis</span>
                                             คำแนะนำเฉพาะบุคคล
                                         </div>
                                     </div>
@@ -852,25 +872,25 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                     </section>
 
                     {/* CTA Section */}
-                    <section className="max-w-4xl mx-auto mt-16 bg-gradient-to-r from-amber-900/30 to-slate-900/60 border border-amber-500/25 rounded-2xl p-8 text-center">
-                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                    <section className="max-w-4xl mx-auto mt-16 rounded-2xl p-8 text-center border" style={{ background: 'linear-gradient(135deg, #fffbeb 0%, #ffffff 50%, #eeebf8 100%)', borderColor: '#ddddf0', boxShadow: '0 4px 24px rgba(201,147,58,0.10)' }}>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1a1a3e' }}>
                             อยากรู้ว่าชื่อของคุณเป็นมงคลไหม?
                         </h2>
-                        <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
+                        <p className="mb-6 max-w-2xl mx-auto" style={{ color: '#5a5a82' }}>
                             ใช้ระบบ AI วิเคราะห์ชื่อมงคลฟรี! ตรวจสอบเลขศาสตร์ ทักษา อายตนะ 6 และอักษรกาลกิณีได้ภายในไม่กี่วินาที
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link href="/name-check" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-bold py-4 px-8 rounded-full transition-all hover:scale-105 shadow-lg shadow-amber-900/40">
+                            <Link href="/name-check" className="wtp-button-primary inline-flex items-center justify-center gap-2 py-4 px-8 rounded-full transition-all hover:scale-105">
                                 <span>วิเคราะห์ชื่อมงคลฟรี</span>
                                 <ArrowLeft size={18} className="rotate-180" />
                             </Link>
-                            <Link href="/premium-search" className="inline-flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-8 rounded-full transition-all">
+                            <Link href="/premium-search" className="inline-flex items-center justify-center gap-2 font-bold py-4 px-8 rounded-full transition-all border" style={{ background: '#ffffff', borderColor: '#ddddf0', color: '#1a1a3e' }}>
                                 <span>👑 ค้นหาชื่อมงคล Premium</span>
                             </Link>
                         </div>
                     </section>
                 </main>
-            </div>
+            </SoftYellowGlowBackground>
         </>
     );
 }

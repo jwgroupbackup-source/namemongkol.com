@@ -178,48 +178,48 @@ export default function NameAnalysisPage() {
             />
             <ClientPage />
 
-            <section id="bulk-pair-analysis-seo" className="w-full bg-[#0f172a] px-4 pt-12 text-slate-200">
-                <div className="mx-auto max-w-4xl rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-300/80">Bulk Pair Analysis</p>
-                    <h2 className="mt-3 text-2xl font-bold text-white">คัดหลายชื่อด้วยคู่เลข ไม่ใช่ผลรวมอย่างเดียว</h2>
-                    <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">
+            <section id="bulk-pair-analysis-seo" className="w-full bg-[#f8f8fc] px-4 pt-12 text-[#1a1a3e]">
+                <div className="mx-auto max-w-4xl rounded-2xl border border-[#ddddf0] bg-white p-6 sm:p-8 shadow-sm">
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-600">Bulk Pair Analysis</p>
+                    <h2 className="mt-3 text-2xl font-bold text-[#1a1a3e]">คัดหลายชื่อด้วยคู่เลข ไม่ใช่ผลรวมอย่างเดียว</h2>
+                    <p className="mt-4 text-sm leading-7 text-[#5a5a82] sm:text-base">
                         จุดเด่นของ NameMongkol คือการวิเคราะห์ชื่อแบบละเอียด โดยถอดตัวอักษรแต่ละตัวเป็นค่าเลขศาสตร์ แล้วจับเลขที่อยู่ติดกันเป็นคู่ เช่น 14, 24, 65 เพื่ออ่านพลังส่งเสริม จุดที่ควรระวัง และความหมายเชิงลึกของชื่อ ไม่ใช่ดูเฉพาะผลรวมตัวเลขเท่านั้น ในหน้า Bulk Analysis หลักการเดียวกันนี้ช่วยให้คุณเปรียบเทียบหลายชื่อได้เร็วขึ้น เห็นทั้งคะแนนรวม คู่เลขในชื่อ และจุดที่ควรระวังก่อนนำชื่อที่สนใจไปตรวจร่วมกับนามสกุลในหน้า /name-check
                     </p>
                 </div>
             </section>
 
             {/* SSR Internal Links (lightweight) — helps crawlers discover related pages without relying on JS */}
-            <div className="w-full bg-[#0f172a] text-slate-200 px-4 pb-24">
-                <div className="max-w-4xl mx-auto border-t border-white/10 pt-10">
-                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
+            <div className="w-full bg-[#f8f8fc] text-[#1a1a3e] px-4 pb-24">
+                <div className="max-w-4xl mx-auto border-t border-[#ddddf0] pt-10">
+                    <p className="text-xs font-bold text-[#8e8eaa] uppercase tracking-widest mb-4">
                         บริการอื่นๆ ที่เกี่ยวข้อง
                     </p>
                     <div className="flex flex-wrap gap-2">
-                        <Link href="/name-check" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        <Link href="/name-check" className="text-xs bg-white border border-[#ddddf0] hover:bg-[#f3f3f9] hover:border-indigo-300 hover:text-indigo-600 px-3 py-1.5 rounded-full text-[#5a5a82] transition-colors shadow-sm">
                             วิเคราะห์ชื่อ-นามสกุล (ฟรี)
                         </Link>
-                        <Link href="/about" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        <Link href="/about" className="text-xs bg-white border border-[#ddddf0] hover:bg-[#f3f3f9] hover:border-indigo-300 hover:text-indigo-600 px-3 py-1.5 rounded-full text-[#5a5a82] transition-colors shadow-sm">
                             เกี่ยวกับ NameMongkol
                         </Link>
-                        <Link href="/name-generator" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        <Link href="/name-generator" className="text-xs bg-white border border-[#ddddf0] hover:bg-[#f3f3f9] hover:border-indigo-300 hover:text-indigo-600 px-3 py-1.5 rounded-full text-[#5a5a82] transition-colors shadow-sm">
                             สร้างชื่อมงคลด้วย AI
                         </Link>
-                        <Link href="/search" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        <Link href="/search" className="text-xs bg-white border border-[#ddddf0] hover:bg-[#f3f3f9] hover:border-indigo-300 hover:text-indigo-600 px-3 py-1.5 rounded-full text-[#5a5a82] transition-colors shadow-sm">
                             ค้นหาชื่อมงคลฟรี 5,000+ ชื่อ
                         </Link>
-                        <Link href="/premium-search" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        <Link href="/premium-search" className="text-xs bg-white border border-[#ddddf0] hover:bg-[#f3f3f9] hover:border-indigo-300 hover:text-indigo-600 px-3 py-1.5 rounded-full text-[#5a5a82] transition-colors shadow-sm">
                             เปลี่ยนชื่อมงคล Pro
                         </Link>
-                        <Link href="/premium-analysis" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        <Link href="/premium-analysis" className="text-xs bg-white border border-[#ddddf0] hover:bg-[#f3f3f9] hover:border-indigo-300 hover:text-indigo-600 px-3 py-1.5 rounded-full text-[#5a5a82] transition-colors shadow-sm">
                             วิเคราะห์ชื่อขั้นสูง (Premium)
                         </Link>
-                        <Link href="/phone-analysis" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        <Link href="/phone-analysis" className="text-xs bg-white border border-[#ddddf0] hover:bg-[#f3f3f9] hover:border-indigo-300 hover:text-indigo-600 px-3 py-1.5 rounded-full text-[#5a5a82] transition-colors shadow-sm">
                             เช็คเบอร์มงคลกราฟพลังงาน 6 ด้าน
                         </Link>
-                        <Link href="/palm-analysis" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        <Link href="/palm-analysis" className="text-xs bg-white border border-[#ddddf0] hover:bg-[#f3f3f9] hover:border-indigo-300 hover:text-indigo-600 px-3 py-1.5 rounded-full text-[#5a5a82] transition-colors shadow-sm">
                             วิเคราะห์ลายมือออนไลน์ด้วย AI
                         </Link>
-                        <Link href="/wallpapers" className="text-xs bg-slate-800/60 hover:bg-indigo-500/15 px-3 py-1.5 rounded-full text-slate-300 hover:text-white transition-colors">
+                        <Link href="/wallpapers" className="text-xs bg-white border border-[#ddddf0] hover:bg-[#f3f3f9] hover:border-indigo-300 hover:text-indigo-600 px-3 py-1.5 rounded-full text-[#5a5a82] transition-colors shadow-sm">
                             วอลเปเปอร์มงคลเสริมดวง ดาวน์โหลดฟรี
                         </Link>
                     </div>

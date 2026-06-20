@@ -51,7 +51,7 @@ export const ArticleShareButtons: React.FC<ArticleShareButtonsProps> = ({ title,
                 onClick={() => handleShare('copy')}
                 className={`p-2.5 rounded-full transition-colors ${copied
                     ? 'bg-emerald-500/10 text-emerald-500'
-                    : 'bg-slate-700/50 hover:bg-slate-700 text-slate-400 hover:text-white'
+                    : 'bg-slate-200 hover:bg-slate-300 text-slate-500 hover:text-slate-700'
                     }`}
                 title="คัดลอกลิงก์"
             >

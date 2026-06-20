@@ -35,14 +35,14 @@ export function LanguageToggle() {
         <div className="relative" ref={menuRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-3 py-2 rounded-full bg-slate-100/70 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/10 transition-all duration-200 backdrop-blur-md shadow-sm group"
+                className="flex items-center gap-2 px-3 py-2 rounded-full bg-[#0f172a] border border-[#1e293b] hover:bg-[#1e293b] hover:border-amber-500/30 transition-all duration-200 shadow-sm group"
                 aria-label="Select Language"
                 aria-expanded={isOpen}
             >
                 <div className="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center text-white text-[10px] font-bold shadow-sm">
                     {language.toUpperCase()}
                 </div>
-                <span className="text-sm font-medium text-slate-700 dark:text-slate-200 hidden sm:block">
+                <span className="text-sm font-medium text-slate-300 group-hover:text-amber-400 transition-colors hidden sm:block">
                     {currentLang.label}
                 </span>
                 <ChevronDown

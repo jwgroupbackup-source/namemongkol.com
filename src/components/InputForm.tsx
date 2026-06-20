@@ -83,55 +83,51 @@ export const InputForm: React.FC<InputFormProps> = ({
 
     return (
         <div className="w-full animate-fade-in-up">
-            <div className="relative overflow-hidden rounded-[1.35rem] border border-[#f0c976]/70 bg-[linear-gradient(145deg,#fffaf1_0%,#fff6e8_52%,#fff0d6_100%)] p-3 text-[#18223a] shadow-[0_0_0_1px_rgba(255,244,218,0.84),0_24px_70px_rgba(218,146,22,0.24),0_0_42px_rgba(250,194,87,0.28)] sm:rounded-[1.9rem] sm:p-6 lg:p-7">
-                <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[#f7d894] to-transparent" />
-                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[radial-gradient(circle,rgba(242,181,55,0.22),transparent_62%)] blur-2xl" />
-                <div className="pointer-events-none absolute -left-24 bottom-0 h-60 w-60 rounded-full bg-[radial-gradient(circle,rgba(245,203,122,0.18),transparent_64%)] blur-2xl" />
-
-                <div className="pointer-events-none absolute left-4 top-4 hidden h-8 w-8 border-l border-t border-[#eac679]/70 sm:block" />
-                <div className="pointer-events-none absolute right-4 top-4 hidden h-8 w-8 border-r border-t border-[#eac679]/70 sm:block" />
-                <div className="pointer-events-none absolute bottom-4 left-4 hidden h-8 w-8 border-b border-l border-[#eac679]/60 sm:block" />
-                <div className="pointer-events-none absolute bottom-4 right-4 hidden h-8 w-8 border-b border-r border-[#eac679]/60 sm:block" />
+            <div className="relative overflow-hidden rounded-[1.5rem] border border-amber-400/70 bg-[#071a34] p-4 text-slate-100 shadow-[0_22px_70px_rgba(3,10,28,0.42),inset_0_1px_0_rgba(255,255,255,0.08)] sm:rounded-[2rem] sm:p-6 lg:p-7">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(67,112,184,0.28),transparent_42%),linear-gradient(180deg,rgba(19,43,83,0.78),rgba(3,15,34,0.96))]" />
+                <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-amber-200/80 to-transparent" />
+                <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-[radial-gradient(circle,rgba(245,158,11,0.17),transparent_62%)] blur-3xl" />
+                <div className="pointer-events-none absolute -left-24 bottom-0 h-60 w-60 rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.18),transparent_64%)] blur-3xl" />
 
                 <div className="relative z-10">
                     <div className="mb-3 text-center sm:mb-5">
-                        <p className="mx-auto mb-3 hidden items-center gap-2 rounded-full border border-[#f0c976]/70 bg-[#fff4d8]/80 px-4 py-2 text-[11px] font-semibold text-[#b87507] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:inline-flex">
+                        <p className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full border border-amber-400/70 bg-amber-400/10 px-4 py-2 text-[11px] font-semibold text-amber-300 shadow-[0_0_24px_rgba(245,158,11,0.18)]">
                             <Sparkles className="h-3.5 w-3.5" />
                             Free name analysis
                         </p>
-                        <h2 className="text-2xl font-bold leading-tight text-[#17243d] sm:text-4xl">
+                        <h2 className="text-3xl font-extrabold leading-tight text-slate-50 drop-shadow-sm sm:text-4xl">
                             เริ่มวิเคราะห์ชื่อฟรี
                         </h2>
-                        <p className="mt-2 hidden text-sm leading-6 text-[#5d6676] sm:block">
+                        <p className="mt-2 text-sm leading-6 text-slate-300">
                             กรอกข้อมูลพื้นฐาน แล้วดูผลจาก 4 ศาสตร์หลักได้ทันที
                         </p>
                     </div>
 
-                    <div className="mb-5 hidden grid-cols-3 gap-2.5 sm:grid">
+                    <div className="mb-5 grid grid-cols-3 gap-2.5">
                         {formTrustItems.map((item) => (
                             <div
                                 key={item.title}
-                                className="min-h-[5.7rem] rounded-xl border border-[#efd49c] bg-[#fff8ed]/80 px-2.5 py-3 text-center shadow-[0_10px_24px_rgba(124,80,20,0.06)]"
+                                className="min-h-[5.15rem] rounded-xl border border-slate-500/45 bg-slate-900/28 px-2 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] sm:min-h-[5.7rem] sm:px-2.5"
                             >
-                                <item.icon className="mx-auto mb-2 h-5 w-5 text-[#f0a313]" />
-                                <p className="text-xs font-bold leading-snug text-[#1b2a44]">{item.title}</p>
-                                <p className="mt-1 text-[10px] leading-snug text-[#7a6b58]">{item.detail}</p>
+                                <item.icon className="mx-auto mb-2 h-5 w-5 text-amber-400" />
+                                <p className="text-[11px] font-bold leading-snug text-slate-50 sm:text-xs">{item.title}</p>
+                                <p className="mt-1 text-[10px] leading-snug text-slate-400">{item.detail}</p>
                             </div>
                         ))}
                     </div>
 
                     <div className="space-y-3 sm:space-y-4">
-                        <div className="hidden sm:block">
-                            <label htmlFor="birth-day" className="mb-2 block text-xs font-bold text-[#1f2b43]">
+                        <div>
+                            <label htmlFor="birth-day" className="mb-2 block text-xs font-bold text-slate-100">
                                 วันเกิด
                             </label>
                             <div className="relative">
-                                <CalendarDays className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9b8b75]" />
+                                <CalendarDays className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                                 <select
                                     id="birth-day"
                                     value={day}
                                     onChange={(e) => onDayChange(e.target.value)}
-                                    className="w-full appearance-none rounded-xl border border-[#e3d3bb] bg-[#fffdf9] px-10 py-3 text-sm font-medium text-[#24314a] outline-none transition-all placeholder:text-[#a89b89] focus:border-[#f0a313] focus:ring-2 focus:ring-[#f0a313]/20"
+                                    className="w-full appearance-none rounded-xl border border-slate-500/45 bg-[#102545] px-10 py-3 text-sm font-medium text-slate-100 outline-none transition-all placeholder:text-slate-400 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/25"
                                 >
                                     {Object.entries(thaksaConfig).map(([key, config]) => (
                                         <option key={key} value={key}>
@@ -139,51 +135,51 @@ export const InputForm: React.FC<InputFormProps> = ({
                                         </option>
                                     ))}
                                 </select>
-                                <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9b8b75]" />
+                                <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                             </div>
                         </div>
 
                         <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-4">
                             <div>
-                                <label htmlFor="input-name" className="mb-2 block text-xs font-bold text-[#1f2b43]">
+                                <label htmlFor="input-name" className="mb-2 block text-xs font-bold text-slate-100">
                                     ชื่อจริง
                                 </label>
                                 <div className="relative">
-                                    <UserRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9b8b75]" />
+                                    <UserRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                                     <input
                                         id="input-name"
                                         type="text"
                                         value={name}
                                         onChange={(e) => onNameChange(e.target.value)}
                                         placeholder="เช่น สมชาย / James"
-                                        className="w-full rounded-xl border border-[#e3d3bb] bg-[#fffdf9] px-10 py-3 text-sm font-medium text-[#24314a] outline-none transition-all placeholder:text-[#a89b89] focus:border-[#f0a313] focus:ring-2 focus:ring-[#f0a313]/20"
+                                        className="w-full rounded-xl border border-slate-500/45 bg-[#102545] px-10 py-3 text-sm font-medium text-slate-100 outline-none transition-all placeholder:text-slate-400 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/25"
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label htmlFor="input-surname" className="mb-2 block text-xs font-bold text-[#1f2b43]">
+                                <label htmlFor="input-surname" className="mb-2 block text-xs font-bold text-slate-100">
                                     นามสกุล
                                 </label>
                                 <div className="relative">
-                                    <UserRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9b8b75]" />
+                                    <UserRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                                     <input
                                         id="input-surname"
                                         type="text"
                                         value={surname}
                                         onChange={(e) => onSurnameChange(e.target.value)}
                                         placeholder="เช่น ใจดี / Smith"
-                                        className="w-full rounded-xl border border-[#e3d3bb] bg-[#fffdf9] px-10 py-3 text-sm font-medium text-[#24314a] outline-none transition-all placeholder:text-[#a89b89] focus:border-[#f0a313] focus:ring-2 focus:ring-[#f0a313]/20"
+                                        className="w-full rounded-xl border border-slate-500/45 bg-[#102545] px-10 py-3 text-sm font-medium text-slate-100 outline-none transition-all placeholder:text-slate-400 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/25"
                                     />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="hidden sm:block">
-                            <p className="mb-2 text-xs font-bold text-[#1f2b43]">รองรับภาษา</p>
+                        <div>
+                            <p className="mb-2 text-xs font-bold text-slate-100">รองรับภาษา</p>
                             <div className="grid grid-cols-2 gap-3">
                                 <button
                                     type="button"
-                                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#f0a313] bg-[#fff4d8] px-3 py-2.5 text-sm font-bold text-[#7c4b00] shadow-[0_8px_18px_rgba(218,146,22,0.10)] outline-none transition-all focus-visible:ring-2 focus-visible:ring-[#f0a313]/35"
+                                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-amber-400 bg-amber-400/16 px-3 py-2.5 text-sm font-bold text-amber-200 shadow-[0_0_24px_rgba(245,158,11,0.22),inset_0_1px_0_rgba(255,255,255,0.08)] outline-none transition-all focus-visible:ring-2 focus-visible:ring-amber-400/35"
                                     aria-pressed="true"
                                 >
                                     <ThaiFlagMark />
@@ -191,7 +187,7 @@ export const InputForm: React.FC<InputFormProps> = ({
                                 </button>
                                 <button
                                     type="button"
-                                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#e3d3bb] bg-[#fffdf9] px-3 py-2.5 text-sm font-semibold text-[#6c7480] outline-none transition-all hover:border-[#e6bd75] hover:text-[#3f4a5d] focus-visible:ring-2 focus-visible:ring-[#f0a313]/25"
+                                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-500/45 bg-[#102545] px-3 py-2.5 text-sm font-semibold text-slate-300 outline-none transition-all hover:border-amber-400/50 hover:text-slate-100 focus-visible:ring-2 focus-visible:ring-amber-400/25"
                                     aria-pressed="false"
                                 >
                                     <EnglishFlagMark />
@@ -204,10 +200,10 @@ export const InputForm: React.FC<InputFormProps> = ({
                             onClick={onAnalyze}
                             disabled={isDisabled}
                             data-track="home.hero.analyze"
-                            className={`group relative w-full overflow-hidden rounded-xl py-3.5 text-base font-bold outline-none transition-all active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-[#f0a313]/35 sm:py-4 sm:text-lg ${
+                            className={`group relative w-full overflow-hidden rounded-xl py-3.5 text-base font-bold outline-none transition-all active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-300/45 sm:py-4 sm:text-lg ${
                                 isDisabled
-                                    ? 'cursor-not-allowed border border-[#d5c7b0] bg-[#ded6c8] text-[#9a8f7f]'
-                                    : 'bg-[linear-gradient(135deg,#f8c24b_0%,#efa10d_52%,#d98400_100%)] text-[#fffaf1] shadow-[0_16px_32px_rgba(207,126,0,0.26),inset_0_1px_0_rgba(255,255,255,0.32)] hover:-translate-y-0.5 hover:shadow-[0_20px_38px_rgba(207,126,0,0.34),inset_0_1px_0_rgba(255,255,255,0.38)]'
+                                    ? 'cursor-not-allowed border border-amber-300/50 bg-gradient-to-b from-amber-300/85 to-amber-500/85 text-[#3d2602] opacity-80 shadow-[0_0_20px_rgba(245,158,11,0.24),inset_0_1px_0_rgba(255,255,255,0.35)]'
+                                    : 'border border-amber-200/70 bg-gradient-to-b from-amber-300 to-amber-500 text-[#3d2602] shadow-[0_0_24px_rgba(245,158,11,0.38),inset_0_1px_0_rgba(255,255,255,0.5)] hover:-translate-y-0.5 hover:from-amber-200 hover:to-amber-400'
                             }`}
                         >
                             <span className="relative z-10 flex items-center justify-center gap-2">
@@ -224,8 +220,8 @@ export const InputForm: React.FC<InputFormProps> = ({
                             </span>
                         </button>
 
-                        <div className="flex items-start justify-center gap-2 px-1 text-center text-[10px] leading-relaxed text-[#7b7368] sm:px-2 sm:text-xs">
-                            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#798070]" />
+                        <div className="flex items-start justify-center gap-2 px-1 text-center text-[10px] leading-relaxed text-slate-400 sm:px-2 sm:text-xs">
+                            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
                             <p>
                                 ใช้งานฟรีได้ทันที ไม่มีค่าใช้จ่าย ข้อมูลของคุณจะถูกเก็บเป็นความลับและปลอดภัย 100%
                                 ไม่เปิดเผยต่อบุคคลที่สาม

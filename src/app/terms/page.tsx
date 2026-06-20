@@ -164,11 +164,11 @@ export default function TermsPage() {
                                     <div className="grid md:grid-cols-2 gap-4">
                                         <div className="bg-black/20 p-4 rounded-xl border border-white/5">
                                             <h3 className="font-semibold text-white mb-2">💎 การใช้งานเครดิต</h3>
-                                            <p className="text-sm text-slate-400">ใช้แลกบริการ Premium เช่น ค้นหาชื่อระดับสูง, ดาวน์โหลดวอลเปเปอร์พิเศษ, วิเคราะห์ลายมือด้วย AI (30 เครดิต/ครั้ง) หรือการวิเคราะห์ชื่อจำนวนมาก (Bulk Analysis)</p>
+                                            <p className="text-sm text-slate-300">ใช้แลกบริการ Premium เช่น ค้นหาชื่อระดับสูง, ดาวน์โหลดวอลเปเปอร์พิเศษ, วิเคราะห์ลายมือด้วย AI (30 เครดิต/ครั้ง) หรือการวิเคราะห์ชื่อจำนวนมาก (Bulk Analysis)</p>
                                         </div>
                                         <div className="bg-black/20 p-4 rounded-xl border border-white/5">
                                             <h3 className="font-semibold text-white mb-2">🚫 นโยบายการคืนเงิน</h3>
-                                            <p className="text-sm text-slate-400">
+                                            <p className="text-sm text-slate-300">
                                                 เนื่องจากบริการของเราเป็นสินค้าดิจิทัลที่ผลิตขึ้นเฉพาะบุคคล (Personalized Digital Goods) และมีการส่งมอบข้อมูลทันทีหลังการชำระเงิน บริษัทจึงขอสงวนสิทธิ์ในการ <span className="text-red-300">ไม่คืนเงินในทุกกรณี</span> เว้นแต่จะเกิดความผิดพลาดจากระบบที่ไม่สามารถส่งมอบข้อมูลได้ตามที่ระบุไว้
                                             </p>
                                         </div>
@@ -256,7 +256,7 @@ export default function TermsPage() {
                                             </div>
                                         </div>
                                     </div>
-                                    <p className="text-sm text-slate-400 mt-2">
+                                    <p className="text-sm text-slate-300 mt-2">
                                         ทีมงานพร้อมให้บริการทุกวัน เวลา 09:00 - 22:00 น.
                                     </p>
                                 </div>

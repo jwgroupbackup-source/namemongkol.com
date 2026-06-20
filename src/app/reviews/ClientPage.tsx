@@ -288,21 +288,21 @@ export default function ClientPage() {
     }, [selectedCategory, dbReviews]);
 
     return (
-        <div className="min-h-screen bg-[#050b14] text-slate-100 font-sans pb-28">
+        <div className="min-h-screen bg-[#f8f8fc] text-[#5a5a82] font-sans pb-28">
             {/* Header Section */}
             <div className="relative pt-12 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
                 {/* Background Decor */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-[-20%] left-1/4 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[120px] mix-blend-screen" />
                     <div className="absolute top-[20%] right-1/4 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[100px] mix-blend-screen" />
-                    <div className="absolute bottom-0 w-full h-[30%] bg-gradient-to-t from-[#050b14] to-transparent" />
+                    <div className="absolute bottom-0 w-full h-[30%] bg-gradient-to-t from-[#f8f8fc] to-transparent" />
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto text-center pt-8">
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-bold uppercase tracking-wider mb-8 shadow-[0_0_15px_rgba(245,158,11,0.2)]"
+                        className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-sm font-bold uppercase tracking-wider mb-8 shadow-sm"
                     >
                         <MessageCircle size={16} />
                         <span>{t('pages.reviews.badge')}</span>
@@ -312,7 +312,7 @@ export default function ClientPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-white via-amber-100 to-amber-500 mb-6 drop-shadow-sm leading-tight"
+                        className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-[#1a1a3e] mb-6 drop-shadow-sm leading-tight"
                     >
                         {t('pages.reviews.title')}
                     </motion.h1>
@@ -321,7 +321,7 @@ export default function ClientPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-12 font-light leading-relaxed"
+                        className="text-lg md:text-xl text-[#5a5a82] max-w-2xl mx-auto mb-12 font-light leading-relaxed"
                     >
                         {t('pages.reviews.description')}
                     </motion.p>
@@ -360,9 +360,9 @@ export default function ClientPage() {
                             whileTap={{ scale: 0.95 }}
                             transition={{ delay: 0.4 }}
                             onClick={() => router.push('/')}
-                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-8 sm:py-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold text-base sm:text-lg hover:bg-white/10 hover:border-white/30 transition-all backdrop-blur-sm mt-3 sm:mt-0"
+                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-8 sm:py-5 rounded-2xl bg-white border border-slate-200 text-[#1a1a3e] font-bold text-base sm:text-lg hover:border-amber-500/30 hover:shadow-md transition-all mt-3 sm:mt-0"
                         >
-                            <Search className="w-5 h-5 sm:w-[22px] sm:h-[22px] text-slate-300" />
+                            <Search className="w-5 h-5 sm:w-[22px] sm:h-[22px] text-amber-500" />
                             {t('pages.reviews.ctaAnalyze')}
                         </motion.button>
                     </div>
@@ -373,11 +373,11 @@ export default function ClientPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div className="max-w-4xl mx-auto text-center mb-12 mt-4">
-                    <h2 className="text-2xl md:text-3xl font-bold text-amber-500 mb-6">
+                    <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a3e] mb-6">
                         {t('pages.reviews.subheading')}
                     </h2>
-                    <p className="text-slate-300 leading-relaxed text-lg">
-                        ที่ NameMongkol เราเชื่อว่าชื่อและตัวเลขมีพลังในการเปลี่ยนแปลงชีวิต หน้านี้ได้รวบรวม <Link href="/name-analysis" className="text-amber-400 hover:text-amber-300 underline decoration-amber-500/30 hover:decoration-amber-400 transition-colors"><strong>รีวิวเปลี่ยนชื่อมงคล</strong></Link> และ <Link href="/phone-analysis" className="text-amber-400 hover:text-amber-300 underline decoration-amber-500/30 hover:decoration-amber-400 transition-colors"><strong>ประสบการณ์เปลี่ยนเบอร์มงคล</strong></Link> จากผู้ใช้งานจริงของเรา ไม่ว่าคุณจะกำลังมองหา <Link href="/search" className="text-amber-400 hover:text-amber-300 underline decoration-amber-500/30 hover:decoration-amber-400 transition-colors"><strong>ชื่อมงคล</strong></Link> เพื่อเสริมดวงการเงิน แก้เคล็ดเรื่องสุขภาพ หรือเสริมเสน่ห์ความรัก เรื่องราวเหล่านี้คือบทพิสูจน์ว่าศาสตร์แห่งการตั้งชื่อและเลขศาสตร์ประยุกต์สามารถช่วยพลิกฟื้นชะตาชีวิตและสร้างความมั่นใจให้คุณได้อย่างไร
+                    <p className="text-[#5a5a82] leading-relaxed text-lg">
+                        ที่ NameMongkol เราเชื่อว่าชื่อและตัวเลขมีพลังในการเปลี่ยนแปลงชีวิต หน้านี้ได้รวบรวม <Link href="/name-analysis" className="text-amber-600 hover:text-amber-700 underline decoration-amber-500/30 hover:decoration-amber-400 transition-colors"><strong>รีวิวเปลี่ยนชื่อมงคล</strong></Link> และ <Link href="/phone-analysis" className="text-amber-600 hover:text-amber-700 underline decoration-amber-500/30 hover:decoration-amber-400 transition-colors"><strong>ประสบการณ์เปลี่ยนเบอร์มงคล</strong></Link> จากผู้ใช้งานจริงของเรา ไม่ว่าคุณจะกำลังมองหา <Link href="/search" className="text-amber-600 hover:text-amber-700 underline decoration-amber-500/30 hover:decoration-amber-400 transition-colors"><strong>ชื่อมงคล</strong></Link> เพื่อเสริมดวงการเงิน แก้เคล็ดเรื่องสุขภาพ หรือเสริมเสน่ห์ความรัก เรื่องราวเหล่านี้คือบทพิสูจน์ว่าศาสตร์แห่งการตั้งชื่อและเลขศาสตร์ประยุกต์สามารถช่วยพลิกฟื้นชะตาชีวิตและสร้างความมั่นใจให้คุณได้อย่างไร
                     </p>
                 </div>
 
@@ -388,8 +388,8 @@ export default function ClientPage() {
                             key={category.id}
                             onClick={() => setSelectedCategory(category.id)}
                             className={`px-3 py-1.5 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 ${selectedCategory === category.id
-                                ? 'cosmic-chip-active'
-                                : 'cosmic-chip'
+                                ? 'bg-[#0f172a] text-amber-400 border border-amber-500/50 shadow-md'
+                                : 'bg-white border border-slate-200 text-[#5a5a82] hover:bg-slate-50 hover:border-amber-500/30'
                                 }`}
                         >
                             {category.label}
@@ -411,7 +411,7 @@ export default function ClientPage() {
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.95 }}
                                 transition={{ duration: 0.3 }}
-                                className="break-inside-avoid glass-card ancient-frame rounded-2xl sm:rounded-3xl p-4 sm:p-7 group relative overflow-hidden mb-4 sm:mb-6"
+                                className="break-inside-avoid bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/30 transition-[transform,border-color,box-shadow] hover:shadow-xl shadow-md rounded-2xl sm:rounded-3xl p-4 sm:p-7 group relative overflow-hidden mb-4 sm:mb-6"
                                 itemScope
                                 itemType="https://schema.org/Review"
                             >
@@ -518,7 +518,7 @@ export default function ClientPage() {
                                     ))}
                                 </div>
 
-                                <p className="cosmic-text-soft leading-relaxed mb-6 relative z-10 italic" itemProp="reviewBody">
+                                <p className="text-slate-300 leading-relaxed mb-6 relative z-10 italic" itemProp="reviewBody">
                                     &quot;{review.content}&quot;
                                 </p>
 
@@ -527,7 +527,7 @@ export default function ClientPage() {
                                         {review.images.map((img, idx) => (
                                             <div
                                                 key={idx}
-                                                className={`relative rounded-xl overflow-hidden border border-white/10 group ${review.images!.length === 1 ? 'aspect-video' : 'aspect-square'
+                                                className={`relative rounded-xl overflow-hidden border border-[#1e293b] group ${review.images!.length === 1 ? 'aspect-video' : 'aspect-square'
                                                     }`}
                                             >
                                                 <div className="absolute inset-0 bg-white/5 backdrop-blur-sm" />
@@ -545,7 +545,7 @@ export default function ClientPage() {
                                 )}
 
                                 {/* Tags - Clickable for Internal Linking */}
-                                <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5">
+                                <div className="flex flex-wrap gap-2 pt-4 border-t border-[#1e293b]">
                                     {review.tags.map((tag) => (
                                         <Link
                                             key={tag}
@@ -558,7 +558,7 @@ export default function ClientPage() {
                                 </div>
 
                                 {/* Helpful Vote & Share - User Engagement */}
-                                <div className="flex items-center justify-between mt-5 pt-4 border-t border-amber-500/10">
+                                <div className="flex items-center justify-between mt-5 pt-4 border-t border-[#1e293b]">
                                     <button
                                         onClick={(e) => { e.stopPropagation(); handleHelpfulVote(review.id); }}
                                         disabled={userVotedReviews.has(review.id)}
@@ -596,46 +596,46 @@ export default function ClientPage() {
                 )}
 
                 {/* FAQ Section - SEO Optimized */}
-                <div className="mt-20 border-t border-white/10 pt-16 pb-8">
-                    <h2 className="text-3xl font-bold text-center text-white mb-12">
+                <div className="mt-20 border-t border-slate-200 pt-16 pb-8">
+                    <h2 className="text-3xl font-bold text-center text-[#1a1a3e] mb-12">
                         {t('pages.reviews.faqTitle')}
                     </h2>
                     <div className="max-w-3xl mx-auto space-y-8">
-                        <div className="bg-white/5 rounded-2xl p-6 md:p-8 backdrop-blur-sm border border-white/5">
-                            <h3 className="text-xl font-bold text-amber-400 mb-3">
+                        <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+                            <h3 className="text-xl font-bold text-amber-600 mb-3">
                                 Q: {t('pages.reviews.faq1Q')}
                             </h3>
-                            <p className="text-slate-300 leading-relaxed">
+                            <p className="text-[#5a5a82] leading-relaxed">
                                 A: {t('pages.reviews.faq1A')}
                             </p>
                         </div>
 
-                        <div className="bg-white/5 rounded-2xl p-6 md:p-8 backdrop-blur-sm border border-white/5">
-                            <h3 className="text-xl font-bold text-amber-400 mb-3">
+                        <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+                            <h3 className="text-xl font-bold text-amber-600 mb-3">
                                 Q: {t('pages.reviews.faq2Q')}
                             </h3>
-                            <p className="text-slate-300 leading-relaxed">
+                            <p className="text-[#5a5a82] leading-relaxed">
                                 A: {t('pages.reviews.faq2A')}
                             </p>
                         </div>
 
-                        <div className="text-center mt-8 text-slate-500 text-sm">
-                            <p>กำลังมองหาที่ <Link href="/search" className="text-amber-400 hover:text-amber-300 hover:underline"><strong>ตั้งชื่อมงคลที่ไหนดี</strong></Link> หรือต้องการ <Link href="/name-analysis" className="text-amber-400 hover:text-amber-300 hover:underline"><strong>แก้กรรมด้วยชื่อ</strong></Link>? ปรึกษา NameMongkol ได้ทันที</p>
+                        <div className="text-center mt-8 text-[#5a5a82] text-sm">
+                            <p>กำลังมองหาที่ <Link href="/search" className="text-amber-600 hover:text-amber-700 hover:underline"><strong>ตั้งชื่อมงคลที่ไหนดี</strong></Link> หรือต้องการ <Link href="/name-analysis" className="text-amber-600 hover:text-amber-700 hover:underline"><strong>แก้กรรมด้วยชื่อ</strong></Link>? ปรึกษา NameMongkol ได้ทันที</p>
                         </div>
 
                         {/* Bottom CTA */}
-                        <div className="bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20 rounded-2xl p-8 text-center mt-12">
-                            <h3 className="text-2xl font-bold text-white mb-4">
+                        <div className="bg-amber-50 border border-amber-500/30 rounded-2xl p-8 text-center mt-12 shadow-sm">
+                            <h3 className="text-2xl font-bold text-[#1a1a3e] mb-4">
                                 {t('pages.reviews.bottomTitle')}
                             </h3>
-                            <p className="text-slate-300 mb-8 max-w-lg mx-auto">
+                            <p className="text-[#5a5a82] mb-8 max-w-lg mx-auto">
                                 {t('pages.reviews.bottomDesc')}
                             </p>
                             <Link
                                 href="/search"
-                                className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-amber-500 text-slate-900 font-bold hover:bg-amber-400 transition-colors shadow-lg shadow-amber-500/20"
+                                className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-[#0f172a] border border-[#1e293b] text-white font-bold hover:border-amber-500/30 transition-all shadow-md"
                             >
-                                <Sparkles size={20} />
+                                <Sparkles size={20} className="text-amber-400" />
                                 {t('pages.reviews.bottomCta')}
                             </Link>
                         </div>

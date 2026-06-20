@@ -23,23 +23,23 @@ export const ResultHeader: React.FC<ResultHeaderProps> = ({ result }) => {
         <>
             <div className="flex flex-col items-center mb-6 sm:mb-8 animate-fade-in-up">
                 <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2.5 sm:p-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-xl">
-                        <User className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
+                    <div className="p-2.5 sm:p-3 rounded-full bg-amber-50 border border-amber-200 backdrop-blur-sm shadow-sm">
+                        <User className="w-5 h-5 sm:w-6 sm:h-6 text-amber-500" />
                     </div>
                 </div>
-                <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-slate-100 text-center break-words px-2 leading-tight drop-shadow-sm">
+                <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-[#1a1a3e] text-center break-words px-2 leading-tight drop-shadow-sm">
                     {result.name} {result.surname}
                 </h2>
                 <div className="h-px w-28 sm:w-32 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent mt-4 sm:mt-6"></div>
             </div>
             <div className={`grid ${result.surname ? 'grid-cols-2 gap-3 sm:gap-4' : 'grid-cols-1 max-w-sm mx-auto gap-4'}`}>
-                <div className="glass-card p-3 sm:p-4 rounded-2xl text-center relative overflow-hidden group hover:scale-[1.02] transition-transform">
+                <div className="bg-white border border-[#ddddf0] shadow-sm p-3 sm:p-4 rounded-2xl text-center relative overflow-hidden group hover:scale-[1.02] transition-transform">
                     <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${result.namePrediction.bgGradient}`}></div>
                     {/* Grade Badge */}
                     <div className="flex justify-end mb-1">
                         <GradeBadge grade={result.nameGrade} />
                     </div>
-                    <span className="text-slate-400 text-xs sm:text-sm font-medium">ผลรวมชื่อ</span>
+                    <span className="text-[#5a5a82] text-xs sm:text-sm font-medium">ผลรวมชื่อ</span>
                     <div className={`text-3xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${result.namePrediction.bgGradient} mt-2 mb-1`}>
                         {result.nameScore}
                     </div>
@@ -48,11 +48,11 @@ export const ResultHeader: React.FC<ResultHeaderProps> = ({ result }) => {
                     </div>
                     <div className="flex justify-center gap-0.5">
                         {[...Array(5)].map((_, i) => (
-                            <Star key={i} className={`w-3 h-3 ${i < result.namePrediction.stars ? result.namePrediction.color + ' fill-current' : 'text-slate-700'}`} />
+                            <Star key={i} className={`w-3 h-3 ${i < result.namePrediction.stars ? result.namePrediction.color + ' fill-current' : 'text-slate-200'}`} />
                         ))}
                     </div>
-                    <div className="mt-3 pt-3 border-t border-white/5 space-y-3">
-                        <p className="text-xs text-slate-400 leading-relaxed line-clamp-2 sm:line-clamp-none">&quot;{result.namePrediction.desc}&quot;</p>
+                    <div className="mt-3 pt-3 border-t border-[#ddddf0] space-y-3">
+                        <p className="text-xs text-[#5a5a82] leading-relaxed line-clamp-2 sm:line-clamp-none">&quot;{result.namePrediction.desc}&quot;</p>
 
                         {(result.namePrediction.color.includes('rose') ||
                             result.namePrediction.color.includes('red') ||
@@ -71,13 +71,13 @@ export const ResultHeader: React.FC<ResultHeaderProps> = ({ result }) => {
                     </div>
                 </div>
                 {result.surname && (
-                    <div className="glass-card p-3 sm:p-4 rounded-2xl text-center relative overflow-hidden group hover:scale-[1.02] transition-transform">
+                    <div className="bg-white border border-[#ddddf0] shadow-sm p-3 sm:p-4 rounded-2xl text-center relative overflow-hidden group hover:scale-[1.02] transition-transform">
                         <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${result.surnamePrediction.bgGradient}`}></div>
                         {/* Grade Badge */}
                         <div className="flex justify-end mb-1">
                             <GradeBadge grade={result.surnameGrade} />
                         </div>
-                        <span className="text-slate-400 text-xs sm:text-sm font-medium">ผลรวมนามสกุล</span>
+                        <span className="text-[#5a5a82] text-xs sm:text-sm font-medium">ผลรวมนามสกุล</span>
                         <div className={`text-3xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${result.surnamePrediction.bgGradient} mt-2 mb-1`}>
                             {result.surnameScore}
                         </div>
@@ -86,11 +86,11 @@ export const ResultHeader: React.FC<ResultHeaderProps> = ({ result }) => {
                         </div>
                         <div className="flex justify-center gap-0.5">
                             {[...Array(5)].map((_, i) => (
-                                <Star key={i} className={`w-3 h-3 ${i < result.surnamePrediction.stars ? result.surnamePrediction.color + ' fill-current' : 'text-slate-700'}`} />
+                                <Star key={i} className={`w-3 h-3 ${i < result.surnamePrediction.stars ? result.surnamePrediction.color + ' fill-current' : 'text-slate-200'}`} />
                             ))}
                         </div>
-                        <div className="mt-3 pt-3 border-t border-white/5">
-                            <p className="text-xs text-slate-400 leading-relaxed line-clamp-2 sm:line-clamp-none">&quot;{result.surnamePrediction.desc}&quot;</p>
+                        <div className="mt-3 pt-3 border-t border-[#ddddf0]">
+                            <p className="text-xs text-[#5a5a82] leading-relaxed line-clamp-2 sm:line-clamp-none">&quot;{result.surnamePrediction.desc}&quot;</p>
                         </div>
                     </div>
                 )}
