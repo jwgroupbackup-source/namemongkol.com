@@ -61,17 +61,17 @@ function computeEnergyBars(name: string): number[] {
 function getLevelInfo(level: string): { label: string; color: string; bg: string } {
     switch (level) {
         case 'VERY_GOOD':
-            return { label: 'ดีมาก ✨', color: 'text-emerald-300', bg: 'bg-emerald-500/20 border-emerald-500/30' };
+            return { label: 'ดีมาก ✨', color: 'text-emerald-700', bg: 'bg-emerald-50 border-emerald-200' };
         case 'GOOD':
-            return { label: 'ดี 👍', color: 'text-green-300', bg: 'bg-green-500/20 border-green-500/30' };
+            return { label: 'ดี 👍', color: 'text-emerald-600', bg: 'bg-emerald-50/50 border-emerald-200/60' };
         case 'NEUTRAL':
-            return { label: 'ปานกลาง', color: 'text-slate-300', bg: 'bg-slate-500/20 border-slate-500/30' };
+            return { label: 'ปานกลาง', color: 'text-[#5a5a82]', bg: 'bg-slate-50 border-slate-200' };
         case 'BAD':
-            return { label: 'ระวัง ⚠️', color: 'text-orange-300', bg: 'bg-orange-500/20 border-orange-500/30' };
+            return { label: 'ระวัง ⚠️', color: 'text-amber-700', bg: 'bg-amber-50 border-amber-200' };
         case 'VERY_BAD':
-            return { label: 'ควรปรับปรุง', color: 'text-red-300', bg: 'bg-red-500/20 border-red-500/30' };
+            return { label: 'ควรปรับปรุง', color: 'text-rose-700', bg: 'bg-rose-50 border-rose-200' };
         default:
-            return { label: 'ปานกลาง', color: 'text-slate-300', bg: 'bg-slate-500/20 border-slate-500/30' };
+            return { label: 'ปานกลาง', color: 'text-[#5a5a82]', bg: 'bg-slate-50 border-slate-200' };
     }
 }
 
@@ -117,16 +117,16 @@ export default function AuraVibeWidget() {
 
     return (
         <div className="my-10 max-w-xl mx-auto">
-            <div className="rounded-2xl border border-amber-500/30 bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-amber-950/30 backdrop-blur-xl overflow-hidden shadow-xl shadow-amber-900/10">
+            <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-[#f8f8fc] to-[#f0f0f8] overflow-hidden shadow-xl shadow-slate-200/50">
                 {/* Header */}
-                <div className="px-5 py-4 sm:px-6 sm:py-5 border-b border-amber-500/10 bg-amber-500/[0.03]">
+                <div className="px-5 py-4 sm:px-6 sm:py-5 border-b border-slate-100 bg-slate-50/50">
                     <div className="flex items-center gap-2.5">
-                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/30">
+                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center shadow-md shadow-amber-500/20">
                             <Sparkles size={18} className="text-white" />
                         </div>
                         <div>
-                            <h3 className="text-base sm:text-lg font-bold text-white leading-tight">เช็คพลังงานชื่อของคุณ</h3>
-                            <p className="text-[11px] text-slate-400">ระบบเลขศาสตร์ วิเคราะห์ฟรี!</p>
+                            <h3 className="text-base sm:text-lg font-bold text-[#1a1a3e] leading-tight">เช็คพลังงานชื่อของคุณ</h3>
+                            <p className="text-[11px] text-[#6a6a92]">ระบบเลขศาสตร์ วิเคราะห์ฟรี!</p>
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@ export default function AuraVibeWidget() {
                                     onKeyDown={(e) => e.key === 'Enter' && handleCheck()}
                                     placeholder="พิมพ์ชื่อที่นี่..."
                                     maxLength={50}
-                                    className="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/40 focus:border-amber-500/50 transition-all text-sm"
+                                    className="flex-1 px-4 py-3 rounded-xl bg-white border border-slate-200 text-[#1a1a3e] placeholder-[#a0a0b8] focus:outline-none focus:ring-2 focus:ring-amber-500/40 focus:border-amber-500/50 transition-all text-sm shadow-sm"
                                 />
                                 <button
                                     onClick={handleCheck}
@@ -153,7 +153,7 @@ export default function AuraVibeWidget() {
                                     เช็คเลย
                                 </button>
                             </div>
-                            <p className="text-[11px] text-center text-slate-500">
+                            <p className="text-[11px] text-center text-[#6a6a92]">
                                 พิมพ์ชื่อภาษาไทยแล้วกด "เช็คเลย" เพื่อดูกราฟพลังงาน
                             </p>
                         </div>
@@ -163,12 +163,12 @@ export default function AuraVibeWidget() {
                             {/* Name + Score Header */}
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-xs text-slate-400 mb-0.5">ผลวิเคราะห์ชื่อ</p>
-                                    <p className="text-xl font-bold text-white">{resultName}</p>
+                                    <p className="text-xs text-[#6a6a92] mb-0.5">ผลวิเคราะห์ชื่อ</p>
+                                    <p className="text-xl font-bold text-[#1a1a3e]">{resultName}</p>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500">{score}</p>
-                                    <p className="text-[10px] text-slate-500">ผลรวมชื่อ</p>
+                                    <p className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-amber-700">{score}</p>
+                                    <p className="text-[10px] text-[#6a6a92]">ผลรวมชื่อ</p>
                                 </div>
                             </div>
 
@@ -176,30 +176,30 @@ export default function AuraVibeWidget() {
                             <div className={`flex items-start gap-3 p-3 rounded-xl border ${levelInfo.bg}`}>
                                 <span className={`text-sm font-bold ${levelInfo.color} whitespace-nowrap`}>{levelInfo.label}</span>
                                 <div className="min-w-0">
-                                    <p className="text-xs font-semibold text-white">{prediction.title}</p>
-                                    <p className="text-[11px] text-slate-400 mt-0.5 line-clamp-2">{prediction.desc}</p>
+                                    <p className="text-xs font-semibold text-[#1a1a3e]">{prediction.title}</p>
+                                    <p className="text-[11px] text-[#5a5a82] mt-0.5 line-clamp-2">{prediction.desc}</p>
                                 </div>
                             </div>
 
                             {/* Energy Bars */}
                             <div className="space-y-2.5">
-                                <p className="text-xs font-medium text-slate-400">⚡ กราฟพลังงาน 6 ด้าน</p>
+                                <p className="text-xs font-medium text-[#4a4a6e]">⚡ กราฟพลังงาน 6 ด้าน</p>
                                 {ENERGY_DIMENSIONS.map((dim, idx) => {
                                     const Icon = dim.icon;
                                     const val = energyBars[idx] ?? 50;
                                     return (
                                         <div key={dim.label} className="flex items-center gap-2.5">
-                                            <div className={`w-6 h-6 rounded-md ${dim.bgColor} flex items-center justify-center flex-shrink-0`}>
-                                                <Icon size={13} className="text-slate-300" />
+                                            <div className={`w-6 h-6 rounded-md ${dim.bgColor} flex items-center justify-center flex-shrink-0 border border-slate-100`}>
+                                                <Icon size={13} className="text-[#5a5a82]" />
                                             </div>
-                                            <span className="text-[11px] text-slate-400 w-20 truncate">{dim.label}</span>
-                                            <div className="flex-1 h-2.5 bg-slate-700/50 rounded-full overflow-hidden">
+                                            <span className="text-[11px] text-[#5a5a82] w-20 truncate">{dim.label}</span>
+                                            <div className="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden shadow-inner border border-slate-200/50">
                                                 <div
                                                     className={`h-full rounded-full bg-gradient-to-r ${dim.color} transition-all duration-700 ease-out`}
                                                     style={{ width: `${val}%` }}
                                                 />
                                             </div>
-                                            <span className="text-[11px] text-slate-500 w-8 text-right font-mono">{val}%</span>
+                                            <span className="text-[11px] text-[#6a6a92] w-8 text-right font-mono font-medium">{val}%</span>
                                         </div>
                                     );
                                 })}
@@ -218,7 +218,7 @@ export default function AuraVibeWidget() {
                             {/* Try Another */}
                             <button
                                 onClick={handleReset}
-                                className="w-full text-center text-xs text-slate-500 hover:text-slate-300 transition-colors py-1"
+                                className="w-full text-center text-xs text-[#6a6a92] hover:text-amber-700 transition-colors py-1 font-medium"
                             >
                                 ลองชื่ออื่น →
                             </button>

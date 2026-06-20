@@ -256,6 +256,9 @@ const HeroSocialProof = () => {
                             />
                         ))}
                     </span>
+                    <span className="text-[10px] sm:text-xs font-medium text-[#8e8eaa] ml-0.5 whitespace-nowrap">
+                        ({reviewCount ? reviewCount.toLocaleString('th-TH') : '...'} รีวิว)
+                    </span>
                 </span>
             </div>
         </div>

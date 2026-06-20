@@ -9,15 +9,15 @@ import dynamic from 'next/dynamic';
 import { unstable_cache } from 'next/cache';
 
 const ArticleShareButtons = dynamic(() => import('@/components/ArticleShareButtons').then(mod => mod.ArticleShareButtons), {
-    loading: () => <div className="h-10 w-24 bg-slate-800/50 rounded-full animate-pulse" />
+    loading: () => <div className="h-10 w-24 bg-slate-200/50 rounded-full animate-pulse" />
 });
 
 const ArticleCTA = dynamic(() => import('@/components/ArticleCTA').then(mod => mod.ArticleCTA), {
-    loading: () => <div className="h-64 bg-slate-800/50 rounded-2xl animate-pulse" />
+    loading: () => <div className="h-64 bg-slate-200/50 rounded-2xl animate-pulse" />
 });
 
 const AuraVibeWidget = dynamic(() => import('@/components/AuraVibeWidget'), {
-    loading: () => <div className="h-48 bg-slate-800/50 rounded-2xl animate-pulse my-10 max-w-xl mx-auto" />
+    loading: () => <div className="h-48 bg-slate-200/50 rounded-2xl animate-pulse my-10 max-w-xl mx-auto" />
 });
 import { articles as localArticles, Article } from '@/data/articles';
 import {
@@ -174,10 +174,20 @@ const getPublishedArticleSummariesDb = unstable_cache(
 
 async function getRelatedArticlePool(): Promise<Article[]> {
     const dbArticles = await getPublishedArticleSummariesDb();
-    const existingSlugs = new Set(dbArticles.map((article) => article.slug));
-    const existingTitles = new Set(dbArticles.map((article) => article.title));
+    
+    // Deduplicate dbArticles by slug (keep first occurrence) just in case DB returns multiple
+    const uniqueDbArticlesMap = new Map<string, Article>();
+    for (const article of dbArticles) {
+        if (!uniqueDbArticlesMap.has(article.slug)) {
+            uniqueDbArticlesMap.set(article.slug, article);
+        }
+    }
+    const uniqueDbArticles = Array.from(uniqueDbArticlesMap.values());
+
+    const existingSlugs = new Set(uniqueDbArticles.map((article) => article.slug));
+    const existingTitles = new Set(uniqueDbArticles.map((article) => article.title));
     const localFallback = localArticles.filter((article) => !existingSlugs.has(article.slug) && !existingTitles.has(article.title));
-    return [...dbArticles, ...localFallback];
+    return [...uniqueDbArticles, ...localFallback];
 }
 
 // Pre-render all known article pages at build time
@@ -316,11 +326,65 @@ function escapeHtmlAttribute(value: string) {
 
 function normalizeArticleContentHtml(content: string, article: Article, shouldWrapImages: boolean) {
     const normalizedContent = content
-        .replace(/bg-clip-text\s+text-transparent\s+bg-gradient-to-r\s+from-[^\s"']+\s+to-[^\s"']+/g, 'text-amber-200')
+        .replace(/bg-clip-text\s+text-transparent\s+bg-gradient-to-r\s+from-[^\s"']+\s+to-[^\s"']+/g, 'text-amber-700')
         .replace(/\bborder-l-4\b/g, 'border')
-        .replace(/\bborder-l-[^\s"']+/g, 'border-white/10')
+        .replace(/\bborder-l-[^\s"']+/g, 'border-amber-300/40')
         .replace(/\brounded-r-xl\b/g, 'rounded-xl')
-        .replace(/\brounded-r-lg\b/g, 'rounded-lg');
+        .replace(/\brounded-r-lg\b/g, 'rounded-lg')
+        
+        /* --- Text Colors --- */
+        .replace(/\btext-white\b/g, 'text-[#1a1a3e]')
+        .replace(/\btext-slate-100\b/g, 'text-[#3a3a5e]')
+        .replace(/\btext-slate-200\b/g, 'text-[#4a4a6e]')
+        .replace(/\btext-slate-300\b/g, 'text-[#5a5a82]')
+        .replace(/\btext-slate-400\b/g, 'text-[#6a6a92]')
+        .replace(/\btext-amber-100\b/g, 'text-amber-700')
+        .replace(/\btext-amber-200\b/g, 'text-amber-700')
+        .replace(/\btext-amber-300\b/g, 'text-amber-600')
+        .replace(/\btext-amber-400\b/g, 'text-amber-600')
+        .replace(/\btext-emerald-200\b/g, 'text-emerald-700')
+        .replace(/\btext-emerald-300\b/g, 'text-emerald-600')
+        .replace(/\btext-rose-100\b/g, 'text-rose-700')
+        .replace(/\btext-rose-200\b/g, 'text-rose-600')
+        .replace(/\btext-rose-300\b/g, 'text-rose-600')
+        .replace(/\btext-indigo-100\b/g, 'text-indigo-700')
+        
+        /* --- Gradients --- */
+        .replace(/\bbg-gradient-to-br\s+from-slate-950\s+via-slate-900\s+to-indigo-950\b/g, 'bg-gradient-to-br from-[#f0f0f8] to-[#e8e8f4]')
+        .replace(/\bbg-gradient-to-r\s+from-emerald-900\/50\s+to-slate-800\b/g, 'bg-slate-100')
+        
+        /* --- Backgrounds --- */
+        .replace(/\bbg-slate-950(\/\d+)?\b/g, 'bg-slate-50')
+        .replace(/\bbg-slate-900(\/\d+)?\b/g, 'bg-white')
+        .replace(/\bbg-slate-800(\/\d+)?\b/g, 'bg-slate-50')
+        .replace(/\bbg-rose-950(\/\d+)?\b/g, 'bg-rose-50')
+        .replace(/\bbg-rose-900(\/\d+)?\b/g, 'bg-rose-50')
+        .replace(/\bbg-amber-900(\/\d+)?\b/g, 'bg-amber-50')
+        .replace(/\bbg-amber-800(\/\d+)?\b/g, 'bg-amber-100')
+        .replace(/\bbg-emerald-900(\/\d+)?\b/g, 'bg-emerald-50')
+        .replace(/\bbg-indigo-900(\/\d+)?\b/g, 'bg-indigo-50')
+        .replace(/\bbg-emerald-500\/5\b/g, 'bg-emerald-50')
+        .replace(/\bbg-indigo-400\/10\b/g, 'bg-indigo-50')
+        .replace(/\bbg-amber-400\/10\b/g, 'bg-amber-50')
+        .replace(/\bbg-\[#0f172a\]/g, 'bg-[#f0f0f8]')
+        .replace(/\bbg-\[#0a0f1d\]/g, 'bg-[#f5f5fb]')
+        .replace(/\bbg-\[#080d19\]/g, 'bg-[#f5f5fb]')
+        .replace(/\bbg-white\/5\b/g, 'bg-white')
+        .replace(/\bbg-white\/10\b/g, 'bg-white/80')
+        .replace(/\bhover:bg-slate-800(\/\d+)?\b/g, 'hover:bg-slate-100')
+        .replace(/\bhover:bg-slate-900(\/\d+)?\b/g, 'hover:bg-slate-100')
+        .replace(/\bhover:bg-white\/10\b/g, 'hover:bg-slate-50')
+        
+        /* --- Borders & Dividers --- */
+        .replace(/\bborder-white\/10/g, 'border-slate-200')
+        .replace(/\bborder-white\/5/g, 'border-slate-200')
+        .replace(/\bborder-slate-700(\/\d+)?\b/g, 'border-slate-200')
+        .replace(/\bborder-\[#1e293b\]/g, 'border-slate-200')
+        .replace(/\bdivide-slate-700(\/\d+)?\b/g, 'divide-slate-200')
+        .replace(/\bborder-rose-500\/30\b/g, 'border-rose-200')
+        .replace(/\bborder-rose-300\/20\b/g, 'border-rose-200')
+        .replace(/\bborder-emerald-500\/20\b/g, 'border-emerald-200')
+        .replace(/\bborder-indigo-400\/25\b/g, 'border-indigo-200');
 
     if (!shouldWrapImages) {
         return normalizedContent;
@@ -334,7 +398,7 @@ function normalizeArticleContentHtml(content: string, article: Article, shouldWr
         const safeSrc = escapeHtmlAttribute(src);
         const safeAlt = escapeHtmlAttribute(alt);
 
-        return `<figure class="article-media not-prose my-8 overflow-hidden rounded-2xl border border-white/10 bg-[#080d19] p-2 shadow-[0_18px_60px_rgba(0,0,0,0.28)]"><a href="${safeSrc}" target="_blank" rel="noopener noreferrer" class="block"><img src="${safeSrc}" alt="${safeAlt}" loading="lazy" class="h-auto w-full rounded-xl object-contain" /></a><figcaption class="px-2 pb-1 pt-3 text-center text-xs text-slate-400">คลิกเพื่อดูภาพขนาดเต็ม</figcaption></figure>`;
+        return `<figure class="article-media not-prose my-8 overflow-hidden rounded-2xl border border-slate-200 bg-[#f5f5fb] p-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)]"><a href="${safeSrc}" target="_blank" rel="noopener noreferrer" class="block"><img src="${safeSrc}" alt="${safeAlt}" loading="lazy" class="h-auto w-full rounded-xl object-contain" /></a><figcaption class="px-2 pb-1 pt-3 text-center text-xs text-[#6a6a92]">คลิกเพื่อดูภาพขนาดเต็ม</figcaption></figure>`;
     });
 }
 
@@ -448,34 +512,34 @@ function ArticleEnhancementBlock({ article }: { article: Article }) {
     return (
         <section
             aria-labelledby="article-summary-heading"
-            className="article-direct-answer not-prose mb-10 rounded-2xl border border-[#1e293b] bg-[#0f172a] p-4 shadow-xl sm:p-6"
+            className="article-direct-answer not-prose mb-10 rounded-2xl border border-slate-200 bg-gradient-to-br from-[#f0f0f8] to-[#e8e8f4] p-4 shadow-lg sm:p-6"
         >
             <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
                 <div className="flex flex-col justify-between">
                     <div>
-                        <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-xs font-semibold text-amber-200">
+                        <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-700">
                             <Compass className="h-3.5 w-3.5" />
                             สรุปก่อนอ่าน
                         </div>
-                        <h2 id="article-summary-heading" className="text-xl font-bold leading-snug text-white sm:text-2xl">
+                        <h2 id="article-summary-heading" className="text-xl font-bold leading-snug text-[#1a1a3e] sm:text-2xl">
                             บทความนี้ช่วยให้คุณตัดสินใจเรื่องชื่อมงคลได้แม่นขึ้น
                         </h2>
-                        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
+                        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#5a5a82] sm:text-base">
                             เราสรุปประเด็นสำคัญของบทความนี้ไว้ให้ก่อน เพื่อให้ผู้อ่านจาก Google เห็นคำตอบเร็วขึ้น และเลือกอ่านหัวข้อที่ตรงกับความต้องการได้ทันที
                         </p>
                     </div>
 
                     <ul className="mt-5 grid gap-3">
                         {takeaways.map((item) => (
-                            <li key={item} className="flex gap-3 rounded-xl border border-[#1e293b] bg-white/[0.03] p-3">
-                                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
-                                <span className="text-sm leading-relaxed text-slate-300">{item}</span>
+                            <li key={item} className="flex gap-3 rounded-xl border border-slate-200 bg-white/70 p-3">
+                                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
+                                <span className="text-sm leading-relaxed text-[#4a4a6e]">{item}</span>
                             </li>
                         ))}
                     </ul>
                 </div>
 
-                <figure className="overflow-hidden rounded-2xl border border-white/10 bg-[#090f1d]">
+                <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
                     <div className="relative aspect-[16/10] w-full">
                         <ArticleImage
                             src={visualSummaryImage}
@@ -485,15 +549,15 @@ function ArticleEnhancementBlock({ article }: { article: Article }) {
                             className="scale-100"
                         />
                     </div>
-                    <figcaption className="border-t border-white/10 px-4 py-3 text-xs leading-relaxed text-slate-400">
+                    <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-relaxed text-[#6a6a92]">
                         ภาพประกอบบทความ: {article.title}
                     </figcaption>
                 </figure>
             </div>
 
-            <div className="mt-6 border-t border-white/10 pt-5">
-                <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-200">
-                    <Link2 className="h-4 w-4 text-amber-300" />
+            <div className="mt-6 border-t border-slate-200 pt-5">
+                <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-[#1a1a3e]">
+                    <Link2 className="h-4 w-4 text-amber-600" />
                     อ่านแล้วต่อยอดได้ทันที
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
@@ -501,10 +565,10 @@ function ArticleEnhancementBlock({ article }: { article: Article }) {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="group rounded-xl border border-[#1e293b] bg-white/[0.03] p-4 transition hover:-translate-y-0.5 hover:border-amber-500/30 hover:bg-white/[0.06] shadow-sm"
+                            className="group rounded-xl border border-slate-200 bg-white/70 p-4 transition hover:-translate-y-0.5 hover:border-amber-500/40 hover:bg-white shadow-sm"
                         >
-                            <span className="text-sm font-bold text-white group-hover:text-amber-400">{link.title}</span>
-                            <span className="mt-1 block text-xs leading-relaxed text-slate-300">{link.description}</span>
+                            <span className="text-sm font-bold text-[#1a1a3e] group-hover:text-amber-600">{link.title}</span>
+                            <span className="mt-1 block text-xs leading-relaxed text-[#5a5a82]">{link.description}</span>
                         </Link>
                     ))}
                 </div>
@@ -672,6 +736,10 @@ export default async function ArticlePage({ params }: Props) {
 
         relatedArticles = [...relatedArticles, ...keywordMatches].slice(0, 3);
     }
+    
+    // Final safety measure to ensure no duplicate keys are rendered
+    relatedArticles = Array.from(new Map(relatedArticles.map(a => [a.slug, a])).values());
+    
     const schemaKeywords = (article.keywords || []).slice(0, 8);
     const articleEntityTopics = [
         article.category,
@@ -873,14 +941,14 @@ export default async function ArticlePage({ params }: Props) {
                     </nav>
 
                     {/* Back Link */}
-                    <Link href="/articles" className="inline-flex items-center gap-1.5 text-xs text-slate-200 hover:text-amber-400 mb-8 px-4 py-2 rounded-full bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/30 transition-all group shadow-sm w-fit">
-                        <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform text-amber-400" />
+                    <Link href="/articles" className="inline-flex items-center gap-1.5 text-xs text-[#5a5a82] hover:text-amber-700 mb-8 px-4 py-2 rounded-full bg-white border border-slate-200 hover:border-amber-500/40 transition-all group shadow-sm w-fit">
+                        <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform text-amber-600" />
                         <span>บทความทั้งหมด</span>
                     </Link>
 
                     {/* Meta */}
                     <div className="flex flex-wrap items-center gap-4 text-sm text-[#5a5a82] mb-6 font-medium">
-                        <span className="px-3 py-1 bg-[#0f172a] text-amber-400 rounded-full border border-[#1e293b] inline-flex items-center gap-1.5 shadow-sm">
+                        <span className="px-3 py-1 bg-amber-50 text-amber-700 rounded-full border border-amber-200 inline-flex items-center gap-1.5 shadow-sm">
                             <Tag size={12} />
                             {article.category}
                         </span>
@@ -910,7 +978,7 @@ export default async function ArticlePage({ params }: Props) {
                     </h1>
 
                     {/* Cover Image */}
-                    <div className={`${isWideMediaArticle ? "mx-auto max-w-[1040px] rounded-3xl border-white/10 bg-slate-950/70 p-2 shadow-2xl shadow-amber-950/20 md:p-3" : "rounded-2xl border-white/5 bg-slate-900 p-2 shadow-2xl shadow-purple-900/10"} w-full aspect-video mb-10 overflow-hidden relative border flex items-center justify-center`}>
+                    <div className={`${isWideMediaArticle ? "mx-auto max-w-[1040px] rounded-3xl border-slate-200 bg-white p-2 shadow-xl md:p-3" : "rounded-2xl border-slate-200 bg-white p-2 shadow-xl"} w-full aspect-video mb-10 overflow-hidden relative border flex items-center justify-center`}>
                         {/* 
                            Note: Since we might not have real images yet, 
                            we'll use a placeholder logic if exact file doesn't exist, 
@@ -929,10 +997,10 @@ export default async function ArticlePage({ params }: Props) {
 
                     {/* Table of Contents — enhanced with numbered sections for long articles */}
                     {effectiveToc && effectiveToc.length > 0 && (
-                        <nav className="bg-[#0f172a] rounded-2xl p-6 mb-10 border border-[#1e293b] shadow-md" aria-label="สารบัญบทความ">
-                            <h2 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
+                        <nav className="bg-gradient-to-br from-[#f0f0f8] to-[#e8e8f4] rounded-2xl p-6 mb-10 border border-slate-200 shadow-md" aria-label="สารบัญบทความ">
+                            <h2 className="text-lg font-bold text-[#1a1a3e] mb-5 flex items-center gap-2">
                                 <span className="text-xl opacity-80">📖</span> สารบัญ
-                                <span className="text-xs font-normal text-slate-400 ml-auto">{effectiveToc.filter(t => t.level === 2).length} หัวข้อหลัก</span>
+                                <span className="text-xs font-normal text-[#6a6a92] ml-auto">{effectiveToc.filter(t => t.level === 2).length} หัวข้อหลัก</span>
                             </h2>
                             <ul className="space-y-2">
                                 {(() => {
@@ -941,11 +1009,11 @@ export default async function ArticlePage({ params }: Props) {
                                         if (item.level === 2) h2Counter++;
                                         return (
                                             <li key={item.id} style={{ paddingLeft: (item.level - 2) * 16 }}>
-                                                <a href={`#${item.id}`} className="text-slate-300 hover:text-amber-400 transition-colors text-sm flex items-center gap-3 py-1">
+                                                <a href={`#${item.id}`} className="text-[#4a4a6e] hover:text-amber-600 transition-colors text-sm flex items-center gap-3 py-1">
                                                     {item.level === 2 ? (
-                                                        <span className="w-5 h-5 text-amber-500 rounded text-xs flex items-center justify-center flex-shrink-0 font-bold border border-amber-500/20">{h2Counter}</span>
+                                                        <span className="w-5 h-5 text-amber-600 rounded text-xs flex items-center justify-center flex-shrink-0 font-bold border border-amber-500/30">{h2Counter}</span>
                                                     ) : (
-                                                        <span className="w-1.5 h-1.5 bg-slate-600 rounded-full flex-shrink-0 ml-1.5" />
+                                                        <span className="w-1.5 h-1.5 bg-slate-400 rounded-full flex-shrink-0 ml-1.5" />
                                                     )}
                                                     {item.title}
                                                 </a>
@@ -988,17 +1056,17 @@ export default async function ArticlePage({ params }: Props) {
                                 {effectiveFaqItems.map((item, index) => (
                                     <details
                                         key={index}
-                                        className="group bg-[#0f172a] border border-[#1e293b] rounded-2xl overflow-hidden hover:border-amber-500/30 transition-all shadow-sm"
+                                        className="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-amber-500/30 transition-all shadow-sm"
                                         {...(index < 3 ? { open: true } : {})}
                                     >
                                         <summary className="flex items-start gap-3 p-6 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden">
-                                            <span className="w-6 h-6 text-amber-400 rounded text-xs flex items-center justify-center flex-shrink-0 font-bold mt-0.5 border border-amber-500/20">{index + 1}</span>
-                                            <span className="text-white font-medium leading-snug flex-1">{item.question}</span>
-                                            <span className="text-slate-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0 mt-0.5">
+                                            <span className="w-6 h-6 text-amber-600 rounded text-xs flex items-center justify-center flex-shrink-0 font-bold mt-0.5 border border-amber-500/30">{index + 1}</span>
+                                            <span className="text-[#1a1a3e] font-medium leading-snug flex-1">{item.question}</span>
+                                            <span className="text-[#6a6a92] group-open:rotate-180 transition-transform duration-200 flex-shrink-0 mt-0.5">
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                                             </span>
                                         </summary>
-                                        <div className="px-6 pb-6 pt-0 text-slate-300 text-sm leading-relaxed border-t border-[#1e293b] mt-0 pt-4">
+                                        <div className="px-6 pb-6 pt-0 text-[#5a5a82] text-sm leading-relaxed border-t border-slate-200 mt-0 pt-4">
                                             {item.answer}
                                         </div>
                                     </details>
@@ -1012,7 +1080,7 @@ export default async function ArticlePage({ params }: Props) {
                         <div className="mt-10 pt-6 border-t border-slate-200">
                             <div className="flex flex-wrap gap-2">
                                 {article.keywords.map((keyword: string) => (
-                                    <span key={keyword} className="bg-[#0f172a] text-slate-300 border border-[#1e293b] text-xs px-3 py-1 rounded-full hover:border-amber-500/30 transition-all cursor-default shadow-sm">
+                                    <span key={keyword} className="bg-white text-[#5a5a82] border border-slate-200 text-xs px-3 py-1 rounded-full hover:border-amber-500/30 transition-all cursor-default shadow-sm">
                                         #{keyword}
                                     </span>
                                 ))}
@@ -1022,10 +1090,10 @@ export default async function ArticlePage({ params }: Props) {
 
                     {/* Palm Analysis CTA — palmistry article specific */}
                     {isPalmistryArticle && (
-                        <div className="mt-10 p-8 bg-[#0f172a] border border-[#1e293b] rounded-2xl text-center shadow-md relative overflow-hidden">
+                        <div className="mt-10 p-8 bg-gradient-to-br from-amber-50 to-[#f0f0f8] border border-amber-200 rounded-2xl text-center shadow-md relative overflow-hidden">
                             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
-                            <h3 className="text-xl font-bold text-white mb-3 relative z-10">อยากลองวิเคราะห์ลายมือของคุณด้วย AI?</h3>
-                            <p className="text-slate-300 text-sm mb-6 max-w-lg mx-auto relative z-10">ระบบ AI ของ NameMongkol อ่านเส้นชีวิต เส้นสมอง เส้นหัวใจ และเส้นวาสนา พร้อมให้คำแนะนำเชิงสร้างสรรค์</p>
+                            <h3 className="text-xl font-bold text-[#1a1a3e] mb-3 relative z-10">อยากลองวิเคราะห์ลายมือของคุณด้วย AI?</h3>
+                            <p className="text-[#5a5a82] text-sm mb-6 max-w-lg mx-auto relative z-10">ระบบ AI ของ NameMongkol อ่านเส้นชีวิต เส้นสมอง เส้นหัวใจ และเส้นวาสนา พร้อมให้คำแนะนำเชิงสร้างสรรค์</p>
                             <Link href="/palm-analysis" className="inline-block px-8 py-3.5 bg-[#c9933a] hover:bg-[#d4a54e] text-white font-bold rounded-xl transition-all shadow-[0_0_24px_rgba(245,158,11,0.22)] hover:shadow-[0_0_32px_rgba(245,158,11,0.30)] hover:-translate-y-0.5 relative z-10">วิเคราะห์ลายมือฟรีที่นี่</Link>
                         </div>
                     )}
@@ -1033,29 +1101,29 @@ export default async function ArticlePage({ params }: Props) {
                     {/* Aura Vibe Widget removed — single instance at mid-article is sufficient */}
 
                     {/* Author Bio Card — EEAT signal */}
-                    <section className="mt-12 bg-[#0f172a] border border-[#1e293b] rounded-2xl p-8 flex flex-col md:flex-row items-start gap-6 shadow-md">
-                        <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">
+                    <section className="mt-12 bg-gradient-to-br from-[#f0f0f8] to-white border border-slate-200 rounded-2xl p-8 flex flex-col md:flex-row items-start gap-6 shadow-md">
+                        <div className="w-16 h-16 bg-amber-50 border border-amber-200 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">
                             👨‍🏫
                         </div>
                         <div className="flex-1">
-                            <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                            <h3 className="text-lg font-bold text-[#1a1a3e] mb-2 flex items-center gap-2">
                                 {article.author}
-                                <Award size={16} className="text-amber-400" />
+                                <Award size={16} className="text-amber-600" />
                             </h3>
-                            <p className="text-slate-300 text-sm leading-relaxed mb-5 max-w-2xl">
+                            <p className="text-[#5a5a82] text-sm leading-relaxed mb-5 max-w-2xl">
                                 นักวิเคราะห์ชื่อมงคลและเลขศาสตร์ ผู้เชี่ยวชาญด้านทักษาปกรณ์ เลขศาสตร์ไทย และโหราศาสตร์
                                 ประสบการณ์วิเคราะห์ชื่อมากกว่า 150,000 ชื่อผ่านระบบ NameMongkol
                                 อ้างอิงตำราทักษาปกรณ์ฉบับราชบัณฑิต และหลักเลขศาสตร์สากล
                             </p>
                             <div className="flex flex-wrap gap-3">
-                                <Link href="/about" className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
-                                    <BookOpen size={12} className="text-amber-400" /> เกี่ยวกับผู้เขียน
+                                <Link href="/about" className="inline-flex items-center gap-1.5 text-xs text-[#5a5a82] hover:text-[#1a1a3e] bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50 hover:border-slate-300 transition-all">
+                                    <BookOpen size={12} className="text-amber-600" /> เกี่ยวกับผู้เขียน
                                 </Link>
-                                <Link href="/name-check" className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
-                                    <ExternalLink size={12} className="text-amber-400" /> วิเคราะห์ชื่อฟรี
+                                <Link href="/name-check" className="inline-flex items-center gap-1.5 text-xs text-[#5a5a82] hover:text-[#1a1a3e] bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50 hover:border-slate-300 transition-all">
+                                    <ExternalLink size={12} className="text-amber-600" /> วิเคราะห์ชื่อฟรี
                                 </Link>
-                                <Link href="/reviews" className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
-                                    <Star size={12} className="text-amber-400" /> ดูรีวิวผู้ใช้งาน
+                                <Link href="/reviews" className="inline-flex items-center gap-1.5 text-xs text-[#5a5a82] hover:text-[#1a1a3e] bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50 hover:border-slate-300 transition-all">
+                                    <Star size={12} className="text-amber-600" /> ดูรีวิวผู้ใช้งาน
                                 </Link>
                             </div>
                         </div>
@@ -1102,9 +1170,9 @@ export default async function ArticlePage({ params }: Props) {
                                     <Link
                                         key={related.slug}
                                         href={`/articles/${related.slug}`}
-                                        className="group bg-[#0f172a] border border-[#1e293b] rounded-2xl overflow-hidden hover:border-amber-500/30 hover:-translate-y-1 hover:shadow-xl shadow-md transition-all flex flex-col"
+                                        className="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-amber-500/30 hover:-translate-y-1 hover:shadow-xl shadow-md transition-all flex flex-col"
                                     >
-                                        <div className="h-40 w-full bg-[#0a0f1d] relative overflow-hidden p-2">
+                                        <div className="h-40 w-full bg-[#f5f5fb] relative overflow-hidden p-2">
                                             <ArticleImage
                                                 src={related.coverImage}
                                                 alt={related.coverImageAlt || `ภาพหน้าปกบทความ ${related.title}`}
@@ -1113,11 +1181,10 @@ export default async function ArticlePage({ params }: Props) {
                                                 variant="related"
                                                 className="scale-100"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-[#050711]/90 via-transparent to-transparent" />
                                         </div>
                                         <div className="p-5">
-                                            <div className="text-xs font-medium text-[#c9933a] mb-2 uppercase tracking-wide">{related.category}</div>
-                                            <h4 className="text-sm font-medium text-white group-hover:text-slate-200 transition-colors line-clamp-2 leading-relaxed">
+                                            <div className="text-xs font-medium text-amber-600 mb-2 uppercase tracking-wide">{related.category}</div>
+                                            <h4 className="text-sm font-medium text-[#1a1a3e] group-hover:text-amber-700 transition-colors line-clamp-2 leading-relaxed">
                                                 {related.title}
                                             </h4>
                                         </div>
@@ -1137,19 +1204,19 @@ export default async function ArticlePage({ params }: Props) {
                             ให้บริการทั้งวิเคราะห์ชื่อฟรีและค้นหาชื่อมงคล Premium พร้อมวอลเปเปอร์มงคลเสริมดวง
                         </p>
                         <div className="flex flex-wrap gap-2">
-                            <Link href="/name-check" className="text-xs bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/30 px-4 py-2 rounded-full text-slate-200 hover:text-amber-400 transition-all shadow-sm">
+                            <Link href="/name-check" className="text-xs bg-[#f0f0f8] border border-slate-200 hover:border-amber-500/40 px-4 py-2 rounded-full text-[#5a5a82] hover:text-amber-700 transition-all shadow-sm">
                                 เช็คชื่อมงคลฟรี
                             </Link>
-                            <Link href="/premium-search" className="text-xs bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/30 px-4 py-2 rounded-full text-slate-200 hover:text-amber-400 transition-all shadow-sm">
+                            <Link href="/premium-search" className="text-xs bg-[#f0f0f8] border border-slate-200 hover:border-amber-500/40 px-4 py-2 rounded-full text-[#5a5a82] hover:text-amber-700 transition-all shadow-sm">
                                 ค้นหาชื่อมงคล Premium
                             </Link>
-                            <Link href="/phone-analysis" className="text-xs bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/30 px-4 py-2 rounded-full text-slate-200 hover:text-amber-400 transition-all shadow-sm">
+                            <Link href="/phone-analysis" className="text-xs bg-[#f0f0f8] border border-slate-200 hover:border-amber-500/40 px-4 py-2 rounded-full text-[#5a5a82] hover:text-amber-700 transition-all shadow-sm">
                                 วิเคราะห์เบอร์มงคล
                             </Link>
-                            <Link href="/wallpapers" className="text-xs bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/30 px-4 py-2 rounded-full text-slate-200 hover:text-amber-400 transition-all shadow-sm">
+                            <Link href="/wallpapers" className="text-xs bg-[#f0f0f8] border border-slate-200 hover:border-amber-500/40 px-4 py-2 rounded-full text-[#5a5a82] hover:text-amber-700 transition-all shadow-sm">
                                 วอลเปเปอร์มงคล
                             </Link>
-                            <Link href="/articles" className="text-xs bg-[#0f172a] border border-[#1e293b] hover:border-amber-500/30 px-4 py-2 rounded-full text-slate-200 hover:text-amber-400 transition-all shadow-sm">
+                            <Link href="/articles" className="text-xs bg-[#f0f0f8] border border-slate-200 hover:border-amber-500/40 px-4 py-2 rounded-full text-[#5a5a82] hover:text-amber-700 transition-all shadow-sm">
                                 บทความทั้งหมด
                             </Link>
                         </div>
