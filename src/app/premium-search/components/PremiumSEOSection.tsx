@@ -8,22 +8,46 @@ interface PremiumSEOSectionProps {
     allNamesLength: number;
 }
 
+const featureCards = [
+    {
+        icon: Shield,
+        title: 'ชั้นที่ 1: คัดตามหลักทักษา',
+        desc: 'อักษรนำดี กาลกิณีไม่มี 100% ทุกชื่อผ่านการตรวจสอบว่าไม่มีอักษรต้องห้ามตามวันเกิด',
+        card: 'border-emerald-200 bg-gradient-to-br from-emerald-50 via-teal-50/70 to-white',
+        iconBox: 'border-emerald-200 bg-white text-emerald-600',
+    },
+    {
+        icon: Star,
+        title: 'ชั้นที่ 2: คัดตามเลขศาสตร์',
+        desc: 'คัดเฉพาะผลรวมเลขศาสตร์ระดับ A+ เช่น 14, 15, 24, 36, 45 ที่ส่งเสริมดวงชะตาอย่างแท้จริง',
+        card: 'border-amber-200 bg-gradient-to-br from-amber-50 via-yellow-50/70 to-white',
+        iconBox: 'border-amber-200 bg-white text-amber-600',
+    },
+    {
+        icon: Zap,
+        title: 'ชั้นที่ 3: ความหมายดี',
+        desc: 'ความหมายดี ไพเราะ ไม่เชย เหมาะกับยุคสมัย เรียกชื่อแล้วดูดี มีความหมายเป็นสิริมงคล',
+        card: 'border-violet-200 bg-gradient-to-br from-violet-50 via-purple-50/70 to-white',
+        iconBox: 'border-violet-200 bg-white text-violet-600',
+    },
+];
+
 export default function PremiumSEOSection({ allNamesLength }: PremiumSEOSectionProps) {
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
     const faqs = [
         {
             q: 'เปลี่ยนชื่อมงคล Pro ต่างจากค้นหาทั่วไปอย่างไร?',
-            a: 'ระบบเปลี่ยนชื่อมงคล Pro ใช้ ฐานข้อมูลชื่อคัดกรอง ที่ผ่านการคัดกรอง 3 ชั้น: 1) คัดตามหลักทักษา ไม่มีอักษรกาลกิณี 2) คัดเฉพาะผลรวมเลขศาสตร์ระดับ A+ 3) ความหมายดี ไพเราะ ทันสมัย และสามารถเลือกอักษรนำวรรคเดช/ศรี ได้'
+            a: 'ระบบ Pro ใช้ฐานข้อมูลชื่อคัดกรองที่ผ่าน 3 ชั้น: ทักษา, เลขศาสตร์ระดับ A+, และความหมายที่เหมาะกับการใช้งานจริง พร้อมตัวเลือกอักษรนำวรรคเดชหรือวรรคศรี',
         },
         {
             q: 'วรรคเดชและวรรคศรีคืออะไร?',
-            a: 'วรรคเดช คืออักษรนำที่ส่งเสริมเรื่องอำนาจบารมี การเลื่อนขั้นเลื่อนตำแหน่ง เหมาะกับผู้ต้องการความก้าวหน้าในหน้าที่การงาน ส่วน วรรคศรี คืออักษรนำที่ส่งเสริมเรื่องโชคลาภ เสน่ห์ความรัก เหมาะกับผู้ต้องการดึงดูดความโชคดีและเสน่ห์'
+            a: 'วรรคเดชช่วยเสริมอำนาจ บารมี และความก้าวหน้า ส่วนวรรคศรีช่วยเสริมโชคลาภ เสน่ห์ และความนิยม เหมาะกับเป้าหมายชีวิตที่ต่างกัน',
         },
         {
             q: 'เปลี่ยนชื่อมงคล Pro ใช้กี่เครดิต?',
-            a: 'การปลดล็อกชื่อใช้ 15 เครดิตต่อการปลดล็อก 1 ครั้ง (สูงสุด 20 รายชื่อ) ในแต่ละหมวดอักษรที่คุณประสงค์จะเปิดใช้งาน'
-        }
+            a: 'การปลดล็อกรายชื่อใช้ 15 เครดิตต่อครั้ง โดยแสดงได้สูงสุด 20 รายชื่อต่อหมวดอักษรที่เลือก',
+        },
     ];
 
     const comparisons = [
@@ -36,100 +60,82 @@ export default function PremiumSEOSection({ allNamesLength }: PremiumSEOSectionP
     ];
 
     return (
-        <section className="mt-24 pt-16 border-t border-slate-200 space-y-24 relative z-10">
-            {/* Background Glows for SEO section */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-[200px] bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none" />
+        <section className="relative z-10 mt-24 space-y-24 border-t border-emerald-100 pt-16">
+            <div className="absolute left-1/2 top-0 h-px w-full max-w-4xl -translate-x-1/2 bg-gradient-to-r from-transparent via-emerald-300 to-transparent" />
+            <div className="pointer-events-none absolute left-1/2 top-0 h-[200px] w-full max-w-2xl -translate-x-1/2 rounded-full bg-emerald-100/60 blur-[120px]" />
 
-            {/* Section A */}
-            <div className="max-w-4xl mx-auto px-4">
-                <h2 className="text-3xl md:text-5xl font-black text-center text-[#1a1a3e] mb-6">
-                    ทำไมต้อง <span className="text-emerald-600 drop-shadow-sm">&quot;เปลี่ยนชื่อมงคล Pro&quot;</span>?
+            <div className="mx-auto max-w-4xl px-4">
+                <h2 className="mb-6 text-center text-3xl font-black text-[#1a1a3e] md:text-5xl">
+                    ทำไมต้อง <span className="text-emerald-700">&quot;เปลี่ยนชื่อมงคล Pro&quot;</span>?
                 </h2>
-                <p className="text-lg md:text-xl text-[#5a5a82] leading-relaxed mb-12 text-center max-w-3xl mx-auto">
-                    ระบบ Pro แตกต่างจากการตั้งชื่อทั่วไป เพราะเราใช้ <strong className="text-emerald-600 font-semibold">ฐานข้อมูลชื่อคัดกรอง</strong> ที่ผ่านการคัดกรองมาแล้วถึง 3 ชั้น
+                <p className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-[#5a5a82] md:text-xl">
+                    ระบบ Pro แตกต่างจากการตั้งชื่อทั่วไป เพราะใช้ <strong className="font-semibold text-emerald-700">ฐานข้อมูลชื่อคัดกรอง</strong> ที่ผ่านการคัดมาแล้ว 3 ชั้น
                 </p>
 
-                <div className="grid md:grid-cols-3 gap-6">
-                    {[
-                        { icon: Shield, title: 'ชั้นที่ 1: คัดตามหลักทักษา', desc: 'อักษรนำดี กาลกิณีไม่มี 100% ทุกชื่อผ่านการตรวจสอบว่าไม่มีอักษรต้องห้ามตามวันเกิด', color: 'emerald' },
-                        { icon: Star, title: 'ชั้นที่ 2: คัดตามเลขศาสตร์', desc: 'คัดเฉพาะผลรวมเลขศาสตร์ระดับ A+ เช่น 14, 15, 24, 36, 45 ที่ส่งเสริมดวงชะตาอย่างแท้จริง', color: 'amber' },
-                        { icon: Zap, title: 'ชั้นที่ 3: ความหมายดี', desc: 'ความหมายดี ไพเราะ ไม่เชย เหมาะกับยุคสมัย เรียกชื่อแล้วดูดี มีความหมายเป็นสิริมงคล', color: 'purple' }
-                    ].map((feature, i) => {
-                        const Icon = feature.icon;
-                        return (
-                            <div key={i} className={`group bg-[#0f172a] border border-[#1e293b] shadow-md rounded-3xl p-6 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-${feature.color}-500/30`}>
-                                <div className={`w-14 h-14 rounded-2xl bg-${feature.color}-500/10 border border-${feature.color}-500/20 flex items-center justify-center mb-6 transition-transform group-hover:scale-110`}>
-                                    <Icon className={`w-7 h-7 text-${feature.color}-400 drop-shadow-md`} />
-                                </div>
-                                <h3 className="text-xl font-bold text-white mb-3 tracking-wide">{feature.title}</h3>
-                                <p className="text-slate-300 leading-relaxed text-sm md:text-base">
-                                    {feature.desc}
-                                </p>
+                <div className="grid gap-6 md:grid-cols-3">
+                    {featureCards.map(({ icon: Icon, title, desc, card, iconBox }) => (
+                        <div key={title} className={`group rounded-3xl border p-6 shadow-[0_18px_42px_rgba(16,185,129,0.07)] transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_22px_52px_rgba(16,185,129,0.12)] ${card}`}>
+                            <div className={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border transition-transform group-hover:scale-110 ${iconBox}`}>
+                                <Icon className="h-7 w-7" />
                             </div>
-                        );
-                    })}
+                            <h3 className="mb-3 text-xl font-bold tracking-wide text-[#1a1a3e]">{title}</h3>
+                            <p className="text-sm leading-relaxed text-[#5a5a82] md:text-base">{desc}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
 
-            {/* Section B: Comparison Table */}
-            <div className="max-w-4xl mx-auto px-4 space-y-8">
-                <div className="text-center space-y-2">
-                    <h2 className="text-2xl md:text-4xl font-black text-[#1a1a3e]">
-                        เปรียบเทียบ <span className="text-[#5a5a82]">ค้นหาทั่วไป</span> vs <span className="text-emerald-600 drop-shadow-sm">Pro</span>
+            <div className="mx-auto max-w-4xl space-y-8 px-4">
+                <div className="space-y-2 text-center">
+                    <h2 className="text-2xl font-black text-[#1a1a3e] md:text-4xl">
+                        เปรียบเทียบ <span className="text-[#5a5a82]">ค้นหาทั่วไป</span> vs <span className="text-emerald-700">Pro</span>
                     </h2>
                 </div>
 
-                {/* Mobile View */}
-                <div className="block md:hidden space-y-4">
-                    {comparisons.map((row, i) => (
-                        <div key={i} className="bg-[#0f172a] border border-[#1e293b] rounded-2xl p-5 space-y-4 shadow-md backdrop-blur-sm">
-                            <h4 className="text-sm font-bold text-slate-200 text-center">{row.feature}</h4>
+                <div className="space-y-4 md:hidden">
+                    {comparisons.map((row) => (
+                        <div key={row.feature} className="space-y-4 rounded-2xl border border-emerald-100 bg-white/85 p-5 shadow-[0_14px_34px_rgba(16,185,129,0.08)]">
+                            <h4 className="text-center text-sm font-bold text-[#1a1a3e]">{row.feature}</h4>
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="bg-white/5 rounded-xl p-4 border border-white/5 flex flex-col items-center justify-center min-h-[80px]">
-                                    <span className="block text-[10px] text-slate-400 uppercase tracking-widest mb-2 font-bold">ทั่วไป</span>
-                                    {typeof row.free === 'boolean' ? (
-                                        row.free ? <CheckCircle2 className="w-6 h-6 text-emerald-400" /> : <XCircle className="w-6 h-6 text-slate-600" />
-                                    ) : (
-                                        <span className="text-sm text-slate-300 font-semibold text-center leading-tight">{row.free}</span>
-                                    )}
+                                <div className="flex min-h-[80px] flex-col items-center justify-center rounded-xl border border-slate-100 bg-slate-50 p-4">
+                                    <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest text-[#5a5a82]">ทั่วไป</span>
+                                    {typeof row.free === 'boolean'
+                                        ? row.free ? <CheckCircle2 className="h-6 w-6 text-emerald-500" /> : <XCircle className="h-6 w-6 text-slate-300" />
+                                        : <span className="text-center text-sm font-semibold leading-tight text-[#5a5a82]">{row.free}</span>}
                                 </div>
-                                <div className={`rounded-xl p-4 border flex flex-col items-center justify-center min-h-[80px] ${row.highlightPro ? 'bg-emerald-500/10 border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.15)]' : 'bg-white/5 border-white/5'}`}>
-                                    <span className="block text-[10px] text-emerald-400 uppercase tracking-widest mb-2 font-black">Pro</span>
-                                    {typeof row.pro === 'boolean' ? (
-                                        row.pro ? <CheckCircle2 className="w-6 h-6 text-emerald-400 drop-shadow-md" /> : <XCircle className="w-6 h-6 text-red-400" />
-                                    ) : (
-                                        <span className="text-sm text-emerald-300 font-extrabold text-center leading-tight drop-shadow-md">{row.pro}</span>
-                                    )}
+                                <div className={`flex min-h-[80px] flex-col items-center justify-center rounded-xl border p-4 ${row.highlightPro ? 'border-emerald-200 bg-emerald-50 shadow-[0_10px_24px_rgba(16,185,129,0.10)]' : 'border-emerald-100 bg-white'}`}>
+                                    <span className="mb-2 block text-[10px] font-black uppercase tracking-widest text-emerald-700">Pro</span>
+                                    {typeof row.pro === 'boolean'
+                                        ? row.pro ? <CheckCircle2 className="h-6 w-6 text-emerald-600" /> : <XCircle className="h-6 w-6 text-red-400" />
+                                        : <span className="text-center text-sm font-extrabold leading-tight text-emerald-700">{row.pro}</span>}
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Desktop View */}
-                <div className="hidden md:block overflow-hidden bg-[#0f172a] rounded-3xl border border-[#1e293b] shadow-md backdrop-blur-xl">
+                <div className="hidden overflow-hidden rounded-3xl border border-emerald-100 bg-white/90 shadow-[0_18px_44px_rgba(16,185,129,0.08)] md:block">
                     <table className="w-full border-collapse">
                         <thead>
-                            <tr className="border-b border-white/10 bg-white/[0.02]">
-                                <th className="text-left py-6 px-8 text-slate-400 font-bold uppercase tracking-wider text-xs">คุณสมบัติ</th>
-                                <th className="text-center py-6 px-8 text-slate-400 font-bold uppercase tracking-wider text-xs">ค้นหาทั่วไป</th>
-                                <th className="text-center py-6 px-8 text-emerald-400 font-black uppercase tracking-wider text-xs bg-emerald-500/5">เปลี่ยนชื่อมงคล Pro</th>
+                            <tr className="border-b border-emerald-100 bg-emerald-50/70">
+                                <th className="px-8 py-6 text-left text-xs font-bold uppercase tracking-wider text-[#5a5a82]">คุณสมบัติ</th>
+                                <th className="px-8 py-6 text-center text-xs font-bold uppercase tracking-wider text-[#5a5a82]">ค้นหาทั่วไป</th>
+                                <th className="bg-emerald-100/60 px-8 py-6 text-center text-xs font-black uppercase tracking-wider text-emerald-700">เปลี่ยนชื่อมงคล Pro</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-white/5">
-                            {comparisons.map((row, i) => (
-                                <tr key={i} className="hover:bg-white/[0.02] transition-colors group">
-                                    <td className="py-5 px-8 text-slate-300 font-medium">{row.feature}</td>
-                                    <td className="text-center py-5 px-8 text-slate-300">
-                                        {typeof row.free === 'boolean' ? (
-                                            row.free ? <CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto opacity-70" /> : <XCircle className="w-5 h-5 text-slate-700 mx-auto" />
-                                        ) : row.free}
+                        <tbody className="divide-y divide-emerald-50">
+                            {comparisons.map((row) => (
+                                <tr key={row.feature} className="transition-colors hover:bg-emerald-50/40">
+                                    <td className="px-8 py-5 font-medium text-[#1a1a3e]">{row.feature}</td>
+                                    <td className="px-8 py-5 text-center text-[#5a5a82]">
+                                        {typeof row.free === 'boolean'
+                                            ? row.free ? <CheckCircle2 className="mx-auto h-5 w-5 text-emerald-500" /> : <XCircle className="mx-auto h-5 w-5 text-slate-300" />
+                                            : row.free}
                                     </td>
-                                    <td className={`text-center py-5 px-8 font-extrabold ${row.highlightPro ? 'text-emerald-300 bg-emerald-500/[0.03] group-hover:bg-emerald-500/[0.05]' : 'text-emerald-400/80 bg-emerald-500/[0.01]'}`}>
-                                        {typeof row.pro === 'boolean' ? (
-                                            row.pro ? <CheckCircle2 className="w-5 h-5 text-emerald-400 mx-auto drop-shadow-sm" /> : <XCircle className="w-5 h-5 text-red-500 mx-auto" />
-                                        ) : row.pro}
+                                    <td className={`px-8 py-5 text-center font-extrabold ${row.highlightPro ? 'bg-emerald-50 text-emerald-700' : 'bg-emerald-50/40 text-emerald-600'}`}>
+                                        {typeof row.pro === 'boolean'
+                                            ? row.pro ? <CheckCircle2 className="mx-auto h-5 w-5 text-emerald-600" /> : <XCircle className="mx-auto h-5 w-5 text-red-500" />
+                                            : row.pro}
                                     </td>
                                 </tr>
                             ))}
@@ -138,32 +144,30 @@ export default function PremiumSEOSection({ allNamesLength }: PremiumSEOSectionP
                 </div>
             </div>
 
-            {/* CTA */}
-            <div className="max-w-3xl mx-auto px-4">
-                <div className="text-center bg-emerald-50 border border-emerald-500/30 rounded-3xl p-10 sm:p-14 shadow-sm relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.05),transparent_50%)]" />
+            <div className="mx-auto max-w-3xl px-4">
+                <div className="relative overflow-hidden rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-amber-50 p-10 text-center shadow-[0_18px_44px_rgba(16,185,129,0.10)] sm:p-14">
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.08),transparent_50%)]" />
                     <div className="relative z-10">
-                        <p className="text-[#5a5a82] mb-6 text-lg">
-                            💡 <strong className="text-emerald-600">คำแนะนำสำคัญ:</strong> หลังได้ชื่อที่ต้องการแล้ว อย่าลืมนำไป
+                        <p className="mb-6 text-lg text-[#5a5a82]">
+                            <strong className="text-emerald-700">คำแนะนำสำคัญ:</strong> หลังได้ชื่อที่ต้องการแล้ว อย่าลืมนำไป
                         </p>
                         <Link
                             href="/"
-                            className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#0f172a] text-white font-black rounded-2xl transition-all hover:-translate-y-1 shadow-md hover:shadow-xl border border-[#1e293b] hover:border-emerald-500/30"
+                            className="inline-flex items-center gap-2.5 rounded-2xl border border-emerald-200 bg-white px-8 py-4 font-black text-[#1a1a3e] shadow-[0_12px_32px_rgba(16,185,129,0.12)] transition-all hover:-translate-y-1 hover:border-emerald-300 hover:bg-emerald-50"
                         >
-                            <Sparkles size={20} className="text-emerald-400" />
+                            <Sparkles size={20} className="text-emerald-600" />
                             วิเคราะห์ชื่อ-สกุล ก่อนนำไปใช้
                         </Link>
-                        <p className="text-[#5a5a82] text-sm mt-6 font-medium">
+                        <p className="mt-6 text-sm font-medium text-[#5a5a82]">
                             เพื่อตรวจสอบความเข้ากันของชื่อกับนามสกุล และดูผลวิเคราะห์แบบละเอียด
                         </p>
                     </div>
                 </div>
             </div>
 
-            {/* FAQ Section */}
-            <div className="max-w-3xl mx-auto px-4 pb-20">
-                <h2 className="text-2xl md:text-3xl font-black text-center text-[#1a1a3e] flex items-center justify-center gap-3 mb-8">
-                    <HelpCircle className="w-8 h-8 text-emerald-600" />
+            <div className="mx-auto max-w-3xl px-4 pb-20">
+                <h2 className="mb-8 flex items-center justify-center gap-3 text-center text-2xl font-black text-[#1a1a3e] md:text-3xl">
+                    <HelpCircle className="h-8 w-8 text-emerald-700" />
                     คำถามที่พบบ่อย
                 </h2>
 
@@ -171,25 +175,21 @@ export default function PremiumSEOSection({ allNamesLength }: PremiumSEOSectionP
                     {faqs.map((faq, index) => {
                         const isOpen = openFaqIndex === index;
                         return (
-                            <div key={index} className={`bg-white border ${isOpen ? 'border-emerald-500/30 shadow-md' : 'border-slate-200 shadow-sm'} rounded-2xl overflow-hidden transition-all duration-300`}>
+                            <div key={faq.q} className={`overflow-hidden rounded-2xl border bg-white transition-all duration-300 ${isOpen ? 'border-emerald-300 shadow-[0_14px_34px_rgba(16,185,129,0.12)]' : 'border-emerald-100 shadow-sm'}`}>
                                 <button
                                     type="button"
                                     onClick={() => setOpenFaqIndex(isOpen ? null : index)}
-                                    className="w-full px-6 py-5 text-left flex items-start justify-between gap-4 font-bold text-[#1a1a3e] hover:text-emerald-600 transition-colors focus:outline-none"
+                                    className="flex w-full items-start justify-between gap-4 px-6 py-5 text-left font-bold text-[#1a1a3e] transition-colors hover:text-emerald-700 focus:outline-none"
                                 >
-                                    <span className="text-base sm:text-lg flex items-start gap-3">
-                                        <span className="text-emerald-600 shrink-0 font-black">Q.</span>
-                                        <span className="leading-snug pt-0.5">{faq.q}</span>
+                                    <span className="flex items-start gap-3 text-base sm:text-lg">
+                                        <span className="shrink-0 font-black text-emerald-700">Q.</span>
+                                        <span className="pt-0.5 leading-snug">{faq.q}</span>
                                     </span>
-                                    <ChevronDown className={`w-5 h-5 text-[#5a5a82] shrink-0 transition-transform duration-300 mt-1 ${isOpen ? 'rotate-180 text-emerald-600' : ''}`} />
+                                    <ChevronDown className={`mt-1 h-5 w-5 shrink-0 text-[#5a5a82] transition-transform duration-300 ${isOpen ? 'rotate-180 text-emerald-700' : ''}`} />
                                 </button>
-                                <div
-                                    className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                                        isOpen ? 'max-h-[500px] bg-slate-50' : 'max-h-0'
-                                    }`}
-                                >
-                                    <div className="p-6 pt-0 text-sm sm:text-base text-[#5a5a82] leading-relaxed flex items-start gap-3">
-                                        <span className="text-amber-600 font-black shrink-0">A.</span>
+                                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[500px] bg-emerald-50/50' : 'max-h-0'}`}>
+                                    <div className="flex items-start gap-3 p-6 pt-0 text-sm leading-relaxed text-[#5a5a82] sm:text-base">
+                                        <span className="shrink-0 font-black text-amber-700">A.</span>
                                         <span className="pt-0.5">{faq.a}</span>
                                     </div>
                                 </div>

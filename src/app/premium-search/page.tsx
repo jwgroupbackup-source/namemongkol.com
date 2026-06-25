@@ -137,15 +137,17 @@ export default function PremiumSearchPage() {
             />
             <ClientPage />
             <section
-                className="relative px-4 pb-24 pt-16 bg-[#f8f8fc] overflow-hidden border-t border-slate-200 mt-12"
+                className="relative mt-12 overflow-hidden border-t border-amber-100/70 bg-[#f8f8fc] px-4 pb-24 pt-16"
             >
-                <div className="mx-auto max-w-5xl relative z-10">
-                    <div className="text-center md:text-left mb-12">
-                        <p className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-amber-600">
+                <div className="absolute right-0 top-0 h-80 w-80 rounded-full bg-[#c9933a]/10 blur-3xl" />
+                <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-[#9b8ec4]/10 blur-3xl" />
+                <div className="relative z-10 mx-auto max-w-5xl">
+                    <div className="mb-12 text-center md:text-left">
+                        <p className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-emerald-700">
                             Premium Name Selection
                         </p>
                         <h2 className="text-3xl font-black text-[#1a1a3e] sm:text-4xl">
-                            เปลี่ยนชื่อมงคล <span className="text-amber-600">Pro</span> เหมาะกับกรณีไหน?
+                            เปลี่ยนชื่อมงคล <span className="text-emerald-700">Pro</span> เหมาะกับกรณีไหน?
                         </h2>
                         <p className="mt-4 max-w-3xl text-sm leading-7 text-[#5a5a82] sm:text-base mx-auto md:mx-0">
                             หน้านี้เหมาะกับคนที่ตัดสินใจจริงจังเรื่องเปลี่ยนชื่อและต้องการคัดชื่อจากฐานข้อมูลพรีเมียม
@@ -155,30 +157,30 @@ export default function PremiumSearchPage() {
                     </div>
 
                     <div className="grid gap-6 md:grid-cols-3">
-                        <div className="group rounded-3xl border border-[#1e293b] bg-[#0f172a] p-8 shadow-md transition-[transform,border-color,box-shadow] hover:-translate-y-1 hover:border-cyan-500/40 hover:shadow-xl">
-                            <h3 className="text-lg font-black text-white group-hover:text-cyan-400 transition-colors">1. เริ่มจากเช็กชื่อเดิม</h3>
-                            <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                        <div className="group rounded-3xl border border-sky-200 bg-gradient-to-br from-sky-50 via-cyan-50/70 to-white p-8 shadow-[0_18px_42px_rgba(14,165,233,0.08)] transition-[transform,border-color,box-shadow] hover:-translate-y-1 hover:border-sky-300 hover:shadow-[0_22px_52px_rgba(14,165,233,0.13)]">
+                            <h3 className="text-lg font-black text-[#1a1a3e] transition-colors group-hover:text-sky-700">1. เริ่มจากเช็กชื่อเดิม</h3>
+                            <p className="mt-3 text-sm leading-relaxed text-[#5a5a82]">
                                 วิเคราะห์ชื่อและนามสกุลปัจจุบัน เพื่อดูว่าปัญหาอยู่ที่ผลรวม คู่เลข หรืออักษรกาลกิณี
                             </p>
-                            <Link href="/name-check" className="mt-6 inline-flex items-center text-sm font-bold text-cyan-400 hover:text-cyan-300">
+                            <Link href="/name-check" className="mt-6 inline-flex items-center text-sm font-bold text-sky-700 hover:text-sky-600">
                                 ไปวิเคราะห์ชื่อฟรี →
                             </Link>
                         </div>
-                        <div className="group rounded-3xl border border-[#1e293b] bg-[#0f172a] p-8 shadow-md transition-[transform,border-color,box-shadow] hover:-translate-y-1 hover:border-amber-500/40 hover:shadow-xl">
-                            <h3 className="text-lg font-black text-white group-hover:text-amber-400 transition-colors">2. หาไอเดียชื่อทั่วไป</h3>
-                            <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                        <div className="group rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-yellow-50/70 to-white p-8 shadow-[0_18px_42px_rgba(245,158,11,0.08)] transition-[transform,border-color,box-shadow] hover:-translate-y-1 hover:border-amber-300 hover:shadow-[0_22px_52px_rgba(245,158,11,0.13)]">
+                            <h3 className="text-lg font-black text-[#1a1a3e] transition-colors group-hover:text-amber-700">2. หาไอเดียชื่อทั่วไป</h3>
+                            <p className="mt-3 text-sm leading-relaxed text-[#5a5a82]">
                                 ถ้ายังอยู่ในขั้นสำรวจชื่อจำนวนมาก ให้เริ่มจากฐานข้อมูลชื่อมงคลฟรีหรือเครื่องมือสร้างชื่อด้วย AI
                             </p>
-                            <Link href="/search" className="mt-6 inline-flex items-center text-sm font-bold text-amber-400 hover:text-amber-300">
+                            <Link href="/search" className="mt-6 inline-flex items-center text-sm font-bold text-amber-700 hover:text-amber-600">
                                 ค้นหาชื่อมงคลฟรี →
                             </Link>
                         </div>
-                        <div className="group rounded-3xl border border-emerald-500/20 bg-[#0f172a] p-8 shadow-[0_0_20px_rgba(16,185,129,0.05)] transition-[transform,border-color,box-shadow] hover:-translate-y-1 hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.1)]">
-                            <h3 className="text-lg font-black text-emerald-400">3. คัดชื่อสำหรับเปลี่ยนจริง</h3>
-                            <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                        <div className="group rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-teal-50/70 to-white p-8 shadow-[0_18px_42px_rgba(16,185,129,0.08)] transition-[transform,border-color,box-shadow] hover:-translate-y-1 hover:border-emerald-300 hover:shadow-[0_22px_52px_rgba(16,185,129,0.13)]">
+                            <h3 className="text-lg font-black text-emerald-800">3. คัดชื่อสำหรับเปลี่ยนจริง</h3>
+                            <p className="mt-3 text-sm leading-relaxed text-[#5a5a82]">
                                 ใช้ Pro เมื่อต้องการชื่อที่คัดตามวันเกิดและอักษรนำ พร้อมลดโอกาสเจอชื่อที่ขัดกับหลักทักษา
                             </p>
-                            <Link href="/premium-analysis" className="mt-6 inline-flex items-center text-sm font-bold text-emerald-400 hover:text-emerald-300">
+                            <Link href="/premium-analysis" className="mt-6 inline-flex items-center text-sm font-bold text-emerald-700 hover:text-emerald-600">
                                 วิเคราะห์ชื่อขั้นสูงต่อ →
                             </Link>
                         </div>

@@ -26,6 +26,7 @@ import PremiumHeader from './components/PremiumHeader';
 import PremiumNameCard from './components/PremiumNameCard';
 import PremiumAlphabetBar from './components/PremiumAlphabetBar';
 import PremiumSEOSection from './components/PremiumSEOSection';
+import { SoftYellowGlowBackground } from '@/components/ui/background-components';
 
 interface ScoreDropdownProps {
     value: string;
@@ -38,6 +39,11 @@ function ScoreDropdown({ value, onChange, scores, disabled }: ScoreDropdownProps
     const [open, setOpen] = useState(false);
     const rootRef = useRef<HTMLDivElement | null>(null);
     const { t } = useLanguage();
+    const getScoreBadgeClass = (tone: string) => {
+        if (tone.includes('emerald')) return 'border border-emerald-200 bg-emerald-100 text-emerald-800';
+        if (tone.includes('rose')) return 'border border-rose-200 bg-rose-100 text-rose-700';
+        return 'border border-amber-200 bg-amber-100 text-amber-800';
+    };
 
     useEffect(() => {
         if (!open) return;
@@ -66,18 +72,18 @@ function ScoreDropdown({ value, onChange, scores, disabled }: ScoreDropdownProps
                 type="button"
                 disabled={disabled}
                 onClick={() => setOpen(v => !v)}
-                className={`flex w-full items-center justify-between px-3 py-2.5 sm:px-4 sm:py-3 bg-[#0a0f1d] border border-[#1e293b] rounded-xl text-slate-200 focus:outline-none focus:ring-1 focus:ring-amber-400/50 focus:border-amber-400/50 transition-all font-medium text-xs sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed ${open ? 'rounded-b-none border-b-transparent shadow-lg' : ''}`}
+                className={`flex w-full items-center justify-between rounded-xl border border-emerald-200 bg-white px-3 py-2.5 text-xs font-semibold text-[#17352f] shadow-[0_10px_24px_rgba(16,185,129,0.07)] transition-all focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3 sm:text-sm ${open ? 'rounded-b-none border-b-transparent shadow-lg' : ''}`}
             >
                 <span>{selectedLabel}</span>
-                <ChevronDown className={`h-3.5 w-3.5 sm:h-4 sm:w-4 text-slate-400 transition-transform duration-300 ${open ? 'rotate-180 text-amber-400' : ''}`} />
+                <ChevronDown className={`h-3.5 w-3.5 text-emerald-500 transition-transform duration-300 sm:h-4 sm:w-4 ${open ? 'rotate-180 text-emerald-700' : ''}`} />
             </button>
 
             {open && (
-                <div className="absolute left-0 right-0 top-full mt-0 z-50 max-h-80 overflow-y-auto bg-[#0f172a] border border-[#1e293b] border-t-0 rounded-b-xl shadow-2xl custom-scrollbar animate-fade-in-up">
+                <div className="absolute left-0 right-0 top-full z-50 mt-0 max-h-80 overflow-y-auto rounded-b-xl border border-t-0 border-emerald-300 bg-white shadow-[0_20px_40px_rgba(16,185,129,0.16)] custom-scrollbar animate-fade-in-up">
                     <button
                         type="button"
                         onClick={() => { onChange(''); setOpen(false); }}
-                        className={`w-full px-4 py-3 text-left transition-colors border-b border-[#1e293b] text-sm font-medium ${value === '' ? 'bg-amber-400/10 text-amber-200' : 'text-slate-300 hover:bg-white/5 hover:text-white'}`}
+                        className={`w-full border-b border-emerald-200 px-4 py-3 text-left text-sm font-semibold transition-colors ${value === '' ? 'bg-emerald-200 text-[#0f2d27]' : 'bg-white text-[#17352f] hover:bg-emerald-50 hover:text-[#0f2d27]'}`}
                     >
                         {t('pages.premiumSearch.filters.scoreAny')}
                     </button>
@@ -88,22 +94,22 @@ function ScoreDropdown({ value, onChange, scores, disabled }: ScoreDropdownProps
                                 key={score}
                                 type="button"
                                 onClick={() => { onChange(score.toString()); setOpen(false); }}
-                                className={`w-full px-4 py-3 text-left transition-colors border-b border-[#1e293b] last:border-0 flex items-center justify-between group/item ${value === score.toString() ? 'bg-amber-400/10' : 'hover:bg-white/5'}`}
+                                className={`group/item flex w-full items-center justify-between border-b border-emerald-200 px-4 py-3 text-left transition-colors last:border-0 ${value === score.toString() ? 'bg-emerald-200/90' : 'bg-white hover:bg-emerald-50'}`}
                             >
                                 <div className="flex flex-col flex-1 min-w-0 pr-4">
                                     <div className="flex items-center gap-2 mb-1">
-                                        <span className={`font-bold transition-colors ${value === score.toString() ? 'text-amber-300' : 'text-slate-200 group-hover/item:text-white'}`}>
+                                        <span className={`font-bold transition-colors ${value === score.toString() ? 'text-[#0f2d27]' : 'text-[#17352f] group-hover/item:text-[#0f2d27]'}`}>
                                             {(t('pages.premiumSearch.filters.scorePrefix') || '').trim()} {score}
                                         </span>
-                                        <span className={`text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider ${color}`}>
+                                        <span className={`rounded-md px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${getScoreBadgeClass(color)}`}>
                                             {level}
                                         </span>
                                     </div>
-                                    <span className={`text-xs truncate transition-colors ${value === score.toString() ? 'text-amber-200/70' : 'text-slate-500 group-hover/item:text-slate-400'}`}>
+                                    <span className={`truncate text-xs transition-colors ${value === score.toString() ? 'text-[#245045]' : 'text-[#42544f] group-hover/item:text-[#245045]'}`}>
                                         {desc}
                                     </span>
                                 </div>
-                                {value === score.toString() && <div className="w-2 h-2 rounded-full bg-amber-400 shrink-0 shadow-[0_0_8px_rgba(251,191,36,0.8)]" />}
+                                {value === score.toString() && <div className="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.45)]" />}
                             </button>
                         );
                     })}
@@ -285,19 +291,12 @@ export default function ClientPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#f8f8fc] text-[#5a5a82] font-sans relative overflow-hidden">
-            {/* Background Effects */}
-            <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.8),transparent_80%)]" />
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px]" />
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[150px]" />
-            </div>
-
+        <SoftYellowGlowBackground className="overflow-x-hidden font-sans text-[#5a5a82] selection:bg-amber-500 selection:text-white">
             {/* Floating Mobile Credits */}
-            <div className="fixed bottom-[7.75rem] right-4 z-40 flex items-center gap-2 rounded-full border border-amber-400/30 bg-slate-900/90 px-4 py-2.5 shadow-[0_8px_30px_rgba(245,158,11,0.25)] backdrop-blur-xl sm:hidden">
-                <Coins className="w-4 h-4 text-amber-400" />
-                <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider">เครดิต:</span>
-                <span className="text-sm font-black text-amber-300">{userCredits !== null ? userCredits : '—'}</span>
+            <div className="fixed bottom-[7.75rem] right-4 z-40 flex items-center gap-2 rounded-full border border-emerald-200 bg-white/90 px-4 py-2.5 shadow-[0_12px_34px_rgba(16,185,129,0.16)] backdrop-blur-xl sm:hidden">
+                <Coins className="h-4 w-4 text-amber-600" />
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#5a5a82]">เครดิต:</span>
+                <span className="text-sm font-black text-emerald-700">{userCredits !== null ? userCredits : '—'}</span>
             </div>
 
             <main className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-36 pt-7 sm:px-6 sm:pt-32 md:pb-24">
@@ -311,20 +310,20 @@ export default function ClientPage() {
 
                     {/* Ultra Premium Filter Panel */}
                     <div className="group relative z-30">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/10 via-amber-400/5 to-amber-500/10 rounded-[2rem] blur opacity-70 group-hover:opacity-100 transition duration-1000" />
-                        <div className="relative rounded-2xl border border-[#1e293b] bg-[#0f172a] shadow-md sm:rounded-3xl">
+                        <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-r from-emerald-200/30 via-amber-100/35 to-emerald-100/30 opacity-80 blur transition duration-1000 group-hover:opacity-100" />
+                        <div className="relative rounded-2xl border border-emerald-200/80 bg-gradient-to-br from-white via-emerald-50/50 to-amber-50/40 shadow-[0_24px_70px_rgba(16,185,129,0.12)] sm:rounded-3xl">
                             <div className="absolute inset-0 overflow-hidden rounded-2xl sm:rounded-3xl pointer-events-none">
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-amber-400/5 rounded-full blur-[80px]" />
+                                <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-emerald-200/35 blur-[80px]" />
                             </div>
                             
                             <div className="relative z-10 p-4 sm:p-8">
-                                <div className="mb-4 flex items-center justify-between border-b border-[#1e293b] pb-4 sm:mb-6 sm:pb-5">
+                                <div className="mb-4 flex items-center justify-between gap-3 border-b border-emerald-100 pb-4 sm:mb-6 sm:pb-5">
                                     <div>
-                                        <h2 className="flex items-center gap-2.5 text-lg font-bold text-white">
-                                            <SlidersHorizontal className="h-5 w-5 text-amber-400" />
+                                        <h2 className="flex items-center gap-2.5 text-lg font-bold text-[#1a1a3e]">
+                                            <SlidersHorizontal className="h-5 w-5 text-emerald-600" />
                                             ปรับเงื่อนไขค้นหา
                                         </h2>
-                                        <p className="mt-1.5 text-xs text-slate-400 font-medium">
+                                        <p className="mt-1.5 text-xs font-medium text-[#5a5a82]">
                                             {activeFilterCount > 0 ? `กำลังใช้ ${activeFilterCount} ตัวกรอง` : 'เริ่มจากวันเกิดก่อนเพื่อเปิดตัวเลือกอักษรนำ'}
                                         </p>
                                     </div>
@@ -332,7 +331,7 @@ export default function ClientPage() {
                                     type="button"
                                     onClick={resetFilters}
                                     disabled={isLoading || activeFilterCount === 0}
-                                    className="flex items-center gap-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-amber-400/30 px-4 py-2 text-xs font-bold text-slate-300 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                                    className="flex items-center gap-2 rounded-xl border border-emerald-100 bg-white/70 px-4 py-2 text-xs font-bold text-[#5a5a82] transition-all hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-700 disabled:cursor-not-allowed disabled:opacity-40"
                                 >
                                     <RotateCcw className="h-3.5 w-3.5" />
                                     ล้างตัวกรอง
@@ -342,7 +341,7 @@ export default function ClientPage() {
                             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 relative z-10">
                                 {/* Day Filter */}
                                 <div className="space-y-1.5 sm:space-y-2">
-                                    <label className="block text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest">{t('pages.premiumSearch.filters.dayLabel')}</label>
+                                    <label className="block text-[10px] font-bold uppercase tracking-widest text-[#5a5a82] sm:text-xs">{t('pages.premiumSearch.filters.dayLabel')}</label>
                                     <div className="relative">
                                         <select
                                             value={selectedDay}
@@ -350,45 +349,45 @@ export default function ClientPage() {
                                                 setSelectedDay(e.target.value);
                                                 if (e.target.value === 'All') setLeadingCharType('Any');
                                             }}
-                                            className="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-[#0a0f1d] border border-[#1e293b] rounded-xl text-slate-200 focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/50 transition-all appearance-none font-medium text-xs sm:text-sm"
+                                            className="w-full appearance-none rounded-xl border border-emerald-100 bg-white/85 px-3 py-2.5 text-xs font-medium text-[#1a1a3e] shadow-[0_10px_24px_rgba(16,185,129,0.05)] transition-all focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-100 sm:px-4 sm:py-3 sm:text-sm"
                                         >
-                                            {dayOptions.map(day => <option key={day.value} value={day.value} className="bg-[#0f172a]">{day.label}</option>)}
+                                            {dayOptions.map(day => <option key={day.value} value={day.value}>{day.label}</option>)}
                                         </select>
-                                        <ChevronDown className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 h-3.5 w-3.5 sm:h-4 sm:w-4 text-slate-400 pointer-events-none" />
+                                        <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-emerald-500 sm:right-4 sm:h-4 sm:w-4" />
                                     </div>
                                 </div>
 
                                 {/* Score Filter */}
                                 <div className="space-y-1.5 sm:space-y-2">
-                                    <label className="block text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest">{t('pages.premiumSearch.filters.scoreLabel')}</label>
+                                    <label className="block text-[10px] font-bold uppercase tracking-widest text-[#5a5a82] sm:text-xs">{t('pages.premiumSearch.filters.scoreLabel')}</label>
                                     <ScoreDropdown value={targetScore} onChange={setTargetScore} scores={uniqueScores} disabled={isLoading} />
                                 </div>
 
                                 {/* Gender Filter */}
                                 <div className="space-y-1.5 sm:space-y-2">
-                                    <label className="block text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest">{t('pages.premiumSearch.filters.genderLabel')}</label>
+                                    <label className="block text-[10px] font-bold uppercase tracking-widest text-[#5a5a82] sm:text-xs">{t('pages.premiumSearch.filters.genderLabel')}</label>
                                     <div className="relative">
                                         <select
                                             value={selectedGender}
                                             onChange={(e) => setSelectedGender(e.target.value)}
-                                            className="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-[#0a0f1d] border border-[#1e293b] rounded-xl text-slate-200 focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/50 transition-all appearance-none font-medium text-xs sm:text-sm"
+                                            className="w-full appearance-none rounded-xl border border-emerald-100 bg-white/85 px-3 py-2.5 text-xs font-medium text-[#1a1a3e] shadow-[0_10px_24px_rgba(16,185,129,0.05)] transition-all focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-100 sm:px-4 sm:py-3 sm:text-sm"
                                         >
-                                            <option value="all" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderAll')}</option>
-                                            <option value="male" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderMale')}</option>
-                                            <option value="female" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderFemale')}</option>
-                                            <option value="neutral" className="bg-[#0f172a]">{t('pages.premiumSearch.filters.genderNeutral')}</option>
+                                            <option value="all">{t('pages.premiumSearch.filters.genderAll')}</option>
+                                            <option value="male">{t('pages.premiumSearch.filters.genderMale')}</option>
+                                            <option value="female">{t('pages.premiumSearch.filters.genderFemale')}</option>
+                                            <option value="neutral">{t('pages.premiumSearch.filters.genderNeutral')}</option>
                                         </select>
-                                        <ChevronDown className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 h-3.5 w-3.5 sm:h-4 sm:w-4 text-slate-400 pointer-events-none" />
+                                        <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-emerald-500 sm:right-4 sm:h-4 sm:w-4" />
                                     </div>
                                 </div>
 
                                 {/* Leading Char Filter */}
                                 <div className="space-y-1.5 sm:space-y-2">
-                                    <label className="block text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center justify-between">
+                                    <label className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-[#5a5a82] sm:text-xs">
                                         <span className="truncate">{t('pages.premiumSearch.leading.label')}</span>
-                                        <span className="text-[9px] sm:text-[10px] text-amber-500/70 normal-case ml-1 shrink-0">{selectedDay !== 'All' ? `(${selectedDay})` : ''}</span>
+                                        <span className="ml-1 shrink-0 text-[9px] normal-case text-emerald-600/80 sm:text-[10px]">{selectedDay !== 'All' ? `(${selectedDay})` : ''}</span>
                                     </label>
-                                    <div className="bg-[#0a0f1d] p-1 sm:p-1.5 rounded-xl border border-[#1e293b] flex gap-1 h-[38px] sm:h-[46px]">
+                                    <div className="flex h-[38px] gap-1 rounded-xl border border-emerald-100 bg-white/80 p-1 shadow-[0_10px_24px_rgba(16,185,129,0.05)] sm:h-[46px] sm:p-1.5">
                                         {(['Dech', 'Si', 'Any'] as LeadingCharType[]).map((type) => {
                                             const isSelected = leadingCharType === type;
                                             const labelMap: Record<LeadingCharType, string> = { Dech: 'เดช', Si: 'ศรี', Any: 'ทั้งหมด' };
@@ -400,8 +399,8 @@ export default function ClientPage() {
                                                     onClick={() => setLeadingCharType(type as LeadingCharType)}
                                                     className={`flex-1 flex items-center justify-center rounded-lg text-[10px] sm:text-xs font-bold transition-all disabled:cursor-not-allowed ${
                                                         isSelected 
-                                                            ? 'bg-amber-500/20 border border-amber-400/50 text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.25)] disabled:bg-amber-500/10 disabled:border-amber-500/30 disabled:text-amber-600 disabled:shadow-none' 
-                                                            : 'text-slate-400 hover:text-slate-200 hover:bg-white/5 border border-transparent disabled:text-slate-600 disabled:hover:bg-transparent'
+                                                            ? 'border border-emerald-300 bg-gradient-to-r from-emerald-100 to-amber-50 text-emerald-800 shadow-[0_8px_18px_rgba(16,185,129,0.16)] disabled:border-emerald-200 disabled:bg-emerald-50 disabled:text-emerald-500 disabled:shadow-none'
+                                                            : 'border border-transparent text-[#5a5a82] hover:bg-emerald-50 hover:text-emerald-700 disabled:text-slate-300 disabled:hover:bg-transparent'
                                                     }`}
                                                 >
                                                     {labelMap[type]}
@@ -437,27 +436,27 @@ export default function ClientPage() {
                                     return (
                                         <>
                                             {!isFullyUnlocked && (
-                                                <div className="relative mb-6 overflow-hidden rounded-3xl border border-amber-500/30 bg-[#0f172a] p-6 sm:p-12 text-center shadow-md backdrop-blur-2xl">
-                                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(245,158,11,0.15),transparent_50%)]" />
+                                                <div className="relative mb-6 overflow-hidden rounded-3xl border border-amber-200/80 bg-gradient-to-br from-white via-amber-50/70 to-emerald-50/60 p-6 text-center shadow-[0_24px_70px_rgba(245,158,11,0.14)] backdrop-blur-2xl sm:p-12">
+                                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.12),transparent_52%)]" />
                                                     <div className="relative z-10 flex flex-col items-center">
                                                         <div className="relative mb-4 sm:mb-6">
-                                                            <div className="absolute inset-0 bg-amber-500/20 rounded-full blur-xl scale-150 animate-pulse" />
-                                                            <div className="w-12 h-12 sm:w-20 sm:h-20 rounded-2xl bg-[#0a0f1d] border border-amber-500/40 flex items-center justify-center rotate-3 hover:rotate-6 transition-transform">
-                                                                <Lock className="w-6 h-6 sm:w-8 sm:h-8 text-amber-400 drop-shadow-md" />
+                                                            <div className="absolute inset-0 scale-150 animate-pulse rounded-full bg-amber-300/25 blur-xl" />
+                                                            <div className="flex h-12 w-12 rotate-3 items-center justify-center rounded-2xl border border-amber-300 bg-white/85 transition-transform hover:rotate-6 sm:h-20 sm:w-20">
+                                                                <Lock className="h-6 w-6 text-amber-700 drop-shadow-md sm:h-8 sm:w-8" />
                                                             </div>
                                                         </div>
-                                                        <h3 className="text-xl sm:text-3xl font-black text-white mb-2 sm:mb-3 tracking-tight">
-                                                            ปลดล็อกหมวดอักษร <span className="text-amber-400 text-3xl sm:text-4xl">&quot;{selectedLetter}&quot;</span>
+                                                        <h3 className="mb-2 text-xl font-black tracking-tight text-[#1a1a3e] sm:mb-3 sm:text-3xl">
+                                                            ปลดล็อกหมวดอักษร <span className="text-3xl text-emerald-700 sm:text-4xl">&quot;{selectedLetter}&quot;</span>
                                                         </h3>
-                                                        <p className="text-slate-300 text-[11px] sm:text-base mb-5 sm:mb-8 max-w-lg mx-auto leading-relaxed">
+                                                        <p className="mx-auto mb-5 max-w-lg text-[11px] leading-relaxed text-[#5a5a82] sm:mb-8 sm:text-base">
                                                             คัดเฉพาะรายชื่อเกรด A+ เสริมมงคลทวีคูณสูงสุด 20 รายชื่อต่อครั้ง (รายชื่ออื่นจะถูกสุ่มเปิดเพื่อความสิริมงคล)
                                                         </p>
                                                         <button
                                                             onClick={() => performUnlock(selectedLetter, 15)}
                                                             disabled={isLoading}
-                                                            className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-black rounded-2xl shadow-[0_10px_30px_rgba(245,158,11,0.3)] transition-all hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(245,158,11,0.4)] disabled:opacity-70 text-sm sm:text-base"
+                                                            className="group relative inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-300 to-yellow-300 px-6 py-3 text-sm font-black text-[#1a1a3e] shadow-[0_12px_32px_rgba(245,158,11,0.22)] transition-all hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(245,158,11,0.30)] disabled:opacity-70 sm:gap-3 sm:px-8 sm:py-4 sm:text-base"
                                                         >
-                                                            <div className="absolute inset-0 rounded-2xl border-2 border-white/20 mix-blend-overlay" />
+                                                            <div className="absolute inset-0 rounded-2xl border-2 border-white/30 mix-blend-overlay" />
                                                             {isLoading ? <span className="animate-spin text-lg sm:text-xl">⏳</span> : <Lock className="w-4 h-4 sm:w-5 sm:h-5" />}
                                                             ปลดล็อกรายชื่อมงคล (15 เครดิต)
                                                         </button>
@@ -476,9 +475,9 @@ export default function ClientPage() {
                                                     <button
                                                         onClick={() => performUnlock(selectedLetter, 15)}
                                                         disabled={isLoading}
-                                                        className="inline-flex items-center gap-2 px-8 py-4 bg-[#0f172a] border border-[#1e293b] hover:border-amber-400/40 text-white font-bold rounded-2xl transition-all disabled:opacity-50 shadow-md hover:shadow-xl"
+                                                        className="inline-flex items-center gap-2 rounded-2xl border border-emerald-200 bg-white/85 px-8 py-4 font-bold text-[#1a1a3e] shadow-[0_14px_34px_rgba(16,185,129,0.10)] transition-all hover:border-emerald-300 hover:bg-emerald-50 disabled:opacity-50"
                                                     >
-                                                        {isLoading ? <span className="animate-spin">⏳</span> : <Lock size={18} className="text-amber-400" />}
+                                                        {isLoading ? <span className="animate-spin">⏳</span> : <Lock size={18} className="text-emerald-700" />}
                                                         ดูเพิ่มอีก 20 ชื่อ (15 เครดิต)
                                                     </button>
                                                     <p className="mt-4 text-xs text-[#5a5a82] font-medium">
@@ -501,15 +500,15 @@ export default function ClientPage() {
                             </div>
                         </div>
                     ) : (
-                        <div className="bg-[#0f172a] border border-[#1e293b] rounded-3xl p-12 text-center mt-12 shadow-md">
-                            <div className="w-24 h-24 bg-slate-900/50 rounded-3xl flex items-center justify-center mx-auto mb-6 border border-[#1e293b] shadow-inner">
-                                <Search size={40} className="text-slate-500" />
+                        <div className="mt-12 rounded-3xl border border-emerald-200/80 bg-white/85 p-12 text-center shadow-[0_18px_44px_rgba(16,185,129,0.08)]">
+                            <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-3xl border border-emerald-100 bg-emerald-50 shadow-inner">
+                                <Search size={40} className="text-emerald-500" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">{t('pages.premiumSearch.results.emptyTitle')}</h3>
-                            <p className="text-slate-300 mb-8">{t('pages.premiumSearch.results.emptyDesc')}</p>
+                            <h3 className="mb-3 text-2xl font-bold tracking-tight text-[#1a1a3e]">{t('pages.premiumSearch.results.emptyTitle')}</h3>
+                            <p className="mb-8 text-[#5a5a82]">{t('pages.premiumSearch.results.emptyDesc')}</p>
                             <button
                                 onClick={resetFilters}
-                                className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-500/10 border border-amber-500/20 px-6 py-3 font-bold text-amber-400 transition-colors hover:bg-amber-500/20"
+                                className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-6 py-3 font-bold text-emerald-700 transition-colors hover:bg-emerald-100"
                             >
                                 <RotateCcw className="h-4 w-4" />
                                 ล้างตัวกรองแล้วเริ่มใหม่
@@ -521,6 +520,6 @@ export default function ClientPage() {
 
                 </div>
             </main>
-        </div>
+        </SoftYellowGlowBackground>
     );
 }

@@ -7,7 +7,7 @@ import {
     Sparkles, Clock, User, Target,
     ChevronRight, ArrowLeft, Star, Crown,
     Lock, CheckCircle2, AlertCircle, RefreshCw,
-    Coins, Briefcase, Activity, Heart, HelpingHand, Check,
+    Coins, Briefcase, Activity, Heart, HelpingHand, Check, Mars, Venus,
     ShieldCheck, Info, XCircle, TrendingUp, MessageSquareQuote
 } from 'lucide-react';
 import Link from 'next/link';
@@ -155,6 +155,49 @@ export default function PremiumAnalysisPage() {
         { key: 'LOVE', title: 'ความรัก', subtitle: 'เสน่ห์ คู่ครอง', icon: <Heart size={20} /> },
         { key: 'PATRON', title: 'อุปถัมภ์', subtitle: 'ผู้ใหญ่เมตตา', icon: <HelpingHand size={20} /> },
     ];
+
+    const focusStyles: Record<FocusTopic, { card: string; active: string; icon: string; iconActive: string; titleActive: string; glow: string }> = {
+        WEALTH: {
+            card: 'border-amber-200/80 bg-gradient-to-br from-amber-50 via-yellow-50 to-white shadow-[0_16px_36px_rgba(245,158,11,0.12)]',
+            active: 'border-amber-300 bg-gradient-to-br from-amber-100 via-yellow-50 to-white shadow-[0_20px_42px_rgba(245,158,11,0.22)] ring-1 ring-amber-300',
+            icon: 'bg-amber-100 text-amber-700 shadow-[0_10px_24px_rgba(245,158,11,0.18)]',
+            iconActive: 'bg-gradient-to-br from-amber-200 to-yellow-300 text-[#2f230b] shadow-[0_12px_28px_rgba(245,158,11,0.26)]',
+            titleActive: 'text-[#2f230b]',
+            glow: 'bg-amber-200/40',
+        },
+        JOB: {
+            card: 'border-pink-200/80 bg-gradient-to-br from-pink-50 via-rose-50 to-white shadow-[0_16px_36px_rgba(236,72,153,0.10)]',
+            active: 'border-pink-300 bg-gradient-to-br from-pink-100 via-rose-50 to-white shadow-[0_20px_42px_rgba(236,72,153,0.18)] ring-1 ring-pink-300',
+            icon: 'bg-pink-100 text-pink-600 shadow-[0_10px_24px_rgba(236,72,153,0.14)]',
+            iconActive: 'bg-gradient-to-br from-pink-200 to-rose-300 text-pink-900 shadow-[0_12px_28px_rgba(236,72,153,0.22)]',
+            titleActive: 'text-pink-900',
+            glow: 'bg-pink-200/40',
+        },
+        HEALTH: {
+            card: 'border-emerald-200/80 bg-gradient-to-br from-emerald-50 via-teal-50 to-white shadow-[0_16px_36px_rgba(16,185,129,0.10)]',
+            active: 'border-emerald-300 bg-gradient-to-br from-emerald-100 via-teal-50 to-white shadow-[0_20px_42px_rgba(16,185,129,0.18)] ring-1 ring-emerald-300',
+            icon: 'bg-emerald-100 text-emerald-700 shadow-[0_10px_24px_rgba(16,185,129,0.14)]',
+            iconActive: 'bg-gradient-to-br from-emerald-200 to-teal-300 text-emerald-950 shadow-[0_12px_28px_rgba(16,185,129,0.22)]',
+            titleActive: 'text-emerald-950',
+            glow: 'bg-emerald-200/40',
+        },
+        LOVE: {
+            card: 'border-violet-200/80 bg-gradient-to-br from-violet-50 via-purple-50 to-white shadow-[0_16px_36px_rgba(139,92,246,0.10)]',
+            active: 'border-violet-300 bg-gradient-to-br from-violet-100 via-purple-50 to-white shadow-[0_20px_42px_rgba(139,92,246,0.18)] ring-1 ring-violet-300',
+            icon: 'bg-violet-100 text-violet-600 shadow-[0_10px_24px_rgba(139,92,246,0.14)]',
+            iconActive: 'bg-gradient-to-br from-violet-200 to-purple-300 text-violet-950 shadow-[0_12px_28px_rgba(139,92,246,0.22)]',
+            titleActive: 'text-violet-950',
+            glow: 'bg-violet-200/40',
+        },
+        PATRON: {
+            card: 'border-sky-200/80 bg-gradient-to-br from-sky-50 via-blue-50 to-white shadow-[0_16px_36px_rgba(59,130,246,0.10)]',
+            active: 'border-sky-300 bg-gradient-to-br from-sky-100 via-blue-50 to-white shadow-[0_20px_42px_rgba(59,130,246,0.18)] ring-1 ring-sky-300',
+            icon: 'bg-sky-100 text-sky-600 shadow-[0_10px_24px_rgba(59,130,246,0.14)]',
+            iconActive: 'bg-gradient-to-br from-sky-200 to-blue-300 text-sky-950 shadow-[0_12px_28px_rgba(59,130,246,0.22)]',
+            titleActive: 'text-sky-950',
+            glow: 'bg-sky-200/40',
+        },
+    };
 
     const handleAnalyze = async (isNewBatch = false) => {
         const { default: Swal } = await import('sweetalert2');
@@ -530,23 +573,23 @@ export default function PremiumAnalysisPage() {
     );
 
     const formContent = (
-        <div className="relative mx-auto max-w-6xl overflow-visible px-0 animate-fade-in-up sm:px-4 md:px-8">
+        <div className="relative mx-auto max-w-6xl overflow-visible px-0 animate-fade-in-up sm:px-2 md:px-4">
 
-            <div className="relative z-10 grid grid-cols-1 gap-5 md:gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="relative z-10 grid grid-cols-1 gap-8 md:gap-10 lg:grid-cols-12 lg:gap-14">
 
                 {/* Left Column: Personal Inputs (User Data) */}
-                <div className="lg:col-span-5 space-y-5 md:space-y-8">
+                <div className="lg:col-span-5 space-y-5 md:space-y-6">
 
-                    <div className="flex items-center gap-3 text-amber-400 mb-2">
-                        <div className="w-1.5 h-6 md:h-7 bg-gradient-to-b from-amber-400 to-amber-600 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
-                        <h3 className="text-base md:text-xl font-extrabold uppercase tracking-wide md:tracking-widest drop-shadow-md">ข้อมูลส่วนตัว</h3>
+                    <div className="mb-2 flex items-center gap-3 text-pink-500">
+                        <div className="h-7 w-1.5 rounded-full bg-gradient-to-b from-pink-400 to-rose-400 shadow-[0_8px_20px_rgba(244,114,182,0.28)]"></div>
+                        <h3 className="text-base font-extrabold tracking-[0.08em] md:text-xl">ข้อมูลส่วนตัว</h3>
                     </div>
 
                     {/* Surname */}
                     <div className="space-y-2 md:space-y-3">
-                        <label className="text-sm font-bold text-slate-200 ml-1">นามสกุล <span className="text-red-400">*</span></label>
+                        <label className="ml-1 text-sm font-bold text-[#2f2f4f]">นามสกุล <span className="text-red-400">*</span></label>
                         <div className="relative group">
-                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-amber-400 transition-colors">
+                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-pink-400 transition-colors group-focus-within:text-pink-500">
                                 <User size={20} className="w-5 h-5 md:w-5 md:h-5" />
                             </div>
                             <input
@@ -554,7 +597,7 @@ export default function PremiumAnalysisPage() {
                                 value={surname}
                                 onChange={(e) => setSurname(e.target.value)}
                                 placeholder="กรอกนามสกุลของท่าน"
-                                className="w-full rounded-xl border border-slate-700/80 bg-slate-900/90 pl-11 pr-4 py-3 text-base text-white shadow-inner transition-all placeholder:text-slate-500 focus:border-amber-500/50 focus:outline-none focus:ring-1 focus:ring-amber-500/50 md:rounded-2xl md:pl-12 md:pr-5 md:py-4 md:text-lg"
+                                className="w-full rounded-xl border border-pink-100/90 bg-white/80 py-3 pl-11 pr-4 text-base text-[#1a1a3e] shadow-[0_10px_24px_rgba(201,147,58,0.05)] transition-all placeholder:text-slate-400 focus:border-pink-300 focus:outline-none focus:ring-2 focus:ring-pink-200/50 md:rounded-2xl md:py-4 md:pl-12 md:pr-5 md:text-lg"
                             />
                         </div>
                     </div>
@@ -563,7 +606,7 @@ export default function PremiumAnalysisPage() {
                     <div className="grid grid-cols-1 gap-5 md:gap-6">
                         {/* Birth Date (Dropdowns) */}
                         <div className="space-y-2 md:space-y-3">
-                            <label className="text-sm font-bold text-slate-200 ml-1">วันเกิด</label>
+                            <label className="ml-1 text-sm font-bold text-[#2f2f4f]">วันเกิด</label>
                             <div className="grid grid-cols-12 gap-2 sm:gap-4">
                                 {/* Day */}
                                 <div className="col-span-4 sm:col-span-3 relative">
@@ -573,6 +616,7 @@ export default function PremiumAnalysisPage() {
                                         options={DAYS}
                                         placeholder="วัน"
                                         searchPlaceholder="ค้นหาวัน..."
+                                        variant="light"
                                     />
                                 </div>
 
@@ -584,6 +628,7 @@ export default function PremiumAnalysisPage() {
                                         options={THAI_MONTHS}
                                         placeholder="เดือน"
                                         searchPlaceholder="ค้นหาเดือน..."
+                                        variant="light"
                                     />
                                 </div>
 
@@ -595,6 +640,7 @@ export default function PremiumAnalysisPage() {
                                         options={YEARS.map(y => ({ value: y.val, label: y.label }))}
                                         placeholder="ปี (พ.ศ.)"
                                         searchPlaceholder="ค้นหาปี..."
+                                        variant="light"
                                     />
                                 </div>
                             </div>
@@ -602,12 +648,12 @@ export default function PremiumAnalysisPage() {
 
                         {/* Birth Time */}
                         <div className="space-y-2 md:space-y-3">
-                            <label className="text-sm font-bold text-slate-200 ml-1 flex justify-between items-center">
+                            <label className="ml-1 flex items-center justify-between text-sm font-bold text-[#2f2f4f]">
                                 <span className="flex items-center gap-2">
                                     เวลาเกิด
                                     {/* Tooltip for birth time */}
                                     <div className="relative group/tooltip">
-                                        <Info size={14} className="text-slate-400 hover:text-amber-400 cursor-help transition-colors" />
+                                        <Info size={14} className="cursor-help text-pink-300 transition-colors hover:text-pink-500" />
                                         <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-64 p-3 bg-slate-900/90 backdrop-blur-xl border border-amber-500/20 rounded-xl text-xs text-slate-300 opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all z-50 shadow-2xl">
                                             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-slate-900 border-r border-b border-amber-500/20 rotate-45"></div>
                                             <p className="leading-relaxed">
@@ -625,9 +671,9 @@ export default function PremiumAnalysisPage() {
                                             setIsUnknownTime(e.target.checked);
                                             if (e.target.checked) setBirthTime('');
                                         }}
-                                        className="rounded border-slate-600 bg-slate-900 text-amber-500 focus:ring-amber-500/50"
+                                        className="rounded border-pink-200 bg-white text-pink-500 focus:ring-pink-300"
                                     />
-                                    <label htmlFor="unknownTime" className="text-xs text-slate-300 cursor-pointer hover:text-amber-400 transition-colors">ไม่ทราบเวลา</label>
+                                    <label htmlFor="unknownTime" className="cursor-pointer text-xs text-slate-500 transition-colors hover:text-pink-500">ไม่ทราบเวลา</label>
                                 </div>
                             </label>
                             <div className={`grid grid-cols-2 gap-3 md:gap-4 ${isUnknownTime ? 'opacity-50 pointer-events-none' : ''}`}>
@@ -640,6 +686,7 @@ export default function PremiumAnalysisPage() {
                                         disabled={isUnknownTime}
                                         placeholder="นาฬิกา"
                                         searchPlaceholder="ค้นหา..."
+                                        variant="light"
                                     />
                                 </div>
 
@@ -652,6 +699,7 @@ export default function PremiumAnalysisPage() {
                                         disabled={isUnknownTime}
                                         placeholder="นาที"
                                         searchPlaceholder="ค้นหา..."
+                                        variant="light"
                                     />
                                 </div>
                             </div>
@@ -660,24 +708,26 @@ export default function PremiumAnalysisPage() {
 
                     {/* Gender */}
                     <div className="space-y-2 md:space-y-3">
-                        <label className="text-sm font-bold text-slate-200 ml-1">เพศ</label>
-                        <div className="grid grid-cols-2 gap-2.5 md:gap-3 p-0 md:p-1">
+                        <label className="ml-1 text-sm font-bold text-[#2f2f4f]">เพศ</label>
+                        <div className="grid grid-cols-2 gap-3 p-0 md:p-1">
                             <button
                                 onClick={() => setGender('male')}
-                                className={`min-h-12 py-3 md:py-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border ${gender === 'male'
-                                    ? 'bg-blue-500/10 text-blue-300 border-blue-500/30 ring-1 ring-blue-500/30'
-                                    : 'bg-white/5 border-transparent text-slate-400 hover:bg-white/10'
+                                className={`min-h-12 py-3 md:py-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border shadow-[0_8px_22px_rgba(236,72,153,0.04)] ${gender === 'male'
+                                    ? 'border-pink-300 bg-gradient-to-br from-pink-50 to-rose-50 text-pink-600 ring-1 ring-pink-200'
+                                    : 'border-pink-100/80 bg-white/80 text-slate-500 hover:border-pink-200 hover:text-pink-500'
                                     }`}
                             >
+                                <Mars className="h-4 w-4" />
                                 <span>ชาย</span>
                             </button>
                             <button
                                 onClick={() => setGender('female')}
-                                className={`min-h-12 py-3 md:py-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border ${gender === 'female'
-                                    ? 'bg-pink-500/10 text-pink-300 border-pink-500/30 ring-1 ring-pink-500/30'
-                                    : 'bg-white/5 border-transparent text-slate-400 hover:bg-white/10'
+                                className={`min-h-12 py-3 md:py-4 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border shadow-[0_8px_22px_rgba(236,72,153,0.04)] ${gender === 'female'
+                                    ? 'border-pink-300 bg-gradient-to-br from-pink-50 to-rose-50 text-pink-600 ring-1 ring-pink-200'
+                                    : 'border-pink-100/80 bg-white/80 text-slate-500 hover:border-pink-200 hover:text-pink-500'
                                     }`}
                             >
+                                <Venus className="h-4 w-4" />
                                 <span>หญิง</span>
                             </button>
                         </div>
@@ -686,29 +736,30 @@ export default function PremiumAnalysisPage() {
 
                 {/* Right Column: Focus Selection (Grid Cards) */}
                 <div className="lg:col-span-7 flex flex-col h-full mt-2 md:mt-0">
-                    <div className="flex items-center gap-3 text-amber-400 mb-4 md:mb-8">
-                        <div className="w-1.5 h-6 md:h-7 bg-gradient-to-b from-amber-400 to-amber-600 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
-                        <h3 className="text-base md:text-xl font-extrabold uppercase tracking-wide md:tracking-widest drop-shadow-md">เลือกสิ่งที่คุณต้องการเน้น (FOCUS)</h3>
+                    <div className="mb-4 flex items-center gap-3 text-pink-500 md:mb-8">
+                        <div className="h-7 w-1.5 rounded-full bg-gradient-to-b from-pink-400 to-rose-400 shadow-[0_8px_20px_rgba(244,114,182,0.28)]"></div>
+                        <h3 className="text-base font-extrabold tracking-[0.08em] md:text-xl">เลือกสิ่งที่คุณต้องการเน้น (FOCUS)</h3>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 flex-1">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5">
                         {focusOptions.map((option) => {
                             const isActive = focus === option.key;
+                            const styles = focusStyles[option.key];
                             return (
                                 <button
                                     key={option.key}
                                     onClick={() => setFocus(option.key)}
-                                    className={`group relative min-h-20 p-3.5 md:p-4 rounded-2xl border-0 transition-all duration-300 flex items-center gap-3 md:gap-4 overflow-hidden
+                                    className={`group relative min-h-24 overflow-hidden rounded-2xl border p-4 transition-all duration-300 flex items-center gap-3 md:gap-4 hover:-translate-y-0.5
                                         ${isActive
-                                            ? 'bg-amber-500/10 shadow-inner ring-1 ring-amber-500/50'
-                                            : 'bg-white/5 hover:bg-white/10'
+                                            ? styles.active
+                                            : styles.card
                                         }`}
                                 >
 
                                     {/* Icon Box */}
                                     <div className={`p-2.5 md:p-3 rounded-lg md:rounded-xl transition-all duration-300 shrink-0 ${isActive
-                                        ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-[#140f0a] shadow-[0_0_15px_rgba(245,158,11,0.4)]'
-                                        : 'bg-white/5 text-slate-400 group-hover:text-amber-300 group-hover:bg-white/10'
+                                        ? styles.iconActive
+                                        : styles.icon
                                         }`}>
                                         {React.cloneElement(option.icon as React.ReactElement<{ size: number }>, { size: 24 })}
                                     </div>
@@ -716,23 +767,23 @@ export default function PremiumAnalysisPage() {
                                     {/* Text Content */}
                                     <div className="flex-1 text-left z-10">
                                         <div className="flex items-center gap-2">
-                                            <h4 className={`text-sm md:text-base font-bold transition-colors ${isActive ? 'text-amber-300' : 'text-slate-200 group-hover:text-white'}`}>
+                                            <h4 className={`text-sm md:text-base font-bold transition-colors ${isActive ? styles.titleActive : 'text-[#2f2f4f] group-hover:text-[#1a1a3e]'}`}>
                                                 {option.title}
                                             </h4>
                                             {isActive && (
-                                                <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-amber-500 flex items-center justify-center shadow-lg transform scale-100 transition-transform">
-                                                    <Check size={12} className="text-[#140f0a] stroke-[3px] w-2.5 h-2.5 md:w-3 md:h-3" />
+                                                <div className="flex h-4 w-4 scale-100 items-center justify-center rounded-full bg-orange-400 shadow-lg transition-transform md:h-5 md:w-5">
+                                                    <Check size={12} className="h-2.5 w-2.5 text-white stroke-[3px] md:h-3 md:w-3" />
                                                 </div>
                                             )}
                                         </div>
-                                        <p className={`text-xs mt-0.5 md:mt-1 ${isActive ? 'text-amber-100/90' : 'text-slate-400 group-hover:text-slate-300'}`}>
+                                        <p className={`text-xs mt-0.5 md:mt-1 ${isActive ? 'text-slate-700' : 'text-slate-500 group-hover:text-slate-600'}`}>
                                             {option.subtitle}
                                         </p>
                                     </div>
 
                                     {/* Lustrous effect for active state */}
                                     {isActive && (
-                                        <div className="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-amber-500/10 rounded-full blur-2xl -mr-6 -mt-6 md:-mr-8 md:-mt-8 pointer-events-none"></div>
+                                        <div className={`absolute -right-8 -top-8 h-28 w-28 rounded-full blur-2xl md:h-32 md:w-32 ${styles.glow} pointer-events-none`}></div>
                                     )}
                                 </button>
                             );
@@ -742,17 +793,17 @@ export default function PremiumAnalysisPage() {
             </div>
 
             {/* Bottom Action Area */}
-            <div className="mt-8 md:mt-12 pt-5 md:pt-8 border-t border-white/5 relative z-10">
+            <div className="relative z-10 mt-8 border-t border-pink-100 pt-5 md:mt-10 md:pt-7">
                 <div className="flex flex-col items-center justify-center space-y-4">
                     <button
                         onClick={() => handleAnalyze(false)}
                         disabled={isLoading}
                         data-track="premiumAnalysis.form.analyze"
-                        className="group relative w-full md:max-w-xl mx-auto overflow-hidden rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 shadow-[0_0_30px_rgba(245,158,11,0.2)] transition-all hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(245,158,11,0.4)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 disabled:grayscale"
+                        className="group relative mx-auto w-full overflow-hidden rounded-2xl border border-amber-300/80 bg-gradient-to-r from-amber-50 via-yellow-50 to-white shadow-[0_18px_44px_rgba(245,158,11,0.18)] transition-all hover:-translate-y-1 hover:shadow-[0_22px_52px_rgba(245,158,11,0.24)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 disabled:grayscale md:max-w-3xl"
                     >
-                        <div className="relative flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5 md:px-8 md:py-6">
+                        <div className="relative flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5 md:px-8 md:py-5">
                             <div className="flex min-w-0 items-center gap-3.5 sm:gap-5">
-                                <div className="bg-gradient-to-br from-amber-400 to-orange-500 p-2.5 md:p-3 rounded-lg md:rounded-xl text-[#0f172a] shadow-lg shrink-0">
+                                <div className="shrink-0 rounded-lg bg-gradient-to-br from-amber-100 to-yellow-200 p-2.5 text-[#7a4b00] shadow-[0_12px_28px_rgba(245,158,11,0.22)] md:rounded-xl md:p-3">
                                     {isLoading ? <span className="animate-spin block"><RefreshCw className="w-5 h-5 md:w-7 md:h-7" /></span> : <Sparkles className="animate-pulse w-5 h-5 md:w-7 md:h-7" />}
                                 </div>
                                 <div className="min-w-0 text-left leading-tight">
@@ -760,7 +811,7 @@ export default function PremiumAnalysisPage() {
                                     <p className="mt-1 text-xs md:text-sm text-[#2a1f14] font-semibold leading-tight">ใช้ศาสตร์ชั้นสูง + พลังตัวเลข</p>
                                 </div>
                             </div>
-                            <div className="inline-flex w-full sm:w-auto items-center justify-center gap-1.5 md:gap-2 self-start sm:self-auto bg-black/10 border border-black/5 px-3 py-2 sm:px-4 md:px-5 md:py-3 rounded-xl shadow-inner shrink-0">
+                            <div className="inline-flex w-full shrink-0 items-center justify-center gap-1.5 self-start rounded-xl border border-amber-300/50 bg-gradient-to-r from-amber-300 to-yellow-300 px-3 py-2 shadow-[0_10px_22px_rgba(245,158,11,0.20)] sm:w-auto sm:self-auto sm:px-4 md:gap-2 md:px-5 md:py-3">
                                 <span className="text-[11px] sm:text-sm md:text-base font-bold text-[#140f0a] leading-tight text-center">
                                     {userTier === 'vvip'
                                         ? `ใช้ ${PREMIUM_ANALYSIS_COST} เครดิต`
@@ -773,11 +824,11 @@ export default function PremiumAnalysisPage() {
                         {!isLoading && <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-20 pointer-events-none"></div>}
                     </button>
 
-                    <p className="text-slate-300 text-xs md:text-sm flex items-center gap-1.5 md:gap-2 opacity-80 hover:opacity-100 transition-opacity font-medium">
-                        <Lock size={14} className="text-amber-500 w-3.5 h-3.5 md:w-4 md:h-4" />
+                    <p className="flex items-center gap-1.5 text-xs font-medium text-slate-500 opacity-90 transition-opacity hover:opacity-100 md:gap-2 md:text-sm">
+                        <Lock size={14} className="h-3.5 w-3.5 text-pink-400 md:h-4 md:w-4" />
                         ปลอดภัยสูงสุด • ข้อมูลของท่านจะถูกเก็บเป็นความลับ
                         {userTier === 'vvip' && userCredits !== null && (
-                            <span className="text-amber-300">• เครดิตคงเหลือ {userCredits}</span>
+                            <span className="text-pink-500">• เครดิตคงเหลือ {userCredits}</span>
                         )}
                     </p>
                 </div>
@@ -813,7 +864,10 @@ export default function PremiumAnalysisPage() {
                     </header>
 
                     {/* Main Content Area */}
-                    <div className="rounded-[2rem] border border-slate-800 bg-slate-950/90 px-4 py-6 text-slate-200 shadow-2xl shadow-slate-950/20 sm:px-6 md:px-8 md:py-10">
+                    <div className="relative overflow-hidden rounded-[2rem] border border-pink-100/70 bg-gradient-to-br from-white via-pink-50/35 to-amber-50/45 px-4 py-6 text-[#1a1a3e] shadow-[0_30px_90px_rgba(201,147,58,0.12)] sm:px-6 md:rounded-[2.5rem] md:px-10 md:py-10">
+                        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-pink-200 to-transparent"></div>
+                        <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-pink-100/40 blur-3xl"></div>
+                        <div className="pointer-events-none absolute -bottom-28 left-1/3 h-72 w-72 rounded-full bg-amber-100/50 blur-3xl"></div>
                         {!hasAnalyzed ? formContent : resultsContent}
                     </div>
 

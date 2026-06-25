@@ -4,7 +4,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import ReviewBadge from '@/components/ReviewBadge';
 import UserStatsBadge from '@/components/UserStatsBadge';
-import PopularNames from '@/components/PopularNames';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/utils/supabase';
@@ -559,9 +558,6 @@ export default function SearchPage() {
                                     <div className="flex flex-wrap gap-2 md:gap-3 justify-center">
                                         <ReviewBadge rating={publicStats.avgRating} count={publicStats.reviewCount} />
                                         <UserStatsBadge users={publicStats.weeklyAnalyses} label="มีผู้ค้นหาสัปดาห์นี้แล้ว" />
-                                    </div>
-                                    <div className="hidden sm:block">
-                                        <PopularNames />
                                     </div>
                                 </div>
                                 <div className="mb-5 text-center md:mb-12">
