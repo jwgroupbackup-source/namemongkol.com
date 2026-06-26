@@ -171,9 +171,14 @@ export default function PremiumSearchPage() {
                             <p className="mt-3 text-sm leading-relaxed text-[#5a5a82]">
                                 ถ้ายังอยู่ในขั้นสำรวจชื่อจำนวนมาก ให้เริ่มจากฐานข้อมูลชื่อมงคลฟรีหรือเครื่องมือสร้างชื่อด้วย AI
                             </p>
-                            <Link href="/search" className="mt-6 inline-flex items-center text-sm font-bold text-amber-700 hover:text-amber-600">
-                                ค้นหาชื่อมงคลฟรี →
-                            </Link>
+                            <div className="mt-6 flex flex-wrap gap-3">
+                                <Link href="/search" className="inline-flex items-center text-sm font-bold text-amber-700 hover:text-amber-600">
+                                    ค้นหาชื่อมงคลฟรี →
+                                </Link>
+                                <Link href="/name-generator" className="inline-flex items-center text-sm font-bold text-pink-600 hover:text-pink-500">
+                                    สร้างชื่อมงคลด้วย AI →
+                                </Link>
+                            </div>
                         </div>
                         <div className="group rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-teal-50/70 to-white p-8 shadow-[0_18px_42px_rgba(16,185,129,0.08)] transition-[transform,border-color,box-shadow] hover:-translate-y-1 hover:border-emerald-300 hover:shadow-[0_22px_52px_rgba(16,185,129,0.13)]">
                             <h3 className="text-lg font-black text-emerald-800">3. คัดชื่อสำหรับเปลี่ยนจริง</h3>

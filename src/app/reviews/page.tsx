@@ -58,8 +58,7 @@ async function getReviews() {
 export default async function ReviewsPage() {
     const reviews = await getReviews();
 
-    // Serialize dates for Client Component if passing data directly, 
-    // but here we only use it for JSON-LD. ClientPage fetches its own data.
+    // Reuse the approved reviews for both JSON-LD and the initial client render.
 
     // Calculate aggregate rating for SEO
     const totalRatings = reviews.length;
@@ -168,7 +167,7 @@ export default async function ReviewsPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
             />
-            <ClientPage />
+            <ClientPage initialReviews={reviews} />
         </>
     );
 }

@@ -149,48 +149,48 @@ export default function NameGeneratorPage() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             <ClientPage />
-            <section className="bg-[#0f172a] px-4 pb-20 text-slate-200">
-                <div className="mx-auto max-w-4xl border-t border-white/10 pt-12">
-                    <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-amber-300">
+            <section className="bg-[#fff9fd] px-4 pb-24 text-[#5a5a82]">
+                <div className="mx-auto max-w-5xl border-t border-pink-100 pt-12">
+                    <p className="mb-3 text-xs font-extrabold uppercase tracking-normal text-pink-500">
                         AI Naming Workflow
                     </p>
-                    <h2 className="text-2xl font-bold text-white sm:text-3xl">
+                    <h2 className="text-balance text-2xl font-extrabold text-[#15163f] sm:text-3xl">
                         สร้างชื่อมงคลด้วย AI แล้วควรตรวจอะไรต่อก่อนใช้จริง
                     </h2>
-                    <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
+                    <p className="mt-4 max-w-3xl text-sm leading-7 text-[#5a5a82] sm:text-base">
                         เครื่องมือนี้ช่วยสร้างชื่อใหม่ที่ผ่านเกณฑ์ผลรวมเลขศาสตร์และคู่เลขมงคลในระดับเริ่มต้น เหมาะสำหรับหาไอเดียชื่อจำนวนมากอย่างรวดเร็ว
                         แต่ก่อนนำไปใช้จริงควรตรวจร่วมกับนามสกุล วันเกิด และอักษรกาลกิณี เพื่อให้รู้ว่าชื่อนั้นส่งเสริมดวงของเจ้าของชื่อจริงหรือไม่
                     </p>
 
                     <div className="mt-8 grid gap-4 md:grid-cols-3">
-                        <div className="rounded-2xl border border-amber-400/15 bg-amber-400/5 p-5">
-                            <h3 className="font-semibold text-amber-200">1. สร้างรายชื่อ</h3>
-                            <p className="mt-2 text-sm leading-6 text-slate-300">
+                        <div className="rounded-2xl border border-amber-200 bg-[#fff8e8] p-5 shadow-sm">
+                            <h3 className="font-extrabold text-amber-700">1. สร้างรายชื่อ</h3>
+                            <p className="mt-2 text-sm leading-6 text-[#6b5b3d]">
                                 เลือกอักษรนำแล้วให้ AI สร้างชื่อเกรด A+ เป็นชุด เพื่อใช้เป็นตัวเลือกตั้งต้น
                             </p>
                         </div>
-                        <div className="rounded-2xl border border-cyan-400/15 bg-cyan-400/5 p-5">
-                            <h3 className="font-semibold text-cyan-200">2. วิเคราะห์กับนามสกุล</h3>
-                            <p className="mt-2 text-sm leading-6 text-slate-300">
+                        <div className="rounded-2xl border border-sky-200 bg-[#f0faff] p-5 shadow-sm">
+                            <h3 className="font-extrabold text-sky-700">2. วิเคราะห์กับนามสกุล</h3>
+                            <p className="mt-2 text-sm leading-6 text-[#465f73]">
                                 นำชื่อที่ชอบไปเช็กชื่อและนามสกุล เพื่อดูผลรวมจริงและความสมพงศ์ของชื่อเต็ม
                             </p>
                         </div>
-                        <div className="rounded-2xl border border-emerald-400/15 bg-emerald-400/5 p-5">
-                            <h3 className="font-semibold text-emerald-200">3. คัดชื่อเสริมดวง</h3>
-                            <p className="mt-2 text-sm leading-6 text-slate-300">
+                        <div className="rounded-2xl border border-emerald-200 bg-[#effdf7] p-5 shadow-sm">
+                            <h3 className="font-extrabold text-emerald-700">3. คัดชื่อเสริมดวง</h3>
+                            <p className="mt-2 text-sm leading-6 text-[#416458]">
                                 ถ้าต้องการชื่อที่คัดตามวันเกิด อักษรนำ และวรรคเดช/ศรี ให้ใช้ระบบ Pro ต่อ
                             </p>
                         </div>
                     </div>
 
                     <div className="mt-8 flex flex-wrap gap-3 text-sm">
-                        <Link href="/name-check" className="rounded-full border border-cyan-400/20 bg-cyan-400/5 px-4 py-2 text-cyan-200 hover:bg-cyan-400/10">
+                        <Link href="/name-check" className="rounded-full border border-sky-200 bg-white px-4 py-2 font-bold text-sky-700 shadow-sm transition-colors hover:bg-sky-50">
                             วิเคราะห์ชื่อกับนามสกุลฟรี
                         </Link>
-                        <Link href="/search" className="rounded-full border border-amber-400/20 bg-amber-400/5 px-4 py-2 text-amber-200 hover:bg-amber-400/10">
+                        <Link href="/search" className="rounded-full border border-amber-200 bg-white px-4 py-2 font-bold text-amber-700 shadow-sm transition-colors hover:bg-amber-50">
                             ค้นหาชื่อมงคลจากฐานข้อมูล
                         </Link>
-                        <Link href="/premium-search" className="rounded-full border border-emerald-400/20 bg-emerald-400/5 px-4 py-2 text-emerald-200 hover:bg-emerald-400/10">
+                        <Link href="/premium-search" className="rounded-full border border-emerald-200 bg-white px-4 py-2 font-bold text-emerald-700 shadow-sm transition-colors hover:bg-emerald-50">
                             เปลี่ยนชื่อมงคล Pro
                         </Link>
                     </div>

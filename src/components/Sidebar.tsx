@@ -143,6 +143,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         { key: 'wallpapers', nameKey: 'sidebar.wallpapers', icon: ImageIcon, iconImage: '/icon/วอลเปเปอร์มงคล.png', iconPadding: 'p-2.5', path: '/wallpapers' },
         { key: 'reviews', nameKey: 'sidebar.reviews', icon: MessageCircle, iconImage: '/icon/รีวิวจากทางบ้าน.png', iconPadding: 'p-2.5', path: '/reviews' },
         { key: 'name-analysis', nameKey: 'sidebar.bulkNameFilter', icon: ClipboardList, iconImage: '/icon/ระบบคัดกรองชื่อ.png', iconPadding: 'p-2.5', path: '/name-analysis' },
+        { key: 'name-generator', nameKey: 'สร้างชื่อมงคล AI', icon: Wand2, path: '/name-generator' },
         { key: 'history', nameKey: 'sidebar.history', icon: HistoryIcon, iconImage: '/icon/ประวัติการใช้งาน.png', iconPadding: 'p-2.5', path: '/history' },
         { key: 'about', nameKey: 'sidebar.about', icon: Info, iconImage: '/icon/เกี่ยวกับเรา.png', path: '/about', mobileOnly: true },
     ];
@@ -151,7 +152,6 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
 
     if (role === 'admin') {
         menuItems.push(
-            { key: 'name-generator', nameKey: 'AI Name Generator', icon: Wand2, path: '/name-generator' },
             { key: 'admin-articles', nameKey: 'sidebar.adminArticles', icon: BookOpen, path: '/admin/articles' },
             { key: 'admin-users', nameKey: 'sidebar.adminUsers', icon: UserIcon, path: '/admin/users' },
             { key: 'admin-settings', nameKey: 'sidebar.adminSettings', icon: Settings, path: '/admin/settings' }

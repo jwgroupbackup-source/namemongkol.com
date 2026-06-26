@@ -581,6 +581,8 @@ export default function SearchPage() {
                                             <h3 className="text-amber-800 font-semibold mb-1 text-sm">💡 {t('pages.search.tipTitle')}</h3>
                                             <p className="text-slate-700 text-sm leading-relaxed">
                                                 {t('pages.search.tipBody')} <Link href="/" className="text-amber-700 hover:underline decoration-amber-400/30 underline-offset-4">{t('pages.search.links.l1Title')}</Link>
+                                                <span className="mx-1 text-slate-400">·</span>
+                                                ถ้ายังไม่มีชื่อในใจ ลอง <Link href="/name-generator" className="font-bold text-pink-600 hover:underline decoration-pink-300/50 underline-offset-4">สร้างชื่อมงคลด้วย AI</Link>
                                             </p>
                                         </div>
                                     </div>

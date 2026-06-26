@@ -237,7 +237,11 @@ const HeroSocialProof = () => {
 
                 <span className="h-3.5 w-px bg-[#ddddf0] sm:h-4" />
 
-                <span className="inline-flex items-center gap-1.5 text-xs text-[#5a5a82] sm:text-sm">
+                <Link
+                    href="/reviews"
+                    aria-label={`ดูรีวิวจากผู้ใช้งานทั้งหมด ${reviewCount ? reviewCount.toLocaleString('th-TH') : ''} รีวิว`}
+                    className="inline-flex items-center gap-1.5 rounded-full px-1.5 py-1 text-xs text-[#5a5a82] transition-all hover:bg-amber-50 hover:text-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-300 focus:ring-offset-2 sm:text-sm"
+                >
                     <span className="font-bold text-amber-500">({ratingLabel})</span>
                     <span
                         className="flex items-center gap-0.5 text-amber-400"
@@ -259,7 +263,7 @@ const HeroSocialProof = () => {
                     <span className="text-[10px] sm:text-xs font-medium text-[#8e8eaa] ml-0.5 whitespace-nowrap">
                         ({reviewCount ? reviewCount.toLocaleString('th-TH') : '...'} รีวิว)
                     </span>
-                </span>
+                </Link>
             </div>
         </div>
     );
