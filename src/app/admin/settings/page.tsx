@@ -4,6 +4,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Save, Settings, Tag } from 'lucide-react';
 import { supabase } from '@/utils/supabase';
+import { revalidateSettings } from '@/app/actions/revalidateSettings';
 import {
     DEFAULT_PALM_SYSTEM_PROMPT,
     DEFAULT_PALM_USER_PROMPT,
@@ -130,6 +131,7 @@ export default function AdminSettingsPage() {
                 .upsert(updates);
 
             if (error) throw error;
+            await revalidateSettings();
 
             const newGeminiApiKey = geminiApiKeyInput.trim();
             if (newGeminiApiKey) {
@@ -208,6 +210,7 @@ export default function AdminSettingsPage() {
                 .upsert(promptUpdates);
 
             if (error) throw error;
+            await revalidateSettings();
 
             setPalmSystemPrompt(DEFAULT_PALM_SYSTEM_PROMPT);
             setPalmUserPrompt(DEFAULT_PALM_USER_PROMPT);

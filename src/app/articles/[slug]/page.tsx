@@ -39,8 +39,8 @@ const SLUG_REDIRECTS: Record<string, string> = {
 
 const LOCAL_PRIORITY_ARTICLE_SLUGS = new Set(['boy-names-wednesday-night-2569']);
 
-// ISR: cache 1 hour, invalidate via revalidateTag('articles') when admin updates
-export const revalidate = 3600;
+// ISR: cache 24 hours, invalidate on demand via revalidateTag('articles') when admin updates
+export const revalidate = 86400;
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -169,7 +169,7 @@ async function fetchPublishedArticleSummariesDb(): Promise<Article[]> {
 const getPublishedArticleSummariesDb = unstable_cache(
     fetchPublishedArticleSummariesDb,
     ['articles-detail-summary-list'],
-    { revalidate: 3600, tags: ['articles'] }
+    { revalidate: 86400, tags: ['articles'] }
 );
 
 async function getRelatedArticlePool(): Promise<Article[]> {

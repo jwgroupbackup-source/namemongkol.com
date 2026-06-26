@@ -152,13 +152,14 @@ export default function AdminArticlesPage() {
 
         if (result.isConfirmed) {
             try {
+                const deletedArticle = articles.find(article => article.id === id);
                 const { error } = await supabase
                     .from('articles')
                     .delete()
                     .eq('id', id);
 
                 if (error) throw error;
-                await revalidateArticles();
+                await revalidateArticles(deletedArticle?.slug);
 
                 setArticles(prev => prev.filter(a => a.id !== id));
                 Swal.fire('Deleted!', 'Article has been deleted.', 'success');
@@ -236,13 +237,18 @@ export default function AdminArticlesPage() {
             };
 
             if (isEditing && currentArticle.id) {
+                const previousSlug = articles.find(article => article.id === currentArticle.id)?.slug;
                 const { error } = await supabase
                     .from('articles')
                     .update(payload)
                     .eq('id', currentArticle.id);
 
                 if (error) throw error;
-                await revalidateArticles();
+                await revalidateArticles(slugToCheck);
+
+                if (previousSlug && previousSlug !== slugToCheck) {
+                    await revalidateArticles(previousSlug);
+                }
 
                 // Refresh list or update local state
                 setArticles(prev => prev.map(a => a.id === currentArticle.id ? { ...a, ...payload, id: currentArticle.id as string } : a));
@@ -255,7 +261,7 @@ export default function AdminArticlesPage() {
                     .single();
 
                 if (error) throw error;
-                await revalidateArticles();
+                await revalidateArticles(slugToCheck);
                 if (data) setArticles(prev => [data as Article, ...prev]);
                 Swal.fire('Success', 'Article created successfully', 'success');
             }

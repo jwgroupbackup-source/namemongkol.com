@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
+import { unstable_cache } from 'next/cache';
 import { createClient } from '@supabase/supabase-js';
 
-export const revalidate = 300; // Cache 5 minutes
+const STATS_REVALIDATE_SECONDS = 900;
+
+export const revalidate = 900; // Cache 15 minutes
 
 const fallbackStats = {
     totalAnalyses: 0,
@@ -20,58 +23,66 @@ const getSupabase = () => {
     return createClient(supabaseUrl, supabaseKey);
 };
 
-export async function GET() {
+async function fetchPublicStats() {
     const supabase = getSupabase();
 
     if (!supabase) {
-        return NextResponse.json(
-            { success: false, stats: fallbackStats },
-            {
-                headers: {
-                    'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
-                },
-            },
-        );
+        return { success: false, stats: fallbackStats };
     }
 
+    const weekAgoIso = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+
+    const [analysisRes, weeklyAnalysisRes, usersRes, reviewsRes] = await Promise.all([
+        supabase.from('analysis_results').select('*', { count: 'exact', head: true }),
+        supabase.from('analysis_results').select('*', { count: 'exact', head: true }).gte('created_at', weekAgoIso),
+        supabase.from('user_profiles').select('*', { count: 'exact', head: true }),
+        supabase.from('reviews').select('rating').eq('status', 'approved'),
+    ]);
+
+    const totalAnalyses = analysisRes.count ?? 0;
+    const weeklyAnalyses = weeklyAnalysisRes.count ?? 0;
+    const totalUsers = usersRes.count ?? 0;
+
+    const reviews = reviewsRes.data ?? [];
+    const avgRating = reviews.length > 0
+        ? (reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / reviews.length).toFixed(1)
+        : '5.0';
+    const reviewCount = reviews.length;
+
+    return {
+        success: true,
+        stats: {
+            totalAnalyses,
+            weeklyAnalyses,
+            totalUsers,
+            avgRating: parseFloat(avgRating),
+            reviewCount,
+        },
+    };
+}
+
+const getCachedPublicStats = unstable_cache(
+    fetchPublicStats,
+    ['public-stats:v1'],
+    { revalidate: STATS_REVALIDATE_SECONDS, tags: ['public-stats'] },
+);
+
+export async function GET() {
     try {
-        const weekAgoIso = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-
-        const [analysisRes, weeklyAnalysisRes, usersRes, reviewsRes] = await Promise.all([
-            supabase.from('analysis_results').select('*', { count: 'exact', head: true }),
-            supabase.from('analysis_results').select('*', { count: 'exact', head: true }).gte('created_at', weekAgoIso),
-            supabase.from('user_profiles').select('*', { count: 'exact', head: true }),
-            supabase.from('reviews').select('rating').eq('status', 'approved'),
-        ]);
-
-        const totalAnalyses = analysisRes.count ?? 0;
-        const weeklyAnalyses = weeklyAnalysisRes.count ?? 0;
-        const totalUsers = usersRes.count ?? 0;
-
-        const reviews = reviewsRes.data ?? [];
-        const avgRating = reviews.length > 0
-            ? (reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / reviews.length).toFixed(1)
-            : '5.0';
-        const reviewCount = reviews.length;
-
-        return NextResponse.json({
-            success: true,
-            stats: {
-                totalAnalyses,
-                weeklyAnalyses,
-                totalUsers,
-                avgRating: parseFloat(avgRating),
-                reviewCount,
-            },
-        }, {
+        return NextResponse.json(await getCachedPublicStats(), {
             headers: {
-                'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+                'Cache-Control': `public, s-maxage=${STATS_REVALIDATE_SECONDS}, stale-while-revalidate=3600`,
             },
         });
     } catch {
         return NextResponse.json(
             { success: false, stats: fallbackStats },
-            { status: 500 },
+            {
+                status: 500,
+                headers: {
+                    'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+                },
+            },
         );
     }
 }

@@ -155,7 +155,7 @@ const HeroSocialProof = () => {
 
         const loadStats = async () => {
             try {
-                const response = await fetch('/api/live-stats', { cache: 'no-store' });
+                const response = await fetch('/api/live-stats');
                 if (!response.ok) {
                     return;
                 }

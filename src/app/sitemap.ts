@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { articles as localArticles } from '@/data/articles';
 import { siteUrl } from '@/lib/seo';
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 const STATIC_LASTMOD = '2026-06-02';
 const CONTENT_LASTMOD = '2026-05-30';

@@ -11,10 +11,25 @@
 
 import { supabase } from '@/utils/supabase';
 
+const CLICK_SAMPLE_RATE = 0.35;
+const DEDUPE_WINDOW_MS = 2000;
+const ALWAYS_TRACK_KEYWORDS = [
+    'analyze',
+    'submit',
+    'login',
+    'signup',
+    'topup',
+    'payment',
+    'unlock',
+    'deduct',
+    'download',
+];
+
 // ---------------------------------------------------------------------------
 // Session ID (anonymous fallback)
 // ---------------------------------------------------------------------------
 let _sessionId: string | null = null;
+const _recentEvents = new Map<string, number>();
 
 function getSessionId(): string {
     if (_sessionId) return _sessionId;
@@ -59,6 +74,21 @@ export async function trackEvent(
     try {
         const pagePath = options.pagePath ?? (typeof window !== 'undefined' ? window.location.pathname : '/');
         const referrer = typeof document !== 'undefined' ? document.referrer : '';
+        const normalizedKey = buttonKey.toLowerCase();
+        const shouldAlwaysTrack = ALWAYS_TRACK_KEYWORDS.some(keyword => normalizedKey.includes(keyword));
+        const dedupeKey = `${pagePath}:${buttonKey}`;
+        const now = Date.now();
+        const lastTrackedAt = _recentEvents.get(dedupeKey) ?? 0;
+
+        if (now - lastTrackedAt < DEDUPE_WINDOW_MS) {
+            return;
+        }
+
+        if (!shouldAlwaysTrack && Math.random() > CLICK_SAMPLE_RATE) {
+            return;
+        }
+
+        _recentEvents.set(dedupeKey, now);
 
         // Get user_id if logged in
         let userId: string | null = null;

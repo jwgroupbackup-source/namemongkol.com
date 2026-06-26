@@ -27,7 +27,7 @@ export const TrustStrip = () => {
 
         const loadStats = async () => {
             try {
-                const res = await fetch('/api/live-stats', { cache: 'no-store' });
+                const res = await fetch('/api/live-stats');
                 if (!res.ok) return;
 
                 const data = await res.json() as LiveStatsResponse;

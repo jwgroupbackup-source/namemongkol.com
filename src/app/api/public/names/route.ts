@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-// Cache the data for 24 hours to improve performance
-export const revalidate = 86400;
+const NAMES_REVALIDATE_SECONDS = 604800;
+
+// Cache the data for 7 days to reduce repeated database reads.
+export const revalidate = 604800;
 
 const getSupabase = () => createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL || 'http://dummy.supabase.co',
@@ -46,7 +48,7 @@ export async function GET() {
             data: allData
         }, {
             headers: {
-                'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=43200',
+                'Cache-Control': `public, s-maxage=${NAMES_REVALIDATE_SECONDS}, stale-while-revalidate=2592000`,
             },
         });
 

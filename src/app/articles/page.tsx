@@ -36,8 +36,8 @@ function getArticleCoverAlt(article: ArticleRow | (typeof localArticles)[number]
         : `บทความ: ${article.title} - เคล็ดลับตั้งชื่อมงคล`;
 }
 
-// ISR: cache 1 hour, invalidate via revalidateTag('articles') when admin updates
-export const revalidate = 3600;
+// ISR: cache 24 hours, invalidate on demand via revalidateTag('articles') when admin updates
+export const revalidate = 86400;
 
 // Helper to parse Thai date string "DD Month YYYY" to timestamp
 const parseThaiDate = (dateStr: string) => {
@@ -94,7 +94,7 @@ async function fetchArticlesFromDb() {
 const getCachedDbArticles = unstable_cache(
     fetchArticlesFromDb,
     ['articles-list'],
-    { revalidate: 3600, tags: ['articles'] }
+    { revalidate: 86400, tags: ['articles'] }
 );
 
 // Old Thai slug → New English slug redirect map

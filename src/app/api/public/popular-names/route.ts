@@ -3,7 +3,9 @@ import { createClient } from '@supabase/supabase-js';
 import { calculateScore } from '@/utils/numerologyUtils';
 import { analyzeNameSuitability } from '@/utils/thaksaUtils';
 
-export const revalidate = 3600; // Cache 1 hour
+const POPULAR_NAMES_REVALIDATE_SECONDS = 86400;
+
+export const revalidate = 86400; // Cache 24 hours
 
 const getSupabase = () => createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL || 'http://dummy.supabase.co',
@@ -58,7 +60,7 @@ export async function GET() {
                 data: top10
             }, {
                 headers: {
-                    'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+                    'Cache-Control': `public, s-maxage=${POPULAR_NAMES_REVALIDATE_SECONDS}, stale-while-revalidate=604800`,
                 },
             });
         }

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
@@ -73,6 +74,7 @@ export async function POST(request: Request) {
             .single();
 
         if (error) throw error;
+        revalidateTag('pricing', 'max');
 
         return NextResponse.json({ success: true, tier: data });
 
@@ -111,6 +113,7 @@ export async function PUT(request: Request) {
             .single();
 
         if (error) throw error;
+        revalidateTag('pricing', 'max');
 
         return NextResponse.json({ success: true, tier: data });
 
@@ -139,6 +142,7 @@ export async function DELETE(request: Request) {
             .eq('id', id);
 
         if (error) throw error;
+        revalidateTag('pricing', 'max');
 
         return NextResponse.json({ success: true });
 

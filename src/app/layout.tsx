@@ -185,7 +185,7 @@ const getSettings = unstable_cache(
     }
   },
   ['app-settings'],
-  { revalidate: 3600, tags: ['settings'] }
+  { revalidate: 86400, tags: ['settings'] }
 );
 
 export default async function RootLayout({

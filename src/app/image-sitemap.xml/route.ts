@@ -5,7 +5,7 @@ import { buildWallpaperAlt, INITIAL_WALLPAPERS, ZODIAC_WALLPAPERS } from '@/data
 import { absoluteSiteUrl, getArticleImages } from '@/lib/articleImageMeta';
 import { siteUrl } from '@/lib/seo';
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 type SitemapImage = {
     loc: string;
@@ -195,7 +195,7 @@ export async function GET() {
     return new NextResponse(xml, {
         headers: {
             'Content-Type': 'application/xml; charset=utf-8',
-            'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+            'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800',
         },
     });
 }

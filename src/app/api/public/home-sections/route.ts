@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-export const revalidate = 1800;
+const HOME_SECTIONS_REVALIDATE_SECONDS = 3600;
+
+export const revalidate = 3600;
 
 const emptyHomeSections = {
     wallpapers: [],
@@ -80,7 +82,7 @@ export async function GET() {
             },
             {
                 headers: {
-                    'Cache-Control': 'public, s-maxage=1800, stale-while-revalidate=86400',
+                    'Cache-Control': `public, s-maxage=${HOME_SECTIONS_REVALIDATE_SECONDS}, stale-while-revalidate=86400`,
                 },
             },
         );
