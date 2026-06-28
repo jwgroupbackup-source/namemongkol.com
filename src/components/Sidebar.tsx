@@ -276,26 +276,26 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             {/* Overlay */}
             {isOpen && (
                 <div
-                    className="fixed inset-0 bg-[#1a1a3e]/20 backdrop-blur-sm z-40 lg:hidden transition-opacity"
+                    className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-40 lg:hidden transition-opacity"
                     onClick={() => onClose()}
                 />
             )}
 
             <aside
-                className={`fixed inset-y-0 left-0 z-50 w-80 lg:w-[360px] backdrop-blur-xl border-r shadow-2xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 bg-[#0a0f1d] border-white/5 ${isOpen ? 'translate-x-0' : '-translate-x-full'
+                className={`fixed inset-y-0 left-0 z-50 w-80 lg:w-[360px] backdrop-blur-xl border-r shadow-2xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 bg-[linear-gradient(180deg,#f6f7f9_0%,#eef1f5_48%,#e8ecf2_100%)] border-slate-200/80 ${isOpen ? 'translate-x-0' : '-translate-x-full'
                     }`}
             >
                 <div className="flex flex-col h-full px-5 pb-6 pt-20 lg:p-6 pb-[calc(env(safe-area-inset-bottom)+1.25rem)]">
                     {/* Header */}
                     <div className="hidden lg:flex items-center gap-3 px-2 mb-8 mt-4">
                         <div className="relative shrink-0">
-                            <div className="absolute -inset-1 bg-amber-500/20 rounded-2xl blur-md opacity-50"></div>
+                            <div className="absolute -inset-1 bg-amber-400/25 rounded-2xl blur-md opacity-60"></div>
                             <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20 ring-1 ring-white/10">
                                 <Sparkles size={26} className="text-white drop-shadow-md" />
                             </div>
                         </div>
                         <div className="flex items-baseline tracking-tight">
-                            <span className="text-[26px] font-bold text-white font-sans mr-[1px]">Name</span>
+                            <span className="text-[26px] font-bold text-slate-800 font-sans mr-[1px]">Name</span>
                             <span className="text-[26px] font-bold text-amber-500 font-sans">Mongkol</span>
                         </div>
                     </div>
@@ -315,12 +315,12 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                     <div key={item.key} className="space-y-1">
                                         <div
                                             className={`flex items-center justify-between w-full rounded-xl lg:rounded-2xl transition-all duration-200 group relative overflow-hidden ${isParentActive
-                                                ? 'bg-white/10 text-white shadow-lg shadow-black/20 border border-white/10'
-                                                : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                                                ? 'border border-white/80 bg-white/70 text-slate-900 shadow-[0_14px_34px_rgba(15,23,42,0.12)]'
+                                                : 'text-slate-600 hover:bg-white/55 hover:text-slate-900 hover:shadow-[0_8px_24px_rgba(15,23,42,0.08)]'
                                                 }`}
                                         >
                                             {isParentActive && (
-                                                <div className="absolute left-0 top-0 w-1 h-full bg-amber-400 rounded-r-full shadow-[0_0_10px_rgba(251,191,36,0.5)]" />
+                                                <div className="absolute left-0 top-0 w-1 h-full bg-amber-400 rounded-r-full shadow-[0_0_12px_rgba(245,158,11,0.32)]" />
                                             )}
 
                                             <Link
@@ -338,7 +338,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                                     e.stopPropagation();
                                                     toggleSubMenu(item.key);
                                                 }}
-                                                className="p-3 lg:p-4 hover:bg-white/10 transition-colors"
+                                                className="p-3 lg:p-4 hover:bg-white/60 transition-colors"
                                             >
                                                 <ChevronDown size={16} className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
                                             </button>
@@ -366,11 +366,11 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                                                 }
                                                             }}
                                                             className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 border-l-2 ml-4 ${isSubActive
-                                                                ? 'border-amber-400 bg-white/5 text-white'
-                                                                : 'border-white/5 text-slate-500 hover:text-slate-300 hover:border-slate-500 hover:bg-white/5'
+                                                                ? 'border-amber-400 bg-white/70 text-slate-900 shadow-sm'
+                                                                : 'border-slate-200 text-slate-500 hover:text-slate-800 hover:border-slate-300 hover:bg-white/55'
                                                                 }`}
                                                         >
-                                                            <subItem.icon size={18} className={isSubActive ? 'text-amber-400' : 'opacity-70'} />
+                                                            <subItem.icon size={18} className={isSubActive ? 'text-amber-500' : 'opacity-70'} />
                                                             <span className="text-[14px]">
                                                                 {subLabel}
                                                             </span>
@@ -393,11 +393,11 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                         key={item.path}
                                         href={item.path}
                                         onClick={() => onClose()}
-                                        className="group relative flex items-center justify-between px-3 py-3 mx-0 lg:mx-2 my-2 rounded-2xl bg-[#1e293b] border border-slate-700/50 overflow-hidden hover:bg-[#252f44] transition-all duration-300 shadow-lg shadow-black/20"
+                                        className="group relative flex items-center justify-between px-3 py-3 mx-0 lg:mx-2 my-2 rounded-2xl border border-white/85 bg-[linear-gradient(135deg,#ffffff_0%,#eef2f7_100%)] overflow-hidden shadow-[0_16px_34px_rgba(15,23,42,0.14),inset_0_1px_0_rgba(255,255,255,0.75)] transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-200 hover:shadow-[0_20px_42px_rgba(15,23,42,0.16),0_0_0_1px_rgba(245,158,11,0.08)]"
                                     >
                                         {/* Left Accent Bar & Glow */}
-                                        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.6)]"></div>
-                                        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-amber-500/20 to-transparent pointer-events-none"></div>
+                                        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.36)]"></div>
+                                        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-amber-300/20 to-transparent pointer-events-none"></div>
 
                                         <div className="flex items-center gap-3 relative z-10 pl-3">
                                             {/* Icon Box */}
@@ -412,20 +412,20 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                                     />
                                                 </div>
                                             ) : (
-                                                <div className="w-10 h-10 rounded-xl bg-black/40 flex items-center justify-center shrink-0 border border-white/5 shadow-inner group-hover:border-amber-500/30 transition-colors">
+                                                <div className="w-10 h-10 rounded-xl bg-white/75 flex items-center justify-center shrink-0 border border-amber-100 shadow-sm group-hover:border-amber-300/60 transition-colors">
                                                     <item.icon size={20} className="text-amber-500 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
                                                 </div>
                                             )}
 
                                             {/* Text */}
                                             <div className="flex flex-col">
-                                                <span className="text-slate-100 font-bold text-[15px] leading-tight mb-0.5 group-hover:text-white transition-colors">{premiumLabel}</span>
+                                                <span className="text-slate-800 font-bold text-[15px] leading-tight mb-0.5 group-hover:text-slate-950 transition-colors">{premiumLabel}</span>
                                                 <span className="text-[10px] font-bold text-amber-500 tracking-wider uppercase">{premiumFeature}</span>
                                             </div>
                                         </div>
 
                                         {/* Badge */}
-                                        <span className="relative z-10 bg-gradient-to-r from-amber-500 to-amber-600 text-black text-[10px] font-black px-2.5 py-1 rounded-lg shadow-lg shadow-amber-500/20 whitespace-nowrap scale-95 uppercase tracking-wide group-hover:scale-100 transition-transform">
+                                        <span className="relative z-10 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 text-[10px] font-black px-2.5 py-1 rounded-lg shadow-lg shadow-amber-500/20 whitespace-nowrap scale-95 uppercase tracking-wide group-hover:scale-100 transition-transform">
                                             {premiumBadge}
                                         </span>
                                     </Link>
@@ -453,19 +453,19 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                         onClose();
                                     }}
                                     className={`flex items-center gap-3 lg:gap-4 px-4 py-3 lg:px-5 lg:py-4 rounded-xl lg:rounded-2xl transition-all duration-200 group relative overflow-hidden ${isActive
-                                        ? 'bg-white/10 text-white shadow-lg border border-white/10'
-                                        : 'text-slate-400 hover:bg-white/5 hover:text-slate-200 hover:pl-6'
+                                        ? 'border border-white/85 bg-white/70 text-slate-900 shadow-[0_14px_32px_rgba(15,23,42,0.12),inset_0_1px_0_rgba(255,255,255,0.72)]'
+                                        : 'text-slate-600 hover:bg-white/55 hover:text-slate-900 hover:pl-6 hover:shadow-[0_8px_24px_rgba(15,23,42,0.08)]'
                                         } ${item.mobileOnly ? 'lg:hidden' : ''}`}
                                 >
                                     {isActive && (
-                                        <div className="absolute left-0 top-0 w-1 h-full bg-amber-400 rounded-r-full shadow-[0_0_10px_rgba(251,191,36,0.5)]" />
+                                        <div className="absolute left-0 top-0 w-1 h-full bg-amber-400 rounded-r-full shadow-[0_0_12px_rgba(245,158,11,0.32)]" />
                                     )}
                                     {/* Icon Container */}
                                     {item.iconImage ? (
                                         <div
                                             className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl overflow-hidden transition-all duration-300 ${isActive
-                                                ? 'scale-105 drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]'
-                                                : 'group-hover:scale-105 group-hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.15)]'
+                                                ? 'scale-105 drop-shadow-[0_8px_14px_rgba(15,23,42,0.12)]'
+                                                : 'group-hover:scale-105 group-hover:drop-shadow-[0_8px_14px_rgba(15,23,42,0.10)]'
                                                 } ${item.iconPadding ?? ''}`}
                                         >
                                             <Image
@@ -510,14 +510,14 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                         ) : item.path === '/name-analysis' ? (
                                             <span className="flex items-center gap-2">
                                                 {defaultLabel}
-                                                <span className="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-[9px] font-bold px-1.5 py-0.5 rounded">
+                                                <span className="bg-indigo-100 text-indigo-700 border border-indigo-200 text-[9px] font-bold px-1.5 py-0.5 rounded">
                                                     {bulkBadge}
                                                 </span>
                                             </span>
                                         ) : item.path === '/premium-analysis' ? (
                                             <div className="flex items-center justify-between w-full">
                                                 <div className="flex flex-col leading-tight">
-                                                    <span className="text-slate-100 font-bold text-[15px]">{defaultLabel}</span>
+                                                    <span className="text-slate-800 font-bold text-[15px]">{defaultLabel}</span>
                                                     <span className="text-[10px] font-bold text-amber-500 tracking-wider uppercase mt-0.5">{premiumFeature}</span>
                                                 </div>
                                                 <span className="bg-gradient-to-r from-amber-500 to-amber-600 text-black text-[10px] font-black px-2 py-1 rounded-md shadow-lg shadow-amber-500/20 ml-2 whitespace-nowrap">
@@ -537,14 +537,14 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                             );
                         })}
 
-                        <div className="my-6 border-t border-white/10 lg:hidden" />
+                        <div className="my-6 border-t border-slate-300/70 lg:hidden" />
 
                         {user ? (
                             <div className="lg:hidden">
 
-                                <div className="px-5 py-4 mb-2 rounded-2xl bg-white/5 border border-white/10">
+                                <div className="px-5 py-4 mb-2 rounded-2xl bg-white/65 border border-white/85 shadow-[0_10px_28px_rgba(15,23,42,0.10)]">
                                     <p className="text-[11px] text-slate-500 mb-2 uppercase tracking-wider font-semibold">{t('sidebar.loggedInAs', 'Logged in as')}</p>
-                                    <div className="flex items-center gap-3 text-white font-medium truncate mb-4">
+                                    <div className="flex items-center gap-3 text-slate-900 font-medium truncate mb-4">
                                         <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-500 to-amber-600 flex items-center justify-center text-white shadow-lg shadow-amber-500/20 ring-2 ring-white/10">
                                             <UserIcon size={20} />
                                         </div>
@@ -560,7 +560,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                         </div>
                                     </div>
                                     {credits !== null && (
-                                        <div className="flex items-center justify-between bg-black/40 rounded-xl p-1.5 pr-1.5 border border-white/5">
+                                        <div className="flex items-center justify-between bg-slate-100/80 rounded-xl p-1.5 pr-1.5 border border-white/80">
                                             <div className="flex items-center gap-2 text-xs text-amber-400 font-bold px-3 py-1.5 rounded-lg">
                                                 <Sparkles size={14} />
                                                 <span>{credits} {t('nav.credits', 'Credits')}</span>
@@ -573,7 +573,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                 </div>
                                 <button
                                     onClick={handleLogout}
-                                    className="w-full flex items-center gap-4 px-5 py-3.5 rounded-2xl transition-all duration-200 group text-slate-400 hover:bg-red-500/10 hover:text-red-400 border border-transparent hover:border-red-500/20"
+                                    className="w-full flex items-center gap-4 px-5 py-3.5 rounded-2xl transition-all duration-200 group text-slate-600 hover:bg-red-50 hover:text-red-500 border border-transparent hover:border-red-200"
                                 >
                                     <LogOut className="w-[22px] h-[22px] transition-colors" />
                                     <span className="font-medium text-[15px]">{t('nav.logout')}</span>
@@ -584,9 +584,9 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                 <Link
                                     href="/login"
                                     onClick={() => onClose()}
-                                    className="w-full flex items-center justify-center gap-3 px-5 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-medium transition-all group border border-white/5 hover:border-white/20"
+                                    className="w-full flex items-center justify-center gap-3 px-5 py-3.5 rounded-2xl bg-white/65 hover:bg-white/85 text-slate-800 font-medium transition-all group border border-white/80 hover:border-amber-200 shadow-[0_10px_26px_rgba(15,23,42,0.10)]"
                                 >
-                                    <LogIn size={20} className="text-slate-400 group-hover:text-white transition-colors" />
+                                    <LogIn size={20} className="text-slate-500 group-hover:text-amber-500 transition-colors" />
                                     <span>{t('nav.login')}</span>
                                 </Link>
                             </div>

@@ -23,6 +23,7 @@ import {
     ThumbsUp,
     Trash2,
     Users,
+    WandSparkles,
 } from 'lucide-react';
 import { Review, ReviewServiceType } from '@/types';
 import { ReviewFormModal } from '@/components/ReviewFormModal';
@@ -77,6 +78,7 @@ const REVIEW_COPY_TH = {
     midCtaTitle: 'อยากรู้ว่าชื่อของคุณส่งเสริมดวงแค่ไหน?',
     midCtaDesc: 'เริ่มวิเคราะห์ชื่อฟรีได้ทันที แล้วค่อยเลือกบริการ Premium เมื่อพร้อม',
     midCtaButton: 'เริ่มวิเคราะห์ชื่อฟรี',
+    generatorCta: 'สร้างชื่อมงคล AI',
     serviceFilterEyebrow: 'เลือกตามบริการ',
     serviceFilterDesc: 'กรองรีวิวตามบริการที่คุณสนใจ เพื่อดูประสบการณ์ที่ใกล้เคียงกับสิ่งที่คุณกำลังตัดสินใจ',
     emptyDesc: 'ลองเลือกประเภทบริการอื่น หรือเป็นคนแรกที่แบ่งปันประสบการณ์ของบริการนี้',
@@ -766,6 +768,13 @@ export default function ClientPage({ initialReviews = [] }: ClientPageProps) {
                                         <Search size={18} className="text-amber-500" />
                                         {t('pages.reviews.ctaAnalyze')}
                                     </Link>
+                                    <Link
+                                        href="/name-generator"
+                                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-pink-200 bg-pink-50 px-5 py-3.5 text-sm font-bold text-pink-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-pink-300 hover:bg-pink-100 sm:w-auto sm:text-base"
+                                    >
+                                        <WandSparkles size={18} className="text-pink-500" />
+                                        {tr('pages.reviews.generatorCta', REVIEW_COPY_TH.generatorCta)}
+                                    </Link>
                                 </div>
                             </div>
 
@@ -987,6 +996,13 @@ export default function ClientPage({ initialReviews = [] }: ClientPageProps) {
                             >
                                 <CreditCard size={17} className="text-amber-300" />
                                 {tr('pages.reviews.packageCta', REVIEW_COPY_TH.packageCta)}
+                            </Link>
+                            <Link
+                                href="/name-generator"
+                                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-pink-300/35 bg-pink-400/10 px-5 py-3 text-sm font-bold text-pink-100 transition-colors hover:border-pink-300/70 hover:bg-pink-400/20 sm:w-auto"
+                            >
+                                <WandSparkles size={17} className="text-pink-300" />
+                                {tr('pages.reviews.generatorCta', REVIEW_COPY_TH.generatorCta)}
                             </Link>
                         </div>
                     </div>

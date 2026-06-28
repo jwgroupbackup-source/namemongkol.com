@@ -40,7 +40,7 @@ export const HomeSeoContent = () => {
                 </div>
             </div>
 
-            <div className="mb-10 grid gap-4 md:grid-cols-2">
+            <div className="mb-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <Link
                     href="/name-check"
                     className="rounded-2xl border border-amber-200 bg-amber-50 p-5 transition-colors hover:border-amber-300 hover:bg-amber-100 shadow-sm"
@@ -63,6 +63,18 @@ export const HomeSeoContent = () => {
                         เหมาะสำหรับพ่อแม่และคนที่กำลังหาชื่อใหม่ โดยเริ่มจากรายชื่อมงคล แล้วค่อยนำชื่อที่ชอบไปวิเคราะห์ร่วมกับนามสกุลอีกครั้ง
                     </p>
                     <p className="mt-4 text-sm font-medium text-sky-600">ไปค้นหาชื่อมงคลฟรี</p>
+                </Link>
+
+                <Link
+                    href="/name-generator"
+                    className="rounded-2xl border border-pink-200 bg-pink-50 p-5 transition-colors hover:border-pink-300 hover:bg-pink-100 shadow-sm"
+                >
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-pink-600">Intent 03</p>
+                    <h2 className="mt-2 text-xl font-bold text-[#1a1a3e]">สร้างชื่อมงคลด้วย AI เมื่อต้องการไอเดียชื่อใหม่</h2>
+                    <p className="mt-3 text-sm leading-relaxed text-[#5a5a82]">
+                        เหมาะสำหรับคนที่ยังไม่มีชื่อในใจ ต้องการให้ระบบช่วยประกอบชื่อใหม่ แล้วนำชื่อที่ถูกใจไปวิเคราะห์ชื่อร่วมกับนามสกุลอีกครั้งก่อนใช้งานจริง
+                    </p>
+                    <p className="mt-4 text-sm font-medium text-pink-600">ไปหน้า /name-generator →</p>
                 </Link>
             </div>
 
